@@ -1,59 +1,11 @@
 @import "tailwindcss";
 
-/* ---- Dark theme (default) ---- */
 :root {
-  --v-bg:              #111827;
-  --v-surface:         #1f2937;
-  --v-surface-2:       #273549;
-  --v-text:            #ffffff;
-  --v-text-secondary:  #d1d5db;
-  --v-accent:          #06b6d4;
-  --v-accent-glow:     #06b6d4;
-  --v-accent-fg:       #083344;
-  --v-border:          rgba(255, 255, 255, 0.1);
-  --v-destructive:     #ef4444;
-  --v-destructive-fg:  #450a0a;
-  --v-text-disabled:   #6b7280;
-  --v-surface-disabled:#1a2233;
-  --v-border-disabled: rgba(255, 255, 255, 0.05);
-
-  --v-font:         var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --v-font-mono:    var(--font-geist-mono), ui-monospace, monospace;
-  --v-font-heading: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-
-  --v-duration-fast: 200ms;
-  --v-duration-base: 300ms;
-
-  /* Legacy aliases for Tailwind @theme */
-  --background: var(--v-bg);
-  --foreground: var(--v-text);
-  --accent: var(--v-accent);
-  --muted: var(--v-surface);
-  --card: var(--v-surface);
-}
-
-/* ---- Light theme ---- */
-[data-theme="light"] {
-  --v-bg:              #f0f9ff;
-  --v-surface:         #e0f2fe;
-  --v-surface-2:       #bae6fd;
-  --v-text:            #0c1a27;
-  --v-text-secondary:  #374151;
-  --v-accent:          #0891b2;
-  --v-accent-glow:     #06b6d4;
-  --v-accent-fg:       #f0f9ff;
-  --v-border:          rgba(12, 26, 39, 0.15);
-  --v-destructive:     #dc2626;
-  --v-destructive-fg:  #ffffff;
-  --v-text-disabled:   #9ca3af;
-  --v-surface-disabled:#e8f4fc;
-  --v-border-disabled: rgba(12, 26, 39, 0.07);
-
-  --background: var(--v-bg);
-  --foreground: var(--v-text);
-  --accent: var(--v-accent);
-  --muted: var(--v-surface);
-  --card: var(--v-surface);
+  --background: #111827;
+  --foreground: #ffffff;
+  --accent: #06b6d4;
+  --muted: #1f2937;
+  --card: #1f2937;
 }
 
 @theme inline {
@@ -62,24 +14,29 @@
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-card: var(--card);
-  --font-sans: var(--v-font);
-  --font-mono: var(--v-font-mono);
-  --font-heading: var(--v-font-heading);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-outfit);
 }
 
 body {
-  background: var(--v-bg);
-  color: var(--v-text);
-  font-family: var(--v-font);
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
-  transition: background-color var(--v-duration-base), color var(--v-duration-base);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--v-font-heading);
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), sans-serif;
 }
 
-/* ---- Background Effects ---- */
+/* Background Effects */
 .bg-noise {
   position: fixed;
   top: 0;
@@ -104,7 +61,7 @@ h1, h2, h3, h4, h5, h6 {
     radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.08), transparent 25%);
 }
 
-/* ---- Glass Panel ---- */
+/* Utilities */
 .glass-panel {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
@@ -112,10 +69,17 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-/* ---- Animations ---- */
+/* Animations */
 @keyframes slideUpFade {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-in {
@@ -123,12 +87,23 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0;
 }
 
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-500 { animation-delay: 500ms; }
+.delay-100 {
+  animation-delay: 100ms;
+}
 
-/* ---- Spotlight Card Effect ---- */
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Spotlight Effect */
 .spotlight-card {
   position: relative;
   overflow: hidden;
@@ -137,9 +112,13 @@ h1, h2, h3, h4, h5, h6 {
 .spotlight-card::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
-      rgba(255, 255, 255, 0.06), transparent 40%);
+      rgba(255, 255, 255, 0.06),
+      transparent 40%);
   opacity: 0;
   transition: opacity 0.5s;
   pointer-events: none;
@@ -150,29 +129,8 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 }
 
-/* ---- Accent Glow ---- */
-.accent-glow {
-  box-shadow: 0 0 8px var(--v-accent-glow);
-}
 
-/* ---- Shimmer Badge ---- */
-@keyframes shimmer {
-  0%   { background-position: 200% center; }
-  100% { background-position: -200% center; }
-}
-
-.shimmer-badge {
-  background: linear-gradient(
-    90deg,
-    rgba(6, 182, 212, 0.1) 0%,
-    rgba(6, 182, 212, 0.3) 50%,
-    rgba(6, 182, 212, 0.1) 100%
-  );
-  background-size: 200% auto;
-  animation: shimmer 3s linear infinite;
-}
-
-/* ---- Utilities ---- */
+/* Line clamp utility */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -180,17 +138,9 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
+
+/* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
 }
 
-/* ---- Accessibility: Reduced Motion ---- */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}

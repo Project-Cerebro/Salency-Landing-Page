@@ -48,13 +48,11 @@
 
 ## Polish (Design Bandwidth)
 
-- [ ] Reconsider heading font — Outfit is becoming overused in startup space
-  - Look for something more editorial with character
-  - Consider compact condensed sans, a grotesque with personality, or a serif
+- [x] Reconsider heading font — Outfit is becoming overused in startup space
+  - Switched to Syne — geometric grotesque with strong character at display sizes, editorial without being quirky
 
-- [ ] Pull back on cyan neon — let type and whitespace do more work
-  - Reduce glow effects on cards and buttons
-  - One well-placed accent > neon everywhere
+- [x] Pull back on cyan neon — let type and whitespace do more work
+  - Restored strategic cyan: blockquote borders, step numbers, V1 card glow, comparison header, Results border — purposeful not ambient
 
 - [x] Fix nav and footer items
   - Removed "Home" link from nav
