@@ -10,7 +10,6 @@ interface FormData {
     lastName: string;
     companyName: string;
     email: string;
-    phone?: string;
     role: string;
     salesReps: string;
     website?: string; // Honeypot field
@@ -108,27 +107,16 @@ export function EmailForm() {
                 {errors.companyName && <span className="text-red-400 text-xs mt-1">Required</span>}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-1">Work Email *</label>
-                    <input
-                        type="email"
-                        {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
-                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
-                        placeholder="jane@acme.com"
-                        suppressHydrationWarning
-                    />
-                    {errors.email && <span className="text-red-400 text-xs mt-1">Valid email required</span>}
-                </div>
-                <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-1">Phone Number</label>
-                    <input
-                        {...register('phone')}
-                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
-                        placeholder="+1 (555) 000-0000"
-                        suppressHydrationWarning
-                    />
-                </div>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-300 mb-1">Work Email *</label>
+                <input
+                    type="email"
+                    {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
+                    placeholder="jane@acme.com"
+                    suppressHydrationWarning
+                />
+                {errors.email && <span className="text-red-400 text-xs mt-1">Valid email required</span>}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">

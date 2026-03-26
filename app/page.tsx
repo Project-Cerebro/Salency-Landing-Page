@@ -1,9 +1,9 @@
 
 import React from 'react';
-import { Ear, Lightbulb, Bell, CheckCircle2, ArrowRight, Menu, Clock, Calendar, Package, Radar, Target } from 'lucide-react';
+import { Ear, Lightbulb, Bell, CheckCircle2, ArrowRight, FileText, Upload, Zap } from 'lucide-react';
 import { EmailForm } from '@/components/EmailForm';
-import { ProblemCard } from '@/components/ProblemCard';
 import { PillarCard } from '@/components/PillarCard';
+import { Header } from '@/components/Header';
 
 export default function Home() {
   return (
@@ -12,31 +12,7 @@ export default function Home() {
       <div className="bg-noise"></div>
       <div className="bg-mesh"></div>
 
-      {/* HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 relative">
-              <img src="/logo.png" alt="Cerebro Logo" className="object-contain w-full h-full" />
-            </div>
-            <span className="font-bold text-xl tracking-tight text-white font-heading">Cerebro</span>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-            <a href="#" className="hover:text-white transition-colors">Home</a>
-            <a href="#how-it-works" className="hover:text-white transition-colors">How it Works</a>
-            <a href="#pilot" className="hover:text-white transition-colors">Pilot Access</a>
-          </nav>
-
-          <a href="#pilot" className="hidden md:block bg-accent/90 hover:bg-accent text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-all shadow-lg shadow-accent/20">
-            Get Early Access
-          </a>
-
-          <button className="md:hidden text-white p-2">
-            <Menu />
-          </button>
-        </div>
-      </header>
+      <Header />
 
       <main className="pt-20">
         {/* HERO SECTION */}
@@ -47,24 +23,15 @@ export default function Home() {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1] drop-shadow-2xl">
-              Never Forget What<br className="hidden md:block" /> Your Customers Need
+              AI that remembers every customer pain<br className="hidden md:block" /> your sales reps forget.
             </h1>
 
-            <p className="text-xl md:text-2xl text-accent mb-8 font-medium max-w-2xl mx-auto">
-              Turn every customer need and timeline into a perfectly timed follow-up—so reps never miss their moment to sell.
+            <p className="text-xl md:text-2xl text-gray-300 mb-4 max-w-2xl mx-auto leading-relaxed">
+              Gong records your calls. Cerebro solves what happens after.
             </p>
 
-            <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-4 leading-relaxed">
-              Your sales reps capture customer problems in calls but forget them by the time they need to re-engage.
-              We listen to every call, remember every problem, and alert your team at the exact moment it's time to sell.
-            </p>
-
-            <p className="text-base text-gray-300 max-w-3xl mx-auto mb-6 font-medium">
-              Cerebro does what your CRM can't: it turns loose call notes into dated follow-up triggers tied to real customer timelines.
-            </p>
-
-            <p className="text-sm text-gray-500 mb-12">
-              Built for B2B teams with 5–50 reps and long, multi-touch sales cycles.
+            <p className="text-base text-gray-500 max-w-2xl mx-auto mb-12">
+              Built for B2B SaaS teams with 5–50 reps who are tired of losing context between calls.
             </p>
 
             <a
@@ -76,16 +43,14 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Hero Visual - Product Interface */}
+          {/* Hero Visual - Transcript to Output */}
           <div className="mt-16 md:mt-20 relative">
-            <div className="relative max-w-7xl mx-auto">
-              {/* Dramatic Background Glows */}
-              <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/10 blur-[120px] rounded-full"></div>
-              <div className="absolute top-1/2 -left-20 w-[300px] h-[500px] bg-purple-500/10 blur-[100px] rounded-full"></div>
-              <div className="absolute top-1/2 -right-20 w-[300px] h-[500px] bg-emerald-500/10 blur-[100px] rounded-full"></div>
+            <div className="relative max-w-5xl mx-auto">
+              {/* Subtle glow */}
+              <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/8 blur-[100px] rounded-full pointer-events-none"></div>
 
-              {/* Main Product Interface */}
-              <div className="relative z-10 mx-4">
+              {/* Product Interface — Transcript → Output */}
+              <div className="relative z-10">
                 {/* Browser Chrome */}
                 <div className="bg-[#0a0a0f] rounded-t-2xl border border-white/10 border-b-0 px-4 py-3 flex items-center gap-3">
                   <div className="flex gap-2">
@@ -94,9 +59,9 @@ export default function Home() {
                     <div className="w-3 h-3 rounded-full bg-green-500/70"></div>
                   </div>
                   <div className="flex-1 flex justify-center">
-                    <div className="bg-white/5 rounded-lg px-4 py-1.5 flex items-center gap-2 text-xs text-gray-500">
-                      <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-                      app.cerebro.ai/dashboard
+                    <div className="bg-white/5 rounded-md px-4 py-1.5 flex items-center gap-2 text-xs text-gray-500">
+                      <div className="w-2 h-2 rounded-full bg-green-500/60"></div>
+                      app.cerebro.ai/analysis
                     </div>
                   </div>
                   <div className="w-20"></div>
@@ -424,22 +389,77 @@ export default function Home() {
           </div>
         </section>
 
+        {/* GONG COMPARISON SECTION */}
+        <section className="py-24 px-6 border-y border-white/5">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-sm font-bold tracking-widest text-accent uppercase mb-3">Positioning</h2>
+              <h3 className="text-3xl md:text-5xl font-bold text-white mb-4">The last mile Gong leaves unaddressed.</h3>
+              <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                Gong records everything. But a full transcript doesn&apos;t tell your CS director which product solves which pain, or give your new AE the context they need to pick up where someone left off.
+              </p>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-white/10">
+                    <th className="text-left py-4 pr-8 text-gray-500 font-medium w-1/2"></th>
+                    <th className="py-4 px-6 text-center text-gray-400 font-semibold">Gong</th>
+                    <th className="py-4 px-6 text-center text-white font-semibold">Cerebro</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { capability: "Records calls", gong: true, cerebro: "Works with any transcript" },
+                    { capability: "Coaches reps in the moment", gong: true, cerebro: false },
+                    { capability: "Extracts pain in the customer’s own words", gong: false, cerebro: true },
+                    { capability: "Maps pain to your specific products", gong: false, cerebro: true },
+                    { capability: "Generates context-aware follow-up drafts", gong: false, cerebro: true },
+                    { capability: "Gives successors full account context", gong: false, cerebro: true },
+                  ].map((row, i) => (
+                    <tr key={i} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                      <td className="py-4 pr-8 text-gray-300">{row.capability}</td>
+                      <td className="py-4 px-6 text-center">
+                        {row.gong === true ? (
+                          <span className="text-gray-400">✓</span>
+                        ) : row.gong === false ? (
+                          <span className="text-gray-700">—</span>
+                        ) : (
+                          <span className="text-gray-400 text-xs">{row.gong}</span>
+                        )}
+                      </td>
+                      <td className="py-4 px-6 text-center">
+                        {row.cerebro === true ? (
+                          <span className="text-accent font-semibold">✓</span>
+                        ) : row.cerebro === false ? (
+                          <span className="text-gray-700">—</span>
+                        ) : (
+                          <span className="text-accent text-xs font-medium">{row.cerebro}</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
         {/* RESULTS SECTION */}
         <section className="py-24 bg-gradient-to-br from-accent/5 to-transparent border-y border-white/5">
           <div className="max-w-4xl mx-auto px-6">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Trust That Scales Revenue</h2>
-              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                <span className="text-accent font-semibold">High-Trust Partnerships:</span> Listening is your most profitable tactic. 
-                When reps recall specific needs months later, they prove they aren't just selling—they’re solving. 
-                This shifts the dynamic from "vendor" to "trusted partner," eliminating friction and fast-tracking closed deals.
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">What changes when nothing gets lost.</h2>
+              <p className="text-lg text-gray-400 mb-8 leading-relaxed">
+                Cerebro doesn&apos;t close deals. It captures the context your team needs to close them — so the signal from a January discovery call is still there when the customer&apos;s budget unlocks in Q3.
               </p>
               <div className="space-y-6">
                 {[
-                  { title: "Close More Deals", desc: "You close more deals because every follow-up anchors on the exact pains customers mentioned — at the moment they're finally ready to buy." },
-                  { title: "Shorter Sales Cycles", desc: "Shorten cycles by re-engaging precisely when customers' budget and priority go live, instead of blasting random follow-ups." },
-                  { title: "Faster Rep Ramp", desc: "New reps ramp faster by seeing exactly which pains, timelines, and product combos led to closed deals — so they can copy winning patterns instead of guessing from generic summaries. Because Cerebro shows real 'pain → product → outcome' chains, training is built on reality, not role-play scripts." },
-                  { title: "Systematic Upsells", desc: "Turn every 'not in scope yet' comment into a scheduled expansion touch, triggered automatically when timing hits." }
+                  { title: "Capture what gets lost", desc: "Every pain, timeline, and buying signal is extracted from calls and stored — so reps re-engage with the exact context that was discussed, not a blank CRM field." },
+                  { title: "Re-engage at the right moment", desc: "Cerebro pings reps when a customer stated timeline arrives — not randomly, not too late. The follow-up writes itself from real call context." },
+                  { title: "Faster rep ramp", desc: "New reps inherit real account history instead of starting from zero. Training is built on actual pain-to-product chains from past calls, not role-play scripts." },
+                  { title: "Expansion revenue you would otherwise miss", desc: "Every out-of-scope comment becomes a scheduled follow-up touch, triggered when the timing actually hits." }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4">
                     <CheckCircle2 className="text-accent flex-shrink-0 w-6 h-6 mt-1" />
@@ -450,16 +470,52 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
 
-              {/* Sales Enablement Callout */}
-              <div className="mt-8 bg-accent/5 border border-accent/20 rounded-xl p-6">
-                <h4 className="text-sm font-bold text-accent uppercase tracking-wide mb-2">For Sales Enablement</h4>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  Cerebro gives new reps a library of real examples: which customer pains appeared on calls, what was pitched, and what actually closed — so training is built on reality, not scripts.
-                </p>
-              </div>
+        {/* TEAM SECTION */}
+        <section className="py-24 px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-sm font-bold tracking-widest text-accent uppercase mb-3">Team</h2>
+              <h3 className="text-3xl md:text-4xl font-bold text-white">Built by people who&apos;ve done the job.</h3>
             </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  name: "Howard",
+                  title: "Co-founder & CEO",
+                  bio: "Former founding AE at Viggle (a16z-backed). Led MUFG Hong Kong’s first Panda Bond. BD roles at Sequence and Treasure. MBET, University of Waterloo.",
+                  initials: "H",
+                  color: "from-cyan-500 to-blue-600",
+                },
+                {
+                  name: "Nikki Ip",
+                  title: "Co-founder & COO",
+                  bio: "Building Cerebro’s go-to-market and operations. Previously led revenue analytics and operational strategy at Adaptavist Group. Background in institutional client management and compliance in banking.",
+                  initials: "N",
+                  color: "from-violet-500 to-purple-600",
+                },
+                {
+                  name: "Babajide Okusanya",
+                  title: "Co-founder & Technical Lead",
+                  bio: "LLM specialist building Cerebro’s extraction and mapping engine. Previously scaled a B2B marketplace to meaningful ARR. Deep experience in applied AI.",
+                  initials: "B",
+                  color: "from-emerald-500 to-teal-600",
+                },
+              ].map((founder, i) => (
+                <div key={i} className="bg-white/[0.03] rounded-2xl p-6 border border-white/10">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${founder.color} flex items-center justify-center text-white font-bold text-lg mb-4`}>
+                    {founder.initials}
+                  </div>
+                  <div className="text-lg font-bold text-white mb-1">{founder.name}</div>
+                  <div className="text-sm text-accent mb-3">{founder.title}</div>
+                  <p className="text-sm text-gray-400 leading-relaxed">{founder.bio}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

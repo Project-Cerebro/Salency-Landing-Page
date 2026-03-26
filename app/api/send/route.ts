@@ -12,7 +12,6 @@ const FormSchema = z.object({
     companyName: z.string().min(1, "Company name is required"),
     role: z.string().min(1, "Role is required"),
     salesReps: z.string().min(1, "Team size is required"),
-    phone: z.string().optional(),
     website: z.string().optional(), // Honeypot
 });
 
@@ -36,7 +35,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const { firstName, lastName, email, companyName, role, salesReps, phone } = result.data;
+        const { firstName, lastName, email, companyName, role, salesReps } = result.data;
 
         const escapeHtml = (unsafe: string | undefined) => {
             return (unsafe || '').replace(/[&<"']/g, (m) => {
@@ -61,7 +60,6 @@ export async function POST(request: Request) {
         <p><strong>Company:</strong> ${escapeHtml(companyName)}</p>
         <p><strong>Role:</strong> ${escapeHtml(role)}</p>
         <p><strong>Team Size:</strong> ${escapeHtml(salesReps)}</p>
-        <p><strong>Phone:</strong> ${escapeHtml(phone) || 'N/A'}</p>
       `,
         });
 
