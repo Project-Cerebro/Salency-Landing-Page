@@ -235,14 +235,25 @@ If you decide to add a light theme toggle later:
 
 ## Implementation Sequence
 
-If you decide to implement this system, here's the recommended order:
+Status as of March 2026 — all SAFE items implemented.
 
-1. **Background warmth** (5 min) — Swap `--v-bg` / `--background` to `#0F1117`. Instant improvement, zero risk.
-2. **Text warmth** (5 min) — Swap `--v-text` to `#E8E6E3`. Reduces eye strain, adds warmth.
-3. **Add Instrument Serif** (15 min) — Import in `layout.tsx`, apply to hero H1 only. Biggest visual differentiation for minimal effort.
-4. **Add copper accent token** (10 min) — Define `--accent-warm: #E8925A` in `globals.css`. Don't apply yet.
-5. **Update CTA buttons to copper** (20 min) — Change hero CTA, pilot form submit, and header "Get Early Access" from cyan to copper. Keep links and data highlights in cyan.
-6. **Test and iterate** — View the page. If it feels right, continue. If not, revert to SAFE-only changes.
+1. ~~**Background warmth** — `--background: #0F1117` in `globals.css`~~ DONE
+2. ~~**Text warmth** — `--foreground: #E8E6E3`, `--text-secondary: #9B9A97`, `--text-muted: #5E5D5B`~~ DONE
+3. ~~**Add Instrument Serif** — Imported in `layout.tsx`, applied to hero H1 with italic copper emphasis~~ DONE
+4. ~~**Add copper accent token** — `--accent-warm: #E8925A` in `globals.css` + `@theme inline`~~ DONE
+5. ~~**Update CTA buttons to copper** — Hero, Header, EmailForm all use `bg-accent-warm`~~ DONE
+6. ~~**Semantic color tokens** — `--success`, `--warning`, `--error`, `--info` registered in CSS + Tailwind~~ DONE
+7. ~~**Section differentiation** — Alternating sections use `bg-bg-secondary` for visual rhythm~~ DONE
+8. ~~**Ghost button** — Hero has a secondary "See How It Works" border-only button~~ DONE
+9. ~~**Surface tokens** — `--bg-secondary`, `--bg-surface`, `--bg-elevated` available~~ DONE
+
+### Remaining (RISK items — deferred)
+
+| Change | Status | Notes |
+|---|---|---|
+| DM Sans replacing Geist Sans (body) | Deferred | Geist Sans is well-made and already loaded. Difference is subtle. |
+| JetBrains Mono replacing Geist Mono | Deferred | Low impact, only affects HeroMock data labels. |
+| Full light mode | Deferred | Reference tokens provided above. High effort. |
 
 ---
 
