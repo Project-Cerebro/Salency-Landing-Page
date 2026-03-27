@@ -91,9 +91,10 @@ export function HeroMock() {
   return (
     <div className="mt-16 md:mt-20 relative text-left">
       <div className="relative max-w-5xl mx-auto">
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/8 blur-[100px] rounded-full pointer-events-none"></div>
+        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-accent/10 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-[90%] h-[50%] bg-white/[0.04] blur-[60px] rounded-full pointer-events-none"></div>
 
-        <div className="relative z-10 bg-white rounded-2xl shadow-2xl shadow-black/25 border border-gray-200 overflow-hidden">
+        <div className="relative z-10 bg-[#f8f9fb] rounded-2xl shadow-xl shadow-black/15 border border-gray-200/80 overflow-hidden ring-1 ring-white/10">
           {/* Header */}
           <div className="px-5 md:px-8 pt-5 md:pt-7 pb-3 md:pb-4">
             <div className="flex items-center gap-2 text-sm mb-0.5">
@@ -129,10 +130,10 @@ export function HeroMock() {
           {/* Tabs */}
           <div className="relative border-b border-gray-200">
             {scrollFade.left && (
-              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#f8f9fb] to-transparent z-10 pointer-events-none" />
             )}
             {scrollFade.right && (
-              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#f8f9fb] to-transparent z-10 pointer-events-none" />
             )}
             <div
               ref={tabsRef}
@@ -343,7 +344,7 @@ export function HeroMock() {
             </div>
 
             {/* Bottom fade gradient */}
-            <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#f8f9fb] to-transparent pointer-events-none" />
           </div>
         </div>
       </div>
