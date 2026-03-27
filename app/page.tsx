@@ -299,25 +299,22 @@ export default function Home() {
                   title: "Co-founder & CEO",
                   bio: "Former founding AE at Viggle (a16z-backed). Led MUFG Hong Kong’s first Panda Bond. BD roles at Sequence and Treasure. MBET, University of Waterloo.",
                   initials: "H",
-                  color: "from-cyan-500 to-blue-600",
                 },
                 {
                   name: "Nikki Ip",
                   title: "Co-founder & COO",
                   bio: "Building Cerebro’s go-to-market and operations. Previously led revenue analytics and operational strategy at Adaptavist Group. Background in institutional client management and compliance in banking.",
                   initials: "N",
-                  color: "from-violet-500 to-purple-600",
                 },
                 {
                   name: "Babajide Okusanya",
                   title: "Co-founder & Technical Lead",
                   bio: "LLM specialist building Cerebro’s extraction and mapping engine. Previously scaled a B2B marketplace to meaningful ARR. Deep experience in applied AI.",
                   initials: "B",
-                  color: "from-emerald-500 to-teal-600",
                 },
               ].map((founder, i) => (
                 <div key={i} className="bg-white/[0.03] rounded-2xl p-6 border border-white/10">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${founder.color} flex items-center justify-center text-white font-bold text-lg mb-4`}>
+                  <div className="w-12 h-12 rounded-xl bg-accent/15 border border-accent/20 flex items-center justify-center text-accent font-bold text-lg mb-4">
                     {founder.initials}
                   </div>
                   <div className="text-lg font-bold text-white mb-1">{founder.name}</div>
