@@ -48,7 +48,7 @@ export default function Home() {
         </section>
 
         {/* PROBLEM SECTION */}
-        <section className="py-24 bg-white/[0.02] border-y border-white/5">
+        <section className="py-16 md:py-24 bg-white/[0.02] border-y border-white/5">
           <div className="max-w-5xl mx-auto px-6">
             <div className="text-center mb-16">
               <p className="text-sm font-bold tracking-widest text-accent uppercase mb-3">The Problem</p>
@@ -184,7 +184,7 @@ export default function Home() {
         </section>
 
         {/* GONG COMPARISON SECTION */}
-        <section className="py-24 px-6 border-y border-white/5">
+        <section className="py-16 md:py-20 px-6 border-y border-white/5">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <p className="text-sm font-bold tracking-widest text-accent uppercase mb-3">Positioning</p>
@@ -269,7 +269,7 @@ export default function Home() {
         </section>
 
         {/* TEAM SECTION */}
-        <section id="team" className="py-24 px-6">
+        <section id="team" className="py-16 md:py-20 px-6">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
               <p className="text-sm font-bold tracking-widest text-accent uppercase mb-3">Team</p>
@@ -314,7 +314,7 @@ export default function Home() {
         </section>
 
         {/* PILOT SECTION */}
-        <section id="pilot" className="py-24 px-6 max-w-7xl mx-auto">
+        <section id="pilot" className="py-24 md:py-32 px-6 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
               <h2 className="text-4xl font-bold text-white mb-6">Join the Pilot</h2>
