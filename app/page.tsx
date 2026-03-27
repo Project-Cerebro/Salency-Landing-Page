@@ -35,7 +35,7 @@ export default function Home() {
               Built for B2B SaaS teams with 5–50 reps who are tired of losing context between calls.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="#pilot"
                 className="inline-flex items-center bg-accent-warm hover:brightness-110 text-background font-bold px-8 py-4 rounded-lg text-lg shadow-[0_0_20px_rgba(232,146,90,0.3)] hover:shadow-[0_0_40px_rgba(232,146,90,0.5)] hover:-translate-y-1 transition-[color,background-color,box-shadow,transform,filter] duration-200"
