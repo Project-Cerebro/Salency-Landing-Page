@@ -49,7 +49,7 @@ export default function Home() {
         </section>
 
         {/* PROBLEM SECTION */}
-        <section className="py-16 md:py-24 bg-white/[0.02] border-y border-white/5">
+        <section className="py-16 md:py-24 bg-bg-secondary border-y border-white/5">
           <div className="max-w-5xl mx-auto px-6">
             <ScrollReveal>
             <div className="text-center mb-16">
@@ -194,7 +194,7 @@ export default function Home() {
         </section>
 
         {/* GONG COMPARISON SECTION */}
-        <section className="py-16 md:py-20 px-6 border-y border-white/5">
+        <section className="py-16 md:py-20 px-6 bg-bg-secondary border-y border-white/5">
           <div className="max-w-4xl mx-auto">
             <ScrollReveal>
             <div className="text-center mb-12">
@@ -283,7 +283,7 @@ export default function Home() {
         </section>
 
         {/* TEAM SECTION */}
-        <section id="team" className="py-16 md:py-20 px-6">
+        <section id="team" className="py-16 md:py-20 px-6 bg-bg-secondary border-y border-white/5">
           <div className="max-w-4xl mx-auto">
             <ScrollReveal>
             <div className="text-center mb-16">
