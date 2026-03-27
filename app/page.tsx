@@ -374,8 +374,8 @@ export default function Home() {
 
           <div className="flex gap-6 text-sm text-gray-400">
             <a href="mailto:founders@trycerebro.com" className="hover:text-white transition-colors py-3">founders@trycerebro.com</a>
-            <a href="#" className="hover:text-white transition-colors py-3">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors py-3">Terms</a>
+            <a href="/privacy" className="hover:text-white transition-colors py-3">Privacy Policy</a>
+            <a href="/terms" className="hover:text-white transition-colors py-3">Terms</a>
           </div>
 
           <div className="text-sm text-gray-600">
