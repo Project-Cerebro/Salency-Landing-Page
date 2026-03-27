@@ -26,7 +26,7 @@ export function PageClient() {
             <ScrollReveal>
               <div className="text-center mb-16">
                 <p className="text-sm font-bold tracking-widest text-accent-warm uppercase mb-3">The Problem</p>
-                <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">The same context problem. Two different faces.</h2>
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Your reps hear everything. Your CRM remembers nothing.</h2>
               </div>
             </ScrollReveal>
 
@@ -187,7 +187,7 @@ function SolutionSection() {
               'Call recap + follow-up email draft generated per call',
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-3 text-gray-300 text-sm">
-                <CheckCircle2 className="text-accent w-4 h-4 flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="text-accent-warm w-4 h-4 flex-shrink-0 mt-0.5" />
                 <span>{item}</span>
               </li>
             ))}
@@ -278,7 +278,7 @@ function ResultsSection() {
                 { title: 'Expansion signals, surfaced', desc: "Out-of-scope comments and future needs are extracted and tagged alongside the deal context — so nothing gets buried in a transcript no one re-reads." },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4">
-                  <CheckCircle2 className="text-accent flex-shrink-0 w-6 h-6 mt-1" />
+                  <CheckCircle2 className="text-accent-warm flex-shrink-0 w-6 h-6 mt-1" />
                   <div>
                     <h4 className="text-lg font-bold text-white">{item.title}</h4>
                     <p className="text-gray-400">{item.desc}</p>
