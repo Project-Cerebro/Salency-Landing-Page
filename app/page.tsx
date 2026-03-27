@@ -2,7 +2,6 @@
 import React from 'react';
 import { Ear, Lightbulb, Bell, CheckCircle2, ArrowRight, FileText, Upload, Zap } from 'lucide-react';
 import { EmailForm } from '@/components/EmailForm';
-import { PillarCard } from '@/components/PillarCard';
 import { Header } from '@/components/Header';
 import { HeroMock } from '@/components/HeroMock';
 
@@ -133,22 +132,32 @@ export default function Home() {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Not just a summary. Structured signal.</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <PillarCard
-              icon={Ear}
-              heading="Extract pains and timelines"
-              description="Every problem, objection, competitor mention, and timeline is pulled from the transcript — in the customer's own words, cited back to the source. Reps see exactly what was said and when."
-            />
-            <PillarCard
-              icon={Lightbulb}
-              heading="Map pain to your products"
-              description="Cerebro doesn't just tag topics. It maps each extracted pain to specific products and features in your catalog, with reasoning. Where call recorders stop at what was said, Cerebro connects it to what actually solves it."
-            />
-            <PillarCard
-              icon={Bell}
-              heading="Generate the follow-up"
-              description="A call recap and a draft follow-up email, grounded in the actual conversation. Your reps send better outreach in minutes, not hours — and successors inherit the full context."
-            />
+          <div className="space-y-10 mb-16 max-w-3xl mx-auto">
+            {[
+              {
+                icon: Ear,
+                heading: "Extract pains and timelines",
+                description: "Every problem, objection, competitor mention, and timeline is pulled from the transcript — in the customer's own words, cited back to the source. Reps see exactly what was said and when.",
+              },
+              {
+                icon: Lightbulb,
+                heading: "Map pain to your products",
+                description: "Cerebro doesn't just tag topics. It maps each extracted pain to specific products and features in your catalog, with reasoning. Where call recorders stop at what was said, Cerebro connects it to what actually solves it.",
+              },
+              {
+                icon: Bell,
+                heading: "Generate the follow-up",
+                description: "A call recap and a draft follow-up email, grounded in the actual conversation. Your reps send better outreach in minutes, not hours — and successors inherit the full context.",
+              },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-5">
+                <item.icon size={20} className="text-accent shrink-0 mt-1" />
+                <div>
+                  <h4 className="text-lg font-bold text-white mb-1.5">{item.heading}</h4>
+                  <p className="text-gray-400 leading-relaxed">{item.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* What V1 gives you today */}
