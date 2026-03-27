@@ -138,8 +138,8 @@ h6 {
 }
 
 
-/* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
