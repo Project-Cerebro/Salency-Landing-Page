@@ -52,9 +52,9 @@ export function EmailForm() {
 
     if (isSuccess) {
         return (
-            <div className="bg-accent/10 border border-accent p-8 rounded-xl text-center max-w-lg mx-auto">
+            <div className="bg-accent-warm/10 border border-accent-warm/30 p-8 rounded-xl text-center max-w-lg mx-auto">
                 <h3 className="text-2xl font-bold text-white mb-2">Thanks!</h3>
-                <p className="text-accent-200">We'll be in touch within 24 hours to schedule your pilot.</p>
+                <p className="text-accent-warm/80">We&apos;ll be in touch within 24 hours to schedule your pilot.</p>
             </div>
         );
     }
@@ -160,7 +160,7 @@ export function EmailForm() {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-accent hover:bg-cyan-400 text-background font-bold py-4 rounded-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-lg shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transition-[color,background-color,box-shadow,transform,opacity] duration-200"
+                className="w-full bg-accent-warm hover:brightness-110 text-background font-bold py-4 rounded-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-lg shadow-[0_0_20px_rgba(232,146,90,0.3)] hover:shadow-[0_0_30px_rgba(232,146,90,0.5)] transition-[color,background-color,box-shadow,transform,opacity,filter] duration-200"
             >
                 {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : 'Get Early Access'}
             </button>

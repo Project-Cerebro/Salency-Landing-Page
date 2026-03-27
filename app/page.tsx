@@ -8,7 +8,7 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-accent/30 selection:text-white relative">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-accent-warm/30 selection:text-white relative">
       {/* Background Effects */}
       <div className="bg-noise"></div>
       <div className="bg-mesh"></div>
@@ -19,12 +19,12 @@ export default function Home() {
         {/* HERO SECTION */}
         <section className="py-24 md:py-32 px-6 max-w-7xl mx-auto text-center">
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <div className="inline-block bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-8 border border-accent/20 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-              New: Pilot Access Open
+            <div className="inline-block bg-accent-warm/10 text-accent-warm px-4 py-1.5 rounded-full text-sm font-semibold mb-8 border border-accent-warm/20 shadow-[0_0_15px_rgba(232,146,90,0.1)]">
+              Pilot Access Open
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1] drop-shadow-2xl">
-              AI that remembers every customer pain<br className="hidden md:block" /> your sales reps forget.
+            <h1 className="text-5xl md:text-7xl font-normal tracking-tight text-white mb-6 leading-[1.08] drop-shadow-2xl" style={{ fontFamily: 'var(--font-instrument-serif), Georgia, serif' }}>
+              AI that remembers every customer <em className="italic text-accent-warm not-italic" style={{ fontStyle: 'italic' }}>pain</em><br className="hidden md:block" /> your sales reps forget.
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-300 mb-4 max-w-2xl mx-auto leading-relaxed">
@@ -37,7 +37,7 @@ export default function Home() {
 
             <a
               href="#pilot"
-              className="inline-flex items-center bg-accent hover:bg-cyan-400 text-background font-bold px-8 py-4 rounded-lg text-lg shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.5)] hover:-translate-y-1 transition-[color,background-color,box-shadow,transform] duration-200"
+              className="inline-flex items-center bg-accent-warm hover:brightness-110 text-background font-bold px-8 py-4 rounded-lg text-lg shadow-[0_0_20px_rgba(232,146,90,0.3)] hover:shadow-[0_0_40px_rgba(232,146,90,0.5)] hover:-translate-y-1 transition-[color,background-color,box-shadow,transform,filter] duration-200"
             >
               Get Early Access
               <ArrowRight className="ml-2 w-5 h-5" />
