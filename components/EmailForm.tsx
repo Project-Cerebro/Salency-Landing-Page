@@ -96,7 +96,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                     <label className="block text-sm font-medium text-gray-300 mb-1">First Name *</label>
                     <input
                         {...register('firstName', { required: true })}
-                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
+                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors"
                         placeholder="Jane"
                         autoComplete="given-name"
                         onFocus={() => track('form_start')}
@@ -108,7 +108,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                     <label className="block text-sm font-medium text-gray-300 mb-1">Last Name *</label>
                     <input
                         {...register('lastName', { required: true })}
-                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
+                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors"
                         placeholder="Doe"
                         autoComplete="family-name"
                         suppressHydrationWarning
@@ -121,7 +121,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                 <label className="block text-sm font-medium text-gray-300 mb-1">Company Name *</label>
                 <input
                     {...register('companyName', { required: true })}
-                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
+                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors"
                     placeholder="Acme Inc."
                     autoComplete="organization"
                     suppressHydrationWarning
@@ -134,7 +134,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                 <input
                     type="email"
                     {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
-                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
+                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors"
                     placeholder="jane@acme.com"
                     autoComplete="email"
                     suppressHydrationWarning
@@ -147,7 +147,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                     <label className="block text-sm font-medium text-gray-300 mb-1">Role *</label>
                     <select
                         {...register('role', { required: true })}
-                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors appearance-none"
+                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors appearance-none"
                         suppressHydrationWarning
                     >
                         <option value="">Select Role...</option>
@@ -163,7 +163,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                     <label className="block text-sm font-medium text-gray-300 mb-1">Number of Sales Reps *</label>
                     <select
                         {...register('salesReps', { required: true })}
-                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors appearance-none"
+                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors appearance-none"
                         suppressHydrationWarning
                     >
                         <option value="">Select Range...</option>

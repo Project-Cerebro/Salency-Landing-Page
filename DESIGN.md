@@ -88,21 +88,27 @@ Keep the dark theme (it's built, it works, it projects technical confidence) but
 
 | Token | Hex | Use |
 |---|---|---|
-| `--bg-primary` | `#0F1117` | Page background |
-| `--bg-secondary` | `#161922` | Alternate section bg |
-| `--bg-surface` | `#1C1F2B` | Cards, containers |
-| `--bg-elevated` | `#242836` | Hover states, dropdowns |
+| `--bg-primary` | `#121015` | Page background (warm neutral) |
+| `--bg-secondary` | `#1A171E` | Alternate section bg (warm neutral) |
+| `--bg-surface` | `#201D24` | Cards, containers (warm neutral) |
+| `--bg-elevated` | `#2A262F` | Hover states, dropdowns (warm neutral) |
 
-#### Accents (dual — cyan for data, copper for action)
+The `.bg-mesh` background gradient favors copper (5% opacity, 25% radius) over cyan (3% opacity, 20% radius) to reinforce the warm identity at the ambient level.
+
+#### Accents (copper-led — copper for identity, cyan for data)
 
 | Token | Hex | Use |
 |---|---|---|
-| `--accent-primary` | `#06B6D4` | Data highlights, links, progress indicators, HeroMock chrome |
-| `--accent-warm` | `#E8925A` | CTAs, hero emphasis, badges, the "human" accent |
-| `--accent-primary-subtle` | `rgba(6,182,212,0.12)` | Cyan tinted backgrounds |
+| `--accent-warm` | `#E8925A` | **Primary accent:** CTAs, emphasis, focus states, checkmarks, borders, quotes — all interaction and emotional content |
+| `--accent-primary` | `#06B6D4` | Data labels, comparison tables, HeroMock product chrome — supporting role only |
 | `--accent-warm-subtle` | `rgba(232,146,90,0.12)` | Copper tinted backgrounds |
+| `--accent-primary-subtle` | `rgba(6,182,212,0.12)` | Cyan tinted backgrounds |
 
-**Rationale:** Cyan stays because it's already in the HeroMock and product UI. But CTAs and emotional emphasis get the warm copper — a color that says "trust, warmth, action" to sales leaders, not "cold analytics." This dual-accent system gives us range.
+#### Palette Hierarchy
+
+**Copper leads. Cyan supports. If you're unsure which to use, use copper.**
+
+The product is about remembering what others forget — warmth, nuance, human context, memory. That's not "clean tech blue." Copper owns all interaction surfaces (CTAs, focus rings, checkmarks, quote borders, section labels). Cyan is reserved for data contexts only: the Gong comparison table and HeroMock product chrome. This hierarchy ensures Salency reads as "warm, memorable brand" rather than "another blue AI tool with orange decoration."
 
 #### Text (warm off-white, not pure white)
 
@@ -188,7 +194,7 @@ These changes improve the system without breaking anything. Implement freely.
 
 | Change | Impact | Effort |
 |---|---|---|
-| Warm up backgrounds (`#0F1117` replacing `#111827`) | Medium | Low — CSS var swap |
+| Warm up backgrounds (`#121015` replacing `#0F1117`) | Medium | Low — CSS var swap |
 | Add warm copper `--accent-warm` as secondary accent | High | Medium — add token + update CTAs |
 | Warm text colors (`#E8E6E3` replacing `#EDEDED`) | Low | Low — CSS var swap |
 | Add Instrument Serif for hero H1 only | High | Low — add font, one class |
@@ -237,7 +243,7 @@ If you decide to add a light theme toggle later:
 
 Status as of March 2026 — all SAFE items implemented.
 
-1. ~~**Background warmth** — `--background: #0F1117` in `globals.css`~~ DONE
+1. ~~**Background warmth** — `--background: #121015` (warmed from `#0F1117`) in `globals.css`~~ DONE
 2. ~~**Text warmth** — `--foreground: #E8E6E3`, `--text-secondary: #9B9A97`, `--text-muted: #5E5D5B`~~ DONE
 3. ~~**Add Instrument Serif** — Imported in `layout.tsx`, applied to hero H1 with italic copper emphasis~~ DONE
 4. ~~**Add copper accent token** — `--accent-warm: #E8925A` in `globals.css` + `@theme inline`~~ DONE
@@ -278,7 +284,7 @@ Things this design system deliberately avoids:
 - **Pure white text on near-black** — Use warm off-white (`#E8E6E3`) for reduced eye strain and warmer feel.
 - **`transition: all`** — Always specify transition properties explicitly.
 - **System fonts** — At minimum, use Outfit for headings and Geist Sans for body. Never fall back to raw system sans-serif.
-- **Cyan-only accent** — Always pair cyan (data/links) with copper (CTAs/emphasis) for visual range.
+- **Cyan as primary accent** — Copper leads, cyan supports. Use cyan only for data contexts (comparison tables, HeroMock chrome). Everything else is copper.
 - **Uniform section padding** — Vary padding across sections for visual rhythm.
 
 ---
