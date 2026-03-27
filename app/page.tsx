@@ -35,13 +35,21 @@ export default function Home() {
               Built for B2B SaaS teams with 5–50 reps who are tired of losing context between calls.
             </p>
 
-            <a
-              href="#pilot"
-              className="inline-flex items-center bg-accent-warm hover:brightness-110 text-background font-bold px-8 py-4 rounded-lg text-lg shadow-[0_0_20px_rgba(232,146,90,0.3)] hover:shadow-[0_0_40px_rgba(232,146,90,0.5)] hover:-translate-y-1 transition-[color,background-color,box-shadow,transform,filter] duration-200"
-            >
-              Get Early Access
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </a>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <a
+                href="#pilot"
+                className="inline-flex items-center bg-accent-warm hover:brightness-110 text-background font-bold px-8 py-4 rounded-lg text-lg shadow-[0_0_20px_rgba(232,146,90,0.3)] hover:shadow-[0_0_40px_rgba(232,146,90,0.5)] hover:-translate-y-1 transition-[color,background-color,box-shadow,transform,filter] duration-200"
+              >
+                Get Early Access
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </a>
+              <a
+                href="#how-it-works"
+                className="inline-flex items-center text-gray-300 hover:text-white font-medium px-6 py-4 rounded-lg text-lg border border-white/10 hover:border-white/20 hover:-translate-y-0.5 transition-[color,border-color,transform] duration-200"
+              >
+                See How It Works
+              </a>
+            </div>
           </div>
 
           {/* Hero Visual — Product UI Mock */}
