@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import {
   ExternalLink,
   Calendar,
@@ -64,6 +64,29 @@ const urgencyStyles = {
 export function HeroMock() {
   const [activeTab, setActiveTab] = useState<Tab>('painpoints');
   const [expandedRow, setExpandedRow] = useState<number | null>(1);
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const [scrollFade, setScrollFade] = useState({ left: false, right: false });
+
+  const updateScrollFade = useCallback(() => {
+    const el = tabsRef.current;
+    if (!el) return;
+    setScrollFade({
+      left: el.scrollLeft > 4,
+      right: el.scrollLeft + el.clientWidth < el.scrollWidth - 4,
+    });
+  }, []);
+
+  useEffect(() => {
+    const el = tabsRef.current;
+    if (!el) return;
+    updateScrollFade();
+    el.addEventListener('scroll', updateScrollFade, { passive: true });
+    window.addEventListener('resize', updateScrollFade);
+    return () => {
+      el.removeEventListener('scroll', updateScrollFade);
+      window.removeEventListener('resize', updateScrollFade);
+    };
+  }, [updateScrollFade]);
 
   return (
     <div className="mt-16 md:mt-20 relative text-left">
@@ -104,33 +127,44 @@ export function HeroMock() {
           </div>
 
           {/* Tabs */}
-          <div className="flex items-center gap-0 px-5 md:px-8 border-b border-gray-200 text-sm overflow-x-auto scrollbar-none">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`shrink-0 py-2.5 px-3 md:px-4 font-medium border-b-2 transition-colors flex items-center gap-1.5 ${
-                    activeTab === tab.id
-                      ? 'border-blue-600 text-gray-900 font-semibold'
-                      : 'border-transparent text-gray-400 hover:text-gray-600'
-                  }`}
-                >
-                  {Icon && <Icon size={13} />}
-                  {tab.label}
-                  {tab.count != null && (
-                    <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full leading-none ${
-                      activeTab === tab.id && tab.id === 'painpoints'
-                        ? 'bg-red-100 text-red-600'
-                        : 'bg-gray-100 text-gray-400'
-                    }`}>
-                      {tab.count}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+          <div className="relative border-b border-gray-200">
+            {scrollFade.left && (
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            )}
+            {scrollFade.right && (
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+            )}
+            <div
+              ref={tabsRef}
+              className="flex items-center gap-0 px-5 md:px-8 text-sm overflow-x-auto scrollbar-none"
+            >
+              {tabs.map((tab) => {
+                const Icon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`shrink-0 py-3 px-3 md:px-4 font-medium border-b-2 transition-colors flex items-center gap-1.5 ${
+                      activeTab === tab.id
+                        ? 'border-blue-600 text-gray-900 font-semibold'
+                        : 'border-transparent text-gray-400 hover:text-gray-600'
+                    }`}
+                  >
+                    {Icon && <Icon size={13} />}
+                    {tab.label}
+                    {tab.count != null && (
+                      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full leading-none ${
+                        activeTab === tab.id && tab.id === 'painpoints'
+                          ? 'bg-red-100 text-red-600'
+                          : 'bg-gray-100 text-gray-400'
+                      }`}>
+                        {tab.count}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Tab Content */}
