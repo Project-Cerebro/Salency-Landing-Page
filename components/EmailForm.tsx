@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Loader2 } from 'lucide-react';
 import { track } from '@vercel/analytics';
@@ -20,9 +20,13 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
         defaultValues: { email: prefillEmail ?? '' },
     });
+
+    useEffect(() => {
+        if (prefillEmail) setValue('email', prefillEmail);
+    }, [prefillEmail, setValue]);
 
     const onSubmit = async (data: FormData) => {
         if (data.website) {
