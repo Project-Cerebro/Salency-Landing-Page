@@ -240,11 +240,11 @@ function GongComparisonSection() {
                   </td>
                   <td className="py-4 px-6 text-center">
                     {row.salency === true ? (
-                      <span className="text-accent font-semibold">✓</span>
+                      <span className="text-accent-warm font-semibold">✓</span>
                     ) : row.salency === false ? (
                       <span className="text-gray-700">—</span>
                     ) : (
-                      <span className="text-accent text-xs font-medium">{String(row.salency)}</span>
+                      <span className="text-accent-warm text-xs font-medium">{String(row.salency)}</span>
                     )}
                   </td>
                 </tr>
