@@ -61,6 +61,17 @@ h6 {
   text-wrap: balance;
 }
 
+/* Investor register — editorial voice (Instrument Serif headings, wider leading) */
+.register-investor h3 {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.register-investor p {
+  line-height: 1.75;
+}
+
 /* Background Effects */
 .bg-noise {
   position: fixed;

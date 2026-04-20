@@ -18,7 +18,6 @@ export function Header() {
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
           <a href="#how-it-works" className="hover:text-white transition-colors py-3">How it Works</a>
-          <a href="#team" className="hover:text-white transition-colors py-3">Team</a>
           <a href="#pilot" className="hover:text-white transition-colors py-3">Pilot Access</a>
         </nav>
 
@@ -43,7 +42,6 @@ export function Header() {
           <nav className="flex flex-col px-6 py-4 gap-1">
             {[
               { href: '#how-it-works', label: 'How it Works' },
-              { href: '#team', label: 'Team' },
               { href: '#pilot', label: 'Pilot Access' },
             ].map(({ href, label }) => (
               <a
