@@ -11,53 +11,59 @@ npm run lint     # Run ESLint
 npm start        # Run production server
 ```
 
-No test suite is configured. There is no single-test command.
+No test suite is configured.
 
-## Environment Setup
+## Environment
 
-Requires a `.env.local` file with:
+`.env.local` vars:
+
 ```
-RESEND_API_KEY=your_key_here
+RESEND_API_KEY=...                 # required — pilot form emails
+UPSTASH_REDIS_REST_URL=...         # optional — enables per-IP rate limit (5/hour)
+UPSTASH_REDIS_REST_TOKEN=...       # required if UPSTASH_REDIS_REST_URL is set
 ```
+
+Rate limiting in `app/api/send/route.ts` is gated on `UPSTASH_REDIS_REST_URL` — if unset, the limiter is skipped entirely (fine for local dev).
 
 ## Architecture
 
-Single-page marketing/landing site built with **Next.js 16 App Router**, **React 19**, **TypeScript**, and **Tailwind CSS v4**.
+Single-page marketing site. **Next.js 16 App Router**, **React 19**, **TypeScript**, **Tailwind CSS v4**.
 
-### Key files
+### Page composition
 
-- `app/page.tsx` — Entire landing page. All content sections are inline: Header, Hero, HeroMock, Problem, Solution, Gong Comparison, Results, Team, Pilot CTA, Footer.
-- `app/layout.tsx` — Root layout; loads Geist Sans, Geist Mono, and Outfit from Google Fonts.
-- `app/globals.css` — Theme tokens (CSS vars), custom utility classes, scroll-reveal animations, and all keyframe animations.
-- `app/api/send/route.ts` — Single POST endpoint for pilot signup form. Validates with Zod, checks honeypot, and sends two emails via Resend (admin notification + user confirmation).
-- `components/EmailForm.tsx` — Client component using React Hook Form. Includes a hidden honeypot `website` field for bot detection. Posts to `/api/send`.
-- `components/Header.tsx` — Responsive header with mobile hamburger menu and "Get Early Access" CTA.
-- `components/HeroMock.tsx` — Interactive replica of Salency's product UI with tabbed views (Transcript, Pains, Objections, etc.).
-- `components/ScrollReveal.tsx` — Client component using IntersectionObserver for scroll-triggered fade-in animations. Respects `prefers-reduced-motion`.
-- `components/SpotlightCard.tsx` — Client component wrapping cards with a mouse-tracking radial gradient spotlight effect.
-- `components/ProblemCard.tsx` — Presentational wrapper around `SpotlightCard`.
+- `app/page.tsx` — Thin server shell: background layers, `<Header />`, `<PageClient />`, footer. Does **not** contain section content.
+- `components/PageClient.tsx` — Client component that owns the whole page body. All marketing sections (Problem, Solution, Gong Comparison, Results, Team, Pilot) are defined as local functions inside this file. Holds the `capturedEmail` state that flows from the hero email capture into the pilot form.
+- `components/HeroSection.tsx`, `SocialProof.tsx`, `FounderVideo.tsx`, `HeroEmailCapture.tsx`, `InteractiveDemo.tsx`, `HeroMock.tsx` — Hero-area pieces composed by `PageClient`.
+- `app/privacy/page.tsx`, `app/terms/page.tsx` — Static legal pages.
 
-### Styling conventions
+When editing marketing copy: check `components/PageClient.tsx` first. `app/page.tsx` only contains header/footer chrome.
 
-- **Tailwind CSS v4** — No `tailwind.config.ts`; theme is defined via `@theme` blocks inside `globals.css`.
-- Theme colors are CSS variables: `--accent: #06b6d4` (cyan), `--v-bg: #0a1219`, `--v-text: #EDEDED`.
-- Dark theme throughout. All accent colors reference the CSS vars.
-- Custom animation classes in `globals.css` are applied as plain class names (e.g., `animate-in`, `delay-100`, `breathe`, `float-card`).
-- `ScrollReveal` wraps below-fold sections for scroll-triggered fade-in animations.
-- Explicit `transition-property` lists instead of `transition-all` for performance.
+### API + form flow
 
-### Design system
+- `components/EmailForm.tsx` — React Hook Form. Hidden honeypot `website` field. POSTs to `/api/send`. Accepts a `prefillEmail` prop from `PageClient` (wired through `HeroSection` → `setCapturedEmail`).
+- `app/api/send/route.ts` — Single POST endpoint. Flow: Upstash rate limit (if configured) → honeypot short-circuit returns `{success, status:'filtered'}` → Zod validate → send two emails via Resend (admin to `founders@salency.ai`, confirmation to user) with `Promise.allSettled` so admin failure 500s but user-confirmation failure is tolerated (sandbox restriction surfaced in the response).
+- HTML in emails uses a manual `escapeHtml` — do not concatenate user input into the templates without running it through that helper.
 
-- See `DESIGN.md` for the full proposed design system with competitive research, color/type tokens, SAFE/RISK classification, and implementation sequence.
-- See `.gstack/design-reports/design-preview.html` for a live preview (open in browser, toggle dark/light mode).
-- Current system uses cyan (`#06b6d4`) as sole accent. Proposed system adds warm copper (`#E8925A`) for CTAs and Instrument Serif for hero headlines.
+### Styling
 
-### Data flow
+- Tailwind v4 — no `tailwind.config.ts`. Theme tokens live in `@theme` blocks inside `app/globals.css`.
+- Primary accent is **warm copper** `--accent-warm: #E8925A` (used for CTAs, section eyebrows, checkmarks, founder badges). The older cyan `--accent: #06b6d4` is still defined but rarely referenced — prefer `accent-warm` for new work.
+- Background uses `--background: #121015` with `--bg-secondary: #1A171E` for alternating bands, plus `bg-noise` and `bg-mesh` layers rendered in `app/page.tsx`.
+- Fonts loaded in `app/layout.tsx`: Geist Sans (body), Outfit (display), Instrument Serif (hero accent). No Geist Mono.
+- `components/ScrollReveal.tsx` wraps below-fold sections; uses IntersectionObserver and respects `prefers-reduced-motion`.
+- `components/SpotlightCard.tsx` provides a mouse-tracked radial gradient for cards; `ProblemCard.tsx` is a server-component wrapper around it.
+- Prefer explicit `transition-property` lists over `transition-all`.
 
-- No database. Form submissions go directly to Resend via the `/api/send` route.
-- The admin recipient email in `route.ts` is currently `delivered@resend.dev` (a Resend sandbox address) — update to a real address before production.
+### Client/server split
 
-### Component model
+Server by default. Client components (`'use client'`): `PageClient`, `Header`, `HeroSection`, `HeroEmailCapture`, `HeroMock`, `InteractiveDemo`, `FounderVideo`, `SocialProof`, `EmailForm`, `ScrollReveal`, `SpotlightCard`. Because `PageClient` is a client boundary, everything it renders is effectively client — keep `app/page.tsx` and footer in the server tree if you want static rendering of the chrome.
 
-- Server Components by default. `EmailForm`, `SpotlightCard`, `Header`, `HeroMock`, and `ScrollReveal` are `'use client'` (they require interactivity/browser APIs).
-- `ProblemCard` is a server component that accepts plain props and renders `SpotlightCard` inside.
+### Analytics
+
+`@vercel/analytics` is mounted once in `app/layout.tsx` via `<Analytics />`. No other tracking.
+
+### Design system reference
+
+- `DESIGN.md` — full proposed system with tokens, competitive research, SAFE/RISK classification.
+- `SALENCY_LANDING_PAGE.md`, `TASKS.md` — product/positioning context and outstanding work.
+- `.gstack/design-reports/design-preview.html` — live token preview (open in browser).
