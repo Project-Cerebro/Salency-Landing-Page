@@ -11,13 +11,13 @@ export function RegisterDivider({ eyebrow, chapter = '02', className = '' }: Pro
 
   return (
     <div
-      className={`relative w-full h-40 md:h-[220px] bg-[#0C0A10] flex items-center justify-center overflow-hidden ${className}`}
+      className={`relative w-full h-40 md:h-[220px] bg-bg-register-investor flex items-center justify-center overflow-hidden ${className}`}
       role="separator"
       aria-label={eyebrow}
     >
       <div
         className="absolute top-0 left-0 right-0 h-3 md:h-1 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, #121015, #0C0A10)' }}
+        style={{ background: 'linear-gradient(to bottom, var(--background), var(--bg-register-investor))' }}
         aria-hidden
       />
       <div
@@ -41,7 +41,7 @@ export function RegisterDivider({ eyebrow, chapter = '02', className = '' }: Pro
         style={{ background: 'rgba(232, 146, 90, 0.22)' }}
         aria-hidden
       />
-      <div className="relative z-10 flex flex-col items-center gap-3 bg-[#0C0A10] px-6">
+      <div className="relative z-10 flex flex-col items-center gap-3 bg-bg-register-investor px-6">
         <span
           className="font-mono text-[11px] tracking-[0.3em] uppercase"
           style={{ color: '#5E5D5B' }}

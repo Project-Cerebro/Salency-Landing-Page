@@ -31,7 +31,7 @@ const founders = [
 
 export function InvestorRegister() {
   return (
-    <section className="register-investor bg-[#0C0A10]">
+    <section className="register-investor bg-bg-register-investor">
       <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
         {/* Platform framing */}
         <ScrollReveal>
@@ -77,7 +77,7 @@ export function InvestorRegister() {
                     </div>
                   </div>
                   <div>
-                    <div className="text-2xl md:text-3xl text-white mb-1">{f.name}</div>
+                    <h4 className="text-2xl md:text-3xl text-white mb-1 m-0">{f.name}</h4>
                     <div className="text-[13px] font-bold uppercase tracking-wider text-accent-warm mb-5">
                       {f.title}
                     </div>

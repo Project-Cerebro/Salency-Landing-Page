@@ -11,6 +11,7 @@
   --bg-secondary: #1A171E;
   --bg-surface: #201D24;
   --bg-elevated: #2A262F;
+  --bg-register-investor: #0C0A10;
 
   --text-primary: #E8E6E3;
   --text-secondary: #9B9A97;
@@ -35,6 +36,7 @@
   --color-bg-secondary: var(--bg-secondary);
   --color-bg-surface: var(--bg-surface);
   --color-bg-elevated: var(--bg-elevated);
+  --color-bg-register-investor: var(--bg-register-investor);
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
@@ -62,7 +64,9 @@ h6 {
 }
 
 /* Investor register — editorial voice (Instrument Serif headings, wider leading) */
-.register-investor h3 {
+.register-investor h2,
+.register-investor h3,
+.register-investor h4 {
   font-family: var(--font-instrument-serif), Georgia, serif;
   font-weight: 400;
   letter-spacing: -0.01em;
