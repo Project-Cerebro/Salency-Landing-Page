@@ -8,11 +8,15 @@ Pre-seed startup landing page for **Salency**, a B2B SaaS sales intelligence pla
 
 ## Product in One Line
 
-**AI that remembers every customer pain your sales reps forget.**
+**Institutional memory for sales teams — so context outlives the rep who heard it.**
+
+(Alternate, more feature-forward if the platform line feels too abstract for the hero: *"AI that remembers every customer pain your sales reps forget."*)
 
 ## What Salency Actually Does
 
-Salency is a sales intelligence layer that turns sales call transcripts into structured, actionable context. It extracts customer pain points, maps them to relevant products and features, and generates follow-ups — so reps stop losing deals to forgotten context, and anyone inheriting an account gets full history instead of nothing.
+Salency is the institutional memory layer for B2B sales. Every call, objection, competitor mention, and requirement gets extracted, mapped to your products, and retained as durable account context — so reps stop losing deals to forgotten signals, and anyone inheriting an account gets full history instead of nothing.
+
+**Framing discipline:** Salency is a platform, not a feature. Call-capture (bot), brief views, and follow-up drafts are surfaces on top of the memory layer — not the product itself. Always lead with the platform vision before the UI surface.
 
 ### The Core Insight (Use This to Inform Tone)
 
@@ -24,15 +28,20 @@ Reps are biased captors. They only write down what they already understand — w
 - Upload sales call transcripts (text)
 - Extract pains, objections, competitors, requirements, next steps
 - Map identified pains to relevant products and features automatically
-- Generate structured call recaps and follow-up email drafts
+- Generate structured call recaps, follow-up email drafts, and handoff briefs
 - Citations and confidence scores on all outputs
+
+### Coming Soon (V1.5 — ~6-8 weeks out)
+
+- Recall.ai meeting bot joins Zoom / Meet / Teams calls, captures audio + speaker-attributed transcript, feeds the extraction pipeline automatically
+- No desktop app, no third-party capture integrations (Fathom / Fireflies / Gong) in V1.5 — the bot is the single capture path
 
 ### What Salency Does NOT Do (Don't Imply These)
 
 - Does NOT replace your CRM
-- Does NOT record calls (not a Gong competitor)
+- Does NOT coach reps in the moment (that's Gong's turf) — Salency is the memory layer, not the coaching layer
 - Does NOT claim to "close more deals" — it captures what gets lost
-- No live call joining, no CRM integrations in V1
+- No CRM integrations in V1
 
 ---
 
@@ -76,22 +85,25 @@ This section should feel confident, not defensive. One short paragraph or a clea
 
 | | Gong | Salency |
 |---|---|---|
-| Records calls | ✓ | Works with any transcript |
+| Records calls | ✓ | Bot capture (V1.5) + works with any transcript |
 | Coaches reps in the moment | ✓ | — |
 | Extracts pain in customer's own words | — | ✓ |
 | Maps pain → your specific products | — | ✓ |
 | Generates context-aware follow-ups | — | ✓ |
 | Gives successors full account context | — | ✓ |
+| Institutional memory across all accounts | — | ✓ |
 
 ### 5. Team
 
-Three co-founders. Keep bios tight — 2-3 sentences each. Lead with Salency, then relevant background.
+Two co-founders + one technical contributor. Keep bios tight — 2-3 sentences each. Lead with Salency, then relevant background.
 
-**Howard** — Co-founder & CEO. Former founding AE at Viggle (a16z-backed). Led MUFG Hong Kong's first Panda Bond. Finance-to-startup trajectory across BD roles at Sequence and Treasure. MBET, University of Waterloo.
+**Howard** — Co-founder & CEO. Founding AE at Viggle (a16z-backed). Led MUFG Hong Kong's first Panda Bond. Finance-to-startup trajectory across BD roles at Sequence and Treasure. MBET, University of Waterloo.
 
-**Nikki Ip** — Co-founder & COO. Building Salency's go-to-market and operations. Previously led revenue analytics and operational strategy at Adaptavist Group. Background in institutional client management and compliance (AML/KYC) in banking.
+**Nikki Ip** — Co-founder & COO. Building Salency's go-to-market and operations alongside her current role leading revenue analytics and operational strategy at Adaptavist Group. Background in institutional client management and compliance (AML/KYC) in banking.
 
-**Babajide Okusanya** — Co-founder & Technical Lead. LLM specialist building Salency's extraction and mapping engine. Previously scaled a B2B marketplace to meaningful ARR. Active builder with deep experience in applied AI.
+**Babajide Okusanya** — Technical contributor. LLM specialist building Salency's extraction and mapping engine. Previously scaled a B2B marketplace to meaningful ARR. Active builder with deep experience in applied AI.
+
+> **Team framing note (for copy reviewers, not public page):** Howard and Nikki are the two named co-founders on the cap table and on the YC application. Babajide is a contractor on a staged ladder (Stage 1: pre-incorp IP assigned; Stage 2 trigger-based: advisor equity on a cliff once angel/YC/revenue unlocks payment). Do not publicly title him "Co-founder" until Stage 3 is formally triggered and restructured. If he moves to Stage 3 full-time co-founder, update this section.
 
 ### 6. CTA (Bottom)
 
