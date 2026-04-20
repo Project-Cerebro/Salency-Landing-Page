@@ -14,7 +14,7 @@ export function ProblemCard({ heading, description, quote, author }: ProblemCard
       <p className="text-gray-300 mb-6 font-light leading-relaxed">{description}</p>
 
       <div className="bg-white/5 p-4 rounded-lg italic text-gray-400 text-sm border-l-2 border-accent-warm/30">
-        "{quote}"
+        &ldquo;{quote}&rdquo;
         <div className="mt-2 text-xs font-semibold not-italic text-accent-warm/80">— {author}</div>
       </div>
     </SpotlightCard>
