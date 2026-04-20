@@ -3,291 +3,285 @@
 > "Stripe's clarity meets Linear's confidence."
 > — SALENCY_LANDING_PAGE.md brief
 
+This doc reflects what is **actually shipped** in `app/globals.css`, `app/layout.tsx`, and the component tree. When code and this doc disagree, code wins — update the doc.
+
 ## Design Philosophy
 
-Salency is a B2B sales intelligence tool for revenue leaders, not developers. The visual language should feel like **a company already in market** — editorial confidence, warm professionalism, and zero AI-startup clichés. Every pixel should answer the question: "Would a VP of Sales at a $30M ARR company trust this enough to reply to the pilot email?"
+Salency is a B2B sales intelligence tool for revenue leaders, not developers. The visual language should feel like **a company already in market** — editorial confidence, warm professionalism, zero AI-startup clichés. Every pixel answers: "Would a VP of Sales at a $30M ARR company trust this enough to reply to the pilot email?"
 
 ### Three Principles
 
-1. **Signal over noise.** Just as Salency extracts structured context from messy transcripts, the design should extract clarity from complexity. Clean surfaces, strong type hierarchy, no visual clutter.
-2. **Warm professionalism.** B2B sales culture runs on trust and relationships, not on dark-mode hacker aesthetics. The palette and typography should project confidence and warmth in equal measure.
-3. **Product-led identity.** The HeroMock — a functioning replica of Salency's actual UI — is the most distinctive element on the page. Let the product do the visual heavy lifting. Everything else should frame it, not compete with it.
+1. **Signal over noise.** Just as Salency extracts structured context from messy transcripts, the design extracts clarity from complexity. Clean surfaces, strong type hierarchy, no visual clutter.
+2. **Warm professionalism.** B2B sales culture runs on trust and relationships, not dark-mode hacker aesthetics. Palette and typography project confidence and warmth in equal measure.
+3. **Product-led identity.** The `HeroMock` — a functioning replica of Salency's actual UI — is the most distinctive element on the page. Let the product do the visual heavy lifting. Everything else frames it, doesn't compete with it.
+
+---
+
+## Design Tokens (shipped)
+
+All tokens defined in `app/globals.css` `:root` and exposed to Tailwind via `@theme inline`.
+
+### Backgrounds
+
+| Token | Hex | Tailwind | Use |
+|---|---|---|---|
+| `--background` | `#121015` | `bg-background` | Page background (warm neutral) |
+| `--bg-secondary` | `#1A171E` | `bg-bg-secondary` | Alternating section bands |
+| `--bg-surface` / `--card` / `--muted` | `#201D24` | `bg-card` / `bg-muted` | Cards, containers |
+| `--bg-elevated` | `#2A262F` | `bg-bg-elevated` | Hover states, dropdowns |
+
+Ambient layer: `.bg-mesh` (in `globals.css`) paints two radial gradients — copper at 15%/50% (5% opacity) and cyan at 85%/30% (3% opacity). Copper stronger than cyan on purpose — reinforces warm identity at the ambient level. `.bg-noise` adds 5% opacity SVG turbulence on top.
+
+### Accents — copper leads, cyan supports
+
+| Token | Hex | Tailwind | Use |
+|---|---|---|---|
+| `--accent-warm` | `#E8925A` | `accent-warm` | **Primary:** CTAs, emphasis, focus, checkmarks, borders, quote rules, section eyebrows |
+| `--accent` | `#06B6D4` | `accent` | Data-only: comparison table, HeroMock product chrome |
+
+**Rule:** if unsure which accent to use, use copper. Cyan is reserved for product-data contexts. This keeps Salency reading as "warm memorable brand" rather than "another blue AI tool with orange accents."
+
+Opacity tint idioms seen across components (no token, but consistent): `/8`, `/10`, `/20`, `/30`, `/50` on `accent-warm` for tinted surfaces, hover states, and borders. Example patterns:
+
+```tsx
+bg-accent-warm/10 border border-accent-warm/20 text-accent-warm     // eyebrow pill
+bg-accent-warm text-background shadow-[0_0_20px_rgba(232,146,90,0.3)]  // primary CTA
+border-accent-warm/30 bg-white/5                                     // subtle border on card quote
+```
+
+### Text
+
+| Token | Hex | Tailwind | Use |
+|---|---|---|---|
+| `--foreground` / `--text-primary` | `#E8E6E3` | `text-foreground` | Headlines, primary content (warm off-white, not pure white) |
+| `--text-secondary` | `#9B9A97` | (raw `text-[#9B9A97]` or utility) | Descriptions, secondary info |
+| `--text-muted` | `#5E5D5B` | (raw) | Labels, captions, step numerals |
+
+Note: only `--foreground` is registered as a Tailwind color via `@theme inline`. Secondary/muted are consumed via CSS var or raw Tailwind opacity utilities (`text-gray-400`, `text-white/60`) across components. Worth tightening if you add new surfaces.
+
+### Semantic
+
+| Token | Hex | Tailwind |
+|---|---|---|
+| `--success` | `#34D399` | `text-success` / `bg-success` |
+| `--warning` | `#FBBF24` | `warning` |
+| `--error` | `#F87171` | `error` |
+| `--info` | `#60A5FA` | `info` |
+
+### Borders
+
+| Token | Value | Use |
+|---|---|---|
+| `--border-default` | `rgba(255,255,255,0.08)` | Default divider (not mapped to Tailwind utility — use `border-white/10` in components) |
+| `--border-strong` | `rgba(255,255,255,0.14)` | Card/input borders |
+
+Actual component usage: `border border-white/5` (subtle), `border border-white/10` (default), `border border-white/20` (strong hover). Copper borders use `border-accent-warm/20` through `/50`.
+
+---
+
+## Typography
+
+Fonts loaded in `app/layout.tsx` via `next/font/google`:
+
+| Role | Font | Weight | Variable | Where |
+|---|---|---|---|---|
+| **Display** | Instrument Serif | 400 regular + italic | `--font-instrument-serif` | Hero H1 only (inline `fontFamily` in `HeroSection.tsx`) |
+| **Headings** | Outfit | 400–700 | `--font-outfit` → `--font-heading` | All `h1–h6` via `globals.css` body rule; brand wordmark in `Header.tsx` |
+| **Body** | Geist Sans | 400–600 | `--font-geist-sans` → `--font-sans` | Body text (default) |
+| **Mono** | System mono stack | — | `--font-mono` | Small numerals, badges, step counters. **No webfont loaded.** |
+
+`--font-mono` is literal `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace` — platform defaults, no download. If mono gets used more, upgrade to JetBrains Mono or Geist Mono.
+
+Heading rule (`globals.css`):
+```css
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  text-wrap: balance;
+}
+```
+
+Why Instrument Serif for hero: serif headlines on warm dark backgrounds create editorial gravitas (NYT, Stripe Press). Pairs naturally with Outfit (geometric sans) for automatic hierarchy contrast. Italic is the hero's emphasis mechanism — no second accent color needed. No competitor in sales-intel uses a serif.
+
+---
+
+## Spacing & Layout
+
+Tailwind default 4px scale. Section-level spacing thinks in 8px multiples.
+
+### Section rhythm (observed in `PageClient.tsx`)
+
+| Context | Pattern |
+|---|---|
+| Major content section | `py-24 md:py-32 px-6` with `max-w-7xl mx-auto` |
+| Mid section | `py-24 px-6 max-w-5xl mx-auto` |
+| Alternating band (`bg-bg-secondary`) | `py-16 md:py-20` (or `md:py-24`) `border-y border-white/5` |
+| Content block inside section | `max-w-3xl` / `max-w-4xl` for prose, `max-w-5xl` for mixed |
+
+Alternating sections use `bg-bg-secondary` with `border-y border-white/5` to create visual rhythm without heavy dividers. Do not use a uniform padding on every section — vary it.
+
+### Max widths
+
+`max-w-7xl` for page shell, `max-w-5xl` mid, `max-w-4xl` for prose + table, `max-w-3xl` for narrow body copy.
+
+---
+
+## Border Radius
+
+Ladder, matching Tailwind defaults:
+
+| Tailwind | Use |
+|---|---|
+| `rounded-full` | Pills (eyebrow, status badges), avatar dots, radial glow shapes |
+| `rounded-lg` (8px) | Buttons, inputs, small cards, demo cards |
+| `rounded-xl` (12px) | `ProblemCard` surfaces |
+| `rounded-2xl` (16px) | Hero card, `FounderVideo`, `InteractiveDemo` container, feature surfaces |
+
+Large bubbly radius on every element is an AI-slop signal (see Anti-patterns). Stick to the ladder.
+
+---
+
+## Interaction Patterns
+
+### CTAs
+
+Primary (header, hero, form submit):
+
+```tsx
+bg-accent-warm hover:brightness-110 text-background
+font-bold px-8 py-4 rounded-lg
+shadow-[0_0_20px_rgba(232,146,90,0.3)]
+hover:shadow-[0_0_40px_rgba(232,146,90,0.5)] hover:-translate-y-1
+transition-[color,background-color,box-shadow,transform,filter] duration-200
+```
+
+Ghost (secondary hero action):
+
+```tsx
+text-gray-300 hover:text-white font-medium
+border border-white/10 hover:border-white/20 hover:-translate-y-0.5
+transition-[color,border-color,transform] duration-200
+```
+
+### Transitions — always explicit
+
+Never `transition-all`. List properties:
+
+```tsx
+transition-[color,background-color,filter] duration-200       // buttons
+transition-colors                                              // nav links, borders
+transition-[color,border-color,transform] duration-200         // ghost buttons
+```
+
+Durations: 200ms for interactions, 300–700ms for reveals/fades.
+
+### Touch targets
+
+Header CTA has `min-h-[44px]` explicitly. Nav links get `py-3` for 44px tap area. Follow the pattern for any new interactive element.
+
+### Scroll reveal
+
+`components/ScrollReveal.tsx` wraps below-fold sections. Uses IntersectionObserver, respects `prefers-reduced-motion` (see `globals.css` `@media (prefers-reduced-motion: reduce)`). 700ms ease with `cubic-bezier(0.16, 1, 0.3, 1)` and 24px translate.
+
+### Spotlight hover
+
+`components/SpotlightCard.tsx` — radial white gradient that tracks the cursor via CSS custom properties (`--mouse-x`, `--mouse-y`). Used by `ProblemCard`. Don't sprinkle on every card — it earns its place when the card IS the interaction.
+
+---
+
+## Anti-patterns (explicitly avoided)
+
+These are ban-list. Reviewers: flag any of these on sight.
+
+- **Gradient-circle icon grids.** The "3 icons in colored circles + bold title + 2-line description" pattern is the most recognizable AI-slop layout. Use inline icons or ghost numerals instead.
+- **Multi-colored founder avatars.** Single accent color. Real photos where available.
+- **Pure white text on near-black.** Use `#E8E6E3` (warm off-white). Reduces eye strain, warmer feel.
+- **`transition: all`.** Always specify transition properties explicitly (lint yourself — this is in `CLAUDE.md`).
+- **System fonts as primary.** Outfit for headings, Geist Sans for body. Never fall back to raw system sans-serif.
+- **Cyan as primary accent.** Copper leads. Cyan is data-only (comparison table, HeroMock chrome). Everything else copper.
+- **Uniform section padding.** Vary padding across sections for visual rhythm. `py-16` on one, `py-24 md:py-32` on the next.
+- **Uniform bubbly border-radius.** Stick to the radius ladder. Don't make everything `rounded-2xl`.
+- **Purple/violet/indigo gradients.** Color palette is warm neutral + copper + data cyan. No blue-to-purple.
 
 ---
 
 ## Competitive Intelligence
 
-Research conducted March 2026 across five reference sites.
+Research conducted March 2026 across five reference sites. Retained as context — explains why the system looks the way it does.
 
 ### Direct Competitors
 
 | Product | Theme | Primary Accent | Fonts | Visual Character |
 |---|---|---|---|---|
 | **Gong** | Light (white) | Deep purple `oklch(0.53 0.23 297)` | Custom "Grotesk" + Inter + Inter Tight | Energetic, social-proof-heavy, human photography |
-| **Clari** | Dark hero → light sections | Cyan/teal | "Maison Neue" + "Faktum" condensed | Enterprise-heavyweight, dark+cyan (very similar to current Salency) |
-| **Apollo** | Warm cream `~#F5F0E8` | Amber/gold | Soehne + Founders Grotesk + ABC Diatype | Most distinctive — warm, editorial, deliberately breaks from blue/purple |
+| **Clari** | Dark hero → light sections | Cyan/teal | "Maison Neue" + "Faktum" condensed | Enterprise-heavyweight. Dark+cyan — very similar to where Salency started. |
+| **Apollo** | Warm cream `~#F5F0E8` | Amber/gold | Soehne + Founders Grotesk + ABC Diatype | Most distinctive — warm, editorial, deliberately breaks from blue/purple. |
 
-### Brief Reference Sites
+### Reference Sites
 
 | Product | Theme | Accent | Fonts | Takeaway |
 |---|---|---|---|---|
-| **Linear** | Full dark, near-black | Minimal (yellow accents) | Inter Variable | Gets away with "default" font because everything else is immaculate. Product screenshots do all work. |
+| **Linear** | Full dark near-black | Minimal yellow | Inter Variable | Gets away with "default" font because everything else is immaculate. Product screenshots carry the identity. |
 | **Stripe** | Light with gradient washes | Multi-color | Custom "Sohne" | Gold standard for premium B2B. Warm, editorial, multi-color. |
 
-### Key Findings
+### Key findings
 
-- **Every competitor uses blue or purple.** Gong = purple, Clari = cyan, Salesforce = blue. Using cyan positions Salency as "smaller Clari."
-- **Apollo broke the mold** with warm cream + amber and it works. The warmth signals trust and approachability — qualities B2B sales leaders respond to.
-- **Premium typefaces are table stakes.** Gong, Apollo, and Stripe all use custom or distinctive fonts. System fonts (Inter, Roboto) read as generic.
-- **Light themes dominate** for B2B sales audiences (Gong, Apollo, Stripe). Dark is more dev-tool (Linear). But dark can work for premium positioning if warm enough.
-- **Product UI screenshots are essential.** Linear and Stripe both let their product visuals carry the identity. Salency's HeroMock already does this well.
-
----
-
-## Current System (Baseline)
-
-What's deployed today. Preserved here so changes are deliberate.
-
-### Colors — Current
-
-```
---background: #111827 (gray-900 — cold blue-gray)
---accent: #06b6d4     (cyan-500)
---v-bg: #0a1219       (adjusted — slightly warm)
---v-text: #EDEDED
---v-text-secondary: #94A3B8
---v-text-muted: #6B7A8D
---v-border: rgba(255,255,255,0.08)
---v-border-subtle: rgba(255,255,255,0.05)
-```
-
-### Typography — Current
-
-- **Headings:** Outfit 700 (via `next/font/google`)
-- **Body:** Geist Sans (via `next/font/google`)
-- **Mono:** Geist Mono (via `next/font/google`)
-
-### Issues with Current
-
-1. **One-dimensional accent.** Cyan is the only color with personality. Everything else is gray.
-2. **Cold background.** `#111827` is Tailwind's default `gray-900` — reads as "dark mode template."
-3. **No display font.** Outfit works for H2–H6 but lacks distinction for the hero headline. The brief asks for "something with character."
-4. **Cyan = Clari.** Our direct competitor uses the same dark + cyan combination.
+- **Every competitor uses blue or purple.** Gong = purple, Clari = cyan, Salesforce = blue. Cyan positions Salency as "smaller Clari."
+- **Apollo broke the mold** with warm cream + amber — works. Warmth signals trust, which B2B sales leaders respond to.
+- **Premium typefaces are table stakes.** Gong, Apollo, Stripe all use custom/distinctive. System fonts (Inter, Roboto) read as generic.
+- **Light dominates** for B2B sales audiences (Gong, Apollo, Stripe). Dark reads more dev-tool (Linear). Dark can still work for premium positioning **if warm enough** — that's the bet Salency is making.
+- **Product UI screenshots carry identity.** Linear and Stripe both let visuals do the work. Salency's `HeroMock` already does this.
 
 ---
 
-## Proposed System
+## Reference — not adopted
 
-### Direction: Warm Dark Editorial
+Options considered but held off on. Documented so the decision doesn't get re-litigated.
 
-Keep the dark theme (it's built, it works, it projects technical confidence) but warm it up significantly and add a second accent color.
+### DM Sans (body) instead of Geist Sans
+Geist Sans is well-made and already loaded. Delta is subtle. Skip unless a specific readability complaint shows up.
 
-### Colors — Proposed
+### JetBrains Mono instead of system mono
+Only affects small numerals and step labels. Not worth the font-load cost until mono appears on more surfaces.
 
-#### Backgrounds (warm undertone, not blue-gray)
+### Light mode toggle
 
-| Token | Hex | Use |
-|---|---|---|
-| `--bg-primary` | `#121015` | Page background (warm neutral) |
-| `--bg-secondary` | `#1A171E` | Alternate section bg (warm neutral) |
-| `--bg-surface` | `#201D24` | Cards, containers (warm neutral) |
-| `--bg-elevated` | `#2A262F` | Hover states, dropdowns (warm neutral) |
-
-The `.bg-mesh` background gradient favors copper (5% opacity, 25% radius) over cyan (3% opacity, 20% radius) to reinforce the warm identity at the ambient level.
-
-#### Accents (copper-led — copper for identity, cyan for data)
-
-| Token | Hex | Use |
-|---|---|---|
-| `--accent-warm` | `#E8925A` | **Primary accent:** CTAs, emphasis, focus states, checkmarks, borders, quotes — all interaction and emotional content |
-| `--accent-primary` | `#06B6D4` | Data labels, comparison tables, HeroMock product chrome — supporting role only |
-| `--accent-warm-subtle` | `rgba(232,146,90,0.12)` | Copper tinted backgrounds |
-| `--accent-primary-subtle` | `rgba(6,182,212,0.12)` | Cyan tinted backgrounds |
-
-#### Palette Hierarchy
-
-**Copper leads. Cyan supports. If you're unsure which to use, use copper.**
-
-The product is about remembering what others forget — warmth, nuance, human context, memory. That's not "clean tech blue." Copper owns all interaction surfaces (CTAs, focus rings, checkmarks, quote borders, section labels). Cyan is reserved for data contexts only: the Gong comparison table and HeroMock product chrome. This hierarchy ensures Salency reads as "warm, memorable brand" rather than "another blue AI tool with orange decoration."
-
-#### Text (warm off-white, not pure white)
-
-| Token | Hex | Use |
-|---|---|---|
-| `--text-primary` | `#E8E6E3` | Headlines, primary content |
-| `--text-secondary` | `#9B9A97` | Descriptions, secondary info |
-| `--text-muted` | `#5E5D5B` | Labels, captions, step numbers |
-
-#### Semantic
-
-| Token | Hex | Use |
-|---|---|---|
-| `--success` | `#34D399` | Confirmations, "complete" states |
-| `--warning` | `#FBBF24` | Timelines, urgency |
-| `--error` | `#F87171` | Failures, objections |
-| `--info` | `#60A5FA` | Neutral highlights |
-
-#### Borders
-
-| Token | Value | Use |
-|---|---|---|
-| `--border` | `rgba(255,255,255,0.08)` | Default dividers |
-| `--border-strong` | `rgba(255,255,255,0.14)` | Cards, inputs, table borders |
-
-### Typography — Proposed
-
-| Role | Font | Weight | Sizes | Source |
-|---|---|---|---|---|
-| **Display** | Instrument Serif | 400 (regular + italic) | 48–80px (hero only) | Google Fonts |
-| **Headings** | Outfit | 600–700 | 20–48px (H2–H6) | Google Fonts (already loaded) |
-| **Body** | DM Sans | 400–600 | 14–20px | Google Fonts |
-| **Mono** | JetBrains Mono | 400–600 | 11–14px | Google Fonts |
-
-**Why Instrument Serif for display?**
-- Serif headlines on dark backgrounds create editorial gravitas (think: The New York Times, The Verge, Stripe Press)
-- It pairs naturally with Outfit (geometric sans for subheadings) — the contrast creates visual hierarchy automatically
-- The italic style gives us an expressive tool for emphasis without needing a second accent color
-- No competitor in the sales intelligence space uses a serif — instant differentiation
-
-**Why DM Sans over Geist Sans for body?**
-- Geometric like Geist but optically warmer — rounder letterforms read as more approachable
-- Excellent weight range for fine-grained hierarchy
-- If you prefer to keep Geist Sans (it's well-made and already loaded), that's a valid choice. The difference is subtle.
-
-**Why JetBrains Mono over Geist Mono?**
-- Wider character spacing makes data strings more scannable at small sizes
-- Already popular in the developer/AI space, but both are solid choices
-
-### Spacing
-
-8px base unit. Use Tailwind's default scale (which is 4px-based) but think in 8px increments for section-level spacing.
-
-| Token | Value | Use |
-|---|---|---|
-| `xs` | 4px | Tight gaps, icon margins |
-| `sm` | 8px | Inner padding, tight lists |
-| `md` | 16px | Standard padding, card internal spacing |
-| `lg` | 24px | Section subsections |
-| `xl` | 32px | Between components |
-| `2xl` | 48px | Between content blocks |
-| `3xl` | 64px | Section padding (mobile) |
-| `4xl` | 96px | Section padding (desktop) |
-
-### Border Radius
-
-| Token | Value | Use |
-|---|---|---|
-| `sm` | 6px | Buttons, badges, inputs |
-| `md` | 10px | Cards, containers |
-| `lg` | 16px | Hero card, major surfaces |
-| `full` | 9999px | Pills, avatars |
-
----
-
-## SAFE vs. RISK Classification
-
-Changes are classified by risk to help prioritize implementation.
-
-### SAFE — Low risk, high confidence
-
-These changes improve the system without breaking anything. Implement freely.
-
-| Change | Impact | Effort |
-|---|---|---|
-| Warm up backgrounds (`#121015` replacing `#0F1117`) | Medium | Low — CSS var swap |
-| Add warm copper `--accent-warm` as secondary accent | High | Medium — add token + update CTAs |
-| Warm text colors (`#E8E6E3` replacing `#EDEDED`) | Low | Low — CSS var swap |
-| Add Instrument Serif for hero H1 only | High | Low — add font, one class |
-| Warm border tokens | Low | Low — CSS var swap |
-| Dual accent button system (copper CTA, cyan links) | High | Medium — update ~5 buttons |
-
-### RISK — Higher risk, requires testing
-
-These changes have meaningful visual impact. Test with real users or A/B if possible.
-
-| Change | Impact | Risk | Notes |
-|---|---|---|---|
-| Replace DM Sans for Geist Sans (body) | Medium | Medium | Affects every paragraph. Test readability. |
-| Replace JetBrains Mono for Geist Mono | Low | Low | Only affects HeroMock data labels. Safe to skip. |
-| Full light mode option | Very high | High | Requires second complete color token set + all component testing |
-| Move hero to Instrument Serif italic for emphasis words | Medium | Medium | Italic serif is expressive but might read as "too editorial" for some audiences |
-
----
-
-## Light Mode Tokens (Reference Only)
-
-If you decide to add a light theme toggle later:
+Reference tokens if it comes back:
 
 ```css
 [data-theme="light"] {
-  --bg-primary: #FAFAF8;
+  --background: #FAFAF8;
   --bg-secondary: #F3F2EF;
   --bg-surface: #FFFFFF;
   --bg-elevated: #FFFFFF;
-
-  --text-primary: #1A1A1A;
+  --foreground: #1A1A1A;
   --text-secondary: #5C5C5C;
   --text-muted: #9C9C9C;
-
-  --accent-primary: #0891B2;    /* Slightly deeper cyan for light bg */
-  --accent-warm: #C47534;       /* Deeper copper for light bg */
-
-  --border: rgba(0, 0, 0, 0.08);
+  --accent: #0891B2;      /* deeper cyan for light bg */
+  --accent-warm: #C47534; /* deeper copper for light bg */
+  --border-default: rgba(0, 0, 0, 0.08);
   --border-strong: rgba(0, 0, 0, 0.14);
 }
 ```
 
+High effort (requires second complete token set + full component testing). Deferred until there's demand.
+
 ---
 
-## Implementation Sequence
+## Implementation status
 
-Status as of March 2026 — all SAFE items implemented.
+All in-scope "warm dark editorial" moves are shipped:
 
-1. ~~**Background warmth** — `--background: #121015` (warmed from `#0F1117`) in `globals.css`~~ DONE
-2. ~~**Text warmth** — `--foreground: #E8E6E3`, `--text-secondary: #9B9A97`, `--text-muted: #5E5D5B`~~ DONE
-3. ~~**Add Instrument Serif** — Imported in `layout.tsx`, applied to hero H1 with italic copper emphasis~~ DONE
-4. ~~**Add copper accent token** — `--accent-warm: #E8925A` in `globals.css` + `@theme inline`~~ DONE
-5. ~~**Update CTA buttons to copper** — Hero, Header, EmailForm all use `bg-accent-warm`~~ DONE
-6. ~~**Semantic color tokens** — `--success`, `--warning`, `--error`, `--info` registered in CSS + Tailwind~~ DONE
-7. ~~**Section differentiation** — Alternating sections use `bg-bg-secondary` for visual rhythm~~ DONE
-8. ~~**Ghost button** — Hero has a secondary "See How It Works" border-only button~~ DONE
-9. ~~**Surface tokens** — `--bg-secondary`, `--bg-surface`, `--bg-elevated` available~~ DONE
-
-### Remaining (RISK items — deferred)
-
-| Change | Status | Notes |
-|---|---|---|
-| DM Sans replacing Geist Sans (body) | Deferred | Geist Sans is well-made and already loaded. Difference is subtle. |
-| JetBrains Mono replacing Geist Mono | Deferred | Low impact, only affects HeroMock data labels. |
-| Full light mode | Deferred | Reference tokens provided above. High effort. |
+- Warm background `#121015` replaced cold `#111827`
+- Copper `--accent-warm` `#E8925A` added and wired to all CTAs
+- Instrument Serif loaded, applied to hero H1 with italic emphasis
+- Warm off-white text `#E8E6E3` replaced pure white
+- Semantic tokens (`--success`, `--warning`, `--error`, `--info`)
+- Surface tokens (`--bg-secondary`, `--bg-surface`, `--bg-elevated`)
+- Ghost secondary button on hero
+- Section alternation with `bg-bg-secondary` + `border-y border-white/5`
 
 ---
 
 ## Preview
 
-A live HTML preview of this design system (both dark and light mode) is available at:
-
-```
-.gstack/design-reports/design-preview.html
-```
-
-Open in a browser to see all fonts, colors, components, and a proposed hero mockup rendered together. Use the "Switch to Light" button in the top right to toggle modes.
-
----
-
-## Anti-Patterns
-
-Things this design system deliberately avoids:
-
-- **Gradient-circle icon grids** — The "3 icons in colored circles" pattern is the most recognizable AI slop pattern. Use inline icons or ghost numerals instead.
-- **Multi-colored founder avatars** — Single accent color for all avatars. Real photos when available.
-- **Pure white text on near-black** — Use warm off-white (`#E8E6E3`) for reduced eye strain and warmer feel.
-- **`transition: all`** — Always specify transition properties explicitly.
-- **System fonts** — At minimum, use Outfit for headings and Geist Sans for body. Never fall back to raw system sans-serif.
-- **Cyan as primary accent** — Copper leads, cyan supports. Use cyan only for data contexts (comparison tables, HeroMock chrome). Everything else is copper.
-- **Uniform section padding** — Vary padding across sections for visual rhythm.
-
----
-
-*Generated by `/design-consultation` — March 2026*
-*Based on competitive analysis of Gong, Clari, Apollo, Linear, and Stripe*
+Live HTML preview at `.gstack/design-reports/design-preview.html` (open in browser) — shows all fonts, colors, components, and the hero mockup together, with a dark/light toggle.
