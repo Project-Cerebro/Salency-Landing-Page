@@ -219,7 +219,7 @@ html {
 
   /* ambient glow removed — Anthropic-style clean hero */
   .page{position:relative;overflow-x:clip}
-  .page > *:not(header):not(.inv-header){position:relative;z-index:1}
+  .page > *:not(header){position:relative;z-index:1}
 
   /* ═══════════ Hub diagram (replaces product mock) ═══════════ */
   .hub-wrap{max-width:1280px;margin:72px auto 0;padding:0 40px}
@@ -1147,11 +1147,6 @@ html {
   }
   .inv-page > *{position:relative;z-index:1}
 
-  .inv-header{
-    max-width:1280px;margin:0 auto;padding:24px 40px;
-    border-bottom:1px solid var(--hair);
-  }
-
   .inv-intro{
     max-width:1280px;margin:0 auto;padding:100px 40px 80px;
     border-bottom:1px solid var(--hair);position:relative;
@@ -1275,21 +1270,16 @@ html {
   .nav-cta{display:none}
   .nav-burger{display:inline-flex}
   .brand .name{font-size:22px}
-  .inv-header{padding:12px 20px}
 }
 
 /* Header focus-visible — copper ring for keyboard users, nothing for mouse */
 header a:focus-visible,
-header button:focus-visible,
-.inv-header a:focus-visible,
-.inv-header button:focus-visible{
+header button:focus-visible{
   outline:2px solid var(--copper);
   outline-offset:3px;
   border-radius:4px;
 }
 header a:focus:not(:focus-visible),
-header button:focus:not(:focus-visible),
-.inv-header a:focus:not(:focus-visible),
-.inv-header button:focus:not(:focus-visible){
+header button:focus:not(:focus-visible){
   outline:none;
 }
