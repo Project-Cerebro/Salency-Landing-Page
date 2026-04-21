@@ -52,7 +52,7 @@ export function MarketingHeader({ variant = 'product' }: MarketingHeaderProps) {
     <header>
       <div className="nav">
         <a className="brand" href="/">
-          <img src="/salency-mark.png" alt="" />
+          <img src="/salency-mark.svg" alt="" />
           <span className="name">Salency</span>
         </a>
 
