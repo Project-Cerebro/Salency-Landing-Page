@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { MarketingHeader } from '@/components/MarketingHeader';
 
 export const metadata: Metadata = {
   title: "Salency — What we're building · for investors",
@@ -7,28 +8,7 @@ export const metadata: Metadata = {
 export default function Investor() {
   return (
     <div className="page inv-page">
-      <header className="inv-header">
-        <div className="nav">
-          <a className="brand" href="/">
-            <img src="/salency-mark.png" alt="" />
-            <span className="name">Salency</span>
-          </a>
-          <nav className="links">
-            <a href="/">Product</a>
-            <a href="#platform">Platform</a>
-            <a href="#team">Team</a>
-            <a href="#thesis">Thesis</a>
-          </nav>
-          <div className="nav-cta">
-            <a href="mailto:howard@salency.com" className="sign">
-              Contact Howard
-            </a>
-            <a href="/" className="btn btn-ghost">
-              ← Back to product
-            </a>
-          </div>
-        </div>
-      </header>
+      <MarketingHeader variant="investor" />
 
       <div className="inv-intro">
         <div className="inv-intro-inner">
