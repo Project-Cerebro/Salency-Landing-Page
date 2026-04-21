@@ -1206,3 +1206,19 @@ html {
   --font-body: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
   --font-display: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
 }
+
+/* Header focus-visible — copper ring for keyboard users, nothing for mouse */
+header a:focus-visible,
+header button:focus-visible,
+.inv-header a:focus-visible,
+.inv-header button:focus-visible{
+  outline:2px solid var(--copper);
+  outline-offset:3px;
+  border-radius:4px;
+}
+header a:focus:not(:focus-visible),
+header button:focus:not(:focus-visible),
+.inv-header a:focus:not(:focus-visible),
+.inv-header button:focus:not(:focus-visible){
+  outline:none;
+}
