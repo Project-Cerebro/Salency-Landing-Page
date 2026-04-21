@@ -1208,6 +1208,76 @@ html {
   --font-display: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
 }
 
+/* Mobile hamburger + slide-down panel */
+.nav-burger{
+  display:none;
+  width:44px;height:44px;
+  align-items:center;justify-content:center;
+  flex-direction:column;gap:4px;
+  background:transparent;border:1px solid var(--hair-2);border-radius:8px;
+  cursor:pointer;padding:0;
+  transition:background-color .18s, border-color .18s;
+}
+.nav-burger:hover{background:rgba(232,230,227,0.04);border-color:rgba(232,230,227,0.22)}
+.nav-burger .bar{
+  display:block;width:18px;height:1.5px;background:var(--ink);border-radius:2px;
+  transition:transform .22s ease, opacity .18s ease;transform-origin:center;
+}
+.nav-burger .bar-1.is-open{transform:translateY(5.5px) rotate(45deg)}
+.nav-burger .bar-2.is-open{opacity:0}
+.nav-burger .bar-3.is-open{transform:translateY(-5.5px) rotate(-45deg)}
+
+.nav-panel{
+  display:none;
+  position:absolute;left:0;right:0;top:100%;z-index:39;
+  background:var(--bg);
+  border-bottom:1px solid var(--hair);
+  box-shadow:0 20px 40px -20px rgba(0,0,0,.6);
+  padding:16px 24px 24px;
+  flex-direction:column;gap:12px;
+  animation:nav-panel-in .2s ease-out;
+}
+.nav-panel.is-open{display:flex}
+@keyframes nav-panel-in{
+  from{opacity:0;transform:translateY(-8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.nav-panel-links{display:flex;flex-direction:column;gap:2px}
+.nav-panel-links a{
+  font-family:var(--font-body), 'Geist', sans-serif;font-weight:400;font-size:16px;
+  color:var(--ink-2);
+  padding:14px 12px;border-radius:8px;min-height:48px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:color .16s, background-color .16s;
+}
+.nav-panel-links a:hover,.nav-panel-links a:active{color:var(--ink);background:rgba(232,230,227,0.05)}
+.nav-panel-links .new{
+  font-family:'Geist Mono',monospace;font-size:9px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--copper);
+  padding:2px 6px;border:1px solid rgba(254,133,49,.3);border-radius:3px;
+}
+.nav-panel-cta{
+  display:flex;flex-direction:column;gap:8px;
+  padding-top:12px;margin-top:4px;
+  border-top:1px solid var(--hair);
+}
+.nav-panel-cta .sign{
+  font-size:15px;color:var(--ink-2);
+  padding:14px 12px;border-radius:8px;min-height:48px;
+  display:inline-flex;align-items:center;
+}
+.nav-panel-cta .btn{justify-content:center;padding:14px 18px;font-size:15px}
+
+/* Collapse desktop nav below 900px */
+@media (max-width:900px){
+  .nav{grid-template-columns:1fr auto auto;gap:12px;padding:12px 20px}
+  nav.links{display:none}
+  .nav-cta{display:none}
+  .nav-burger{display:inline-flex}
+  .brand .name{font-size:22px}
+  .inv-header{padding:12px 20px}
+}
+
 /* Header focus-visible — copper ring for keyboard users, nothing for mouse */
 header a:focus-visible,
 header button:focus-visible,
