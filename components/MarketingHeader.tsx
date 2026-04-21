@@ -1,8 +1,16 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 type Variant = 'product' | 'investor';
+
+function isActive(href: string, pathname: string): boolean {
+  if (!href || href === '#' || href.startsWith('mailto:')) return false;
+  if (href.startsWith('#')) return false;
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(href + '/');
+}
 
 interface MarketingHeaderProps {
   variant?: Variant;
@@ -10,6 +18,7 @@ interface MarketingHeaderProps {
 
 export function MarketingHeader({ variant = 'product' }: MarketingHeaderProps) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname() ?? '/';
 
   useEffect(() => {
     if (!open) return;
@@ -48,12 +57,20 @@ export function MarketingHeader({ variant = 'product' }: MarketingHeaderProps) {
         </a>
 
         <nav className="links">
-          {links.map((l) => (
-            <a key={l.label} href={l.href}>
-              {l.label}
-              {'badge' in l && l.badge && <span className="new">{l.badge}</span>}
-            </a>
-          ))}
+          {links.map((l) => {
+            const active = isActive(l.href, pathname);
+            return (
+              <a
+                key={l.label}
+                href={l.href}
+                className={active ? 'is-active' : undefined}
+                aria-current={active ? 'page' : undefined}
+              >
+                {l.label}
+                {'badge' in l && l.badge && <span className="new">{l.badge}</span>}
+              </a>
+            );
+          })}
         </nav>
 
         <div className="nav-cta">
@@ -99,12 +116,21 @@ export function MarketingHeader({ variant = 'product' }: MarketingHeaderProps) {
         hidden={!open}
       >
         <nav className="nav-panel-links">
-          {links.map((l) => (
-            <a key={l.label} href={l.href} onClick={() => setOpen(false)}>
-              {l.label}
-              {'badge' in l && l.badge && <span className="new">{l.badge}</span>}
-            </a>
-          ))}
+          {links.map((l) => {
+            const active = isActive(l.href, pathname);
+            return (
+              <a
+                key={l.label}
+                href={l.href}
+                className={active ? 'is-active' : undefined}
+                aria-current={active ? 'page' : undefined}
+                onClick={() => setOpen(false)}
+              >
+                {l.label}
+                {'badge' in l && l.badge && <span className="new">{l.badge}</span>}
+              </a>
+            );
+          })}
         </nav>
         <div className="nav-panel-cta">
           {isInvestor ? (
