@@ -40,7 +40,7 @@ export function MarketingHeader({ variant = 'product' }: MarketingHeaderProps) {
       ];
 
   return (
-    <header className={isInvestor ? 'inv-header' : undefined}>
+    <header>
       <div className="nav">
         <a className="brand" href="/">
           <img src="/salency-mark.png" alt="" />
