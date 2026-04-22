@@ -244,7 +244,7 @@ html {
   .hub-input{
     position:absolute;
     display:flex;flex-direction:column;align-items:center;gap:8px;
-    width:100px;left:60px;
+    width:100px;left:0;
     --dy:0px;
     transform:translate(0,-50%) scale(1);
     opacity:1;
@@ -274,8 +274,8 @@ html {
   @keyframes hub-throw{
     0%   {transform:translate(0,-50%) scale(1);opacity:1;filter:blur(0)}
     2%   {transform:translate(0,-50%) scale(1);opacity:1;filter:blur(0)}
-    30%  {transform:translate(200px,calc(-50% + var(--dy) * .7)) scale(.55);opacity:.85;filter:blur(.4px)}
-    50%  {transform:translate(310px,calc(-50% + var(--dy))) scale(.12);opacity:0;filter:blur(1.5px)}
+    30%  {transform:translate(280px,calc(-50% + var(--dy) * .7)) scale(.55);opacity:.85;filter:blur(.4px)}
+    50%  {transform:translate(420px,calc(-50% + var(--dy))) scale(.12);opacity:0;filter:blur(1.5px)}
     51%  {transform:translate(0,-50%) scale(1);opacity:0;filter:blur(0)}
     75%  {transform:translate(0,-50%) scale(1);opacity:1;filter:blur(0)}
     100% {transform:translate(0,-50%) scale(1);opacity:1;filter:blur(0)}
@@ -304,7 +304,7 @@ html {
     line-height:1.1;letter-spacing:-.015em;color:var(--ink);white-space:nowrap;
   }
   .hub-core-ttl em{font-style:italic;color:var(--copper)}
-  .hub-outputs{position:absolute;right:28px;top:0;bottom:0;width:280px;z-index:2}
+  .hub-outputs{position:absolute;right:28px;top:0;bottom:0;width:220px;z-index:2}
   .hub-output{
     --out-delay:0s;
     position:absolute;left:0;right:0;overflow:hidden;
@@ -437,6 +437,81 @@ html {
     letter-spacing:.04em;z-index:3;
   }
   .hub-foot em{font-style:normal;color:var(--copper);font-weight:600}
+
+  /* ═══════════ Hub responsive ═══════════ */
+  @media (max-width:1024px){
+    .hub-inputs{width:200px}
+    .hub-input{width:90px;left:0}
+    .hub-outputs{width:200px}
+    .hub-core-name{font-size:28px}
+    .hub-core-mark{width:36px;height:36px}
+    .hub-outcome{padding:20px 22px}
+    .hub-outcome-rt{font-size:17px}
+  }
+
+  /* Tablet: outcome stacks below the main diagram */
+  @media (max-width:900px){
+    .hub{grid-template-columns:1fr;height:auto}
+    .hub-main{height:500px}
+    .hub-outcome{
+      border-left:none;border-top:1px solid var(--hair-2);
+      padding:22px 28px;
+      opacity:0;transform:translateY(20px);
+    }
+    .hub-outcome-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+    }
+    .hub-wrap.played .hub-outcome{
+      animation:hub-outcome-pop-v .8s cubic-bezier(.2,.8,.3,1) 5.4s forwards;
+    }
+    @keyframes hub-outcome-pop-v{
+      0%   {opacity:0;transform:translateY(20px)}
+      60%  {opacity:1;transform:translateY(-2px)}
+      100% {opacity:1;transform:translateY(0)}
+    }
+  }
+
+  /* Phone: vertical flow inside the main diagram, simplified motion */
+  @media (max-width:640px){
+    .hub-wrap{margin-top:48px;padding:0 20px}
+    .hub-main{
+      height:auto;
+      display:flex;flex-direction:column;align-items:center;
+      padding:48px 18px 32px;gap:28px;
+    }
+    .hub-head{position:static;display:flex;justify-content:center;gap:12px}
+    .hub-lines{display:none}
+    .hub-inputs,.hub-core,.hub-outputs{
+      position:static;width:100%;height:auto;transform:none;left:auto;right:auto;top:auto;bottom:auto;
+    }
+    .hub-inputs{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:10px;justify-items:center;
+    }
+    .hub-input{position:static;left:auto;top:auto!important;width:auto;transform:none}
+    .hub-input-ic{width:40px;height:40px}
+    .hub-input-lbl{font-size:11px}
+    .hub-core{padding:8px 0}
+    .hub-core-name{font-size:26px}
+    .hub-core-ttl{font-size:22px;white-space:normal}
+    .hub-outputs{display:flex;flex-direction:column;gap:10px}
+    .hub-output{position:static;left:auto;top:auto!important;transform:none}
+    .hub-foot{
+      position:static;display:flex;flex-direction:column;gap:6px;text-align:center;
+      padding-top:14px;margin-top:8px;
+    }
+    .hub-outcome{padding:20px}
+    .hub-outcome-grid{grid-template-columns:1fr;gap:16px}
+    /* Skip the throw animation on phones — elements render in place */
+    .hub-wrap.played .hub-input{animation:hub-in-mobile .5s ease-out both}
+    .hub-wrap.played .hub-input:nth-child(1){animation-delay:0s}
+    .hub-wrap.played .hub-input:nth-child(2){animation-delay:.1s}
+    .hub-wrap.played .hub-input:nth-child(3){animation-delay:.2s}
+    .hub-wrap.played .hub-input:nth-child(4){animation-delay:.3s}
+    @keyframes hub-in-mobile{
+      0%   {opacity:0;transform:translateY(8px)}
+      100% {opacity:1;transform:translateY(0)}
+    }
+  }
 
   /* ═══════════ Header ═══════════ */
   header{
