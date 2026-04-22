@@ -385,6 +385,11 @@ html {
     position:relative;min-width:0;
     border-top:1px solid var(--hair-2);
     padding:18px 28px 20px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .hub-outcome-eb{
+    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
   }
   .hub-outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
   .hub-outcome-row{
@@ -1183,9 +1188,9 @@ html {
 
   /* ═══════════ Register divider ═══════════ */
   .reg-div{
-    position:relative;margin-top:120px;
+    position:relative;margin-top:0;
     background:#0C0A10;
-    height:220px;display:flex;align-items:center;justify-content:center;
+    height:96px;display:flex;align-items:center;justify-content:center;
     overflow:hidden;
   }
   .reg-div::before{
@@ -1389,7 +1394,7 @@ html {
   .investors-register > *{position:relative;z-index:1}
 
   .inv-intro{
-    max-width:1280px;margin:0 auto;padding:100px 40px 80px;
+    max-width:1280px;margin:0 auto;padding:48px 40px 80px;
     border-bottom:1px solid var(--hair);position:relative;
   }
   .inv-intro::after{
