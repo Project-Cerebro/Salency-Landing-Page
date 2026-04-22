@@ -1,19 +1,24 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const links = [
-  { href: '#how-it-works', label: 'How it works' },
-  { href: '#', label: 'Memory', badge: 'New' } as const,
-  { href: '#', label: 'vs AI notetakers' },
-  { href: '#investors', label: 'Investors' },
-  { href: '#', label: 'Pricing' },
+type NavLink = {
+  label: string;
+  href: string;
+  badge?: string;
+};
+
+const links: NavLink[] = [
+  { label: 'Products', href: '/' },
+  { label: 'Why Salency', href: '/why-salency' },
+  { label: 'Memory', href: '/memory' },
+  { label: 'Investors', href: '/investors' },
+  { label: 'Pricing', href: '/pricing' },
 ];
 
 function isActive(href: string, pathname: string): boolean {
-  if (!href || href === '#' || href.startsWith('mailto:')) return false;
-  if (href.startsWith('#')) return false;
   if (href === '/') return pathname === '/';
   return pathname === href || pathname.startsWith(href + '/');
 }
@@ -33,35 +38,33 @@ export function MarketingHeader() {
     };
   }, [open]);
 
+  const renderLink = (l: NavLink, onClick?: () => void) => {
+    const active = isActive(l.href, pathname);
+    return (
+      <Link
+        key={l.label}
+        href={l.href}
+        className={active ? 'is-active' : undefined}
+        aria-current={active ? 'page' : undefined}
+        onClick={onClick}
+      >
+        {l.label}
+        {l.badge && <span className="new">{l.badge}</span>}
+      </Link>
+    );
+  };
+
   return (
     <header>
       <div className="nav">
-        <a className="brand" href="/">
+        <Link className="brand" href="/">
           <img src="/salency-mark.svg" alt="" />
           <span className="name">Salency</span>
-        </a>
+        </Link>
 
-        <nav className="links">
-          {links.map((l) => {
-            const active = isActive(l.href, pathname);
-            return (
-              <a
-                key={l.label}
-                href={l.href}
-                className={active ? 'is-active' : undefined}
-                aria-current={active ? 'page' : undefined}
-              >
-                {l.label}
-                {'badge' in l && l.badge && <span className="new">{l.badge}</span>}
-              </a>
-            );
-          })}
-        </nav>
+        <nav className="links">{links.map((l) => renderLink(l))}</nav>
 
         <div className="nav-cta">
-          <a href="#" className="sign">
-            Sign in
-          </a>
           <button className="btn btn-primary">Request a pilot →</button>
         </div>
 
@@ -88,26 +91,9 @@ export function MarketingHeader() {
         hidden={!open}
       >
         <nav className="nav-panel-links">
-          {links.map((l) => {
-            const active = isActive(l.href, pathname);
-            return (
-              <a
-                key={l.label}
-                href={l.href}
-                className={active ? 'is-active' : undefined}
-                aria-current={active ? 'page' : undefined}
-                onClick={() => setOpen(false)}
-              >
-                {l.label}
-                {'badge' in l && l.badge && <span className="new">{l.badge}</span>}
-              </a>
-            );
-          })}
+          {links.map((l) => renderLink(l, () => setOpen(false)))}
         </nav>
         <div className="nav-panel-cta">
-          <a href="#" className="sign" onClick={() => setOpen(false)}>
-            Sign in
-          </a>
           <button
             className="btn btn-primary"
             onClick={() => setOpen(false)}
