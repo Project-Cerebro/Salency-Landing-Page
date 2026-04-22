@@ -842,10 +842,10 @@ html {
   }
   .how-head h2 em{font-style:italic;color:var(--copper)}
   .how-head .lede{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:17px;line-height:1.65;
-    color:var(--ink-2);max-width:48ch;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:19px;line-height:1.55;
+    color:var(--ink-2);max-width:42ch;
   }
-  .how-head .lede em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-size:18px;font-weight:400}
+  .how-head .lede em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-size:20px;font-weight:400}
   .how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hair-2)}
   .how-step{padding:36px 32px 36px 0;border-right:1px solid var(--hair);position:relative}
   .how-step:nth-child(n+2){padding-left:32px}
