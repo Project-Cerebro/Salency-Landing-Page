@@ -1615,7 +1615,10 @@ header button:focus:not(:focus-visible){
 .coming-soon .eb{
   font-family:'Geist Mono',monospace;font-size:10px;font-weight:500;
   letter-spacing:.16em;text-transform:uppercase;color:var(--copper);
-  display:inline-block;margin-bottom:24px;
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;
+}
+.coming-soon .eb::before{
+  content:"";width:28px;height:1px;background:var(--copper);display:inline-block;
 }
 .coming-soon h1{
   font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
@@ -1630,13 +1633,7 @@ header button:focus:not(:focus-visible){
   font-size:18px;line-height:1.55;color:var(--ink-2);
   text-wrap:pretty;
 }
-.coming-soon-meta{
-  margin-top:32px;
-  font-family:'Geist Mono',monospace;font-size:11px;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
-  display:flex;gap:24px;flex-wrap:wrap;
-}
-.coming-soon-meta .dot{color:var(--copper);margin-right:6px}
+.coming-soon-meta{margin-top:32px}
 
 /* ═══════════ Loading UI ═══════════ */
 .sr-only{

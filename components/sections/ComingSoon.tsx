@@ -13,13 +13,9 @@ export function ComingSoon({ eyebrow, title, description }: Props) {
           {title} <em>coming soon.</em>
         </h1>
         <p>{description}</p>
-        <div className="coming-soon-meta">
-          <span>
-            <span className="dot">●</span> Early access · Q2 2026
-          </span>
-          <span>
-            <span className="dot">●</span> Private preview on request
-          </span>
+        <div className="coming-soon-meta hero-meta">
+          <span className="hero-meta-item">Early access · Q2 2026</span>
+          <span className="hero-meta-item">Private preview on request</span>
         </div>
       </div>
     </section>
