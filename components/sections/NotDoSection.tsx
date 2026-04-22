@@ -46,7 +46,7 @@ export function NotDoSection() {
             <span className="check" aria-label="What it does">✓</span>
             <div className="s">
               Salency sits <em>on top of</em> your notetaker. Gong, Fathom,
-              Fireflies, raw .vtt go in. A cited, queryable memory layer
+              Fireflies, or raw text go in. A cited, queryable memory layer
               comes out. Survives rep rotation.
             </div>
           </div>
