@@ -51,8 +51,7 @@ export function HowItWorksSection() {
             <div className="el">Example mapping</div>
             <div className="eq">
               Pain <em>&ldquo;handoff loses context&rdquo;</em>{' '}
-              <strong>→ 3 products ranked</strong> · Contradiction flagged vs
-              Disco call, Dec 12
+              <strong>→ 3 products ranked</strong>, contradictions flagged
             </div>
           </div>
         </div>
