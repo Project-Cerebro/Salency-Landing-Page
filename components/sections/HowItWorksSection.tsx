@@ -80,7 +80,6 @@ export function HowItWorksSection() {
           Works with any transcript.<span className="sep">·</span>
           Citations and confidence scores on every extraction.
         </span>
-        <span>Runs alongside your AI notetaker</span>
       </div>
     </section>
   );
