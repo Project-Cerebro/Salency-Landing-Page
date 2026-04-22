@@ -12,10 +12,9 @@ export function NotDoSection() {
             <div className="t">Not a CRM replacement</div>
             <span className="check" aria-label="What it does">✓</span>
             <div className="s">
-              Reads every call transcript, extracts the pains, stakeholders,
-              and commitments, and writes them back into Salesforce, HubSpot,
-              or Attio as structured fields — so your CRM finally reflects
-              what was actually said.
+              Salesforce, HubSpot, Attio stay. Salency is the memory layer
+              alongside them: pain graph, contradictions, account-level
+              brief. Flat fields export when leadership wants them in CRM.
             </div>
           </div>
           <div className="notdo-item">
@@ -23,10 +22,9 @@ export function NotDoSection() {
             <div className="t">Not an in-call coach</div>
             <span className="check" aria-label="What it does">✓</span>
             <div className="s">
-              Works between calls. After each conversation, Salency updates
-              the account&apos;s memory — pain history, objection log,
-              stakeholder map — so the rep walks into the next call already
-              briefed.
+              That&apos;s Gong&apos;s turf. Salency works between calls.
+              After each conversation it updates the account&apos;s memory,
+              so the rep walks into the next call already briefed.
             </div>
           </div>
           <div className="notdo-item">
@@ -34,9 +32,10 @@ export function NotDoSection() {
             <div className="t">Not a magic close button</div>
             <span className="check" aria-label="What it does">✓</span>
             <div className="s">
-              Removes the context tax. Reps stop re-reading transcripts,
-              re-asking customers, and reconstructing deals from Slack threads
-              — so the hour before every call goes back to selling.
+              We don&apos;t claim to close more deals. We capture what gets
+              lost: the pain a buyer named, the contradiction from last
+              week&apos;s call, the next step nobody wrote down. The hour
+              before every call goes back to selling.
             </div>
           </div>
           <div className="notdo-item">
@@ -44,10 +43,9 @@ export function NotDoSection() {
             <div className="t">Not another call recorder</div>
             <span className="check" aria-label="What it does">✓</span>
             <div className="s">
-              Sits <em>on top of</em> your notetaker. Gong, Fathom, Fireflies,
-              or raw .vtt — Salency takes the transcript they produce and
-              turns it into a cited, queryable memory layer that survives rep
-              rotation.
+              Salency sits <em>on top of</em> your notetaker. Gong, Fathom,
+              Fireflies, raw .vtt go in. A cited, queryable memory layer
+              comes out. Survives rep rotation.
             </div>
           </div>
         </div>
