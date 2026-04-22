@@ -21,6 +21,16 @@ export function NotDoSection() {
           </div>
           <div className="notdo-item">
             <span className="x">×</span>
+            <div className="t">Not an in-call coach</div>
+            <span className="check" aria-label="What it does">✓</span>
+            <div className="s">
+              In-call coaching is a different product. Salency works between
+              calls. After each conversation it updates the account&apos;s
+              memory, so the rep walks into the next call already briefed.
+            </div>
+          </div>
+          <div className="notdo-item">
+            <span className="x">×</span>
             <div className="t">Not a magic close button</div>
             <span className="check" aria-label="What it does">✓</span>
             <div className="s">
