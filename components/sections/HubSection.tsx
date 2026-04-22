@@ -178,7 +178,10 @@ export function HubSection() {
         </div>
 
         <div className="hub-core">
-          <img className="hub-core-mark" src="/salency-mark.svg" alt="Salency" />
+          <div className="hub-core-brand">
+            <img className="hub-core-mark" src="/salency-mark.svg" alt="" />
+            <span className="hub-core-name">Salency</span>
+          </div>
           <div className="hub-core-ttl">
             Extract · <em>Map</em> · Remember
           </div>

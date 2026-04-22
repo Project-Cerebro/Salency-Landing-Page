@@ -286,9 +286,16 @@ html {
     display:flex;flex-direction:column;align-items:center;gap:16px;
     text-align:center;
   }
+  .hub-core-brand{
+    display:flex;align-items:center;gap:12px;
+  }
   .hub-core-mark{
     width:44px;height:44px;object-fit:contain;
     filter:drop-shadow(0 4px 14px rgba(254,133,49,.32));
+  }
+  .hub-core-name{
+    font-family:var(--font-outfit), 'Outfit', sans-serif;font-weight:800;font-size:34px;
+    letter-spacing:-.02em;color:var(--ink);line-height:1;
   }
   .hub-core-ttl{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:30px;
@@ -442,8 +449,8 @@ html {
   .brand{display:flex;align-items:center;gap:11px;min-height:44px;padding:4px 6px;margin-left:-6px;border-radius:6px}
   .brand img{width:26px;height:26px;display:block}
   .brand .name{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:24px;
-    letter-spacing:-.01em;color:var(--ink);
+    font-family:var(--font-outfit), 'Outfit', sans-serif;font-weight:800;font-size:22px;
+    letter-spacing:-.02em;color:var(--ink);
   }
   nav.links{display:flex;gap:24px;justify-self:center}
   nav.links a{
@@ -1293,7 +1300,7 @@ html {
     font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-4);
     letter-spacing:.04em;
   }
-  footer .brand{font-family:var(--font-display), 'Instrument Serif', serif;font-size:18px;color:var(--ink-2);letter-spacing:-.01em}
+  footer .brand{font-family:var(--font-outfit), 'Outfit', sans-serif;font-weight:800;font-size:17px;color:var(--ink-2);letter-spacing:-.02em}
   footer nav{display:flex;gap:24px}
   footer nav a{color:var(--ink-3)}
   footer nav a:hover{color:var(--ink)}
@@ -1356,8 +1363,8 @@ html {
     letter-spacing:.08em;text-transform:uppercase;
   }
   .inv-footer .brand{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:18px;
-    color:#E8E6E3;letter-spacing:-.01em;text-transform:none;
+    font-family:var(--font-outfit), 'Outfit', sans-serif;font-weight:800;font-size:17px;
+    color:#E8E6E3;letter-spacing:-.02em;text-transform:none;
   }
   .inv-footer nav{display:flex;gap:28px}
   .inv-footer nav a{color:var(--ink-3);transition:color .18s}
