@@ -391,7 +391,12 @@ html {
     font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
     letter-spacing:.2em;text-transform:uppercase;color:var(--copper);
   }
-  .hub-outcome-eb .dot{color:var(--copper);margin-right:6px}
+  .hub-outcome-eb .dot{
+    display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:var(--copper);margin-right:8px;
+    vertical-align:middle;font-size:0;line-height:0;
+    position:relative;top:-1px;
+  }
   .hub-outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
   .hub-outcome-row{
     display:flex;flex-direction:column;gap:3px;
