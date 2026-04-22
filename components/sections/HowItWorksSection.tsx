@@ -9,9 +9,8 @@ export function HowItWorksSection() {
           </h2>
         </div>
         <p className="lede">
-          Drop in any transcript: <em>AI notetaker</em>, Zoom, Meet, or a raw
-          .vtt. Salency runs every call through the same pipeline, and the
-          output is{' '}
+          Every transcript, <em>AI notetaker</em> or raw .vtt, runs through the
+          same pipeline. The output is{' '}
           <em>structured, cited, and queryable</em> before your next stand-up.
         </p>
       </div>
