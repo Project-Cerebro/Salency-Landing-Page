@@ -9,9 +9,8 @@ export function HowItWorksSection() {
           </h2>
         </div>
         <p className="lede">
-          Drop in any transcript: <em>AI notetaker</em>, Zoom, Meet, or a raw
-          .vtt. Salency runs every call through the same pipeline, and the
-          output is{' '}
+          Every transcript, <em>AI notetaker</em> or raw .vtt, runs through the
+          same pipeline. The output is{' '}
           <em>structured, cited, and queryable</em> before your next stand-up.
         </p>
       </div>
@@ -51,8 +50,7 @@ export function HowItWorksSection() {
             <div className="el">Example mapping</div>
             <div className="eq">
               Pain <em>&ldquo;handoff loses context&rdquo;</em>{' '}
-              <strong>→ 3 products ranked</strong> · Contradiction flagged vs
-              Disco call, Dec 12
+              <strong>→ 3 products ranked</strong>, contradictions flagged
             </div>
           </div>
         </div>
@@ -79,9 +77,8 @@ export function HowItWorksSection() {
       <div className="how-foot">
         <span>
           Works with any transcript.<span className="sep">·</span>
-          <em>Citations + confidence scores</em> on every extraction.
+          Citations and confidence scores on every extraction.
         </span>
-        <span>Runs alongside your AI notetaker</span>
       </div>
     </section>
   );
