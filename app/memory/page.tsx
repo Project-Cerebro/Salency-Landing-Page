@@ -8,7 +8,7 @@ export default function MemoryPage() {
       <MarketingHeader />
       <ComingSoon
         eyebrow="Memory · New"
-        title="The structured account memory product —"
+        title="Memory —"
         description="A cited, queryable memory graph for every account your team touches. Pains, stakeholders, commitments, objections — all mapped to your catalog, all linked to the call they came from. Deep-dive page under construction."
       />
       <SiteFooter />
