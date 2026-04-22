@@ -3,13 +3,20 @@ import Link from 'next/link';
 export function SiteFooter() {
   return (
     <footer>
-      <span className="brand">Salency</span>
+      <Link href="/" className="brand">Salency</Link>
       <nav>
-        <button type="button" className="footer-link">Product</button>
+        <Link href="/why-salency" className="footer-link">Why Salency</Link>
+        <Link href="/memory" className="footer-link">Memory</Link>
         <Link href="/pricing" className="footer-link">Pricing</Link>
-        <button type="button" className="footer-link">Security</button>
         <Link href="/investors" className="footer-link">Investors</Link>
-        <button type="button" className="footer-link">Careers</button>
+        <a
+          href="mailto:founders@salency.ai?subject=Careers"
+          className="footer-link"
+        >
+          Careers
+        </a>
+        <Link href="/privacy" className="footer-link">Privacy</Link>
+        <Link href="/terms" className="footer-link">Terms</Link>
       </nav>
       <span>© 2026 Salency · Toronto</span>
     </footer>

@@ -5,9 +5,6 @@ export function InvestorsSection() {
         <span className="hair" />
         <div className="wrap">
           <span className="kicker">What we&apos;re building</span>
-          <h2>
-            For <em>investors</em>
-          </h2>
         </div>
       </div>
 
