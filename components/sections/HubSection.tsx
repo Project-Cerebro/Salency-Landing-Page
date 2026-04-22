@@ -248,9 +248,7 @@ export function HubSection() {
         </div>
 
         <div className="hub-outcome" role="complementary">
-          <div className="hub-outcome-eb">
-            <span className="dot">●</span> Outcome
-          </div>
+          <div className="hub-outcome-eb">Outcome</div>
           <div className="hub-outcome-grid">
             <div className="hub-outcome-row">
               <div className="hub-outcome-rk">New AE</div>
