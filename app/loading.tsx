@@ -16,8 +16,9 @@ export default function Loading() {
           <br />
           Every role inherits it.
         </p>
+        <div className="loading-rail" aria-hidden="true" />
+        <span className="loading-label">Loading</span>
       </div>
-      <span className="sr-only">Loading</span>
     </div>
   );
 }
