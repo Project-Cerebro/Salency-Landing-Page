@@ -244,7 +244,7 @@ html {
   .hub-input{
     position:absolute;
     display:flex;flex-direction:column;align-items:center;gap:8px;
-    width:100px;left:0;
+    width:100px;left:60px;
     --dy:0px;
     transform:translate(0,-50%) scale(1);
     opacity:1;
@@ -274,8 +274,8 @@ html {
   @keyframes hub-throw{
     0%   {transform:translate(0,-50%) scale(1);opacity:1;filter:blur(0)}
     2%   {transform:translate(0,-50%) scale(1);opacity:1;filter:blur(0)}
-    30%  {transform:translate(280px,calc(-50% + var(--dy) * .7)) scale(.55);opacity:.85;filter:blur(.4px)}
-    50%  {transform:translate(420px,calc(-50% + var(--dy))) scale(.12);opacity:0;filter:blur(1.5px)}
+    30%  {transform:translate(200px,calc(-50% + var(--dy) * .7)) scale(.55);opacity:.85;filter:blur(.4px)}
+    50%  {transform:translate(340px,calc(-50% + var(--dy))) scale(.12);opacity:0;filter:blur(1.5px)}
     51%  {transform:translate(0,-50%) scale(1);opacity:0;filter:blur(0)}
     75%  {transform:translate(0,-50%) scale(1);opacity:1;filter:blur(0)}
     100% {transform:translate(0,-50%) scale(1);opacity:1;filter:blur(0)}
@@ -314,9 +314,9 @@ html {
     backdrop-filter:blur(6px);box-shadow:0 4px 16px rgba(0,0,0,.3);
     opacity:1;transform:translate(0,-50%);
   }
-  .hub-output:nth-child(1){--out-delay:6.4s}
-  .hub-output:nth-child(2){--out-delay:7.3s}
-  .hub-output:nth-child(3){--out-delay:8.2s}
+  .hub-output:nth-child(1){--out-delay:2s}
+  .hub-output:nth-child(2){--out-delay:2.9s}
+  .hub-output:nth-child(3){--out-delay:3.8s}
   .hub-output::before{
     content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
     background:linear-gradient(100deg,
@@ -389,7 +389,7 @@ html {
     opacity:0;transform:translateX(20px);
   }
   .hub-wrap.played .hub-outcome{
-    animation:hub-outcome-pop .8s cubic-bezier(.2,.8,.3,1) 9.5s forwards;
+    animation:hub-outcome-pop .8s cubic-bezier(.2,.8,.3,1) 5.1s forwards;
   }
   .hub-outcome-eb{
     font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
@@ -441,7 +441,7 @@ html {
   /* ═══════════ Hub responsive ═══════════ */
   @media (max-width:1024px){
     .hub-inputs{width:200px}
-    .hub-input{width:90px;left:0}
+    .hub-input{width:90px;left:55px}
     .hub-outputs{width:200px}
     .hub-core-name{font-size:28px}
     .hub-core-mark{width:36px;height:36px}
@@ -462,7 +462,7 @@ html {
       display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
     }
     .hub-wrap.played .hub-outcome{
-      animation:hub-outcome-pop-v .8s cubic-bezier(.2,.8,.3,1) 9.5s forwards;
+      animation:hub-outcome-pop-v .8s cubic-bezier(.2,.8,.3,1) 5.1s forwards;
     }
     @keyframes hub-outcome-pop-v{
       0%   {opacity:0;transform:translateY(20px)}
