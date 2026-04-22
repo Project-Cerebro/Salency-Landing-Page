@@ -3,7 +3,13 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-type Variant = 'product' | 'investor';
+const links = [
+  { href: '#how-it-works', label: 'How it works' },
+  { href: '#', label: 'Memory', badge: 'New' } as const,
+  { href: '#', label: 'vs AI notetakers' },
+  { href: '#investors', label: 'Investors' },
+  { href: '#', label: 'Pricing' },
+];
 
 function isActive(href: string, pathname: string): boolean {
   if (!href || href === '#' || href.startsWith('mailto:')) return false;
@@ -12,11 +18,7 @@ function isActive(href: string, pathname: string): boolean {
   return pathname === href || pathname.startsWith(href + '/');
 }
 
-interface MarketingHeaderProps {
-  variant?: Variant;
-}
-
-export function MarketingHeader({ variant = 'product' }: MarketingHeaderProps) {
+export function MarketingHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname() ?? '/';
 
@@ -30,23 +32,6 @@ export function MarketingHeader({ variant = 'product' }: MarketingHeaderProps) {
       document.body.style.overflow = '';
     };
   }, [open]);
-
-  const isInvestor = variant === 'investor';
-
-  const links = isInvestor
-    ? [
-        { href: '/', label: 'Product' },
-        { href: '#platform', label: 'Platform' },
-        { href: '#team', label: 'Team' },
-        { href: '#thesis', label: 'Thesis' },
-      ]
-    : [
-        { href: '#how-it-works', label: 'How it works' },
-        { href: '#', label: 'Memory', badge: 'New' },
-        { href: '#', label: 'vs AI notetakers' },
-        { href: '/investor', label: 'Investors' },
-        { href: '#', label: 'Pricing' },
-      ];
 
   return (
     <header>
@@ -74,23 +59,10 @@ export function MarketingHeader({ variant = 'product' }: MarketingHeaderProps) {
         </nav>
 
         <div className="nav-cta">
-          {isInvestor ? (
-            <>
-              <a href="mailto:howard@salency.com" className="sign">
-                Contact Howard
-              </a>
-              <a href="/" className="btn btn-ghost">
-                ← Back to product
-              </a>
-            </>
-          ) : (
-            <>
-              <a href="#" className="sign">
-                Sign in
-              </a>
-              <button className="btn btn-primary">Request a pilot →</button>
-            </>
-          )}
+          <a href="#" className="sign">
+            Sign in
+          </a>
+          <button className="btn btn-primary">Request a pilot →</button>
         </div>
 
         <button
@@ -133,36 +105,15 @@ export function MarketingHeader({ variant = 'product' }: MarketingHeaderProps) {
           })}
         </nav>
         <div className="nav-panel-cta">
-          {isInvestor ? (
-            <>
-              <a
-                href="mailto:howard@salency.com"
-                className="sign"
-                onClick={() => setOpen(false)}
-              >
-                Contact Howard
-              </a>
-              <a
-                href="/"
-                className="btn btn-ghost"
-                onClick={() => setOpen(false)}
-              >
-                ← Back to product
-              </a>
-            </>
-          ) : (
-            <>
-              <a href="#" className="sign" onClick={() => setOpen(false)}>
-                Sign in
-              </a>
-              <button
-                className="btn btn-primary"
-                onClick={() => setOpen(false)}
-              >
-                Request a pilot →
-              </button>
-            </>
-          )}
+          <a href="#" className="sign" onClick={() => setOpen(false)}>
+            Sign in
+          </a>
+          <button
+            className="btn btn-primary"
+            onClick={() => setOpen(false)}
+          >
+            Request a pilot →
+          </button>
         </div>
       </div>
     </header>
