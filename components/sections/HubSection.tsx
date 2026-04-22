@@ -245,12 +245,6 @@ export function HubSection() {
           </div>
         </div>
 
-        <div className="hub-foot">
-          <span>One pipeline · every role · zero handoff loss</span>
-          <span>
-            <em>Early access</em> · Q2 2026
-          </span>
-        </div>
         </div>
 
         <div className="hub-outcome" role="complementary">
@@ -274,6 +268,13 @@ export function HubSection() {
               <div className="hub-outcome-rs">Pains and objections across every deal</div>
             </div>
           </div>
+        </div>
+
+        <div className="hub-foot">
+          <span>One pipeline · every role · zero handoff loss</span>
+          <span>
+            <em>Early access</em> · Q2 2026
+          </span>
         </div>
       </div>
     </section>
