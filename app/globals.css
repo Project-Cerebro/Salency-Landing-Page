@@ -1598,10 +1598,10 @@ header button:focus:not(:focus-visible){
 }
 .loading-mission{
   margin:0 0 40px;
-  font-family:var(--font-display), 'Instrument Serif', serif;
-  font-weight:400;font-style:italic;
-  font-size:22px;line-height:1.4;letter-spacing:-.005em;color:var(--ink-2);
-  max-width:32ch;text-wrap:balance;
+  font-family:var(--font-outfit), 'Outfit', sans-serif;
+  font-weight:400;
+  font-size:18px;line-height:1.5;letter-spacing:-.005em;color:var(--ink-2);
+  max-width:36ch;text-wrap:balance;
 }
 .loading-rail{
   width:280px;height:3px;
@@ -1632,7 +1632,7 @@ header button:focus:not(:focus-visible){
 @media (max-width:640px){
   .loading-mark{width:32px;height:32px}
   .loading-name{font-size:26px}
-  .loading-mission{font-size:17px;margin-bottom:32px}
+  .loading-mission{font-size:15px;margin-bottom:32px}
   .loading-rail{width:220px}
 }
 @media (prefers-reduced-motion: reduce){
