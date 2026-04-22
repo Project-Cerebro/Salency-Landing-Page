@@ -12,9 +12,11 @@ export function NotDoSection() {
             <div className="t">Not a CRM replacement</div>
             <span className="check" aria-label="What it does">✓</span>
             <div className="s">
-              Salesforce, HubSpot, Attio stay. Salency is the memory layer
-              alongside them: pain graph, contradictions, account-level
-              brief. Flat fields export when leadership wants them in CRM.
+              CRM tracks pipeline stages and quotes. Salency tracks what the
+              customer said: pain graph, contradictions, account brief. The
+              memory layer stays on Salency; flat fields export to Salesforce,
+              HubSpot, or Attio as CSV or markdown. Native CRM integration is
+              on the roadmap.
             </div>
           </div>
           <div className="notdo-item">
@@ -22,9 +24,9 @@ export function NotDoSection() {
             <div className="t">Not an in-call coach</div>
             <span className="check" aria-label="What it does">✓</span>
             <div className="s">
-              That&apos;s Gong&apos;s turf. Salency works between calls.
-              After each conversation it updates the account&apos;s memory,
-              so the rep walks into the next call already briefed.
+              In-call coaching is a different product. Salency works between
+              calls. After each conversation it updates the account&apos;s
+              memory, so the rep walks into the next call already briefed.
             </div>
           </div>
           <div className="notdo-item">
@@ -44,7 +46,7 @@ export function NotDoSection() {
             <span className="check" aria-label="What it does">✓</span>
             <div className="s">
               Salency sits <em>on top of</em> your notetaker. Gong, Fathom,
-              Fireflies, raw .vtt go in. A cited, queryable memory layer
+              Fireflies, or raw text go in. A cited, queryable memory layer
               comes out. Survives rep rotation.
             </div>
           </div>
