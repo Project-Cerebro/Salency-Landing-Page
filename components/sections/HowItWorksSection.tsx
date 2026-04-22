@@ -78,7 +78,7 @@ export function HowItWorksSection() {
       <div className="how-foot">
         <span>
           Works with any transcript.<span className="sep">·</span>
-          <em>Citations + confidence scores</em> on every extraction.
+          Citations and confidence scores on every extraction.
         </span>
         <span>Runs alongside your AI notetaker</span>
       </div>
