@@ -8,7 +8,7 @@ export default function PricingPage() {
       <MarketingHeader />
       <ComingSoon
         eyebrow="Pricing"
-        title="Pricing is"
+        title="Pricing —"
         description="We're scoping pilots with a small group of revenue teams this quarter. Pricing is set per engagement while we calibrate. Request a slot and we'll share current terms."
       />
       <SiteFooter />

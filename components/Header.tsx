@@ -11,7 +11,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <div className="flex items-center gap-1">
           <div className="w-10 h-10 relative overflow-hidden rounded-lg">
-            <img src="/logo.svg" alt="Salency Logo" className="object-contain w-full h-full scale-[2.0]" />
+            <img src="/salency-mark.svg" alt="Salency Logo" className="object-contain w-full h-full" />
           </div>
           <span className="font-bold text-xl tracking-tight text-white font-heading">Salency</span>
         </div>
