@@ -9,6 +9,7 @@ export function HubSection() {
   return (
     <section className={`hub-wrap${played ? ' played' : ''}`}>
       <div className="hub">
+        <div className="hub-main">
         <div className="hub-head">
           <span className="eb">
             Inputs <span className="arr">→</span>
@@ -250,27 +251,28 @@ export function HubSection() {
             <em>Early access</em> · Q2 2026
           </span>
         </div>
-      </div>
-
-      <div className="hub-outcome" role="complementary">
-        <div className="hub-outcome-eb">
-          <span className="dot">●</span> Outcome · every role inherits it
         </div>
-        <div className="hub-outcome-grid">
-          <div className="hub-outcome-row">
-            <div className="hub-outcome-rk">New AE</div>
-            <div className="hub-outcome-rt">Inherits context</div>
-            <div className="hub-outcome-rs">Full account state before the next call</div>
+
+        <div className="hub-outcome" role="complementary">
+          <div className="hub-outcome-eb">
+            <span className="dot">●</span> Outcome
           </div>
-          <div className="hub-outcome-row">
-            <div className="hub-outcome-rk">CSM</div>
-            <div className="hub-outcome-rt">Picks up handoff</div>
-            <div className="hub-outcome-rs">Pain-to-product mappings already cited</div>
-          </div>
-          <div className="hub-outcome-row">
-            <div className="hub-outcome-rk">Director</div>
-            <div className="hub-outcome-rt">Sees the pattern</div>
-            <div className="hub-outcome-rs">Pains and objections across every deal</div>
+          <div className="hub-outcome-grid">
+            <div className="hub-outcome-row">
+              <div className="hub-outcome-rk">New AE</div>
+              <div className="hub-outcome-rt">Inherits context</div>
+              <div className="hub-outcome-rs">Full account state before the next call</div>
+            </div>
+            <div className="hub-outcome-row">
+              <div className="hub-outcome-rk">CSM</div>
+              <div className="hub-outcome-rt">Picks up handoff</div>
+              <div className="hub-outcome-rs">Pain-to-product mappings already cited</div>
+            </div>
+            <div className="hub-outcome-row">
+              <div className="hub-outcome-rk">Director</div>
+              <div className="hub-outcome-rt">Sees the pattern</div>
+              <div className="hub-outcome-rs">Pains and objections across every deal</div>
+            </div>
           </div>
         </div>
       </div>
