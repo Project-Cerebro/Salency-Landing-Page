@@ -21,16 +21,16 @@ export function HowItWorksSection() {
             <em>Extract</em>
           </h3>
           <p className="desc">
-            Every call is parsed into five structured signal types: customer
-            needs, objections, competitors, requirements, next steps.
-            Enumerated, not summarised. Every signal carries the verbatim
-            quote, the speaker, and the timestamp.
+            Every call is parsed into five structured signal types: pains,
+            objections, competitors, requirements, next steps. Enumerated,
+            not summarised. Every signal carries the verbatim quote, the
+            speaker, and the timestamp.
           </p>
           <div className="ex">
             <div className="el">Example extraction</div>
             <div className="eq">
-              <strong>Customer need</strong> · Account visibility at renewal
-              handoff · Priya Shah, VP Sales · 18:02
+              <strong>Pain</strong> · CS director inherits accounts blind at
+              renewal · Priya Shah, VP Sales · 18:02
             </div>
           </div>
         </div>
@@ -40,16 +40,16 @@ export function HowItWorksSection() {
             <em>Map</em>
           </h3>
           <p className="desc">
-            Each customer need maps to a line in your product catalog, ranked
-            by confidence. Every new call is compared against prior calls on
-            the same account, and contradictions get flagged. The graph keeps
-            growing: needs, products, stakeholders, and how the story has
+            Each pain maps to a line in your product catalog, ranked by
+            confidence. Every new call is compared against prior calls on the
+            same account, and contradictions get flagged. The graph keeps
+            growing: pains, products, stakeholders, and how the story has
             changed over time.
           </p>
           <div className="ex">
             <div className="el">Example mapping</div>
             <div className="eq">
-              Need <em>&ldquo;context across handoffs&rdquo;</em>{' '}
+              Pain <em>&ldquo;handoff loses context&rdquo;</em>{' '}
               <strong>→ 3 products ranked</strong>, contradictions flagged
             </div>
           </div>
