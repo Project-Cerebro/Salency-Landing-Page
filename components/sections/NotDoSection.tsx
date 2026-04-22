@@ -12,9 +12,11 @@ export function NotDoSection() {
             <div className="t">Not a CRM replacement</div>
             <span className="check" aria-label="What it does">✓</span>
             <div className="s">
-              Salesforce, HubSpot, Attio stay. Salency is the memory layer
-              alongside them: pain graph, contradictions, account-level
-              brief. Flat fields export when leadership wants them in CRM.
+              CRM tracks pipeline stages and quotes. Salency tracks what the
+              customer said: pain graph, contradictions, account brief. The
+              memory layer stays on Salency; flat fields export to Salesforce,
+              HubSpot, or Attio as CSV or markdown. Native CRM integration is
+              on the roadmap.
             </div>
           </div>
           <div className="notdo-item">
@@ -46,16 +48,6 @@ export function NotDoSection() {
               Salency sits <em>on top of</em> your notetaker. Gong, Fathom,
               Fireflies, raw .vtt go in. A cited, queryable memory layer
               comes out. Survives rep rotation.
-            </div>
-          </div>
-          <div className="notdo-item">
-            <span className="x">×</span>
-            <div className="t">Not a CRM integration (yet)</div>
-            <span className="check" aria-label="What it does">✓</span>
-            <div className="s">
-              V1 ships CSV and markdown export. Reps copy structured fields
-              into Salesforce, HubSpot, or Attio manually. Programmatic
-              write-back lands in V1.5. The graph stays on Salency by design.
             </div>
           </div>
         </div>
