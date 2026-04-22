@@ -48,6 +48,16 @@ export function NotDoSection() {
               comes out. Survives rep rotation.
             </div>
           </div>
+          <div className="notdo-item">
+            <span className="x">×</span>
+            <div className="t">Not a CRM integration (yet)</div>
+            <span className="check" aria-label="What it does">✓</span>
+            <div className="s">
+              V1 ships CSV and markdown export. Reps copy structured fields
+              into Salesforce, HubSpot, or Attio manually. Programmatic
+              write-back lands in V1.5. The graph stays on Salency by design.
+            </div>
+          </div>
         </div>
       </div>
     </section>
