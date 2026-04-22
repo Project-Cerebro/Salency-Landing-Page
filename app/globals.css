@@ -1146,20 +1146,19 @@ html {
   footer nav a:hover{color:var(--ink)}
 
   /* ═══════════ Investor page (standalone) ═══════════ */
-  /* On /investor/ the whole body is the "investor register" tone — no divider needed. */
-  body:has(.inv-page){background:#0C0A10}
-  .inv-page{background:#0C0A10;min-height:100vh;position:relative;overflow:hidden}
-  .inv-page::before{
+  /* Investor register, appended after the .reg-div transition on the single landing page. */
+  .investors-register{background:#0C0A10;position:relative;overflow:hidden}
+  .investors-register::before{
     content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);
     width:1400px;height:900px;pointer-events:none;z-index:0;
     background:radial-gradient(ellipse at center, rgba(240,168,118,0.14) 0%, rgba(240,168,118,0.04) 30%, transparent 60%);
   }
-  .inv-page::after{
+  .investors-register::after{
     content:"";position:absolute;top:900px;left:-200px;
     width:700px;height:700px;pointer-events:none;z-index:0;
     background:radial-gradient(circle, rgba(209,60,19,0.08) 0%, transparent 60%);
   }
-  .inv-page > *{position:relative;z-index:1}
+  .investors-register > *{position:relative;z-index:1}
 
   .inv-intro{
     max-width:1280px;margin:0 auto;padding:100px 40px 80px;
@@ -1193,8 +1192,8 @@ html {
   }
   .inv-intro-meta .sep{color:var(--ink-4);opacity:.5}
 
-  /* When reg-inv appears on investor page without the divider, keep its top padding but drop the double noise layer */
-  .inv-page .reg-inv{padding-top:72px;padding-bottom:120px}
+  /* .reg-inv inside the merged investor register — top padding since the .reg-div divider sits above */
+  .investors-register .reg-inv{padding-top:72px;padding-bottom:120px}
 
   .inv-footer{
     max-width:1280px;margin:0 auto;padding:40px;
