@@ -26,7 +26,7 @@ export default function Investor() {
           <div className="inv-intro-meta">
             <span>Pre-seed · Q2 2026</span>
             <span className="sep">·</span>
-            <span>4 of 10 pilot spots open</span>
+            <span>Early access opening Q2 2026</span>
             <span className="sep">·</span>
             <span>Private deck available on request</span>
           </div>
@@ -194,7 +194,7 @@ export default function Investor() {
           <a href="#">Deck (on request)</a>
           <a href="#">Security</a>
         </nav>
-        <span>© 2026 Salency, Inc. · SOC 2 Type II · Pre-seed</span>
+        <span>© 2026 Salency · Toronto · Pre-seed</span>
       </footer>
     </div>
   );

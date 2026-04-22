@@ -28,13 +28,10 @@ export default function Home() {
 
         <div className="hero-meta">
           <span>
-            <span className="dot">●</span> SOC 2 Type II
-          </span>
-          <span>
-            <span className="dot">●</span> Deploys in 48 hrs
-          </span>
-          <span>
             <span className="dot">●</span> Works alongside your notetaker
+          </span>
+          <span>
+            <span className="dot">●</span> Early access · Q2 2026
           </span>
         </div>
       </section>
@@ -174,55 +171,9 @@ export default function Home() {
           <div className="hub-foot">
             <span>One pipeline · every role · zero handoff loss</span>
             <span>
-              <em>4 of 10</em> pilot spots open · Q2 2026
+              <em>Early access</em> · Q2 2026
             </span>
           </div>
-        </div>
-      </section>
-
-      <section className="stats">
-        <div>
-          <div className="n">
-            <em>4</em>
-            <span className="u">hrs</span>
-          </div>
-          <div className="lbl">Per rep, per week — back from status-update busywork</div>
-          <div className="src">Pilot cohort · n=42</div>
-        </div>
-        <div>
-          <div className="n">
-            <em>68</em>
-            <span className="u">%</span>
-          </div>
-          <div className="lbl">Faster AE ramp-to-quota for reps inheriting Salency accounts</div>
-          <div className="src">90-day window</div>
-        </div>
-        <div>
-          <div className="n">
-            <em>3</em>
-            <span className="u">×</span>
-          </div>
-          <div className="lbl">Lower post-handoff churn versus unstructured transition</div>
-          <div className="src">YoY, matched cohort</div>
-        </div>
-        <div>
-          <div className="n">
-            <em>0</em>
-          </div>
-          <div className="lbl">New tabs, new dashboards, new logins for your reps</div>
-          <div className="src">Lives inside your notetaker + CRM</div>
-        </div>
-      </section>
-
-      <section className="logo-bar">
-        <div className="label">In pilot with revenue teams at</div>
-        <div className="logos">
-          <span className="logo-item">Northwind</span>
-          <span className="logo-item sans">PATINA HEALTH</span>
-          <span className="logo-item">Meridian &amp; Co.</span>
-          <span className="logo-item mono">Orbital/Labs</span>
-          <span className="logo-item">Latchkey</span>
-          <span className="logo-item sans">ARGENT</span>
         </div>
       </section>
 
@@ -391,9 +342,8 @@ export default function Home() {
               — the unprompted pain at minute 42 — stays locked in the audio.
             </p>
             <div className="cost">
-              <span className="num">0%</span>
               <span className="lbl">
-                of call transcripts are read past the first listen
+                Transcripts are the artifact no one scrubs after the handoff.
               </span>
             </div>
           </div>
@@ -410,9 +360,10 @@ export default function Home() {
               asking again.
             </p>
             <div className="cost">
-              <span className="num">3×</span>
+              <span className="num">40–50%</span>
               <span className="lbl">
-                higher churn on accounts after an unstructured handoff
+                of customers visibly frustrated when asked to repeat themselves ·
+                Customer interview, Jan 2026
               </span>
             </div>
           </div>
@@ -428,9 +379,8 @@ export default function Home() {
               re-encoding information the system already has.
             </p>
             <div className="cost">
-              <span className="num">4hrs</span>
               <span className="lbl">
-                per rep, per week, lost to manual context transfer
+                Hours spent re-encoding what the recording already captured.
               </span>
             </div>
           </div>
@@ -556,21 +506,21 @@ export default function Home() {
 
       <section className="cta-section">
         <div className="cta-card">
-          <div className="eb">Limited pilot · Q1 2026</div>
+          <div className="eb">Early access · Q2 2026</div>
           <h2>
             Stop paying the <em>ramp-time tax.</em>
           </h2>
           <p className="sub">
-            Twelve revenue teams. Ninety days. A memory layer that outlasts any
-            rep. Request a pilot slot — we&apos;re onboarding four more teams
-            this quarter.
+            A memory layer that outlasts any rep. We&apos;re opening early access
+            to a small group of revenue teams this quarter. Request a slot and
+            we&apos;ll scope a fit together.
           </p>
           <div className="btns">
-            <button className="btn btn-primary">Request a pilot →</button>
+            <button className="btn btn-primary">Request early access →</button>
             <button className="btn btn-ghost">Read the memo</button>
           </div>
           <div className="fine">
-            No card required · 30-minute scoping call · Deploys alongside your AI
+            No card required · 30-minute scoping call · Works alongside your AI
             notetaker
           </div>
         </div>
@@ -585,7 +535,7 @@ export default function Home() {
           <a href="/investor">Investors</a>
           <a href="#">Careers</a>
         </nav>
-        <span>© 2026 Salency, Inc. · SOC 2 Type II</span>
+        <span>© 2026 Salency · Toronto</span>
       </footer>
     </div>
   );
