@@ -155,12 +155,12 @@ If it isn't a keyword, it's chrome. Chrome uses `--ink-*` and `--hair*`. Never i
 ### Section container
 
 ```css
-max-width: 1280px;
+max-width: var(--page-max);  /* resolves to 1280px */
 margin: 0 auto;
 padding: 0 40px;
 ```
 
-All investor-page sections (`.inv-intro`, `.platform`, `.roadmap`, `.team`, `.thesis`) share the canonical `1280px` container so every section lines up on one vertical spine. Legal pages use narrower.
+The `--page-max` token (declared in `:root`, currently `1280px`) is the single source of truth for the page-content band. 23 section containers across the site reference it. Change the token to change every container at once. Legal pages use narrower measures via their own rules.
 
 ### Section rhythm
 

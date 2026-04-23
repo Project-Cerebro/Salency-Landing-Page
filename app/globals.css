@@ -178,6 +178,10 @@ html {
     --copper-a40: rgba(254,133,49,.4);
     --copper-a50: rgba(254,133,49,.5);
     --copper-a60: rgba(254,133,49,.6);
+    /* Layout: canonical page-content maximum width. Every section
+       container that centers into the 1280-wide band references this
+       token instead of the literal. */
+    --page-max: 1280px;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
@@ -226,7 +230,7 @@ html {
 
   /* ═══════════ Hub diagram (replaces product mock) ═══════════ */
   .hub-wrap{
-    max-width:1280px;margin:72px auto 0;padding:0 40px;
+    max-width:var(--page-max);margin:72px auto 0;padding:0 40px;
 
     .hub{
       position:relative;height:auto;
@@ -590,7 +594,7 @@ html {
     border-bottom:1px solid var(--hair);
   }
   .nav{
-    max-width:1280px;margin:0 auto;
+    max-width:var(--page-max);margin:0 auto;
     padding:16px 40px;
     display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:48px;
   }
@@ -676,7 +680,7 @@ html {
      viewed through the pricing-page lens. All layout/typography lives
      here so the JSX is semantic (no Tailwind utility soup). */
   .apply-page{
-    max-width:1280px;margin:40px auto 0;padding:20px 40px;
+    max-width:var(--page-max);margin:40px auto 0;padding:20px 40px;
 
     .apply-intro{max-width:48rem;margin-bottom:64px}
 
@@ -746,14 +750,14 @@ html {
 
   /* ═══════════ Hero ═══════════ */
   .hero{
-    max-width:1280px;margin:0 auto;
+    max-width:var(--page-max);margin:0 auto;
     padding:96px 40px 72px;
   }
   @media (max-width: 768px) {
     .hero { padding: 56px 22px 48px; }
   }
   .hero-hairline{
-    max-width:1280px;margin:0 auto;
+    max-width:var(--page-max);margin:0 auto;
     border-top:1px solid var(--hair);
   }
   .h1{
@@ -813,7 +817,7 @@ html {
 
   /* ═══════════ Problem section ═══════════ */
   .prob{
-    max-width:1280px;margin:40px auto 0;padding:20px 40px;
+    max-width:var(--page-max);margin:40px auto 0;padding:20px 40px;
   }
   .prob-head{
     display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;
@@ -933,7 +937,7 @@ html {
 
   /* ═══════════ CTA ═══════════ */
   .cta-section{
-    max-width:1280px;margin:140px auto 0;padding:0 40px 120px;
+    max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
   }
   @media (max-width: 768px) {
     .cta-section { margin-top: 80px; padding: 0 22px 64px; }
@@ -977,7 +981,7 @@ html {
   }
 
   /* ═══════════ How it works (Extract · Map · Remember) ═══════════ */
-  .how{max-width:1280px;margin:140px auto 0;padding:0 40px}
+  .how{max-width:var(--page-max);margin:140px auto 0;padding:0 40px}
   @media (max-width: 768px) {
     .how { margin-top: 80px; padding: 0 22px; }
   }
@@ -1071,7 +1075,7 @@ html {
   .how-foot .sep{color:var(--ink-4);margin:0 6px}
 
   /* ═══════════ NOT strip ═══════════ */
-  .notdo{max-width:1280px;margin:56px auto 0;padding:0 40px}
+  .notdo{max-width:var(--page-max);margin:56px auto 0;padding:0 40px}
   @media (max-width: 768px) {
     .notdo { margin-top: 40px; padding: 0 22px; }
   }
@@ -1124,7 +1128,7 @@ html {
   }
 
   /* ═══════════ Notetaker comparison table ═══════════ */
-  .notetaker{max-width:1280px;margin:140px auto 0;padding:0 40px}
+  .notetaker{max-width:var(--page-max);margin:140px auto 0;padding:0 40px}
   @media (max-width: 768px) {
     .notetaker { margin-top: 80px; padding: 0 22px; }
   }
@@ -1261,7 +1265,7 @@ html {
 
   /* Platform framing */
   .platform{
-    max-width:1280px;margin:0 auto;padding:0 40px;
+    max-width:var(--page-max);margin:0 auto;padding:0 40px;
 
     .eb{margin-bottom:28px;display:flex}
     h2{
@@ -1292,7 +1296,7 @@ html {
 
   /* Moat framing — why the data lives on Salency, not Salesforce (§6 platform-native posture, §8 uncopyable pair) */
   .moat{
-    max-width:1280px;margin:80px auto 0;padding:0 40px;
+    max-width:var(--page-max);margin:80px auto 0;padding:0 40px;
 
     .eb{margin-bottom:28px;display:flex}
     h2{
@@ -1323,7 +1327,7 @@ html {
 
   /* V1.5 roadmap */
   .roadmap{
-    max-width:1280px;margin:80px auto 0;padding:0 40px;
+    max-width:var(--page-max);margin:80px auto 0;padding:0 40px;
 
     .roadmap-card{
       padding:22px 28px;border:1px solid var(--hair-2);border-radius:10px;
@@ -1345,7 +1349,7 @@ html {
 
   /* Team */
   .team{
-    max-width:1280px;margin:100px auto 0;padding:0 40px;
+    max-width:var(--page-max);margin:100px auto 0;padding:0 40px;
 
     .sect-head{
       margin-bottom:64px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:baseline;
@@ -1413,7 +1417,7 @@ html {
   }
 
   /* Future-fit thesis */
-  .thesis{max-width:1280px;margin:100px auto 0;padding:0 40px 20px}
+  .thesis{max-width:var(--page-max);margin:100px auto 0;padding:0 40px 20px}
   .thesis-card{
     padding:56px 64px;background:rgba(255,255,255,.02);
     border:1px solid var(--hair-2);border-radius:16px;position:relative;overflow:hidden;
@@ -1444,7 +1448,7 @@ html {
   footer{
     border-top:1px solid var(--hair);
     padding:40px;
-    max-width:1280px;margin:0 auto;
+    max-width:var(--page-max);margin:0 auto;
     display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
     font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-4);
     letter-spacing:.04em;
@@ -1478,7 +1482,7 @@ html {
   }
 
   .inv-intro{
-    max-width:1280px;margin:40px auto 0;padding:20px 40px;
+    max-width:var(--page-max);margin:40px auto 0;padding:20px 40px;
     border-bottom:1px solid var(--hair);position:relative;
 
     &::after{
@@ -1658,7 +1662,7 @@ header button:focus:not(:focus-visible){
 
 /* ═══════════ Coming-soon stub pages ═══════════ */
 .coming-soon{
-  max-width:1280px;margin:80px auto 0;padding:20px 40px;
+  max-width:var(--page-max);margin:80px auto 0;padding:20px 40px;
 }
 .coming-soon-inner{max-width:780px}
 .coming-soon .eb{margin-bottom:24px}
@@ -1777,7 +1781,7 @@ header button:focus:not(:focus-visible){
 .memory-page {
   /* ── Intro (matches standalone canonical per DESIGN.md §4) ── */
   .mem-intro {
-    max-width: 1280px;
+    max-width:var(--page-max);
     margin: 40px auto 0;
     padding: 20px 40px;
 
@@ -2105,7 +2109,7 @@ header button:focus:not(:focus-visible){
 
   /* ── Supporting surfaces 02 / 03 / 04 ── */
   .mem-supporting {
-    max-width: 1280px;
+    max-width:var(--page-max);
     margin: 120px auto 0;
     padding: 0 40px;
   }
@@ -2291,7 +2295,7 @@ header button:focus:not(:focus-visible){
 
   /* ── CRM vs Salency compare ── */
   .mem-compare {
-    max-width: 1280px;
+    max-width:var(--page-max);
     margin: 120px auto 0;
     padding: 0 40px;
   }
@@ -2367,7 +2371,7 @@ header button:focus:not(:focus-visible){
 
   /* ── Transcript sources ── */
   .mem-compat {
-    max-width: 1280px;
+    max-width:var(--page-max);
     margin: 96px auto 0;
     padding: 32px 40px;
     border-top: 1px solid var(--hair);
@@ -2405,7 +2409,7 @@ header button:focus:not(:focus-visible){
 
   /* ── Pilot CTA ── */
   .mem-cta {
-    max-width: 1280px;
+    max-width:var(--page-max);
     margin: 96px auto 120px;
     padding: 0 40px;
     text-align: center;
