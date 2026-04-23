@@ -1313,42 +1313,6 @@ html {
   .gong-table .col-s .ic{color:var(--copper)}
   .gong-table .col-g .ic{color:var(--ink-4)}
 
-  /* ═══════════ Register divider ═══════════ */
-  .reg-div{
-    position:relative;margin-top:0;
-    background:#0C0A10;
-    height:96px;display:flex;align-items:center;justify-content:center;
-    overflow:hidden;
-
-    &::before{
-      content:"";position:absolute;top:0;left:0;right:0;height:4px;
-      background:linear-gradient(to bottom,#121015,#0C0A10);pointer-events:none;
-    }
-    &::after{
-      content:"";position:absolute;inset:0;pointer-events:none;
-      background:radial-gradient(ellipse 600px 120px at 50% 50%,rgba(254,133,49,0.08),transparent 70%);
-    }
-
-    .hair{
-      position:absolute;left:0;right:0;top:50%;height:1px;
-      background:rgba(254,133,49,0.22);
-    }
-    .wrap{
-      position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:12px;
-      background:#0C0A10;padding:0 28px;
-    }
-    .kicker{
-      font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.3em;
-      color:var(--ink-4);text-transform:uppercase;
-    }
-    h2{
-      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:40px;
-      line-height:1;letter-spacing:-.01em;color:var(--ink);margin:0;white-space:nowrap;
-
-      em{font-style:italic;color:var(--copper)}
-    }
-  }
-
   /* ═══════════ Investor register ═══════════ */
   .reg-inv{
     background:#0C0A10;padding:100px 0 120px;position:relative;
@@ -1554,7 +1518,6 @@ html {
   }
 
   /* ═══════════ Investor page (standalone) ═══════════ */
-  /* Investor register, appended after the .reg-div transition on the single landing page. */
   .investors-register{
     background:#0C0A10;position:relative;overflow:hidden;
 
@@ -1570,12 +1533,11 @@ html {
     }
     > *{position:relative;z-index:1}
 
-    /* .reg-inv inside the merged investor register — top padding since the .reg-div divider sits above */
     .reg-inv{padding-top:72px;padding-bottom:120px}
   }
 
   .inv-intro{
-    max-width:1280px;margin:0 auto;padding:48px 40px 80px;
+    max-width:1280px;margin:0 auto;padding:120px 40px 96px;
     border-bottom:1px solid var(--hair);position:relative;
 
     &::after{

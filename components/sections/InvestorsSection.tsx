@@ -1,13 +1,6 @@
 export function InvestorsSection() {
   return (
     <>
-      <div className="reg-div" aria-hidden="true">
-        <span className="hair" />
-        <div className="wrap">
-          <span className="kicker">What we&apos;re building</span>
-        </div>
-      </div>
-
       <div id="investors" className="investors-register">
         <div className="inv-intro">
           <div className="inv-intro-inner">
