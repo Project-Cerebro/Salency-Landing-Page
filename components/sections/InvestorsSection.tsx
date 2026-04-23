@@ -102,7 +102,7 @@ export function InvestorsSection() {
 
           <section className="team" id="team">
             <div className="sect-head">
-              <span className="num">03.</span>
+              <span className="section-num">03.</span>
               <h2>
                 Why <em>this team,</em> on this problem, now.
               </h2>

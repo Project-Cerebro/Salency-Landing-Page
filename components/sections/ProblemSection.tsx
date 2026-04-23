@@ -50,7 +50,7 @@ export function ProblemSection() {
             asking again.
           </p>
           <div className="cost">
-            <span className="num">40–50%</span>
+            <span className="figure">40–50%</span>
             <span className="label">
               of customers visibly frustrated when asked to repeat themselves ·
               Customer interview, Jan 2026
