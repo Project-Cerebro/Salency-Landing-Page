@@ -110,6 +110,8 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
     }
 
     const inputClass = 'w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors';
+    const selectChevron = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23E8925A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`;
+    const selectClass = `${inputClass} appearance-none pr-10 bg-no-repeat bg-[right_1rem_center]`;
 
     return (
         <form
@@ -180,7 +182,8 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                 <label className="block text-sm font-medium text-gray-300 mb-1">Industry *</label>
                 <select
                     {...register('industry', { required: true })}
-                    className={inputClass}
+                    className={selectClass}
+                    style={{ backgroundImage: selectChevron }}
                     defaultValue=""
                     suppressHydrationWarning
                 >
@@ -196,7 +199,8 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                 <label className="block text-sm font-medium text-gray-300 mb-1">Your Role *</label>
                 <select
                     {...register('role', { required: true })}
-                    className={inputClass}
+                    className={selectClass}
+                    style={{ backgroundImage: selectChevron }}
                     defaultValue=""
                     suppressHydrationWarning
                 >
@@ -233,9 +237,10 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-accent-warm hover:brightness-110 text-background font-bold py-4 rounded-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-lg shadow-[0_0_20px_rgba(232,146,90,0.3)] hover:shadow-[0_0_30px_rgba(232,146,90,0.5)] transition-[color,background-color,box-shadow,transform,opacity,filter] duration-200"
+                className="w-full bg-accent-warm hover:brightness-110 text-background font-bold py-4 rounded-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg shadow-[0_0_20px_rgba(232,146,90,0.3)] hover:shadow-[0_0_30px_rgba(232,146,90,0.5)] transition-[color,background-color,box-shadow,transform,opacity,filter] duration-200"
             >
-                {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : 'Request Pilot'}
+                {isSubmitting && <Loader2 className="animate-spin w-5 h-5" />}
+                <span>{isSubmitting ? 'Submitting' : 'Request Pilot'}</span>
             </button>
 
             <p className="text-center text-xs text-gray-500 mt-4">
