@@ -60,7 +60,8 @@ export function HowItWorksSection() {
             <em>Remember</em>
           </h3>
           <p className="desc">
-            The next AE inherits a Day-1 brief. The CS director picks up
+            The next account executive inherits a Day-1 brief. The CS
+            director picks up
             mid-story, not from zero. Pipeline review sees every customer
             need across every account without replaying a single call. The
             memory outlasts any rep.
