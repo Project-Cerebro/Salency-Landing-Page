@@ -756,6 +756,32 @@ html {
     }
   }
 
+  /* ═══════════ Shared hero backdrop (copper ellipse glow) ═══════════
+     Mirrors the investor register pattern: pseudo at z-index:0, children
+     lifted to z-index:1. Avoids `isolation: isolate` + negative z-index
+     (which clips the pseudo below the element's own paint layer). */
+  .hero,
+  .mem-intro,
+  .prob,
+  .apply-page{
+    position:relative;
+  }
+  .hero::before,
+  .mem-intro::before,
+  .prob::before,
+  .apply-page::before{
+    content:"";
+    position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+    width:1400px;height:900px;pointer-events:none;z-index:0;
+    background:radial-gradient(ellipse at center, var(--copper-a14) 0%, var(--copper-a04) 30%, transparent 60%);
+  }
+  .hero > *,
+  .mem-intro > *,
+  .prob > *,
+  .apply-page > *{
+    position:relative;z-index:1;
+  }
+
   /* ═══════════ Hero ═══════════ */
   .hero{
     max-width:var(--page-max);margin:0 auto;
