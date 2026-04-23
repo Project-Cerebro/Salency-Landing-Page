@@ -131,7 +131,7 @@ export function InvestorsSection() {
               </div>
             </div>
 
-            <div className="founder rev">
+            <div className="founder founder--reversed">
               <div className="photo p2">NI</div>
               <div className="body">
                 <div className="name">Nikki Ip</div>

@@ -1362,7 +1362,7 @@ html {
     padding-bottom:56px;margin-bottom:56px;border-bottom:1px solid var(--hair);
 
     &:last-child{border-bottom:0;margin-bottom:0}
-    &.rev{
+    &.founder--reversed{
       grid-template-columns:1fr 128px;
 
       .photo{order:2}
@@ -1535,7 +1535,7 @@ html {
       margin-bottom: 40px;
     }
     .founder,
-    .founder.rev {
+    .founder.founder--reversed {
       /* Photo on top, body below — at 375px the 128px photo + 1fr body
          cramped the bio to ~12ch per line. Reversed variant collapses
          to the same stacked layout. */
