@@ -248,10 +248,10 @@ html {
       .eb{
         font-size:10.5px;display:inline;gap:0;
 
-        .arr{color:var(--ink-4);margin:0 4px}
+        .arrow{color:var(--ink-4);margin:0 4px}
         &.r{
           color:var(--copper);
-          .arr{color:var(--ink-4)}
+          .arrow{color:var(--ink-4)}
         }
       }
     }
