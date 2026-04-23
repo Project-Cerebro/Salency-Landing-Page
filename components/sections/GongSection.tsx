@@ -33,7 +33,7 @@ export function GongSection() {
               <span className="icon">—</span>Transcript + call summary
             </td>
             <td className="col-s">
-              <span className="icon">→</span>
+              <span className="icon">✓</span>
               <strong>Structured signals</strong> mapped to your catalog
             </td>
           </tr>
@@ -43,14 +43,13 @@ export function GongSection() {
               <span className="icon">—</span>The call
             </td>
             <td className="col-s">
-              <span className="icon">→</span>The <strong>account</strong> — every
-              pain, promise, stakeholder, across every call
+              <span className="icon">✓</span>The <strong>account</strong>
             </td>
           </tr>
           <tr>
             <td className="dim">Survives rep turnover</td>
             <td className="col-g">
-              <span className="icon">×</span>Transcript survives. Context
+              <span className="icon">—</span>Transcript survives. Context
               doesn&apos;t.
             </td>
             <td className="col-s">
@@ -75,14 +74,14 @@ export function GongSection() {
               moments
             </td>
             <td className="col-s">
-              <span className="icon">→</span>AE, CSM, director — every role on
+              <span className="icon">✓</span>AE, CSM, director — every role on
               the account, on demand
             </td>
           </tr>
           <tr>
             <td className="dim">Handoff artefact</td>
             <td className="col-g">
-              <span className="icon">×</span>None — you still write the handoff
+              <span className="icon">—</span>None — you still write the handoff
               doc by hand
             </td>
             <td className="col-s">
@@ -93,10 +92,10 @@ export function GongSection() {
           <tr>
             <td className="dim">Works alongside</td>
             <td className="col-g">
-              <span className="icon">→</span>Your CRM
+              <span className="icon">—</span>Your CRM
             </td>
             <td className="col-s">
-              <span className="icon">→</span>Your notetaker + your CRM —{' '}
+              <span className="icon">✓</span>Your notetaker + your CRM —{' '}
               <strong>zero rip-and-replace</strong>
             </td>
           </tr>

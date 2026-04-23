@@ -1078,9 +1078,10 @@ html {
   }
   .prob-card:nth-child(n+2){padding-left:36px}
   .prob-card:last-child{border-right:0}
+  /* Pain-card index "01/02/03" is decorative numbering, not a keyword. */
   .prob-card .idx{
     font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-weight:400;
-    font-size:15px;color:var(--copper);letter-spacing:.02em;margin-bottom:10px;
+    font-size:15px;color:var(--ink-3);letter-spacing:.02em;margin-bottom:10px;
     display:flex;align-items:center;gap:10px;
   }
   .prob-card .idx::after{
@@ -1100,9 +1101,10 @@ html {
     display:flex;align-items:baseline;gap:10px;
     padding-top:16px;border-top:1px dashed var(--hair-2);
   }
+  /* "40–50%" style data figures read brightness, not hue. Ink ramp. */
   .prob-card .cost .num{
     font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-weight:400;
-    font-size:40px;line-height:1;color:var(--copper);letter-spacing:-.02em;
+    font-size:40px;line-height:1;color:var(--ink);letter-spacing:-.02em;
   }
   .prob-card .cost .label{
     font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
@@ -1312,8 +1314,10 @@ html {
     font-weight:500;text-align:center;
     grid-column:1;
   }
+  /* .check is a positive list marker. Brightness differentiates it
+     from the rust .x; the copper accent is reserved for keywords. */
   .notdo-item .x{color:var(--rust)}
-  .notdo-item .check{color:var(--copper)}
+  .notdo-item .check{color:var(--ink)}
   .notdo-item .title{font-size:14.5px;color:var(--ink);font-weight:400;line-height:1.4;grid-column:2}
   .notdo-item .subtitle{font-size:13px;color:var(--ink-3);line-height:1.5;grid-column:2}
 
@@ -1379,8 +1383,78 @@ html {
     display:inline-block;margin-right:8px;font-family:'Geist Mono',monospace;
     font-size:11px;width:16px;text-align:center;
   }
-  .notetaker-table .col-s .icon{color:var(--copper)}
+  /* Icon markers are list markers, not keywords. Salency column uses
+     bright ink so it's visible against the copper-tinted cell; the
+     column's copper-a03 background + bold strong is the signal. */
+  .notetaker-table .col-s .icon{color:var(--ink-2)}
   .notetaker-table .col-g .icon{color:var(--ink-4)}
+
+  /* Mobile: table → card-per-row. Row-level semantics stay intact,
+     but each row becomes a bordered card with the dimension as a
+     caption and two labeled cells (Notetaker / Salency) underneath.
+     Column headers dissolve; their labels re-materialize as ::before
+     text on each body cell so users can still tell which is which. */
+  @media (max-width: 768px) {
+    .notetaker-table,
+    .notetaker-table thead,
+    .notetaker-table tbody,
+    .notetaker-table tr,
+    .notetaker-table td,
+    .notetaker-table th { display: block; }
+    .notetaker-table { background: transparent; border: 0; border-radius: 0; }
+    .notetaker-table thead { display: none; }
+    .notetaker-table tbody tr {
+      border: 1px solid var(--hair-2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      background: #121015;
+    }
+    .notetaker-table tbody tr:last-child { margin-bottom: 0; }
+    .notetaker-table tbody td {
+      border: 0;
+      padding: 8px 0;
+      width: auto;
+    }
+    .notetaker-table tbody td.dim {
+      width: auto;
+      font-size: 10.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      font-family: 'Geist Mono', monospace;
+      border-bottom: 1px solid var(--hair);
+      padding-bottom: 10px;
+      margin-bottom: 6px;
+    }
+    .notetaker-table tbody td.col-g { background: transparent; }
+    .notetaker-table tbody td.col-g::before {
+      content: "Notetaker";
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 4px;
+    }
+    .notetaker-table tbody td.col-s {
+      background: var(--copper-a04);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-top: 6px;
+    }
+    .notetaker-table tbody td.col-s::before {
+      content: "Salency";
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 4px;
+    }
+  }
 
   /* ═══════════ Investor register ═══════════ */
   .reg-inv{
