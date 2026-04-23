@@ -113,16 +113,40 @@ Investor page uses a slightly darker `#0C0A10` literal for the register band —
 
 | Token | Hex | Use |
 |---|---|---|
-| `--copper` | `#FE8531` | **Primary accent.** Every eyebrow, every `em` accent, every primary CTA, every `::before` dash, checkmarks, focus rings. |
+| `--copper` | `#FE8531` | **Primary accent. Keywords only** — see scope rule below. |
 | `--copper-soft` | `#FEBEA8` | Rare — soft copper for tinted surfaces. |
 | `--copper-deep` | `#CA640A` | Gradient terminator on `.btn-primary` / `.btn-submit`. |
 | `--rust` | `#D13C13` | Occasional founder-photo gradient accents. |
 | `--rust-deep` | `#95280A` | Gradient depths. |
 | `--sand` | `#FFEDE8` | Copper-on-copper text highlight (founder photo initials). |
 
-Common copper alpha idioms (no tokens but consistent): `rgba(254,133,49, .03 / .05 / .08 / .14 / .18 / .22 / .28 / .3 / .4 / .5)`. Use these literal rgbas for surfaces, borders, and gradients that need copper at transparency.
+Copper-alpha ladder: tokenized as `--copper-a0` through `--copper-a60` (see `:root` in `globals.css`). Use the token for any alpha stop used 2+ times on the page; rare one-off stops stay as inline `rgba(254,133,49, .X)` literals.
 
-**Rule:** every accent uses `--copper`. Never introduce new hex colors for accents. If you need a softer tone, use copper at lower alpha (`rgba(254,133,49,.5)`) rather than shifting hue.
+### The "keywords only" rule
+
+`--copper` is reserved for **keywords** — the parts of the page the user should *focus on*. A keyword is one of:
+
+1. An `em` inside a display heading (h1 / h2 / h3).
+2. An `em` inside body copy (paragraph, bio, card text).
+3. The eyebrow `.eb` text + its 28×1 copper dash `::before`.
+4. A primary CTA (text, button background, or link) — at most one per section.
+5. A deliberately chosen single visual anchor per page (e.g. the `.mem-hero-frame` 2px left gradient, the hero `.ping` dot on `/`). One per page, documented in §9.
+
+Copper is **not** for:
+
+- Borders on decorative frames, cards, or surfaces.
+- Timestamps, metadata chips, captions, labels that aren't CTAs.
+- Quote glyphs (`"` / `"`), bullet markers, icons, list-item indicators.
+- Hover-state tints.
+- Gradient edges, decorative blobs, atmospheric washes that aren't the one-per-page anchor.
+- Separator lines, dividers, hairlines — use `var(--hair)` / `var(--hair-2)`.
+- Alternating row tints, striped surfaces — use `var(--bg-2)` / `var(--bg-3)`.
+- Data-viz fills (progress bars, intensity dots) — the signal is fill state, not hue. Use the ink ramp.
+- Semantic status chips (champion / skeptic / blocker) — use brightness in the ink ramp for positive states; reserve `--rust` for danger states.
+
+Applied retrospectively: `/memory` went from **33 copper hits → 4 copper roles** (eyebrow + dash, headline em, hero-frame anchor, compare-foot CTA link). See §9 for the per-page audit.
+
+If it isn't a keyword, it's chrome. Chrome uses `--ink-*` and `--hair*`. Never introduce new hex colors for accents; if you need a softer copper, use the alpha ladder.
 
 ---
 
@@ -361,3 +385,30 @@ Known investor-specific deliberate choices (not drift):
 
 - All five investor-page containers (`.inv-intro`, `.platform`, `.roadmap`, `.team`, `.thesis`) unified at `max-width:1280px` + `padding:0 40px`. Previously `.inv-intro` sat in a 1280px band while the four section blocks sat in 1100px, offsetting the content by ~90px per side at wide viewports. Single vertical spine restored.
 - Body-text `em` across the investors page (`.platform p`, `.founder .bio`, `.founder .fit p`, `.thesis-card p`) flipped from `color:var(--ink)` to `color:var(--copper)`. One-tier accent treatment page-wide. Display headings (`h1`, `h2`, `.primitive .title`, `.roadmap-card .body`, `.close`) were already copper — now body emphasis matches.
+
+## 10 · Reference: /memory copper cleanup (2026-04-23)
+
+`/memory` was the worst offender under the "keywords only" rule: 33 copper references across ~750 lines of scoped CSS. Chrome uses demoted to the `--ink-*` ramp in one pass.
+
+**Kept copper (4 roles):**
+- Eyebrow `.eb` text + 28×1 `::before` dash (5 instances — intro, hero-surface, support-head, compare-head, cta).
+- Display headline `em` (5 instances — intro h1, hero-title, support-card h3, compare-head h2, cta h2).
+- `.mem-hero-frame::before` — 2px left gradient on the featured hero surface. **The single visual anchor for this page**, per rule #5.
+- `.mem-compare-foot a` — inline CTA link "view full comparison" treated as a micro-CTA.
+
+**Demoted (chrome, now on the ink ramp):**
+- `.memory-block .q::before/::after` (quote glyphs) → `--ink-3`.
+- `.memory-block .attr .ts` (timestamp) → `--ink-3`.
+- `.mem-hero-meta .pulse` (live indicator) → `--ink-3`/`--ink-2`. Pulse animation box-shadow rgba swapped to ink.
+- `.mem-hero-chip` (status label) → `--ink-3` with ink-tinted background.
+- `.person-cite-link` / `.pain-cite-link` (inline source links) → `--ink-3` with 1px hair underline.
+- `.stance.champion` chip → `--ink` (bright, out-hierarchies skeptic ink-2).
+- `.pain` left border and tint → `--hair-2` / ink-tinted gradient.
+- `.intensity-dot` filled dots → `--ink-2`. Signal is fill-state, not hue.
+- `.support-head .idx` / `.support-chip` → `--ink-4` / `--ink-3`.
+- `.pp-conf` percent text → `--ink-2`.
+- `.mapping-bar` bg + `.mapping-bar-fill` gradient → ink ramp. Progress communicates by length.
+- `.cx-date` / `.cx-arrow` / `.hx-line.muted` — mock text → `--ink-3`.
+- `.mem-table thead th:nth-child(3)` (Salency column header) → `--ink` (brightness differentiates from CRM column at `--ink-3`, no accent needed).
+
+Next under this rule: `/pilot` + `/pricing` (`.apply-check` / `.apply-dot` list markers), then home `/` (hub pulse, hover states).
