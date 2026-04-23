@@ -1,16 +1,18 @@
 import { MarketingHeader } from '@/components/MarketingHeader';
-import { ComingSoon } from '@/components/sections/ComingSoon';
+import { PilotApplication } from '@/components/sections/PilotApplication';
 import { SiteFooter } from '@/components/sections/SiteFooter';
+
+export const metadata = {
+  title: 'Pricing · Salency',
+  description:
+    'Pricing is set per engagement while we calibrate with the Spring 2026 pilot cohort. Tell us about your team and we will share current terms.',
+};
 
 export default function PricingPage() {
   return (
     <div className="page">
       <MarketingHeader />
-      <ComingSoon
-        eyebrow="Pricing"
-        title="Pricing —"
-        description="We're scoping pilots with a small group of revenue teams this quarter. Pricing is set per engagement while we calibrate. Request a slot and we'll share current terms."
-      />
+      <PilotApplication />
       <SiteFooter />
     </div>
   );
