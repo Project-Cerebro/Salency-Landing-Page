@@ -2236,13 +2236,16 @@ header button:focus:not(:focus-visible){
       }
     }
 
+    /* Support-card h3: whole heading uses the accent — h3 and its em
+       share the same color so the title reads as one unit, not a
+       split ink/copper mix. */
     h3 {
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
       font-weight: 400;
       font-size: 22px;
       line-height: 1.15;
       letter-spacing: -.015em;
-      color: var(--ink);
+      color: var(--copper);
       margin: 0 0 10px;
     }
     h3 em { font-style: italic; color: var(--copper); }
