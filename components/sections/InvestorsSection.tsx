@@ -120,7 +120,7 @@ export function InvestorsSection() {
                   Panda Bond and handled business development at Sequence and
                   Treasure. MBET, Waterloo.
                 </p>
-                <div className="fit">
+                <div className="founder-fit">
                   <div className="label">Unfair advantage</div>
                   <p>
                     Has <em>lost deals to forgotten context personally</em>, in
@@ -143,7 +143,7 @@ export function InvestorsSection() {
                   internally. Prior background in institutional client
                   management and AML/KYC compliance in banking.
                 </p>
-                <div className="fit">
+                <div className="founder-fit">
                   <div className="label">Unfair advantage</div>
                   <p>
                     Knows what sales ops <em>actually trusts</em>, how handoffs
@@ -166,7 +166,7 @@ export function InvestorsSection() {
                   Previously scaled a B2B marketplace to meaningful ARR as an
                   applied-AI operator — not a research hire.
                 </p>
-                <div className="fit">
+                <div className="founder-fit">
                   <div className="label">Unfair advantage</div>
                   <p>
                     The core technical risk in Salency is not &ldquo;can an LLM
