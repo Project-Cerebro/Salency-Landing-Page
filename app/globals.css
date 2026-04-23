@@ -134,6 +134,22 @@ h6 {
   }
 }
 
+/* Page first-load fade-up — fires on initial paint + client-side nav (element remounts) */
+@keyframes page-reveal {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page {
+  animation: page-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page {
+    animation: none;
+  }
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px; /* sticky header (~76px) + breathing room for hash-anchor jumps */
