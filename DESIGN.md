@@ -177,9 +177,9 @@ Used on every marketing section to label the content area.
 ```css
 .eb {
   font-family: 'Geist Mono', monospace;
-  font-size: 10–11px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: .16–.18em;
+  letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--copper);
   display: inline-flex;
