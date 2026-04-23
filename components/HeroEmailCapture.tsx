@@ -3,6 +3,7 @@
 import { useState, FormEvent } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { track } from '@vercel/analytics';
+import { openPilotModal } from '@/components/PilotModal';
 
 export function HeroEmailCapture({ onCapture }: { onCapture: (email: string) => void }) {
   const [email, setEmail] = useState('');
@@ -17,10 +18,7 @@ export function HeroEmailCapture({ onCapture }: { onCapture: (email: string) => 
     }
     track('hero_email_submit');
     onCapture(email);
-    const pilotEl = document.getElementById('pilot');
-    if (pilotEl) {
-      pilotEl.scrollIntoView({ behavior: 'smooth' });
-    }
+    openPilotModal(email);
   };
 
   return (

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { openPilotModal } from '@/components/PilotModal';
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,12 +23,13 @@ export function Header() {
           <a href="#pilot" className="hover:text-white transition-colors py-3">Pilot Access</a>
         </nav>
 
-        <a
-          href="#pilot"
+        <button
+          type="button"
+          onClick={() => openPilotModal()}
           className="hidden md:flex md:items-center bg-accent-warm hover:brightness-110 text-background min-h-[44px] px-5 py-2.5 rounded-lg text-sm font-bold transition-[color,background-color,filter] duration-200 shadow-lg shadow-accent-warm/20"
         >
           Request Pilot
-        </a>
+        </button>
 
         <button
           className="md:hidden text-white p-2.5"
@@ -55,13 +57,16 @@ export function Header() {
                 {label}
               </a>
             ))}
-            <a
-              href="#pilot"
+            <button
+              type="button"
               className="mt-3 bg-accent-warm hover:brightness-110 text-background px-5 py-3 rounded-lg text-sm font-bold transition-[color,background-color,filter] duration-200 text-center"
-              onClick={() => setMobileOpen(false)}
+              onClick={() => {
+                setMobileOpen(false);
+                openPilotModal();
+              }}
             >
               Request Pilot
-            </a>
+            </button>
           </nav>
         </div>
       )}

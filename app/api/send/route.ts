@@ -1,3 +1,4 @@
+
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
@@ -14,32 +15,44 @@ const ratelimit = process.env.UPSTASH_REDIS_REST_URL
     })
   : null;
 
-const ROLES = [
-    'AE',
-    'Sales Manager',
-    'VP Sales',
-    'RevOps',
-    'CS Lead',
-    'Founder / CEO',
+const INDUSTRIES = [
+    'SaaS / Software',
+    'Financial Services',
+    'Healthcare',
+    'Retail & E-commerce',
+    'Manufacturing',
+    'Professional Services',
+    'Media & Advertising',
+    'Education',
     'Other',
 ] as const;
 
-const TEAM_SIZES = ['1–4', '5–10', '11–50', '50+'] as const;
+const TEAM_SIZES = ['1-4', '5-10', '11-50', '50+'] as const;
 
-const normalizeWebsite = (raw: string) =>
-    raw.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '');
+const ROLES = [
+    'Founder / CEO',
+    'VP Sales',
+    'VP Revenue / CRO',
+    'Head of Sales / Sales Director',
+    'Sales Manager',
+    'Account Executive',
+    'Sales Operations / RevOps',
+    'VP / Head of Customer Success',
+    'Customer Success Manager',
+    'Other',
+] as const;
+
+const NAME_REGEX = /^[\p{L}\p{M}\p{Zs}'\-.]{2,80}$/u;
+const WEBSITE_REGEX = /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/[^\s]*)?$/i;
 
 const FormSchema = z.object({
-    firstName: z.string().min(1, 'First name is required'),
-    email: z.string().email('Invalid email address'),
-    companyWebsite: z
-        .string()
-        .min(1, 'Company website is required')
-        .regex(/^[^\s]+\.[^\s]+$/, 'Invalid website')
-        .transform(normalizeWebsite),
+    name: z.string().regex(NAME_REGEX, "Invalid name").max(80),
+    email: z.string().email("Invalid email address").max(120),
+    website: z.string().regex(WEBSITE_REGEX, "Invalid website").max(200),
+    industry: z.enum(INDUSTRIES),
     role: z.enum(ROLES),
     teamSize: z.enum(TEAM_SIZES),
-    website: z.string().optional(),
+    address: z.string().optional(),
 });
 
 export async function POST(request: Request) {
@@ -65,7 +78,7 @@ export async function POST(request: Request) {
             );
         }
 
-        if (body.website) {
+        if (body.address) {
             return NextResponse.json({ success: true, status: 'filtered' });
         }
 
@@ -78,7 +91,8 @@ export async function POST(request: Request) {
             );
         }
 
-        const { firstName, email, companyWebsite, role, teamSize } = result.data;
+        const { name, email, website: rawWebsite, industry, role, teamSize } = result.data;
+        const website = /^https?:\/\//i.test(rawWebsite) ? rawWebsite : `https://${rawWebsite}`;
 
         const escapeHtml = (unsafe: string | undefined) => {
             return (unsafe || '').replace(/[&<"']/g, (m) => {
@@ -94,14 +108,15 @@ export async function POST(request: Request) {
         const adminEmailFn = resend.emails.send({
             from: 'Salency Admin <onboarding@resend.dev>',
             to: ['founders@salency.ai'],
-            subject: `New Pilot Request: ${escapeHtml(companyWebsite)}`,
+            subject: `New Pilot Request: ${escapeHtml(name)} · ${escapeHtml(website)}`,
             html: `
         <h1>New Pilot Request</h1>
-        <p><strong>Name:</strong> ${escapeHtml(firstName)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Company website:</strong> ${escapeHtml(companyWebsite)}</p>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Work Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Website:</strong> <a href="${escapeHtml(website)}">${escapeHtml(website)}</a></p>
+        <p><strong>Industry:</strong> ${escapeHtml(industry)}</p>
         <p><strong>Role:</strong> ${escapeHtml(role)}</p>
-        <p><strong>Team size:</strong> ${escapeHtml(teamSize)}</p>
+        <p><strong>Team Size:</strong> ${escapeHtml(teamSize)}</p>
       `,
         });
 
@@ -111,8 +126,8 @@ export async function POST(request: Request) {
             subject: 'Pilot Request Received - Salency',
             html: `
         <h1>We received your request!</h1>
-        <p>Hi ${escapeHtml(firstName)},</p>
-        <p>Thanks for your interest in the Salency pilot. We've received your details and will be in touch within 24 hours.</p>
+        <p>Hi ${escapeHtml(name)},</p>
+        <p>Thanks for your interest in the Salency pilot. We've received your details and someone from our team will reach out to you shortly.</p>
         <p>Best,<br/>The Salency Team</p>
       `,
         });

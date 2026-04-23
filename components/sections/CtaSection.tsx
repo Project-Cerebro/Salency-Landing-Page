@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { openPilotModal } from '@/components/PilotModal';
 
 export function CtaSection() {
   return (
@@ -14,9 +17,13 @@ export function CtaSection() {
           inherits a Day-1 brief instead of starting from zero.
         </p>
         <div className="btns">
-          <Link href="/pilot" className="btn btn-primary">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => openPilotModal()}
+          >
             Request pilot access →
-          </Link>
+          </button>
           <Link href="/investors#thesis" className="btn btn-ghost">
             Read our thesis
           </Link>

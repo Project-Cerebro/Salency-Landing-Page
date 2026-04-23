@@ -203,8 +203,8 @@ export function HubSection() {
               </svg>
             </div>
             <div className="hub-output-body">
-              <div className="hub-output-ttl">Products mapped</div>
-              <div className="hub-output-sub">pain → feature, cited to transcript</div>
+              <div className="hub-output-ttl">Pain → product mappings</div>
+              <div className="hub-output-sub">cited to transcript, confidence-scored</div>
             </div>
           </div>
           <div className="hub-output" style={{ top: '50%' }}>
@@ -221,8 +221,8 @@ export function HubSection() {
               </svg>
             </div>
             <div className="hub-output-body">
-              <div className="hub-output-ttl">Customer needs</div>
-              <div className="hub-output-sub">pains, objections, asks</div>
+              <div className="hub-output-ttl">Recaps + follow-up drafts</div>
+              <div className="hub-output-sub">pains, objections, competitors, next steps</div>
             </div>
           </div>
           <div className="hub-output" style={{ top: '74%' }}>
@@ -239,8 +239,8 @@ export function HubSection() {
               </svg>
             </div>
             <div className="hub-output-body">
-              <div className="hub-output-ttl">Account context</div>
-              <div className="hub-output-sub">state carried across every call</div>
+              <div className="hub-output-ttl">Handoff briefs</div>
+              <div className="hub-output-sub">full account state, ready for the next rep</div>
             </div>
           </div>
         </div>
@@ -252,18 +252,18 @@ export function HubSection() {
           <div className="hub-outcome-grid">
             <div className="hub-outcome-row">
               <div className="hub-outcome-rk">New AE</div>
-              <div className="hub-outcome-rt">Inherits context</div>
-              <div className="hub-outcome-rs">Full account state before the next call</div>
+              <div className="hub-outcome-rt">Inherits the account</div>
+              <div className="hub-outcome-rs">Every pain, objection, and commitment from prior calls</div>
             </div>
             <div className="hub-outcome-row">
               <div className="hub-outcome-rk">CSM</div>
-              <div className="hub-outcome-rt">Picks up handoff</div>
-              <div className="hub-outcome-rs">Pain-to-product mappings already cited</div>
+              <div className="hub-outcome-rt">Picks up the relationship</div>
+              <div className="hub-outcome-rs">Cited pain-to-product mappings, no re-asking</div>
             </div>
             <div className="hub-outcome-row">
               <div className="hub-outcome-rk">Director</div>
               <div className="hub-outcome-rt">Sees the pattern</div>
-              <div className="hub-outcome-rs">Pains and objections across every deal</div>
+              <div className="hub-outcome-rs">Pains and objections across every deal in the pipe</div>
             </div>
           </div>
         </div>

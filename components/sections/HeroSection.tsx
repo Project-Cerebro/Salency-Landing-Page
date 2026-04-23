@@ -1,4 +1,6 @@
-import Link from 'next/link';
+'use client';
+
+import { openPilotModal } from '@/components/PilotModal';
 
 export function HeroSection() {
   return (
@@ -20,9 +22,13 @@ export function HeroSection() {
         </p>
 
         <div className="cta-row">
-          <Link href="/pilot" className="btn btn-primary">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => openPilotModal()}
+          >
             Request a pilot →
-          </Link>
+          </button>
           <button className="btn btn-ghost">Watch 90-second tour</button>
         </div>
 

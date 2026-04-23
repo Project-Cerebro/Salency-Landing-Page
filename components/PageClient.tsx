@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { HeroSection } from '@/components/HeroSection';
 import { SocialProof } from '@/components/SocialProof';
 import { FounderVideo } from '@/components/FounderVideo';
-import { EmailForm } from '@/components/EmailForm';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { openPilotModal } from '@/components/PilotModal';
 
 export function PageClient() {
   const [capturedEmail, setCapturedEmail] = useState('');
@@ -106,8 +106,20 @@ export function PageClient() {
               </div>
 
               <div className="relative">
-                <div className="sticky top-24">
-                  <EmailForm prefillEmail={capturedEmail} />
+                <div className="sticky top-24 bg-card p-8 rounded-2xl border border-white/10 shadow-2xl text-center">
+                  <h3 className="text-xl font-bold text-white mb-2">Ready to start?</h3>
+                  <p className="text-sm text-gray-400 mb-6">Tell us a bit about your team and someone from our team will reach out to you shortly.</p>
+                  <button
+                    type="button"
+                    onClick={() => openPilotModal(capturedEmail || undefined)}
+                    className="w-full inline-flex items-center justify-center bg-accent-warm hover:brightness-110 text-background font-bold px-8 py-4 rounded-lg text-lg shadow-[0_0_20px_rgba(232,146,90,0.3)] hover:shadow-[0_0_30px_rgba(232,146,90,0.5)] active:scale-[0.98] transition-[color,background-color,box-shadow,transform,filter] duration-200"
+                  >
+                    Request Your Pilot
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </button>
+                  <p className="text-center text-xs text-gray-500 mt-4">
+                    Your data is secure. No spam, ever.
+                  </p>
                 </div>
               </div>
             </div>
