@@ -1,287 +1,315 @@
 # Salency Design System
 
-> "Stripe's clarity meets Linear's confidence."
-> — SALENCY_LANDING_PAGE.md brief
+> "Stripe's clarity meets Linear's confidence." — `SALENCY_LANDING_PAGE.md`
 
-This doc reflects what is **actually shipped** in `app/globals.css`, `app/layout.tsx`, and the component tree. When code and this doc disagree, code wins — update the doc.
+**This doc reflects what ships on the home page (`/`) as of 2026-04-23.** Extracted from `app/globals.css`, `app/layout.tsx`, and the live composition in `components/sections/HeroSection.tsx` + `PageClient.tsx`. When code and this doc disagree, code wins. Update the doc.
 
-## Design Philosophy
-
-Salency is a B2B sales intelligence tool for revenue leaders, not developers. The visual language should feel like **a company already in market** — editorial confidence, warm professionalism, zero AI-startup clichés. Every pixel answers: "Would a VP of Sales at a $30M ARR company trust this enough to reply to the pilot email?"
-
-### Three Principles
-
-1. **Signal over noise.** Just as Salency extracts structured context from messy transcripts, the design extracts clarity from complexity. Clean surfaces, strong type hierarchy, no visual clutter.
-2. **Warm professionalism.** B2B sales culture runs on trust and relationships, not dark-mode hacker aesthetics. Palette and typography project confidence and warmth in equal measure.
-3. **Product-led identity.** The `HeroMock` — a functioning replica of Salency's actual UI — is the most distinctive element on the page. Let the product do the visual heavy lifting. Everything else frames it, doesn't compete with it.
+Philosophy carries over from the earlier proposal: editorial confidence, warm professionalism, zero AI-startup clichés. The rest below reflects current shipped state.
 
 ---
 
-## Design Tokens (shipped)
+## 1 · Philosophy
 
-All tokens defined in `app/globals.css` `:root` and exposed to Tailwind via `@theme inline`.
+Salency is a B2B sales-intelligence platform for revenue leaders, not developers. The visual language projects a company already in market — trustworthy, shipped, calm. Every pixel answers: *"Would a VP Sales at a $30M-ARR company trust this enough to reply to the pilot email?"*
 
-### Backgrounds
+**Three principles:**
 
-| Token | Hex | Tailwind | Use |
+1. **Signal over noise.** Clean surfaces, strong type hierarchy, no clutter. Cards earn their existence — no decorative card grids.
+2. **Warm professionalism.** B2B sales culture runs on trust and relationships, not dark-mode hacker aesthetics. Warm copper accent, never purple gradients.
+3. **Editorial typography.** Instrument Sans drives display + body. Geist Mono for eyebrows. One type voice. No generic Inter/Roboto/system-ui fallbacks as the primary stack.
+
+---
+
+## 2 · Typography
+
+### Loaded fonts (`app/layout.tsx`)
+
+| CSS variable | Family | Weights | Style |
 |---|---|---|---|
-| `--background` | `#121015` | `bg-background` | Page background (warm neutral) |
-| `--bg-secondary` | `#1A171E` | `bg-bg-secondary` | Alternating section bands |
-| `--bg-surface` / `--card` / `--muted` | `#201D24` | `bg-card` / `bg-muted` | Cards, containers |
-| `--bg-elevated` | `#2A262F` | `bg-bg-elevated` | Hover states, dropdowns |
+| `--font-instrument-sans` | Instrument Sans | 400, 500, 600, 700 | normal + italic |
+| `--font-instrument-serif` | Instrument Serif | 400 | normal + italic |
+| `--font-geist-sans` | Geist | all | normal |
+| `--font-geist-mono` | Geist Mono | all | normal |
+| `--font-outfit` | Outfit | all | normal |
 
-Ambient layer: `.bg-mesh` (in `globals.css`) paints two radial gradients — copper at 15%/50% (5% opacity) and cyan at 85%/30% (3% opacity). Copper stronger than cyan on purpose — reinforces warm identity at the ambient level. `.bg-noise` adds 5% opacity SVG turbulence on top.
+### Resolved tokens (`globals.css:1631-1632`)
 
-### Accents — copper leads, cyan supports
-
-| Token | Hex | Tailwind | Use |
-|---|---|---|---|
-| `--accent-warm` | `#E8925A` | `accent-warm` | **Primary:** CTAs, emphasis, focus, checkmarks, borders, quote rules, section eyebrows |
-| `--accent` | `#06B6D4` | `accent` | Data-only: comparison table, HeroMock product chrome |
-
-**Rule:** if unsure which accent to use, use copper. Cyan is reserved for product-data contexts. This keeps Salency reading as "warm memorable brand" rather than "another blue AI tool with orange accents."
-
-Opacity tint idioms seen across components (no token, but consistent): `/8`, `/10`, `/20`, `/30`, `/50` on `accent-warm` for tinted surfaces, hover states, and borders. Example patterns:
-
-```tsx
-bg-accent-warm/10 border border-accent-warm/20 text-accent-warm     // eyebrow pill
-bg-accent-warm text-background shadow-[0_0_20px_rgba(232,146,90,0.3)]  // primary CTA
-border-accent-warm/30 bg-white/5                                     // subtle border on card quote
+```css
+--font-body: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
+--font-display: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
 ```
 
-### Text
+Both `--font-body` and `--font-display` currently resolve to **Instrument Sans**. Many CSS rules still list `'Instrument Serif', serif` as a fallback — those are legacy declarations that never activate because Instrument Sans loads successfully. When in doubt, use `var(--font-display)` for headings and `var(--font-body)` for prose and trust the token.
 
-| Token | Hex | Tailwind | Use |
+### Usage map
+
+| Role | Font | Weight | Used on |
 |---|---|---|---|
-| `--foreground` / `--text-primary` | `#E8E6E3` | `text-foreground` | Headlines, primary content (warm off-white, not pure white) |
-| `--text-secondary` | `#9B9A97` | (raw `text-[#9B9A97]` or utility) | Descriptions, secondary info |
-| `--text-muted` | `#5E5D5B` | (raw) | Labels, captions, step numerals |
+| Hero h1, section h2, card h3, editorial accents | `var(--font-display)` (Instrument Sans) | 400 normal, 400 italic for `em` | `.h1`, `.hero h1`, `.prob-head h2`, `.how-head h2`, `.gong-head h2`, `.platform h2`, `.thesis-card h2`, `.coming-soon h1`, `.pilot-app h1`/`h3`, `.inv-intro h1`, `.founder .name` |
+| Body, ledes, paragraph text, list items | `var(--font-body)` (Instrument Sans) | 300 for ledes, 400 for body | `.sub`, `.how-head .lede`, `.platform p`, `.inv-intro p`, `.pilot-lede`, `.founder .bio`, `.thesis-card p` |
+| Eyebrows, meta strips, labels, pill tags, footer legal | `'Geist Mono', monospace` | 400 or 500 | `.eb`, `.hero-meta`, `.inv-intro-meta`, `.founder .role`, `.roadmap-card .v`, `.sample-label`, `footer`, legal pages |
+| Brand wordmark (header logo) | `var(--font-outfit)` | 800 | `.brand .name`, `.nav-brand` |
 
-Note: only `--foreground` is registered as a Tailwind color via `@theme inline`. Secondary/muted are consumed via CSS var or raw Tailwind opacity utilities (`text-gray-400`, `text-white/60`) across components. Worth tightening if you add new surfaces.
+Geist Sans is loaded but effectively not used — `body` lists it after `--font-body` in fallback.
 
-### Semantic
+### Type scale (all `clamp()` fluid)
 
-| Token | Hex | Tailwind |
+| Role | Size | Line-height | Letter-spacing |
+|---|---|---|---|
+| Hero h1 | `clamp(40px, 5.6vw, 72px)` | 1.08 | -.025em |
+| Section h2 | `clamp(38px, 4.2vw-5.4vw, 54-76px)` (varies per section) | 1.02–1.1 | -.02 to -.025em |
+| Card h3 | 20–22px | 1.2 | — |
+| Founder name / hero accent | 30–32px | 1.1 | -.015em |
+| Lede | 18–19px | 1.55–1.7 | — |
+| Body | 15–17px | 1.55–1.75 | — |
+| Eyebrow (`.eb`) | 10–11px | — | .16–.18em uppercase |
+| Caption / meta | 10–11px | — | .12–.2em uppercase |
+
+### Italic accent rule
+
+Inside display text, `em` = italic color accent. Two forms:
+
+```css
+.hero .h1 em       { font-style: normal; font-weight: inherit; color: var(--copper); }
+.platform h2 em    { font-style: italic;  color: var(--copper); }
+```
+
+Some heroes use `font-style: normal` for the accent (kept upright), others use italic. Either is acceptable — `em` always switches color to `--copper`, the italicness is per-context.
+
+---
+
+## 3 · Color Tokens (`globals.css:194-214`)
+
+### Surfaces
+
+| Token | Hex | Use |
 |---|---|---|
-| `--success` | `#34D399` | `text-success` / `bg-success` |
-| `--warning` | `#FBBF24` | `warning` |
-| `--error` | `#F87171` | `error` |
-| `--info` | `#60A5FA` | `info` |
+| `--bg` | `#0E0C11` | Page background |
+| `--bg-2` | `#121015` | (alternate; mostly unused today) |
+| `--bg-3` | `#1A171E` | (alternate bands) |
+| `--surface` | `#201D24` | Cards, primitives |
+| `--surface-2` | `#2A262F` | Elevated hover |
 
-### Borders
+Investor page uses a slightly darker `#0C0A10` literal for the register band — intentional scene break.
+
+### Hairlines
 
 | Token | Value | Use |
 |---|---|---|
-| `--border-default` | `rgba(255,255,255,0.08)` | Default divider (not mapped to Tailwind utility — use `border-white/10` in components) |
-| `--border-strong` | `rgba(255,255,255,0.14)` | Card/input borders |
+| `--hair` | `rgba(232,230,227,0.08)` | Subtle dividers, section bottoms |
+| `--hair-2` | `rgba(232,230,227,0.14)` | Card borders, stronger dividers |
 
-Actual component usage: `border border-white/5` (subtle), `border border-white/10` (default), `border border-white/20` (strong hover). Copper borders use `border-accent-warm/20` through `/50`.
+### Ink (text)
+
+| Token | Hex | Use |
+|---|---|---|
+| `--ink` | `#E8E6E3` | Headlines, primary body |
+| `--ink-2` | `#B6B4B0` | Secondary body, ledes |
+| `--ink-3` | `#7C7A77` | Labels, captions, meta |
+| `--ink-4` | `#4E4C4A` | Footer legal, muted meta |
+
+### Accent — copper only
+
+| Token | Hex | Use |
+|---|---|---|
+| `--copper` | `#FE8531` | **Primary accent.** Every eyebrow, every `em` accent, every primary CTA, every `::before` dash, checkmarks, focus rings. |
+| `--copper-soft` | `#FEBEA8` | Rare — soft copper for tinted surfaces. |
+| `--copper-deep` | `#CA640A` | Gradient terminator on `.btn-primary` / `.btn-submit`. |
+| `--rust` | `#D13C13` | Occasional founder-photo gradient accents. |
+| `--rust-deep` | `#95280A` | Gradient depths. |
+| `--sand` | `#FFEDE8` | Copper-on-copper text highlight (founder photo initials). |
+
+Common copper alpha idioms (no tokens but consistent): `rgba(254,133,49, .03 / .05 / .08 / .14 / .18 / .22 / .28 / .3 / .4 / .5)`. Use these literal rgbas for surfaces, borders, and gradients that need copper at transparency.
+
+**Rule:** every accent uses `--copper`. Never introduce new hex colors for accents. If you need a softer tone, use copper at lower alpha (`rgba(254,133,49,.5)`) rather than shifting hue.
 
 ---
 
-## Typography
+## 4 · Spacing + Layout
 
-Fonts loaded in `app/layout.tsx` via `next/font/google`:
+### Section container
 
-| Role | Font | Weight | Variable | Where |
-|---|---|---|---|---|
-| **Display** | Instrument Serif | 400 regular + italic | `--font-instrument-serif` | Hero H1 only (inline `fontFamily` in `HeroSection.tsx`) |
-| **Headings** | Outfit | 400–700 | `--font-outfit` → `--font-heading` | All `h1–h6` via `globals.css` body rule; brand wordmark in `Header.tsx` |
-| **Body** | Geist Sans | 400–600 | `--font-geist-sans` → `--font-sans` | Body text (default) |
-| **Mono** | System mono stack | — | `--font-mono` | Small numerals, badges, step counters. **No webfont loaded.** |
-
-`--font-mono` is literal `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace` — platform defaults, no download. If mono gets used more, upgrade to JetBrains Mono or Geist Mono.
-
-Heading rule (`globals.css`):
 ```css
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-  text-wrap: balance;
+max-width: 1280px;
+margin: 0 auto;
+padding: 0 40px;
+```
+
+Wider sections (investor) use `max-width: 1100px` with the same padding. Legal pages use narrower.
+
+### Section rhythm
+
+- Between sections: `margin-top: 100–140px` at desktop.
+- First section on a page: `padding: 48–96px top`.
+- Last section before footer: `padding-bottom: 96–120px`.
+
+### Card / card-like surfaces
+
+| Treatment | Value |
+|---|---|
+| Border-radius | 10–16px (10 for pills and small cards, 12 for medium, 16 for hero cards like `.thesis-card`, `.cta-card`) |
+| Border | `1px solid var(--hair-2)` |
+| Background | `rgba(255,255,255,.02)` or `rgba(254,133,49,.03–.05)` for copper-tinted |
+| Padding | 22–32px for card content, 56–64px for hero cards |
+
+### Spacing scale (observed, not strictly enforced)
+
+4, 8, 12, 16, 18, 20, 24, 28, 32, 40, 44, 48, 56, 64, 72, 80, 96, 100, 120, 140. Most values land on an 8px grid; 18/22/28/44/56/72 appear often for comfortable editorial rhythm.
+
+---
+
+## 5 · Component Patterns
+
+### Eyebrow (`.eb`) — the signature pattern
+
+Used on every marketing section to label the content area.
+
+```css
+.eb {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10–11px;
+  font-weight: 500;
+  letter-spacing: .16–.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eb::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--copper);
+  display: inline-block;
 }
 ```
 
-Why Instrument Serif for hero: serif headlines on warm dark backgrounds create editorial gravitas (NYT, Stripe Press). Pairs naturally with Outfit (geometric sans) for automatic hierarchy contrast. Italic is the hero's emphasis mechanism — no second accent color needed. No competitor in sales-intel uses a serif.
+Shipped copies (all use the same 28×1 dash, copper, `.18em` tracking):
+- `.prob-head .eb` / `::before` — Problem section
+- `.how-head .eb` / `::before` — How it works
+- `.gong-head .eb` / `::before` — Gong comparison
+- `.platform .eb` / `::before` — Platform framing (investors)
+- `.coming-soon .eb` / `::before` — Pricing + Memory stubs
+- `.pilot-app .eb` / `::before` — Pilot + Pricing page intro
+- `.inv-intro .eb` / `::before` — Investors intro
+- `.thesis-card .eb` / `::before` — Future-fit thesis
 
----
+When adding a new section, use this pattern. Exactly 28×1 copper dash, `.18em` tracking, copper text.
 
-## Spacing & Layout
+### Buttons
 
-Tailwind default 4px scale. Section-level spacing thinks in 8px multiples.
+Three canonical buttons, all in `globals.css:627-666`:
 
-### Section rhythm (observed in `PageClient.tsx`)
-
-| Context | Pattern |
-|---|---|
-| Major content section | `py-24 md:py-32 px-6` with `max-w-7xl mx-auto` |
-| Mid section | `py-24 px-6 max-w-5xl mx-auto` |
-| Alternating band (`bg-bg-secondary`) | `py-16 md:py-20` (or `md:py-24`) `border-y border-white/5` |
-| Content block inside section | `max-w-3xl` / `max-w-4xl` for prose, `max-w-5xl` for mixed |
-
-Alternating sections use `bg-bg-secondary` with `border-y border-white/5` to create visual rhythm without heavy dividers. Do not use a uniform padding on every section — vary it.
-
-### Max widths
-
-`max-w-7xl` for page shell, `max-w-5xl` mid, `max-w-4xl` for prose + table, `max-w-3xl` for narrow body copy.
-
----
-
-## Border Radius
-
-Ladder, matching Tailwind defaults:
-
-| Tailwind | Use |
-|---|---|
-| `rounded-full` | Pills (eyebrow, status badges), avatar dots, radial glow shapes |
-| `rounded-lg` (8px) | Buttons, inputs, small cards, demo cards |
-| `rounded-xl` (12px) | `ProblemCard` surfaces |
-| `rounded-2xl` (16px) | Hero card, `FounderVideo`, `InteractiveDemo` container, feature surfaces |
-
-Large bubbly radius on every element is an AI-slop signal (see Anti-patterns). Stick to the ladder.
-
----
-
-## Interaction Patterns
-
-### CTAs
-
-Primary (header, hero, form submit):
-
-```tsx
-bg-accent-warm hover:brightness-110 text-background
-font-bold px-8 py-4 rounded-lg
-shadow-[0_0_20px_rgba(232,146,90,0.3)]
-hover:shadow-[0_0_40px_rgba(232,146,90,0.5)] hover:-translate-y-1
-transition-[color,background-color,box-shadow,transform,filter] duration-200
-```
-
-Ghost (secondary hero action):
-
-```tsx
-text-gray-300 hover:text-white font-medium
-border border-white/10 hover:border-white/20 hover:-translate-y-0.5
-transition-[color,border-color,transform] duration-200
-```
-
-### Transitions — always explicit
-
-Never `transition-all`. List properties:
-
-```tsx
-transition-[color,background-color,filter] duration-200       // buttons
-transition-colors                                              // nav links, borders
-transition-[color,border-color,transform] duration-200         // ghost buttons
-```
-
-Durations: 200ms for interactions, 300–700ms for reveals/fades.
-
-### Touch targets
-
-Header CTA has `min-h-[44px]` explicitly. Nav links get `py-3` for 44px tap area. Follow the pattern for any new interactive element.
-
-### Scroll reveal
-
-`components/ScrollReveal.tsx` wraps below-fold sections. Uses IntersectionObserver, respects `prefers-reduced-motion` (see `globals.css` `@media (prefers-reduced-motion: reduce)`). 700ms ease with `cubic-bezier(0.16, 1, 0.3, 1)` and 24px translate.
-
-### Spotlight hover
-
-`components/SpotlightCard.tsx` — radial white gradient that tracks the cursor via CSS custom properties (`--mouse-x`, `--mouse-y`). Used by `ProblemCard`. Don't sprinkle on every card — it earns its place when the card IS the interaction.
-
----
-
-## Anti-patterns (explicitly avoided)
-
-These are ban-list. Reviewers: flag any of these on sight.
-
-- **Gradient-circle icon grids.** The "3 icons in colored circles + bold title + 2-line description" pattern is the most recognizable AI-slop layout. Use inline icons or ghost numerals instead.
-- **Multi-colored founder avatars.** Single accent color. Real photos where available.
-- **Pure white text on near-black.** Use `#E8E6E3` (warm off-white). Reduces eye strain, warmer feel.
-- **`transition: all`.** Always specify transition properties explicitly (lint yourself — this is in `CLAUDE.md`).
-- **System fonts as primary.** Outfit for headings, Geist Sans for body. Never fall back to raw system sans-serif.
-- **Cyan as primary accent.** Copper leads. Cyan is data-only (comparison table, HeroMock chrome). Everything else copper.
-- **Uniform section padding.** Vary padding across sections for visual rhythm. `py-16` on one, `py-24 md:py-32` on the next.
-- **Uniform bubbly border-radius.** Stick to the radius ladder. Don't make everything `rounded-2xl`.
-- **Purple/violet/indigo gradients.** Color palette is warm neutral + copper + data cyan. No blue-to-purple.
-
----
-
-## Competitive Intelligence
-
-Research conducted March 2026 across five reference sites. Retained as context — explains why the system looks the way it does.
-
-### Direct Competitors
-
-| Product | Theme | Primary Accent | Fonts | Visual Character |
-|---|---|---|---|---|
-| **Gong** | Light (white) | Deep purple `oklch(0.53 0.23 297)` | Custom "Grotesk" + Inter + Inter Tight | Energetic, social-proof-heavy, human photography |
-| **Clari** | Dark hero → light sections | Cyan/teal | "Maison Neue" + "Faktum" condensed | Enterprise-heavyweight. Dark+cyan — very similar to where Salency started. |
-| **Apollo** | Warm cream `~#F5F0E8` | Amber/gold | Soehne + Founders Grotesk + ABC Diatype | Most distinctive — warm, editorial, deliberately breaks from blue/purple. |
-
-### Reference Sites
-
-| Product | Theme | Accent | Fonts | Takeaway |
-|---|---|---|---|---|
-| **Linear** | Full dark near-black | Minimal yellow | Inter Variable | Gets away with "default" font because everything else is immaculate. Product screenshots carry the identity. |
-| **Stripe** | Light with gradient washes | Multi-color | Custom "Sohne" | Gold standard for premium B2B. Warm, editorial, multi-color. |
-
-### Key findings
-
-- **Every competitor uses blue or purple.** Gong = purple, Clari = cyan, Salesforce = blue. Cyan positions Salency as "smaller Clari."
-- **Apollo broke the mold** with warm cream + amber — works. Warmth signals trust, which B2B sales leaders respond to.
-- **Premium typefaces are table stakes.** Gong, Apollo, Stripe all use custom/distinctive. System fonts (Inter, Roboto) read as generic.
-- **Light dominates** for B2B sales audiences (Gong, Apollo, Stripe). Dark reads more dev-tool (Linear). Dark can still work for premium positioning **if warm enough** — that's the bet Salency is making.
-- **Product UI screenshots carry identity.** Linear and Stripe both let visuals do the work. Salency's `HeroMock` already does this.
-
----
-
-## Reference — not adopted
-
-Options considered but held off on. Documented so the decision doesn't get re-litigated.
-
-### DM Sans (body) instead of Geist Sans
-Geist Sans is well-made and already loaded. Delta is subtle. Skip unless a specific readability complaint shows up.
-
-### JetBrains Mono instead of system mono
-Only affects small numerals and step labels. Not worth the font-load cost until mono appears on more surfaces.
-
-### Light mode toggle
-
-Reference tokens if it comes back:
+**`.btn .btn-primary`** — nav CTAs, section CTAs
 
 ```css
-[data-theme="light"] {
-  --background: #FAFAF8;
-  --bg-secondary: #F3F2EF;
-  --bg-surface: #FFFFFF;
-  --bg-elevated: #FFFFFF;
-  --foreground: #1A1A1A;
-  --text-secondary: #5C5C5C;
-  --text-muted: #9C9C9C;
-  --accent: #0891B2;      /* deeper cyan for light bg */
-  --accent-warm: #C47534; /* deeper copper for light bg */
-  --border-default: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.14);
+background: linear-gradient(180deg, #FE9544 0%, var(--copper) 50%, var(--copper-deep) 100%);
+color: #1A0A02;
+font-weight: 600;
+box-shadow:
+  inset 0 1px 0 rgba(255,255,255,.25),
+  inset 0 -1px 0 rgba(0,0,0,.2),
+  0 1px 0 rgba(0,0,0,.3),
+  0 8px 24px -8px rgba(254,133,49,.5);
+/* hover */ filter: brightness(1.08); transform: translateY(-1px);
+```
+
+**`.btn .btn-ghost`** — secondary CTAs
+
+```css
+background: rgba(232,230,227,.04);
+color: var(--ink);
+border: 1px solid var(--hair-2);
+/* hover */ background: rgba(232,230,227,.08); border-color: rgba(232,230,227,.22);
+```
+
+**`.btn-submit`** — form submit button (larger, full-width) (`globals.css:649-666`)
+
+Same gradient + shadow stack as `.btn-primary` but sized for forms (`padding: 16px 24px`, `font-size: 16px`, `width: 100%`). Hover uses `filter: brightness(1.1)` only — no lift. Written with native CSS nesting (`&:hover`, `&:disabled`, `&:disabled:hover`).
+
+### Meta strip (`.hero-meta`, `.hero-meta-item`)
+
+Shared mono-caps meta line with 6×6 copper circle bullets via `::before`. Shipped in `.hero-meta` + `.hero-meta-item` (reused by `.coming-soon-meta` on stub pages).
+
+### Card chrome
+
+Most marketing cards:
+
+```css
+background: rgba(255,255,255,.02);
+border: 1px solid var(--hair-2);
+border-radius: 10–16px;
+padding: 22–32px (content) / 56–64px (hero);
+```
+
+Hero cards (`.thesis-card`, `.cta-card`) add a 2px left gradient via `::before`:
+
+```css
+&::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: linear-gradient(180deg, var(--copper), rgba(254,133,49,0));
 }
 ```
 
-High effort (requires second complete token set + full component testing). Deferred until there's demand.
+---
+
+## 6 · Conventions
+
+### Native CSS nesting is the convention
+
+`globals.css` migrates flat selectors to native CSS nesting. Existing nested blocks: `.hub-wrap`, `.loading-screen`, `.btn-submit`, `.pilot-app`, `.coming-soon`, `.reg-div`, `.reg-inv`, `.platform`, `.roadmap`, `.team`, `.founder`, `.thesis-card`, `.investors-register`, `.inv-intro`, `.inv-footer`, `footer`.
+
+When writing new CSS, nest descendants, `&::before`, `&::after`, `&:hover`, `&.modifier`, `&:disabled` inside the parent selector. Use blank lines between the parent's own rules and nested children for readability.
+
+### Token discipline
+
+- **Never introduce a hex literal for text or accent color.** Use `var(--ink)`, `var(--ink-2)`, `var(--ink-3)`, `var(--ink-4)`, `var(--copper)`.
+- **Background/neutral hexes are allowed for section scenography** — `#0C0A10` for the investor register band is intentional.
+- **Copper at alpha** uses literal `rgba(254,133,49,*)`. Do not use `rgba(240,168,118,*)` (off-brand peach) — that was drift and was purged on 2026-04-23.
+
+### Italic accent
+
+`em` inside a display heading changes color to `var(--copper)`. Italicness is per-context. Never introduce `<strong>` for color emphasis — that shift is reserved for `em`.
+
+### File path reference
+
+All selectors above live in a single file: `app/globals.css`. Section headers use the `═══════════` banner comment pattern. Keep the banner style when adding new sections.
 
 ---
 
-## Implementation status
+## 7 · Anti-Patterns (purged, don't reintroduce)
 
-All in-scope "warm dark editorial" moves are shipped:
-
-- Warm background `#121015` replaced cold `#111827`
-- Copper `--accent-warm` `#E8925A` added and wired to all CTAs
-- Instrument Serif loaded, applied to hero H1 with italic emphasis
-- Warm off-white text `#E8E6E3` replaced pure white
-- Semantic tokens (`--success`, `--warning`, `--error`, `--info`)
-- Surface tokens (`--bg-secondary`, `--bg-surface`, `--bg-elevated`)
-- Ghost secondary button on hero
-- Section alternation with `bg-bg-secondary` + `border-y border-white/5`
+1. **Off-brand peach `#F0A876`.** Previously used as a muted copper on the investor page. Purged 2026-04-23 in favor of the single `--copper` token.
+2. **`rgba(240,168,118,*)` gradients.** Same drift. Use `rgba(254,133,49,*)` for copper-at-alpha.
+3. **Hardcoded ink hexes** (`#E8E6E3`, `#B6B4B0`, `#7C7A77`, `#4E4C4A`). Use `var(--ink)` / `--ink-2` / `--ink-3` / `--ink-4`.
+4. **Tailwind `font-serif` / `font-mono` / `font-light` on marketing headings.** These resolve to generic `ui-serif`, `ui-monospace`, and system sans — not our loaded fonts. Use the CSS tokens via globals selectors (`.eb`, `.pilot-lede`, `h1` inside `.pilot-app`).
+5. **New eyebrow variants.** Always use `.eb` with the 28×1 copper dash. Don't invent `.kicker` / `.pilot-eb` / `.inv-eb` — they drift.
+6. **Inter / Roboto / system-ui as a primary font.** Never add those back as the first font family. Instrument Sans loads via `next/font` and is reliable.
+7. **Purple gradients, icon-in-circle feature grids, centered-everything hero, emoji as design, cookie-cutter section rhythm.** Standard AI-slop blacklist. Salency explicitly rejects these.
 
 ---
 
-## Preview
+## 8 · Consuming This System on a New Page
 
-Live HTML preview at `.gstack/design-reports/design-preview.html` (open in browser) — shows all fonts, colors, components, and the hero mockup together, with a dark/light toggle.
+When building a new marketing page:
+
+1. Root wrapper: `<div className="page"><MarketingHeader />...<SiteFooter /></div>`.
+2. For editorial intro (hero-like section), use or mirror `.inv-intro` / `.coming-soon` / `.pilot-app` — a scoped block with nested `.eb`, `h1`, lede `p`.
+3. For structured sections below, use the `.prob-head` / `.how-head` / `.platform` patterns — `.eb` + `h2` + supporting copy.
+4. CTAs: `.btn .btn-primary` for primary, `.btn .btn-ghost` for secondary. Form submits: `.btn-submit`.
+5. Colors: only `var(--copper)` for accents, `var(--ink)` scale for text, `var(--hair)` / `--hair-2` for dividers.
+6. Nesting: write new CSS blocks with native nesting, not flat selectors.
+
+---
+
+## 9 · Reference: /investors Alignment (2026-04-23)
+
+`/investors` was audited against this system and aligned. Every accent now pulls from `var(--copper)`. Every ink value uses the `--ink-*` scale. Every eyebrow uses the 28×1 copper dash `::before`. Every block is native-nested CSS. See `components/sections/InvestorsSection.tsx` + the investor CSS range `globals.css:1317–1625`.
+
+Known investor-specific deliberate choices (not drift):
+- Background `#0C0A10` (darker than home `--bg`) for the register band — scene break.
+- Founder photo gradients use `rgba(107,78,255,...)` (purple) and `rgba(0,181,160,...)` (teal) to differentiate founders. Exception to the "copper only" rule, narrow in scope (3 avatars only).
