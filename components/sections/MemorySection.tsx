@@ -45,39 +45,6 @@ const PAINS = [
   },
 ];
 
-const OWED = [
-  {
-    state: 'open' as const,
-    stateLabel: 'Owed · due Apr 26',
-    text: 'Pricing memo',
-    tail: 'to Priya with 3-year commit scenarios',
-  },
-  {
-    state: 'scheduled' as const,
-    stateLabel: 'Scheduled Apr 30',
-    text: 'Security walkthrough',
-    tail: 'with Marcus · SOC 2 roadmap + on-prem options',
-  },
-  {
-    state: 'open' as const,
-    stateLabel: 'Owed · unscheduled',
-    text: 'Reference call',
-    tail: 'with a design-partner revenue team',
-  },
-  {
-    state: 'closed' as const,
-    stateLabel: 'Closed Apr 18',
-    text: null,
-    tail: 'Send transcript-only evaluation workflow for legal review',
-  },
-];
-
-const MAPPING = [
-  { prod: 'Memory Layer', tail: 'Handoff Brief', conf: 0.92 },
-  { prod: 'Contradiction Detection', tail: 'add-on', conf: 0.74 },
-  { prod: 'Account Pattern Search', tail: null, conf: 0.61 },
-];
-
 const COMPARE_ROWS = [
   {
     signal: 'Customer pain',
@@ -165,9 +132,9 @@ export function MemorySection() {
               <div className="brief-meta">
                 <span>Updated 2026-04-22</span>
                 <span className="sep">&middot;</span>
-                <span className="pulse">3 new signals since last open</span>
+                <span className="pulse">3 new pains flagged</span>
                 <span className="sep">&middot;</span>
-                <span>12 calls indexed &middot; 4 stakeholders tracked</span>
+                <span>12 calls indexed &middot; 2 stakeholders on this card</span>
               </div>
 
               {/* People */}
@@ -222,106 +189,11 @@ export function MemorySection() {
                 </div>
               </div>
 
-              {/* We owe them */}
-              <div className="brief-block">
-                <div className="eb">
-                  We owe them <span className="sub">open commitments</span>
-                </div>
-                <div className="owed">
-                  {OWED.map((o, idx) => (
-                    <div key={idx} className={`owed-row ${o.state}`}>
-                      <span className="owed-glyph" aria-label={o.state} />
-                      <div className="owed-text">
-                        {o.text && <em>{o.text}</em>}
-                        {o.text && ' '}
-                        {o.tail}
-                      </div>
-                      <span className="owed-meta">{o.stateLabel}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* What's changed */}
-              <div className="brief-block">
-                <div className="eb">
-                  What&rsquo;s changed{' '}
-                  <span className="sub">contradictions flagged</span>
-                </div>
-                <div className="contra">
-                  <div className="contra-col left">
-                    <span className="contra-date">Apr 07</span>
-                    <span className="contra-quote">
-                      &ldquo;budget is fifty.&rdquo;
-                    </span>
-                    <span className="contra-who">
-                      Priya Shah &middot; call 02 &middot; 22:13
-                    </span>
-                  </div>
-                  <div className="contra-arrow">&rarr;</div>
-                  <div className="contra-col">
-                    <span className="contra-date">Apr 14</span>
-                    <span className="contra-quote">
-                      &ldquo;budget&rsquo;s tight, maybe twenty.&rdquo;
-                    </span>
-                    <span className="contra-who">
-                      Priya Shah &middot; call 03 &middot; 18:02
-                    </span>
-                  </div>
-                </div>
-                <div className="contra-obs">
-                  <span className="label">System note</span>
-                  Budget may have reset between Mar and Apr &middot; verify
-                  before the pricing memo lands.
-                </div>
-              </div>
-
-              {/* How we map */}
-              <div className="brief-block">
-                <div className="eb">
-                  How we map{' '}
-                  <span className="sub">
-                    pain &rarr; product, confidence-ranked
-                  </span>
-                </div>
-                <div className="mapping">
-                  {MAPPING.map((m) => (
-                    <div key={m.prod} className="mapping-row">
-                      <div className="mapping-prod">
-                        <em>{m.prod}</em>
-                        {m.tail && ` \u00B7 ${m.tail}`}
-                      </div>
-                      <ConfBar pct={m.conf} />
-                      <div className="mapping-conf">{m.conf.toFixed(2)}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Next */}
-              <div className="brief-block">
-                <div className="eb">
-                  Next <span className="sub">where to pick up</span>
-                </div>
-                <div className="next">
-                  <div className="next-row">
-                    <span className="next-key">Meeting</span>
-                    <span className="next-val">
-                      <em>Apr 25, 2:00 PM PT</em> &middot; 45 min &middot;
-                      Priya, Marcus, Howard
-                    </span>
-                  </div>
-                  <div className="next-row">
-                    <span className="next-key">Since last contact</span>
-                    <span className="next-val">8 days</span>
-                  </div>
-                  <div className="next-row">
-                    <span className="next-key">Call 03 ended on</span>
-                    <span className="next-val cliffhanger">
-                      &ldquo;walk us through pricing.&rdquo;
-                    </span>
-                  </div>
-                </div>
+              <div className="brief-foot">
+                <span>This is what the rep opens Monday at 1:45pm.</span>
+                <span className="brief-foot-also">
+                  Also in the brief: open commitments &middot; contradictions &middot; pain &rarr; product mapping &middot; next-step cliffhanger.
+                </span>
               </div>
             </div>
           </div>
