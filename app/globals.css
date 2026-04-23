@@ -47,7 +47,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Brand typeface goes first so Tailwind Preflight's ui-sans-serif
+     default can't win the cascade. Instrument Sans loads via next/font
+     in app/layout.tsx; --font-instrument-sans is scoped to <body>
+     through the className. Geist + system-ui are hard fallbacks. */
+  font-family: var(--font-instrument-sans), var(--font-geist-sans), 'Instrument Sans', system-ui, sans-serif;
   overflow-x: hidden;
 }
 
@@ -185,7 +189,11 @@ html {
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
-  body{font-family:var(--font-body), 'Geist','Outfit',system-ui,sans-serif;font-size:15px;line-height:1.55;font-weight:400}
+  /* Reference --font-instrument-sans directly (skipping --font-body
+     indirection) because --font-body's declaration has trouble
+     resolving through Tailwind's theme layer. Instrument Sans is
+     the canonical brand typeface; Geist stays as a hard fallback. */
+  body{font-family:var(--font-instrument-sans), 'Instrument Sans', var(--font-geist-sans), 'Geist', system-ui, sans-serif;font-size:15px;line-height:1.55;font-weight:400}
   a{color:inherit;text-decoration:none}
 
   /* ambient glow removed — Anthropic-style clean hero */
@@ -1567,8 +1575,12 @@ html {
   }
 
 /* ═══════════ Marketing font mapping ═══════════ */
-/* Bind --font-body / --font-display to next/font variables. */
-:root{
+/* Bind --font-body / --font-display to next/font variables.
+   These live on body (not :root) because --font-instrument-sans is
+   scoped to <body> through the className next/font injects — at
+   :root, var(--font-instrument-sans) resolves to invalid and the
+   whole --font-body chain collapses to the browser default. */
+body {
   --font-body: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
   --font-display: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
 }
