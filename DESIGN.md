@@ -45,7 +45,7 @@ Both `--font-body` and `--font-display` currently resolve to **Instrument Sans**
 
 | Role | Font | Weight | Used on |
 |---|---|---|---|
-| Hero h1, section h2, card h3, editorial accents | `var(--font-display)` (Instrument Sans) | 400 normal, 400 italic for `em` | `.h1`, `.hero h1`, `.prob-head h2`, `.how-head h2`, `.gong-head h2`, `.platform h2`, `.thesis-card h2`, `.coming-soon h1`, `.pilot-app h1`/`h3`, `.inv-intro h1`, `.founder .name` |
+| Hero h1, section h2, card h3, editorial accents | `var(--font-display)` (Instrument Sans) | 400 normal, 400 italic for `em` | `.h1`, `.hero h1`, `.prob-head h2`, `.how-head h2`, `.notetaker-head h2`, `.platform h2`, `.thesis-card h2`, `.coming-soon h1`, `.pilot-app h1`/`h3`, `.inv-intro h1`, `.founder .name` |
 | Body, ledes, paragraph text, list items | `var(--font-body)` (Instrument Sans) | 300 for ledes, 400 for body | `.sub`, `.how-head .lede`, `.platform p`, `.inv-intro p`, `.pilot-lede`, `.founder .bio`, `.thesis-card p` |
 | Eyebrows, meta strips, labels, pill tags, footer legal | `'Geist Mono', monospace` | 400 or 500 | `.eb`, `.hero-meta`, `.inv-intro-meta`, `.founder .role`, `.roadmap-card .v`, `.sample-label`, `footer`, legal pages |
 | Brand wordmark (header logo) | `var(--font-outfit)` | 800 | `.brand .name`, `.nav-brand` |
@@ -67,14 +67,15 @@ Geist Sans is loaded but effectively not used — `body` lists it after `--font-
 
 ### Italic accent rule
 
-Inside display text, `em` = italic color accent. Two forms:
+Inside display text **and body copy**, `em` = color accent. Two forms:
 
 ```css
 .hero .h1 em       { font-style: normal; font-weight: inherit; color: var(--copper); }
 .platform h2 em    { font-style: italic;  color: var(--copper); }
+.platform p em     { font-family: var(--font-display); font-style: italic; color: var(--copper); }
 ```
 
-Some heroes use `font-style: normal` for the accent (kept upright), others use italic. Either is acceptable — `em` always switches color to `--copper`, the italicness is per-context.
+Some heroes use `font-style: normal` for the accent (kept upright), others use italic. Either is acceptable — `em` always switches color to `--copper`, the italicness is per-context. Body-text `em` (paragraphs, bios, pullquotes) also resolves to `--copper`; never `--ink`. One-tier accent hierarchy across the page.
 
 ---
 
@@ -135,7 +136,7 @@ margin: 0 auto;
 padding: 0 40px;
 ```
 
-Wider sections (investor) use `max-width: 1100px` with the same padding. Legal pages use narrower.
+All investor-page sections (`.inv-intro`, `.platform`, `.roadmap`, `.team`, `.thesis`) share the canonical `1280px` container so every section lines up on one vertical spine. Legal pages use narrower.
 
 ### Section rhythm
 
@@ -143,15 +144,16 @@ Wider sections (investor) use `max-width: 1100px` with the same padding. Legal p
 - First section on a page: `padding: 48–96px top`.
 - Last section before footer: `padding-bottom: 96–120px`.
 
-### Standalone intro padding — `120px 40px 96px` (canonical)
+### Standalone section container — `max-width:1280px; margin:80px auto 0; padding:20px 40px` (canonical)
 
-Every standalone marketing page (pages accessed from the MarketingHeader nav that aren't the home page) uses the same intro padding so header-to-content spacing feels identical across the site. Selectors:
+Every marketing section that sits at the top of a standalone page (not home) uses the same container: 1280px max-width, `80px` top margin as header-to-content spacing, `20px` vertical padding, `40px` fixed horizontal padding. Selectors:
 
+- `.prob` (the Problem section — shared with home as a mid-page spacer, with the same `80px` acting as section-to-section rhythm there)
 - `.coming-soon` (on `/memory`)
 - `.inv-intro` (on `/investors`)
-- `.pilot-app` (on `/pilot` and `/pricing`, applied via `pt-[120px] pb-24 px-6 md:px-10` in `PilotApplication.tsx`)
+- `.pilot-app` (on `/pilot` and `/pricing`, applied via `max-w-[1280px] mx-auto mt-20 px-10 py-5` in `PilotApplication.tsx`)
 
-Home (`/`) uses the tighter `.hero` 96/40/72 variant because it has more above-the-fold content. Legal pages (`/privacy`, `/terms`) use `pt-32` (128px) via Tailwind since they're narrow-measure prose.
+Home (`/`) hero uses the tighter `.hero` 96/40/72 variant because it has more above-the-fold content. Legal pages (`/privacy`, `/terms`) use `pt-32` (128px) via Tailwind since they're narrow-measure prose.
 
 ### Card / card-like surfaces
 
@@ -177,9 +179,9 @@ Used on every marketing section to label the content area.
 ```css
 .eb {
   font-family: 'Geist Mono', monospace;
-  font-size: 10–11px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: .16–.18em;
+  letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--copper);
   display: inline-flex;
@@ -198,7 +200,7 @@ Used on every marketing section to label the content area.
 Shipped copies (all use the same 28×1 dash, copper, `.18em` tracking):
 - `.prob-head .eb` / `::before` — Problem section
 - `.how-head .eb` / `::before` — How it works
-- `.gong-head .eb` / `::before` — Gong comparison
+- `.notetaker-head .eb` / `::before` — Notetaker comparison
 - `.platform .eb` / `::before` — Platform framing (investors)
 - `.coming-soon .eb` / `::before` — Pricing + Memory stubs
 - `.pilot-app .eb` / `::before` — Pilot + Pricing page intro
@@ -307,7 +309,7 @@ When adding a new top-level section, use the thick banner. When adding a sub-sec
 
 ### Italic accent
 
-`em` inside a display heading changes color to `var(--copper)`. Italicness is per-context. Never introduce `<strong>` for color emphasis — that shift is reserved for `em`.
+`em` — anywhere, heading or body — changes color to `var(--copper)`. Italicness is per-context (display headings may use upright `em`). Never introduce `<strong>` for color emphasis — that shift is reserved for `em`.
 
 ### File path reference
 
@@ -354,3 +356,8 @@ When building a new marketing page:
 Known investor-specific deliberate choices (not drift):
 - Background `#0C0A10` (darker than home `--bg`) for the `.investors-register` band — scene break.
 - Founder photo gradients use `rgba(107,78,255,...)` (purple) and `rgba(0,181,160,...)` (teal) to differentiate founders. Exception to the "copper only" rule, narrow in scope (3 avatars only).
+
+### Follow-up pass (2026-04-23)
+
+- All five investor-page containers (`.inv-intro`, `.platform`, `.roadmap`, `.team`, `.thesis`) unified at `max-width:1280px` + `padding:0 40px`. Previously `.inv-intro` sat in a 1280px band while the four section blocks sat in 1100px, offsetting the content by ~90px per side at wide viewports. Single vertical spine restored.
+- Body-text `em` across the investors page (`.platform p`, `.founder .bio`, `.founder .fit p`, `.thesis-card p`) flipped from `color:var(--ink)` to `color:var(--copper)`. One-tier accent treatment page-wide. Display headings (`h1`, `h2`, `.primitive .title`, `.roadmap-card .body`, `.close`) were already copper — now body emphasis matches.
