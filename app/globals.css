@@ -1054,7 +1054,7 @@ html {
   }
   .prob-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(48px,5.4vw,76px);line-height:1.02;letter-spacing:-.025em;
+    font-size:clamp(36px,5.4vw,76px);line-height:1.02;letter-spacing:-.025em;
     margin:0;color:var(--ink);max-width:18ch;text-wrap:balance;
   }
   .prob-head h2 em{font-style:italic;color:var(--copper)}
@@ -1066,6 +1066,17 @@ html {
   .prob-head .lede em{
     font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);
     font-size:19px;font-weight:400;
+  }
+  /* .prob-head mobile: 2-col headline+lede grid stacks, gap tightens,
+     margin below head reduces. h2 clamp already handles the font
+     scale-down on narrow viewports. */
+  @media (max-width: 768px) {
+    .prob-head {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+      align-items: start;
+    }
   }
 
   .prob-row{
@@ -2792,10 +2803,71 @@ header button:focus:not(:focus-visible){
     .mem-hero-bridge { flex-direction: column; gap: 8px; }
 
     .mem-compare { margin-top: 72px; padding: 0 22px; }
-    .mem-table { font-size: 13px; }
-    .mem-table thead th { padding: 14px 16px; }
-    .mem-table td { padding: 14px 16px; font-size: 13px; }
-    .mem-table td:nth-child(1) { width: 30%; }
+
+    /* Table → card-per-row. Signal (col 1) becomes the card caption,
+       CRM and Salency cells label themselves via ::before pseudo-
+       labels so users still know which column is which. Salency cell
+       keeps the brighter ink + subtle copper tint to signal answer. */
+    .mem-table,
+    .mem-table thead,
+    .mem-table tbody,
+    .mem-table tr,
+    .mem-table td,
+    .mem-table th { display: block; }
+    .mem-table { background: transparent; border: 0; border-radius: 0; }
+    .mem-table thead { display: none; }
+    .mem-table tbody tr {
+      border: 1px solid var(--hair-2);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .mem-table tbody tr:last-child { margin-bottom: 0; }
+    .mem-table tbody td {
+      border: 0;
+      padding: 6px 0;
+      width: auto;
+      font-size: 13.5px;
+    }
+    .mem-table tbody td:nth-child(1) {
+      width: auto;
+      font-size: 10.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      font-family: 'Geist Mono', monospace;
+      border-bottom: 1px solid var(--hair);
+      padding-bottom: 10px;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    .mem-table tbody td:nth-child(2)::before {
+      content: "In your CRM";
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 3px;
+    }
+    .mem-table tbody td:nth-child(3) {
+      background: var(--copper-a04);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-top: 6px;
+    }
+    .mem-table tbody td:nth-child(3)::before {
+      content: "In Salency";
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 3px;
+    }
 
     .mem-compat { margin-top: 72px; padding: 24px 22px; }
     .mem-compat-line { font-size: 15px; }
