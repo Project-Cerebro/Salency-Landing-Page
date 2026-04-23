@@ -64,7 +64,7 @@ const COMPARE_ROWS = [
     signal: 'Pattern across accounts',
     crm: 'CSV export to a spreadsheet',
     salency:
-      'Live graph query, "handoff loses context" lights up 7 accounts',
+      'Search \u201chandoff loses context\u201d \u2014 7 accounts match',
   },
 ];
 
@@ -104,9 +104,8 @@ export function MemorySection() {
           <p className="lede">
             Every call your team runs becomes{' '}
             <em>structured, cited, queryable</em> context, mapped to your product
-            catalog and tied to the rep who heard it. The new account executive
-            inherits a Day-1 brief. The CS director picks up mid-story. Nothing
-            is re-asked.
+            catalog and tied to the rep who heard it. The new AE inherits a Day-1
+            brief. The CS director picks up mid-story. Nothing is re-asked.
           </p>
         </section>
       </ScrollReveal>
@@ -128,7 +127,9 @@ export function MemorySection() {
                   <span>12 calls indexed</span>
                 </span>
               </div>
-              <span className="mem-hero-chip">01</span>
+              <span className="mem-hero-chip">
+                Surface 01 &middot; Design preview
+              </span>
             </div>
 
             <div className="mem-brief-grid">
@@ -217,7 +218,7 @@ export function MemorySection() {
               </h3>
               <p className="support-desc">
                 Every extracted pain ranked against your catalog, confidence-scored.
-                Three upsells queued before the account executive has ended the call.
+                Three upsells queued before the AE has ended the call.
               </p>
               <div className="support-mock pp-mock">
                 <div className="pp-row">
@@ -277,9 +278,8 @@ export function MemorySection() {
                 <em>Handoff export</em>
               </h3>
               <p className="support-desc">
-                One-click markdown. The new account executive gets a brief.
-                The CS director gets a handoff. Nobody gets &ldquo;I wasn&rsquo;t
-                in that call.&rdquo;
+                One-click markdown. The new AE gets a brief. The CS director gets
+                a handoff. Nobody gets &ldquo;I wasn&rsquo;t in that call.&rdquo;
               </p>
               <div className="support-mock hx-mock">
                 <div className="hx-line"># Acme Corp — handoff</div>
