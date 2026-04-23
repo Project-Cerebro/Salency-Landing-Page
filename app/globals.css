@@ -1331,7 +1331,7 @@ html {
 
   /* Platform framing */
   .platform{
-    max-width:1100px;margin:0 auto;padding:0 40px;
+    max-width:1280px;margin:0 auto;padding:0 40px;
 
     .eb{
       font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
@@ -1350,7 +1350,7 @@ html {
       font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;
       color:var(--ink-2);max-width:62ch;margin:0 0 18px;
 
-      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-size:19px;font-weight:400}
+      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-size:19px;font-weight:400}
     }
     .primitive{
       margin-top:44px;padding:28px 32px;
@@ -1372,7 +1372,7 @@ html {
 
   /* V1.5 roadmap */
   .roadmap{
-    max-width:1100px;margin:80px auto 0;padding:0 40px;
+    max-width:1280px;margin:80px auto 0;padding:0 40px;
 
     .roadmap-card{
       padding:22px 28px;border:1px solid var(--hair-2);border-radius:10px;
@@ -1394,7 +1394,7 @@ html {
 
   /* Team */
   .team{
-    max-width:1100px;margin:100px auto 0;padding:0 40px;
+    max-width:1280px;margin:100px auto 0;padding:0 40px;
 
     .sect-head{
       margin-bottom:64px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:baseline;
@@ -1444,7 +1444,7 @@ html {
       font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:16px;line-height:1.75;
       color:var(--ink-2);max-width:62ch;margin:0 0 20px;
 
-      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-size:17px;font-weight:400}
+      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-size:17px;font-weight:400}
     }
     .fit{
       padding:14px 18px;border-left:2px solid rgba(254,133,49,.4);
@@ -1458,13 +1458,13 @@ html {
         font-family:var(--font-body), 'Geist', sans-serif;font-size:14.5px;line-height:1.55;color:var(--ink-2);
         font-weight:300;margin:0;max-width:62ch;
 
-        em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-weight:400}
+        em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-weight:400}
       }
     }
   }
 
   /* Future-fit thesis */
-  .thesis{max-width:1100px;margin:100px auto 0;padding:0 40px 20px}
+  .thesis{max-width:1280px;margin:100px auto 0;padding:0 40px 20px}
   .thesis-card{
     padding:56px 64px;background:rgba(255,255,255,.02);
     border:1px solid var(--hair-2);border-radius:16px;position:relative;overflow:hidden;
@@ -1490,7 +1490,7 @@ html {
       font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:17px;
       color:var(--ink-2);max-width:64ch;margin:0 0 18px;
 
-      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-size:18px;font-weight:400}
+      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-size:18px;font-weight:400}
     }
     .close{
       margin-top:28px;padding-top:24px;border-top:1px solid var(--hair);
