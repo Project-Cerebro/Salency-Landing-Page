@@ -15,7 +15,7 @@ const IDEAL = [
 
 export function PilotApplication() {
   return (
-    <main className="pilot-app max-w-6xl mx-auto px-6 md:px-10 pt-[120px] pb-24">
+    <main className="pilot-app max-w-[1280px] mx-auto mt-20 px-10 py-5">
       <section className="mb-16 md:mb-20 max-w-3xl">
         <p className="eb mb-5">Pilot cohort · Spring 2026</p>
         <h1 className="text-5xl md:text-6xl mb-6 text-balance">

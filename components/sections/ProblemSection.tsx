@@ -23,7 +23,7 @@ export function ProblemSection() {
       <div className="prob-row">
         <div className="prob-card">
           <div className="idx">i.</div>
-          <h3 className="ttl">
+          <h3 className="title">
             Calls are <em>recorded.</em> Context isn&apos;t <em>captured.</em>
           </h3>
           <p className="desc">
@@ -32,7 +32,7 @@ export function ProblemSection() {
             — the unprompted pain at minute 42 — stays locked in the audio.
           </p>
           <div className="cost">
-            <span className="lbl">
+            <span className="label">
               Transcripts are the artifact no one scrubs after the handoff.
             </span>
           </div>
@@ -40,7 +40,7 @@ export function ProblemSection() {
 
         <div className="prob-card">
           <div className="idx">ii.</div>
-          <h3 className="ttl">
+          <h3 className="title">
             Every handoff restarts from <em>zero.</em>
           </h3>
           <p className="desc">
@@ -51,7 +51,7 @@ export function ProblemSection() {
           </p>
           <div className="cost">
             <span className="num">40–50%</span>
-            <span className="lbl">
+            <span className="label">
               of customers visibly frustrated when asked to repeat themselves ·
               Customer interview, Jan 2026
             </span>
@@ -60,7 +60,7 @@ export function ProblemSection() {
 
         <div className="prob-card">
           <div className="idx">iii.</div>
-          <h3 className="ttl">
+          <h3 className="title">
             Reps pay a <em>busywork tax</em> to keep the lights on.
           </h3>
           <p className="desc">
@@ -69,7 +69,7 @@ export function ProblemSection() {
             re-encoding information the system already has.
           </p>
           <div className="cost">
-            <span className="lbl">
+            <span className="label">
               Hours spent re-encoding what the recording already captured.
             </span>
           </div>
@@ -77,14 +77,14 @@ export function ProblemSection() {
       </div>
 
       <div className="prob-resolve">
-        <span className="rlbl">— The fix</span>
-        <p className="rtxt">
+        <span className="label">— The fix</span>
+        <p className="text">
           Salency sits above your AI notetaker and CRM as an{' '}
           <em>institutional memory layer</em> — extracting structured context
           from every call, keeping it current as the account evolves, and
           surfacing it the moment someone new picks up the relationship.
         </p>
-        <Link href="/" className="ra">
+        <Link href="/" className="link">
           See how it works →
         </Link>
       </div>

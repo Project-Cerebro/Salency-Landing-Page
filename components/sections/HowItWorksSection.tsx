@@ -27,8 +27,8 @@ export function HowItWorksSection() {
             speaker, and the timestamp.
           </p>
           <div className="ex">
-            <div className="el">Example extraction</div>
-            <div className="eq">
+            <div className="example-label">Example extraction</div>
+            <div className="example-quote">
               <strong>Pain</strong> · CS director inherits accounts blind at
               renewal · Priya Shah, VP Sales · 18:02
             </div>
@@ -47,8 +47,8 @@ export function HowItWorksSection() {
             changed over time.
           </p>
           <div className="ex">
-            <div className="el">Example mapping</div>
-            <div className="eq">
+            <div className="example-label">Example mapping</div>
+            <div className="example-quote">
               Pain <em>&ldquo;handoff loses context&rdquo;</em>{' '}
               <strong>→ 3 products ranked</strong>, contradictions flagged
             </div>
@@ -66,8 +66,8 @@ export function HowItWorksSection() {
             memory outlasts any rep.
           </p>
           <div className="ex">
-            <div className="el">Example surface</div>
-            <div className="eq">
+            <div className="example-label">Example surface</div>
+            <div className="example-quote">
               <strong>Next steps</strong> · Renewal conversation by Mar 15 ·
               Open commitments: 3
             </div>
