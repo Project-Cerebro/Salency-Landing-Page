@@ -956,15 +956,15 @@ html {
     font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-weight:400;
     font-size:15.5px;line-height:1.45;color:var(--ink);margin:0;
   }
-  .memory-block .q::before{content:"\201C";color:var(--copper);margin-right:2px}
-  .memory-block .q::after{content:"\201D";color:var(--copper);margin-left:2px}
+  .memory-block .q::before{content:"\201C";color:var(--ink-3);margin-right:2px}
+  .memory-block .q::after{content:"\201D";color:var(--ink-3);margin-left:2px}
   .memory-block .attr{
     margin-top:10px;padding-top:10px;border-top:1px solid var(--hair);
     font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--ink-3);
     display:flex;justify-content:space-between;align-items:center;
   }
   .memory-block .attr .who{color:var(--ink-2)}
-  .memory-block .attr .ts{color:var(--copper)}
+  .memory-block .attr .ts{color:var(--ink-3)}
 
   .stakeholders{display:grid;gap:8px}
   .person{
@@ -1969,27 +1969,30 @@ header button:focus:not(:focus-visible){
 
       .pulse {
         display: inline-flex; align-items: center; gap: 6px;
-        color: var(--copper);
+        color: var(--ink-3);
 
         &::before {
           content: "";
           width: 5px; height: 5px; border-radius: 50%;
-          background: var(--copper);
-          box-shadow: 0 0 0 0 rgba(254, 133, 49, 0.55);
+          background: var(--ink-2);
+          box-shadow: 0 0 0 0 rgba(232, 230, 227, 0.35);
           animation: memPulse 2.4s ease-in-out infinite;
         }
       }
     }
 
+    /* Status chip — semantic label, not a keyword. Demoted from copper
+       to the ink ramp; the uppercase mono-caps treatment already reads
+       as "tag" without needing the accent color. */
     .mem-hero-chip {
       font-family: 'Geist Mono', monospace;
       font-size: 10px;
       font-weight: 500;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--copper);
-      background: rgba(254, 133, 49, 0.08);
-      border: 1px solid rgba(254, 133, 49, 0.26);
+      color: var(--ink-3);
+      background: rgba(232, 230, 227, 0.04);
+      border: 1px solid var(--hair-2);
       border-radius: 4px;
       padding: 5px 10px;
       white-space: nowrap;
@@ -2087,7 +2090,7 @@ header button:focus:not(:focus-visible){
       color: var(--ink-3);
       letter-spacing: .04em;
 
-      .person-cite-link { color: var(--copper); }
+      .person-cite-link { color: var(--ink-3); border-bottom: 1px solid var(--hair); }
     }
   }
 
@@ -2100,10 +2103,13 @@ header button:focus:not(:focus-visible){
     padding: 2px 6px;
     border-radius: 4px;
 
+    /* Champion state — bright ink against the more muted skeptic (ink-2)
+       and the rust blocker. Hierarchy communicated by brightness and
+       hue-family, not the primary accent. */
     &.champion {
-      color: var(--copper);
-      background: rgba(254, 133, 49, 0.08);
-      border: 1px solid rgba(254, 133, 49, 0.24);
+      color: var(--ink);
+      background: rgba(232, 230, 227, 0.06);
+      border: 1px solid var(--hair-2);
     }
     &.skeptic {
       color: var(--ink-2);
@@ -2121,8 +2127,8 @@ header button:focus:not(:focus-visible){
   .mem-hero-surface .pains { display: grid; gap: 6px; }
   .mem-hero-surface .pain {
     padding: 8px 0 8px 14px;
-    border-left: 2px solid var(--copper);
-    background: linear-gradient(90deg, rgba(254, 133, 49, 0.04), transparent 60%);
+    border-left: 2px solid var(--hair-2);
+    background: linear-gradient(90deg, rgba(232, 230, 227, 0.03), transparent 60%);
     border-radius: 0 4px 4px 0;
 
     .pain-quote {
@@ -2147,16 +2153,18 @@ header button:focus:not(:focus-visible){
       gap: 10px;
       flex-wrap: wrap;
 
-      .pain-cite-link { color: var(--copper); }
+      .pain-cite-link { color: var(--ink-3); border-bottom: 1px solid var(--hair); }
     }
   }
 
   .mem-hero-surface .intensity {
     display: inline-flex; gap: 3px; align-items: center;
 
+    /* Intensity dots: filled = active, off = muted. Signal is fill
+       state, not hue — so filled uses the ink ramp, not the accent. */
     .intensity-dot {
       width: 4px; height: 4px; border-radius: 50%;
-      background: var(--copper);
+      background: var(--ink-2);
     }
     .intensity-dot.off { background: var(--ink-4); opacity: .4; }
   }
@@ -2262,7 +2270,7 @@ header button:focus:not(:focus-visible){
         font-weight: 500;
         letter-spacing: .2em;
         text-transform: uppercase;
-        color: var(--copper);
+        color: var(--ink-4);
       }
 
       .support-chip {
@@ -2271,21 +2279,24 @@ header button:focus:not(:focus-visible){
         font-weight: 500;
         letter-spacing: .16em;
         text-transform: uppercase;
-        color: var(--copper);
-        background: rgba(254, 133, 49, 0.08);
-        border: 1px solid rgba(254, 133, 49, 0.24);
+        color: var(--ink-3);
+        background: rgba(232, 230, 227, 0.04);
+        border: 1px solid var(--hair-2);
         border-radius: 4px;
         padding: 3px 8px;
       }
     }
 
+    /* Support-card h3: whole heading uses the accent — h3 and its em
+       share the same color so the title reads as one unit, not a
+       split ink/copper mix. */
     h3 {
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
       font-weight: 400;
       font-size: 22px;
       line-height: 1.15;
       letter-spacing: -.015em;
-      color: var(--ink);
+      color: var(--copper);
       margin: 0 0 10px;
     }
     h3 em { font-style: italic; color: var(--copper); }
@@ -2325,21 +2336,23 @@ header button:focus:not(:focus-visible){
       .pp-conf {
         font-family: 'Geist Mono', monospace;
         font-size: 11px;
-        color: var(--copper);
+        color: var(--ink-2);
         min-width: 34px;
         text-align: right;
       }
 
+      /* Progress bar communicates by LENGTH. Fill uses the ink ramp
+         so it doesn't compete with keywords for the user's attention. */
       .mapping-bar {
         position: relative;
         height: 5px;
         border-radius: 3px;
-        background: rgba(254, 133, 49, 0.10);
+        background: rgba(232, 230, 227, 0.06);
         overflow: hidden;
 
         .mapping-bar-fill {
           position: absolute; inset: 0;
-          background: linear-gradient(90deg, var(--copper), var(--copper-soft));
+          background: linear-gradient(90deg, var(--ink-2), var(--ink-3));
           border-radius: 3px;
         }
       }
@@ -2364,7 +2377,7 @@ header button:focus:not(:focus-visible){
         font-weight: 500;
         letter-spacing: .18em;
         text-transform: uppercase;
-        color: var(--copper);
+        color: var(--ink-3);
       }
 
       .cx-quote {
@@ -2380,7 +2393,7 @@ header button:focus:not(:focus-visible){
       text-align: center;
       font-family: 'Geist Mono', monospace;
       font-size: 16px;
-      color: var(--copper);
+      color: var(--ink-3);
       opacity: .8;
       line-height: 1;
       margin: 2px 0;
@@ -2394,7 +2407,7 @@ header button:focus:not(:focus-visible){
     line-height: 1.7;
 
     .hx-line { color: var(--ink-2); }
-    .hx-line.muted { color: var(--copper); opacity: .85; }
+    .hx-line.muted { color: var(--ink-3); opacity: .85; }
   }
 
   /* ── CRM vs Salency compare ── */
@@ -2461,6 +2474,8 @@ header button:focus:not(:focus-visible){
       background: rgba(0, 0, 0, 0.12);
     }
     thead th:nth-child(2) { color: var(--ink-3); }
+    /* Salency column header is a keyword — the whole point of the
+       table is to mark THIS column as the answer. Copper earned. */
     thead th:nth-child(3) { color: var(--copper); }
 
     td {
@@ -2604,6 +2619,6 @@ header button:focus:not(:focus-visible){
 }
 
 @keyframes memPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(254, 133, 49, 0.55); }
-  50% { box-shadow: 0 0 0 5px rgba(254, 133, 49, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 230, 227, 0.35); }
+  50% { box-shadow: 0 0 0 5px rgba(232, 230, 227, 0); }
 }
