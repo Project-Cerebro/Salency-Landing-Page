@@ -1219,6 +1219,9 @@ html {
 
   /* ═══════════ How it works (Extract · Map · Remember) ═══════════ */
   .how{max-width:1280px;margin:140px auto 0;padding:0 40px}
+  @media (max-width: 768px) {
+    .how { margin-top: 80px; padding: 0 22px; }
+  }
   .how-head{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;margin-bottom:56px}
   .how-head .eb{
     font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
@@ -1317,6 +1320,9 @@ html {
 
   /* ═══════════ NOT strip ═══════════ */
   .notdo{max-width:1280px;margin:56px auto 0;padding:0 40px}
+  @media (max-width: 768px) {
+    .notdo { margin-top: 40px; padding: 0 22px; }
+  }
   .notdo-card{
     background:#121015;border:1px solid var(--hair-2);border-radius:14px;
     padding:32px 40px;
@@ -1365,6 +1371,9 @@ html {
 
   /* ═══════════ Notetaker comparison table ═══════════ */
   .notetaker{max-width:1280px;margin:140px auto 0;padding:0 40px}
+  @media (max-width: 768px) {
+    .notetaker { margin-top: 80px; padding: 0 22px; }
+  }
   .notetaker-head{margin-bottom:48px;max-width:56ch}
   .notetaker-head .eb{
     font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
