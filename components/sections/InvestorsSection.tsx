@@ -55,6 +55,40 @@ export function InvestorsSection() {
             </div>
           </section>
 
+          <section className="moat" id="moat">
+            <div className="eb">Moat</div>
+            <h2>
+              Why this doesn&apos;t live in <em>Salesforce.</em>
+            </h2>
+            <p>
+              The wedge is the <em>shape of the data</em>. Contradiction pairs,
+              pain evolution over time, confidence-ranked pain → product
+              matches, cross-account pattern graphs. None of these fit a CRM
+              row. Flatten any of them into a field and you kill the thing
+              that makes Salency uncopyable.
+            </p>
+            <p>
+              So Salency sits <em>on top</em> of your stack, not inside it.
+              Linear syncs completion status to GitHub, keeps the ticket
+              experience in Linear. Superhuman reads your Gmail, keeps the
+              triage experience in Superhuman. Reps live in CRM for pipeline
+              stages. Reps live in Salency for the qualitative layer — what
+              the customer actually said, what contradicts what, which pains
+              map to which products.
+            </p>
+            <div className="primitive">
+              <span className="label">The uncopyable pair</span>
+              <p className="title">
+                Pain-product mapping plus contradiction detection, embedded in
+                product-management workflows.{' '}
+                <em>
+                  Either alone is defensible for 6 to 9 months. Together, with
+                  workflow depth, switching cost is measured in quarters.
+                </em>
+              </p>
+            </div>
+          </section>
+
           <section className="roadmap">
             <div className="roadmap-card">
               <span className="pill">On the roadmap</span>

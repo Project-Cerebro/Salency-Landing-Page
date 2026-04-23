@@ -1331,6 +1331,47 @@ html {
     }
   }
 
+  /* Moat framing — why the data lives on Salency, not Salesforce (§6 platform-native posture, §8 uncopyable pair) */
+  .moat{
+    max-width:1280px;margin:80px auto 0;padding:0 40px;
+
+    .eb{
+      font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+      margin-bottom:28px;display:flex;align-items:center;gap:10px;
+
+      &::before{content:"";width:28px;height:1px;background:var(--copper);display:inline-block}
+    }
+    h2{
+      font-size:clamp(38px,4.2vw,54px);line-height:1.1;color:var(--ink);
+      margin:0 0 28px;max-width:28ch;text-wrap:balance;
+
+      em{font-style:italic;color:var(--copper)}
+    }
+    p{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;
+      color:var(--ink-2);max-width:62ch;margin:0 0 18px;
+
+      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-size:19px;font-weight:400}
+    }
+    .primitive{
+      margin-top:44px;padding:28px 32px;
+      background:rgba(254,133,49,.05);border:1px solid var(--copper-a18);
+      border-radius:12px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+
+      .label{
+        font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+        letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+      }
+      .title{
+        font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
+        line-height:1.35;color:var(--ink);max-width:62ch;margin:0;
+
+        em{font-style:italic;color:var(--copper)}
+      }
+    }
+  }
+
   /* V1.5 roadmap */
   .roadmap{
     max-width:1280px;margin:80px auto 0;padding:0 40px;
