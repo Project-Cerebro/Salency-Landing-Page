@@ -67,14 +67,15 @@ Geist Sans is loaded but effectively not used — `body` lists it after `--font-
 
 ### Italic accent rule
 
-Inside display text, `em` = italic color accent. Two forms:
+Inside display text **and body copy**, `em` = color accent. Two forms:
 
 ```css
 .hero .h1 em       { font-style: normal; font-weight: inherit; color: var(--copper); }
 .platform h2 em    { font-style: italic;  color: var(--copper); }
+.platform p em     { font-family: var(--font-display); font-style: italic; color: var(--copper); }
 ```
 
-Some heroes use `font-style: normal` for the accent (kept upright), others use italic. Either is acceptable — `em` always switches color to `--copper`, the italicness is per-context.
+Some heroes use `font-style: normal` for the accent (kept upright), others use italic. Either is acceptable — `em` always switches color to `--copper`, the italicness is per-context. Body-text `em` (paragraphs, bios, pullquotes) also resolves to `--copper`; never `--ink`. One-tier accent hierarchy across the page.
 
 ---
 
@@ -135,7 +136,7 @@ margin: 0 auto;
 padding: 0 40px;
 ```
 
-Wider sections (investor) use `max-width: 1100px` with the same padding. Legal pages use narrower.
+All investor-page sections (`.inv-intro`, `.platform`, `.roadmap`, `.team`, `.thesis`) share the canonical `1280px` container so every section lines up on one vertical spine. Legal pages use narrower.
 
 ### Section rhythm
 
@@ -308,7 +309,7 @@ When adding a new top-level section, use the thick banner. When adding a sub-sec
 
 ### Italic accent
 
-`em` inside a display heading changes color to `var(--copper)`. Italicness is per-context. Never introduce `<strong>` for color emphasis — that shift is reserved for `em`.
+`em` — anywhere, heading or body — changes color to `var(--copper)`. Italicness is per-context (display headings may use upright `em`). Never introduce `<strong>` for color emphasis — that shift is reserved for `em`.
 
 ### File path reference
 
@@ -355,3 +356,8 @@ When building a new marketing page:
 Known investor-specific deliberate choices (not drift):
 - Background `#0C0A10` (darker than home `--bg`) for the `.investors-register` band — scene break.
 - Founder photo gradients use `rgba(107,78,255,...)` (purple) and `rgba(0,181,160,...)` (teal) to differentiate founders. Exception to the "copper only" rule, narrow in scope (3 avatars only).
+
+### Follow-up pass (2026-04-23)
+
+- All five investor-page containers (`.inv-intro`, `.platform`, `.roadmap`, `.team`, `.thesis`) unified at `max-width:1280px` + `padding:0 40px`. Previously `.inv-intro` sat in a 1280px band while the four section blocks sat in 1100px, offsetting the content by ~90px per side at wide viewports. Single vertical spine restored.
+- Body-text `em` across the investors page (`.platform p`, `.founder .bio`, `.founder .fit p`, `.thesis-card p`) flipped from `color:var(--ink)` to `color:var(--copper)`. One-tier accent treatment page-wide. Display headings (`h1`, `h2`, `.primitive .title`, `.roadmap-card .body`, `.close`) were already copper — now body emphasis matches.
