@@ -196,13 +196,11 @@ export default function MemoryPage() {
 
       <ScrollReveal>
         <section className="mem-compat">
-          <span className="eb">Works alongside your stack</span>
-          <div className="mem-compat-row">
-            <span className="mem-compat-chip">Gong</span>
-            <span className="mem-compat-chip">Fathom</span>
-            <span className="mem-compat-chip">Fireflies</span>
-            <span className="mem-compat-chip raw">raw .vtt / .txt</span>
-          </div>
+          <span className="eb">Transcript sources</span>
+          <p className="mem-compat-line">
+            Bring transcripts from <em>Gong, Fathom, Fireflies, Otter, Zoom</em>,
+            or raw .vtt / .txt. Paste or upload — takes about a minute per call.
+          </p>
         </section>
       </ScrollReveal>
 

@@ -1894,20 +1894,14 @@ header button:focus:not(:focus-visible){
     letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4);
     margin-bottom:20px;display:block;
   }
-  .mem-compat-row{
-    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
-    gap:32px;
+  .mem-compat-line{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:16px;line-height:1.6;color:var(--ink-2);
+    max-width:60ch;margin:0 auto;
   }
-  .mem-compat-chip{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:22px;letter-spacing:-.01em;color:var(--ink-2);opacity:.65;
-    transition:opacity .18s, color .18s;
-  }
-  .mem-compat-chip:hover{opacity:.95;color:var(--ink)}
-  .mem-compat-chip.raw{
-    font-family:'Geist Mono',monospace;font-size:13px;letter-spacing:.08em;
-    padding:6px 12px;border:1px solid var(--hair-2);border-radius:4px;
-    color:var(--ink-3);opacity:.85;
+  .mem-compat-line em{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;color:var(--ink);font-size:17px;font-weight:400;
   }
 
   /* CTA closer */
@@ -1938,8 +1932,8 @@ header button:focus:not(:focus-visible){
     .mem-table thead th{padding:14px 18px}
     .mem-table td:nth-child(1){width:28%}
     .mem-compat{margin-top:72px;padding:28px 24px}
-    .mem-compat-row{gap:22px}
-    .mem-compat-chip{font-size:18px}
+    .mem-compat-line{font-size:15px}
+    .mem-compat-line em{font-size:16px}
     .mem-cta{margin:72px auto 80px}
   }
 }
