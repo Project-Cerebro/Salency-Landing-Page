@@ -96,7 +96,7 @@ export function HubSection() {
                 </text>
               </svg>
             </div>
-            <div className="hub-input-lbl">Transcript</div>
+            <div className="hub-input-label">Transcript</div>
           </div>
 
           <div className="hub-input" style={{ top: '39%' }}>
@@ -141,7 +141,7 @@ export function HubSection() {
                 />
               </svg>
             </div>
-            <div className="hub-input-lbl">Product Catalog</div>
+            <div className="hub-input-label">Product Catalog</div>
           </div>
 
           <div className="hub-input" style={{ top: '59%' }}>
@@ -164,7 +164,7 @@ export function HubSection() {
                 />
               </svg>
             </div>
-            <div className="hub-input-lbl">Product Details</div>
+            <div className="hub-input-label">Product Details</div>
           </div>
 
           <div className="hub-input" style={{ top: '76%' }}>
@@ -174,7 +174,7 @@ export function HubSection() {
                 <path d="M18 17 L32 24 L18 31 Z" fill="#FFFFFF" />
               </svg>
             </div>
-            <div className="hub-input-lbl">Call Recording</div>
+            <div className="hub-input-label">Call Recording</div>
           </div>
         </div>
 
