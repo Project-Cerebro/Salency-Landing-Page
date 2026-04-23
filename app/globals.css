@@ -1895,6 +1895,10 @@ html {
   from{opacity:0;transform:translateY(-8px)}
   to{opacity:1;transform:translateY(0)}
 }
+@media (prefers-reduced-motion: reduce){
+  .nav-panel{animation:none}
+  .nav-burger .bar{transition:none}
+}
 .nav-panel-links{display:flex;flex-direction:column;gap:2px}
 .nav-panel-links a{
   font-family:var(--font-body), 'Geist', sans-serif;font-weight:400;font-size:16px;
