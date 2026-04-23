@@ -193,6 +193,33 @@ Home (`/`) hero uses the tighter `.hero` 96/40/72 variant because it has more ab
 
 4, 8, 12, 16, 18, 20, 24, 28, 32, 40, 44, 48, 56, 64, 72, 80, 96, 100, 120, 140. Most values land on an 8px grid; 18/22/28/44/56/72 appear often for comfortable editorial rhythm.
 
+### Responsive breakpoints (in use)
+
+Most component overrides use `@media (max-width: 768px)` as the "phone portrait + narrow tablet" breakpoint. Other widths appear where a specific component needs them (`860px` for `.mem-brief-grid`, `900px` for the desktop→hamburger nav switch, `960px` for `.mem-support-grid`, `720px` for the memory-page chrome fine-tune, `1024px` for `.apply-layout` 2-col reveal). Default to `768px` when adding a new mobile override; go narrower (640) or wider (1024) only with reason.
+
+**Per-section mobile overrides already shipped:**
+
+| Section / Page | Mobile treatment |
+|---|---|
+| `.prob-head`, `.how-head` | 2-col headline+lede grid stacks to 1-col, gap 64 → 24, margin-bottom 72/56 → 40, h2 clamp floor 48/44 → 36 |
+| `.prob-row`, `.how-steps` | 3-col card grid → 1-col stack; vertical dividers become horizontal; arrow glyphs hide |
+| `.prob-resolve` | 3-cell row (label + text + link) stacks to 1-col |
+| `.notdo-card`, `.notdo-list` | 2-col `header + list` and the 2-col item list both collapse to 1-col |
+| `.mem-table`, `.notetaker-table` | Table → card-per-row stack. Headers dissolve; column labels re-materialize as `::before` pseudo-labels on each cell. Salency cells retain `--copper-a04` tint |
+| `.apply-page` (`/pilot` + `/pricing`) | Typography scales at 768, grid becomes 2-col at 1024, sidebar/form re-order |
+| `.investors-register` | Horizontal gutters 40 → 22, `.founder` grid stacks, `.thesis-card` padding 56/64 → 32/24, `.founder.rev` reversed layout collapses |
+| `.mem-*` (memory page) | Intro padding, brief-grid, support-grid all stack; mem-table → card-per-row |
+| Home `.hero` | Padding 96/40/72 → 56/22/48 |
+| Home `.cta-section` + `.cta-card` | Margin + padding shrink; card padding 72/56 → 40/24; radius 20 → 14 |
+| `.how`, `.notdo`, `.notetaker` | Horizontal gutters 40 → 22, margin-top scaled down |
+| Pilot modal close (`.pilot-modal-close`) | `position: sticky; top: 8px` so the close button stays visible when the form scrolls past the viewport |
+
+**Standalone page intros** (`.inv-intro`, `.mem-intro`, `.apply-page`, `.prob`): all share `max-width: 1280px; margin: 40px auto 0; padding: 20px 40px` at desktop. At ≤768px, horizontal padding tightens to 22px.
+
+**Accessibility baseline:**
+- Minimum touch target: **44 × 44px** (WCAG 2.5.5). Mobile nav hamburger, pilot-modal close, and main-nav panel links all hit this.
+- `prefers-reduced-motion: reduce` respected on hero scroll-reveal, nav-panel slide-in + burger bar-rotate, pilot-modal fade/zoom, and memory hero pulse.
+
 ---
 
 ## 5 · Component Patterns

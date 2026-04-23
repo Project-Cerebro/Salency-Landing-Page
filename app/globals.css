@@ -748,6 +748,9 @@ html {
     max-width:1280px;margin:0 auto;
     padding:96px 40px 72px;
   }
+  @media (max-width: 768px) {
+    .hero { padding: 56px 22px 48px; }
+  }
   .hero-hairline{
     max-width:1280px;margin:0 auto;
     border-top:1px solid var(--hair);
@@ -1170,11 +1173,17 @@ html {
   .cta-section{
     max-width:1280px;margin:140px auto 0;padding:0 40px 120px;
   }
+  @media (max-width: 768px) {
+    .cta-section { margin-top: 80px; padding: 0 22px 64px; }
+  }
   .cta-card{
     position:relative;overflow:hidden;
     background:linear-gradient(135deg, #1A171E 0%, #121015 100%);
     border:1px solid var(--hair-2);border-radius:20px;
     padding:72px 56px;text-align:center;
+  }
+  @media (max-width: 768px) {
+    .cta-card { padding: 40px 24px; border-radius: 14px; }
   }
   .cta-card::before{
     content:"";position:absolute;inset:0;pointer-events:none;
@@ -1210,6 +1219,9 @@ html {
 
   /* ═══════════ How it works (Extract · Map · Remember) ═══════════ */
   .how{max-width:1280px;margin:140px auto 0;padding:0 40px}
+  @media (max-width: 768px) {
+    .how { margin-top: 80px; padding: 0 22px; }
+  }
   .how-head{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;margin-bottom:56px}
   .how-head .eb{
     font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
@@ -1219,8 +1231,18 @@ html {
   .how-head .eb::before{content:"";width:28px;height:1px;background:var(--copper);display:inline-block}
   .how-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(44px,5vw,64px);line-height:1.03;letter-spacing:-.025em;
+    font-size:clamp(36px,5vw,64px);line-height:1.03;letter-spacing:-.025em;
     margin:0;color:var(--ink);max-width:16ch;text-wrap:balance;
+  }
+  /* .how-head mobile: 2-col headline+lede stacks, same treatment as
+     .prob-head per PR #71. */
+  @media (max-width: 768px) {
+    .how-head {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+      align-items: start;
+    }
   }
   .how-head h2 em{font-style:italic;color:var(--copper)}
   .how-head .lede{
@@ -1298,6 +1320,9 @@ html {
 
   /* ═══════════ NOT strip ═══════════ */
   .notdo{max-width:1280px;margin:56px auto 0;padding:0 40px}
+  @media (max-width: 768px) {
+    .notdo { margin-top: 40px; padding: 0 22px; }
+  }
   .notdo-card{
     background:#121015;border:1px solid var(--hair-2);border-radius:14px;
     padding:32px 40px;
@@ -1346,6 +1371,9 @@ html {
 
   /* ═══════════ Notetaker comparison table ═══════════ */
   .notetaker{max-width:1280px;margin:140px auto 0;padding:0 40px}
+  @media (max-width: 768px) {
+    .notetaker { margin-top: 80px; padding: 0 22px; }
+  }
   .notetaker-head{margin-bottom:48px;max-width:56ch}
   .notetaker-head .eb{
     font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
@@ -1866,6 +1894,10 @@ html {
 @keyframes nav-panel-in{
   from{opacity:0;transform:translateY(-8px)}
   to{opacity:1;transform:translateY(0)}
+}
+@media (prefers-reduced-motion: reduce){
+  .nav-panel{animation:none}
+  .nav-burger .bar{transition:none}
 }
 .nav-panel-links{display:flex;flex-direction:column;gap:2px}
 .nav-panel-links a{
