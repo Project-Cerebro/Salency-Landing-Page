@@ -48,20 +48,23 @@ export function PilotModal() {
       role="dialog"
       aria-modal="true"
       aria-label="Request your pilot"
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200"
+      className="pilot-modal-backdrop"
       onClick={close}
     >
       <div
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200"
+        className="pilot-modal-panel"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Close button stays visible no matter how far the form scrolls
+            on a small viewport — the panel is the scroll container, so
+            a position:sticky close stays pinned to the top-right. */}
         <button
           type="button"
           onClick={close}
           aria-label="Close"
-          className="absolute top-3 right-3 z-10 p-2 text-gray-400 hover:text-white transition-colors"
+          className="pilot-modal-close"
         >
-          <X className="w-5 h-5" />
+          <X className="pilot-modal-close-icon" aria-hidden />
         </button>
         <EmailForm prefillEmail={prefill} />
       </div>

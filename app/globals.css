@@ -1629,6 +1629,63 @@ html {
     }
   }
 
+  /* ═══════════ Investor page — mobile overrides ═══════════ */
+  @media (max-width: 768px) {
+    .investors-register .reg-inv {
+      padding-top: 48px;
+      padding-bottom: 80px;
+    }
+    .inv-intro,
+    .platform,
+    .roadmap,
+    .team,
+    .thesis {
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+    .platform .primitive {
+      /* Stack the "Data primitive" label above the title on narrow screens. */
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 22px 22px;
+    }
+    .roadmap-card {
+      /* Same for the "On the roadmap" pill + body. */
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 18px 22px;
+    }
+    .team .sect-head {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .founder,
+    .founder.rev {
+      /* Photo on top, body below — at 375px the 128px photo + 1fr body
+         cramped the bio to ~12ch per line. Reversed variant collapses
+         to the same stacked layout. */
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding-bottom: 40px;
+      margin-bottom: 40px;
+
+      .photo { order: 0; width: 96px; height: 96px; font-size: 40px; }
+      .body { order: 1; text-align: left; }
+    }
+    .thesis-card {
+      /* 56/64 padding was the desktop editorial feel — at mobile that
+         left only ~200px for text. */
+      padding: 32px 24px;
+    }
+    .thesis-card h2 {
+      font-size: clamp(28px, 7vw, 40px);
+    }
+    .thesis-card .close {
+      font-size: 18px;
+    }
+  }
+
 /* ═══════════ Marketing font mapping ═══════════ */
 /* Bind --font-body / --font-display to next/font variables. */
 :root{
@@ -2622,4 +2679,77 @@ header button:focus:not(:focus-visible){
 @keyframes memPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(232, 230, 227, 0.35); }
   50% { box-shadow: 0 0 0 5px rgba(232, 230, 227, 0); }
+}
+
+/* ═══════════ Pilot modal (Request-your-pilot form) ═══════════ */
+.pilot-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  animation: pilotModalFadeIn 200ms ease-out;
+}
+@media (min-width: 768px) {
+  .pilot-modal-backdrop { padding: 24px; }
+}
+
+.pilot-modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 42rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: pilotModalFadeZoomIn 200ms ease-out;
+}
+
+/* Close button — pinned top-right of the scrolling panel so it stays
+   visible even when the form content is longer than the viewport.
+   44×44 hit area per WCAG touch-target guidance. */
+.pilot-modal-close {
+  position: sticky;
+  top: 8px;
+  margin-left: auto;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: rgba(20, 17, 25, 0.85);
+  border: 1px solid var(--hair-2);
+  border-radius: 9999px;
+  color: var(--ink-2);
+  cursor: pointer;
+  z-index: 10;
+  transition: color 180ms, background-color 180ms, border-color 180ms;
+}
+.pilot-modal-close:hover,
+.pilot-modal-close:focus-visible {
+  color: var(--ink);
+  background: rgba(32, 29, 36, 0.95);
+  border-color: var(--hair);
+  outline: none;
+}
+.pilot-modal-close-icon {
+  width: 18px;
+  height: 18px;
+}
+
+@keyframes pilotModalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pilotModalFadeZoomIn {
+  from { opacity: 0; transform: scale(.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pilot-modal-backdrop,
+  .pilot-modal-panel { animation: none; }
 }
