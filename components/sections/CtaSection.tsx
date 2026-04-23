@@ -14,7 +14,9 @@ export function CtaSection() {
           inherits a Day-1 brief instead of starting from zero.
         </p>
         <div className="btns">
-          <button className="btn btn-primary">Request pilot access →</button>
+          <Link href="/pilot" className="btn btn-primary">
+            Request pilot access →
+          </Link>
           <Link href="/investors#thesis" className="btn btn-ghost">
             Read our thesis
           </Link>

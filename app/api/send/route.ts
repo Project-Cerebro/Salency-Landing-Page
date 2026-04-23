@@ -1,4 +1,3 @@
-
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
@@ -15,10 +14,31 @@ const ratelimit = process.env.UPSTASH_REDIS_REST_URL
     })
   : null;
 
+const ROLES = [
+    'AE',
+    'Sales Manager',
+    'VP Sales',
+    'RevOps',
+    'CS Lead',
+    'Founder / CEO',
+    'Other',
+] as const;
+
+const TEAM_SIZES = ['1–4', '5–10', '11–50', '50+'] as const;
+
+const normalizeWebsite = (raw: string) =>
+    raw.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '');
+
 const FormSchema = z.object({
-    firstName: z.string().min(1, "First name is required"),
-    email: z.string().email("Invalid email address"),
-    companyName: z.string().min(1, "Company name is required"),
+    firstName: z.string().min(1, 'First name is required'),
+    email: z.string().email('Invalid email address'),
+    companyWebsite: z
+        .string()
+        .min(1, 'Company website is required')
+        .regex(/^[^\s]+\.[^\s]+$/, 'Invalid website')
+        .transform(normalizeWebsite),
+    role: z.enum(ROLES),
+    teamSize: z.enum(TEAM_SIZES),
     website: z.string().optional(),
 });
 
@@ -58,7 +78,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const { firstName, email, companyName } = result.data;
+        const { firstName, email, companyWebsite, role, teamSize } = result.data;
 
         const escapeHtml = (unsafe: string | undefined) => {
             return (unsafe || '').replace(/[&<"']/g, (m) => {
@@ -74,12 +94,14 @@ export async function POST(request: Request) {
         const adminEmailFn = resend.emails.send({
             from: 'Salency Admin <onboarding@resend.dev>',
             to: ['founders@salency.ai'],
-            subject: `New Pilot Request: ${escapeHtml(companyName)}`,
+            subject: `New Pilot Request: ${escapeHtml(companyWebsite)}`,
             html: `
         <h1>New Pilot Request</h1>
         <p><strong>Name:</strong> ${escapeHtml(firstName)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Company:</strong> ${escapeHtml(companyName)}</p>
+        <p><strong>Company website:</strong> ${escapeHtml(companyWebsite)}</p>
+        <p><strong>Role:</strong> ${escapeHtml(role)}</p>
+        <p><strong>Team size:</strong> ${escapeHtml(teamSize)}</p>
       `,
         });
 
