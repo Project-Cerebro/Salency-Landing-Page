@@ -17,7 +17,7 @@ export function HowItWorksSection() {
       <div className="how-steps">
         <div className="how-step">
           <div className="idx">Step 01</div>
-          <h3 className="verb">
+          <h3 className="how-step-action">
             <em>Extract</em>
           </h3>
           <p className="desc">
@@ -36,7 +36,7 @@ export function HowItWorksSection() {
         </div>
         <div className="how-step">
           <div className="idx">Step 02</div>
-          <h3 className="verb">
+          <h3 className="how-step-action">
             <em>Map</em>
           </h3>
           <p className="desc">
@@ -56,7 +56,7 @@ export function HowItWorksSection() {
         </div>
         <div className="how-step">
           <div className="idx">Step 03</div>
-          <h3 className="verb">
+          <h3 className="how-step-action">
             <em>Remember</em>
           </h3>
           <p className="desc">
