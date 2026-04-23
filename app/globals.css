@@ -650,6 +650,13 @@ html {
       0 8px 24px -8px var(--copper-a50);
   }
   .btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  /* Keyboard focus ring: visible copper outline for all primary/ghost
+     buttons so sighted keyboard users can see where they are. */
+  .btn-primary:focus-visible,
+  .btn-ghost:focus-visible{
+    outline:2px solid var(--copper);
+    outline-offset:3px;
+  }
   .btn-ghost{
     background:rgba(232,230,227,0.04);color:var(--ink);
     border:1px solid var(--hair-2);
@@ -671,6 +678,7 @@ html {
     transition:filter .18s ease, opacity .18s ease;
 
     &:hover{filter:brightness(1.1)}
+    &:focus-visible{outline:2px solid #1A0A02;outline-offset:2px}
     &:disabled{opacity:.5;cursor:not-allowed}
     &:disabled:hover{filter:none}
   }
