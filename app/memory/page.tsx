@@ -54,6 +54,7 @@ export default function MemoryPage() {
           <article className="mem-card">
             <div className="mem-card-head">
               <span className="idx">Surface 01</span>
+              <span className="preview-chip">Design preview</span>
             </div>
             <h3>
               <em>Day-1 brief</em> per account
@@ -62,9 +63,46 @@ export default function MemoryPage() {
               Every stakeholder named, every pain cited, every open commitment
               listed. The new rep walks in briefed, not briefed-from-scratch.
             </p>
-            <div className="shot">
-              {/* TODO: swap with <img src="/memory/day-1-brief.png" alt="..." /> when Howard drops screenshot */}
-              Screenshot · Day-1 brief
+            <div className="mem-brief">
+              <div className="brief-head">
+                <span>Acme Corp · Day-1 brief</span>
+                <span>3 new signals</span>
+              </div>
+              <div className="brief-block">
+                <div className="brief-label">People</div>
+                <div className="brief-row">
+                  <span className="brief-name">Priya Shah</span>
+                  <span className="brief-meta">VP Sales · Champion</span>
+                </div>
+                <div className="brief-row">
+                  <span className="brief-name">Marcus Chen</span>
+                  <span className="brief-meta">Sales Ops · Skeptic</span>
+                </div>
+              </div>
+              <div className="brief-block">
+                <div className="brief-label">Top pain</div>
+                <div className="brief-quote">
+                  &ldquo;We lose deals to forgotten context every quarter.&rdquo;
+                </div>
+                <div className="brief-cite">
+                  Priya Shah, VP Sales · call 03, 18:02
+                </div>
+              </div>
+              <div className="brief-block">
+                <div className="brief-label">Contradiction flagged</div>
+                <div className="brief-contra">
+                  <span className="contra-date">Apr 07</span>
+                  <span className="contra-quote">
+                    &ldquo;budget is fifty&rdquo;
+                  </span>
+                </div>
+                <div className="brief-contra">
+                  <span className="contra-date">Apr 14</span>
+                  <span className="contra-quote">
+                    &ldquo;budget&apos;s tight, maybe twenty&rdquo;
+                  </span>
+                </div>
+              </div>
             </div>
           </article>
         </ScrollReveal>

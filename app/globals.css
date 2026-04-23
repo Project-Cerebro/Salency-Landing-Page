@@ -1970,3 +1970,53 @@ header button:focus:not(:focus-visible){
     line-height:1.35;color:#E8E6E3;max-width:62ch;margin:0;
   }
   .moat .primitive .tt em{font-style:italic;color:#F0A876}
+
+  /* Day-1 brief design-preview mock (Surface 01 on /memory) */
+  .memory-page .mem-brief{
+    margin:0 -28px;background:#0A0910;border-top:1px solid var(--hair);
+    padding:18px 24px 22px;font-family:var(--font-body), 'Geist', sans-serif;
+  }
+  .memory-page .mem-brief .brief-head{
+    font-family:'Geist Mono',monospace;font-size:9.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-4);
+    display:flex;justify-content:space-between;align-items:center;
+    padding-bottom:10px;margin-bottom:14px;
+    border-bottom:1px solid var(--hair);
+  }
+  .memory-page .mem-brief .brief-block{padding:8px 0}
+  .memory-page .mem-brief .brief-block + .brief-block{
+    border-top:1px dashed var(--hair);margin-top:8px;padding-top:12px;
+  }
+  .memory-page .mem-brief .brief-label{
+    font-family:'Geist Mono',monospace;font-size:9.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--copper);
+    margin-bottom:8px;
+  }
+  .memory-page .mem-brief .brief-row{
+    display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+    padding:3px 0;
+  }
+  .memory-page .mem-brief .brief-name{color:var(--ink);font-size:13px;font-weight:500}
+  .memory-page .mem-brief .brief-meta{
+    color:var(--ink-3);font-size:11.5px;
+    font-family:'Geist Mono',monospace;letter-spacing:.04em;
+  }
+  .memory-page .mem-brief .brief-quote{
+    color:var(--ink);font-size:13.5px;font-style:italic;line-height:1.45;
+    padding:6px 10px;margin:2px 0 6px;
+    background:rgba(254,133,49,.06);border-left:2px solid var(--copper);
+    border-radius:0 4px 4px 0;
+  }
+  .memory-page .mem-brief .brief-cite{
+    color:var(--ink-3);font-size:11px;
+    font-family:'Geist Mono',monospace;letter-spacing:.04em;
+  }
+  .memory-page .mem-brief .brief-contra{
+    display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:baseline;
+    padding:4px 0;
+  }
+  .memory-page .mem-brief .contra-date{
+    font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:.08em;
+    color:var(--copper);text-transform:uppercase;
+  }
+  .memory-page .mem-brief .contra-quote{color:var(--ink-2);font-size:13px;font-style:italic}
