@@ -132,7 +132,7 @@ export function InvestorsSection() {
             </div>
 
             <div className="founder founder--reversed">
-              <div className="photo p2">NI</div>
+              <div className="photo photo--violet">NI</div>
               <div className="body">
                 <div className="name">Nikki Ip</div>
                 <div className="role">Co-founder &amp; COO</div>
@@ -156,7 +156,7 @@ export function InvestorsSection() {
             </div>
 
             <div className="founder">
-              <div className="photo p3">BO</div>
+              <div className="photo photo--teal">BO</div>
               <div className="body">
                 <div className="name">Babajide Okusanya</div>
                 <div className="role">Technical Lead</div>

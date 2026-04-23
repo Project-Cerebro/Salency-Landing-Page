@@ -1376,8 +1376,8 @@ html {
       display:flex;align-items:center;justify-content:center;letter-spacing:-.01em;
       border:1px solid var(--copper-a30);
 
-      &.p2{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));border-color:rgba(107,78,255,.3);color:#D8CEFF}
-      &.p3{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
+      &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));border-color:rgba(107,78,255,.3);color:#D8CEFF}
+      &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
     }
     .name{
       font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:32px;
