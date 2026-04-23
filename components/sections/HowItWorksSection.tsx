@@ -9,9 +9,9 @@ export function HowItWorksSection() {
           </h2>
         </div>
         <p className="lede">
-          Every transcript, <em>AI notetaker</em> or raw text, runs through the
-          same pipeline. The output is{' '}
-          <em>structured, cited, and queryable</em> before your next stand-up.
+          Any transcript &mdash; <em>AI notetaker</em> or raw &mdash; runs
+          through the same pipeline, and the output is{' '}
+          <em>structured, cited, queryable</em> before your next stand-up.
         </p>
       </div>
       <div className="how-steps">
@@ -42,9 +42,9 @@ export function HowItWorksSection() {
           <p className="desc">
             Each pain maps to a line in your product catalog, ranked by
             confidence. Every new call is compared against prior calls on the
-            same account, and contradictions get flagged. The graph keeps
-            growing: pains, products, stakeholders, and how the story has
-            changed over time.
+            same account, and contradictions get flagged. The memory graph
+            keeps growing: pains, products, stakeholders, and how the story
+            has changed over time.
           </p>
           <div className="ex">
             <div className="example-label">Example mapping</div>
