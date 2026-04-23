@@ -12,9 +12,9 @@ export function CtaSection() {
           Stop paying the <em>ramp-time tax.</em>
         </h2>
         <p className="sub">
-          Most AEs take months to ramp. Every week of that is revenue on the
-          floor. A memory layer that outlasts any rep, so the next hire
-          inherits a Day-1 brief instead of starting from zero.
+          Most account executives take months to ramp. Every week of that is
+          revenue on the floor. A memory layer that outlasts any rep, so the
+          next hire inherits a Day-1 brief instead of starting from zero.
         </p>
         <div className="btns">
           <button
