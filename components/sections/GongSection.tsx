@@ -74,8 +74,8 @@ export function GongSection() {
               moments
             </td>
             <td className="col-s">
-              <span className="icon">✓</span>AE, CSM, director — every role on
-              the account, on demand
+              <span className="icon">✓</span>Account executive, customer success
+              manager, director — every role on the account, on demand
             </td>
           </tr>
           <tr>

@@ -114,7 +114,8 @@ export function InvestorsSection() {
                 <div className="name">Howard Tam</div>
                 <div className="role">Co-founder &amp; CEO</div>
                 <p className="bio">
-                  Founding AE at <em>Viggle</em> (a16z-backed), where he ran
+                  Founding account executive at <em>Viggle</em> (a16z-backed),
+                  where he ran
                   pilot-to-paid motions with the exact B2B buyers Salency sells
                   to today. Before that, he led MUFG Hong Kong&apos;s first
                   Panda Bond and handled business development at Sequence and

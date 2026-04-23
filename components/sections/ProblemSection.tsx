@@ -44,7 +44,8 @@ export function ProblemSection() {
             Every handoff restarts from <em>zero.</em>
           </h3>
           <p className="desc">
-            A new AE picks up the account. A CS director inherits at renewal.
+            A new account executive picks up the account. A CS director
+            inherits at renewal.
             Neither gets the pain history, the stakeholder map, or the promises
             made. They rebuild the relationship by calling the customer and
             asking again.
