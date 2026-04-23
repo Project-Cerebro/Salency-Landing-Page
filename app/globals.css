@@ -1729,3 +1729,250 @@ header button:focus:not(:focus-visible){
   from {left:-50%}
   to   {left:100%}
 }
+
+/* ═══════════════════════════════════════════════════════════
+   MEMORY PAGE — /memory
+   Buyer-deep: four surfaces grid, CRM-vs-Salency compare,
+   compat strip, pilot CTA. Marketing register.
+═══════════════════════════════════════════════════════════ */
+:where(.memory-page){
+  .mem-intro{
+    max-width:1280px;margin:80px auto 0;padding:0 40px 0;
+  }
+  .mem-intro .eb{
+    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--copper);
+    display:inline-flex;align-items:center;gap:12px;margin-bottom:28px;
+  }
+  .mem-intro .eb::before{content:"";width:32px;height:1px;background:var(--copper);display:inline-block}
+  .mem-intro h1{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:clamp(44px,5.4vw,72px);line-height:1.03;letter-spacing:-.025em;
+    color:var(--ink);margin:0 0 24px;max-width:20ch;text-wrap:balance;
+  }
+  .mem-intro h1 em{font-style:italic;color:var(--copper)}
+  .mem-intro .lede{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:19px;line-height:1.6;color:var(--ink-2);max-width:56ch;margin:0;
+  }
+  .mem-intro .lede em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-weight:400}
+
+  /* Four-surfaces grid */
+  .mem-surfaces{
+    max-width:1280px;margin:80px auto 0;padding:0 40px;
+    display:grid;grid-template-columns:repeat(2, 1fr);gap:24px;
+  }
+  .mem-card{
+    position:relative;
+    background:linear-gradient(180deg,#141119 0%,#0F0D13 100%);
+    border:1px solid var(--hair-2);border-radius:14px;
+    padding:28px 28px 0;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .mem-card .mem-card-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px}
+  .mem-card .idx{
+    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--copper);
+  }
+  .mem-card .preview-chip{
+    font-family:'Geist Mono',monospace;font-size:9.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;
+    color:var(--copper);background:rgba(254,133,49,.08);
+    border:1px solid rgba(254,133,49,.24);border-radius:4px;
+    padding:3px 8px;
+  }
+  .mem-card h3{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:28px;line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+    margin:0 0 12px;
+  }
+  .mem-card h3 em{font-style:italic;color:var(--copper)}
+  .mem-card .desc{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:14.5px;line-height:1.6;color:var(--ink-2);
+    margin:0 0 22px;max-width:44ch;
+  }
+  .mem-card .shot{
+    margin:0 -28px;background:#0A0910;border-top:1px solid var(--hair);
+    min-height:220px;display:flex;align-items:center;justify-content:center;
+    color:var(--ink-4);font-family:'Geist Mono',monospace;font-size:11px;
+    letter-spacing:.12em;text-transform:uppercase;padding:24px;
+    position:relative;overflow:hidden;
+  }
+  .mem-card .shot img{width:100%;height:auto;display:block}
+
+  /* Design-preview mock for pain-product mapping */
+  .mem-mock{
+    margin:0 -28px;background:#0A0910;border-top:1px solid var(--hair);
+    padding:20px 24px;font-family:var(--font-body), 'Geist', sans-serif;
+  }
+  .mem-mock .mock-head{
+    font-family:'Geist Mono',monospace;font-size:9.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-4);margin-bottom:12px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .mem-mock .mock-pain{
+    font-size:13px;color:var(--ink);font-style:italic;margin-bottom:14px;
+    padding:10px 12px;background:rgba(254,133,49,.06);
+    border-left:2px solid var(--copper);border-radius:0 4px 4px 0;
+  }
+  .mem-mock .mock-row{
+    display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;
+    padding:9px 0;border-bottom:1px dashed var(--hair);
+    font-size:13px;color:var(--ink-2);
+  }
+  .mem-mock .mock-row:last-child{border-bottom:0}
+  .mem-mock .mock-prod{color:var(--ink);font-weight:500}
+  .mem-mock .mock-conf{
+    font-family:'Geist Mono',monospace;font-size:11px;color:var(--copper);
+  }
+  .mem-mock .mock-bar{
+    width:60px;height:4px;background:rgba(254,133,49,.12);border-radius:2px;
+    overflow:hidden;position:relative;
+  }
+  .mem-mock .mock-bar::before{
+    content:"";position:absolute;inset:0;width:var(--pct,0%);
+    background:var(--copper);border-radius:2px;
+  }
+
+  /* CRM-vs-Salency compare */
+  .mem-compare{
+    max-width:1280px;margin:100px auto 0;padding:0 40px;
+  }
+  .mem-compare-head{margin-bottom:40px;max-width:60ch}
+  .mem-compare-head .eb{
+    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+    margin-bottom:18px;display:flex;align-items:center;gap:10px;
+  }
+  .mem-compare-head .eb::before{content:"";width:28px;height:1px;background:var(--copper);display:inline-block}
+  .mem-compare-head h2{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:clamp(34px,4vw,52px);line-height:1.05;letter-spacing:-.025em;
+    color:var(--ink);margin:0;max-width:22ch;text-wrap:balance;
+  }
+  .mem-compare-head h2 em{font-style:italic;color:var(--copper)}
+  .mem-table{
+    width:100%;border-collapse:collapse;
+    border:1px solid var(--hair-2);border-radius:14px;overflow:hidden;
+    background:#121015;
+  }
+  .mem-table thead th{
+    text-align:left;padding:16px 24px;
+    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-4);border-bottom:1px solid var(--hair-2);
+    background:#0F0D13;
+  }
+  .mem-table thead th:nth-child(2){color:var(--ink-3)}
+  .mem-table thead th:nth-child(3){color:var(--copper)}
+  .mem-table td{
+    padding:18px 24px;vertical-align:top;
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:14px;line-height:1.55;
+    border-bottom:1px solid var(--hair);
+  }
+  .mem-table tr:last-child td{border-bottom:0}
+  .mem-table td:nth-child(1){color:var(--ink);font-weight:500;width:22%}
+  .mem-table td:nth-child(2){color:var(--ink-3);width:39%}
+  .mem-table td:nth-child(3){color:var(--ink);width:39%}
+  .mem-table td:nth-child(3) em{font-style:normal;color:var(--copper);font-weight:500}
+  .mem-compare-foot{
+    margin-top:24px;font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:14px;color:var(--ink-3);
+  }
+  .mem-compare-foot a{color:var(--copper);border-bottom:1px solid rgba(254,133,49,.3);transition:border-color .18s}
+  .mem-compare-foot a:hover{border-bottom-color:var(--copper)}
+
+  /* Compat strip */
+  .mem-compat{
+    max-width:1280px;margin:96px auto 0;padding:36px 40px;
+    border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+    text-align:center;
+  }
+  .mem-compat .eb{
+    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4);
+    margin-bottom:20px;display:block;
+  }
+  .mem-compat-row{
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+    gap:32px;
+  }
+  .mem-compat-chip{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:22px;letter-spacing:-.01em;color:var(--ink-2);opacity:.65;
+    transition:opacity .18s, color .18s;
+  }
+  .mem-compat-chip:hover{opacity:.95;color:var(--ink)}
+  .mem-compat-chip.raw{
+    font-family:'Geist Mono',monospace;font-size:13px;letter-spacing:.08em;
+    padding:6px 12px;border:1px solid var(--hair-2);border-radius:4px;
+    color:var(--ink-3);opacity:.85;
+  }
+
+  /* CTA closer */
+  .mem-cta{
+    max-width:1280px;margin:100px auto 120px;padding:0 40px;text-align:center;
+  }
+  .mem-cta .eb{
+    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--copper);
+    margin-bottom:20px;display:block;
+  }
+  .mem-cta h2{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:clamp(36px,4.5vw,56px);line-height:1.05;letter-spacing:-.025em;
+    color:var(--ink);margin:0 auto 20px;max-width:22ch;text-wrap:balance;
+  }
+  .mem-cta h2 em{font-style:italic;color:var(--copper)}
+  .mem-cta .sub{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:16.5px;line-height:1.6;color:var(--ink-2);
+    max-width:52ch;margin:0 auto 32px;
+  }
+
+  @media (max-width:860px){
+    .mem-surfaces{grid-template-columns:1fr;gap:18px}
+    .mem-compare{margin-top:72px}
+    .mem-table td{padding:14px 18px;font-size:13px}
+    .mem-table thead th{padding:14px 18px}
+    .mem-table td:nth-child(1){width:28%}
+    .mem-compat{margin-top:72px;padding:28px 24px}
+    .mem-compat-row{gap:22px}
+    .mem-compat-chip{font-size:18px}
+    .mem-cta{margin:72px auto 80px}
+  }
+}
+
+  /* Moat section (on /investors, between platform and roadmap) */
+  .moat{max-width:1100px;margin:80px auto 0;padding:0 40px}
+  .moat .eb{
+    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--copper);
+    margin-bottom:28px;display:flex;align-items:center;gap:10px;
+  }
+  .moat .eb::before{content:"";width:28px;height:1px;background:var(--copper);display:inline-block}
+  .moat h2{
+    font-size:clamp(38px,4.2vw,54px);line-height:1.1;color:#E8E6E3;
+    margin:0 0 28px;max-width:28ch;text-wrap:balance;
+  }
+  .moat h2 em{font-style:italic;color:#F0A876}
+  .moat p{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;
+    color:#B6B4B0;max-width:62ch;margin:0 0 18px;
+  }
+  .moat p em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:#E8E6E3;font-size:19px;font-weight:400}
+  .moat .primitive{
+    margin-top:44px;padding:28px 32px;
+    background:rgba(254,133,49,.05);border:1px solid rgba(254,133,49,.18);
+    border-radius:12px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+  }
+  .moat .primitive .lbl{
+    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:#F0A876;
+  }
+  .moat .primitive .tt{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
+    line-height:1.35;color:#E8E6E3;max-width:62ch;margin:0;
+  }
+  .moat .primitive .tt em{font-style:italic;color:#F0A876}
