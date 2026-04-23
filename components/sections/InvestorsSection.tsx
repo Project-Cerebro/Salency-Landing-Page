@@ -1,13 +1,6 @@
 export function InvestorsSection() {
   return (
     <>
-      <div className="reg-div" aria-hidden="true">
-        <span className="hair" />
-        <div className="wrap">
-          <span className="kicker">What we&apos;re building</span>
-        </div>
-      </div>
-
       <div id="investors" className="investors-register">
         <div className="inv-intro">
           <div className="inv-intro-inner">
@@ -64,13 +57,12 @@ export function InvestorsSection() {
 
           <section className="roadmap">
             <div className="roadmap-card">
-              <span className="v">V1.5 · Next</span>
+              <span className="v">On the roadmap</span>
               <span className="t">
                 A <em>Recall.ai meeting bot</em> that joins Zoom, Meet, and
                 Teams calls directly — feeding the extraction pipeline without
                 a transcript upload step.
               </span>
-              <span className="s">On the roadmap</span>
             </div>
           </section>
 
