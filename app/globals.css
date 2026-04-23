@@ -1790,11 +1790,11 @@ header button:focus:not(:focus-visible){
    Memory page — /memory (per DESIGN.md §2–§7 alignment)
 ═══════════════════════════════════════════════════════════ */
 .memory-page {
-  /* ── Intro (matches .coming-soon / .inv-intro canonical 120/40/96) ── */
+  /* ── Intro (matches standalone canonical per DESIGN.md §4) ── */
   .mem-intro {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 120px 40px 48px;
+    max-width: 1280px;
+    margin: 80px auto 0;
+    padding: 20px 40px;
 
     .eb {
       font-family: 'Geist Mono', monospace;
@@ -2519,7 +2519,7 @@ header button:focus:not(:focus-visible){
   }
 
   @media (max-width: 720px) {
-    .mem-intro { padding: 96px 22px 36px; }
+    .mem-intro { padding: 20px 22px; margin-top: 48px; }
     .mem-hero-surface { padding: 0 18px; }
     .mem-hero-frame { padding: 20px 18px 18px; }
     .mem-hero-head { flex-direction: column; align-items: flex-start; }
