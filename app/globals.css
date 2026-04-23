@@ -748,6 +748,9 @@ html {
     max-width:1280px;margin:0 auto;
     padding:96px 40px 72px;
   }
+  @media (max-width: 768px) {
+    .hero { padding: 56px 22px 48px; }
+  }
   .hero-hairline{
     max-width:1280px;margin:0 auto;
     border-top:1px solid var(--hair);
@@ -1170,11 +1173,17 @@ html {
   .cta-section{
     max-width:1280px;margin:140px auto 0;padding:0 40px 120px;
   }
+  @media (max-width: 768px) {
+    .cta-section { margin-top: 80px; padding: 0 22px 64px; }
+  }
   .cta-card{
     position:relative;overflow:hidden;
     background:linear-gradient(135deg, #1A171E 0%, #121015 100%);
     border:1px solid var(--hair-2);border-radius:20px;
     padding:72px 56px;text-align:center;
+  }
+  @media (max-width: 768px) {
+    .cta-card { padding: 40px 24px; border-radius: 14px; }
   }
   .cta-card::before{
     content:"";position:absolute;inset:0;pointer-events:none;
