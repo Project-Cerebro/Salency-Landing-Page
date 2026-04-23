@@ -1,4 +1,5 @@
 import { MarketingHeader } from '@/components/MarketingHeader';
+import { ScrollReveal } from '@/components/ScrollReveal';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { HubSection } from '@/components/sections/HubSection';
 import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
@@ -10,11 +11,11 @@ export default function Home() {
   return (
     <div className="page">
       <MarketingHeader />
-      <HeroSection />
-      <HubSection />
-      <HowItWorksSection />
-      <NotDoSection />
-      <CtaSection />
+      <ScrollReveal><HeroSection /></ScrollReveal>
+      <ScrollReveal><HubSection /></ScrollReveal>
+      <ScrollReveal><HowItWorksSection /></ScrollReveal>
+      <ScrollReveal><NotDoSection /></ScrollReveal>
+      <ScrollReveal><CtaSection /></ScrollReveal>
       <SiteFooter />
     </div>
   );
