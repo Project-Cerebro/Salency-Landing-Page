@@ -102,7 +102,7 @@ export function InvestorsSection() {
 
           <section className="team" id="team">
             <div className="sect-head">
-              <span className="num">03.</span>
+              <span className="section-num">03.</span>
               <h2>
                 Why <em>this team,</em> on this problem, now.
               </h2>
@@ -120,7 +120,7 @@ export function InvestorsSection() {
                   Panda Bond and handled business development at Sequence and
                   Treasure. MBET, Waterloo.
                 </p>
-                <div className="fit">
+                <div className="founder-fit">
                   <div className="label">Unfair advantage</div>
                   <p>
                     Has <em>lost deals to forgotten context personally</em>, in
@@ -131,8 +131,8 @@ export function InvestorsSection() {
               </div>
             </div>
 
-            <div className="founder rev">
-              <div className="photo p2">NI</div>
+            <div className="founder founder--reversed">
+              <div className="photo photo--violet">NI</div>
               <div className="body">
                 <div className="name">Nikki Ip</div>
                 <div className="role">Co-founder &amp; COO</div>
@@ -143,7 +143,7 @@ export function InvestorsSection() {
                   internally. Prior background in institutional client
                   management and AML/KYC compliance in banking.
                 </p>
-                <div className="fit">
+                <div className="founder-fit">
                   <div className="label">Unfair advantage</div>
                   <p>
                     Knows what sales ops <em>actually trusts</em>, how handoffs
@@ -156,7 +156,7 @@ export function InvestorsSection() {
             </div>
 
             <div className="founder">
-              <div className="photo p3">BO</div>
+              <div className="photo photo--teal">BO</div>
               <div className="body">
                 <div className="name">Babajide Okusanya</div>
                 <div className="role">Technical Lead</div>
@@ -166,7 +166,7 @@ export function InvestorsSection() {
                   Previously scaled a B2B marketplace to meaningful ARR as an
                   applied-AI operator — not a research hire.
                 </p>
-                <div className="fit">
+                <div className="founder-fit">
                   <div className="label">Unfair advantage</div>
                   <p>
                     The core technical risk in Salency is not &ldquo;can an LLM
@@ -202,7 +202,7 @@ export function InvestorsSection() {
                 inheriting the account doesn&apos;t either. The asset that
                 makes either one useful is the same asset.
               </p>
-              <div className="close">
+              <div className="thesis-close">
                 Salency owns that layer. The longer a team runs it,{' '}
                 <em>the more context compounds</em> — and the harder it is to
                 rip out.

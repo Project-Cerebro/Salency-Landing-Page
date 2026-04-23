@@ -339,6 +339,40 @@ Hero cards (`.thesis-card`, `.cta-card`) add a 2px left gradient via `::before`:
 
 ## 6 · Conventions
 
+### Naming convention
+
+One pattern across the codebase:
+
+| Layer | Pattern | Example |
+|---|---|---|
+| Block (component root) | kebab-case noun | `.founder`, `.thesis-card`, `.apply-card`, `.how-step`, `.mem-hero-frame` |
+| Element (child of block) | nested under block | `.founder .bio`, `.how-step .desc`, `.mem-hero-head .mem-hero-title` |
+| Modifier (variant of block/element) | `--suffix` | `.founder--reversed`, `.photo--violet`, `.photo--teal` |
+| State | `.is-*` / `.has-*` | `.is-open`, `.has-image` |
+| Utility / primitive (documented short alias) | 2–3 letter alias, widely understood | `.eb`, `.sep`, `.sub`, `.pill`, `.dim` |
+
+**Renames applied 2026-04-23** (cryptic short forms → scoped, descriptive):
+
+| Was | Now | Why |
+|---|---|---|
+| `.fit` | `.founder-fit` | didn't say what the block was in isolation |
+| `.rev` | `.founder--reversed` | BEM-style modifier on `.founder` |
+| `.p2` | `.photo--violet` | hue-named; the number was meaningless |
+| `.p3` | `.photo--teal` | same |
+| `.num` (two roles) | `.figure` (data value on `.prob-card .cost`) + `.section-num` (index on `.team .sect-head`) | one alias was pulling double duty |
+| `.close` | `.thesis-close` | scoped to its parent `.thesis-card` |
+| `.verb` | `.how-step-action` | names the role of the h3 inside each how-step |
+| CSS `.arr` | CSS `.arrow` | JSX always used `.arrow`; CSS was wrong |
+
+**Short aliases kept as intentional domain jargon** (whitelisted; don't invent new ones):
+- `.eb` — eyebrow (mono-caps + copper + dash signature treatment)
+- `.sep` — separator (inline `·` or similar)
+- `.sub` — subline / subtitle
+- `.pill` — small pill badge
+- `.dim` — muted row in a table or list
+
+When adding a new class, default to scoped descriptive names. Only use a short alias if the term is already in this list OR if you add a new entry here with justification.
+
 ### Native CSS nesting is the convention
 
 `globals.css` migrates flat selectors to native CSS nesting. Existing nested blocks: `.hub-wrap`, `.loading-screen`, `.btn-submit`, `.apply-page`, `.coming-soon`, `.reg-inv`, `.platform`, `.roadmap`, `.team`, `.founder`, `.thesis-card`, `.investors-register`, `.inv-intro`, `header`, `footer`.
