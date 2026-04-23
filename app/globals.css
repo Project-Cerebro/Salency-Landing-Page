@@ -2143,6 +2143,16 @@ header button:focus:not(:focus-visible){
       letter-spacing: .12em;
       text-transform: uppercase;
       line-height: 1.55;
+
+      .bridge-link {
+        color: var(--copper);
+        text-decoration: none;
+        border-bottom: 1px solid var(--copper-a18);
+        transition: border-color .18s;
+        white-space: nowrap;
+
+        &:hover { border-bottom-color: var(--copper); }
+      }
     }
   }
 

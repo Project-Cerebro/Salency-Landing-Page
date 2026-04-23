@@ -190,7 +190,10 @@ export function MemorySection() {
             </span>
             <span className="bridge-also">
               Also in the brief: commitments &middot; contradictions &middot;
-              pain &rarr; product &middot; cliffhanger
+              pain &rarr; product &middot; cliffhanger.{' '}
+              <Link href="/investors#moat" className="bridge-link">
+                Why not Salesforce &rarr;
+              </Link>
             </span>
           </div>
         </section>
