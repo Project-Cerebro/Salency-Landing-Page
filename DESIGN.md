@@ -392,7 +392,7 @@ Known investor-specific deliberate choices (not drift):
 
 **Kept copper (4 roles):**
 - Eyebrow `.eb` text + 28×1 `::before` dash (5 instances — intro, hero-surface, support-head, compare-head, cta).
-- Display headline `em` (5 instances — intro h1, hero-title, support-card h3, compare-head h2, cta h2).
+- Display headline `em` (4 instances — intro h1, hero-title, compare-head h2, cta h2). **Exception:** `.mem-support-card h3 em` deliberately uses `color: inherit` — support cards are a tertiary grid, not the primary focus of the page, so an accent em would fight with the page-level hierarchy. Don't mix accent ems into non-primary headings.
 - `.mem-hero-frame::before` — 2px left gradient on the featured hero surface. **The single visual anchor for this page**, per rule #5.
 - `.mem-compare-foot a` — inline CTA link "view full comparison" treated as a micro-CTA.
 
