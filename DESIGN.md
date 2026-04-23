@@ -390,11 +390,13 @@ Known investor-specific deliberate choices (not drift):
 
 `/memory` was the worst offender under the "keywords only" rule: 33 copper references across ~750 lines of scoped CSS. Chrome uses demoted to the `--ink-*` ramp in one pass.
 
-**Kept copper (4 roles):**
+**Kept copper (6 roles):**
 - Eyebrow `.eb` text + 28×1 `::before` dash (5 instances — intro, hero-surface, support-head, compare-head, cta).
 - Display-heading `em` (5 instances — intro h1, hero-title, support-card h3, compare-head h2, cta h2). Consistent treatment: every display `em` on the page uses copper. Don't mix ink and copper ems across the same hierarchy level — pick one and apply it everywhere.
+- `.mem-support-card h3` itself (not just its em) — the whole support-card title is copper so the heading reads as one unit, no ink/copper split within the same element. Rule: when a heading contains a copper em, the surrounding heading text uses the same color (avoid mixing within a single element).
 - `.mem-hero-frame::before` — 2px left gradient on the featured hero surface. **The single visual anchor for this page**, per rule #5.
 - `.mem-compare-foot a` — inline CTA link "view full comparison" treated as a micro-CTA.
+- `.mem-table thead th:nth-child(3)` — the "Salency" column header. The whole point of the comparison table is to mark THIS column as the answer; copper is the signal that earns its pixels. Sibling column `.mem-table thead th:nth-child(2)` ("CRM") stays at `--ink-3` for the hierarchy contrast.
 
 **Demoted (chrome, now on the ink ramp):**
 - `.memory-block .q::before/::after` (quote glyphs) → `--ink-3`.
@@ -409,6 +411,5 @@ Known investor-specific deliberate choices (not drift):
 - `.pp-conf` percent text → `--ink-2`.
 - `.mapping-bar` bg + `.mapping-bar-fill` gradient → ink ramp. Progress communicates by length.
 - `.cx-date` / `.cx-arrow` / `.hx-line.muted` — mock text → `--ink-3`.
-- `.mem-table thead th:nth-child(3)` (Salency column header) → `--ink` (brightness differentiates from CRM column at `--ink-3`, no accent needed).
 
 Next under this rule: `/pilot` + `/pricing` (`.apply-check` / `.apply-dot` list markers), then home `/` (hub pulse, hover states).

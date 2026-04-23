@@ -2423,9 +2423,9 @@ header button:focus:not(:focus-visible){
       background: rgba(0, 0, 0, 0.12);
     }
     thead th:nth-child(2) { color: var(--ink-3); }
-    /* Salency column highlighted by brightness (ink) vs. CRM (ink-3),
-       not by accent color. Copper is reserved for keywords. */
-    thead th:nth-child(3) { color: var(--ink); }
+    /* Salency column header is a keyword — the whole point of the
+       table is to mark THIS column as the answer. Copper earned. */
+    thead th:nth-child(3) { color: var(--copper); }
 
     td {
       padding: 18px 22px;
