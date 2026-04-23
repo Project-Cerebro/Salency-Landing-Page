@@ -67,3 +67,16 @@ Server by default. Client components (`'use client'`): `PageClient`, `Header`, `
 - `DESIGN.md` — full proposed system with tokens, competitive research, SAFE/RISK classification.
 - `SALENCY_LANDING_PAGE.md`, `TASKS.md` — product/positioning context and outstanding work.
 - `.gstack/design-reports/design-preview.html` — live token preview (open in browser).
+
+## Branching strategy (GitHub Flow)
+
+**Trunk = `main`. Feature branches branch off `main`, PR to `main`, merge to `main`. `main` auto-deploys to production.**
+
+- **Never** branch off `test-revamp`, `test`, or any long-lived non-main branch. They're obsolete for this repo.
+- **Vercel preview URL per PR** is the staging environment — review the preview, then merge. No intermediate staging branch needed.
+- **Branch names:** `content/*` for copy, `design/*` for visual, `feat/*` for features, `fix/*` for bugs, `refactor/*` for restructure.
+- **One PR = one logical change.** Small, reviewable, bisectable.
+
+**Why:** Salency's landing page is small + fast-moving. The earlier `feature → test-revamp → main` flow caused ordering bugs (e.g., PR #36 shipped before PR #37, breaking prod copy) and double-PR overhead with no integration-risk benefit that Vercel previews don't already cover.
+
+**If you see an older PR targeting `test-revamp`:** retarget to `main` with `gh pr edit <N> --base main`.
