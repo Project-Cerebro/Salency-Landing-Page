@@ -33,7 +33,7 @@ export function HeroSection() {
         </div>
 
         <div className="hero-meta">
-          <span className="hero-meta-item">Works alongside your notetaker</span>
+          <span className="hero-meta-item">Reads any transcript</span>
           <span className="hero-meta-item">Early access · Q2 2026</span>
         </div>
       </section>
