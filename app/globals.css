@@ -1131,6 +1131,28 @@ html {
   }
   .prob-resolve .link:hover{color:#FE9F5B}
 
+  /* Problem section mobile: 3-col pain grid stacks, vertical dividers
+     become horizontal, asymmetric left/right padding resets, and the
+     .prob-resolve 3-cell row (label + text + link) stacks to 1 col. */
+  @media (max-width: 768px) {
+    .prob-row { grid-template-columns: 1fr; }
+    .prob-card {
+      padding: 32px 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--hair);
+    }
+    .prob-card:nth-child(n+2) { padding-left: 0; }
+    .prob-card:last-child { border-bottom: 0; padding-bottom: 8px; }
+    .prob-card .title { max-width: none; }
+    .prob-card .desc  { max-width: none; }
+    .prob-resolve {
+      padding: 24px 22px;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .prob-resolve .link { white-space: normal; }
+  }
+
   /* ═══════════ CTA ═══════════ */
   .cta-section{
     max-width:1280px;margin:140px auto 0;padding:0 40px 120px;
@@ -1294,6 +1316,18 @@ html {
   .notdo-item .check{color:var(--copper)}
   .notdo-item .title{font-size:14.5px;color:var(--ink);font-weight:400;line-height:1.4;grid-column:2}
   .notdo-item .subtitle{font-size:13px;color:var(--ink-3);line-height:1.5;grid-column:2}
+
+  /* "NOT strip" mobile: card header stacks above the 2-col item list,
+     and the item list itself collapses to one column. */
+  @media (max-width: 768px) {
+    .notdo-card {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 24px 22px;
+    }
+    .notdo-card .header { max-width: none; }
+    .notdo-list { grid-template-columns: 1fr; gap: 14px; }
+  }
 
   /* ═══════════ Notetaker comparison table ═══════════ */
   .notetaker{max-width:1280px;margin:140px auto 0;padding:0 40px}
