@@ -1,4 +1,5 @@
 import { MarketingHeader } from '@/components/MarketingHeader';
+import { ScrollReveal } from '@/components/ScrollReveal';
 import { PilotApplication } from '@/components/sections/PilotApplication';
 import { SiteFooter } from '@/components/sections/SiteFooter';
 
@@ -12,7 +13,7 @@ export default function PilotPage() {
   return (
     <div className="page">
       <MarketingHeader />
-      <PilotApplication />
+      <ScrollReveal><PilotApplication /></ScrollReveal>
       <SiteFooter />
     </div>
   );
