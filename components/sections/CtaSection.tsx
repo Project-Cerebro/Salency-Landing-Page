@@ -1,3 +1,7 @@
+'use client';
+
+import { openPilotModal } from '@/components/PilotModal';
+
 export function CtaSection() {
   return (
     <section className="cta-section">
@@ -12,8 +16,14 @@ export function CtaSection() {
           we&apos;ll scope a fit together.
         </p>
         <div className="btns">
-          <button className="btn btn-primary">Request early access →</button>
-          <button className="btn btn-ghost">Read the memo</button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => openPilotModal()}
+          >
+            Request early access →
+          </button>
+          <button type="button" className="btn btn-ghost">Read the memo</button>
         </div>
         <div className="fine">
           No card required · 30-minute scoping call · Works alongside your AI

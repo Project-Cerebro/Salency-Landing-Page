@@ -1129,7 +1129,7 @@ html {
   }
   .how-head .lede em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-size:20px;font-weight:400}
   .how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hair-2)}
-  .how-step{padding:36px 32px 36px 0;border-right:1px solid var(--hair);position:relative}
+  .how-step{padding:36px 32px 36px 0;border-right:1px solid var(--hair);position:relative;display:flex;flex-direction:column}
   .how-step:nth-child(n+2){padding-left:32px}
   .how-step:last-child{border-right:0}
   .how-step:not(:last-child)::before{
@@ -1154,6 +1154,7 @@ html {
     line-height:1.65;color:var(--ink-2);margin:0 0 22px;max-width:34ch;
   }
   .how-step .ex{
+    margin-top:auto;
     padding:14px 16px;background:rgba(254,133,49,.04);
     border:1px solid rgba(254,133,49,.12);border-radius:8px;
   }

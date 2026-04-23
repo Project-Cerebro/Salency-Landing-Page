@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { Zap, ChevronDown, Sparkles, AlertCircle, Copy, Check } from 'lucide-react';
 import { track } from '@vercel/analytics';
+import { openPilotModal } from '@/components/PilotModal';
 
 const SAMPLE_TRANSCRIPTS = [
   {
@@ -268,12 +269,13 @@ export function InteractiveDemo() {
                 <p className="text-sm text-gray-400 mb-3">
                   Want to see this on your own calls?
                 </p>
-                <a
-                  href="#pilot"
+                <button
+                  type="button"
+                  onClick={() => openPilotModal()}
                   className="inline-flex items-center bg-accent-warm/10 hover:bg-accent-warm/20 text-accent-warm font-semibold px-5 py-2.5 rounded-lg text-sm border border-accent-warm/20 transition-colors"
                 >
                   Start Your Free Pilot
-                </a>
+                </button>
               </div>
             )}
           </div>

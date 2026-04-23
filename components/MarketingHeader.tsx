@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { openPilotModal } from '@/components/PilotModal';
 
 type NavLink = {
   label: string;
@@ -65,7 +66,13 @@ export function MarketingHeader() {
         <nav className="links">{links.map((l) => renderLink(l))}</nav>
 
         <div className="nav-cta">
-          <button className="btn btn-primary">Request a pilot →</button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => openPilotModal()}
+          >
+            Request a pilot →
+          </button>
         </div>
 
         <button
@@ -95,8 +102,12 @@ export function MarketingHeader() {
         </nav>
         <div className="nav-panel-cta">
           <button
+            type="button"
             className="btn btn-primary"
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false);
+              openPilotModal();
+            }}
           >
             Request a pilot →
           </button>
