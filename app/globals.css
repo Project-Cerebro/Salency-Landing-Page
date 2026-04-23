@@ -1849,10 +1849,10 @@ header button:focus:not(:focus-visible){
     }
   }
 
-  /* ── Featured hero surface (Surface 01: the brief) ── */
+  /* ── Featured hero surface (Surface 01: tight 2-col, fits viewport) ── */
   .mem-hero-surface {
     max-width: 1100px;
-    margin: 24px auto 0;
+    margin: 20px auto 0;
     padding: 0 40px;
   }
 
@@ -1861,7 +1861,7 @@ header button:focus:not(:focus-visible){
     background: rgba(254, 133, 49, 0.03);
     border: 1px solid var(--hair-2);
     border-radius: 16px;
-    padding: 36px 36px 40px;
+    padding: 22px 28px 20px;
     overflow: hidden;
 
     /* Hero-card 2px left gradient per DESIGN.md §5 card chrome */
@@ -1874,33 +1874,57 @@ header button:focus:not(:focus-visible){
     }
   }
 
+  /* Card header — brief-title + meta on the left, preview chip on the right */
   .mem-hero-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 24px;
-    margin-bottom: 28px;
-    border-bottom: 1px solid var(--hair);
-    gap: 16px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--hair-2);
+    gap: 14px;
     flex-wrap: wrap;
 
-    .mem-hero-kicker {
-      font-family: 'Geist Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--copper);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+    .mem-hero-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
 
-      &::before {
-        content: "";
-        width: 28px;
-        height: 1px;
-        background: var(--copper);
-        display: inline-block;
+    .mem-hero-title {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      line-height: 1.3;
+
+      em { font-style: italic; color: var(--copper); font-weight: 400; }
+    }
+
+    .mem-hero-meta {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-3);
+      letter-spacing: .04em;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+
+      .sep { color: var(--ink-4); opacity: .5; }
+
+      .pulse {
+        display: inline-flex; align-items: center; gap: 6px;
+        color: var(--copper);
+
+        &::before {
+          content: "";
+          width: 5px; height: 5px; border-radius: 50%;
+          background: var(--copper);
+          box-shadow: 0 0 0 0 rgba(254, 133, 49, 0.55);
+          animation: memPulse 2.4s ease-in-out infinite;
+        }
       }
     }
 
@@ -1915,77 +1939,27 @@ header button:focus:not(:focus-visible){
       border: 1px solid rgba(254, 133, 49, 0.26);
       border-radius: 4px;
       padding: 5px 10px;
+      white-space: nowrap;
     }
   }
 
-  /* ── The brief (6 blocks) ── */
-  .mem-brief {
-    max-width: 760px;
-    margin: 0 auto;
-  }
+  /* Brief grid — People left, They need right */
+  .mem-brief-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 28px;
+    padding-top: 16px;
 
-  .mem-brief .crumb {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-4);
-    margin-bottom: 16px;
-
-    .crumb-link { color: var(--ink-3); }
-    .sep { color: var(--ink-4); margin: 0 8px; }
-  }
-
-  .mem-brief .brief-title {
-    font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-    font-weight: 400;
-    font-size: clamp(36px, 4.6vw, 52px);
-    line-height: 1.04;
-    letter-spacing: -.02em;
-    color: var(--ink);
-    margin: 0 0 14px;
-
-    em { font-style: italic; color: var(--copper); }
-  }
-
-  .mem-brief .brief-meta {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: .04em;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 48px;
-
-    .sep { color: var(--ink-4); opacity: .6; }
-
-    .pulse {
-      display: inline-flex; align-items: center; gap: 8px;
-      color: var(--copper);
-
-      &::before {
-        content: "";
-        width: 6px; height: 6px; border-radius: 50%;
-        background: var(--copper);
-        box-shadow: 0 0 0 0 rgba(254, 133, 49, 0.55);
-        animation: memPulse 2.4s ease-in-out infinite;
-      }
+    .brief-block {
+      padding: 0;
+      border: 0;
     }
-  }
-
-  .mem-brief .brief-block {
-    padding: 32px 0 36px;
-    border-top: 1px solid var(--hair);
-
-    &:first-of-type { border-top: 1px solid var(--hair-2); padding-top: 0; }
   }
 
   /* Canonical eyebrow inside brief blocks */
-  .mem-brief .eb {
+  .mem-hero-surface .eb {
     font-family: 'Geist Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     letter-spacing: .18em;
     text-transform: uppercase;
@@ -1993,11 +1967,11 @@ header button:focus:not(:focus-visible){
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 22px;
+    margin-bottom: 12px;
 
     &::before {
       content: "";
-      width: 28px;
+      width: 24px;
       height: 1px;
       background: var(--copper);
       display: inline-block;
@@ -2006,42 +1980,42 @@ header button:focus:not(:focus-visible){
     .sub {
       font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
       color: var(--ink-3);
-      font-size: 12.5px;
+      font-size: 11.5px;
       letter-spacing: .04em;
       font-weight: 400;
       text-transform: none;
     }
   }
 
-  /* Block 1 — People */
-  .mem-brief .people { display: grid; gap: 18px; }
-  .mem-brief .person {
+  /* People — compact stacked rows */
+  .mem-hero-surface .people { display: grid; gap: 8px; }
+  .mem-hero-surface .person {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 14px 0;
+    gap: 3px;
+    padding: 8px 0;
     border-bottom: 1px dashed var(--hair);
 
     &:last-child { border-bottom: 0; }
 
     .person-main {
-      display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+      display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
     }
 
     .person-name {
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
       font-weight: 500;
-      font-size: 22px;
+      font-size: 17px;
       color: var(--ink);
       letter-spacing: -.01em;
-      line-height: 1.15;
+      line-height: 1.2;
     }
 
     .person-role {
       font-family: 'Geist Mono', monospace;
-      font-size: 11px;
+      font-size: 10px;
       color: var(--ink-3);
-      letter-spacing: .12em;
+      letter-spacing: .1em;
       text-transform: uppercase;
     }
 
@@ -2049,33 +2023,28 @@ header button:focus:not(:focus-visible){
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 17px;
-      line-height: 1.45;
+      font-size: 14px;
+      line-height: 1.35;
       color: var(--ink-2);
     }
 
     .person-cite {
       font-family: 'Geist Mono', monospace;
-      font-size: 11px;
+      font-size: 10px;
       color: var(--ink-3);
       letter-spacing: .04em;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
 
       .person-cite-link { color: var(--copper); }
-      .arrow { color: var(--copper); opacity: .7; }
     }
   }
 
-  .mem-brief .stance {
+  .mem-hero-surface .stance {
     font-family: 'Geist Mono', monospace;
-    font-size: 10.5px;
+    font-size: 9px;
     font-weight: 500;
     letter-spacing: .16em;
     text-transform: uppercase;
-    padding: 4px 10px;
+    padding: 2px 6px;
     border-radius: 4px;
 
     &.champion {
@@ -2095,71 +2064,69 @@ header button:focus:not(:focus-visible){
     }
   }
 
-  /* Block 2 — They Need */
-  .mem-brief .pains { display: grid; gap: 10px; }
-  .mem-brief .pain {
-    padding: 14px 0 14px 20px;
+  /* They need — compact pain rows */
+  .mem-hero-surface .pains { display: grid; gap: 6px; }
+  .mem-hero-surface .pain {
+    padding: 8px 0 8px 14px;
     border-left: 2px solid var(--copper);
     background: linear-gradient(90deg, rgba(254, 133, 49, 0.04), transparent 60%);
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 4px 4px 0;
 
     .pain-quote {
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 19px;
-      line-height: 1.4;
+      font-size: 14.5px;
+      line-height: 1.3;
       color: var(--ink);
-      margin: 0 0 8px;
+      margin: 0 0 4px;
       letter-spacing: -.005em;
     }
 
     .pain-cite {
       font-family: 'Geist Mono', monospace;
-      font-size: 11px;
+      font-size: 10px;
       color: var(--ink-3);
       letter-spacing: .04em;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
 
       .pain-cite-link { color: var(--copper); }
     }
   }
 
-  .mem-brief .intensity {
+  .mem-hero-surface .intensity {
     display: inline-flex; gap: 3px; align-items: center;
 
     .intensity-dot {
-      width: 5px; height: 5px; border-radius: 50%;
+      width: 4px; height: 4px; border-radius: 50%;
       background: var(--copper);
     }
     .intensity-dot.off { background: var(--ink-4); opacity: .4; }
   }
 
-  /* Brief foot — promise strip hinting at what lives inside the full product brief */
-  .mem-brief .brief-foot {
-    margin-top: 28px;
-    padding-top: 22px;
-    border-top: 1px solid var(--hair);
+  /* Bridge "also in the brief" strip — outside the card */
+  .mem-hero-bridge {
+    margin-top: 18px;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
 
-    > span:first-child {
+    .bridge-lead {
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
       font-style: italic;
-      font-size: 15px;
+      font-size: 14px;
       color: var(--ink-2);
       line-height: 1.4;
     }
 
-    .brief-foot-also {
+    .bridge-also {
       font-family: 'Geist Mono', monospace;
-      font-size: 10.5px;
+      font-size: 10px;
       color: var(--ink-3);
       letter-spacing: .12em;
       text-transform: uppercase;
@@ -2548,11 +2515,16 @@ header button:focus:not(:focus-visible){
     .mem-support-grid { grid-template-columns: 1fr; gap: 18px; }
   }
 
+  @media (max-width: 860px) {
+    .mem-brief-grid { grid-template-columns: 1fr; gap: 20px; }
+  }
+
   @media (max-width: 720px) {
     .mem-intro { padding: 96px 22px 36px; }
     .mem-hero-surface { padding: 0 18px; }
-    .mem-hero-frame { padding: 24px 20px 28px; }
+    .mem-hero-frame { padding: 20px 18px 18px; }
     .mem-hero-head { flex-direction: column; align-items: flex-start; }
+    .mem-hero-bridge { flex-direction: column; gap: 8px; }
 
     .mem-compare { margin-top: 72px; padding: 0 22px; }
     .mem-table { font-size: 13px; }

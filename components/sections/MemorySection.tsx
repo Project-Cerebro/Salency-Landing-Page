@@ -26,20 +26,19 @@ const PEOPLE = [
 const PAINS = [
   {
     quote: 'Handoff loses context every time an AE rotates off.',
-    who: 'Priya Shah, VP Sales',
+    who: 'Priya Shah',
     cite: 'call 03, Apr 14 · 18:02',
     urgency: 3,
   },
   {
-    quote:
-      'We can\u2019t tell which pains repeat across accounts \u2014 it\u2019s all in reps\u2019 heads.',
-    who: 'Priya Shah, VP Sales',
+    quote: 'Pains repeat across accounts \u2014 all in reps\u2019 heads.',
+    who: 'Priya Shah',
     cite: 'call 02, Apr 07 · 27:44',
     urgency: 2,
   },
   {
-    quote: 'Our CRM has a notes field, but nothing structured we can query.',
-    who: 'Marcus Chen, Sales Ops',
+    quote: 'CRM has notes, not anything we can query.',
+    who: 'Marcus Chen',
     cite: 'call 03, Apr 14 · 41:02',
     urgency: 1,
   },
@@ -111,37 +110,33 @@ export function MemorySection() {
         </section>
       </ScrollReveal>
 
-      {/* ─── Surface 01: featured brief ─── */}
+      {/* ─── Surface 01: featured brief (tight 2-col, fits viewport) ─── */}
       <ScrollReveal>
         <section className="mem-hero-surface">
           <div className="mem-hero-frame">
             <div className="mem-hero-head">
-              <span className="mem-hero-kicker">The brief &middot; Surface 01</span>
-              <span className="mem-hero-chip">Design preview</span>
+              <div className="mem-hero-title-group">
+                <span className="mem-hero-title">
+                  Acme Corp &middot; <em>Day-1 brief</em>
+                </span>
+                <span className="mem-hero-meta">
+                  <span>Updated 2026-04-22</span>
+                  <span className="sep">&middot;</span>
+                  <span className="pulse">3 new pains flagged</span>
+                  <span className="sep">&middot;</span>
+                  <span>12 calls indexed</span>
+                </span>
+              </div>
+              <span className="mem-hero-chip">
+                Surface 01 &middot; Design preview
+              </span>
             </div>
 
-            <div className="mem-brief">
-              <div className="crumb">
-                <span className="crumb-link">Prospects</span>
-                <span className="sep">/</span>
-                <span>Acme Corp</span>
-              </div>
-              <h2 className="brief-title">
-                Acme Corp &middot; <em>Day-1 brief</em>
-              </h2>
-              <div className="brief-meta">
-                <span>Updated 2026-04-22</span>
-                <span className="sep">&middot;</span>
-                <span className="pulse">3 new pains flagged</span>
-                <span className="sep">&middot;</span>
-                <span>12 calls indexed &middot; 2 stakeholders on this card</span>
-              </div>
-
-              {/* People */}
+            <div className="mem-brief-grid">
+              {/* LEFT: People */}
               <div className="brief-block">
                 <div className="eb">
-                  People{' '}
-                  <span className="sub">who&rsquo;s in the room</span>
+                  People <span className="sub">who&rsquo;s in the room</span>
                 </div>
                 <div className="people">
                   {PEOPLE.map((p) => (
@@ -157,18 +152,15 @@ export function MemorySection() {
                         &ldquo;{p.quote}&rdquo;
                       </div>
                       <div className="person-cite">
-                        <span>
-                          {p.name}, {p.role} &middot;
-                        </span>
+                        <span>{p.name} &middot; </span>
                         <span className="person-cite-link">{p.cite}</span>
-                        <span className="arrow">&rsaquo;&rsaquo;</span>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* They need */}
+              {/* RIGHT: They need */}
               <div className="brief-block">
                 <div className="eb">
                   They need <span className="sub">top pains, cited</span>
@@ -188,14 +180,18 @@ export function MemorySection() {
                   ))}
                 </div>
               </div>
-
-              <div className="brief-foot">
-                <span>This is what the rep opens Monday at 1:45pm.</span>
-                <span className="brief-foot-also">
-                  Also in the brief: open commitments &middot; contradictions &middot; pain &rarr; product mapping &middot; next-step cliffhanger.
-                </span>
-              </div>
             </div>
+          </div>
+
+          {/* "Also in the brief" bridge — moved outside the card */}
+          <div className="mem-hero-bridge">
+            <span className="bridge-lead">
+              This is what the rep opens Monday at 1:45pm.
+            </span>
+            <span className="bridge-also">
+              Also in the brief: commitments &middot; contradictions &middot;
+              pain &rarr; product &middot; cliffhanger
+            </span>
           </div>
         </section>
       </ScrollReveal>
