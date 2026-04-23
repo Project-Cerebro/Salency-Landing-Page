@@ -45,7 +45,7 @@ Both `--font-body` and `--font-display` currently resolve to **Instrument Sans**
 
 | Role | Font | Weight | Used on |
 |---|---|---|---|
-| Hero h1, section h2, card h3, editorial accents | `var(--font-display)` (Instrument Sans) | 400 normal, 400 italic for `em` | `.h1`, `.hero h1`, `.prob-head h2`, `.how-head h2`, `.gong-head h2`, `.platform h2`, `.thesis-card h2`, `.coming-soon h1`, `.pilot-app h1`/`h3`, `.inv-intro h1`, `.founder .name` |
+| Hero h1, section h2, card h3, editorial accents | `var(--font-display)` (Instrument Sans) | 400 normal, 400 italic for `em` | `.h1`, `.hero h1`, `.prob-head h2`, `.how-head h2`, `.notetaker-head h2`, `.platform h2`, `.thesis-card h2`, `.coming-soon h1`, `.pilot-app h1`/`h3`, `.inv-intro h1`, `.founder .name` |
 | Body, ledes, paragraph text, list items | `var(--font-body)` (Instrument Sans) | 300 for ledes, 400 for body | `.sub`, `.how-head .lede`, `.platform p`, `.inv-intro p`, `.pilot-lede`, `.founder .bio`, `.thesis-card p` |
 | Eyebrows, meta strips, labels, pill tags, footer legal | `'Geist Mono', monospace` | 400 or 500 | `.eb`, `.hero-meta`, `.inv-intro-meta`, `.founder .role`, `.roadmap-card .v`, `.sample-label`, `footer`, legal pages |
 | Brand wordmark (header logo) | `var(--font-outfit)` | 800 | `.brand .name`, `.nav-brand` |
@@ -199,7 +199,7 @@ Used on every marketing section to label the content area.
 Shipped copies (all use the same 28×1 dash, copper, `.18em` tracking):
 - `.prob-head .eb` / `::before` — Problem section
 - `.how-head .eb` / `::before` — How it works
-- `.gong-head .eb` / `::before` — Gong comparison
+- `.notetaker-head .eb` / `::before` — Notetaker comparison
 - `.platform .eb` / `::before` — Platform framing (investors)
 - `.coming-soon .eb` / `::before` — Pricing + Memory stubs
 - `.pilot-app .eb` / `::before` — Pilot + Pricing page intro

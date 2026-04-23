@@ -1260,58 +1260,58 @@ html {
   .notdo-item .title{font-size:14.5px;color:var(--ink);font-weight:400;line-height:1.4;grid-column:2}
   .notdo-item .subtitle{font-size:13px;color:var(--ink-3);line-height:1.5;grid-column:2}
 
-  /* ═══════════ Gong comparison table ═══════════ */
-  .gong{max-width:1280px;margin:140px auto 0;padding:0 40px}
-  .gong-head{margin-bottom:48px;max-width:56ch}
-  .gong-head .eb{
+  /* ═══════════ Notetaker comparison table ═══════════ */
+  .notetaker{max-width:1280px;margin:140px auto 0;padding:0 40px}
+  .notetaker-head{margin-bottom:48px;max-width:56ch}
+  .notetaker-head .eb{
     font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
     letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
     margin-bottom:18px;display:flex;align-items:center;gap:10px;
   }
-  .gong-head .eb::before{content:"";width:28px;height:1px;background:var(--copper);display:inline-block}
-  .gong-head h2{
+  .notetaker-head .eb::before{content:"";width:28px;height:1px;background:var(--copper);display:inline-block}
+  .notetaker-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
     font-size:clamp(40px,4.5vw,58px);line-height:1.04;letter-spacing:-.025em;
     margin:0 0 18px;color:var(--ink);text-wrap:balance;
   }
-  .gong-head h2 em{font-style:italic;color:var(--copper)}
-  .gong-head p{font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:16px;line-height:1.65;color:var(--ink-2);margin:0}
-  .gong-table{
+  .notetaker-head h2 em{font-style:italic;color:var(--copper)}
+  .notetaker-head p{font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:16px;line-height:1.65;color:var(--ink-2);margin:0}
+  .notetaker-table{
     width:100%;border-collapse:collapse;
     background:#121015;border:1px solid var(--hair-2);border-radius:14px;overflow:hidden;
   }
-  .gong-table thead th{
+  .notetaker-table thead th{
     padding:22px 24px;text-align:left;border-bottom:1px solid var(--hair-2);
     font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
     letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);
   }
-  .gong-table thead th.col-s{color:var(--copper);background:rgba(254,133,49,.04)}
-  .gong-table thead th.col-s .brand{
+  .notetaker-table thead th.col-s{color:var(--copper);background:rgba(254,133,49,.04)}
+  .notetaker-table thead th.col-s .brand{
     display:block;font-family:var(--font-display), 'Instrument Serif', serif;font-size:22px;font-weight:400;
     letter-spacing:-.01em;color:var(--ink);text-transform:none;margin-top:4px;
   }
-  .gong-table thead th.col-g .brand{
+  .notetaker-table thead th.col-g .brand{
     display:block;font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;font-size:18px;
     color:var(--ink-2);text-transform:none;letter-spacing:-.005em;margin-top:4px;
   }
-  .gong-table tbody td{
+  .notetaker-table tbody td{
     padding:20px 24px;border-bottom:1px solid var(--hair);vertical-align:top;
     font-family:var(--font-body), 'Geist', sans-serif;font-size:14.5px;line-height:1.5;color:var(--ink-2);
   }
-  .gong-table tbody tr:last-child td{border-bottom:0}
-  .gong-table tbody td.dim{
+  .notetaker-table tbody tr:last-child td{border-bottom:0}
+  .notetaker-table tbody td.dim{
     color:var(--ink);font-weight:500;font-size:14px;
     font-family:'Geist Mono',monospace;letter-spacing:.02em;width:24%;
   }
-  .gong-table tbody td.col-s{background:rgba(254,133,49,.03);color:var(--ink)}
-  .gong-table tbody td.col-s strong{color:var(--copper);font-weight:500}
-  .gong-table tbody td.col-g{color:var(--ink-3)}
-  .gong-table .icon{
+  .notetaker-table tbody td.col-s{background:rgba(254,133,49,.03);color:var(--ink)}
+  .notetaker-table tbody td.col-s strong{color:var(--copper);font-weight:500}
+  .notetaker-table tbody td.col-g{color:var(--ink-3)}
+  .notetaker-table .icon{
     display:inline-block;margin-right:8px;font-family:'Geist Mono',monospace;
     font-size:11px;width:16px;text-align:center;
   }
-  .gong-table .col-s .icon{color:var(--copper)}
-  .gong-table .col-g .icon{color:var(--ink-4)}
+  .notetaker-table .col-s .icon{color:var(--copper)}
+  .notetaker-table .col-g .icon{color:var(--ink-4)}
 
   /* ═══════════ Investor register ═══════════ */
   .reg-inv{

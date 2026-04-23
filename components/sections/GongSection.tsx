@@ -1,7 +1,7 @@
 export function GongSection() {
   return (
-    <section className="gong">
-      <div className="gong-head">
+    <section className="notetaker">
+      <div className="notetaker-head">
         <div className="eb">vs AI notetakers</div>
         <h2>
           The last mile <em>AI notetakers leave unaddressed.</em>
@@ -12,7 +12,7 @@ export function GongSection() {
           turns. Here&apos;s where the two diverge.
         </p>
       </div>
-      <table className="gong-table">
+      <table className="notetaker-table">
         <thead>
           <tr>
             <th>Dimension</th>
