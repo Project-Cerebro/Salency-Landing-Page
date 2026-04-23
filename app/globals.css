@@ -1786,3 +1786,1010 @@ header button:focus:not(:focus-visible){
   from {left:-50%}
   to   {left:100%}
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Memory page — /memory (per DESIGN.md §2–§7 alignment)
+═══════════════════════════════════════════════════════════ */
+.memory-page {
+  /* ── Intro (matches .coming-soon / .inv-intro canonical 120/40/96) ── */
+  .mem-intro {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 120px 40px 48px;
+
+    .eb {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+
+      &::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: var(--copper);
+        display: inline-block;
+      }
+    }
+
+    h1 {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: clamp(44px, 5.2vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -.025em;
+      color: var(--ink);
+      margin: 0 0 28px;
+      max-width: 22ch;
+      text-wrap: balance;
+    }
+    h1 em { font-style: italic; color: var(--copper); }
+
+    .lede {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--ink-2);
+      max-width: 62ch;
+      margin: 0;
+    }
+    .lede em {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-style: italic;
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 400;
+    }
+  }
+
+  /* ── Featured hero surface (Surface 01: the brief) ── */
+  .mem-hero-surface {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    padding: 0 40px;
+  }
+
+  .mem-hero-frame {
+    position: relative;
+    background: rgba(254, 133, 49, 0.03);
+    border: 1px solid var(--hair-2);
+    border-radius: 16px;
+    padding: 36px 36px 40px;
+    overflow: hidden;
+
+    /* Hero-card 2px left gradient per DESIGN.md §5 card chrome */
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 100%;
+      background: linear-gradient(180deg, var(--copper), rgba(254, 133, 49, 0));
+    }
+  }
+
+  .mem-hero-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--hair);
+    gap: 16px;
+    flex-wrap: wrap;
+
+    .mem-hero-kicker {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      &::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: var(--copper);
+        display: inline-block;
+      }
+    }
+
+    .mem-hero-chip {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      background: rgba(254, 133, 49, 0.08);
+      border: 1px solid rgba(254, 133, 49, 0.26);
+      border-radius: 4px;
+      padding: 5px 10px;
+    }
+  }
+
+  /* ── The brief (6 blocks) ── */
+  .mem-brief {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .mem-brief .crumb {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 16px;
+
+    .crumb-link { color: var(--ink-3); }
+    .sep { color: var(--ink-4); margin: 0 8px; }
+  }
+
+  .mem-brief .brief-title {
+    font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(36px, 4.6vw, 52px);
+    line-height: 1.04;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    margin: 0 0 14px;
+
+    em { font-style: italic; color: var(--copper); }
+  }
+
+  .mem-brief .brief-meta {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: .04em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 48px;
+
+    .sep { color: var(--ink-4); opacity: .6; }
+
+    .pulse {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--copper);
+
+      &::before {
+        content: "";
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--copper);
+        box-shadow: 0 0 0 0 rgba(254, 133, 49, 0.55);
+        animation: memPulse 2.4s ease-in-out infinite;
+      }
+    }
+  }
+
+  .mem-brief .brief-block {
+    padding: 32px 0 36px;
+    border-top: 1px solid var(--hair);
+
+    &:first-of-type { border-top: 1px solid var(--hair-2); padding-top: 0; }
+  }
+
+  /* Canonical eyebrow inside brief blocks */
+  .mem-brief .eb {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+
+    &::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--copper);
+      display: inline-block;
+    }
+
+    .sub {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      color: var(--ink-3);
+      font-size: 12.5px;
+      letter-spacing: .04em;
+      font-weight: 400;
+      text-transform: none;
+    }
+  }
+
+  /* Block 1 — People */
+  .mem-brief .people { display: grid; gap: 18px; }
+  .mem-brief .person {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--hair);
+
+    &:last-child { border-bottom: 0; }
+
+    .person-main {
+      display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+    }
+
+    .person-name {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      line-height: 1.15;
+    }
+
+    .person-role {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .person-quote {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.45;
+      color: var(--ink-2);
+    }
+
+    .person-cite {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: .04em;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+
+      .person-cite-link { color: var(--copper); }
+      .arrow { color: var(--copper); opacity: .7; }
+    }
+  }
+
+  .mem-brief .stance {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+
+    &.champion {
+      color: var(--copper);
+      background: rgba(254, 133, 49, 0.08);
+      border: 1px solid rgba(254, 133, 49, 0.24);
+    }
+    &.skeptic {
+      color: var(--ink-2);
+      background: rgba(232, 230, 227, 0.04);
+      border: 1px solid var(--hair-2);
+    }
+    &.blocker {
+      color: var(--rust);
+      background: rgba(209, 60, 19, 0.10);
+      border: 1px solid rgba(209, 60, 19, 0.26);
+    }
+  }
+
+  /* Block 2 — They Need */
+  .mem-brief .pains { display: grid; gap: 10px; }
+  .mem-brief .pain {
+    padding: 14px 0 14px 20px;
+    border-left: 2px solid var(--copper);
+    background: linear-gradient(90deg, rgba(254, 133, 49, 0.04), transparent 60%);
+    border-radius: 0 6px 6px 0;
+
+    .pain-quote {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 19px;
+      line-height: 1.4;
+      color: var(--ink);
+      margin: 0 0 8px;
+      letter-spacing: -.005em;
+    }
+
+    .pain-cite {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: .04em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      .pain-cite-link { color: var(--copper); }
+    }
+  }
+
+  .mem-brief .intensity {
+    display: inline-flex; gap: 3px; align-items: center;
+
+    .intensity-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--copper);
+    }
+    .intensity-dot.off { background: var(--ink-4); opacity: .4; }
+  }
+
+  /* Block 3 — We Owe Them */
+  .mem-brief .owed { display: grid; }
+  .mem-brief .owed-row {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 14px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--hair);
+
+    &:last-child { border-bottom: 0; }
+
+    .owed-glyph {
+      width: 14px; height: 14px; margin-top: 6px;
+      border-radius: 50%;
+      justify-self: center;
+    }
+
+    &.open .owed-glyph {
+      background: var(--copper);
+      box-shadow: 0 0 0 3px rgba(254, 133, 49, 0.14);
+    }
+    &.scheduled .owed-glyph {
+      background: transparent;
+      border: 2px solid var(--ink-2);
+    }
+    &.closed .owed-glyph {
+      background: var(--ink-4);
+      opacity: .7;
+    }
+
+    .owed-text {
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.5;
+
+      em {
+        font-style: italic;
+        color: var(--copper);
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    &.closed .owed-text {
+      color: var(--ink-3);
+      text-decoration: line-through;
+      text-decoration-color: var(--ink-4);
+    }
+
+    .owed-meta {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-3);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    &.open .owed-meta { color: var(--copper); }
+    &.closed .owed-meta { color: var(--ink-4); }
+  }
+
+  /* Block 4 — What's Changed */
+  .mem-brief .contra {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: stretch;
+    padding: 22px;
+    background: rgba(254, 133, 49, 0.04);
+    border: 1px solid rgba(254, 133, 49, 0.18);
+    border-radius: 10px;
+
+    .contra-col {
+      display: grid; gap: 10px; align-content: start;
+
+      &.left { text-align: right; }
+    }
+
+    .contra-date {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+
+    .contra-quote {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.4;
+      color: var(--ink);
+      letter-spacing: -.005em;
+    }
+
+    .contra-who {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-3);
+      letter-spacing: .04em;
+    }
+
+    .contra-arrow {
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Geist Mono', monospace;
+      font-size: 22px;
+      color: var(--copper);
+      padding: 0 4px;
+    }
+  }
+
+  .mem-brief .contra-obs {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(254, 133, 49, 0.05);
+    border-left: 2px solid var(--copper);
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.5;
+
+    .label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--copper);
+      display: block;
+      margin-bottom: 4px;
+    }
+  }
+
+  /* Block 5 — How We Map */
+  .mem-brief .mapping { display: grid; gap: 12px; }
+  .mem-brief .mapping-row {
+    display: grid;
+    grid-template-columns: 1fr 180px auto;
+    gap: 18px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--hair);
+
+    &:last-child { border-bottom: 0; }
+
+    .mapping-prod {
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 500;
+
+      em {
+        font-style: italic;
+        color: var(--copper);
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    .mapping-bar {
+      position: relative;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(254, 133, 49, 0.10);
+      overflow: hidden;
+
+      .mapping-bar-fill {
+        position: absolute; inset: 0;
+        background: linear-gradient(90deg, var(--copper), var(--copper-soft));
+        border-radius: 3px;
+      }
+    }
+
+    .mapping-conf {
+      font-family: 'Geist Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--copper);
+      letter-spacing: .04em;
+      min-width: 48px;
+      text-align: right;
+    }
+  }
+
+  /* Block 6 — Next */
+  .mem-brief .next { display: grid; gap: 14px; }
+  .mem-brief .next-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--hair);
+
+    &:last-child { border-bottom: 0; }
+
+    .next-key {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    .next-val {
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.5;
+
+      em {
+        font-style: italic;
+        color: var(--copper);
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    .cliffhanger {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.4;
+    }
+  }
+
+  /* ── Supporting surfaces 02 / 03 / 04 ── */
+  .mem-supporting {
+    max-width: 1280px;
+    margin: 120px auto 0;
+    padding: 0 40px;
+  }
+
+  .mem-support-head { margin-bottom: 36px; }
+
+  .mem-support-head .eb {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    &::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--copper);
+      display: inline-block;
+    }
+
+    .sub {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      color: var(--ink-3);
+      font-size: 12.5px;
+      letter-spacing: .04em;
+      font-weight: 400;
+      text-transform: none;
+    }
+  }
+
+  .mem-support-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .mem-support-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--hair-2);
+    border-radius: 12px;
+    padding: 26px 26px 22px;
+    display: flex;
+    flex-direction: column;
+
+    .support-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 10px;
+
+      .idx {
+        font-family: 'Geist Mono', monospace;
+        font-size: 10.5px;
+        font-weight: 500;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--copper);
+      }
+
+      .support-chip {
+        font-family: 'Geist Mono', monospace;
+        font-size: 9.5px;
+        font-weight: 500;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: var(--copper);
+        background: rgba(254, 133, 49, 0.08);
+        border: 1px solid rgba(254, 133, 49, 0.24);
+        border-radius: 4px;
+        padding: 3px 8px;
+      }
+    }
+
+    h3 {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: -.015em;
+      color: var(--ink);
+      margin: 0 0 10px;
+    }
+    h3 em { font-style: italic; color: var(--copper); }
+
+    .support-desc {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-2);
+      margin: 0 0 18px;
+      flex-grow: 1;
+    }
+
+    .support-mock {
+      background: #0A0910;
+      border: 1px solid var(--hair);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    }
+  }
+
+  /* Pain-product mini mock */
+  .mem-support-card .pp-mock {
+    display: grid;
+    gap: 10px;
+
+    .pp-row {
+      display: grid;
+      grid-template-columns: 1fr 70px auto;
+      gap: 10px;
+      align-items: center;
+      font-size: 12.5px;
+
+      .pp-prod { color: var(--ink); font-weight: 500; }
+      .pp-conf {
+        font-family: 'Geist Mono', monospace;
+        font-size: 11px;
+        color: var(--copper);
+        min-width: 34px;
+        text-align: right;
+      }
+
+      .mapping-bar {
+        position: relative;
+        height: 5px;
+        border-radius: 3px;
+        background: rgba(254, 133, 49, 0.10);
+        overflow: hidden;
+
+        .mapping-bar-fill {
+          position: absolute; inset: 0;
+          background: linear-gradient(90deg, var(--copper), var(--copper-soft));
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+
+  /* Contradictions mini mock */
+  .mem-support-card .cx-mock {
+    display: grid;
+    gap: 8px;
+
+    .cx-row {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 12px;
+      align-items: baseline;
+      padding: 6px 0;
+
+      .cx-date {
+        font-family: 'Geist Mono', monospace;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: var(--copper);
+      }
+
+      .cx-quote {
+        font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+        font-style: italic;
+        font-size: 14px;
+        line-height: 1.35;
+        color: var(--ink);
+      }
+    }
+
+    .cx-arrow {
+      text-align: center;
+      font-family: 'Geist Mono', monospace;
+      font-size: 16px;
+      color: var(--copper);
+      opacity: .8;
+      line-height: 1;
+      margin: 2px 0;
+    }
+  }
+
+  /* Handoff export mini mock */
+  .mem-support-card .hx-mock {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.7;
+
+    .hx-line { color: var(--ink-2); }
+    .hx-line.muted { color: var(--copper); opacity: .85; }
+  }
+
+  /* ── CRM vs Salency compare ── */
+  .mem-compare {
+    max-width: 1280px;
+    margin: 120px auto 0;
+    padding: 0 40px;
+  }
+
+  .mem-compare-head { margin-bottom: 36px; max-width: 60ch; }
+
+  .mem-compare-head .eb {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    &::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--copper);
+      display: inline-block;
+    }
+  }
+
+  .mem-compare-head h2 {
+    font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -.025em;
+    color: var(--ink);
+    margin: 0;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .mem-compare-head h2 em { font-style: italic; color: var(--copper); }
+
+  .mem-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--hair-2);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+
+    thead th {
+      text-align: left;
+      padding: 16px 22px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      border-bottom: 1px solid var(--hair-2);
+      background: rgba(0, 0, 0, 0.12);
+    }
+    thead th:nth-child(2) { color: var(--ink-3); }
+    thead th:nth-child(3) { color: var(--copper); }
+
+    td {
+      padding: 18px 22px;
+      vertical-align: top;
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+      border-bottom: 1px solid var(--hair);
+    }
+    tr:last-child td { border-bottom: 0; }
+    td:nth-child(1) { color: var(--ink); font-weight: 500; width: 22%; }
+    td:nth-child(2) { color: var(--ink-3); width: 39%; }
+    td:nth-child(3) { color: var(--ink); width: 39%; }
+  }
+
+  .mem-compare-foot {
+    margin-top: 22px;
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--ink-3);
+
+    a {
+      color: var(--copper);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(254, 133, 49, 0.3);
+      transition: border-color .18s;
+    }
+    a:hover { border-bottom-color: var(--copper); }
+  }
+
+  /* ── Transcript sources ── */
+  .mem-compat {
+    max-width: 1280px;
+    margin: 96px auto 0;
+    padding: 32px 40px;
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+    text-align: center;
+
+    .eb {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 16px;
+      display: block;
+    }
+  }
+
+  .mem-compat-line {
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 68ch;
+    margin: 0 auto;
+
+    em {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-style: italic;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 400;
+    }
+  }
+
+  /* ── Pilot CTA ── */
+  .mem-cta {
+    max-width: 1280px;
+    margin: 96px auto 120px;
+    padding: 0 40px;
+    text-align: center;
+
+    .eb {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 22px;
+      display: block;
+    }
+
+    h2 {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 4.5vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -.025em;
+      color: var(--ink);
+      margin: 0 auto 18px;
+      max-width: 22ch;
+      text-wrap: balance;
+    }
+    h2 em { font-style: italic; color: var(--copper); }
+
+    .sub {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 16.5px;
+      line-height: 1.6;
+      color: var(--ink-2);
+      max-width: 52ch;
+      margin: 0 auto 30px;
+    }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 960px) {
+    .mem-support-grid { grid-template-columns: 1fr; gap: 18px; }
+  }
+
+  @media (max-width: 720px) {
+    .mem-intro { padding: 96px 22px 36px; }
+    .mem-hero-surface { padding: 0 18px; }
+    .mem-hero-frame { padding: 24px 20px 28px; }
+    .mem-hero-head { flex-direction: column; align-items: flex-start; }
+
+    .mem-brief .contra {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 18px;
+
+      .contra-col.left { text-align: left; }
+      .contra-arrow { padding: 0; font-size: 16px; justify-content: flex-start; }
+    }
+
+    .mem-brief .mapping-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+
+      .mapping-bar { width: 100%; }
+      .mapping-conf { text-align: left; }
+    }
+
+    .mem-brief .next-row { grid-template-columns: 1fr; gap: 4px; }
+
+    .mem-compare { margin-top: 72px; padding: 0 22px; }
+    .mem-table { font-size: 13px; }
+    .mem-table thead th { padding: 14px 16px; }
+    .mem-table td { padding: 14px 16px; font-size: 13px; }
+    .mem-table td:nth-child(1) { width: 30%; }
+
+    .mem-compat { margin-top: 72px; padding: 24px 22px; }
+    .mem-compat-line { font-size: 15px; }
+    .mem-compat-line em { font-size: 16px; }
+
+    .mem-cta { margin: 72px auto 72px; padding: 0 22px; }
+  }
+}
+
+@keyframes memPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(254, 133, 49, 0.55); }
+  50% { box-shadow: 0 0 0 5px rgba(254, 133, 49, 0); }
+}
