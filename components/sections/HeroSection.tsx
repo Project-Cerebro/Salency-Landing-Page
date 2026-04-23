@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export function HeroSection() {
   return (
     <>
@@ -18,7 +20,9 @@ export function HeroSection() {
         </p>
 
         <div className="cta-row">
-          <button className="btn btn-primary">Request a pilot →</button>
+          <Link href="/pilot" className="btn btn-primary">
+            Request a pilot →
+          </Link>
           <button className="btn btn-ghost">Watch 90-second tour</button>
         </div>
 

@@ -65,7 +65,9 @@ export function MarketingHeader() {
         <nav className="links">{links.map((l) => renderLink(l))}</nav>
 
         <div className="nav-cta">
-          <button className="btn btn-primary">Request a pilot →</button>
+          <Link href="/pilot" className="btn btn-primary">
+            Request a pilot →
+          </Link>
         </div>
 
         <button
@@ -94,12 +96,13 @@ export function MarketingHeader() {
           {links.map((l) => renderLink(l, () => setOpen(false)))}
         </nav>
         <div className="nav-panel-cta">
-          <button
+          <Link
+            href="/pilot"
             className="btn btn-primary"
             onClick={() => setOpen(false)}
           >
             Request a pilot →
-          </button>
+          </Link>
         </div>
       </div>
     </header>

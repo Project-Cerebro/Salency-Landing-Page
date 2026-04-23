@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -8,17 +7,33 @@ import { track } from '@vercel/analytics';
 
 interface FormData {
     firstName: string;
-    companyName: string;
     email: string;
+    companyWebsite: string;
+    role: string;
+    teamSize: string;
     website?: string;
 }
+
+const ROLES = [
+    'AE',
+    'Sales Manager',
+    'VP Sales',
+    'RevOps',
+    'CS Lead',
+    'Founder / CEO',
+    'Other',
+];
+
+const TEAM_SIZES = ['1–4', '5–10', '11–50', '50+'];
+
+const WEBSITE_PATTERN = /^[^\s]+\.[^\s]+$/;
 
 export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
     const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
-        defaultValues: { email: prefillEmail ?? '' },
+        defaultValues: { email: prefillEmail ?? '', role: '', teamSize: '' },
     });
 
     useEffect(() => {
@@ -64,7 +79,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
         return (
             <div className="bg-accent-warm/10 border border-accent-warm/30 p-8 rounded-xl text-center max-w-lg mx-auto">
                 <h3 className="text-2xl font-bold text-white mb-2">You&apos;re in.</h3>
-                <p className="text-gray-300 mb-1">We&apos;ll email you within 24 hours to schedule your pilot kickoff.</p>
+                <p className="text-gray-300 mb-1">We&apos;ll reply within 24 hours to schedule your pilot kickoff.</p>
                 <p className="text-sm text-gray-500">Check your inbox for a confirmation from the Salency team.</p>
             </div>
         );
@@ -76,8 +91,8 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
             className="bg-card p-8 rounded-2xl border border-white/10 max-w-2xl mx-auto shadow-2xl"
             suppressHydrationWarning
         >
-            <h3 className="text-xl font-bold text-white mb-1">Request Your Pilot</h3>
-            <p className="text-sm text-gray-400 mb-6">We&apos;ll reply within 24 hours.</p>
+            <h3 className="text-xl font-bold text-white mb-1">Request your pilot</h3>
+            <p className="text-sm text-gray-400 mb-6">We reply within 24 hours.</p>
 
             {serverError && (
                 <div className="mb-6 bg-red-500/10 border border-red-500/30 text-red-300 text-sm rounded-lg px-4 py-3">
@@ -97,7 +112,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-300 mb-1">First Name *</label>
+                <label className="block text-sm font-medium text-gray-300 mb-1">First name *</label>
                 <input
                     {...register('firstName', { required: true })}
                     className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors"
@@ -110,7 +125,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-300 mb-1">Work Email *</label>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Work email *</label>
                 <input
                     type="email"
                     {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
@@ -122,16 +137,49 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                 {errors.email && <span className="text-red-400 text-xs mt-1">Valid email required</span>}
             </div>
 
-            <div className="mb-8">
-                <label className="block text-sm font-medium text-gray-300 mb-1">Company Name *</label>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-300 mb-1">Company website *</label>
                 <input
-                    {...register('companyName', { required: true })}
+                    type="text"
+                    {...register('companyWebsite', { required: true, pattern: WEBSITE_PATTERN })}
                     className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors"
-                    placeholder="Acme Inc."
-                    autoComplete="organization"
+                    placeholder="acme.com"
+                    autoComplete="url"
                     suppressHydrationWarning
                 />
-                {errors.companyName && <span className="text-red-400 text-xs mt-1">Required</span>}
+                {errors.companyWebsite && <span className="text-red-400 text-xs mt-1">Valid website required</span>}
+            </div>
+
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-300 mb-1">Your role *</label>
+                <select
+                    {...register('role', { required: true })}
+                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors"
+                    defaultValue=""
+                    suppressHydrationWarning
+                >
+                    <option value="" disabled>Select your role</option>
+                    {ROLES.map((role) => (
+                        <option key={role} value={role}>{role}</option>
+                    ))}
+                </select>
+                {errors.role && <span className="text-red-400 text-xs mt-1">Required</span>}
+            </div>
+
+            <div className="mb-8">
+                <label className="block text-sm font-medium text-gray-300 mb-1">Sales team size *</label>
+                <select
+                    {...register('teamSize', { required: true })}
+                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors"
+                    defaultValue=""
+                    suppressHydrationWarning
+                >
+                    <option value="" disabled>Select team size</option>
+                    {TEAM_SIZES.map((size) => (
+                        <option key={size} value={size}>{size}</option>
+                    ))}
+                </select>
+                {errors.teamSize && <span className="text-red-400 text-xs mt-1">Required</span>}
             </div>
 
             <button
@@ -139,11 +187,11 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                 disabled={isSubmitting}
                 className="w-full bg-accent-warm hover:brightness-110 text-background font-bold py-4 rounded-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-lg shadow-[0_0_20px_rgba(232,146,90,0.3)] hover:shadow-[0_0_30px_rgba(232,146,90,0.5)] transition-[color,background-color,box-shadow,transform,opacity,filter] duration-200"
             >
-                {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : 'Request Pilot'}
+                {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : 'Request pilot access →'}
             </button>
 
             <p className="text-center text-xs text-gray-500 mt-4">
-                Your data is secure. No spam, ever.
+                No marketing sequences. You&apos;ll hear from a founder, not a bot.
             </p>
         </form>
     );
