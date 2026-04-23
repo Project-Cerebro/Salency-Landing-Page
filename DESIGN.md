@@ -151,7 +151,7 @@ Every marketing section that sits at the top of a standalone page (not home) use
 - `.prob` (the Problem section — shared with home as a mid-page spacer, with the same `80px` acting as section-to-section rhythm there)
 - `.coming-soon` (on `/memory`)
 - `.inv-intro` (on `/investors`)
-- `.apply-page` (on `/pilot` and `/pricing`, applied via `max-w-[1280px] mx-auto mt-20 px-10 py-5` in `PilotApplication.tsx`). Generic "apply-*" naming so classes aren't misleading on `/pricing`. Sidebar cards use `.apply-card` (`background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:.75rem; padding:1.5rem` → `2rem` at ≥768px).
+- `.apply-page` (on `/pilot` and `/pricing`). Fully CSS-driven — no Tailwind utilities in the JSX. Layout, typography, grid, responsive breakpoints all nested under `.apply-page` in globals. Sub-classes: `.apply-intro` (intro section), `.apply-lede` (lede paragraph), `.apply-layout` (two-column grid), `.apply-sidebar` (vertical stack of cards), `.apply-form` (email form column), `.apply-card` (shared card panel), `.apply-check` and `.apply-dot` (list-item markers).
 
 Home (`/`) hero uses the tighter `.hero` 96/40/72 variant because it has more above-the-fold content. Legal pages (`/privacy`, `/terms`) use `pt-32` (128px) via Tailwind since they're narrow-measure prose.
 
