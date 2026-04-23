@@ -1,3 +1,7 @@
+'use client';
+
+import { openPilotModal } from '@/components/PilotModal';
+
 export function HeroSection() {
   return (
     <>
@@ -18,7 +22,13 @@ export function HeroSection() {
         </p>
 
         <div className="cta-row">
-          <button className="btn btn-primary">Request a pilot →</button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => openPilotModal()}
+          >
+            Request a pilot →
+          </button>
           <button className="btn btn-ghost">Watch 90-second tour</button>
         </div>
 
