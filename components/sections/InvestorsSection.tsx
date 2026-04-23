@@ -202,7 +202,7 @@ export function InvestorsSection() {
                 inheriting the account doesn&apos;t either. The asset that
                 makes either one useful is the same asset.
               </p>
-              <div className="close">
+              <div className="thesis-close">
                 Salency owns that layer. The longer a team runs it,{' '}
                 <em>the more context compounds</em> — and the harder it is to
                 rip out.

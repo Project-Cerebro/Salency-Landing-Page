@@ -1431,7 +1431,7 @@ html {
 
       em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-size:18px;font-weight:400}
     }
-    .close{
+    .thesis-close{
       margin-top:28px;padding-top:24px;border-top:1px solid var(--hair);
       font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
       line-height:1.35;color:var(--ink);max-width:52ch;
@@ -1555,7 +1555,7 @@ html {
     .thesis-card h2 {
       font-size: clamp(28px, 7vw, 40px);
     }
-    .thesis-card .close {
+    .thesis-card .thesis-close {
       font-size: 18px;
     }
   }
