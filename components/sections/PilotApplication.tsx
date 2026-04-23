@@ -15,15 +15,13 @@ const IDEAL = [
 
 export function PilotApplication() {
   return (
-    <main className="max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-24">
+    <main className="pilot-app max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-24">
       <section className="mb-16 md:mb-20 max-w-3xl">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent-warm mb-5">
-          Pilot cohort · Spring 2026
-        </p>
-        <h1 className="font-serif font-normal text-5xl md:text-6xl leading-[1.02] tracking-tight text-white mb-6 text-balance">
-          Join the <em className="italic text-accent-warm">pilot.</em>
+        <p className="eb mb-5">Pilot cohort · Spring 2026</p>
+        <h1 className="text-5xl md:text-6xl mb-6 text-balance">
+          Join the <em>pilot.</em>
         </h1>
-        <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light max-w-[52ch]">
+        <p className="pilot-lede text-lg md:text-xl max-w-[52ch]">
           A memory layer that outlasts any rep. We&apos;re opening early access to a
           small group of revenue teams this cohort. Tell us about your team and
           we&apos;ll scope the fit together.
@@ -33,13 +31,10 @@ export function PilotApplication() {
       <section className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-16 items-start">
         <div className="space-y-6 order-2 lg:order-1">
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8">
-            <h3 className="font-serif text-xl text-white mb-4">Pilot includes</h3>
+            <h3 className="text-xl mb-4">Pilot includes</h3>
             <ul className="space-y-3">
               {PILOT_INCLUDES.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed"
-                >
+                <li key={item} className="flex items-start gap-3 text-sm">
                   <span className="text-accent-warm mt-[2px] shrink-0">✓</span>
                   <span>{item}</span>
                 </li>
@@ -47,13 +42,10 @@ export function PilotApplication() {
             </ul>
           </div>
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8">
-            <h3 className="font-serif text-xl text-white mb-4">Good fit if</h3>
+            <h3 className="text-xl mb-4">Good fit if</h3>
             <ul className="space-y-3">
               {IDEAL.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed"
-                >
+                <li key={item} className="flex items-start gap-3 text-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-warm mt-[9px] shrink-0" />
                   <span>{item}</span>
                 </li>
