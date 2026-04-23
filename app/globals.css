@@ -276,7 +276,7 @@ html {
       filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));
     }
 
-    .hub-input-lbl{
+    .hub-input-label{
       font-family:var(--font-body), 'Geist', sans-serif;
       font-size:12px;color:var(--ink);
       letter-spacing:.01em;text-align:center;line-height:1.25;
@@ -373,17 +373,17 @@ html {
       transition:transform .2s ease;
     }
 
-    .hub-outcome-rk{
+    .hub-outcome-role{
       font-family:'Geist Mono',monospace;font-size:10px;font-weight:500;
       letter-spacing:.2em;text-transform:uppercase;color:var(--copper);
     }
 
-    .hub-outcome-rt{
+    .hub-outcome-role-title{
       font-family:var(--font-display), 'Instrument Serif', serif;
       font-weight:400;font-size:20px;line-height:1.2;color:var(--ink);
     }
 
-    .hub-outcome-rs{
+    .hub-outcome-role-summary{
       font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
       font-size:12.5px;color:var(--ink-3);line-height:1.45;
     }
@@ -442,7 +442,7 @@ html {
       .hub-core-name{font-size:28px}
       .hub-core-mark{width:36px;height:36px}
       .hub-outcome{padding:20px 22px}
-      .hub-outcome-rt{font-size:17px}
+      .hub-outcome-role-title{font-size:17px}
     }
 
     @media (max-width:900px){
@@ -473,7 +473,7 @@ html {
 
       .hub-input{position:static;left:auto;top:auto!important;width:auto;transform:none}
       .hub-input-ic{width:40px;height:40px}
-      .hub-input-lbl{font-size:11px}
+      .hub-input-label{font-size:11px}
 
       .hub-core{padding:8px 0}
       .hub-core-name{font-size:26px}
@@ -1024,7 +1024,7 @@ html {
 
   /* ═══════════ Problem section ═══════════ */
   .prob{
-    max-width:1280px;margin:140px auto 0;padding:0 40px;
+    max-width:1280px;margin:80px auto 0;padding:20px 40px;
   }
   .prob-head{
     display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;
@@ -1072,12 +1072,12 @@ html {
   .prob-card .idx::after{
     content:"";flex:1;height:1px;background:var(--hair);
   }
-  .prob-card .ttl{
+  .prob-card .title{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
     font-size:30px;line-height:1.1;letter-spacing:-.02em;color:var(--ink);
     margin:0 0 16px;max-width:14ch;
   }
-  .prob-card .ttl em{font-style:italic;color:var(--copper)}
+  .prob-card .title em{font-style:italic;color:var(--copper)}
   .prob-card .desc{
     font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
     line-height:1.6;color:var(--ink-2);margin:0 0 24px;max-width:32ch;
@@ -1090,7 +1090,7 @@ html {
     font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-weight:400;
     font-size:40px;line-height:1;color:var(--copper);letter-spacing:-.02em;
   }
-  .prob-card .cost .lbl{
+  .prob-card .cost .label{
     font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
     letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
     line-height:1.4;max-width:18ch;
@@ -1102,20 +1102,20 @@ html {
     border-left:2px solid var(--copper);border-radius:0 12px 12px 0;
     display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;
   }
-  .prob-resolve .rlbl{
+  .prob-resolve .label{
     font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
     letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
   }
-  .prob-resolve .rtxt{
+  .prob-resolve .text{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
     line-height:1.3;letter-spacing:-.01em;color:var(--ink);max-width:64ch;
   }
-  .prob-resolve .rtxt em{font-style:italic;color:var(--copper)}
-  .prob-resolve .ra{
+  .prob-resolve .text em{font-style:italic;color:var(--copper)}
+  .prob-resolve .link{
     font-family:var(--font-body), 'Geist', sans-serif;font-size:13.5px;color:var(--copper);
     white-space:nowrap;font-weight:500;
   }
-  .prob-resolve .ra:hover{color:#FE9F5B}
+  .prob-resolve .link:hover{color:#FE9F5B}
 
   /* ═══════════ CTA ═══════════ */
   .cta-section{
@@ -1209,14 +1209,14 @@ html {
     padding:14px 16px;background:rgba(254,133,49,.04);
     border:1px solid rgba(254,133,49,.12);border-radius:8px;
   }
-  .how-step .ex .el{
+  .how-step .ex .example-label{
     font-family:'Geist Mono',monospace;font-size:9.5px;font-weight:500;
     letter-spacing:.18em;text-transform:uppercase;color:var(--copper);margin-bottom:6px;
   }
-  .how-step .ex .eq{
+  .how-step .ex .example-quote{
     font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;line-height:1.45;color:var(--ink-2);
   }
-  .how-step .ex .eq strong{color:var(--ink);font-weight:500}
+  .how-step .ex .example-quote strong{color:var(--ink);font-weight:500}
   .how-foot{
     margin-top:28px;padding:18px 24px;
     display:flex;justify-content:space-between;align-items:center;gap:24px;
@@ -1233,12 +1233,12 @@ html {
     padding:32px 40px;
     display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;
   }
-  .notdo-card .hdr{
+  .notdo-card .header{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:26px;
     line-height:1.2;letter-spacing:-.015em;color:var(--ink);max-width:10ch;
   }
-  .notdo-card .hdr em{font-style:italic;color:var(--copper)}
-  .notdo-card .hdr .eb{
+  .notdo-card .header em{font-style:italic;color:var(--copper)}
+  .notdo-card .header .eb{
     display:block;font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
     letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4);margin-bottom:10px;
   }
@@ -1257,8 +1257,8 @@ html {
   }
   .notdo-item .x{color:var(--rust)}
   .notdo-item .check{color:var(--copper)}
-  .notdo-item .t{font-size:14.5px;color:var(--ink);font-weight:400;line-height:1.4;grid-column:2}
-  .notdo-item .s{font-size:13px;color:var(--ink-3);line-height:1.5;grid-column:2}
+  .notdo-item .title{font-size:14.5px;color:var(--ink);font-weight:400;line-height:1.4;grid-column:2}
+  .notdo-item .subtitle{font-size:13px;color:var(--ink-3);line-height:1.5;grid-column:2}
 
   /* ═══════════ Gong comparison table ═══════════ */
   .gong{max-width:1280px;margin:140px auto 0;padding:0 40px}
@@ -1306,12 +1306,12 @@ html {
   .gong-table tbody td.col-s{background:rgba(254,133,49,.03);color:var(--ink)}
   .gong-table tbody td.col-s strong{color:var(--copper);font-weight:500}
   .gong-table tbody td.col-g{color:var(--ink-3)}
-  .gong-table .ic{
+  .gong-table .icon{
     display:inline-block;margin-right:8px;font-family:'Geist Mono',monospace;
     font-size:11px;width:16px;text-align:center;
   }
-  .gong-table .col-s .ic{color:var(--copper)}
-  .gong-table .col-g .ic{color:var(--ink-4)}
+  .gong-table .col-s .icon{color:var(--copper)}
+  .gong-table .col-g .icon{color:var(--ink-4)}
 
   /* ═══════════ Investor register ═══════════ */
   .reg-inv{
@@ -1357,11 +1357,11 @@ html {
       background:rgba(254,133,49,.05);border:1px solid rgba(254,133,49,.18);
       border-radius:12px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
 
-      .lbl{
+      .label{
         font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
         letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
       }
-      .tt{
+      .title{
         font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
         line-height:1.35;color:var(--ink);max-width:62ch;margin:0;
 
@@ -1379,12 +1379,12 @@ html {
       background:rgba(255,255,255,.02);
       display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;
 
-      .v{
+      .pill{
         font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.18em;
         text-transform:uppercase;color:var(--copper);padding:6px 12px;
         border:1px solid rgba(254,133,49,.28);border-radius:999px;
       }
-      .t{
+      .body{
         font-family:var(--font-body), 'Geist', sans-serif;font-size:15.5px;color:var(--ink);font-weight:400;
 
         em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-size:16.5px;font-weight:400}
@@ -1450,7 +1450,7 @@ html {
       padding:14px 18px;border-left:2px solid rgba(254,133,49,.4);
       background:rgba(254,133,49,.03);
 
-      .lbl{
+      .label{
         font-family:'Geist Mono',monospace;font-size:10px;font-weight:500;
         letter-spacing:.18em;text-transform:uppercase;color:var(--copper);margin-bottom:4px;
       }
@@ -1539,7 +1539,7 @@ html {
   }
 
   .inv-intro{
-    max-width:1280px;margin:0 auto;padding:120px 40px 96px;
+    max-width:1280px;margin:80px auto 0;padding:20px 40px;
     border-bottom:1px solid var(--hair);position:relative;
 
     &::after{
@@ -1666,8 +1666,7 @@ header button:focus:not(:focus-visible){
 
 /* ═══════════ Coming-soon stub pages ═══════════ */
 .coming-soon{
-  max-width:1280px;margin:0 auto;
-  padding:120px 40px 96px;
+  max-width:1280px;margin:80px auto 0;padding:20px 40px;
 }
 .coming-soon-inner{max-width:780px}
 .coming-soon .eb{

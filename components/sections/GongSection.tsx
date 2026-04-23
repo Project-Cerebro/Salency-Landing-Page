@@ -30,73 +30,73 @@ export function GongSection() {
           <tr>
             <td className="dim">Output</td>
             <td className="col-g">
-              <span className="ic">—</span>Transcript + call summary
+              <span className="icon">—</span>Transcript + call summary
             </td>
             <td className="col-s">
-              <span className="ic">→</span>
+              <span className="icon">→</span>
               <strong>Structured signals</strong> mapped to your catalog
             </td>
           </tr>
           <tr>
             <td className="dim">Unit of memory</td>
             <td className="col-g">
-              <span className="ic">—</span>The call
+              <span className="icon">—</span>The call
             </td>
             <td className="col-s">
-              <span className="ic">→</span>The <strong>account</strong> — every
+              <span className="icon">→</span>The <strong>account</strong> — every
               pain, promise, stakeholder, across every call
             </td>
           </tr>
           <tr>
             <td className="dim">Survives rep turnover</td>
             <td className="col-g">
-              <span className="ic">×</span>Transcript survives. Context
+              <span className="icon">×</span>Transcript survives. Context
               doesn&apos;t.
             </td>
             <td className="col-s">
-              <span className="ic">✓</span>New rep inherits the{' '}
+              <span className="icon">✓</span>New rep inherits the{' '}
               <strong>full account state</strong> before their first call
             </td>
           </tr>
           <tr>
             <td className="dim">Citations</td>
             <td className="col-g">
-              <span className="ic">—</span>Timestamps in transcript
+              <span className="icon">—</span>Timestamps in transcript
             </td>
             <td className="col-s">
-              <span className="ic">✓</span>Every extraction cited —{' '}
+              <span className="icon">✓</span>Every extraction cited —{' '}
               <strong>transcript + timestamp + confidence</strong>
             </td>
           </tr>
           <tr>
             <td className="dim">Who reads it</td>
             <td className="col-g">
-              <span className="ic">—</span>Managers, spot-checking coaching
+              <span className="icon">—</span>Managers, spot-checking coaching
               moments
             </td>
             <td className="col-s">
-              <span className="ic">→</span>AE, CSM, director — every role on
+              <span className="icon">→</span>AE, CSM, director — every role on
               the account, on demand
             </td>
           </tr>
           <tr>
             <td className="dim">Handoff artefact</td>
             <td className="col-g">
-              <span className="ic">×</span>None — you still write the handoff
+              <span className="icon">×</span>None — you still write the handoff
               doc by hand
             </td>
             <td className="col-s">
-              <span className="ic">✓</span>Handoff doc is the{' '}
+              <span className="icon">✓</span>Handoff doc is the{' '}
               <strong>live memory layer</strong> itself
             </td>
           </tr>
           <tr>
             <td className="dim">Works alongside</td>
             <td className="col-g">
-              <span className="ic">→</span>Your CRM
+              <span className="icon">→</span>Your CRM
             </td>
             <td className="col-s">
-              <span className="ic">→</span>Your notetaker + your CRM —{' '}
+              <span className="icon">→</span>Your notetaker + your CRM —{' '}
               <strong>zero rip-and-replace</strong>
             </td>
           </tr>

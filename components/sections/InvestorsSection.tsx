@@ -46,8 +46,8 @@ export function InvestorsSection() {
               the same core graph. One primitive. Everything else is surface.
             </p>
             <div className="primitive">
-              <span className="lbl">Data primitive</span>
-              <p className="tt">
+              <span className="label">Data primitive</span>
+              <p className="title">
                 Structured account memory —{' '}
                 <em>cited, scoped, and compounding</em> — is the input every
                 future revenue tool will be measured against.
@@ -57,8 +57,8 @@ export function InvestorsSection() {
 
           <section className="roadmap">
             <div className="roadmap-card">
-              <span className="v">On the roadmap</span>
-              <span className="t">
+              <span className="pill">On the roadmap</span>
+              <span className="body">
                 A <em>Recall.ai meeting bot</em> that joins Zoom, Meet, and
                 Teams calls directly — feeding the extraction pipeline without
                 a transcript upload step.
@@ -87,7 +87,7 @@ export function InvestorsSection() {
                   Treasure. MBET, Waterloo.
                 </p>
                 <div className="fit">
-                  <div className="lbl">Unfair advantage</div>
+                  <div className="label">Unfair advantage</div>
                   <p>
                     Has <em>lost deals to forgotten context personally</em>, in
                     rooms where the budget was real. The product spec comes
@@ -110,7 +110,7 @@ export function InvestorsSection() {
                   management and AML/KYC compliance in banking.
                 </p>
                 <div className="fit">
-                  <div className="lbl">Unfair advantage</div>
+                  <div className="label">Unfair advantage</div>
                   <p>
                     Knows what sales ops <em>actually trusts</em>, how handoffs
                     break at 50 reps, and which metrics survive a board deck.
@@ -133,7 +133,7 @@ export function InvestorsSection() {
                   applied-AI operator — not a research hire.
                 </p>
                 <div className="fit">
-                  <div className="lbl">Unfair advantage</div>
+                  <div className="label">Unfair advantage</div>
                   <p>
                     The core technical risk in Salency is not &ldquo;can an LLM
                     summarise a call.&rdquo; It is{' '}

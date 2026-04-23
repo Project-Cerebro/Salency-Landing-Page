@@ -143,15 +143,16 @@ Wider sections (investor) use `max-width: 1100px` with the same padding. Legal p
 - First section on a page: `padding: 48–96px top`.
 - Last section before footer: `padding-bottom: 96–120px`.
 
-### Standalone intro padding — `120px 40px 96px` (canonical)
+### Standalone section container — `max-width:1280px; margin:140px auto 0; padding:0 40px` (canonical)
 
-Every standalone marketing page (pages accessed from the MarketingHeader nav that aren't the home page) uses the same intro padding so header-to-content spacing feels identical across the site. Selectors:
+Every marketing section that sits at the top of a standalone page (not home) uses the same container: 1280px max-width, `140px` top margin as header-to-content spacing, no vertical padding, `40px` fixed horizontal padding. Selectors:
 
+- `.prob` (the Problem section — shared with home as a mid-page spacer, with the same `140px` acting as section-to-section rhythm there)
 - `.coming-soon` (on `/memory`)
 - `.inv-intro` (on `/investors`)
-- `.pilot-app` (on `/pilot` and `/pricing`, applied via `pt-[120px] pb-24 px-6 md:px-10` in `PilotApplication.tsx`)
+- `.pilot-app` (on `/pilot` and `/pricing`, applied via `max-w-[1280px] mx-auto px-10 mt-[140px]` in `PilotApplication.tsx`)
 
-Home (`/`) uses the tighter `.hero` 96/40/72 variant because it has more above-the-fold content. Legal pages (`/privacy`, `/terms`) use `pt-32` (128px) via Tailwind since they're narrow-measure prose.
+Home (`/`) hero uses the tighter `.hero` 96/40/72 variant because it has more above-the-fold content. Legal pages (`/privacy`, `/terms`) use `pt-32` (128px) via Tailwind since they're narrow-measure prose.
 
 ### Card / card-like surfaces
 

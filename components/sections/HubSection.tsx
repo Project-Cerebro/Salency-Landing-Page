@@ -12,10 +12,10 @@ export function HubSection() {
         <div className="hub-main">
         <div className="hub-head">
           <span className="eb">
-            Inputs <span className="arr">→</span>
+            Inputs <span className="arrow">→</span>
           </span>
           <span className="eb r">
-            <span className="arr">→</span> Outputs
+            <span className="arrow">→</span> Outputs
           </span>
         </div>
 
@@ -251,19 +251,19 @@ export function HubSection() {
           <div className="hub-outcome-eb">Outcome</div>
           <div className="hub-outcome-grid">
             <div className="hub-outcome-row">
-              <div className="hub-outcome-rk">New AE</div>
-              <div className="hub-outcome-rt">Inherits the account</div>
-              <div className="hub-outcome-rs">Every pain, objection, and commitment from prior calls</div>
+              <div className="hub-outcome-role">New AE</div>
+              <div className="hub-outcome-role-title">Inherits the account</div>
+              <div className="hub-outcome-role-summary">Every pain, objection, and commitment from prior calls</div>
             </div>
             <div className="hub-outcome-row">
-              <div className="hub-outcome-rk">CSM</div>
-              <div className="hub-outcome-rt">Picks up the relationship</div>
-              <div className="hub-outcome-rs">Cited pain-to-product mappings, no re-asking</div>
+              <div className="hub-outcome-role">CSM</div>
+              <div className="hub-outcome-role-title">Picks up the relationship</div>
+              <div className="hub-outcome-role-summary">Cited pain-to-product mappings, no re-asking</div>
             </div>
             <div className="hub-outcome-row">
-              <div className="hub-outcome-rk">Director</div>
-              <div className="hub-outcome-rt">Sees the pattern</div>
-              <div className="hub-outcome-rs">Pains and objections across every deal in the pipe</div>
+              <div className="hub-outcome-role">Director</div>
+              <div className="hub-outcome-role-title">Sees the pattern</div>
+              <div className="hub-outcome-role-summary">Pains and objections across every deal in the pipe</div>
             </div>
           </div>
         </div>
