@@ -45,8 +45,8 @@ Both `--font-body` and `--font-display` currently resolve to **Instrument Sans**
 
 | Role | Font | Weight | Used on |
 |---|---|---|---|
-| Hero h1, section h2, card h3, editorial accents | `var(--font-display)` (Instrument Sans) | 400 normal, 400 italic for `em` | `.h1`, `.hero h1`, `.prob-head h2`, `.how-head h2`, `.notetaker-head h2`, `.platform h2`, `.thesis-card h2`, `.coming-soon h1`, `.pilot-app h1`/`h3`, `.inv-intro h1`, `.founder .name` |
-| Body, ledes, paragraph text, list items | `var(--font-body)` (Instrument Sans) | 300 for ledes, 400 for body | `.sub`, `.how-head .lede`, `.platform p`, `.inv-intro p`, `.pilot-lede`, `.founder .bio`, `.thesis-card p` |
+| Hero h1, section h2, card h3, editorial accents | `var(--font-display)` (Instrument Sans) | 400 normal, 400 italic for `em` | `.h1`, `.hero h1`, `.prob-head h2`, `.how-head h2`, `.notetaker-head h2`, `.platform h2`, `.thesis-card h2`, `.coming-soon h1`, `.apply-page h1`/`h3`, `.inv-intro h1`, `.founder .name` |
+| Body, ledes, paragraph text, list items | `var(--font-body)` (Instrument Sans) | 300 for ledes, 400 for body | `.sub`, `.how-head .lede`, `.platform p`, `.inv-intro p`, `.apply-lede`, `.founder .bio`, `.thesis-card p` |
 | Eyebrows, meta strips, labels, pill tags, footer legal | `'Geist Mono', monospace` | 400 or 500 | `.eb`, `.hero-meta`, `.inv-intro-meta`, `.founder .role`, `.roadmap-card .v`, `.sample-label`, `footer`, legal pages |
 | Brand wordmark (header logo) | `var(--font-outfit)` | 800 | `.brand .name`, `.nav-brand` |
 
@@ -151,7 +151,7 @@ Every marketing section that sits at the top of a standalone page (not home) use
 - `.prob` (the Problem section — shared with home as a mid-page spacer, with the same `80px` acting as section-to-section rhythm there)
 - `.coming-soon` (on `/memory`)
 - `.inv-intro` (on `/investors`)
-- `.pilot-app` (on `/pilot` and `/pricing`, applied via `max-w-[1280px] mx-auto mt-20 px-10 py-5` in `PilotApplication.tsx`)
+- `.apply-page` (on `/pilot` and `/pricing`, applied via `max-w-[1280px] mx-auto mt-20 px-10 py-5` in `PilotApplication.tsx`). Generic "apply-*" naming so classes aren't misleading on `/pricing`. Sidebar cards use `.apply-card` (`background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:.75rem; padding:1.5rem` → `2rem` at ≥768px).
 
 Home (`/`) hero uses the tighter `.hero` 96/40/72 variant because it has more above-the-fold content. Legal pages (`/privacy`, `/terms`) use `pt-32` (128px) via Tailwind since they're narrow-measure prose.
 
@@ -203,7 +203,7 @@ Shipped copies (all use the same 28×1 dash, copper, `.18em` tracking):
 - `.notetaker-head .eb` / `::before` — Notetaker comparison
 - `.platform .eb` / `::before` — Platform framing (investors)
 - `.coming-soon .eb` / `::before` — Pricing + Memory stubs
-- `.pilot-app .eb` / `::before` — Pilot + Pricing page intro
+- `.apply-page .eb` / `::before` — Pilot + Pricing page intro
 - `.inv-intro .eb` / `::before` — Investors intro
 - `.thesis-card .eb` / `::before` — Future-fit thesis
 
@@ -289,7 +289,7 @@ Hero cards (`.thesis-card`, `.cta-card`) add a 2px left gradient via `::before`:
 
 ### Native CSS nesting is the convention
 
-`globals.css` migrates flat selectors to native CSS nesting. Existing nested blocks: `.hub-wrap`, `.loading-screen`, `.btn-submit`, `.pilot-app`, `.coming-soon`, `.reg-inv`, `.platform`, `.roadmap`, `.team`, `.founder`, `.thesis-card`, `.investors-register`, `.inv-intro`, `header`, `footer`.
+`globals.css` migrates flat selectors to native CSS nesting. Existing nested blocks: `.hub-wrap`, `.loading-screen`, `.btn-submit`, `.apply-page`, `.coming-soon`, `.reg-inv`, `.platform`, `.roadmap`, `.team`, `.founder`, `.thesis-card`, `.investors-register`, `.inv-intro`, `header`, `footer`.
 
 When writing new CSS, nest descendants, `&::before`, `&::after`, `&:hover`, `&.modifier`, `&:disabled` inside the parent selector. Use blank lines between the parent's own rules and nested children for readability.
 
@@ -322,7 +322,7 @@ All selectors above live in a single file: `app/globals.css`. Section headers us
 1. **Off-brand peach `#F0A876`.** Previously used as a muted copper on the investor page. Purged 2026-04-23 in favor of the single `--copper` token.
 2. **`rgba(240,168,118,*)` gradients.** Same drift. Use `rgba(254,133,49,*)` for copper-at-alpha.
 3. **Hardcoded ink hexes** (`#E8E6E3`, `#B6B4B0`, `#7C7A77`, `#4E4C4A`). Use `var(--ink)` / `--ink-2` / `--ink-3` / `--ink-4`.
-4. **Tailwind `font-serif` / `font-mono` / `font-light` on marketing headings.** These resolve to generic `ui-serif`, `ui-monospace`, and system sans — not our loaded fonts. Use the CSS tokens via globals selectors (`.eb`, `.pilot-lede`, `h1` inside `.pilot-app`).
+4. **Tailwind `font-serif` / `font-mono` / `font-light` on marketing headings.** These resolve to generic `ui-serif`, `ui-monospace`, and system sans — not our loaded fonts. Use the CSS tokens via globals selectors (`.eb`, `.apply-lede`, `h1` inside `.apply-page`).
 5. **New eyebrow variants.** Always use `.eb` with the 28×1 copper dash. Don't invent `.kicker` / `.pilot-eb` / `.inv-eb` — they drift. `.kicker` and the `.reg-div` scene-break band that contained it were removed from `/investors` on 2026-04-23.
 6. **Inter / Roboto / system-ui as a primary font.** Never add those back as the first font family. Instrument Sans loads via `next/font` and is reliable.
 7. **Purple gradients, icon-in-circle feature grids, centered-everything hero, emoji as design, cookie-cutter section rhythm.** Standard AI-slop blacklist. Salency explicitly rejects these.
@@ -334,7 +334,7 @@ All selectors above live in a single file: `app/globals.css`. Section headers us
 When building a new marketing page:
 
 1. Root wrapper: `<div className="page"><MarketingHeader />...<SiteFooter /></div>`.
-2. For editorial intro (hero-like section), use or mirror `.inv-intro` / `.coming-soon` / `.pilot-app` — a scoped block with nested `.eb`, `h1`, lede `p`.
+2. For editorial intro (hero-like section), use or mirror `.inv-intro` / `.coming-soon` / `.apply-page` — a scoped block with nested `.eb`, `h1`, lede `p`.
 3. For structured sections below, use the `.prob-head` / `.how-head` / `.platform` patterns — `.eb` + `h2` + supporting copy.
 4. CTAs: `.btn .btn-primary` for primary, `.btn .btn-ghost` for secondary. Form submits: `.btn-submit`.
 5. Colors: only `var(--copper)` for accents, `var(--ink)` scale for text, `var(--hair)` / `--hair-2` for dividers.
@@ -350,7 +350,7 @@ When building a new marketing page:
 - Every eyebrow (`.inv-intro .eb`, `.platform .eb`, `.thesis-card .eb`) uses the 28×1 copper dash `::before` with `.18em` tracking.
 - Every investor-block selector is native-nested CSS.
 - The `.reg-div` 96px scene-break band at the top of the section was removed — it held only a single `.kicker` span that wasn't earning its weight. `.reg-div`, `.kicker`, `.wrap`, and `.inv-footer` CSS blocks all dropped as dead code.
-- `.inv-intro` padding normalized to `120px 40px 96px` to match `.coming-soon` and `.pilot-app` — the standalone intro canonical.
+- `.inv-intro` padding normalized to `120px 40px 96px` to match `.coming-soon` and `.apply-page` — the standalone intro canonical.
 - Chrome: `/investors` renders `<MarketingHeader />` and `<SiteFooter />`, same as every other marketing + legal page.
 
 Known investor-specific deliberate choices (not drift):
