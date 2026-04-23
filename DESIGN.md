@@ -168,14 +168,15 @@ All investor-page sections (`.inv-intro`, `.platform`, `.roadmap`, `.team`, `.th
 - First section on a page: `padding: 48–96px top`.
 - Last section before footer: `padding-bottom: 96–120px`.
 
-### Standalone section container — `max-width:1280px; margin:80px auto 0; padding:20px 40px` (canonical)
+### Standalone section container — `max-width:1280px; margin:40px auto 0; padding:20px 40px` (canonical)
 
-Every marketing section that sits at the top of a standalone page (not home) uses the same container: 1280px max-width, `80px` top margin as header-to-content spacing, `20px` vertical padding, `40px` fixed horizontal padding. Selectors:
+Every marketing section that sits at the top of a standalone page (not home) uses the same container: 1280px max-width, `40px` top margin as header-to-content spacing (tightened from 80px on 2026-04-23 — header already has adequate internal padding, 80px was creating a second gap), `20px` vertical padding, `40px` fixed horizontal padding. Selectors:
 
-- `.prob` (the Problem section — shared with home as a mid-page spacer, with the same `80px` acting as section-to-section rhythm there)
-- `.coming-soon` (on `/memory`)
+- `.prob` (the Problem section on `/why-salency`)
+- `.mem-intro` (on `/memory`)
 - `.inv-intro` (on `/investors`)
 - `.apply-page` (on `/pilot` and `/pricing`). Fully CSS-driven — no Tailwind utilities in the JSX. Layout, typography, grid, responsive breakpoints all nested under `.apply-page` in globals. Sub-classes: `.apply-intro` (intro section), `.apply-lede` (lede paragraph), `.apply-layout` (two-column grid), `.apply-sidebar` (vertical stack of cards), `.apply-form` (email form column), `.apply-card` (shared card panel), `.apply-check` and `.apply-dot` (list-item markers).
+- `.coming-soon` (legacy stub template — still at 80px, update if re-used)
 
 Home (`/`) hero uses the tighter `.hero` 96/40/72 variant because it has more above-the-fold content. Legal pages (`/privacy`, `/terms`) use `pt-32` (128px) via Tailwind since they're narrow-measure prose.
 
