@@ -212,14 +212,11 @@ html {
      breadcrumb (inherits smaller font + no decoration from parent);
      the CTA card (centered layout, decoration would offset text);
      the NOT-strip dim header label (uses its own muted treatment);
-     the mem-cta (centered block eyebrow above the final CTA); and
-     the mem-compat strip (small muted ink eyebrow centered above
-     the transcript-sources line). */
+     the mem-cta (centered block eyebrow above the final CTA). */
   .hub-head .eb::before,
   .cta-card .eb::before,
   .notdo-card .header .eb::before,
-  .mem-cta .eb::before,
-  .mem-compat .eb::before{content:none}
+  .mem-cta .eb::before{content:none}
 
   /* Canonical em accent — display headings and body copy inside any
      .page root render em italic copper by default. Scoped overrides
@@ -2403,44 +2400,6 @@ header button:focus:not(:focus-visible){
     a:hover { border-bottom-color: var(--copper); }
   }
 
-  /* ── Transcript sources ── */
-  .mem-compat {
-    max-width:var(--page-max);
-    margin: 96px auto 0;
-    padding: 32px 40px;
-    border-top: 1px solid var(--hair);
-    border-bottom: 1px solid var(--hair);
-    text-align: center;
-
-    /* Muted centered eyebrow: overrides copper → ink-4, tracking
-       → .2em (vs canonical .18em), layout → block. */
-    .eb {
-      font-size: 10.5px;
-      letter-spacing: .2em;
-      color: var(--ink-4);
-      margin-bottom: 16px;
-      display: block;
-    }
-  }
-
-  .mem-compat-line {
-    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--ink-2);
-    max-width: 68ch;
-    margin: 0 auto;
-
-    em {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-style: italic;
-      color: var(--ink);
-      font-size: 17px;
-      font-weight: 400;
-    }
-  }
-
   /* ── Pilot CTA ── */
   .mem-cta {
     max-width:var(--page-max);
@@ -2561,10 +2520,6 @@ header button:focus:not(:focus-visible){
       color: var(--copper);
       margin-bottom: 3px;
     }
-
-    .mem-compat { margin-top: 72px; padding: 24px 22px; }
-    .mem-compat-line { font-size: 15px; }
-    .mem-compat-line em { font-size: 16px; }
 
     .mem-cta { margin: 72px auto 72px; padding: 0 22px; }
   }

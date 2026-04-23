@@ -330,38 +330,24 @@ export function MemorySection() {
         </section>
       </ScrollReveal>
 
-      {/* ─── Transcript sources ─── */}
-      <ScrollReveal>
-        <section className="mem-compat">
-          <span className="eb">Transcript sources</span>
-          <p className="mem-compat-line">
-            Bring transcripts from{' '}
-            <em>Gong, Fathom, Fireflies, Otter, Zoom</em>, or raw .vtt / .txt.
-            Paste or upload &mdash; takes about a minute per call.
-          </p>
-        </section>
-      </ScrollReveal>
-
       {/* ─── Pilot CTA ─── */}
-      <ScrollReveal>
-        <section className="mem-cta">
-          <span className="eb">Pilot cohort &middot; Spring 2026</span>
-          <h2>
-            Inherit every account&rsquo;s <em>memory</em> from Day 1.
-          </h2>
-          <p className="sub">
-            We&rsquo;re onboarding a small group of revenue teams this cohort.
-            Tell us about your team and we&rsquo;ll scope the fit together.
-          </p>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => openPilotModal()}
-          >
-            Request a pilot &rarr;
-          </button>
-        </section>
-      </ScrollReveal>
+      <section className="mem-cta">
+        <span className="eb">Pilot cohort &middot; Spring 2026</span>
+        <h2>
+          Inherit every account&rsquo;s <em>memory</em> from Day 1.
+        </h2>
+        <p className="sub">
+          First account memory stands up in a week. By month two, the rep
+          inheriting it reads the story, not a notes field.
+        </p>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => openPilotModal()}
+        >
+          Request a pilot &rarr;
+        </button>
+      </section>
     </>
   );
 }
