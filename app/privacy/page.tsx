@@ -1,9 +1,10 @@
-import { Header } from '@/components/Header';
+import { MarketingHeader } from '@/components/MarketingHeader';
+import { SiteFooter } from '@/components/sections/SiteFooter';
 
 export default function Privacy() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Header />
+    <div className="page">
+      <MarketingHeader />
       <main className="pt-32 pb-24 px-6 max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
         <div className="prose prose-invert prose-gray max-w-none space-y-6 text-gray-300 text-sm leading-relaxed">
@@ -30,6 +31,7 @@ export default function Privacy() {
           <p>Questions? Email us at <a href="mailto:founders@salency.ai" className="text-accent-warm hover:underline">founders@salency.ai</a>.</p>
         </div>
       </main>
+      <SiteFooter />
     </div>
   );
 }

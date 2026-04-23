@@ -1505,16 +1505,19 @@ html {
   /* ═══════════ Footer ═══════════ */
   footer{
     border-top:1px solid var(--hair);
-    padding:36px 40px;
+    padding:40px;
     max-width:1280px;margin:0 auto;
     display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
     font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-4);
     letter-spacing:.04em;
 
-    .brand{font-family:var(--font-outfit), 'Outfit', sans-serif;font-weight:800;font-size:17px;color:var(--ink-2);letter-spacing:-.02em}
-    nav{display:flex;gap:24px}
-    nav a{color:var(--ink-3)}
-    nav a:hover{color:var(--ink)}
+    .brand{
+      font-family:var(--font-outfit), 'Outfit', sans-serif;font-weight:800;font-size:17px;
+      color:var(--ink);letter-spacing:-.02em;
+    }
+    nav{display:flex;gap:24px;flex-wrap:wrap}
+    nav a{color:var(--ink-3);transition:color .18s}
+    nav a:hover{color:var(--copper)}
   }
 
   /* ═══════════ Investor page (standalone) ═══════════ */
@@ -1572,29 +1575,14 @@ html {
     }
   }
 
-  .inv-footer{
-    max-width:1280px;margin:0 auto;padding:40px;
-    border-top:1px solid var(--hair);
-    display:flex;justify-content:space-between;align-items:center;
-    font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-4);
-    letter-spacing:.08em;text-transform:uppercase;
-
-    .brand{
-      font-family:var(--font-outfit), 'Outfit', sans-serif;font-weight:800;font-size:17px;
-      color:var(--ink);letter-spacing:-.02em;text-transform:none;
-    }
-    nav{display:flex;gap:28px}
-    nav a{color:var(--ink-3);transition:color .18s}
-    nav a:hover{color:var(--copper)}
-  }
-
-/* Marketing font mapping — bind --font-body / --font-display to next/font */
+/* ═══════════ Marketing font mapping ═══════════ */
+/* Bind --font-body / --font-display to next/font variables. */
 :root{
   --font-body: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
   --font-display: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
 }
 
-/* Mobile hamburger + slide-down panel */
+/* ═══════════ Mobile nav — hamburger + slide-down panel ═══════════ */
 .nav-burger{
   display:none;
   width:44px;height:44px;
@@ -1655,7 +1643,7 @@ html {
 }
 .nav-panel-cta .btn{justify-content:center;padding:14px 18px;font-size:15px}
 
-/* Collapse desktop nav below 900px */
+/* Collapse desktop nav below 900px — sub-rule of Mobile nav above */
 @media (max-width:900px){
   .nav{grid-template-columns:1fr auto auto;gap:12px;padding:12px 20px}
   nav.links{display:none}
@@ -1664,7 +1652,8 @@ html {
   .brand .name{font-size:22px}
 }
 
-/* Header focus-visible — copper ring for keyboard users, nothing for mouse */
+/* ═══════════ Header focus-visible ═══════════ */
+/* Copper ring for keyboard users, nothing for mouse. */
 header a:focus-visible,
 header button:focus-visible{
   outline:2px solid var(--copper);
