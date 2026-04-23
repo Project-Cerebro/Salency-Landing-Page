@@ -222,6 +222,8 @@ html {
      (e.g. .h1 em { font-style: normal }, .how-head .lede em { color:
      var(--ink) }) win by specificity where they need a different
      treatment. */
+  .page em { font-style: italic; color: var(--copper); }
+
   /* ═══════════ Hub diagram (replaces product mock) ═══════════ */
   .hub-wrap{
     max-width:1280px;margin:72px auto 0;padding:0 40px;
