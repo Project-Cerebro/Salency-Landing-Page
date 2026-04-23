@@ -1219,8 +1219,18 @@ html {
   .how-head .eb::before{content:"";width:28px;height:1px;background:var(--copper);display:inline-block}
   .how-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(44px,5vw,64px);line-height:1.03;letter-spacing:-.025em;
+    font-size:clamp(36px,5vw,64px);line-height:1.03;letter-spacing:-.025em;
     margin:0;color:var(--ink);max-width:16ch;text-wrap:balance;
+  }
+  /* .how-head mobile: 2-col headline+lede stacks, same treatment as
+     .prob-head per PR #71. */
+  @media (max-width: 768px) {
+    .how-head {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+      align-items: start;
+    }
   }
   .how-head h2 em{font-style:italic;color:var(--copper)}
   .how-head .lede{
