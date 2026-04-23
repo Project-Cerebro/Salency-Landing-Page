@@ -664,7 +664,7 @@ html {
      viewed through the pricing-page lens. All layout/typography lives
      here so the JSX is semantic (no Tailwind utility soup). */
   .apply-page{
-    max-width:1280px;margin:80px auto 0;padding:20px 40px;
+    max-width:1280px;margin:40px auto 0;padding:20px 40px;
 
     .apply-intro{max-width:48rem;margin-bottom:64px}
 
@@ -1038,7 +1038,7 @@ html {
 
   /* ═══════════ Problem section ═══════════ */
   .prob{
-    max-width:1280px;margin:80px auto 0;padding:20px 40px;
+    max-width:1280px;margin:40px auto 0;padding:20px 40px;
   }
   .prob-head{
     display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;
@@ -1594,7 +1594,7 @@ html {
   }
 
   .inv-intro{
-    max-width:1280px;margin:80px auto 0;padding:20px 40px;
+    max-width:1280px;margin:40px auto 0;padding:20px 40px;
     border-bottom:1px solid var(--hair);position:relative;
 
     &::after{
@@ -1848,7 +1848,7 @@ header button:focus:not(:focus-visible){
   /* ── Intro (matches standalone canonical per DESIGN.md §4) ── */
   .mem-intro {
     max-width: 1280px;
-    margin: 80px auto 0;
+    margin: 40px auto 0;
     padding: 20px 40px;
 
     .eb {
