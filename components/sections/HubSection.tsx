@@ -251,14 +251,12 @@ export function HubSection() {
           <div className="hub-outcome-eb">Outcome</div>
           <div className="hub-outcome-grid">
             <div className="hub-outcome-row">
-              {/* Kept abbreviated for diagram density. aria-label gives
-                  screen readers the spelled-out role. */}
-              <div className="hub-outcome-role" aria-label="New account executive">New AE</div>
+              <div className="hub-outcome-role">New account executive</div>
               <div className="hub-outcome-role-title">Inherits the account</div>
               <div className="hub-outcome-role-summary">Every pain, objection, and commitment from prior calls</div>
             </div>
             <div className="hub-outcome-row">
-              <div className="hub-outcome-role" aria-label="Customer success manager">CSM</div>
+              <div className="hub-outcome-role">Customer success manager</div>
               <div className="hub-outcome-role-title">Picks up the relationship</div>
               <div className="hub-outcome-role-summary">Cited pain-to-product mappings, no re-asking</div>
             </div>
