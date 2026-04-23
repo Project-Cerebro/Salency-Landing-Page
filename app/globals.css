@@ -660,13 +660,18 @@ html {
 
   /* Application/intake page — shared by /pilot and /pricing.
      Generic "apply-*" naming so the classes aren't misleading when
-     viewed through the pricing-page lens. */
+     viewed through the pricing-page lens. All layout/typography lives
+     here so the JSX is semantic (no Tailwind utility soup). */
   .apply-page{
+    max-width:1280px;margin:80px auto 0;padding:20px 40px;
+
+    .apply-intro{max-width:48rem;margin-bottom:64px}
+
     .eb{
       font-family:'Geist Mono','SFMono-Regular',Consolas,monospace;
       font-size:11px;font-weight:500;letter-spacing:.18em;
       text-transform:uppercase;color:var(--copper);
-      display:inline-flex;align-items:center;gap:10px;
+      display:inline-flex;align-items:center;gap:10px;margin-bottom:20px;
 
       &::before{
         content:"";width:28px;height:1px;background:var(--copper);display:inline-block;
@@ -675,32 +680,65 @@ html {
     h1{
       font-family:var(--font-display), 'Instrument Serif', serif;
       font-weight:400;line-height:1.04;letter-spacing:-.025em;
-      color:var(--ink);
+      color:var(--ink);font-size:3rem;margin:0 0 24px;text-wrap:balance;
 
       em{font-style:italic;color:var(--copper)}
     }
     .apply-lede{
       font-family:var(--font-body), 'Geist', sans-serif;
       font-weight:300;line-height:1.55;color:var(--ink-2);
+      font-size:1.125rem;max-width:52ch;margin:0;
     }
-    h3{
-      font-family:var(--font-display), 'Instrument Serif', serif;
-      font-weight:400;line-height:1.2;color:var(--ink);
+
+    /* Two-column layout: sidebar cards + email form.
+       Form is visually first on narrow viewports, moves right on ≥1024px. */
+    .apply-layout{
+      display:grid;grid-template-columns:1fr;gap:48px;align-items:start;
     }
-    li{
-      font-family:var(--font-body), 'Geist', sans-serif;
-      line-height:1.55;color:var(--ink-2);
+    .apply-sidebar{
+      display:flex;flex-direction:column;gap:24px;order:2;
     }
+    .apply-form{order:1}
+
     /* Sidebar cards ("Pilot includes", "Good fit if") — identical
        styling, shared class so they stay in sync. */
     .apply-card{
       background:rgba(255,255,255,.05);
       border:1px solid rgba(255,255,255,.1);
-      border-radius:.75rem;
-      padding:1.5rem;
+      border-radius:.75rem;padding:1.5rem;
+
+      h3{
+        font-family:var(--font-display), 'Instrument Serif', serif;
+        font-weight:400;line-height:1.2;color:var(--ink);
+        font-size:1.25rem;margin:0 0 16px;
+      }
+      ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+      li{
+        font-family:var(--font-body), 'Geist', sans-serif;
+        line-height:1.55;color:var(--ink-2);
+        font-size:.875rem;display:flex;align-items:flex-start;gap:12px;
+      }
     }
-    @media (min-width: 768px){
+    /* Bullet markers for the two list styles. */
+    .apply-check{color:var(--copper);margin-top:2px;flex-shrink:0}
+    .apply-dot{
+      width:6px;height:6px;border-radius:9999px;background:var(--copper);
+      margin-top:9px;flex-shrink:0;
+    }
+  }
+  @media (min-width: 768px){
+    .apply-page{
+      .apply-intro{margin-bottom:80px}
+      h1{font-size:3.75rem}
+      .apply-lede{font-size:1.25rem}
       .apply-card{padding:2rem}
+    }
+  }
+  @media (min-width: 1024px){
+    .apply-page{
+      .apply-layout{grid-template-columns:1fr 1.2fr;gap:64px}
+      .apply-sidebar{order:1}
+      .apply-form{order:2}
     }
   }
 
