@@ -127,9 +127,7 @@ export function MemorySection() {
                   <span>12 calls indexed</span>
                 </span>
               </div>
-              <span className="mem-hero-chip">
-                Surface 01 &middot; Design preview
-              </span>
+              <span className="mem-hero-chip">01</span>
             </div>
 
             <div className="mem-brief-grid">

@@ -2245,10 +2245,7 @@ header button:focus:not(:focus-visible){
       color: var(--ink);
       margin: 0 0 10px;
     }
-    /* Support-card h3 em: same color as the rest of the heading.
-       Don't mix an accent em into a card title that isn't the primary
-       focus of the page — keep the hierarchy consistent. */
-    h3 em { font-style: italic; color: inherit; }
+    h3 em { font-style: italic; color: var(--copper); }
 
     .support-desc {
       font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
