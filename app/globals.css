@@ -163,6 +163,7 @@ h6 {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* sticky header (~76px) + breathing room for hash-anchor jumps */
   color-scheme: dark;
 }
 
