@@ -217,8 +217,8 @@ export function InvestorsSection() {
                   <span className="name">Nikki Ip</span>
                   <span className="role">Co-founder &amp; COO</span>
                   <p className="line">
-                    Runs revenue analytics + operational strategy at
-                    Adaptavist Group.
+                    Data analyst at Adaptavist Group. Three years running
+                    operational reporting across HubSpot, Snowflake, DBT.
                   </p>
                 </div>
               </div>

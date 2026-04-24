@@ -81,10 +81,14 @@ export function OurStorySection() {
           </aside>
           <div className="story-founder-body">
             <p>
-              Runs revenue analytics and operational strategy at{' '}
-              <em>Adaptavist Group</em>, where she owns the pipeline
-              instrumentation Salency&rsquo;s buyers are trying to build for
-              themselves.
+              Data analyst at <em>Adaptavist Group</em> for 3+ years, running
+              the operational reporting stack across HubSpot, Snowflake, DBT,
+              Google Sheets, OpenAir, Count, and Retool. She&rsquo;s lived
+              the exact pain Salency fixes —{' '}
+              <em>
+                revenue data scattered across platforms, no single layer
+                where the story survives.
+              </em>
             </p>
             <p>
               When Howard showed her the thesis, her first reaction was{' '}
@@ -92,14 +96,19 @@ export function OurStorySection() {
                 &ldquo;I&rsquo;ve been doing this by hand for five
                 years.&rdquo;
               </em>{' '}
-              She joined as co-founder two weeks later.
+              She joined as co-founder two weeks later. She&rsquo;s also
+              Howard&rsquo;s wife — three years of working adjacent
+              commercial jobs before Salency means they watched this pattern
+              break from different angles and landed on the same diagnosis.
             </p>
             <p>
-              Background before Adaptavist: institutional client management
-              and AML/KYC compliance in banking. She writes the go-to-market
-              motion from the buyer&rsquo;s side of the desk — knows what
-              sales ops actually trusts, how handoffs break at 50 reps, and
-              which metrics survive a board deck.
+              Before Adaptavist: Hong Kong banking (Nanyang Commercial Bank,
+              commercial credit for HKD 4B+ listed clients; DBS Bank,
+              AML/KYC, FATCA, PEP screening), operations at VirgoCX (crypto
+              exchange, FINTRAC reporting, Salesforce integrations), and a
+              four-month full-stack software bootcamp (React, REST, MVC).
+              Trilingual (Mandarin, Cantonese, English). BSc Marketing &amp;
+              Management, University of Sussex.
             </p>
           </div>
         </article>
