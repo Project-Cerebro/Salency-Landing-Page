@@ -1489,57 +1489,50 @@ html {
     }
   }
 
-  .founder{
-    display:grid;grid-template-columns:128px 1fr;gap:40px;
-    padding-bottom:56px;margin-bottom:56px;border-bottom:1px solid var(--hair);
+  /* Compact team row on /investors — three rows, each is photo + name +
+     role + one-line bet. Full bios live on /our-story (linked below). */
+  .team-compact{
+    border-top:1px solid var(--hair-2);margin-bottom:24px;
+  }
+  .team-compact-row{
+    display:grid;grid-template-columns:72px 1fr;gap:24px;
+    padding:20px 0;border-bottom:1px solid var(--hair);align-items:center;
 
-    &:last-child{border-bottom:0;margin-bottom:0}
-    &.founder--reversed{
-      grid-template-columns:1fr 128px;
-
-      .photo{order:2}
-      .body{order:1;text-align:left}
-    }
+    &:last-child{border-bottom:none}
 
     .photo{
-      width:128px;height:128px;border-radius:14px;
+      width:72px;height:72px;border-radius:10px;
       background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
-      color:#FFEDE8;font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:52px;
+      color:#FFEDE8;font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:28px;
       display:flex;align-items:center;justify-content:center;letter-spacing:-.01em;
       border:1px solid var(--copper-a30);
 
       &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));border-color:rgba(107,78,255,.3);color:#D8CEFF}
       &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
     }
+  }
+  .team-compact-body{
+    display:grid;grid-template-columns:minmax(180px,220px) auto 1fr;gap:20px;align-items:baseline;
+
     .name{
-      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:32px;
-      line-height:1.1;letter-spacing:-.015em;color:var(--ink);margin:0 0 4px;
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:500;font-size:20px;color:var(--ink);
     }
     .role{
       font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
-      letter-spacing:.18em;text-transform:uppercase;color:var(--copper);margin-bottom:18px;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
     }
-    .bio{
-      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:16px;line-height:1.75;
-      color:var(--ink-2);max-width:62ch;margin:0 0 20px;
-
-      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-size:17px;font-weight:400}
+    .line{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
+      line-height:1.55;color:var(--ink-2);margin:0;
     }
-    .founder-fit{
-      padding:14px 18px;border-left:2px solid var(--copper-a40);
-      background:var(--copper-a03);
+  }
+  .team-compact-link{
+    display:inline-block;font-family:'Geist Mono',monospace;font-size:12px;
+    letter-spacing:.12em;color:var(--copper);text-decoration:none;
+    border-bottom:1px solid var(--copper-a35);padding-bottom:2px;
+    transition:border-color .18s,color .18s;
 
-      .label{
-        font-family:'Geist Mono',monospace;font-size:10px;font-weight:500;
-        letter-spacing:.18em;text-transform:uppercase;color:var(--copper);margin-bottom:4px;
-      }
-      p{
-        font-family:var(--font-body), 'Geist', sans-serif;font-size:14.5px;line-height:1.55;color:var(--ink-2);
-        font-weight:300;margin:0;max-width:62ch;
-
-        em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-weight:400}
-      }
-    }
+    &:hover{color:var(--ink);border-bottom-color:var(--ink)}
   }
 
   /* Future-fit thesis */
@@ -1635,6 +1628,122 @@ html {
     }
   }
 
+  /* ═══════════ /our-story ═══════════ */
+  .story{
+    max-width:var(--page-max);margin:40px auto 120px;padding:20px 40px;
+  }
+
+  .story-intro{
+    padding-bottom:56px;border-bottom:1px solid var(--hair);margin-bottom:72px;
+
+    .eb{margin-bottom:28px;display:flex}
+    h1{
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+      font-size:clamp(40px,4.8vw,64px);line-height:1.06;letter-spacing:-.025em;
+      color:var(--ink);margin:0 0 28px;max-width:22ch;text-wrap:balance;
+
+      em{font-style:italic;color:var(--copper)}
+    }
+    .lede{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;
+      line-height:1.7;color:var(--ink-2);max-width:62ch;margin:0;
+    }
+  }
+
+  .story-origin{
+    padding:32px 40px;border-left:2px solid var(--copper-a40);
+    background:var(--copper-a03);margin-bottom:96px;max-width:68ch;
+
+    .eb{margin-bottom:18px;display:flex}
+    .story-origin-body{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:17px;
+      line-height:1.7;color:var(--ink-2);margin:0 0 16px;
+
+      &:last-child{margin-bottom:0}
+      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;
+        color:var(--copper);font-size:18px;font-weight:400}
+    }
+  }
+
+  .story-founders{
+    .eb{margin-bottom:40px;display:flex}
+  }
+
+  .story-founder{
+    display:grid;grid-template-columns:220px 1fr;gap:56px;
+    padding-bottom:64px;margin-bottom:64px;border-bottom:1px solid var(--hair);
+
+    &:last-child{border-bottom:none;margin-bottom:0}
+  }
+
+  .story-founder-meta{
+    display:flex;flex-direction:column;gap:20px;
+
+    .photo{
+      width:128px;height:128px;border-radius:14px;
+      background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
+      color:#FFEDE8;font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:52px;
+      display:flex;align-items:center;justify-content:center;letter-spacing:-.01em;
+      border:1px solid var(--copper-a30);
+
+      &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));border-color:rgba(107,78,255,.3);color:#D8CEFF}
+      &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
+    }
+  }
+
+  .story-founder-name{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:32px;
+    line-height:1.1;letter-spacing:-.015em;color:var(--ink);margin:0 0 4px;
+  }
+
+  .story-founder-role{
+    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+  }
+
+  .story-founder-body p{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:16.5px;
+    line-height:1.75;color:var(--ink-2);max-width:62ch;margin:0 0 18px;
+
+    &:last-child{margin-bottom:0}
+    em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;
+      color:var(--copper);font-size:17.5px;font-weight:400}
+  }
+
+  .story-close{
+    margin-top:96px;padding-top:56px;border-top:1px solid var(--hair-2);text-align:center;
+
+    p{
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+      font-size:clamp(22px,2.4vw,28px);line-height:1.4;color:var(--ink);
+      max-width:48ch;margin:0 auto 28px;
+
+      em{font-style:italic;color:var(--copper)}
+    }
+  }
+
+  .story-close-link{
+    font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+    text-decoration:none;border-bottom:1px solid var(--copper-a35);
+    padding-bottom:4px;transition:border-color .18s,color .18s;
+
+    &:hover{color:var(--ink);border-bottom-color:var(--ink)}
+  }
+
+  /* /our-story mobile */
+  @media (max-width:768px){
+    .story{padding:20px 22px;margin-bottom:80px}
+    .story-intro{padding-bottom:40px;margin-bottom:48px}
+    .story-origin{padding:24px 22px;margin-bottom:56px}
+    .story-founder{
+      grid-template-columns:1fr;gap:24px;padding-bottom:40px;margin-bottom:40px;
+    }
+    .story-founder-meta{flex-direction:row;align-items:center;gap:16px}
+    .story-founder-meta .photo{width:72px;height:72px;font-size:28px}
+    .story-close{margin-top:64px;padding-top:40px}
+  }
+
   /* ═══════════ Investor page — mobile overrides ═══════════ */
   @media (max-width: 768px) {
     .investors-register .reg-inv {
@@ -1686,18 +1795,21 @@ html {
       gap: 12px;
       margin-bottom: 40px;
     }
-    .founder,
-    .founder.founder--reversed {
-      /* Photo on top, body below — at 375px the 128px photo + 1fr body
-         cramped the bio to ~12ch per line. Reversed variant collapses
-         to the same stacked layout. */
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding-bottom: 40px;
-      margin-bottom: 40px;
+    .team-compact-row {
+      /* Narrow screens: shrink the photo cell and stack name/role/line. */
+      grid-template-columns: 56px 1fr;
+      gap: 14px;
+      padding: 16px 0;
 
-      .photo { order: 0; width: 96px; height: 96px; font-size: 40px; }
-      .body { order: 1; text-align: left; }
+      .photo {
+        width: 56px;
+        height: 56px;
+        font-size: 22px;
+      }
+    }
+    .team-compact-body {
+      grid-template-columns: 1fr;
+      gap: 4px;
     }
     .thesis-card {
       /* 56/64 padding was the desktop editorial feel — at mobile that

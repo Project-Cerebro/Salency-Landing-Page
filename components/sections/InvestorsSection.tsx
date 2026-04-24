@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export function InvestorsSection() {
   return (
     <>
@@ -197,83 +199,45 @@ export function InvestorsSection() {
               </h2>
             </div>
 
-            <div className="founder">
-              <div className="photo">HT</div>
-              <div className="body">
-                <div className="name">Howard Tam</div>
-                <div className="role">Co-founder &amp; CEO</div>
-                <p className="bio">
-                  <em>Five founding-AE / BD seats in four years</em> — Dora,
-                  Sequence, Treasure, Nijta, Viggle (a16z-backed). Ran the
-                  HubSpot→Monday CRM migration at Sequence; came out knowing
-                  flat fields can&rsquo;t hold what the customer said. Before
-                  that he led MUFG Hong Kong&apos;s first Panda Bond. MBET,
-                  Waterloo.
-                </p>
-                <div className="founder-fit">
-                  <div className="label">Unfair advantage</div>
-                  <p>
-                    Watched post-sale trust break when handovers didn&rsquo;t
-                    happen — a rep two desks away, a customer repeating
-                    themselves by minute 15.{' '}
-                    <em>
-                      The product spec comes from that, not from a market map.
-                    </em>
+            <div className="team-compact">
+              <div className="team-compact-row">
+                <div className="photo">HT</div>
+                <div className="team-compact-body">
+                  <span className="name">Howard Tam</span>
+                  <span className="role">Co-founder &amp; CEO</span>
+                  <p className="line">
+                    Five founding-AE / BD seats in four years. Ran the
+                    HubSpot→Monday CRM migration at Sequence.
+                  </p>
+                </div>
+              </div>
+              <div className="team-compact-row">
+                <div className="photo photo--violet">NI</div>
+                <div className="team-compact-body">
+                  <span className="name">Nikki Ip</span>
+                  <span className="role">Co-founder &amp; COO</span>
+                  <p className="line">
+                    Runs revenue analytics + operational strategy at
+                    Adaptavist Group.
+                  </p>
+                </div>
+              </div>
+              <div className="team-compact-row">
+                <div className="photo photo--teal">BO</div>
+                <div className="team-compact-body">
+                  <span className="name">Babajide Okusanya</span>
+                  <span className="role">Founding Engineer</span>
+                  <p className="line">
+                    Scaled MakersValley from 0 to $2M ARR (6.5y, NYC). Ships
+                    provenance-tracked AI context systems.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="founder founder--reversed">
-              <div className="photo photo--violet">NI</div>
-              <div className="body">
-                <div className="name">Nikki Ip</div>
-                <div className="role">Co-founder &amp; COO</div>
-                <p className="bio">
-                  Runs revenue analytics and operational strategy at{' '}
-                  <em>Adaptavist Group</em>, where she owns the pipeline
-                  instrumentation Salency&apos;s buyers are trying to build
-                  internally. Prior background in institutional client
-                  management and AML/KYC compliance in banking.
-                </p>
-                <div className="founder-fit">
-                  <div className="label">Unfair advantage</div>
-                  <p>
-                    Knows what sales ops <em>actually trusts</em>, how handoffs
-                    break at 50 reps, and which metrics survive a board deck.
-                    She writes the go-to-market motion from the buyer&apos;s
-                    side of the desk.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="founder">
-              <div className="photo photo--teal">BO</div>
-              <div className="body">
-                <div className="name">Babajide Okusanya</div>
-                <div className="role">Founding Engineer</div>
-                <p className="bio">
-                  Scaled <em>MakersValley</em> from 0 to $2M ARR (6.5y, NYC)
-                  as an applied-AI operator — not a research hire. Has shipped{' '}
-                  <em>provenance-tracked AI context systems</em> — the exact
-                  technical class Salency runs on. Trained 2,000+ engineers on
-                  AI-assisted workflows.
-                </p>
-                <div className="founder-fit">
-                  <div className="label">Unfair advantage</div>
-                  <p>
-                    The core technical risk in Salency is not &ldquo;can an LLM
-                    summarise a call.&rdquo; It is{' '}
-                    <em>
-                      &ldquo;can extractions stay cited, scoped to a specific
-                      catalog, and trustworthy at volume.&rdquo;
-                    </em>{' '}
-                    He has shipped that class of system before.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <Link href="/our-story" className="team-compact-link">
+              Full bios + founding story on /our-story →
+            </Link>
           </section>
 
           <section className="roadmap" id="roadmap">
