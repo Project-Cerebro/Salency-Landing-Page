@@ -111,11 +111,6 @@ export function MemorySection() {
         </section>
       </ScrollReveal>
 
-      {/* ─── Framing: where the layer lives (migrated from /why-salency) ─── */}
-      <ScrollReveal>
-        <MemoryStackSection />
-      </ScrollReveal>
-
       {/* ─── Surface 01: featured brief (tight 2-col, fits viewport) ─── */}
       <ScrollReveal>
         <section className="mem-hero-surface">
@@ -300,6 +295,13 @@ export function MemorySection() {
             </article>
           </div>
         </section>
+      </ScrollReveal>
+
+      {/* ─── Framing: where Salency lives (migrated from /why-salency).
+           Sits right before mem-compare so the 3-layer frame and the
+           signal-by-signal table cluster as one "not a CRM field" argument. ─── */}
+      <ScrollReveal>
+        <MemoryStackSection />
       </ScrollReveal>
 
       {/* ─── CRM vs Salency ─── */}
