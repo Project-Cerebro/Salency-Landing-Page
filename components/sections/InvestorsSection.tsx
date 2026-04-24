@@ -339,8 +339,8 @@ export function InvestorsSection() {
               </p>
               <div className="thesis-close">
                 Salency owns that layer. The longer a team runs it,{' '}
-                <em>the more context compounds</em> — and the harder it is to
-                rip out.
+                <em>the more context compounds</em> — and the deeper the
+                graph gets.
               </div>
             </div>
           </section>
