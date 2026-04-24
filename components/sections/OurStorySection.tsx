@@ -52,6 +52,8 @@ export function OurStorySection() {
               <em>Dora, Sequence, Treasure, Nijta, Viggle</em> (a16z-backed).
               Ran the HubSpot→Monday CRM migration at Sequence and came out
               knowing flat fields can&rsquo;t hold what the customer said.
+              Before sales, he led MUFG Hong Kong&apos;s first Panda Bond
+              issuance. MBET, Waterloo.
             </p>
             <p>
               In January 2026 he interviewed a senior relationship manager at
@@ -63,10 +65,6 @@ export function OurStorySection() {
               </em>{' '}
               That was the input constraint named by the person Salency was
               being built for.
-            </p>
-            <p>
-              Before sales, Howard led MUFG Hong Kong&apos;s first Panda
-              Bond issuance. MBET, Waterloo.
             </p>
           </div>
         </article>
@@ -81,10 +79,10 @@ export function OurStorySection() {
           </aside>
           <div className="story-founder-body">
             <p>
-              Data analyst at <em>Adaptavist Group</em> for 3+ years, running
-              the operational reporting stack across HubSpot, Snowflake, DBT,
-              Google Sheets, OpenAir, Count, and Retool. She&rsquo;s lived
-              the exact pain Salency fixes —{' '}
+              Data analyst at <em>Adaptavist Group</em> for 3+ years,
+              running the operational reporting stack across HubSpot,
+              Snowflake, and DBT. She&rsquo;s lived the exact pain Salency
+              fixes —{' '}
               <em>
                 revenue data scattered across platforms, no single layer
                 where the story survives.
@@ -96,19 +94,10 @@ export function OurStorySection() {
                 &ldquo;I&rsquo;ve been doing this by hand for five
                 years.&rdquo;
               </em>{' '}
-              She joined as co-founder two weeks later. She&rsquo;s also
-              Howard&rsquo;s wife — three years of working adjacent
-              commercial jobs before Salency means they watched this pattern
-              break from different angles and landed on the same diagnosis.
-            </p>
-            <p>
-              Before Adaptavist: Hong Kong banking (Nanyang Commercial Bank,
-              commercial credit for HKD 4B+ listed clients; DBS Bank,
-              AML/KYC, FATCA, PEP screening), operations at VirgoCX (crypto
-              exchange, FINTRAC reporting, Salesforce integrations), and a
-              four-month full-stack software bootcamp (React, REST, MVC).
-              Trilingual (Mandarin, Cantonese, English). BSc Marketing &amp;
-              Management, University of Sussex.
+              She joined as co-founder two weeks later. Before Adaptavist:
+              Hong Kong commercial banking at Nanyang Commercial Bank
+              (credit for HKD 4B+ listed clients) and operations at a
+              Toronto crypto exchange.
             </p>
           </div>
         </article>
@@ -126,6 +115,8 @@ export function OurStorySection() {
               Scaled <em>MakersValley</em> from 0 to $2M ARR (6.5y, NYC) as
               an applied-AI operator — not a research hire. Built
               Salency&rsquo;s extraction and pain-to-product mapping engine.
+              Trained 2,000+ engineers on AI-assisted workflows along the
+              way.
             </p>
             <p>
               The core technical risk in Salency isn&rsquo;t &ldquo;can an
@@ -136,10 +127,6 @@ export function OurStorySection() {
               </em>{' '}
               He has shipped that class of system before —
               provenance-tracked AI context systems in production.
-            </p>
-            <p>
-              Along the way he trained 2,000+ engineers on AI-assisted
-              workflows.
             </p>
           </div>
         </article>
@@ -169,15 +156,9 @@ export function OurStorySection() {
               blacklisting and account administration at ad-tech scale.
               Redesigned legacy shipping applications at StatysTech with
               user research driving the journey rewrites. Fortune 500 HR
-              interfaces at Myplanet. The through-line: complex B2B
-              software, research-first, design systems early.
-            </p>
-            <p>
-              Her process opens with a user, not a wireframe. AI-augmented
-              design is her stated top skill — not a pivot. Before design:
-              marketing in Switzerland and Canada, plus a year of data
-              analysis at Agriculture and Agri-Food Canada. General Assembly
-              UX, BA Guelph.
+              interfaces at Myplanet. Her process opens with a user, not a
+              wireframe. AI-augmented design is her stated top skill —{' '}
+              <em>not a pivot.</em>
             </p>
           </div>
         </article>
