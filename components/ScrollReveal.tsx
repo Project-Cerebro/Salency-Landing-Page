@@ -27,6 +27,17 @@ export function ScrollReveal({
       el.style.transitionDelay = `${delay}ms`;
     }
 
+    // If the element is already in viewport at mount, reveal it immediately.
+    // IntersectionObserver's first callback is async and can race with initial
+    // paint. On pages that wrap the whole body in a single ScrollReveal
+    // (e.g. /investors), the observer sometimes doesn't fire until a scroll
+    // event wakes it up, leaving content stuck at opacity: 0.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('is-visible');
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
