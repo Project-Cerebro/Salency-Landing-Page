@@ -28,12 +28,14 @@ export function ProblemSection() {
           </h3>
           <p className="desc">
             Conversation intelligence gives you 90 minutes of searchable
-            transcript. Nobody reads 90 minutes of transcript. The real insight
-            — the unprompted pain at minute 42 — stays locked in the audio.
+            transcript. Nobody reads 90 minutes of transcript. The unprompted
+            pain, the offhand competitor mention, the stakeholder aside — they
+            stay locked in the audio.
           </p>
           <div className="cost">
+            <span className="figure">&lt; 4%</span>
             <span className="label">
-              Transcripts are the artifact no one scrubs after the handoff.
+              of transcripts get re-read after the handoff &middot; internal estimate, AE/CS interviews
             </span>
           </div>
         </div>
@@ -53,8 +55,7 @@ export function ProblemSection() {
           <div className="cost">
             <span className="figure">40–50%</span>
             <span className="label">
-              of customers visibly frustrated when asked to repeat themselves ·
-              Customer interview, Jan 2026
+              of customers visibly frustrated when asked to repeat themselves &middot; AE/CS interviews, Q1 2026
             </span>
           </div>
         </div>
@@ -70,8 +71,9 @@ export function ProblemSection() {
             re-encoding information the system already has.
           </p>
           <div className="cost">
+            <span className="figure">3–5 hrs</span>
             <span className="label">
-              Hours spent re-encoding what the recording already captured.
+              per rep per week re-encoding what the recording already captured &middot; AE interviews, Q1 2026
             </span>
           </div>
         </div>
@@ -85,7 +87,7 @@ export function ProblemSection() {
           from every call, keeping it current as the account evolves, and
           surfacing it the moment someone new picks up the relationship.
         </p>
-        <Link href="/" className="link">
+        <Link href="#memory-stack" className="link">
           See how it works →
         </Link>
       </div>
