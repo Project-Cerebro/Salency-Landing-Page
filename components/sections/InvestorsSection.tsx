@@ -27,7 +27,7 @@ export function InvestorsSection() {
 
         <div className="reg-inv">
           <section className="platform" id="platform">
-            <div className="eb">Platform</div>
+            <div className="eb">Platform &amp; moat</div>
             <h2>
               The <em>structured memory layer</em> for B2B sales accounts.
             </h2>
@@ -51,6 +51,28 @@ export function InvestorsSection() {
                 Structured account memory —{' '}
                 <em>cited, scoped, and compounding</em> — is the input every
                 future revenue tool will be measured against.
+              </p>
+            </div>
+            <p className="platform-moat-bridge">
+              The wedge is the <em>shape of the data.</em> Contradiction pairs,
+              pain evolution over time, confidence-ranked pain → product
+              matches, cross-account pattern graphs. None of these fit a CRM
+              row. Flatten any of them into a field and you kill the thing
+              that makes Salency uncopyable. That&rsquo;s why we sit{' '}
+              <em>on top</em> of your stack, not inside it. Reps live in CRM
+              for pipeline stages. Reps live in Salency for the qualitative
+              layer — what the customer actually said, what contradicts what,
+              which pains map to which products.
+            </p>
+            <div className="primitive">
+              <span className="label">The uncopyable pair</span>
+              <p className="title">
+                Pain-product mapping plus contradiction detection, embedded in
+                product-management workflows.{' '}
+                <em>
+                  Either alone is defensible for 6 to 9 months. Together, with
+                  workflow depth, switching cost is measured in quarters.
+                </em>
               </p>
             </div>
           </section>
@@ -97,40 +119,6 @@ export function InvestorsSection() {
                 70–80% of customers. Autonomous bots without structured
                 customer memory don&rsquo;t hold the relationship. That&rsquo;s
                 the gap we fill.
-              </p>
-            </div>
-          </section>
-
-          <section className="moat" id="moat">
-            <div className="eb">Moat</div>
-            <h2>
-              Why this doesn&apos;t live in <em>Salesforce.</em>
-            </h2>
-            <p>
-              The wedge is the <em>shape of the data</em>. Contradiction pairs,
-              pain evolution over time, confidence-ranked pain → product
-              matches, cross-account pattern graphs. None of these fit a CRM
-              row. Flatten any of them into a field and you kill the thing
-              that makes Salency uncopyable.
-            </p>
-            <p>
-              So Salency sits <em>on top</em> of your stack, not inside it.
-              Linear syncs completion status to GitHub, keeps the ticket
-              experience in Linear. Superhuman reads your Gmail, keeps the
-              triage experience in Superhuman. Reps live in CRM for pipeline
-              stages. Reps live in Salency for the qualitative layer — what
-              the customer actually said, what contradicts what, which pains
-              map to which products.
-            </p>
-            <div className="primitive">
-              <span className="label">The uncopyable pair</span>
-              <p className="title">
-                Pain-product mapping plus contradiction detection, embedded in
-                product-management workflows.{' '}
-                <em>
-                  Either alone is defensible for 6 to 9 months. Together, with
-                  workflow depth, switching cost is measured in quarters.
-                </em>
               </p>
             </div>
           </section>
@@ -197,66 +185,6 @@ export function InvestorsSection() {
                   G2. Doesn&rsquo;t hold state between handoffs, and
                   doesn&rsquo;t map pains to a product catalog.
                 </span>
-              </div>
-            </div>
-          </section>
-
-          <section className="roadmap" id="roadmap">
-            <div className="eb">Roadmap</div>
-            <h2>
-              What ships <em>next.</em>
-            </h2>
-            <div className="horizon-list">
-              <div className="horizon">
-                <div className="horizon-head">
-                  <span className="pill">V1.5 · Q2–Q3 2026</span>
-                  <span className="label">Capture + push</span>
-                </div>
-                <ul className="horizon-body">
-                  <li>
-                    <em>Recall.ai meeting bot</em> — joins Zoom, Meet, Teams
-                    directly. Extraction without a transcript upload step.
-                  </li>
-                  <li>
-                    CRM push to Monday and HubSpot — flat summary fields write
-                    back so reps don&rsquo;t double-enter.
-                  </li>
-                </ul>
-              </div>
-              <div className="horizon">
-                <div className="horizon-head">
-                  <span className="pill">V2 · Q4 2026</span>
-                  <span className="label">Enterprise readiness</span>
-                </div>
-                <ul className="horizon-body">
-                  <li>
-                    Salesforce and HubSpot native sync — the two buyers that
-                    sign the enterprise contract.
-                  </li>
-                  <li>
-                    Gong API transcript pull — turns Salency into the layer
-                    sitting on top of the most-entrenched input pipe.
-                  </li>
-                  <li>
-                    10 paying customers, $50–100K ACV range.
-                  </li>
-                </ul>
-              </div>
-              <div className="horizon">
-                <div className="horizon-head">
-                  <span className="pill">V2.5 · 2027</span>
-                  <span className="label">Scale decision</span>
-                </div>
-                <ul className="horizon-body">
-                  <li>
-                    $10–30M ARR target. Workflow integration depth (Productboard
-                    / Aha / Jira) locks switching cost to quarters, not weeks.
-                  </li>
-                  <li>
-                    Decision point: raise at the category-leader mark, or walk
-                    a profitability path into the expanded surface.
-                  </li>
-                </ul>
               </div>
             </div>
           </section>
@@ -348,9 +276,69 @@ export function InvestorsSection() {
             </div>
           </section>
 
+          <section className="roadmap" id="roadmap">
+            <div className="eb">Roadmap</div>
+            <h2>
+              What ships <em>next.</em>
+            </h2>
+            <div className="horizon-list">
+              <div className="horizon">
+                <div className="horizon-head">
+                  <span className="pill">V1.5 · Q2–Q3 2026</span>
+                  <span className="label">Capture + push</span>
+                </div>
+                <ul className="horizon-body">
+                  <li>
+                    <em>Recall.ai meeting bot</em> — joins Zoom, Meet, Teams
+                    directly. Extraction without a transcript upload step.
+                  </li>
+                  <li>
+                    CRM push to Monday and HubSpot — flat summary fields write
+                    back so reps don&rsquo;t double-enter.
+                  </li>
+                </ul>
+              </div>
+              <div className="horizon">
+                <div className="horizon-head">
+                  <span className="pill">V2 · Q4 2026</span>
+                  <span className="label">Enterprise readiness</span>
+                </div>
+                <ul className="horizon-body">
+                  <li>
+                    Salesforce and HubSpot native sync — the two buyers that
+                    sign the enterprise contract.
+                  </li>
+                  <li>
+                    Gong API transcript pull — turns Salency into the layer
+                    sitting on top of the most-entrenched input pipe.
+                  </li>
+                  <li>
+                    10 paying customers, $50–100K ACV range.
+                  </li>
+                </ul>
+              </div>
+              <div className="horizon">
+                <div className="horizon-head">
+                  <span className="pill">V2.5 · 2027</span>
+                  <span className="label">Scale decision</span>
+                </div>
+                <ul className="horizon-body">
+                  <li>
+                    $10–30M ARR target. Workflow integration depth (Productboard
+                    / Aha / Jira) locks switching cost to quarters, not weeks.
+                  </li>
+                  <li>
+                    Decision point: raise at the category-leader mark, or walk
+                    a profitability path into the expanded surface.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
           <section className="thesis" id="thesis">
             <div className="thesis-card">
-              <div className="eb">Future-fit thesis</div>
+              <div className="eb">Why now</div>
               <h2>
                 The <em>bottleneck</em> is about to shift.
               </h2>
@@ -367,6 +355,12 @@ export function InvestorsSection() {
                 doesn&apos;t know what the buyer has already told you. The rep
                 inheriting the account doesn&apos;t either. The asset that
                 makes either one useful is the same asset.
+              </p>
+              <p>
+                Every LLM commoditizes extraction. What doesn&rsquo;t
+                commoditize is the <em>customer-built graph</em> of pains,
+                products, and contradictions — and that graph compounds per
+                customer, per call. The moat is the data shape, not the model.
               </p>
               <div className="thesis-close">
                 Salency owns that layer. The longer a team runs it,{' '}
