@@ -6,19 +6,21 @@ import { BrandReveal } from './BrandReveal';
 /**
  * First-landing splash overlay.
  *
- * Shows exactly once per browser — the very first time a visitor lands on
- * the site. Gated on `localStorage` so refreshes, return visits, and
- * client-side `<Link>` navigation all skip it.
+ * Shows on:
+ *   - Fresh tab (first time the session touches the site)
+ *   - Hard refresh
+ *   - Soft refresh (Cmd+R / F5) — detected via `PerformanceNavigationTiming`
  *
- * Rendered client-only (initial `mounted = false`) so repeat visitors never
- * get a flash of splash-then-dismiss on SSR. First-time visitors see the
- * splash mount on hydration, play the reveal, and fade out after ~4.2s.
+ * Skips on:
+ *   - Client-side `<Link>` navigation within the session (sessionStorage gate)
+ *   - `prefers-reduced-motion`
  *
- * Respects `prefers-reduced-motion`: flag is marked so the splash never
- * shows again, but the animation itself is not played.
+ * Rendered client-only (initial `mounted = false`) so session-repeat visitors
+ * never get a flash of splash-then-dismiss via SSR. Gate runs in useEffect,
+ * mounts the splash only when we've decided to play.
  */
 
-const STORAGE_KEY = 'salency_first_visit_shown';
+const STORAGE_KEY = 'salency_splash_shown';
 const TOTAL_MS = 4200; // beats finish ~4100ms + a short tail for underline fade
 
 export function BrandRevealSplash() {
@@ -26,16 +28,23 @@ export function BrandRevealSplash() {
   const [hiding, setHiding] = useState(false);
 
   useEffect(() => {
-    const alreadyShown = localStorage.getItem(STORAGE_KEY) === '1';
-    if (alreadyShown) return;
-
-    localStorage.setItem(STORAGE_KEY, '1');
-
     const reducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches;
-    if (reducedMotion) return;
+    if (reducedMotion) {
+      sessionStorage.setItem(STORAGE_KEY, '1');
+      return;
+    }
 
+    const navEntry = performance.getEntriesByType(
+      'navigation',
+    )[0] as PerformanceNavigationTiming | undefined;
+    const isReload = navEntry?.type === 'reload';
+    const alreadyShown = sessionStorage.getItem(STORAGE_KEY) === '1';
+
+    if (alreadyShown && !isReload) return;
+
+    sessionStorage.setItem(STORAGE_KEY, '1');
     setMounted(true);
 
     const hideTimer = window.setTimeout(() => {
