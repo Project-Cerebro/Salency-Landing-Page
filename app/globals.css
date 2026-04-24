@@ -1729,11 +1729,26 @@ header button:focus:not(:focus-visible){
     padding:24px;text-align:center;
   }
 
-  /* The <BrandReveal /> replaces the old mark + name lockup. Center it
-     horizontally and give it more room on the splash. */
-  .brand-reveal {
+  /* Lockup: SVG mark on the left + animated wordmark on the right.
+     The mark stays static while the wordmark runs through the reveal.
+     Center-aligned so the symbol lines up with the wordmark's cap. */
+  .brand-lockup {
+    display: flex;
+    align-items: center;
     justify-content: center;
+    gap: 18px;
     margin-bottom: 32px;
+  }
+  .brand-lockup-mark {
+    width: clamp(52px, 8vw, 88px);
+    height: auto;
+    flex-shrink: 0;
+    filter: drop-shadow(0 4px 14px var(--copper-a32));
+  }
+  /* Inside the lockup, BrandReveal sheds its own margin (lockup owns it). */
+  .brand-lockup .brand-reveal {
+    margin-bottom: 0;
+    justify-content: flex-start;
   }
   .brand-reveal-wordmark {
     font-size: clamp(48px, 8vw, 104px);
@@ -1773,6 +1788,8 @@ header button:focus:not(:focus-visible){
   }
 
   @media (max-width:640px){
+    .brand-lockup{gap:12px}
+    .brand-lockup-mark{width:clamp(40px,12vw,56px)}
     .brand-reveal-wordmark{font-size:clamp(40px,12vw,64px)}
     .loading-mission{font-size:15px;margin-bottom:32px}
     .loading-rail{width:220px}

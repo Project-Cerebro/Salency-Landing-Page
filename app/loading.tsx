@@ -4,7 +4,15 @@ export default function Loading() {
   return (
     <div className="loading-screen" role="status" aria-live="polite">
       <div className="loading-inner">
-        <BrandReveal />
+        <div className="brand-lockup">
+          <img
+            className="brand-lockup-mark"
+            src="/salency-mark.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <BrandReveal />
+        </div>
         <p className="loading-mission">
           Every call becomes memory.
           <br />
