@@ -86,15 +86,15 @@ export function BrandReveal() {
     >
       <span className="brand-reveal-wordmark" aria-hidden>
         <span className="brand-reveal-word brand-reveal-sale">
-          <span className="brand-reveal-letter">s</span>
+          <span className="brand-reveal-letter">S</span>
           <span className="brand-reveal-letter">a</span>
           <span className="brand-reveal-letter">l</span>
           <span className="brand-reveal-letter">e</span>
         </span>
         <span className="brand-reveal-sep"> + </span>
         <span className="brand-reveal-word brand-reveal-saliency">
-          {/* Letters that are dropped in the final "salency": s, a, l, i, e */}
-          <span className="brand-reveal-letter brand-reveal-drop">s</span>
+          {/* Letters dropped in the final "Salency": S, a, l, i, e */}
+          <span className="brand-reveal-letter brand-reveal-drop">S</span>
           <span className="brand-reveal-letter brand-reveal-drop">a</span>
           <span className="brand-reveal-letter brand-reveal-drop">l</span>
           <span className="brand-reveal-letter brand-reveal-drop">i</span>

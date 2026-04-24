@@ -2603,13 +2603,12 @@ header button:focus:not(:focus-visible){
    when redundant ones collapse. JS only toggles .is-merged / .is-final. */
 .brand-reveal { display: flex; align-items: baseline; margin-bottom: 28px; }
 .brand-reveal-wordmark {
-  /* Outfit matches the header logo (.brand .name uses the same font at
-     weight 800). Keeps brand identity consistent between the nav
-     wordmark and the hero reveal — Instrument Serif is for emphasis em,
-     not for the brand name itself. */
+  /* Outfit is the brand face (same as .brand .name in the nav).
+     Medium weight (500) reads as a typographic wordmark rather than
+     a shouty logo — gives the mark more editorial restraint. */
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 500;
   font-size: clamp(40px, 7vw, 88px);
   line-height: 1;
   letter-spacing: -0.025em;
@@ -2665,12 +2664,21 @@ header button:focus:not(:focus-visible){
 .brand-reveal.is-merged .brand-reveal-drop { filter: blur(2px); }
 .brand-reveal-underline {
   position: absolute; left: 50%; bottom: -6px;
-  transform: translateX(-50%) scaleX(0); transform-origin: center;
-  width: 0; height: 2px;
+  transform: translateX(-50%);
+  width: 4em; height: 2px;
+  opacity: 0;
   background: linear-gradient(90deg, transparent 0%, var(--copper) 50%, transparent 100%);
-  transition: width 500ms cubic-bezier(.7,0,.3,1), transform 900ms cubic-bezier(.7,0,.3,1);
 }
-.brand-reveal.is-final .brand-reveal-underline { width: 4em; transform: translateX(-50%) scaleX(1); }
+/* Sweep in, hold briefly, then fade out — the mark stands alone at the end. */
+.brand-reveal.is-final .brand-reveal-underline {
+  animation: brand-reveal-underline-sweep 1600ms cubic-bezier(.7, 0, .3, 1) forwards;
+}
+@keyframes brand-reveal-underline-sweep {
+  0%   { opacity: 0; clip-path: inset(0 100% 0 0); }
+  30%  { opacity: 1; clip-path: inset(0 0 0 0); }
+  65%  { opacity: 1; clip-path: inset(0 0 0 0); }
+  100% { opacity: 0; clip-path: inset(0 0 0 0); }
+}
 .brand-reveal.is-final .brand-reveal-wordmark {
   text-shadow: 0 0 28px rgba(254,133,49,0.18);
   transition: text-shadow 900ms ease-out 150ms;
