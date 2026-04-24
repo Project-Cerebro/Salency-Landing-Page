@@ -52,6 +52,7 @@ When editing marketing copy: check `components/PageClient.tsx` first. `app/page.
 - Fonts loaded in `app/layout.tsx`: Geist Sans (body), Outfit (display), Instrument Serif (hero accent). No Geist Mono.
 - `components/ScrollReveal.tsx` wraps below-fold sections; uses IntersectionObserver and respects `prefers-reduced-motion`.
 - `components/SpotlightCard.tsx` provides a mouse-tracked radial gradient for cards; `ProblemCard.tsx` is a server-component wrapper around it.
+- `packages/brand-reveal/` — portable animated wordmark ("Sales + Saliency" → "Salency") and loading-screen splash, packaged for drop-in use in other Salency frontend apps. Exports `<BrandReveal />`, `<BrandRevealSplash />`, plus two standalone stylesheets (`styles.css` = wordmark-only, `loading-screen.css` = full splash chrome + wordmark). Not consumed by this repo — kept as a design primitive only.
 - Prefer explicit `transition-property` lists over `transition-all`.
 
 ### Client/server split
