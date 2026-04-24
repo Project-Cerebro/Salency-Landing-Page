@@ -888,6 +888,7 @@ html {
   .prob-card{
     padding:40px 36px 40px 0;border-right:1px solid var(--hair);
     position:relative;
+    display:flex;flex-direction:column;
   }
   .prob-card:nth-child(n+2){padding-left:36px}
   .prob-card:last-child{border-right:0}
@@ -910,18 +911,13 @@ html {
     line-height:1.6;color:var(--ink-2);margin:0 0 24px;max-width:32ch;
   }
   .prob-card .cost{
-    display:flex;align-items:baseline;gap:10px;
     padding-top:16px;border-top:1px dashed var(--hair-2);
-  }
-  /* "40–50%" style data figures read brightness, not hue. Ink ramp. */
-  .prob-card .cost .figure{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-weight:400;
-    font-size:40px;line-height:1;color:var(--ink);letter-spacing:-.02em;
+    margin-top:auto;
   }
   .prob-card .cost .label{
     font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
     letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
-    line-height:1.4;max-width:18ch;
+    line-height:1.5;
   }
 
   .prob-resolve{
