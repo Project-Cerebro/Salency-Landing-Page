@@ -2,6 +2,26 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+export interface BrandRevealProps {
+  /**
+   * sessionStorage key used to gate replays across navigations.
+   * Override per surface so two instances can replay independently.
+   * Default: `salency_brand_reveal_played`.
+   */
+  storageKey?: string;
+  /**
+   * Override the aria-label. Default: `Salency`.
+   */
+  ariaLabel?: string;
+  /**
+   * Force the animation to play on mount, ignoring the sessionStorage gate
+   * and navigation-type detection. Useful for Storybook or design previews.
+   */
+  forcePlay?: boolean;
+}
+
+const DEFAULT_STORAGE_KEY = 'salency_brand_reveal_played';
+
 /**
  * Animated brand-reveal wordmark.
  *
@@ -12,15 +32,16 @@ import { useEffect, useRef, useState } from 'react';
  *
  * Replay rule:
  *   - Fresh tab           → replay
- *   - Hard refresh        → replay (navigation type === 'reload')
- *   - Soft refresh (F5)   → replay (same navigation type)
+ *   - Hard refresh        → replay
+ *   - Soft refresh (F5)   → replay
  *   - Client-side Link    → do NOT replay (marketing reveal, not nav noise)
  *   - prefers-reduced-motion → snap to final state
  */
-
-const STORAGE_KEY = 'salency_brand_reveal_played';
-
-export function BrandReveal() {
+export function BrandReveal({
+  storageKey = DEFAULT_STORAGE_KEY,
+  ariaLabel = 'Salency',
+  forcePlay = false,
+}: BrandRevealProps = {}) {
   const stageRef = useRef<HTMLDivElement | null>(null);
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
@@ -35,38 +56,35 @@ export function BrandReveal() {
       return;
     }
 
-    // Detect navigation type. Reload (hard or soft) → force replay and
-    // clear the session flag. Otherwise honor the sessionStorage gate so
-    // client-side <Link> back-nav doesn't replay.
+    if (forcePlay) {
+      setShouldAnimate(true);
+      return;
+    }
+
     const navEntry = performance.getEntriesByType(
       'navigation',
     )[0] as PerformanceNavigationTiming | undefined;
     const isReload = navEntry?.type === 'reload';
 
-    const alreadyPlayed = sessionStorage.getItem(STORAGE_KEY) === '1';
+    const alreadyPlayed = sessionStorage.getItem(storageKey) === '1';
 
     if (!isReload && alreadyPlayed) {
-      // SPA nav back to /; keep the static final state.
       stageRef.current?.classList.add('is-final');
       return;
     }
 
-    // Fresh tab OR any kind of refresh → play the reveal.
     setShouldAnimate(true);
-    sessionStorage.setItem(STORAGE_KEY, '1');
-  }, []);
+    sessionStorage.setItem(storageKey, '1');
+  }, [storageKey, forcePlay]);
 
   useEffect(() => {
     if (!shouldAnimate) return;
     const stage = stageRef.current;
     if (!stage) return;
 
-    // Beat 1: entrance (handled by per-letter CSS animation delays).
-    // Beat 2 at 1600ms: merge — collapse redundant letters + shift survivors to copper.
     const mergeTimer = window.setTimeout(() => {
       stage.classList.add('is-merged');
     }, 1600);
-    // Beat 3 at 2500ms: underline sweep + glow.
     const finalTimer = window.setTimeout(() => {
       stage.classList.add('is-final');
     }, 2500);
@@ -81,7 +99,7 @@ export function BrandReveal() {
     <div
       ref={stageRef}
       className={`brand-reveal ${shouldAnimate ? 'is-animating' : ''}`}
-      aria-label="Salency"
+      aria-label={ariaLabel}
       role="img"
     >
       <span className="brand-reveal-wordmark" aria-hidden>
@@ -90,18 +108,15 @@ export function BrandReveal() {
           <span className="brand-reveal-letter">a</span>
           <span className="brand-reveal-letter">l</span>
           <span className="brand-reveal-letter">e</span>
-          {/* Trailing "s" of Sales drops in the merge — final mark is Salency, not Salesency. */}
           <span className="brand-reveal-letter brand-reveal-drop">s</span>
         </span>
         <span className="brand-reveal-sep"> + </span>
         <span className="brand-reveal-word brand-reveal-saliency">
-          {/* Letters dropped in the final "Salency": S, a, l, i, e */}
           <span className="brand-reveal-letter brand-reveal-drop">S</span>
           <span className="brand-reveal-letter brand-reveal-drop">a</span>
           <span className="brand-reveal-letter brand-reveal-drop">l</span>
           <span className="brand-reveal-letter brand-reveal-drop">i</span>
           <span className="brand-reveal-letter brand-reveal-drop">e</span>
-          {/* Surviving letters: n, c, y */}
           <span className="brand-reveal-letter brand-reveal-survive">n</span>
           <span className="brand-reveal-letter brand-reveal-survive">c</span>
           <span className="brand-reveal-letter brand-reveal-survive">y</span>

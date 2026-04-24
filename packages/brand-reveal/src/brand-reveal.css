@@ -1,0 +1,189 @@
+/*
+ * Salency brand-reveal wordmark.
+ *
+ * Consumer-provided tokens (override or define at :root):
+ *   --copper       brand accent            default #FE8531
+ *   --copper-a32   brand accent 32% alpha  default rgba(254,133,49,.32)
+ *   --ink-3        muted ink               default #7C7A77
+ *   --ink-4        most muted ink          default #4E4C4A
+ *   --font-outfit  wordmark font var       default unset (falls back to 'Outfit', sans-serif)
+ */
+
+:root {
+  --copper:       #FE8531;
+  --copper-a32:   rgba(254, 133, 49, .32);
+  --ink-3:        #7C7A77;
+  --ink-4:        #4E4C4A;
+}
+
+.brand-reveal {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 28px;
+}
+
+.brand-reveal-wordmark {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(40px, 7vw, 88px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+}
+
+.brand-reveal-word {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.brand-reveal-sale .brand-reveal-letter {
+  color: var(--copper);
+}
+
+.brand-reveal-saliency .brand-reveal-letter {
+  color: var(--ink-3);
+}
+
+.brand-reveal-sep {
+  display: inline-flex;
+  overflow: hidden;
+  max-width: 1.2em;
+  color: var(--ink-4);
+  font-size: .5em;
+  padding: 0 .3em;
+  font-weight: 400;
+  white-space: pre;
+  transition:
+    max-width 700ms cubic-bezier(.7, 0, .3, 1),
+    opacity 400ms ease-out,
+    padding 700ms cubic-bezier(.7, 0, .3, 1);
+}
+
+.brand-reveal-letter {
+  display: inline-flex;
+  overflow: hidden;
+  max-width: 1em;
+  white-space: pre;
+  position: relative;
+  transition:
+    max-width 700ms cubic-bezier(.7, 0, .3, 1),
+    opacity 400ms ease-out,
+    color 600ms ease-out,
+    filter 600ms ease-out;
+}
+
+.brand-reveal.is-animating .brand-reveal-letter {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: brand-reveal-letter-appear 600ms cubic-bezier(.2, .8, .2, 1) both;
+}
+
+@keyframes brand-reveal-letter-appear {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.brand-reveal.is-animating .brand-reveal-sale .brand-reveal-letter:nth-child(1) { animation-delay: 0ms; }
+.brand-reveal.is-animating .brand-reveal-sale .brand-reveal-letter:nth-child(2) { animation-delay: 80ms; }
+.brand-reveal.is-animating .brand-reveal-sale .brand-reveal-letter:nth-child(3) { animation-delay: 160ms; }
+.brand-reveal.is-animating .brand-reveal-sale .brand-reveal-letter:nth-child(4) { animation-delay: 240ms; }
+.brand-reveal.is-animating .brand-reveal-sale .brand-reveal-letter:nth-child(5) { animation-delay: 320ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(1) { animation-delay: 520ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(2) { animation-delay: 580ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(3) { animation-delay: 640ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(4) { animation-delay: 700ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(5) { animation-delay: 760ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(6) { animation-delay: 820ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(7) { animation-delay: 880ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(8) { animation-delay: 940ms; }
+
+.brand-reveal.is-merged .brand-reveal-sep,
+.brand-reveal.is-merged .brand-reveal-drop {
+  max-width: 0;
+  opacity: 0;
+  padding: 0;
+}
+
+.brand-reveal.is-merged .brand-reveal-drop {
+  filter: blur(2px);
+}
+
+.brand-reveal.is-merged .brand-reveal-saliency .brand-reveal-letter {
+  color: var(--copper);
+}
+
+.brand-reveal-underline {
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 4em;
+  height: 2px;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--copper) 50%,
+    transparent 100%
+  );
+}
+
+.brand-reveal.is-final .brand-reveal-underline {
+  animation: brand-reveal-underline-sweep 1600ms cubic-bezier(.7, 0, .3, 1) forwards;
+}
+
+@keyframes brand-reveal-underline-sweep {
+  0%   { opacity: 0; clip-path: inset(0 100% 0 0); }
+  30%  { opacity: 1; clip-path: inset(0 0 0 0); }
+  65%  { opacity: 1; clip-path: inset(0 0 0 0); }
+  100% { opacity: 0; clip-path: inset(0 0 0 0); }
+}
+
+.brand-reveal.is-final .brand-reveal-wordmark {
+  text-shadow: 0 0 28px rgba(254, 133, 49, 0.18);
+  transition: text-shadow 900ms ease-out 150ms;
+}
+
+/* Optional lockup: wrap <BrandReveal /> with an img + this class on the parent.
+ *
+ *   <div class="brand-lockup">
+ *     <img class="brand-lockup-mark" src="/salency-mark.svg" alt="" aria-hidden="true" />
+ *     <BrandReveal />
+ *   </div>
+ */
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.brand-lockup-mark {
+  width: clamp(52px, 8vw, 88px);
+  height: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 14px var(--copper-a32));
+}
+
+.brand-lockup:has(.brand-reveal.is-animating) .brand-lockup-mark {
+  animation: brand-lockup-mark-fade-in 900ms cubic-bezier(.2, .8, .2, 1) 1400ms both;
+}
+
+@keyframes brand-lockup-mark-fade-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.brand-lockup .brand-reveal {
+  margin-bottom: 0;
+  justify-content: flex-start;
+}
+
+@media (max-width: 640px) {
+  .brand-reveal-wordmark { font-size: clamp(40px, 12vw, 64px); }
+  .brand-lockup { gap: 12px; }
+  .brand-lockup-mark { width: clamp(40px, 12vw, 56px); }
+}

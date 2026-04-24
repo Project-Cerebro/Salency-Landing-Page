@@ -52,13 +52,12 @@ When editing marketing copy: check `components/PageClient.tsx` first. `app/page.
 - Fonts loaded in `app/layout.tsx`: Geist Sans (body), Outfit (display), Instrument Serif (hero accent). No Geist Mono.
 - `components/ScrollReveal.tsx` wraps below-fold sections; uses IntersectionObserver and respects `prefers-reduced-motion`.
 - `components/SpotlightCard.tsx` provides a mouse-tracked radial gradient for cards; `ProblemCard.tsx` is a server-component wrapper around it.
-- `components/BrandReveal.tsx` — reusable animated wordmark ("Sales + Saliency" → "Salency"). Self-contained, no props. CSS lives at the bottom of `app/globals.css` under `.brand-reveal*`. See `packages/brand-reveal/` for the portable export.
-- `components/BrandRevealSplash.tsx` — first-landing splash overlay. Wraps `<BrandReveal />` in the loading-screen chrome and mounts in `app/layout.tsx`. Shows on fresh tab, hard refresh, or soft refresh (`PerformanceNavigationTiming.type === 'reload'`); skips on client-side `<Link>` nav within the session via `sessionStorage['salency_splash_shown']`. Client-only render (no SSR) so the splash never flashes for in-session repeat renders. Respects `prefers-reduced-motion`. Intentionally *not* `app/loading.tsx` — a route-level loading UI would flash on every client-side `<Link>` nav.
+- `packages/brand-reveal/` — portable animated wordmark ("Sales + Saliency" → "Salency") and loading-screen splash, packaged for drop-in use in other Salency frontend apps. Exports `<BrandReveal />`, `<BrandRevealSplash />`, plus two standalone stylesheets (`styles.css` = wordmark-only, `loading-screen.css` = full splash chrome + wordmark). Not consumed by this repo — kept as a design primitive only.
 - Prefer explicit `transition-property` lists over `transition-all`.
 
 ### Client/server split
 
-Server by default. Client components (`'use client'`): `PageClient`, `Header`, `HeroSection`, `HeroEmailCapture`, `HeroMock`, `InteractiveDemo`, `FounderVideo`, `SocialProof`, `EmailForm`, `ScrollReveal`, `SpotlightCard`, `BrandReveal`, `BrandRevealSplash`. Because `PageClient` is a client boundary, everything it renders is effectively client — keep `app/page.tsx` and footer in the server tree if you want static rendering of the chrome.
+Server by default. Client components (`'use client'`): `PageClient`, `Header`, `HeroSection`, `HeroEmailCapture`, `HeroMock`, `InteractiveDemo`, `FounderVideo`, `SocialProof`, `EmailForm`, `ScrollReveal`, `SpotlightCard`. Because `PageClient` is a client boundary, everything it renders is effectively client — keep `app/page.tsx` and footer in the server tree if you want static rendering of the chrome.
 
 ### Analytics
 
