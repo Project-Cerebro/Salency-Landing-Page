@@ -1,11 +1,14 @@
 'use client';
 
 import { openPilotModal } from '@/components/PilotModal';
+import { BrandReveal } from '@/components/BrandReveal';
 
 export function HeroSection() {
   return (
     <>
       <section className="hero">
+        <BrandReveal />
+
         <h1 className="h1">
           Institutional memory for <em>revenue</em> teams.{' '}
           <span className="soft">Not another call recorder.</span>

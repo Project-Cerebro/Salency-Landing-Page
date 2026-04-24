@@ -2602,3 +2602,89 @@ header button:focus:not(:focus-visible){
   .pilot-modal-backdrop,
   .pilot-modal-panel { animation: none; }
 }
+
+/* ═══════════ Brand reveal animation (hero) ═══════════
+   "sale + saliency → salency" fusion. Etymology reveal on first visit.
+   Pure CSS transitions on max-width + opacity; flex reflows letters
+   when redundant ones collapse. JS only toggles .is-merged / .is-final. */
+.brand-reveal { display: flex; align-items: baseline; margin-bottom: 28px; }
+.brand-reveal-wordmark {
+  font-family: var(--font-instrument-serif), 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(40px, 7vw, 88px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+}
+.brand-reveal-word { display: inline-flex; align-items: baseline; }
+.brand-reveal-sale .brand-reveal-letter { color: var(--copper); }
+.brand-reveal-saliency .brand-reveal-letter { color: var(--ink-3); }
+.brand-reveal:not(.is-animating) .brand-reveal-sep,
+.brand-reveal:not(.is-animating) .brand-reveal-drop,
+.brand-reveal.is-merged .brand-reveal-sep,
+.brand-reveal.is-merged .brand-reveal-drop {
+  max-width: 0; opacity: 0; padding: 0;
+}
+.brand-reveal:not(.is-animating) .brand-reveal-saliency .brand-reveal-letter,
+.brand-reveal.is-merged .brand-reveal-saliency .brand-reveal-letter {
+  color: var(--copper);
+}
+.brand-reveal-sep {
+  display: inline-flex; overflow: hidden; max-width: 1.2em;
+  color: var(--ink-4); font-size: .5em; padding: 0 .3em;
+  font-style: normal; white-space: pre;
+  transition: max-width 700ms cubic-bezier(.7,0,.3,1), opacity 400ms ease-out, padding 700ms cubic-bezier(.7,0,.3,1);
+}
+.brand-reveal-letter {
+  display: inline-flex; overflow: hidden; max-width: 1em;
+  white-space: pre; position: relative;
+  transition: max-width 700ms cubic-bezier(.7,0,.3,1), opacity 400ms ease-out, color 600ms ease-out, filter 600ms ease-out;
+  will-change: max-width, opacity, color;
+}
+.brand-reveal.is-animating .brand-reveal-letter {
+  opacity: 0; transform: translateY(6px);
+  animation: brand-reveal-letter-appear 600ms cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes brand-reveal-letter-appear {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.brand-reveal.is-animating .brand-reveal-sale .brand-reveal-letter:nth-child(1) { animation-delay: 0ms; }
+.brand-reveal.is-animating .brand-reveal-sale .brand-reveal-letter:nth-child(2) { animation-delay: 80ms; }
+.brand-reveal.is-animating .brand-reveal-sale .brand-reveal-letter:nth-child(3) { animation-delay: 160ms; }
+.brand-reveal.is-animating .brand-reveal-sale .brand-reveal-letter:nth-child(4) { animation-delay: 240ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(1) { animation-delay: 520ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(2) { animation-delay: 580ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(3) { animation-delay: 640ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(4) { animation-delay: 700ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(5) { animation-delay: 760ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(6) { animation-delay: 820ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(7) { animation-delay: 880ms; }
+.brand-reveal.is-animating .brand-reveal-saliency .brand-reveal-letter:nth-child(8) { animation-delay: 940ms; }
+.brand-reveal.is-merged .brand-reveal-drop { filter: blur(2px); }
+.brand-reveal-underline {
+  position: absolute; left: 50%; bottom: -6px;
+  transform: translateX(-50%) scaleX(0); transform-origin: center;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--copper) 50%, transparent 100%);
+  transition: width 500ms cubic-bezier(.7,0,.3,1), transform 900ms cubic-bezier(.7,0,.3,1);
+}
+.brand-reveal.is-final .brand-reveal-underline { width: 4em; transform: translateX(-50%) scaleX(1); }
+.brand-reveal.is-final .brand-reveal-wordmark {
+  text-shadow: 0 0 28px rgba(254,133,49,0.18);
+  transition: text-shadow 900ms ease-out 150ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-reveal .brand-reveal-letter,
+  .brand-reveal .brand-reveal-sep,
+  .brand-reveal .brand-reveal-wordmark,
+  .brand-reveal .brand-reveal-underline {
+    transition: none !important; animation: none !important;
+  }
+  .brand-reveal .brand-reveal-letter { opacity: 1; transform: none; }
+}
+@media (max-width: 768px) {
+  .brand-reveal { margin-bottom: 20px; }
+}
