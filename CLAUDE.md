@@ -52,12 +52,12 @@ When editing marketing copy: check `components/PageClient.tsx` first. `app/page.
 - Fonts loaded in `app/layout.tsx`: Geist Sans (body), Outfit (display), Instrument Serif (hero accent). No Geist Mono.
 - `components/ScrollReveal.tsx` wraps below-fold sections; uses IntersectionObserver and respects `prefers-reduced-motion`.
 - `components/SpotlightCard.tsx` provides a mouse-tracked radial gradient for cards; `ProblemCard.tsx` is a server-component wrapper around it.
-- `components/BrandReveal.tsx` — reusable animated wordmark ("Sales + Saliency" → "Salency"). Used on `app/loading.tsx`. Replay rule: plays on fresh tab or hard/soft refresh (detected via `PerformanceNavigationTiming`), stays static on client-side `<Link>` nav (sessionStorage-gated). Respects `prefers-reduced-motion`. CSS lives at the bottom of `app/globals.css` under `.brand-reveal*`; lockup with SVG logo lives under `.loading-screen .brand-lockup*`. To reuse elsewhere, import and render `<BrandReveal />` — it's self-contained and needs no props.
+- `components/BrandReveal.tsx` — reusable animated wordmark ("Sales + Saliency" → "Salency"). Self-contained, no props. CSS lives at the bottom of `app/globals.css` under `.brand-reveal*`. Not currently mounted anywhere — kept as a design primitive; see `packages/brand-reveal/` for the portable export.
 - Prefer explicit `transition-property` lists over `transition-all`.
 
 ### Client/server split
 
-Server by default. Client components (`'use client'`): `PageClient`, `Header`, `HeroSection`, `HeroEmailCapture`, `HeroMock`, `InteractiveDemo`, `FounderVideo`, `SocialProof`, `EmailForm`, `ScrollReveal`, `SpotlightCard`, `BrandReveal`. Because `PageClient` is a client boundary, everything it renders is effectively client — keep `app/page.tsx` and footer in the server tree if you want static rendering of the chrome.
+Server by default. Client components (`'use client'`): `PageClient`, `Header`, `HeroSection`, `HeroEmailCapture`, `HeroMock`, `InteractiveDemo`, `FounderVideo`, `SocialProof`, `EmailForm`, `ScrollReveal`, `SpotlightCard`. Because `PageClient` is a client boundary, everything it renders is effectively client — keep `app/page.tsx` and footer in the server tree if you want static rendering of the chrome.
 
 ### Analytics
 
