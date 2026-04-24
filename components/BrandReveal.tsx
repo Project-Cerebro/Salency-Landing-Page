@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 /**
  * Animated brand-reveal wordmark.
  *
- * Shows the etymology of the brand: "sale" (revenue) + "saliency" (what
- * stands out) fuse into "salency" — redundant letters collapse, survivors
+ * Shows the etymology of the brand: "Sales" (revenue) + "Saliency" (what
+ * stands out) fuse into "Salency" — redundant letters collapse, survivors
  * reflow via flex. All motion is CSS transitions; JS only toggles
  * orchestration classes on timers.
  *
@@ -90,6 +90,8 @@ export function BrandReveal() {
           <span className="brand-reveal-letter">a</span>
           <span className="brand-reveal-letter">l</span>
           <span className="brand-reveal-letter">e</span>
+          {/* Trailing "s" of Sales drops in the merge — final mark is Salency, not Salesency. */}
+          <span className="brand-reveal-letter brand-reveal-drop">s</span>
         </span>
         <span className="brand-reveal-sep"> + </span>
         <span className="brand-reveal-word brand-reveal-saliency">
