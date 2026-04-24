@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { openPilotModal } from '@/components/PilotModal';
+import { MemoryStackSection } from '@/components/sections/MemoryStackSection';
 
 const PEOPLE = [
   {
@@ -294,6 +295,13 @@ export function MemorySection() {
             </article>
           </div>
         </section>
+      </ScrollReveal>
+
+      {/* ─── Framing: where Salency lives (migrated from /why-salency).
+           Sits right before mem-compare so the 3-layer frame and the
+           signal-by-signal table cluster as one "not a CRM field" argument. ─── */}
+      <ScrollReveal>
+        <MemoryStackSection />
       </ScrollReveal>
 
       {/* ─── CRM vs Salency ─── */}
