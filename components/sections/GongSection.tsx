@@ -68,25 +68,27 @@ export function GongSection() {
             </td>
           </tr>
           <tr>
-            <td className="dim">Who reads it</td>
+            <td className="dim">When it&rsquo;s used</td>
             <td className="col-g">
-              <span className="icon">—</span>Managers, spot-checking coaching
-              moments
+              <span className="icon">—</span>During the call &mdash; managers
+              spot-check coaching moments
             </td>
             <td className="col-s">
-              <span className="icon">✓</span>Account executive, customer success
-              manager, director — every role on the account, on demand
+              <span className="icon">✓</span>
+              <strong>After every call, and every handoff</strong> &mdash; AE,
+              CSM, director, on demand
             </td>
           </tr>
           <tr>
-            <td className="dim">Handoff artefact</td>
+            <td className="dim">Handoff artifact</td>
             <td className="col-g">
-              <span className="icon">—</span>None — you still write the handoff
-              doc by hand
+              <span className="icon">—</span>None &mdash; you still write the
+              handoff doc by hand
             </td>
             <td className="col-s">
-              <span className="icon">✓</span>Handoff doc is the{' '}
-              <strong>live memory layer</strong> itself
+              <span className="icon">✓</span>
+              <strong>Auto-generated, always current</strong> &mdash; the graph
+              regenerates the doc
             </td>
           </tr>
           <tr>
@@ -101,6 +103,10 @@ export function GongSection() {
           </tr>
         </tbody>
       </table>
+      <p className="notetaker-takeaway">
+        Gong tells you <em>what happened.</em> Salency tells you{' '}
+        <em>what to do next.</em>
+      </p>
     </section>
   );
 }
