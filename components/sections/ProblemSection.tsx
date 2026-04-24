@@ -12,8 +12,8 @@ export function ProblemSection() {
           </h2>
         </div>
         <p className="lede">
-          Your reps sit through four discovery calls a week. Your AI notetaker
-          captures the audio. Your CRM captures the stage change.{' '}
+          Your reps run discovery calls every week. Your AI notetaker captures
+          the audio. Your CRM captures the stage change.{' '}
           <em>Nothing captures what was actually learned</em> — the pains, the
           politics, the promises. So when a rep rotates, the account restarts
           from zero.
@@ -28,8 +28,9 @@ export function ProblemSection() {
           </h3>
           <p className="desc">
             Conversation intelligence gives you 90 minutes of searchable
-            transcript. Nobody reads 90 minutes of transcript. The real insight
-            — the unprompted pain at minute 42 — stays locked in the audio.
+            transcript. Nobody reads 90 minutes of transcript. The unprompted
+            pain, the offhand competitor mention, the stakeholder aside — they
+            stay locked in the audio.
           </p>
           <div className="cost">
             <span className="label">
@@ -51,10 +52,9 @@ export function ProblemSection() {
             asking again.
           </p>
           <div className="cost">
-            <span className="figure">40–50%</span>
             <span className="label">
-              of customers visibly frustrated when asked to repeat themselves ·
-              Customer interview, Jan 2026
+              The customer pays the cost &mdash; they&rsquo;re the ones asked
+              to repeat themselves.
             </span>
           </div>
         </div>
@@ -85,7 +85,7 @@ export function ProblemSection() {
           from every call, keeping it current as the account evolves, and
           surfacing it the moment someone new picks up the relationship.
         </p>
-        <Link href="/" className="link">
+        <Link href="#memory-stack" className="link">
           See how it works →
         </Link>
       </div>
