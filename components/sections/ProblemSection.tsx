@@ -85,7 +85,7 @@ export function ProblemSection() {
           from every call, keeping it current as the account evolves, and
           surfacing it the moment someone new picks up the relationship.
         </p>
-        <Link href="#memory-stack" className="link">
+        <Link href="/memory" className="link">
           See how it works →
         </Link>
       </div>
