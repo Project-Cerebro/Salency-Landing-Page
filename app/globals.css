@@ -759,13 +759,13 @@ html {
      (which clips the pseudo below the element's own paint layer). */
   .hero,
   .mem-intro,
-  .prob,
+  .thesis-hero,
   .apply-page{
     position:relative;
   }
   .hero::before,
   .mem-intro::before,
-  .prob::before,
+  .thesis-hero::before,
   .apply-page::before{
     content:"";
     position:absolute;top:-200px;left:50%;transform:translateX(-50%);
@@ -774,7 +774,7 @@ html {
   }
   .hero > *,
   .mem-intro > *,
-  .prob > *,
+  .thesis-hero > *,
   .apply-page > *{
     position:relative;z-index:1;
   }
