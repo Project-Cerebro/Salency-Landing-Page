@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { openPilotModal } from '@/components/PilotModal';
+import { MemoryStackSection } from '@/components/sections/MemoryStackSection';
 
 const PEOPLE = [
   {
@@ -108,6 +109,11 @@ export function MemorySection() {
             brief. The CS director picks up mid-story. Nothing is re-asked.
           </p>
         </section>
+      </ScrollReveal>
+
+      {/* ─── Framing: where the layer lives (migrated from /why-salency) ─── */}
+      <ScrollReveal>
+        <MemoryStackSection />
       </ScrollReveal>
 
       {/* ─── Surface 01: featured brief (tight 2-col, fits viewport) ─── */}
