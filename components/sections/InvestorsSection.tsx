@@ -217,8 +217,8 @@ export function InvestorsSection() {
                   <span className="name">Nikki Ip</span>
                   <span className="role">Co-founder &amp; COO</span>
                   <p className="line">
-                    Runs revenue analytics + operational strategy at
-                    Adaptavist Group.
+                    Data analyst at Adaptavist Group. Three years running
+                    operational reporting across HubSpot, Snowflake, DBT.
                   </p>
                 </div>
               </div>
@@ -230,6 +230,17 @@ export function InvestorsSection() {
                   <p className="line">
                     Scaled MakersValley from 0 to $2M ARR (6.5y, NYC). Ships
                     provenance-tracked AI context systems.
+                  </p>
+                </div>
+              </div>
+              <div className="team-compact-row">
+                <div className="photo photo--amber">SG</div>
+                <div className="team-compact-body">
+                  <span className="name">Shristi Gartaula</span>
+                  <span className="role">Founding Designer</span>
+                  <p className="line">
+                    Shipped Salency&rsquo;s V1. Five years enterprise B2B
+                    design — Index Exchange, Myplanet, StatysTech.
                   </p>
                 </div>
               </div>

@@ -6,7 +6,7 @@ export function OurStorySection() {
       <div className="story-intro">
         <span className="eb">Our story</span>
         <h1>
-          Three people. Four months.{' '}
+          Four people. Four months.{' '}
           <em>One bet about how sales actually works.</em>
         </h1>
         <p className="lede">
@@ -81,10 +81,14 @@ export function OurStorySection() {
           </aside>
           <div className="story-founder-body">
             <p>
-              Runs revenue analytics and operational strategy at{' '}
-              <em>Adaptavist Group</em>, where she owns the pipeline
-              instrumentation Salency&rsquo;s buyers are trying to build for
-              themselves.
+              Data analyst at <em>Adaptavist Group</em> for 3+ years, running
+              the operational reporting stack across HubSpot, Snowflake, DBT,
+              Google Sheets, OpenAir, Count, and Retool. She&rsquo;s lived
+              the exact pain Salency fixes —{' '}
+              <em>
+                revenue data scattered across platforms, no single layer
+                where the story survives.
+              </em>
             </p>
             <p>
               When Howard showed her the thesis, her first reaction was{' '}
@@ -92,14 +96,19 @@ export function OurStorySection() {
                 &ldquo;I&rsquo;ve been doing this by hand for five
                 years.&rdquo;
               </em>{' '}
-              She joined as co-founder two weeks later.
+              She joined as co-founder two weeks later. She&rsquo;s also
+              Howard&rsquo;s wife — three years of working adjacent
+              commercial jobs before Salency means they watched this pattern
+              break from different angles and landed on the same diagnosis.
             </p>
             <p>
-              Background before Adaptavist: institutional client management
-              and AML/KYC compliance in banking. She writes the go-to-market
-              motion from the buyer&rsquo;s side of the desk — knows what
-              sales ops actually trusts, how handoffs break at 50 reps, and
-              which metrics survive a board deck.
+              Before Adaptavist: Hong Kong banking (Nanyang Commercial Bank,
+              commercial credit for HKD 4B+ listed clients; DBS Bank,
+              AML/KYC, FATCA, PEP screening), operations at VirgoCX (crypto
+              exchange, FINTRAC reporting, Salesforce integrations), and a
+              four-month full-stack software bootcamp (React, REST, MVC).
+              Trilingual (Mandarin, Cantonese, English). BSc Marketing &amp;
+              Management, University of Sussex.
             </p>
           </div>
         </article>
@@ -131,6 +140,44 @@ export function OurStorySection() {
             <p>
               Along the way he trained 2,000+ engineers on AI-assisted
               workflows.
+            </p>
+          </div>
+        </article>
+
+        <article className="story-founder">
+          <aside className="story-founder-meta">
+            <div className="photo photo--amber">SG</div>
+            <div className="story-founder-identity">
+              <h2 className="story-founder-name">Shristi Gartaula</h2>
+              <div className="story-founder-role">Founding Designer</div>
+            </div>
+          </aside>
+          <div className="story-founder-body">
+            <p>
+              Shristi was the designer who shipped Salency&rsquo;s V1.{' '}
+              <em>
+                &ldquo;Sales intelligence platform&rsquo;s MVP application
+                using AI-augmented design skills&rdquo;
+              </em>{' '}
+              on her portfolio is this one. She joined the way the others
+              did — already in the work before the decision was formal.
+            </p>
+            <p>
+              Five years designing enterprise complex-systems tools before
+              Salency. Sole designer at <em>Index Exchange</em> for a
+              10-engineer ad-tech platform, shipping workflows for
+              blacklisting and account administration at ad-tech scale.
+              Redesigned legacy shipping applications at StatysTech with
+              user research driving the journey rewrites. Fortune 500 HR
+              interfaces at Myplanet. The through-line: complex B2B
+              software, research-first, design systems early.
+            </p>
+            <p>
+              Her process opens with a user, not a wireframe. AI-augmented
+              design is her stated top skill — not a pivot. Before design:
+              marketing in Switzerland and Canada, plus a year of data
+              analysis at Agriculture and Agri-Food Canada. General Assembly
+              UX, BA Guelph.
             </p>
           </div>
         </article>
