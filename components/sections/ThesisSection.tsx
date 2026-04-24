@@ -10,7 +10,7 @@ export function ThesisSection() {
         <p className="lede">
           Quarter one, Salency looks like a better handoff doc. By quarter
           four, it&rsquo;s the only system that knows what your customers
-          actually said. The longer it runs, the harder it is to rip out.
+          actually said.
         </p>
       </div>
     </section>
