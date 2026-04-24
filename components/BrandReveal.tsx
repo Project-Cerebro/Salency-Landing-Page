@@ -10,8 +10,12 @@ import { useEffect, useRef, useState } from 'react';
  * reflow via flex. All motion is CSS transitions; JS only toggles
  * orchestration classes on timers.
  *
- * First-visit gate via sessionStorage so repeat page loads in the same
- * tab don't replay. prefers-reduced-motion snaps to final state.
+ * Replay rule:
+ *   - Fresh tab           → replay
+ *   - Hard refresh        → replay (navigation type === 'reload')
+ *   - Soft refresh (F5)   → replay (same navigation type)
+ *   - Client-side Link    → do NOT replay (marketing reveal, not nav noise)
+ *   - prefers-reduced-motion → snap to final state
  */
 
 const STORAGE_KEY = 'salency_brand_reveal_played';
@@ -21,20 +25,33 @@ export function BrandReveal() {
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
   useEffect(() => {
-    // Read gating state on client (SSR renders static final state).
-    const alreadyPlayed =
-      typeof window !== 'undefined' &&
-      sessionStorage.getItem(STORAGE_KEY) === '1';
-    const reducedMotion =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (typeof window === 'undefined') return;
 
-    if (alreadyPlayed || reducedMotion) {
-      // Skip animation; render the final state directly.
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    if (reducedMotion) {
       stageRef.current?.classList.add('is-final');
       return;
     }
 
+    // Detect navigation type. Reload (hard or soft) → force replay and
+    // clear the session flag. Otherwise honor the sessionStorage gate so
+    // client-side <Link> back-nav doesn't replay.
+    const navEntry = performance.getEntriesByType(
+      'navigation',
+    )[0] as PerformanceNavigationTiming | undefined;
+    const isReload = navEntry?.type === 'reload';
+
+    const alreadyPlayed = sessionStorage.getItem(STORAGE_KEY) === '1';
+
+    if (!isReload && alreadyPlayed) {
+      // SPA nav back to /; keep the static final state.
+      stageRef.current?.classList.add('is-final');
+      return;
+    }
+
+    // Fresh tab OR any kind of refresh → play the reveal.
     setShouldAnimate(true);
     sessionStorage.setItem(STORAGE_KEY, '1');
   }, []);
