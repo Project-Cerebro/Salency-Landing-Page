@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Story · Salency — Mockup B (Narrative Rebuild, corrected chronology)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&family=Outfit:wght@400;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0E0C11;
+    --bg-2: #121015;
+    --bg-3: #1A171E;
+    --hair: rgba(232,230,227,0.08);
+    --hair-2: rgba(232,230,227,0.14);
+    --ink: #E8E6E3;
+    --ink-2: #B6B4B0;
+    --ink-3: #7C7A77;
+    --copper: #FE8531;
+    --copper-a03: rgba(254,133,49,.03);
+    --copper-a08: rgba(254,133,49,.08);
+    --copper-a22: rgba(254,133,49,.22);
+    --copper-a30: rgba(254,133,49,.3);
+    --copper-a35: rgba(254,133,49,.35);
+    --copper-a40: rgba(254,133,49,.4);
+    --page-max: 1280px;
+    --font-body: 'Geist', system-ui, sans-serif;
+    --font-display: 'Instrument Serif', serif;
+    --font-outfit: 'Outfit', system-ui, sans-serif;
+    --font-mono: 'Geist Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mockup-badge {
+    position: fixed; top: 12px; right: 12px; z-index: 100;
+    background: rgba(254,133,49,.15); border: 1px solid var(--copper-a35);
+    color: var(--copper); font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    padding: 6px 10px; border-radius: 4px;
+  }
+  .eb {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--copper);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eb::before {
+    content: ""; width: 28px; height: 1px; background: var(--copper); display: inline-block;
+  }
+  em { font-style: italic; color: var(--copper); }
+
+  .story { max-width: var(--page-max); margin: 40px auto 120px; padding: 20px 40px; }
+
+  .story-intro {
+    padding-bottom: 56px; border-bottom: 1px solid var(--hair); margin-bottom: 72px;
+  }
+  .story-intro .eb { margin-bottom: 28px; display: flex; }
+  .story-intro h1 {
+    font-family: var(--font-body); font-weight: 500;
+    font-size: clamp(40px, 4.8vw, 64px); line-height: 1.06; letter-spacing: -.025em;
+    color: var(--ink); margin: 0 0 28px; max-width: 22ch; text-wrap: balance;
+  }
+  .story-intro h1 em { font-style: italic; color: var(--copper); }
+  .story-intro .lede {
+    font-family: var(--font-body); font-weight: 300; font-size: 18px;
+    line-height: 1.7; color: var(--ink-2); max-width: 62ch; margin: 0;
+  }
+
+  .story-origin {
+    padding: 32px 40px; border-left: 2px solid var(--copper-a40);
+    background: var(--copper-a03); margin-bottom: 48px; max-width: 68ch;
+  }
+  .story-origin:last-of-type { margin-bottom: 96px; }
+  .story-origin .eb { margin-bottom: 18px; display: flex; }
+  .story-origin-body {
+    font-family: var(--font-body); font-weight: 300; font-size: 17px;
+    line-height: 1.7; color: var(--ink-2); margin: 0 0 16px;
+  }
+  .story-origin-body:last-child { margin-bottom: 0; }
+  .story-origin-body em {
+    font-family: var(--font-body); font-style: italic;
+    color: var(--copper); font-size: 17px; font-weight: 400;
+  }
+
+  .story-founders .eb { margin-bottom: 40px; display: flex; }
+  .story-founder {
+    display: grid; grid-template-columns: 220px 1fr; gap: 56px;
+    padding-bottom: 64px; margin-bottom: 64px; border-bottom: 1px solid var(--hair);
+  }
+  .story-founder:last-child { border-bottom: none; margin-bottom: 0; }
+  .story-founder-meta { display: flex; flex-direction: column; gap: 20px; }
+  .photo {
+    width: 128px; height: 128px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--copper-a22), rgba(209,60,19,.35));
+    color: #FFEDE8; font-family: var(--font-display); font-weight: 400; font-size: 52px;
+    display: flex; align-items: center; justify-content: center; letter-spacing: -.01em;
+    border: 1px solid var(--copper-a30);
+  }
+  .photo--violet { background: linear-gradient(135deg, rgba(107,78,255,.22), rgba(42,30,128,.5)); border-color: rgba(107,78,255,.3); color: #D8CEFF; }
+  .photo--teal { background: linear-gradient(135deg, rgba(0,181,160,.22), rgba(0,107,94,.45)); border-color: rgba(0,181,160,.3); color: #B5F0E5; }
+  .photo--amber { background: linear-gradient(135deg, rgba(251,191,36,.22), rgba(146,64,14,.5)); border-color: rgba(251,191,36,.32); color: #FFE8A8; }
+  .story-founder-name {
+    font-family: var(--font-display); font-weight: 400; font-size: 32px;
+    line-height: 1.1; letter-spacing: -.015em; color: var(--ink); margin: 0 0 4px;
+  }
+  .story-founder-role {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--copper);
+  }
+  .story-founder-body p {
+    font-family: var(--font-body); font-weight: 300; font-size: 16.5px;
+    line-height: 1.75; color: var(--ink-2); max-width: 62ch; margin: 0 0 18px;
+  }
+  .story-founder-body p:last-child { margin-bottom: 0; }
+  .story-founder-body p em {
+    font-family: var(--font-body); font-style: italic;
+    color: var(--copper); font-size: 16.5px; font-weight: 400;
+  }
+
+  .story-founder-stake {
+    font-family: var(--font-body) !important;
+    font-style: italic;
+    font-weight: 400 !important;
+    font-size: 17px !important;
+    line-height: 1.55 !important;
+    color: var(--copper) !important;
+    margin: 0 0 20px !important;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--copper-a08);
+    max-width: 56ch;
+  }
+  .story-founder-stake em {
+    font-family: var(--font-body) !important;
+    color: var(--copper) !important;
+    font-size: 17px !important;
+  }
+
+  .story-close {
+    margin-top: 96px; padding-top: 56px; border-top: 1px solid var(--hair-2); text-align: center;
+  }
+  .story-close p {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 28px); line-height: 1.4; color: var(--ink);
+    max-width: 56ch; margin: 0 auto 28px;
+  }
+  .story-close p em { font-style: italic; color: var(--copper); }
+  .story-close-link {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--copper);
+    text-decoration: none; border-bottom: 1px solid var(--copper-a35);
+    padding-bottom: 4px; transition: border-color .18s, color .18s;
+  }
+  .story-close-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+  @media (max-width: 768px) {
+    .story { padding: 20px 22px; margin-bottom: 80px; }
+    .story-intro { padding-bottom: 40px; margin-bottom: 48px; }
+    .story-origin { padding: 24px 22px; margin-bottom: 32px; }
+    .story-origin:last-of-type { margin-bottom: 56px; }
+    .story-founder { grid-template-columns: 1fr; gap: 24px; padding-bottom: 40px; margin-bottom: 40px; }
+    .story-founder-meta { flex-direction: row; align-items: center; gap: 16px; }
+    .photo { width: 72px; height: 72px; font-size: 28px; }
+    .story-close { margin-top: 64px; padding-top: 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="mockup-badge">Mockup B · Chronology corrected</div>
+
+<section class="story">
+  <div class="story-intro">
+    <span class="eb">Our story</span>
+    <h1><em>The sentence that became a company.</em></h1>
+    <p class="lede">
+      Salency started with a comment said in passing, in an office. The person who heard it had spent years inside a version of the same failure on a different side of the business, and had just realized something had changed that made it fixable. This is the company that came out of it.
+    </p>
+  </div>
+
+  <div class="story-origin">
+    <span class="eb">The sentence</span>
+    <p class="story-origin-body">
+      Nikki is a data analyst at a B2B SaaS company, three years into running the operational reporting. A coworker said it in passing: salespeople record every call, but nobody ever rewatches the transcripts. One deal closes out of the conversation. The other thousand pain points — <em>the ones waiting on budget cycles, waiting on headcount, waiting on the slow things</em> — die in a file no one opens. The company never even knew they were said.
+    </p>
+    <p class="story-origin-body">
+      She&rsquo;s been watching a version of this on her own side of the business for years. Documentation out of date the week it ships. The real context living in Slack threads and call recordings no one has time to read. She&rsquo;s been asking herself the same question from the ops side: <em>if the evidence lives in conversations, why is a human still writing the doc?</em>
+    </p>
+    <p class="story-origin-body">
+      And then the math changed. LLMs had just gotten good enough to read the evidence directly — the transcripts, the threads, the things that actually happened — and update what the business knew in real time. <em>That&rsquo;s the beat that turned a workplace observation into a company.</em>
+    </p>
+  </div>
+
+  <div class="story-origin">
+    <span class="eb">The confirmation</span>
+    <p class="story-origin-body">
+      Nikki brought it to Howard — a salesperson by trade, and her reality check. He&rsquo;d done five founding-sales seats in four years and had just finished his Entrepreneurship Masters. If the pain was real, he&rsquo;d know. If the market wasn&rsquo;t there, he&rsquo;d say so.
+    </p>
+    <p class="story-origin-body">
+      He recognized it immediately. Late 2024, first onboarding call for a new web3 game-studio customer at Sequence. By minute 15 the customer had said some version of <em>&ldquo;I already told your colleague this&rdquo;</em> three times. The rep who closed the deal was two desks away. Nobody had asked him to do a handover. The CRM had a stage field and a one-line note.
+    </p>
+    <p class="story-origin-body">
+      Howard had stopped thinking of that as a behavior problem months earlier. Behavior doesn&rsquo;t fail at that scale. <em>Infrastructure does.</em> When Nikki named the same failure from the analyst side, he already knew she was right.
+    </p>
+  </div>
+
+  <div class="story-origin">
+    <span class="eb">The reframe</span>
+    <p class="story-origin-body">
+      The CRM was built to store pipeline stages. It was never built to store what the customer said. So the conversation lived in the head of whoever took the call, and died with them when they context-switched, quit, or got reassigned. The recording was the evidence. <em>Nobody read the evidence.</em>
+    </p>
+    <p class="story-origin-body">
+      Until now, nobody could. <em>That&rsquo;s what changed.</em>
+    </p>
+  </div>
+
+  <div class="story-founders">
+    <span class="eb">Who&rsquo;s building it</span>
+
+    <article class="story-founder">
+      <aside class="story-founder-meta">
+        <div class="photo">HT</div>
+        <div>
+          <h2 class="story-founder-name">Howard Tam</h2>
+          <div class="story-founder-role">Co-founder &amp; CEO</div>
+        </div>
+      </aside>
+      <div class="story-founder-body">
+        <p class="story-founder-stake"><em>Why he&rsquo;s here: lived the pain for four years across five sales seats, then confirmed what Nikki was describing the moment she said it.</em></p>
+        <p>
+          Five founding-AE / BD seats in four years — <em>Dora, Sequence, Treasure, Nijta, Viggle</em> (a16z-backed). Ran the HubSpot→Monday CRM migration at Sequence and came out knowing flat fields can&rsquo;t hold what the customer said. Entrepreneurship Masters (MBET, Waterloo). Before sales, he led MUFG Hong Kong&rsquo;s first Panda Bond issuance.
+        </p>
+        <p>
+          In January 2026 he interviewed a senior relationship manager at a fintech who said 40–50% of her customers get visibly annoyed when asked to repeat themselves. Her verbatim: <em>&ldquo;I avoid recording my calls because people tense up.&rdquo;</em> That was the input constraint named by the person Salency was being built for.
+        </p>
+      </div>
+    </article>
+
+    <article class="story-founder">
+      <aside class="story-founder-meta">
+        <div class="photo photo--violet">NI</div>
+        <div>
+          <h2 class="story-founder-name">Nikki Ip</h2>
+          <div class="story-founder-role">Co-founder &amp; Product</div>
+        </div>
+      </aside>
+      <div class="story-founder-body">
+        <p class="story-founder-stake"><em>Why she&rsquo;s here: the product, the business idea, and the way this company tells its story are hers.</em></p>
+        <p>
+          Three years as a data analyst in B2B SaaS. Operations roles across banking and crypto before that — the grounding that tells her where to look inside any business: <em>where the gaps hide, where signal gets lost, where the team closest to the customer always knows something the company never captures.</em>
+        </p>
+      </div>
+    </article>
+
+    <article class="story-founder">
+      <aside class="story-founder-meta">
+        <div class="photo photo--teal">BO</div>
+        <div>
+          <h2 class="story-founder-name">Babajide Okusanya</h2>
+          <div class="story-founder-role">Founding Engineer</div>
+        </div>
+      </aside>
+      <div class="story-founder-body">
+        <p class="story-founder-stake"><em>Why he&rsquo;s here: had already built this class of system in production and knew what makes it defensible.</em></p>
+        <p>
+          Met Howard during his MBET at Waterloo. Scaled <em>MakersValley</em> from 0 to $2M ARR (6.5y, NYC) as an applied-AI operator — not a research hire. Built Salency&rsquo;s extraction and pain-to-product mapping engine. Trained 2,000+ engineers on AI-assisted workflows along the way.
+        </p>
+        <p>
+          The core technical risk in Salency isn&rsquo;t &ldquo;can an LLM summarise a call.&rdquo; It&rsquo;s <em>&ldquo;can extractions stay cited, scoped to a specific catalog, and trustworthy at volume.&rdquo;</em> He has shipped that class of system before — provenance-tracked AI context systems in production.
+        </p>
+      </div>
+    </article>
+
+    <article class="story-founder">
+      <aside class="story-founder-meta">
+        <div class="photo photo--amber">SG</div>
+        <div>
+          <h2 class="story-founder-name">Shristi Gartaula</h2>
+          <div class="story-founder-role">Founding Designer</div>
+        </div>
+      </aside>
+      <div class="story-founder-body">
+        <p class="story-founder-stake"><em>Why she&rsquo;s here: AI-augmented design is her stated top skill — not a pivot.</em></p>
+        <p>
+          The designer who shipped Salency&rsquo;s V1. <em>&ldquo;Sales intelligence platform&rsquo;s MVP application using AI-augmented design skills&rdquo;</em> on her portfolio is this one.
+        </p>
+        <p>
+          Five years designing enterprise complex-systems tools before Salency. Sole designer at <em>Index Exchange</em> for a 10-engineer ad-tech platform, shipping workflows for blacklisting and account administration at ad-tech scale. Redesigned legacy shipping applications at StatysTech with user research driving the journey rewrites. Fortune 500 HR interfaces at Myplanet. Her process opens with a user, not a wireframe. AI-augmented design is her stated top skill — <em>not a pivot.</em>
+        </p>
+      </div>
+    </article>
+  </div>
+
+  <div class="story-close">
+    <p>
+      Every revenue tool shipped in the last twenty years assumed the structured row was the unit of truth. Pipeline stage. Deal size. Close date. Meanwhile the actual thing that closes or loses a deal — <em>what the customer said, what contradicts what, which pain the budget cycle is actually attached to</em> — has been living in transcripts no one reads and heads that quit.
+    </p>
+    <p>
+      What we bet on: remembering every customer conversation isn&rsquo;t another feature on top of a CRM. <em>It&rsquo;s a layer underneath.</em> And the bottleneck is about to shift from &ldquo;how much pipeline can a rep generate&rdquo; to <em>&ldquo;how much of what the customer actually said can the company remember.&rdquo;</em>
+    </p>
+    <p>We&rsquo;re building that layer.</p>
+    <a href="#" class="story-close-link">Read the full thesis →</a>
+  </div>
+</section>
+</body>
+</html>
