@@ -2609,8 +2609,13 @@ header button:focus:not(:focus-visible){
    when redundant ones collapse. JS only toggles .is-merged / .is-final. */
 .brand-reveal { display: flex; align-items: baseline; margin-bottom: 28px; }
 .brand-reveal-wordmark {
-  font-family: var(--font-instrument-serif), 'Instrument Serif', serif;
-  font-style: italic;
+  /* Outfit matches the header logo (.brand .name uses the same font at
+     weight 800). Keeps brand identity consistent between the nav
+     wordmark and the hero reveal — Instrument Serif is for emphasis em,
+     not for the brand name itself. */
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-style: normal;
+  font-weight: 800;
   font-size: clamp(40px, 7vw, 88px);
   line-height: 1;
   letter-spacing: -0.025em;
