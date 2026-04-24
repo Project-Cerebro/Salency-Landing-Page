@@ -29,7 +29,7 @@ export function TeamStripSection() {
         </div>
         <div className="team-strip-row">
           <span className="ts-name">Babajide Okusanya</span>
-          <span className="ts-role">Technical Lead</span>
+          <span className="ts-role">Founding Engineer</span>
           <p className="ts-bet">
             Scaled MakersValley from 0 to $2M ARR (6.5y, NYC). Has shipped
             provenance-tracked AI context systems &mdash; the exact technical

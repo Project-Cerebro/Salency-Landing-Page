@@ -12,8 +12,8 @@ export function ProblemSection() {
           </h2>
         </div>
         <p className="lede">
-          Your reps sit through four discovery calls a week. Your AI notetaker
-          captures the audio. Your CRM captures the stage change.{' '}
+          Your reps run discovery calls every week. Your AI notetaker captures
+          the audio. Your CRM captures the stage change.{' '}
           <em>Nothing captures what was actually learned</em> — the pains, the
           politics, the promises. So when a rep rotates, the account restarts
           from zero.
@@ -33,9 +33,8 @@ export function ProblemSection() {
             stay locked in the audio.
           </p>
           <div className="cost">
-            <span className="figure">&lt; 4%</span>
             <span className="label">
-              of transcripts get re-read after the handoff &middot; internal estimate, AE/CS interviews
+              Transcripts are the artifact no one scrubs after the handoff.
             </span>
           </div>
         </div>
@@ -53,9 +52,9 @@ export function ProblemSection() {
             asking again.
           </p>
           <div className="cost">
-            <span className="figure">40–50%</span>
             <span className="label">
-              of customers visibly frustrated when asked to repeat themselves &middot; AE/CS interviews, Q1 2026
+              The customer pays the cost &mdash; they&rsquo;re the ones asked
+              to repeat themselves.
             </span>
           </div>
         </div>
@@ -71,9 +70,8 @@ export function ProblemSection() {
             re-encoding information the system already has.
           </p>
           <div className="cost">
-            <span className="figure">3–5 hrs</span>
             <span className="label">
-              per rep per week re-encoding what the recording already captured &middot; AE interviews, Q1 2026
+              Hours spent re-encoding what the recording already captured.
             </span>
           </div>
         </div>

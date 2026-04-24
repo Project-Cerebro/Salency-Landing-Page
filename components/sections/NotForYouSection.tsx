@@ -4,7 +4,7 @@ export function NotForYouSection() {
       <div className="notfor-head">
         <span className="eb">Not for you if</span>
         <h2>
-          Salency is the <em>wrong tool</em> in three cases.
+          Salency is the <em>wrong tool</em> in two cases.
         </h2>
       </div>
       <ul className="notfor-list">
@@ -22,13 +22,6 @@ export function NotForYouSection() {
             <strong>Solo operator, no rep turnover.</strong> The scar tissue
             Salency fixes is institutional. Solo founders keep it in their
             head.
-          </div>
-        </li>
-        <li>
-          <span className="notfor-idx">03</span>
-          <div className="notfor-body">
-            <strong>Under ~50 calls per quarter.</strong> The graph thrives on
-            density. A handful of calls per month won&rsquo;t fill it in.
           </div>
         </li>
       </ul>

@@ -29,18 +29,19 @@ export function CompoundsSection() {
         </div>
         <div className="compounds-step">
           <span className="compounds-marker">M6</span>
-          <h4>Cross-account patterns emerge</h4>
+          <h4>Cross-account patterns begin to surface</h4>
           <p>
-            &ldquo;Handoff loses context&rdquo; lights up seven accounts. Your
-            pipeline review stops starting from zero.
+            A single pain query starts returning every account where it
+            appears. Pipeline review stops starting from zero.
           </p>
         </div>
         <div className="compounds-step">
           <span className="compounds-marker">M12</span>
-          <h4>Moat, measured in quarters</h4>
+          <h4>The moat is measured in quarters</h4>
           <p>
-            Rip it out at month twelve and you lose what nobody wrote down.
-            That&rsquo;s the switching cost.
+            By year one, ripping Salency out means losing what nobody wrote
+            down. That&rsquo;s the design &mdash; not a promise, a structural
+            consequence of how memory compounds.
           </p>
         </div>
       </div>
