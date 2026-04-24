@@ -6,7 +6,7 @@ export function OurStorySection() {
       <div className="story-intro">
         <span className="eb">Our story</span>
         <h1>
-          Three people. Four months.{' '}
+          Four people. Four months.{' '}
           <em>One bet about how sales actually works.</em>
         </h1>
         <p className="lede">
@@ -131,6 +131,44 @@ export function OurStorySection() {
             <p>
               Along the way he trained 2,000+ engineers on AI-assisted
               workflows.
+            </p>
+          </div>
+        </article>
+
+        <article className="story-founder">
+          <aside className="story-founder-meta">
+            <div className="photo photo--amber">SG</div>
+            <div className="story-founder-identity">
+              <h2 className="story-founder-name">Shristi Gartaula</h2>
+              <div className="story-founder-role">Founding Designer</div>
+            </div>
+          </aside>
+          <div className="story-founder-body">
+            <p>
+              Shristi was the designer who shipped Salency&rsquo;s V1.{' '}
+              <em>
+                &ldquo;Sales intelligence platform&rsquo;s MVP application
+                using AI-augmented design skills&rdquo;
+              </em>{' '}
+              on her portfolio is this one. She joined the way the others
+              did — already in the work before the decision was formal.
+            </p>
+            <p>
+              Five years designing enterprise complex-systems tools before
+              Salency. Sole designer at <em>Index Exchange</em> for a
+              10-engineer ad-tech platform, shipping workflows for
+              blacklisting and account administration at ad-tech scale.
+              Redesigned legacy shipping applications at StatysTech with
+              user research driving the journey rewrites. Fortune 500 HR
+              interfaces at Myplanet. The through-line: complex B2B
+              software, research-first, design systems early.
+            </p>
+            <p>
+              Her process opens with a user, not a wireframe. AI-augmented
+              design is her stated top skill — not a pivot. Before design:
+              marketing in Switzerland and Canada, plus a year of data
+              analysis at Agriculture and Agri-Food Canada. General Assembly
+              UX, BA Guelph.
             </p>
           </div>
         </article>

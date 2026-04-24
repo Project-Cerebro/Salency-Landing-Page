@@ -1509,6 +1509,7 @@ html {
 
       &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));border-color:rgba(107,78,255,.3);color:#D8CEFF}
       &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
+      &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));border-color:rgba(251,191,36,.32);color:#FFE8A8}
     }
   }
   .team-compact-body{
@@ -1688,6 +1689,7 @@ html {
 
       &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));border-color:rgba(107,78,255,.3);color:#D8CEFF}
       &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
+      &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));border-color:rgba(251,191,36,.32);color:#FFE8A8}
     }
   }
 

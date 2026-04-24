@@ -233,6 +233,17 @@ export function InvestorsSection() {
                   </p>
                 </div>
               </div>
+              <div className="team-compact-row">
+                <div className="photo photo--amber">SG</div>
+                <div className="team-compact-body">
+                  <span className="name">Shristi Gartaula</span>
+                  <span className="role">Founding Designer</span>
+                  <p className="line">
+                    Shipped Salency&rsquo;s V1. Five years enterprise B2B
+                    design — Index Exchange, Myplanet, StatysTech.
+                  </p>
+                </div>
+              </div>
             </div>
 
             <Link href="/our-story" className="team-compact-link">
