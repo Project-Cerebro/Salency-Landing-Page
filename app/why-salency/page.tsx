@@ -23,10 +23,10 @@ export default function WhySalencyPage() {
       <ScrollReveal><MemoryEnablesSection /></ScrollReveal>
       <ScrollReveal><CompoundsSection /></ScrollReveal>
       <ScrollReveal><FiveYearBetSection /></ScrollReveal>
+      <ScrollReveal><TeamStripSection /></ScrollReveal>
       <ScrollReveal><GongSection /></ScrollReveal>
       <ScrollReveal><HandoffToolsSection /></ScrollReveal>
       <ScrollReveal><NotForYouSection /></ScrollReveal>
-      <ScrollReveal><TeamStripSection /></ScrollReveal>
       <PilotCtaSection />
       <SiteFooter />
     </div>
