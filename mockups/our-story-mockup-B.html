@@ -66,8 +66,8 @@
   .story-intro .eb { margin-bottom: 28px; display: flex; }
   .story-intro h1 {
     font-family: var(--font-body); font-weight: 500;
-    font-size: clamp(40px, 4.8vw, 64px); line-height: 1.06; letter-spacing: -.025em;
-    color: var(--ink); margin: 0 0 28px; max-width: 22ch; text-wrap: balance;
+    font-size: clamp(56px, 7vw, 96px); line-height: 1.02; letter-spacing: -.035em;
+    color: var(--ink); margin: 0 0 32px; max-width: 18ch; text-wrap: balance;
   }
   .story-intro h1 em { font-style: italic; color: var(--copper); }
   .story-intro .lede {
@@ -76,11 +76,16 @@
   }
 
   .story-origin {
-    padding: 32px 40px; border-left: 2px solid var(--copper-a40);
-    background: var(--copper-a03); margin-bottom: 48px; max-width: 68ch;
+    padding: 8px 0 8px 32px; border-left: 2px solid var(--copper-a40);
+    margin-bottom: 56px; max-width: 68ch;
   }
-  .story-origin:last-of-type { margin-bottom: 96px; }
-  .story-origin .eb { margin-bottom: 18px; display: flex; }
+  .story-origin:last-of-type { margin-bottom: 0; }
+  .story-origin .eb { margin-bottom: 22px; display: flex; align-items: center; gap: 14px; }
+  .story-origin .eb::before { content: none; }
+  .story-origin .eb-num {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    letter-spacing: .14em; color: var(--copper);
+  }
   .story-origin-body {
     font-family: var(--font-body); font-weight: 300; font-size: 17px;
     line-height: 1.7; color: var(--ink-2); margin: 0 0 16px;
@@ -90,7 +95,17 @@
     font-family: var(--font-body); font-style: italic;
     color: var(--copper); font-size: 17px; font-weight: 400;
   }
+  .story-origin-pullquote {
+    font-family: var(--font-body); font-style: italic; font-weight: 400;
+    font-size: clamp(28px, 3.4vw, 40px); line-height: 1.22;
+    letter-spacing: -.018em; color: var(--copper);
+    max-width: 24ch; margin: 28px 0 8px;
+  }
+  .story-origin-pullquote:last-child { margin-bottom: 0; }
 
+  .story-founders {
+    margin-top: 96px; padding-top: 64px; border-top: 1px solid var(--hair);
+  }
   .story-founders .eb { margin-bottom: 40px; display: flex; }
   .story-founder {
     display: grid; grid-template-columns: 220px 1fr; gap: 56px;
@@ -164,8 +179,10 @@
   @media (max-width: 768px) {
     .story { padding: 20px 22px; margin-bottom: 80px; }
     .story-intro { padding-bottom: 40px; margin-bottom: 48px; }
-    .story-origin { padding: 24px 22px; margin-bottom: 32px; }
-    .story-origin:last-of-type { margin-bottom: 56px; }
+    .story-intro h1 { font-size: clamp(40px, 9vw, 56px); }
+    .story-origin { padding: 4px 0 4px 20px; margin-bottom: 40px; }
+    .story-origin-pullquote { font-size: clamp(24px, 6vw, 32px); }
+    .story-founders { margin-top: 56px; padding-top: 40px; }
     .story-founder { grid-template-columns: 1fr; gap: 24px; padding-bottom: 40px; margin-bottom: 40px; }
     .story-founder-meta { flex-direction: row; align-items: center; gap: 16px; }
     .photo { width: 72px; height: 72px; font-size: 28px; }
@@ -186,7 +203,7 @@
   </div>
 
   <div class="story-origin">
-    <span class="eb">The sentence</span>
+    <span class="eb"><span class="eb-num">01</span>The sentence</span>
     <p class="story-origin-body">
       Nikki is a data analyst at a B2B SaaS company, three years into running the operational reporting. A coworker said it in passing: salespeople record every call, but nobody ever rewatches the transcripts. One deal closes out of the conversation. The other thousand pain points — <em>the ones waiting on budget cycles, waiting on headcount, waiting on the slow things</em> — die in a file no one opens. The company never even knew they were said.
     </p>
@@ -199,7 +216,7 @@
   </div>
 
   <div class="story-origin">
-    <span class="eb">The confirmation</span>
+    <span class="eb"><span class="eb-num">02</span>The confirmation</span>
     <p class="story-origin-body">
       Nikki brought it to Howard — a salesperson by trade, and her reality check. He&rsquo;d done five founding-sales seats in four years and had just finished his Entrepreneurship Masters. If the pain was real, he&rsquo;d know. If the market wasn&rsquo;t there, he&rsquo;d say so.
     </p>
@@ -212,13 +229,12 @@
   </div>
 
   <div class="story-origin">
-    <span class="eb">The reframe</span>
+    <span class="eb"><span class="eb-num">03</span>The reframe</span>
     <p class="story-origin-body">
-      The CRM was built to store pipeline stages. It was never built to store what the customer said. So the conversation lived in the head of whoever took the call, and died with them when they context-switched, quit, or got reassigned. The recording was the evidence. <em>Nobody read the evidence.</em>
+      The CRM was built to store pipeline stages. It was never built to store what the customer said. So the conversation lived in the head of whoever took the call, and died with them when they context-switched, quit, or got reassigned. The recording was the evidence.
     </p>
-    <p class="story-origin-body">
-      Until now, nobody could. <em>That&rsquo;s what changed.</em>
-    </p>
+    <p class="story-origin-pullquote">Nobody read the evidence.</p>
+    <p class="story-origin-pullquote">Until now, nobody could. That&rsquo;s what changed.</p>
   </div>
 
   <div class="story-founders">
