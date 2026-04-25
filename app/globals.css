@@ -2952,6 +2952,10 @@ header button:focus:not(:focus-visible){
 .notfor-list .notfor-body { font-size: 15.5px; line-height: 1.65; color: var(--ink-2); }
 .notfor-list .notfor-body strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; }
 .notfor-foot { margin-top: 28px; font-size: 14.5px; line-height: 1.65; color: var(--ink-3); max-width: 72ch; }
+.notfor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 8px; }
+.notfor-col-head { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px; font-weight: 400; }
+.notfor-list--paired li { grid-template-columns: 1fr; gap: 0; }
+@media (max-width: 768px) { .notfor-grid { grid-template-columns: 1fr; gap: 40px; } }
 
 /* Pilot CTA */
 .why-cta { max-width: var(--page-max); margin: 96px auto 120px; padding: 0 40px; text-align: center; }
