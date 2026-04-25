@@ -51,8 +51,8 @@ export const FOUNDERS: Founder[] = [
     longBio: (
       <>
         Three years as a data analyst at Adaptavist Group, running operational
-        reporting across <em>HubSpot, Snowflake, DBT</em>. Operations roles
-        across banking and crypto before that.
+        reporting across <em>sales, services, and finance</em>. Operations
+        roles across banking and crypto before that.
       </>
     ),
   },
