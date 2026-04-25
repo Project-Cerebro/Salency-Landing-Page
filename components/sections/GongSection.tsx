@@ -49,12 +49,13 @@ export function GongSection() {
           <tr>
             <td className="dim">Survives rep turnover</td>
             <td className="col-g">
-              <span className="icon">—</span>Transcript survives. Context
-              doesn&apos;t.
+              <span className="icon">—</span>Templated handoff doc per
+              inheritance event
             </td>
             <td className="col-s">
-              <span className="icon">✓</span>New rep inherits the{' '}
-              <strong>full account state</strong> before their first call
+              <span className="icon">✓</span>Live{' '}
+              <strong>account graph</strong> — the brief regenerates from it
+              and persists between handoffs
             </td>
           </tr>
           <tr>
@@ -68,27 +69,24 @@ export function GongSection() {
             </td>
           </tr>
           <tr>
-            <td className="dim">When it&rsquo;s used</td>
+            <td className="dim">Pain &rarr; product matching</td>
             <td className="col-g">
-              <span className="icon">—</span>During the call &mdash; managers
-              spot-check coaching moments
+              <span className="icon">—</span>No product catalog primitive
             </td>
             <td className="col-s">
-              <span className="icon">✓</span>
-              <strong>After every call, and every handoff</strong> &mdash; AE,
-              CSM, director, on demand
+              <span className="icon">✓</span>Every pain auto-matched to your
+              catalog, <strong>ranked by confidence</strong>
             </td>
           </tr>
           <tr>
-            <td className="dim">Handoff artifact</td>
+            <td className="dim">Cross-call contradiction detection</td>
             <td className="col-g">
-              <span className="icon">—</span>None &mdash; you still write the
-              handoff doc by hand
+              <span className="icon">—</span>Single-record deal warnings
             </td>
             <td className="col-s">
               <span className="icon">✓</span>
-              <strong>Auto-generated, always current</strong> &mdash; the graph
-              regenerates the doc
+              <strong>Cross-call adversarial comparison</strong> &mdash; both
+              citations attached
             </td>
           </tr>
           <tr>

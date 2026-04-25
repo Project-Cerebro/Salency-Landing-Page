@@ -5,6 +5,7 @@ import { ProblemSection } from '@/components/sections/ProblemSection';
 import { CompoundsSection } from '@/components/sections/CompoundsSection';
 import { GongSection } from '@/components/sections/GongSection';
 import { NotForYouSection } from '@/components/sections/NotForYouSection';
+import { AntiHypeSection } from '@/components/sections/AntiHypeSection';
 import { PilotCtaSection } from '@/components/sections/PilotCtaSection';
 import { SiteFooter } from '@/components/sections/SiteFooter';
 
@@ -17,6 +18,7 @@ export default function WhySalencyPage() {
       <ScrollReveal><GongSection /></ScrollReveal>
       <ScrollReveal><CompoundsSection /></ScrollReveal>
       <ScrollReveal><NotForYouSection /></ScrollReveal>
+      <ScrollReveal><AntiHypeSection /></ScrollReveal>
       <PilotCtaSection />
       <SiteFooter />
     </div>
