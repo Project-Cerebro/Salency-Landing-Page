@@ -9,7 +9,7 @@ export function ThesisSection() {
         </h1>
         <p className="lede">
           Quarter one, Salency looks like a better handoff doc. By quarter
-          four, it&rsquo;s the only system that knows what your customers
+          four, it&rsquo;s the only system that remembers what your customers
           actually said.
         </p>
       </div>
