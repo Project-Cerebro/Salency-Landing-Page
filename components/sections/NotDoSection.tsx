@@ -12,11 +12,30 @@ export function NotDoSection() {
             <div className="title">Not a CRM replacement</div>
             <span className="check" aria-label="What it does">✓</span>
             <div className="subtitle">
-              CRM tracks pipeline stages and quotes. Salency tracks what the
-              customer said: pain graph, contradictions, account brief. The
-              memory layer stays on Salency; flat fields export to Salesforce,
-              HubSpot, or Attio as CSV or markdown. Native CRM integration is
-              on the roadmap.
+              CRM tracks pipeline stages, forecast, and quote-to-cash. Salency
+              tracks what the customer said: pain graph, contradictions,
+              account brief. Two layers, no overlap.
+            </div>
+          </div>
+          <div className="notdo-item">
+            <span className="x">×</span>
+            <div className="title">Not a CRM write-back tool today</div>
+            <span className="check" aria-label="What it does">✓</span>
+            <div className="subtitle">
+              Reps export structured fields by hand &mdash; CSV or markdown
+              into HubSpot, Salesforce, Attio. Native sync is on the roadmap,
+              not yet shipped. We don&apos;t commit to a version until the
+              integration ships.
+            </div>
+          </div>
+          <div className="notdo-item">
+            <span className="x">×</span>
+            <div className="title">Not running on your CRM&apos;s data layer</div>
+            <span className="check" aria-label="What it does">✓</span>
+            <div className="subtitle">
+              The pain-product graph, contradictions, and account memory live
+              on Salency by design. Flatten them into CRM rows and the moat
+              dissolves the same day.
             </div>
           </div>
           <div className="notdo-item">
@@ -29,7 +48,7 @@ export function NotDoSection() {
               memory, so the rep walks into the next call already briefed.
             </div>
           </div>
-          <div className="notdo-item">
+          <div className="notdo-item notdo-item--span">
             <span className="x">×</span>
             <div className="title">Not a magic close button</div>
             <span className="check" aria-label="What it does">✓</span>
@@ -38,16 +57,6 @@ export function NotDoSection() {
               lost: the pain a buyer named, the contradiction from last
               week&apos;s call, the next step nobody wrote down. The hour
               before every call goes back to selling.
-            </div>
-          </div>
-          <div className="notdo-item">
-            <span className="x">×</span>
-            <div className="title">Not another call recorder</div>
-            <span className="check" aria-label="What it does">✓</span>
-            <div className="subtitle">
-              Salency sits <em>on top of</em> your notetaker. Gong, Fathom,
-              Fireflies, or raw text go in. A cited, queryable memory layer
-              comes out. Survives rep rotation.
             </div>
           </div>
         </div>

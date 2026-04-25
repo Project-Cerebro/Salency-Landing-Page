@@ -132,10 +132,12 @@ export function InvestorsSection() {
               Closest threats, and <em>where the shape doesn&rsquo;t fit.</em>
             </h2>
             <p className="compete-lede">
-              No single competitor ships pain-product mapping plus
-              contradiction detection plus handoff brief as an integrated
-              stack. The gap is the shape of the join, not the individual
-              capabilities.
+              Pain extraction, pre-call briefing, and handoff briefs are
+              now table-stakes &mdash; Gong, HubSpot Frame AI, and AskElephant
+              ship versions of all three. No single competitor ships
+              pain-product mapping plus contradiction detection as an
+              integrated stack. The gap is the shape of the join, not the
+              individual capabilities.
             </p>
             <div className="compete-table">
               <div className="compete-row compete-row--head">
@@ -146,47 +148,67 @@ export function InvestorsSection() {
               <div className="compete-row">
                 <span className="c-who">Gong</span>
                 <span className="c-threat">
-                  <em>75%</em>
+                  <em>high</em>
                 </span>
                 <span className="c-why">
-                  Could ship &ldquo;Gong Reactivate&rdquo; as a $10–20/seat
-                  add-on. Their focus is forecasting and coaching. Pain-product
-                  mapping is not their customer motion.
-                </span>
-              </div>
-              <div className="compete-row">
-                <span className="c-who">Clari + Salesloft</span>
-                <span className="c-threat">50%</span>
-                <span className="c-why">
-                  $450M combined ARR (merged Dec 2025). Call intelligence plus
-                  forecasting. Pain-timing is their natural expansion, but
-                  their account is stage and number, not qualitative shape.
+                  <strong>12&ndash;18 month window.</strong> Already ships
+                  pain Smart Trackers (pre-2024), AI Briefer for handoffs (May
+                  2025), Account Console (Feb 2026). Doesn&rsquo;t ship pain
+                  &rarr; product matching against a customer-maintained
+                  catalog (no Vault primitive) or cross-call contradiction
+                  detection. Historical base rate ~38% per 12-month window
+                  for competitor-parity ships.
                 </span>
               </div>
               <div className="compete-row">
                 <span className="c-who">HubSpot Breeze</span>
-                <span className="c-threat">50%</span>
+                <span className="c-threat">
+                  <em>mod-high</em>
+                </span>
                 <span className="c-why">
-                  200K customers, freemium. Could bundle pain-product mapping
-                  into Sales Hub — but bundling into a CRM flattens the graph,
-                  which is the thing that defends the wedge.
+                  <strong>12 month window.</strong> Frame AI acquisition (Dec
+                  2024) and Smart Deal Progression (Apr 2026) put them ~12
+                  months from packaging the matching engine. The architecture-
+                  flat moat argument is retracted post-Frame AI. 200K
+                  customers, freemium.
                 </span>
               </div>
               <div className="compete-row">
                 <span className="c-who">Salesforce Einstein</span>
-                <span className="c-threat">45%</span>
+                <span className="c-threat">
+                  <em>wildcard</em>
+                </span>
                 <span className="c-why">
-                  150K customers. Could bundle for free. Slow to move, but
-                  devastating if they do. Same flattening problem as HubSpot.
+                  <strong>18&ndash;24 month window.</strong> Account Research
+                  Agent (Dreamforce 2025), Data 360 customer graph, Agentforce
+                  360. Recipe published in Architect docs but not packaged as
+                  a SKU. 150K customers. One Spring 2027 release-note bullet
+                  erases the wedge for that base.
                 </span>
               </div>
               <div className="compete-row">
                 <span className="c-who">AskElephant</span>
-                <span className="c-threat">35%</span>
+                <span className="c-threat">
+                  <em>moderate</em>
+                </span>
                 <span className="c-why">
-                  Closest on handoff docs. $99/mo anchor, 500+ teams, strong
-                  G2. Doesn&rsquo;t hold state between handoffs, and
-                  doesn&rsquo;t map pains to a product catalog.
+                  <strong>6&ndash;12 month window.</strong> Pre-call briefs
+                  already ship per third-party reviewers. $6M seed (May 2025)
+                  with a scale-AI-agents mandate. $99/mo anchor. Doesn&rsquo;t
+                  ingest a product catalog or do pain-product matching.
+                </span>
+              </div>
+              <div className="compete-row">
+                <span className="c-who">Clari + Salesloft</span>
+                <span className="c-threat">
+                  <em>low</em>
+                </span>
+                <span className="c-why">
+                  <strong>12&ndash;18 month window.</strong> Merged Dec 2025,
+                  $450M combined ARR. Integration paralysis: 2 CI stacks plus
+                  2 engagement stacks to rationalize. CEO Cox&rsquo;s public
+                  language is 100% forecast-execution unification. FAQ says
+                  full unification &ldquo;coming years.&rdquo;
                 </span>
               </div>
             </div>
@@ -240,31 +262,33 @@ export function InvestorsSection() {
               </div>
               <div className="horizon">
                 <div className="horizon-head">
-                  <span className="pill">Following</span>
-                  <span className="label">Enterprise readiness</span>
-                </div>
-                <ul className="horizon-body">
-                  <li>
-                    Native integrations with the tools revenue teams already
-                    live in — scoped once each one ships a stable contract,
-                    not before.
-                  </li>
-                  <li>
-                    Security posture for regulated-vertical buyers (SOC 2 Type
-                    II audit kickoff post-bridge).
-                  </li>
-                </ul>
-              </div>
-              <div className="horizon">
-                <div className="horizon-head">
-                  <span className="pill">Further out</span>
+                  <span className="pill">Following · 2026 H2</span>
                   <span className="label">Workflow depth</span>
                 </div>
                 <ul className="horizon-body">
                   <li>
                     Embedding pain-product mapping into product-management
                     tools (Productboard, Aha, Jira) — where switching cost
-                    compounds into quarters.
+                    compounds into quarters. Pulled forward from 2027 after
+                    competitive-window analysis tightened the high-threat
+                    tier from 18 months to 12.
+                  </li>
+                  <li>
+                    Native integrations with the CRMs revenue teams already
+                    live in — scoped once each one ships a stable contract,
+                    not before.
+                  </li>
+                </ul>
+              </div>
+              <div className="horizon">
+                <div className="horizon-head">
+                  <span className="pill">Further out</span>
+                  <span className="label">Enterprise readiness + vertical expansion</span>
+                </div>
+                <ul className="horizon-body">
+                  <li>
+                    Security posture for regulated-vertical buyers (SOC 2 Type
+                    II audit kickoff post-bridge).
                   </li>
                   <li>
                     Vertical expansion. First vertical: B2B SaaS. Next:

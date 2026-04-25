@@ -1128,7 +1128,8 @@ html {
     align-items:start;
     padding:8px 0;border-bottom:1px dashed var(--hair);
   }
-  .notdo-item:last-child,.notdo-item:nth-last-child(2){border-bottom:0}
+  .notdo-item:last-child{border-bottom:0}
+  .notdo-item--span{grid-column:1 / -1}
   .notdo-item .x,
   .notdo-item .check{
     font-family:'Geist Mono',monospace;font-size:20px;line-height:1.2;
