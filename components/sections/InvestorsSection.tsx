@@ -78,15 +78,16 @@ export function InvestorsSection() {
                 </em>
               </p>
             </div>
-            <div className="primitive">
-              <span className="label">Cited demand</span>
-              <p className="title">
+            <figure className="platform-evidence">
+              <p className="stat">
                 <em>40–50%</em> of customers get visibly annoyed when asked to
                 repeat themselves; <em>20–30%</em> explicitly express
-                frustration. CS director, crypto/fintech Series B, January
-                2026.
+                frustration.
               </p>
-            </div>
+              <figcaption className="src">
+                CS director, crypto/fintech Series B · January 2026
+              </figcaption>
+            </figure>
           </section>
 
           <section className="inv-tam" id="tam">

@@ -1322,6 +1322,29 @@ html {
     }
   }
 
+  /* Platform evidence — cited demand quote. Visually distinct from
+     .primitive (which carries moat claims) so the rhetorical hierarchy
+     reads: moat callouts > supporting evidence. Left-rule citation, no
+     bordered box. */
+  .platform .platform-evidence{
+    margin-top:44px;padding:6px 0 6px 22px;max-width:62ch;
+    border-left:2px solid var(--copper-a18);
+
+    .stat{
+      font-family:var(--font-display), 'Instrument Serif', serif;
+      font-size:24px;line-height:1.4;color:var(--ink);font-style:italic;
+      margin:0;font-weight:400;
+
+      em{color:var(--copper);font-style:italic;font-weight:400}
+    }
+    .src{
+      display:block;margin-top:10px;
+      font-family:'Geist Mono',monospace;font-size:11px;
+      letter-spacing:.12em;text-transform:uppercase;
+      color:var(--ink-3);font-style:normal;
+    }
+  }
+
   /* Platform moat bridge — separates the "what we are" block from the
      "why the shape defends" block inside the folded Platform section.
      Mirrors .platform p styling but adds breathing room above. */
