@@ -44,9 +44,9 @@ export function InvestorsSection() {
             <p>
               The primitive is structured account memory. The loop compounds:
               every call makes every future call smarter, for every future rep
-              on that account. Every feature we ship — handoff docs, objection
-              libraries, renewal briefs, agent-drafted outreach — inherits from
-              the same core graph. One primitive. Everything else is surface.
+              on that account. Every surface we ship — starting with handoff
+              docs today — inherits from the same core graph. One primitive.
+              Everything else is surface.
             </p>
             <div className="primitive">
               <span className="label">Data primitive</span>
@@ -70,11 +70,11 @@ export function InvestorsSection() {
             <div className="primitive">
               <span className="label">The uncopyable pair</span>
               <p className="title">
-                Pain-product mapping plus contradiction detection, embedded in
-                product-management workflows.{' '}
+                Pain-product mapping plus contradiction detection.{' '}
                 <em>
-                  Either alone is defensible for 6 to 9 months. Together, with
-                  workflow depth, switching cost is measured in quarters.
+                  Either alone is defensible for 6 to 9 months. Together — and
+                  once wired into product-management workflows — switching cost
+                  is measured in quarters.
                 </em>
               </p>
             </div>
@@ -90,8 +90,8 @@ export function InvestorsSection() {
                 <span className="label">Bottom-up</span>
                 <div className="figure">~50K</div>
                 <p className="desc">
-                  Enterprise B2B sales teams running AI notetakers today. Every
-                  one has a memory problem.
+                  B2B SaaS companies with 10–500 reps and multi-feature product
+                  catalogs. Every one has a memory problem.
                 </p>
               </div>
               <div className="cell">
@@ -100,8 +100,8 @@ export function InvestorsSection() {
                   <em>0.5–1%</em> in 3 years
                 </div>
                 <p className="desc">
-                  250–1,000 teams × $50–100K ACV ={' '}
-                  <strong>$12M–$100M ARR</strong>.
+                  250–1,000 teams. Revenue scales with category-standard
+                  enterprise ACVs.
                 </p>
               </div>
               <div className="cell">
@@ -111,7 +111,7 @@ export function InvestorsSection() {
                 </div>
                 <p className="desc">
                   AI sales tooling category proves the scale. Clay hit $100M
-                  ARR in 2 years (a16z-led Series C, $3.1B valuation).
+                  ARR in 2 years (CapitalG-led Series C, $3.1B valuation).
                 </p>
               </div>
             </div>
@@ -229,51 +229,46 @@ export function InvestorsSection() {
               <div className="horizon">
                 <div className="horizon-head">
                   <span className="pill">V1.5 · Q2–Q3 2026</span>
-                  <span className="label">Capture + push</span>
+                  <span className="label">Capture, without the upload step</span>
                 </div>
                 <ul className="horizon-body">
                   <li>
                     <em>Recall.ai meeting bot</em> — joins Zoom, Meet, Teams
-                    directly. Extraction without a transcript upload step.
-                  </li>
-                  <li>
-                    CRM push to Monday and HubSpot — flat summary fields write
-                    back so reps don&rsquo;t double-enter.
+                    directly. Extraction runs without a transcript upload step.
                   </li>
                 </ul>
               </div>
               <div className="horizon">
                 <div className="horizon-head">
-                  <span className="pill">V2 · Q4 2026</span>
+                  <span className="pill">Following</span>
                   <span className="label">Enterprise readiness</span>
                 </div>
                 <ul className="horizon-body">
                   <li>
-                    Salesforce and HubSpot native sync — the two buyers that
-                    sign the enterprise contract.
+                    Native integrations with the tools revenue teams already
+                    live in — scoped once each one ships a stable contract,
+                    not before.
                   </li>
                   <li>
-                    Gong API transcript pull — turns Salency into the layer
-                    sitting on top of the most-entrenched input pipe.
-                  </li>
-                  <li>
-                    10 paying customers, $50–100K ACV range.
+                    Security posture for regulated-vertical buyers (SOC 2 Type
+                    II audit kickoff post-bridge).
                   </li>
                 </ul>
               </div>
               <div className="horizon">
                 <div className="horizon-head">
-                  <span className="pill">V2.5 · 2027</span>
-                  <span className="label">Scale decision</span>
+                  <span className="pill">Further out</span>
+                  <span className="label">Workflow depth</span>
                 </div>
                 <ul className="horizon-body">
                   <li>
-                    $10–30M ARR target. Workflow integration depth (Productboard
-                    / Aha / Jira) locks switching cost to quarters, not weeks.
+                    Embedding pain-product mapping into product-management
+                    tools (Productboard, Aha, Jira) — where switching cost
+                    compounds into quarters.
                   </li>
                   <li>
-                    Decision point: raise at the category-leader mark, or walk
-                    a profitability path into the expanded surface.
+                    Vertical expansion. First vertical: B2B SaaS. Next:
+                    FinTech.
                   </li>
                 </ul>
               </div>
