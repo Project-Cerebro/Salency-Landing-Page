@@ -1548,9 +1548,9 @@ html {
     }
   }
   .team-compact-link{
-    display:inline-block;font-family:'Geist Mono',monospace;font-size:12px;
+    display:inline-block;font-family:'Geist Mono',monospace;font-size:13px;
     letter-spacing:.12em;color:var(--copper);text-decoration:none;
-    border-bottom:1px solid var(--copper-a35);padding-bottom:2px;
+    border-bottom:1px solid var(--copper-a35);padding:12px 0 10px;
     transition:border-color .18s,color .18s;
 
     &:hover{color:var(--ink);border-bottom-color:var(--ink)}
