@@ -83,13 +83,8 @@ export function InvestorsSection() {
               <p className="title">
                 <em>40–50%</em> of customers get visibly annoyed when asked to
                 repeat themselves; <em>20–30%</em> explicitly express
-                frustration. The line that named our input-pipeline
-                constraint:{' '}
-                <em>
-                  &ldquo;I avoid recording my calls because people tense
-                  up.&rdquo;
-                </em>{' '}
-                CS director, crypto/fintech Series B, January 2026.
+                frustration. CS director, crypto/fintech Series B, January
+                2026.
               </p>
             </div>
           </section>
