@@ -215,10 +215,10 @@ export function InvestorsSection() {
                 <div className="photo photo--violet">NI</div>
                 <div className="team-compact-body">
                   <span className="name">Nikki Ip</span>
-                  <span className="role">Co-founder &amp; COO</span>
+                  <span className="role">Co-founder &amp; Product</span>
                   <p className="line">
-                    Data analyst at Adaptavist Group. Three years running
-                    operational reporting across HubSpot, Snowflake, DBT.
+                    Three years as a data analyst in B2B SaaS. Operations
+                    roles across banking and crypto before that.
                   </p>
                 </div>
               </div>
