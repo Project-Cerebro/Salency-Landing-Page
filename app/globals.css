@@ -1647,136 +1647,168 @@ html {
     }
   }
 
-  .story-origin{
-    padding:32px 40px;border-left:2px solid var(--copper-a40);
-    margin-bottom:48px;
+  /* Layer 1 hero — buyer-quote treatment (extends .story-intro) */
+  .story-hero-quote{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:clamp(40px,5.6vw,72px);line-height:1.08;letter-spacing:-.025em;
+    color:var(--ink);margin:0 0 28px;max-width:18ch;text-wrap:balance;
 
-    &:last-of-type{margin-bottom:96px}
+    .open-quote{color:var(--ink-3)}
+  }
+  .story-hero-attribution{
+    font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);
+    margin:0 0 32px;
+  }
+  .story-hero-body{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;
+    line-height:1.7;color:var(--ink-2);max-width:62ch;margin:0;
 
-    .eb{margin-bottom:22px;display:flex}
+    em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
+      color:var(--copper);font-size:18px;font-weight:400}
+  }
 
-    .story-origin-grid{
-      display:grid;grid-template-columns:minmax(0,60ch) minmax(0,30ch);
-      gap:72px;align-items:center;max-width:1080px;
+  /* Layer 2 — founder collision (parallel columns + vertical hairline) */
+  .story-collision{
+    padding-bottom:88px;border-bottom:1px solid var(--hair);margin-bottom:88px;
+
+    .eb{margin-bottom:32px;display:flex}
+  }
+
+  .story-collision-grid{
+    display:grid;grid-template-columns:1fr 1px 1fr;gap:56px;align-items:start;
+  }
+
+  .story-collision-divider{
+    width:1px;background:var(--hair-2);align-self:stretch;
+  }
+
+  .story-collision-col{
+    .name{
+      font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+      letter-spacing:.12em;text-transform:uppercase;color:var(--copper);
+      display:block;margin-bottom:18px;
     }
 
-    .story-origin-body{
+    p{
       font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:17px;
-      line-height:1.7;color:var(--ink-2);margin:0 0 16px;
+      line-height:1.7;color:var(--ink);margin:0;
 
-      &:last-child{margin-bottom:0}
       em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
         color:var(--copper);font-size:17px;font-weight:400}
     }
-
-    .story-origin-aside{margin:0}
-    .story-origin-quote{
-      font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;font-weight:400;
-      font-size:clamp(32px,3vw,44px);line-height:1.2;letter-spacing:-.02em;
-      color:var(--copper);margin:0;max-width:28ch;
-    }
   }
 
-  .story-founders{
-    .eb{margin-bottom:40px;display:flex}
-  }
-
-  .story-founder{
-    display:grid;grid-template-columns:220px 1fr;gap:56px;
-    padding-bottom:64px;margin-bottom:64px;border-bottom:1px solid var(--hair);
-
-    &:last-child{border-bottom:none;margin-bottom:0}
-  }
-
-  .story-founder-meta{
-    display:flex;flex-direction:column;gap:20px;
-
-    .photo{
-      width:128px;height:128px;border-radius:14px;
-      background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
-      color:#FFEDE8;font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:52px;
-      display:flex;align-items:center;justify-content:center;letter-spacing:-.01em;
-      border:1px solid var(--copper-a30);
-
-      &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));border-color:rgba(107,78,255,.3);color:#D8CEFF}
-      &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
-      &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));border-color:rgba(251,191,36,.32);color:#FFE8A8}
-    }
-  }
-
-  .story-founder-name{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:32px;
-    line-height:1.1;letter-spacing:-.015em;color:var(--ink);margin:0 0 4px;
-  }
-
-  .story-founder-role{
-    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
-    letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
-  }
-
-  .story-founder-body p{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:16.5px;
-    line-height:1.75;color:var(--ink-2);max-width:62ch;margin:0 0 18px;
-
-    &:last-child{margin-bottom:0}
-    em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
-      color:var(--copper);font-size:16.5px;font-weight:400}
-  }
-
-  .story-founder-stake{
-    font-style:italic;font-weight:400;font-size:17px;line-height:1.55;
-    color:var(--copper);margin:0 0 20px;padding-bottom:18px;
-    border-bottom:1px solid var(--copper-a08);max-width:56ch;
+  .story-collision-close{
+    margin-top:56px;font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:17px;line-height:1.7;color:var(--ink-2);max-width:64ch;
 
     em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
       color:var(--copper);font-size:17px;font-weight:400}
   }
 
+  /* Layer 3 — 2x2 founder grid with square photos + side-by-side bio */
+  .story-founders{
+    margin-bottom:64px;
+
+    .eb{margin-bottom:40px;display:flex}
+  }
+
+  .story-founders-list{
+    display:grid;grid-template-columns:1fr 1fr;gap:64px 56px;
+  }
+
+  .story-founder{
+    display:flex;gap:24px;align-items:flex-start;
+  }
+
+  .story-founder-meta{
+    flex-shrink:0;
+
+    .photo{
+      width:88px;height:88px;border-radius:0;
+      background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
+      color:#FFEDE8;font-family:'Geist Mono',monospace;font-weight:500;font-size:13px;
+      display:flex;align-items:center;justify-content:center;letter-spacing:.1em;
+      border:1px solid var(--hair-2);
+
+      &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));color:#D8CEFF}
+      &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));color:#B5F0E5}
+      &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));color:#FFE8A8}
+    }
+  }
+
+  .story-founder-body{flex:1;min-width:0}
+
+  .story-founder-name{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:500;font-size:22px;
+    line-height:1.2;letter-spacing:-.015em;color:var(--ink);margin:0 0 4px;
+  }
+
+  .story-founder-role{
+    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+    display:block;margin-bottom:16px;
+  }
+
+  .story-founder-body p{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
+    line-height:1.65;color:var(--ink-2);margin:0;
+
+    em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
+      color:var(--copper);font-size:14.5px;font-weight:400}
+  }
+
+  /* Close — 2 sentences + dual CTA, left-aligned */
   .story-close{
-    margin-top:96px;padding-top:56px;border-top:1px solid var(--hair-2);text-align:center;
+    margin-top:96px;padding-top:56px;border-top:1px solid var(--hair-2);
+    max-width:64ch;
 
     p{
       font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-      font-size:clamp(22px,2.4vw,28px);line-height:1.4;color:var(--ink);
-      max-width:60ch;margin:0 auto 24px;
+      font-size:19px;line-height:1.6;color:var(--ink);margin:0 0 32px;
 
       em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;color:var(--copper)}
-      &:last-of-type{margin-bottom:32px}
     }
+  }
+
+  .story-close-ctas{
+    display:flex;gap:24px;align-items:center;flex-wrap:wrap;
   }
 
   .story-close-link{
     font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;
     letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
     text-decoration:none;border-bottom:1px solid var(--copper-a35);
-    padding-bottom:4px;transition:border-color .18s,color .18s;
+    padding:6px 0;transition:border-color .18s,color .18s;
 
     &:hover{color:var(--ink);border-bottom-color:var(--ink)}
+    &:focus-visible{outline:2px solid var(--copper);outline-offset:4px;border-radius:1px}
   }
 
-  /* /our-story tablet — collapse the two-column story-origin grid */
-  @media (max-width:900px){
-    .story-origin .story-origin-grid{
-      grid-template-columns:1fr;gap:32px;
-    }
-    .story-origin .story-origin-quote{max-width:32ch}
+  .story-close-link--secondary{
+    color:var(--ink-2);border-bottom-color:var(--hair-2);
+
+    &:hover{color:var(--ink);border-bottom-color:var(--ink)}
+    &:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
   }
 
-  /* /our-story mobile */
+  /* /our-story mobile (Decision 2: 2x2 stays to 768px, then 1-col) */
   @media (max-width:768px){
     .story{padding:20px 22px;margin-bottom:80px}
     .story-intro{padding-bottom:40px;margin-bottom:48px}
-    .story-origin{padding:24px 22px;margin-bottom:32px}
-    .story-origin:last-of-type{margin-bottom:56px}
-    .story-origin .story-origin-grid{grid-template-columns:1fr;gap:28px}
-    .story-origin .story-origin-quote{font-size:clamp(22px,5.5vw,28px)}
-    .story-founder{
-      grid-template-columns:1fr;gap:24px;padding-bottom:40px;margin-bottom:40px;
-    }
-    .story-founder-meta{flex-direction:row;align-items:center;gap:16px}
-    .story-founder-meta .photo{width:72px;height:72px;font-size:28px}
-    .story-founder-stake{font-size:16px;padding-bottom:16px;margin-bottom:18px}
+    .story-hero-quote{font-size:clamp(32px,8vw,48px);max-width:none}
+
+    .story-collision{padding-bottom:56px;margin-bottom:56px}
+    .story-collision-grid{grid-template-columns:1fr;gap:40px}
+    .story-collision-divider{width:auto;height:1px;align-self:auto}
+    .story-collision-close{margin-top:40px}
+
+    .story-founders-list{grid-template-columns:1fr;gap:48px}
+    .story-founder-meta .photo{width:72px;height:72px;font-size:12px}
+
     .story-close{margin-top:64px;padding-top:40px}
+    .story-close-ctas{gap:16px}
   }
 
   /* ═══════════ Investor page — mobile overrides ═══════════ */
