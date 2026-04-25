@@ -28,10 +28,11 @@ export const FOUNDERS: Founder[] = [
     ),
     longBio: (
       <>
-        Five founding-AE/BD seats in four years —{' '}
-        <em>Dora, Sequence, Treasure, Nijta, Viggle</em> (a16z). Ran the
-        HubSpot→Monday CRM migration at Sequence. MBET, Waterloo. Pre-sales:
-        led MUFG HK&rsquo;s first Panda Bond issuance.
+        Four founding-AE/BD seats in four years —{' '}
+        <em>Sequence, Treasure, Nijta, Viggle</em> (a16z). Same handoff
+        failure on every team. Ran the HubSpot→Monday CRM migration at
+        Sequence. MBET, Waterloo. Earlier: MUFG HK, led their first Panda
+        Bond issuance.
       </>
     ),
   },

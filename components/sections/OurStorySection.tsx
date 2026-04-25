@@ -4,23 +4,22 @@ import { CALENDAR_URL, PILOT_FORM_ANCHOR } from '@/lib/links';
 export function OurStorySection() {
   return (
     <section className="story">
-      {/* Layer 1 — Hero buyer-quote */}
+      {/* Layer 1 — Hero: the founding observation */}
       <div className="story-intro">
         <span className="eb">Our story</span>
         <blockquote className="story-hero-quote">
-          <span className="open-quote">&ldquo;</span>I avoid recording my calls
-          because people tense up.&rdquo;
+          Salespeople record every call. Nobody rewatches the transcripts.
         </blockquote>
         <div className="story-hero-attribution">
-          Senior relationship manager, fintech &middot; January 2026
+          Said in a Toronto office &middot; 2024
         </div>
         <p className="story-hero-body">
-          She was explaining why her team&rsquo;s account history lives in her
-          head. 40&ndash;50% of her customers visibly annoyed when asked to
-          repeat themselves. <em>Every B2B sales org has this person.</em>{' '}
-          Salency is the structured account memory layer for the conversations
-          that never make it into the CRM. Two people on opposite sides of the
-          same business spotted it before the tooling existed.
+          Thousands of pain points die in files no one opens.{' '}
+          <em>
+            The customer raises five per call. The rep on the call catches
+            three. The rep who inherits sees zero.
+          </em>{' '}
+          Two people on opposite sides of the same business spotted it first.
         </p>
       </div>
 
@@ -31,6 +30,24 @@ export function OurStorySection() {
         </span>
         <div className="story-collision-grid">
           <div className="story-collision-col">
+            <span className="name">
+              Nikki &middot; Adaptavist, 3 years in
+            </span>
+            <p>
+              She heard the line first. Three years running operational
+              reporting at Adaptavist Group across HubSpot/Snowflake/DBT,
+              she&rsquo;d been watching a version of the same failure from
+              the analyst side &mdash; documentation out of date the week it
+              ships, real context living in Slack threads no one reads. When
+              her coworker said it out loud, she recognized the seam.{' '}
+              <em>
+                If the evidence lives in conversations, why is a human still
+                writing the doc?
+              </em>
+            </p>
+          </div>
+          <div className="story-collision-divider" aria-hidden="true" />
+          <div className="story-collision-col">
             <span className="name">Howard &middot; Sequence, late 2024</span>
             <p>
               First onboarding call for a new web3 game-studio customer at
@@ -38,40 +55,24 @@ export function OurStorySection() {
               <em>&ldquo;I already told your colleague this&rdquo;</em> three
               times. The rep who closed the deal was two desks away. Nobody
               had asked him to do a handover. The CRM had a stage field and a
-              one-line note. Howard had stopped thinking of that as a behavior
-              problem months earlier.{' '}
+              one-line note.
+            </p>
+            <p>
+              Howard had stopped thinking of that as a behavior problem months
+              earlier. When Nikki brought him the line, he already knew she
+              was right.{' '}
               <em>
                 Behavior doesn&rsquo;t fail at that scale. Infrastructure
                 does.
               </em>
             </p>
           </div>
-          <div className="story-collision-divider" aria-hidden="true" />
-          <div className="story-collision-col">
-            <span className="name">
-              Nikki &middot; Adaptavist Group, three years in
-            </span>
-            <p>
-              A coworker said it in passing &mdash; salespeople record every
-              call, but nobody rewatches the transcripts. One deal closes; a
-              thousand pain points die in a file no one opens. Nikki is a data
-              analyst at Adaptavist Group, three years running operational
-              reporting across HubSpot/Snowflake/DBT. She&rsquo;d been
-              watching a version of the same failure on her own side of the
-              business. She recognized the seam the moment her coworker named
-              it.{' '}
-              <em>
-                If the evidence lives in conversations, why is a human still
-                writing the doc?
-              </em>
-            </p>
-          </div>
         </div>
         <p className="story-collision-close">
-          Until 2024 nobody could read the evidence. By late 2024 they could.{' '}
+          Until 2024 the evidence existed. Nobody could read it at scale. By
+          2024 they could. Two more years showed which shapes failed.{' '}
           <em>
-            That&rsquo;s the beat that turned a workplace observation into a
-            company.
+            That&rsquo;s what turned a workplace observation into a company.
           </em>
         </p>
       </div>

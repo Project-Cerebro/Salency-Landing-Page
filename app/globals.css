@@ -1663,6 +1663,7 @@ html {
   .story-hero-body{
     font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;
     line-height:1.7;color:var(--ink-2);max-width:62ch;margin:0;
+    text-wrap:pretty;
 
     em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
       color:var(--copper);font-size:18px;font-weight:400}
@@ -1696,6 +1697,8 @@ html {
 
       em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
         color:var(--copper);font-size:17px;font-weight:400}
+
+      &+p{margin-top:18px}
     }
   }
 
