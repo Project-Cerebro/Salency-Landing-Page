@@ -1,5 +1,5 @@
 import { FOUNDERS } from '@/lib/founders';
-import { CALENDAR_URL, PILOT_FORM_ANCHOR } from '@/lib/links';
+import { FOUNDERS_EMAIL, PILOT_FORM_ANCHOR } from '@/lib/links';
 
 export function OurStorySection() {
   return (
@@ -98,33 +98,23 @@ export function OurStorySection() {
         </div>
       </div>
 
-      {/* Close — 2 sentences + dual CTA */}
+      {/* Close — universal body + single primary CTA + subtle email line */}
       <div className="story-close">
         <p>
           We&rsquo;re building the layer that remembers what your customers
           actually said.{' '}
-          <em>
-            If you run a B2B sales team and that sentence describes a problem
-            you have
-          </em>
-          , we&rsquo;d like to talk.
+          <em>If that&rsquo;s a problem you&rsquo;ve watched fail</em>,
+          we&rsquo;d like to talk.
         </p>
         <div className="story-close-ctas">
-          <a
-            href={CALENDAR_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="story-close-link"
-          >
-            Take a 25-min call &rarr;
-          </a>
-          <a
-            href={PILOT_FORM_ANCHOR}
-            className="story-close-link story-close-link--secondary"
-          >
+          <a href={PILOT_FORM_ANCHOR} className="story-close-link">
             Request early access &rarr;
           </a>
         </div>
+        <p className="story-close-email">
+          Or email us at{' '}
+          <a href={`mailto:${FOUNDERS_EMAIL}`}>{FOUNDERS_EMAIL}</a>
+        </p>
       </div>
     </section>
   );
