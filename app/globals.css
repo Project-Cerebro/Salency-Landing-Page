@@ -1635,11 +1635,11 @@ html {
 
     .eb{margin-bottom:28px;display:flex}
     h1{
-      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
       font-size:clamp(40px,4.8vw,64px);line-height:1.06;letter-spacing:-.025em;
       color:var(--ink);margin:0 0 28px;max-width:22ch;text-wrap:balance;
 
-      em{font-style:italic;color:var(--copper)}
+      em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;color:var(--copper)}
     }
     .lede{
       font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;
@@ -1649,16 +1649,31 @@ html {
 
   .story-origin{
     padding:32px 40px;border-left:2px solid var(--copper-a40);
-    background:var(--copper-a03);margin-bottom:96px;max-width:68ch;
+    margin-bottom:48px;
 
-    .eb{margin-bottom:18px;display:flex}
+    &:last-of-type{margin-bottom:96px}
+
+    .eb{margin-bottom:22px;display:flex}
+
+    .story-origin-grid{
+      display:grid;grid-template-columns:minmax(0,60ch) minmax(0,30ch);
+      gap:72px;align-items:center;max-width:1080px;
+    }
+
     .story-origin-body{
       font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:17px;
       line-height:1.7;color:var(--ink-2);margin:0 0 16px;
 
       &:last-child{margin-bottom:0}
-      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;
-        color:var(--copper);font-size:18px;font-weight:400}
+      em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
+        color:var(--copper);font-size:17px;font-weight:400}
+    }
+
+    .story-origin-aside{margin:0}
+    .story-origin-quote{
+      font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;font-weight:400;
+      font-size:clamp(32px,3vw,44px);line-height:1.2;letter-spacing:-.02em;
+      color:var(--copper);margin:0;max-width:28ch;
     }
   }
 
@@ -1704,8 +1719,17 @@ html {
     line-height:1.75;color:var(--ink-2);max-width:62ch;margin:0 0 18px;
 
     &:last-child{margin-bottom:0}
-    em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;
-      color:var(--copper);font-size:17.5px;font-weight:400}
+    em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
+      color:var(--copper);font-size:16.5px;font-weight:400}
+  }
+
+  .story-founder-stake{
+    font-style:italic;font-weight:400;font-size:17px;line-height:1.55;
+    color:var(--copper);margin:0 0 20px;padding-bottom:18px;
+    border-bottom:1px solid var(--copper-a08);max-width:56ch;
+
+    em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
+      color:var(--copper);font-size:17px;font-weight:400}
   }
 
   .story-close{
@@ -1714,9 +1738,10 @@ html {
     p{
       font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
       font-size:clamp(22px,2.4vw,28px);line-height:1.4;color:var(--ink);
-      max-width:48ch;margin:0 auto 28px;
+      max-width:60ch;margin:0 auto 24px;
 
-      em{font-style:italic;color:var(--copper)}
+      em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;color:var(--copper)}
+      &:last-of-type{margin-bottom:32px}
     }
   }
 
@@ -1729,16 +1754,28 @@ html {
     &:hover{color:var(--ink);border-bottom-color:var(--ink)}
   }
 
+  /* /our-story tablet — collapse the two-column story-origin grid */
+  @media (max-width:900px){
+    .story-origin .story-origin-grid{
+      grid-template-columns:1fr;gap:32px;
+    }
+    .story-origin .story-origin-quote{max-width:32ch}
+  }
+
   /* /our-story mobile */
   @media (max-width:768px){
     .story{padding:20px 22px;margin-bottom:80px}
     .story-intro{padding-bottom:40px;margin-bottom:48px}
-    .story-origin{padding:24px 22px;margin-bottom:56px}
+    .story-origin{padding:24px 22px;margin-bottom:32px}
+    .story-origin:last-of-type{margin-bottom:56px}
+    .story-origin .story-origin-grid{grid-template-columns:1fr;gap:28px}
+    .story-origin .story-origin-quote{font-size:clamp(22px,5.5vw,28px)}
     .story-founder{
       grid-template-columns:1fr;gap:24px;padding-bottom:40px;margin-bottom:40px;
     }
     .story-founder-meta{flex-direction:row;align-items:center;gap:16px}
     .story-founder-meta .photo{width:72px;height:72px;font-size:28px}
+    .story-founder-stake{font-size:16px;padding-bottom:16px;margin-bottom:18px}
     .story-close{margin-top:64px;padding-top:40px}
   }
 
