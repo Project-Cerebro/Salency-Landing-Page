@@ -29,6 +29,12 @@ export function NotForYouSection() {
                 new rep on inherited book, expansion team taking over.
               </div>
             </li>
+            <li>
+              <div className="notfor-body">
+                <strong>Your product has multiple features.</strong>{' '}
+                Pain-product mapping needs a catalog with options.
+              </div>
+            </li>
           </ul>
         </div>
         <div className="notfor-col">
@@ -53,12 +59,18 @@ export function NotForYouSection() {
                 it all.
               </div>
             </li>
+            <li>
+              <div className="notfor-body">
+                <strong>Your product is a single feature.</strong> Nothing to
+                map customer pain against.
+              </div>
+            </li>
           </ul>
         </div>
       </div>
       <p className="notfor-foot">
-        Salency sits on top of your CRM, not in place of it. It&rsquo;s the
-        layer between the transcript and the rep who inherits the account.
+        Salency is the layer between the transcript and the rep who inherits
+        the account.
       </p>
     </section>
   );
