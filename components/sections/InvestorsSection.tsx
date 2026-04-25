@@ -57,7 +57,7 @@ export function InvestorsSection() {
               </p>
             </div>
             <p className="platform-moat-bridge">
-              The wedge is the <em>shape of the data.</em> Contradiction pairs,
+              Vs CRM, the wedge is the <em>shape of the data.</em> Contradiction pairs,
               pain evolution over time, confidence-ranked pain → product
               matches, cross-account pattern graphs. None of these fit a CRM
               row. Flatten any of them into a field and you kill the thing
@@ -78,6 +78,16 @@ export function InvestorsSection() {
                 </em>
               </p>
             </div>
+            <figure className="platform-evidence">
+              <p className="stat">
+                <em>40–50%</em> of customers get visibly annoyed when asked to
+                repeat themselves; <em>20–30%</em> explicitly express
+                frustration.
+              </p>
+              <figcaption className="src">
+                CS director, crypto/fintech Series B · January 2026
+              </figcaption>
+            </figure>
           </section>
 
           <section className="inv-tam" id="tam">
@@ -222,17 +232,14 @@ export function InvestorsSection() {
               </h2>
             </div>
 
-            <div className="team-compact">
+            <div className="team-strip">
               {FOUNDERS.map((founder) => (
-                <div key={founder.id} className="team-compact-row">
+                <div key={founder.id} className="strip-cell">
                   <div className={`photo ${founder.photoVariant}`.trim()}>
                     {founder.initials}
                   </div>
-                  <div className="team-compact-body">
-                    <span className="name">{founder.name}</span>
-                    <span className="role">{founder.role}</span>
-                    <p className="line">{founder.shortBio}</p>
-                  </div>
+                  <span className="name">{founder.name}</span>
+                  <span className="role">{founder.role}</span>
                 </div>
               ))}
             </div>
@@ -323,7 +330,9 @@ export function InvestorsSection() {
                 Every LLM commoditizes extraction. What doesn&rsquo;t
                 commoditize is the <em>customer-built graph</em> of pains,
                 products, and contradictions — and that graph compounds per
-                customer, per call. The moat is the data shape, not the model.
+                account, with every call. The moat is the{' '}
+                <em>specific join</em> — pain → product → contradiction across
+                time — wired into the PM tools where roadmaps already live.
               </p>
               <div className="thesis-close">
                 Salency owns that layer. The longer a team runs it,{' '}

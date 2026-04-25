@@ -635,7 +635,7 @@ html {
     display:inline-flex;align-items:center;gap:8px;cursor:pointer;
     font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;font-size:14px;
     border-radius:8px;border:0;transition:all .18s ease;
-    padding:10px 18px;white-space:nowrap;
+    padding:10px 18px;white-space:nowrap;min-height:44px;
   }
   .btn-primary{
     background:linear-gradient(180deg, #FE9544 0%, var(--copper) 50%, var(--copper-deep) 100%);
@@ -1322,6 +1322,29 @@ html {
     }
   }
 
+  /* Platform evidence — cited demand quote. Visually distinct from
+     .primitive (which carries moat claims) so the rhetorical hierarchy
+     reads: moat callouts > supporting evidence. Left-rule citation, no
+     bordered box. */
+  .platform .platform-evidence{
+    margin-top:44px;padding:6px 0 6px 22px;max-width:62ch;
+    border-left:2px solid var(--copper-a18);
+
+    .stat{
+      font-family:var(--font-display), 'Instrument Serif', serif;
+      font-size:24px;line-height:1.4;color:var(--ink);font-style:italic;
+      margin:0;font-weight:400;
+
+      em{color:var(--copper);font-style:italic;font-weight:400}
+    }
+    .src{
+      display:block;margin-top:10px;
+      font-family:'Geist Mono',monospace;font-size:11px;
+      letter-spacing:.12em;text-transform:uppercase;
+      color:var(--ink-3);font-style:normal;
+    }
+  }
+
   /* Platform moat bridge — separates the "what we are" block from the
      "why the shape defends" block inside the folded Platform section.
      Mirrors .platform p styling but adds breathing room above. */
@@ -1486,21 +1509,22 @@ html {
     }
   }
 
-  /* Compact team row on /investors — three rows, each is photo + name +
-     role + one-line bet. Full bios live on /our-story (linked below). */
-  .team-compact{
-    border-top:1px solid var(--hair-2);margin-bottom:24px;
-  }
-  .team-compact-row{
-    display:grid;grid-template-columns:72px 1fr;gap:24px;
-    padding:20px 0;border-bottom:1px solid var(--hair);align-items:center;
+  /* Team strip on /investors — single horizontal row, 4 cells (photo +
+     name + role only). Full bios + founding story live on /our-story
+     (linked below). Strip preserves the deck-shape "Why this team" beat
+     without duplicating shortBios that already render on /our-story. */
+  .team-strip{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
+    border-top:1px solid var(--hair-2);
+    padding-top:32px;margin-bottom:28px;
 
-    &:last-child{border-bottom:none}
-
+    .strip-cell{
+      display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+    }
     .photo{
-      width:72px;height:72px;border-radius:10px;
+      width:56px;height:56px;border-radius:8px;
       background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
-      color:#FFEDE8;font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:28px;
+      color:#FFEDE8;font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
       display:flex;align-items:center;justify-content:center;letter-spacing:-.01em;
       border:1px solid var(--copper-a30);
 
@@ -1508,26 +1532,18 @@ html {
       &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
       &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));border-color:rgba(251,191,36,.32);color:#FFE8A8}
     }
-  }
-  .team-compact-body{
-    display:grid;grid-template-columns:minmax(180px,220px) auto 1fr;gap:20px;align-items:baseline;
-
     .name{
-      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:500;font-size:20px;color:var(--ink);
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:500;font-size:18px;color:var(--ink);
     }
     .role{
       font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
       letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
     }
-    .line{
-      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
-      line-height:1.55;color:var(--ink-2);margin:0;
-    }
   }
   .team-compact-link{
-    display:inline-block;font-family:'Geist Mono',monospace;font-size:12px;
+    display:inline-block;font-family:'Geist Mono',monospace;font-size:13px;
     letter-spacing:.12em;color:var(--copper);text-decoration:none;
-    border-bottom:1px solid var(--copper-a35);padding-bottom:2px;
+    border-bottom:1px solid var(--copper-a35);padding:12px 0 10px;
     transition:border-color .18s,color .18s;
 
     &:hover{color:var(--ink);border-bottom-color:var(--ink)}
@@ -1880,21 +1896,12 @@ html {
       gap: 12px;
       margin-bottom: 40px;
     }
-    .team-compact-row {
-      /* Narrow screens: shrink the photo cell and stack name/role/line. */
-      grid-template-columns: 56px 1fr;
-      gap: 14px;
-      padding: 16px 0;
-
-      .photo {
-        width: 56px;
-        height: 56px;
-        font-size: 22px;
-      }
-    }
-    .team-compact-body {
-      grid-template-columns: 1fr;
-      gap: 4px;
+    .team-strip {
+      /* Narrow screens: 2x2 grid keeps faces large enough to recognize
+         while halving vertical real estate vs four stacked rows. */
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      padding-top: 24px;
     }
     .thesis-card {
       /* 56/64 padding was the desktop editorial feel — at mobile that
