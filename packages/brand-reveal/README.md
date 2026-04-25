@@ -60,6 +60,45 @@ export default function RootLayout({ children }) {
 
 Copy `public/salency-mark.svg` from the landing-page repo alongside this package (or pass your own via `markSrc`).
 
+### Play on first login (consumer-triggered)
+
+When you want the splash to play once after a user logs in (not on every fresh tab), set a flag in your login-success handler and read it in your authenticated layout. `forcePlay` bypasses the sessionStorage gate so it fires every time you mount it.
+
+```tsx
+// after successful login, before redirect
+sessionStorage.setItem('salency:show-login-splash', '1');
+router.push('/dashboard');
+```
+
+```tsx
+// app/(authed)/layout.tsx
+'use client';
+
+import { useEffect, useState } from 'react';
+import { BrandRevealSplash } from '@salency/brand-reveal';
+import '@salency/brand-reveal/loading-screen.css';
+
+export default function AuthedLayout({ children }: { children: React.ReactNode }) {
+  const [showSplash, setShowSplash] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('salency:show-login-splash') === '1') {
+      sessionStorage.removeItem('salency:show-login-splash');
+      setShowSplash(true);
+    }
+  }, []);
+
+  return (
+    <>
+      {showSplash && (
+        <BrandRevealSplash forcePlay onComplete={() => setShowSplash(false)} />
+      )}
+      {children}
+    </>
+  );
+}
+```
+
 ### Logo lockup (manual composition)
 
 If you want the logo + wordmark without the full splash chrome:
@@ -93,6 +132,8 @@ The `.brand-lockup*` classes are defined in `loading-screen.css`.
 | `markSrc`      | `string \| null`           | `/salency-mark.svg`                                        | SVG mark path. `null` = wordmark only, no logo. |
 | `mission`      | `React.ReactNode \| null`  | `Every call becomes memory. / Every role inherits it.`     | Two-line blurb below the wordmark. `null` = hide. |
 | `loadingLabel` | `string \| null`           | `Loading`                                                  | Uppercase label beneath the rail. `null` = hide. |
+| `forcePlay`    | `boolean`                  | `false`                                                    | Bypass the sessionStorage gate and play immediately on mount. Use when the consumer controls the trigger (e.g. on first login). Still respects `prefers-reduced-motion`. |
+| `onComplete`   | `() => void`               | —                                                          | Fires after the fade-out completes and the splash unmounts. Use to clear a trigger flag or unmount a wrapper. |
 
 ## Replay rule
 

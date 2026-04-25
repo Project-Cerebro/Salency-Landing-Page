@@ -36,6 +36,18 @@ export interface BrandRevealSplashProps {
    * Default: `Loading`.
    */
   loadingLabel?: string | null;
+  /**
+   * Bypass the sessionStorage gate and play immediately on mount.
+   * Use when the consumer controls the trigger (e.g. on first login).
+   * Still respects `prefers-reduced-motion`.
+   * Default: `false`.
+   */
+  forcePlay?: boolean;
+  /**
+   * Fired after the fade-out completes and the splash unmounts.
+   * Use to clear the consumer's trigger flag or unmount a wrapper.
+   */
+  onComplete?: () => void;
 }
 
 const DEFAULT_STORAGE_KEY = 'salency_splash_shown';
@@ -67,6 +79,8 @@ export function BrandRevealSplash({
   markSrc = '/salency-mark.svg',
   mission = DEFAULT_MISSION,
   loadingLabel = 'Loading',
+  forcePlay = false,
+  onComplete,
 }: BrandRevealSplashProps = {}) {
   const [mounted, setMounted] = useState(false);
   const [hiding, setHiding] = useState(false);
@@ -77,27 +91,36 @@ export function BrandRevealSplash({
     ).matches;
     if (reducedMotion) {
       sessionStorage.setItem(storageKey, '1');
+      onComplete?.();
       return;
     }
 
-    const navEntry = performance.getEntriesByType(
-      'navigation',
-    )[0] as PerformanceNavigationTiming | undefined;
-    const isReload = navEntry?.type === 'reload';
-    const alreadyShown = sessionStorage.getItem(storageKey) === '1';
+    if (!forcePlay) {
+      const navEntry = performance.getEntriesByType(
+        'navigation',
+      )[0] as PerformanceNavigationTiming | undefined;
+      const isReload = navEntry?.type === 'reload';
+      const alreadyShown = sessionStorage.getItem(storageKey) === '1';
 
-    if (alreadyShown && !isReload) return;
+      if (alreadyShown && !isReload) return;
+    }
 
     sessionStorage.setItem(storageKey, '1');
     setMounted(true);
 
-    const hideTimer = window.setTimeout(() => {
+    const fadeTimer = window.setTimeout(() => {
       setHiding(true);
-      window.setTimeout(() => setMounted(false), 400);
     }, durationMs);
+    const unmountTimer = window.setTimeout(() => {
+      setMounted(false);
+      onComplete?.();
+    }, durationMs + 400);
 
-    return () => window.clearTimeout(hideTimer);
-  }, [storageKey, durationMs]);
+    return () => {
+      window.clearTimeout(fadeTimer);
+      window.clearTimeout(unmountTimer);
+    };
+  }, [storageKey, durationMs, forcePlay, onComplete]);
 
   if (!mounted) return null;
 
