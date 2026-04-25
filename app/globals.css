@@ -2957,17 +2957,6 @@ header button:focus:not(:focus-visible){
 .notfor-list--paired li { grid-template-columns: 1fr; gap: 0; }
 @media (max-width: 768px) { .notfor-grid { grid-template-columns: 1fr; gap: 40px; } }
 
-/* 09 · Anti-hype */
-.antihype { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
-.antihype-head { margin-bottom: 40px; }
-.antihype-head h2 { font-family: var(--font-display); font-size: clamp(30px, 3.2vw, 40px); line-height: 1.1; letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 16px; max-width: 28ch; }
-.antihype-head h2 em { font-style: italic; color: var(--copper); }
-.antihype-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--hair-2); }
-.antihype-list li { display: grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--hair); align-items: baseline; }
-.antihype-list .antihype-idx { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; color: var(--ink-3); }
-.antihype-list .antihype-body { font-size: 15.5px; line-height: 1.65; color: var(--ink-2); }
-.antihype-list .antihype-body strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; }
-
 /* Pilot CTA */
 .why-cta { max-width: var(--page-max); margin: 96px auto 120px; padding: 0 40px; text-align: center; }
 .why-cta .eb { letter-spacing: .2em; margin-bottom: 22px; display: block; }
