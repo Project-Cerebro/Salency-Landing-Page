@@ -22,13 +22,13 @@ export const FOUNDERS: Founder[] = [
     photoVariant: '',
     shortBio: (
       <>
-        Five founding-AE / BD seats in four years. Ran the HubSpot→Monday CRM
+        Four founding-AE / BD seats in five years. Ran the HubSpot→Monday CRM
         migration at Sequence.
       </>
     ),
     longBio: (
       <>
-        Four founding-AE/BD seats in four years —{' '}
+        Four founding-AE/BD seats in five years —{' '}
         <em>Sequence, Treasure, Nijta, Viggle</em> (a16z). Same handoff
         failure on every team. Ran the HubSpot→Monday CRM migration at
         Sequence. MBET, Waterloo. Earlier: MUFG HK, led their first Panda
