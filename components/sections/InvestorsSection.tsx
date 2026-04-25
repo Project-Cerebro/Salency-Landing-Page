@@ -333,7 +333,8 @@ export function InvestorsSection() {
                 Every LLM commoditizes extraction. What doesn&rsquo;t
                 commoditize is the <em>customer-built graph</em> of pains,
                 products, and contradictions — and that graph compounds per
-                customer, per call. The moat is the data shape, not the model.
+                account, with every call. The moat is the data shape, not the
+                model.
               </p>
               <div className="thesis-close">
                 Salency owns that layer. The longer a team runs it,{' '}

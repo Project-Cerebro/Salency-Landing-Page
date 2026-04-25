@@ -2,10 +2,10 @@ export function CompoundsSection() {
   return (
     <section className="compounds" id="compounds">
       <div className="compounds-head">
-        <span className="eb">The switching cost</span>
+        <span className="eb">What compounds</span>
         <h2>
           Month one is the handoff.{' '}
-          <em>Month twelve is the moat.</em>
+          <em>Month twelve is the asset.</em>
         </h2>
       </div>
 
@@ -37,7 +37,7 @@ export function CompoundsSection() {
         </div>
         <div className="compounds-step">
           <span className="compounds-marker">M12</span>
-          <h4>The moat is measured in quarters</h4>
+          <h4>A year of tribal knowledge, structured</h4>
           <p>
             By year one, ripping Salency out means losing what nobody wrote
             down. That&rsquo;s the design &mdash; not a promise, a structural
