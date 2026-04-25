@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FOUNDERS } from '@/lib/founders';
 
 export function InvestorsSection() {
   return (
@@ -200,50 +201,18 @@ export function InvestorsSection() {
             </div>
 
             <div className="team-compact">
-              <div className="team-compact-row">
-                <div className="photo">HT</div>
-                <div className="team-compact-body">
-                  <span className="name">Howard Tam</span>
-                  <span className="role">Co-founder &amp; CEO</span>
-                  <p className="line">
-                    Five founding-AE / BD seats in four years. Ran the
-                    HubSpot→Monday CRM migration at Sequence.
-                  </p>
+              {FOUNDERS.map((founder) => (
+                <div key={founder.id} className="team-compact-row">
+                  <div className={`photo ${founder.photoVariant}`.trim()}>
+                    {founder.initials}
+                  </div>
+                  <div className="team-compact-body">
+                    <span className="name">{founder.name}</span>
+                    <span className="role">{founder.role}</span>
+                    <p className="line">{founder.shortBio}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="team-compact-row">
-                <div className="photo photo--violet">NI</div>
-                <div className="team-compact-body">
-                  <span className="name">Nikki Ip</span>
-                  <span className="role">Co-founder &amp; Product</span>
-                  <p className="line">
-                    Three years as a data analyst in B2B SaaS. Operations
-                    roles across banking and crypto before that.
-                  </p>
-                </div>
-              </div>
-              <div className="team-compact-row">
-                <div className="photo photo--teal">BO</div>
-                <div className="team-compact-body">
-                  <span className="name">Babajide Okusanya</span>
-                  <span className="role">Founding Engineer</span>
-                  <p className="line">
-                    Scaled MakersValley from 0 to $2M ARR (6.5y, NYC). Ships
-                    provenance-tracked AI context systems.
-                  </p>
-                </div>
-              </div>
-              <div className="team-compact-row">
-                <div className="photo photo--amber">SG</div>
-                <div className="team-compact-body">
-                  <span className="name">Shristi Gartaula</span>
-                  <span className="role">Founding Designer</span>
-                  <p className="line">
-                    Shipped Salency&rsquo;s V1. Five years enterprise B2B
-                    design — Index Exchange, Myplanet, StatysTech.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
 
             <Link href="/our-story" className="team-compact-link">
