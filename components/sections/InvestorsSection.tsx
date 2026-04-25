@@ -232,17 +232,14 @@ export function InvestorsSection() {
               </h2>
             </div>
 
-            <div className="team-compact">
+            <div className="team-strip">
               {FOUNDERS.map((founder) => (
-                <div key={founder.id} className="team-compact-row">
+                <div key={founder.id} className="strip-cell">
                   <div className={`photo ${founder.photoVariant}`.trim()}>
                     {founder.initials}
                   </div>
-                  <div className="team-compact-body">
-                    <span className="name">{founder.name}</span>
-                    <span className="role">{founder.role}</span>
-                    <p className="line">{founder.shortBio}</p>
-                  </div>
+                  <span className="name">{founder.name}</span>
+                  <span className="role">{founder.role}</span>
                 </div>
               ))}
             </div>
