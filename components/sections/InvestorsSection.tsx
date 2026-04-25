@@ -57,7 +57,7 @@ export function InvestorsSection() {
               </p>
             </div>
             <p className="platform-moat-bridge">
-              The wedge is the <em>shape of the data.</em> Contradiction pairs,
+              Vs CRM, the wedge is the <em>shape of the data.</em> Contradiction pairs,
               pain evolution over time, confidence-ranked pain → product
               matches, cross-account pattern graphs. None of these fit a CRM
               row. Flatten any of them into a field and you kill the thing
