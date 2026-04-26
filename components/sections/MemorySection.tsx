@@ -333,7 +333,7 @@ export function MemorySection() {
           </table>
           <p className="mem-compare-foot">
             Flatten the graph and you kill the thing.{' '}
-            <Link href="/investors#thesis">Read the full thesis &rarr;</Link>
+            <Link href="/investors#thesis">Read the full institutional memory thesis &rarr;</Link>
           </p>
         </section>
       </ScrollReveal>
