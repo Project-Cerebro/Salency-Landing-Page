@@ -61,6 +61,7 @@ export function MarketingHeader() {
     <header>
       <div className="nav">
         <Link className="brand" href="/">
+          {/* eslint-disable-next-line @next/next/no-img-element -- SVG mark, no next/image optimization needed */}
           <img src="/salency-mark.svg" alt="" />
           <span className="name">Salency</span>
         </Link>
