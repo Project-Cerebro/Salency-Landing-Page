@@ -1182,7 +1182,7 @@ html {
     display:block;font-family:var(--font-display), 'Instrument Serif', serif;font-size:22px;font-weight:400;
     letter-spacing:-.01em;color:var(--ink);text-transform:none;margin-top:4px;
   }
-  .notetaker-table thead th.col-g .brand{
+  .notetaker-table thead th.col-n .brand{
     display:block;font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;font-size:18px;
     color:var(--ink-2);text-transform:none;letter-spacing:-.005em;margin-top:4px;
   }
@@ -1197,7 +1197,7 @@ html {
   }
   .notetaker-table tbody td.col-s{background:var(--copper-a03);color:var(--ink)}
   .notetaker-table tbody td.col-s strong{color:var(--copper);font-weight:500}
-  .notetaker-table tbody td.col-g{color:var(--ink-3)}
+  .notetaker-table tbody td.col-n{color:var(--ink-3)}
   .notetaker-table .icon{
     display:inline-block;margin-right:8px;font-family:'Geist Mono',monospace;
     font-size:11px;width:16px;text-align:center;
@@ -1206,7 +1206,7 @@ html {
      bright ink so it's visible against the copper-tinted cell; the
      column's copper-a03 background + bold strong is the signal. */
   .notetaker-table .col-s .icon{color:var(--ink-2)}
-  .notetaker-table .col-g .icon{color:var(--ink-4)}
+  .notetaker-table .col-n .icon{color:var(--ink-4)}
 
   /* Mobile: table → card-per-row. Row-level semantics stay intact,
      but each row becomes a bordered card with the dimension as a
@@ -1246,8 +1246,8 @@ html {
       padding-bottom: 10px;
       margin-bottom: 6px;
     }
-    .notetaker-table tbody td.col-g { background: transparent; }
-    .notetaker-table tbody td.col-g::before {
+    .notetaker-table tbody td.col-n { background: transparent; }
+    .notetaker-table tbody td.col-n::before {
       content: "Notetaker";
       display: block;
       font-family: 'Geist Mono', monospace;
@@ -3048,7 +3048,7 @@ header button:focus:not(:focus-visible){
 .compounds-step p { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
 .compounds-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hair); font-size: 15px; color: var(--ink-3); max-width: 64ch; }
 
-/* Gong table takeaway */
+/* Notetaker comparison table takeaway */
 .notetaker-takeaway { margin-top: 28px; font-family: var(--font-display); font-size: 18px; line-height: 1.5; color: var(--ink); max-width: 60ch; }
 .notetaker-takeaway em { font-style: italic; color: var(--copper); }
 

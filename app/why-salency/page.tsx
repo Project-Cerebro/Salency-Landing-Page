@@ -4,7 +4,7 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 import { ThesisSection } from '@/components/sections/ThesisSection';
 import { ProblemSection } from '@/components/sections/ProblemSection';
 import { CompoundsSection } from '@/components/sections/CompoundsSection';
-import { GongSection } from '@/components/sections/GongSection';
+import { NotetakerSection } from '@/components/sections/NotetakerSection';
 import { NotForYouSection } from '@/components/sections/NotForYouSection';
 import { PilotCtaSection } from '@/components/sections/PilotCtaSection';
 import { SiteFooter } from '@/components/sections/SiteFooter';
@@ -16,10 +16,10 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'How is Salency different from Gong?',
+      name: 'How is Salency different from AI notetakers?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Gong records your calls. Salency solves what happens after — extracting customer pains, mapping them to your products, and retaining the structured context any rep or successor needs to keep the deal moving.',
+        text: 'AI notetakers record what was said. Salency solves what happens after — extracting customer pains, mapping them to your products, and retaining the structured context any rep or successor needs to keep the deal moving.',
       },
     },
     {
@@ -50,14 +50,14 @@ const faqSchema = {
 };
 
 export const metadata: Metadata = {
-  title: 'Salency vs Gong — what to do with call recordings · Salency',
+  title: 'Why Salency · Salency',
   description:
-    'Gong records your calls. Salency solves what happens after — extracting pains, mapping them to products, and retaining the context reps and successors actually need.',
+    'AI notetakers record what was said. Salency solves what happens after — extracting pains, mapping them to products, and retaining the context reps and successors actually need.',
   alternates: { canonical: '/why-salency' },
   openGraph: {
-    title: 'Salency vs Gong — what to do with call recordings',
+    title: 'Why Salency',
     description:
-      'Gong records your calls. Salency solves what happens after — institutional memory for revenue teams.',
+      'AI notetakers record what was said. Salency solves what happens after — institutional memory for revenue teams.',
     url: 'https://www.salency.ai/why-salency',
     type: 'website',
   },
@@ -70,7 +70,7 @@ export default function WhySalencyPage() {
       <MarketingHeader />
       <ThesisSection />
       <ScrollReveal><ProblemSection /></ScrollReveal>
-      <ScrollReveal><GongSection /></ScrollReveal>
+      <ScrollReveal><NotetakerSection /></ScrollReveal>
       <ScrollReveal><CompoundsSection /></ScrollReveal>
       <ScrollReveal><NotForYouSection /></ScrollReveal>
       <PilotCtaSection />
