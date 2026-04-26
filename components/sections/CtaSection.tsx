@@ -25,7 +25,7 @@ export function CtaSection() {
             Request pilot access →
           </button>
           <Link href="/investors#thesis" className="btn btn-ghost">
-            Read the institutional memory thesis
+            Read our thesis
           </Link>
         </div>
         <div className="fine">

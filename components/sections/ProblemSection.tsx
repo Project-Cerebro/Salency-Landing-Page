@@ -86,7 +86,7 @@ export function ProblemSection() {
           surfacing it the moment someone new picks up the relationship.
         </p>
         <Link href="/memory" className="link">
-          See how the memory layer works →
+          See our memory layer →
         </Link>
       </div>
     </section>
