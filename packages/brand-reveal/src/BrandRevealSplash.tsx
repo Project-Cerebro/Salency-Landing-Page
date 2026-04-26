@@ -89,6 +89,7 @@ export function BrandRevealSplash({
     if (alreadyShown && !isReload) return;
 
     sessionStorage.setItem(storageKey, '1');
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot mount; sessionStorage/performance gated, can't lazy-init
     setMounted(true);
 
     const hideTimer = window.setTimeout(() => {
@@ -110,6 +111,7 @@ export function BrandRevealSplash({
       <div className="loading-inner">
         <div className="brand-lockup">
           {markSrc && (
+            // eslint-disable-next-line @next/next/no-img-element -- portable package, can't depend on next/image
             <img
               className="brand-lockup-mark"
               src={markSrc}

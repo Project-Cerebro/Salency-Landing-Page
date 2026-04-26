@@ -180,6 +180,7 @@ export function HubSection() {
 
         <div className="hub-core">
           <div className="hub-core-brand">
+            {/* eslint-disable-next-line @next/next/no-img-element -- SVG mark, no next/image optimization needed */}
             <img className="hub-core-mark" src="/salency-mark.svg" alt="" />
             <span className="hub-core-name">Salency</span>
           </div>

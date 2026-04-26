@@ -57,6 +57,7 @@ export function BrandReveal({
     }
 
     if (forcePlay) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot mount; browser-API gated, can't lazy-init
       setShouldAnimate(true);
       return;
     }
