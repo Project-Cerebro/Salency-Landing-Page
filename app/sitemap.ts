@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const BASE_URL = 'https://salency.ai';
+const BASE_URL = 'https://www.salency.ai';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

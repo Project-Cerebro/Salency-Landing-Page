@@ -5,7 +5,7 @@ import { PilotModal } from "@/components/PilotModal";
 import { JsonLd } from "@/components/JsonLd";
 import "./globals.css";
 
-const SITE_URL = "https://salency.ai";
+const SITE_URL = "https://www.salency.ai";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -66,13 +66,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://salency.ai"),
+  metadataBase: new URL("https://www.salency.ai"),
   title: "Salency — AI that remembers every customer pain your sales reps forget",
   description: "Sales intelligence that turns call transcripts into structured context. Extract pains, map them to your products, and generate follow-ups — so reps stop losing deals to forgotten context.",
   openGraph: {
     title: "Salency — AI that remembers every customer pain your sales reps forget",
     description: "Sales intelligence that turns call transcripts into structured context. Extract pains, map them to your products, and generate follow-ups.",
-    url: "https://salency.ai",
+    url: "https://www.salency.ai",
     siteName: "Salency",
     images: [{ url: "/salency-mark.svg", alt: "Salency" }],
     type: "website",
