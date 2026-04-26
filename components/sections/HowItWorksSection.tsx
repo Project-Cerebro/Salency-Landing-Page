@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export function HowItWorksSection() {
   return (
     <section className="how" id="how-it-works">
@@ -78,7 +80,8 @@ export function HowItWorksSection() {
       <div className="how-foot">
         <span>
           Works with any transcript.<span className="sep">·</span>
-          Citations and confidence scores on every extraction.
+          Citations and confidence scores on every extraction.<span className="sep">·</span>
+          <Link href="/why-salency">See our take on Gong &rarr;</Link>
         </span>
       </div>
     </section>
