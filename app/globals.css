@@ -61,31 +61,6 @@ h6 {
   text-wrap: balance;
 }
 
-/* Background Effects */
-.bg-noise {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-.bg-mesh {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -2;
-  background:
-    radial-gradient(circle at 15% 50%, rgba(232, 146, 90, 0.05), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.03), transparent 20%);
-}
-
 /* Utilities */
 .glass-panel {
   background: rgba(255, 255, 255, 0.03);
@@ -128,33 +103,6 @@ h6 {
   animation-delay: 500ms;
 }
 
-/* Spotlight Effect */
-.spotlight-card {
-  position: relative;
-  overflow: hidden;
-}
-
-.spotlight-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
-      rgba(255, 255, 255, 0.06),
-      transparent 40%);
-  opacity: 0;
-  transition: opacity 0.5s;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.spotlight-card:hover::before {
-  opacity: 1;
-}
-
-
 /* Line clamp utility */
 .line-clamp-2 {
   display: -webkit-box;
@@ -188,6 +136,2854 @@ h6 {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* sticky header (~76px) + breathing room for hash-anchor jumps */
   color-scheme: dark;
 }
 
+  :root{
+    /* Marketing dark editorial — from colors_and_type.css */
+    --bg: #0E0C11;
+    --bg-2: #121015;
+    --bg-3: #1A171E;
+    --surface: #201D24;
+    --surface-2: #2A262F;
+    --hair: rgba(232,230,227,0.08);
+    --hair-2: rgba(232,230,227,0.14);
+    --ink: #E8E6E3;
+    --ink-2: #B6B4B0;
+    --ink-3: #7C7A77;
+    --ink-4: #4E4C4A;
+    /* Salency warm ramp — from uploaded palette */
+    --copper: #FE8531;          /* primary accent */
+    --copper-soft: #FEBEA8;
+    --copper-deep: #CA640A;
+    --rust: #D13C13;
+    --rust-deep: #95280A;
+    --sand: #FFEDE8;
+    /* Copper at alpha — canonical ladder. Use these instead of rgba(254,133,49,X)
+       literals anywhere. Rare alpha stops (.02, .05, .1, .15, .2, .28, .55, .85)
+       stay inline; tokens cover the values used 2+ times. */
+    --copper-a0:  rgba(254,133,49,0);     /* gradient terminator */
+    --copper-a03: rgba(254,133,49,.03);
+    --copper-a04: rgba(254,133,49,.04);
+    --copper-a08: rgba(254,133,49,.08);
+    --copper-a12: rgba(254,133,49,.12);
+    --copper-a14: rgba(254,133,49,.14);
+    --copper-a18: rgba(254,133,49,.18);
+    --copper-a22: rgba(254,133,49,.22);
+    --copper-a25: rgba(254,133,49,.25);
+    --copper-a30: rgba(254,133,49,.3);
+    --copper-a32: rgba(254,133,49,.32);
+    --copper-a35: rgba(254,133,49,.35);
+    --copper-a40: rgba(254,133,49,.4);
+    --copper-a50: rgba(254,133,49,.5);
+    --copper-a60: rgba(254,133,49,.6);
+    /* Layout: canonical page-content maximum width. Every section
+       container that centers into the 1280-wide band references this
+       token instead of the literal. */
+    --page-max: 1280px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  body{font-family:var(--font-body), 'Geist','Outfit',system-ui,sans-serif;font-size:15px;line-height:1.55;font-weight:400}
+  a{color:inherit;text-decoration:none}
+
+  /* ambient glow removed — Anthropic-style clean hero */
+  .page{position:relative;overflow-x:clip}
+  .page > *:not(header){position:relative;z-index:1}
+
+  /* ═══════════ Canonical eyebrow ═══════════
+     One base rule for every .eb across the site. Scoped overrides
+     below this (.prob-head .eb, .how-head .eb, .inv-intro .eb, etc.)
+     only set per-context margin-bottom (and occasionally font-size /
+     display). The 28×1 copper dash ::before applies by default;
+     edge cases that don't want it explicitly reset with
+     ::before { content: none }. */
+  .eb{
+    font-family:'Geist Mono','SFMono-Regular',Consolas,monospace;
+    font-size:11px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
+    display:inline-flex;align-items:center;gap:10px;
+  }
+  .eb::before{
+    content:"";width:28px;height:1px;background:var(--copper);display:inline-block;
+  }
+  /* Edge cases that don't use the canonical dash: the hub-head
+     breadcrumb (inherits smaller font + no decoration from parent);
+     the CTA card (centered layout, decoration would offset text);
+     the NOT-strip dim header label (uses its own muted treatment);
+     the mem-cta (centered block eyebrow above the final CTA). */
+  .hub-head .eb::before,
+  .cta-card .eb::before,
+  .notdo-card .header .eb::before,
+  .mem-cta .eb::before{content:none}
+
+  /* Canonical em accent — display headings and body copy inside any
+     .page root render em italic copper by default. Scoped overrides
+     (e.g. .h1 em { font-style: normal }, .how-head .lede em { color:
+     var(--ink) }) win by specificity where they need a different
+     treatment. */
+  .page em { font-style: italic; color: var(--copper); }
+
+  /* ═══════════ Hub diagram (replaces product mock) ═══════════ */
+  .hub-wrap{
+    max-width:var(--page-max);margin:72px auto 0;padding:0 40px;
+
+    .hub{
+      position:relative;height:auto;
+      display:flex;flex-direction:column;
+      background:linear-gradient(180deg,#141119 0%,#0F0D13 100%);
+      border:1px solid var(--hair-2);border-radius:16px;overflow:hidden;
+      box-shadow:0 40px 80px -30px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .hub-main{position:relative;height:560px;min-width:0;flex-shrink:0}
+
+    .hub-head{
+      position:absolute;top:22px;left:28px;right:28px;
+      display:flex;justify-content:space-between;
+      font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--copper);z-index:3;
+
+      /* Hub-head uses .eb as a container only (inherits parent's
+         10.5px mono-caps + copper). Override the global .eb base
+         back to inline text so the inline arrows flow naturally. */
+      .eb{
+        font-size:10.5px;display:inline;gap:0;
+
+        .arrow{color:var(--ink-4);margin:0 4px}
+        &.r{
+          color:var(--copper);
+          .arrow{color:var(--ink-4)}
+        }
+      }
+    }
+
+    .hub-lines{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+
+    .hub-inputs{position:absolute;left:28px;top:0;bottom:0;width:220px;z-index:2}
+
+    .hub-input{
+      --dy:0px;
+      position:absolute;
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      width:100px;left:60px;
+      transform:translate(0,-50%) scale(1);
+      opacity:1;filter:blur(0);
+      will-change:transform,opacity,filter;
+
+      &:nth-child(1){--dy:157px}
+      &:nth-child(2){--dy:62px}
+      &:nth-child(3){--dy:-50px}
+      &:nth-child(4){--dy:-146px}
+    }
+
+    .hub-input-ic{
+      width:48px;height:48px;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:10px;
+      filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));
+    }
+
+    .hub-input-label{
+      font-family:var(--font-body), 'Geist', sans-serif;
+      font-size:12px;color:var(--ink);
+      letter-spacing:.01em;text-align:center;line-height:1.25;
+    }
+
+    .hub-core{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;
+      display:flex;flex-direction:column;align-items:center;gap:16px;
+      text-align:center;
+    }
+
+    .hub-core-brand{display:flex;align-items:center;gap:12px}
+
+    .hub-core-mark{
+      width:44px;height:44px;object-fit:contain;
+      filter:drop-shadow(0 4px 14px var(--copper-a32));
+    }
+
+    .hub-core-name{
+      font-family:var(--font-outfit), 'Outfit', sans-serif;font-weight:800;font-size:34px;
+      letter-spacing:-.02em;color:var(--ink);line-height:1;
+    }
+
+    .hub-core-ttl{
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:30px;
+      line-height:1.1;letter-spacing:-.015em;color:var(--ink);white-space:nowrap;
+    }
+
+    .hub-outputs{position:absolute;right:28px;top:0;bottom:0;width:220px;z-index:2}
+
+    .hub-output{
+      --out-delay:0s;
+      position:absolute;left:0;right:0;overflow:hidden;
+      display:flex;align-items:flex-start;gap:12px;
+      background:rgba(26,23,30,.92);border:1px solid var(--copper-a22);
+      border-radius:8px;padding:12px 14px;
+      backdrop-filter:blur(6px);box-shadow:0 4px 16px rgba(0,0,0,.3);
+      opacity:1;transform:translate(0,-50%);
+
+      &:nth-child(1){--out-delay:4s}
+      &:nth-child(2){--out-delay:4.9s}
+      &:nth-child(3){--out-delay:5.8s}
+
+      &::before{
+        content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+        background:linear-gradient(100deg,
+          transparent 30%,
+          var(--copper-a32) 48%,
+          rgba(254,220,190,.55) 50%,
+          var(--copper-a32) 52%,
+          transparent 70%);
+        transform:translateX(-100%);
+      }
+    }
+
+    .hub-output-ic{
+      width:22px;height:22px;flex-shrink:0;border-radius:50%;
+      background:var(--copper-a18);color:var(--copper);
+      display:flex;align-items:center;justify-content:center;margin-top:1px;
+      opacity:1;transform:scale(1);
+    }
+
+    .hub-output-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+
+    .hub-output-ttl{
+      font-family:var(--font-body), 'Geist', sans-serif;
+      font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.2;
+    }
+
+    .hub-output-sub{
+      font-family:var(--font-body), 'Geist', sans-serif;
+      font-size:11.5px;color:var(--ink-3);line-height:1.35;
+    }
+
+    .hub-outcome{
+      position:relative;min-width:0;
+      border-top:1px solid var(--hair-2);
+      padding:18px 28px 20px;
+      display:flex;flex-direction:column;gap:12px;
+    }
+
+    .hub-outcome-eb{
+      font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+    }
+
+    .hub-outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+
+    .hub-outcome-row{
+      display:flex;flex-direction:column;gap:3px;
+      padding-left:12px;border-left:2px solid var(--copper-a35);
+      transition:transform .2s ease;
+    }
+
+    .hub-outcome-role{
+      font-family:'Geist Mono',monospace;font-size:10px;font-weight:500;
+      letter-spacing:.2em;text-transform:uppercase;color:var(--copper);
+    }
+
+    .hub-outcome-role-title{
+      font-family:var(--font-display), 'Instrument Serif', serif;
+      font-weight:400;font-size:20px;line-height:1.2;color:var(--ink);
+    }
+
+    .hub-outcome-role-summary{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+      font-size:12.5px;color:var(--ink-3);line-height:1.45;
+    }
+
+    .hub-foot{
+      display:flex;justify-content:space-between;
+      padding:16px 28px;border-top:1px solid var(--hair);
+      font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-3);
+      letter-spacing:.04em;
+
+      em{font-style:normal;color:var(--copper);font-weight:600}
+    }
+
+    /* Played state — single source of truth for all animation triggers */
+    &.played{
+      .hub-input{
+        animation:hub-throw 4.5s cubic-bezier(.55,.08,.3,1) both;
+
+        &:nth-child(1){animation-delay:0s}
+        &:nth-child(2){animation-delay:1s}
+        &:nth-child(3){animation-delay:2s}
+        &:nth-child(4){animation-delay:3s}
+      }
+
+      .hub-output{
+        animation:
+          hub-output-in .35s cubic-bezier(.2,.8,.3,1) var(--out-delay) forwards,
+          hub-output-glow 1.1s ease-out var(--out-delay) forwards;
+
+        &::before{
+          animation:hub-output-sweep .9s cubic-bezier(.3,.7,.3,1) var(--out-delay) forwards;
+        }
+      }
+
+      .hub-output-ic{
+        animation:hub-output-ic-pop .3s cubic-bezier(.3,1.5,.5,1) calc(var(--out-delay) + .6s) forwards;
+      }
+
+      .hub-output-body{
+        animation:hub-output-reveal .7s cubic-bezier(.3,.7,.3,1) calc(var(--out-delay) + .1s) forwards;
+      }
+
+      .hub-outcome-row{
+        animation:hub-outcome-pulse 1.1s cubic-bezier(.3,.8,.3,1) both;
+
+        &:nth-child(1){animation-delay:7.1s}
+        &:nth-child(2){animation-delay:7.3s}
+        &:nth-child(3){animation-delay:7.5s}
+      }
+    }
+
+    /* Responsive */
+    @media (max-width:1024px){
+      :is(.hub-inputs, .hub-outputs){width:200px}
+      .hub-input{width:90px;left:55px}
+      .hub-core-name{font-size:28px}
+      .hub-core-mark{width:36px;height:36px}
+      .hub-outcome{padding:20px 22px}
+      .hub-outcome-role-title{font-size:17px}
+    }
+
+    @media (max-width:900px){
+      .hub-main{height:500px}
+      .hub-outcome-grid{gap:20px}
+    }
+
+    @media (max-width:640px){
+      margin-top:48px;padding:0 20px;
+
+      .hub-main{
+        height:auto;
+        display:flex;flex-direction:column;align-items:center;
+        padding:48px 18px 32px;gap:28px;
+      }
+
+      .hub-head{position:static;display:flex;justify-content:center;gap:12px}
+      .hub-lines{display:none}
+
+      :is(.hub-inputs, .hub-core, .hub-outputs){
+        position:static;width:100%;height:auto;
+        transform:none;left:auto;right:auto;top:auto;bottom:auto;
+      }
+
+      .hub-inputs{
+        display:grid;grid-template-columns:repeat(4,1fr);gap:10px;justify-items:center;
+      }
+
+      .hub-input{position:static;left:auto;top:auto!important;width:auto;transform:none}
+      .hub-input-ic{width:40px;height:40px}
+      .hub-input-label{font-size:11px}
+
+      .hub-core{padding:8px 0}
+      .hub-core-name{font-size:26px}
+      .hub-core-ttl{font-size:22px;white-space:normal}
+
+      .hub-outputs{display:flex;flex-direction:column;gap:10px}
+
+      .hub-output{
+        position:static;left:auto;top:auto!important;transform:none;
+
+        &:nth-child(1){--out-delay:.9s}
+        &:nth-child(2){--out-delay:1.5s}
+        &:nth-child(3){--out-delay:2.1s}
+      }
+
+      .hub-foot{
+        position:static;display:flex;flex-direction:column;gap:6px;text-align:center;
+        padding-top:14px;margin-top:8px;
+      }
+
+      .hub-outcome{padding:20px}
+      .hub-outcome-grid{grid-template-columns:1fr;gap:16px}
+
+      /* Skip the throw animation on phones — elements render in place */
+      &.played{
+        .hub-input{
+          animation:hub-in-mobile .5s ease-out both;
+
+          &:nth-child(1){animation-delay:0s}
+          &:nth-child(2){animation-delay:.1s}
+          &:nth-child(3){animation-delay:.2s}
+          &:nth-child(4){animation-delay:.3s}
+        }
+
+        .hub-outcome-row{
+          &:nth-child(1){animation-delay:3.3s}
+          &:nth-child(2){animation-delay:3.5s}
+          &:nth-child(3){animation-delay:3.7s}
+        }
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .hub-input{animation:none;transform:translateY(-50%)}
+
+      :is(.hub-output, .hub-output::before, .hub-output-ic, .hub-output-body){
+        animation:none;
+      }
+
+      .hub-output{
+        opacity:1;transform:translate(0,-50%);
+
+        &::before{display:none}
+      }
+
+      .hub-output-ic{opacity:1;transform:scale(1)}
+      .hub-output-body{clip-path:none}
+      .hub-outcome-row{animation:none;transition:none;box-shadow:none}
+    }
+  }
+
+  /* Hub keyframes (keyframes can't be nested inside a selector) */
+  @keyframes hub-throw{
+    0%, 2%    {transform:translate(0,-50%) scale(1);opacity:1;filter:blur(0)}
+    30%       {transform:translate(200px,calc(-50% + var(--dy) * .7)) scale(.55);opacity:.85;filter:blur(.4px)}
+    50%       {transform:translate(340px,calc(-50% + var(--dy))) scale(.12);opacity:0;filter:blur(1.5px)}
+    51%       {transform:translate(0,-50%) scale(1);opacity:0;filter:blur(0)}
+    75%, 100% {transform:translate(0,-50%) scale(1);opacity:1;filter:blur(0)}
+  }
+  @keyframes hub-output-in{
+    from {opacity:0;transform:translate(-10px,-50%)}
+    to   {opacity:1;transform:translate(0,-50%)}
+  }
+  @keyframes hub-output-sweep{
+    from {transform:translateX(-100%)}
+    to   {transform:translateX(100%)}
+  }
+  @keyframes hub-output-reveal{
+    from {clip-path:inset(0 100% 0 0)}
+    to   {clip-path:inset(0)}
+  }
+  @keyframes hub-output-ic-pop{
+    0%   {opacity:0;transform:scale(.4)}
+    60%  {opacity:1;transform:scale(1.2)}
+    100% {opacity:1;transform:scale(1)}
+  }
+  @keyframes hub-output-glow{
+    0%, 100% {box-shadow:0 4px 16px rgba(0,0,0,.3), 0 0 0 0 var(--copper-a0)}
+    30%      {box-shadow:0 4px 16px rgba(0,0,0,.3), 0 0 28px 2px var(--copper-a30)}
+  }
+  @keyframes hub-outcome-pulse{
+    0%   {border-left-color:var(--copper-a35);box-shadow:0 0 0 0 var(--copper-a0)}
+    30%  {border-left-color:var(--copper);box-shadow:-4px 0 18px -2px var(--copper-a50), inset 3px 0 0 var(--copper-a40)}
+    60%  {border-left-color:rgba(254,133,49,.85);box-shadow:-3px 0 12px -2px var(--copper-a30)}
+    100% {border-left-color:rgba(254,133,49,.55);box-shadow:0 0 0 0 var(--copper-a0)}
+  }
+  @keyframes hub-in-mobile{
+    from {opacity:0;transform:translateY(8px)}
+    to   {opacity:1;transform:translateY(0)}
+  }
+
+  /* ═══════════ Header ═══════════ */
+  header{
+    position:sticky;top:0;z-index:40;
+    background:rgba(14,12,17,0.72);
+    backdrop-filter:blur(20px) saturate(140%);
+    border-bottom:1px solid var(--hair);
+  }
+  .nav{
+    max-width:var(--page-max);margin:0 auto;
+    padding:16px 40px;
+    display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:48px;
+  }
+  .brand{display:flex;align-items:center;gap:11px;min-height:44px;padding:4px 6px;margin-left:-6px;border-radius:6px}
+  .brand img{width:26px;height:26px;display:block}
+  .brand .name{
+    font-family:var(--font-outfit), 'Outfit', sans-serif;font-weight:800;font-size:22px;
+    letter-spacing:-.02em;color:var(--ink);
+  }
+  nav.links{display:flex;gap:24px;justify-self:center}
+  nav.links a{
+    position:relative;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:400;font-size:14px;
+    color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;
+    padding:11px 8px;border-radius:6px;
+    transition:color .16s, background-color .16s;
+  }
+  nav.links a::after{
+    content:"";position:absolute;left:8px;right:8px;bottom:6px;height:1px;
+    background:var(--copper);
+    transform:scaleX(0);transform-origin:left center;
+    transition:transform .2s ease;
+  }
+  nav.links a:hover{color:var(--ink);background:rgba(232,230,227,0.06)}
+  nav.links a:hover::after{transform:scaleX(1)}
+  nav.links a.is-active{color:var(--ink)}
+  nav.links a.is-active::after{transform:scaleX(1)}
+  nav.links .new{
+    font-family:'Geist Mono',monospace;font-size:9px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--copper);
+    padding:2px 6px;border:1px solid var(--copper-a30);border-radius:3px;
+  }
+  .nav-cta{display:flex;gap:10px;align-items:center;padding-left:16px;position:relative}
+  .nav-cta::before{
+    content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+    width:1px;height:20px;background:var(--hair-2);
+  }
+  .nav-cta a.sign{font-size:14px;color:var(--ink-2);padding:11px 14px;border-radius:6px;min-height:44px;display:inline-flex;align-items:center;transition:color .16s, background-color .16s}
+  .nav-cta a.sign:hover{color:var(--ink);background:rgba(232,230,227,0.04)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;font-size:14px;
+    border-radius:8px;border:0;transition:all .18s ease;
+    padding:10px 18px;white-space:nowrap;
+  }
+  .btn-primary{
+    background:linear-gradient(180deg, #FE9544 0%, var(--copper) 50%, var(--copper-deep) 100%);
+    color:#1A0A02;font-weight:600;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.25),
+      inset 0 -1px 0 rgba(0,0,0,.2),
+      0 1px 0 rgba(0,0,0,.3),
+      0 8px 24px -8px var(--copper-a50);
+  }
+  .btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  /* Keyboard focus ring: visible copper outline for all primary/ghost
+     buttons so sighted keyboard users can see where they are. */
+  .btn-primary:focus-visible,
+  .btn-ghost:focus-visible{
+    outline:2px solid var(--copper);
+    outline-offset:3px;
+  }
+  .btn-ghost{
+    background:rgba(232,230,227,0.04);color:var(--ink);
+    border:1px solid var(--hair-2);
+  }
+  .btn-ghost:hover{background:rgba(232,230,227,0.08);border-color:rgba(232,230,227,0.22)}
+
+  .btn-submit{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    width:100%;cursor:pointer;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:600;font-size:16px;
+    padding:16px 24px;border-radius:8px;border:0;
+    color:#1A0A02;
+    background:linear-gradient(180deg, #FE9544 0%, var(--copper) 50%, var(--copper-deep) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.25),
+      inset 0 -1px 0 rgba(0,0,0,.2),
+      0 1px 0 rgba(0,0,0,.3),
+      0 8px 24px -8px var(--copper-a50);
+    transition:filter .18s ease, opacity .18s ease;
+
+    &:hover{filter:brightness(1.1)}
+    &:focus-visible{outline:2px solid #1A0A02;outline-offset:2px}
+    &:disabled{opacity:.5;cursor:not-allowed}
+    &:disabled:hover{filter:none}
+  }
+
+  /* Application/intake page — shared by /pilot and /pricing.
+     Generic "apply-*" naming so the classes aren't misleading when
+     viewed through the pricing-page lens. All layout/typography lives
+     here so the JSX is semantic (no Tailwind utility soup). */
+  .apply-page{
+    max-width:var(--page-max);margin:40px auto 0;padding:20px 40px;
+
+    .apply-intro{max-width:48rem;margin-bottom:64px}
+
+    .eb{margin-bottom:20px}
+    h1{
+      font-family:var(--font-display), 'Instrument Serif', serif;
+      font-weight:400;line-height:1.04;letter-spacing:-.025em;
+      color:var(--ink);font-size:3rem;margin:0 0 24px;text-wrap:balance;
+    }
+    .apply-lede{
+      font-family:var(--font-body), 'Geist', sans-serif;
+      font-weight:300;line-height:1.55;color:var(--ink-2);
+      font-size:1.125rem;max-width:52ch;margin:0;
+    }
+
+    /* Two-column layout: sidebar cards + email form.
+       Form is visually first on narrow viewports, moves right on ≥1024px. */
+    .apply-layout{
+      display:grid;grid-template-columns:1fr;gap:48px;align-items:start;
+    }
+    .apply-sidebar{
+      display:flex;flex-direction:column;gap:24px;order:2;
+    }
+    .apply-form{order:1}
+
+    /* Sidebar cards ("Pilot includes", "Good fit if") — identical
+       styling, shared class so they stay in sync. */
+    .apply-card{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:.75rem;padding:1.5rem;
+
+      h3{
+        font-family:var(--font-display), 'Instrument Serif', serif;
+        font-weight:400;line-height:1.2;color:var(--ink);
+        font-size:1.25rem;margin:0 0 16px;
+      }
+      ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+      li{
+        font-family:var(--font-body), 'Geist', sans-serif;
+        line-height:1.55;color:var(--ink-2);
+        font-size:.875rem;display:flex;align-items:flex-start;gap:12px;
+      }
+    }
+    /* Bullet markers for the two list styles. */
+    .apply-check{color:var(--copper);margin-top:2px;flex-shrink:0}
+    .apply-dot{
+      width:6px;height:6px;border-radius:9999px;background:var(--copper);
+      margin-top:9px;flex-shrink:0;
+    }
+  }
+  @media (min-width: 768px){
+    .apply-page{
+      .apply-intro{margin-bottom:80px}
+      h1{font-size:3.75rem}
+      .apply-lede{font-size:1.25rem}
+      .apply-card{padding:2rem}
+    }
+  }
+  @media (min-width: 1024px){
+    .apply-page{
+      .apply-layout{grid-template-columns:1fr 1.2fr;gap:64px}
+      .apply-sidebar{order:1}
+      .apply-form{order:2}
+    }
+  }
+
+  /* ═══════════ Shared hero backdrop (copper ellipse glow) ═══════════
+     Mirrors the investor register pattern: pseudo at z-index:0, children
+     lifted to z-index:1. Avoids `isolation: isolate` + negative z-index
+     (which clips the pseudo below the element's own paint layer). */
+  .hero,
+  .mem-intro,
+  .thesis-hero,
+  .apply-page{
+    position:relative;
+  }
+  .hero::before,
+  .mem-intro::before,
+  .thesis-hero::before,
+  .apply-page::before{
+    content:"";
+    position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+    width:1400px;height:900px;pointer-events:none;z-index:0;
+    background:radial-gradient(ellipse at center, var(--copper-a14) 0%, var(--copper-a04) 30%, transparent 60%);
+  }
+  .hero > *,
+  .mem-intro > *,
+  .thesis-hero > *,
+  .apply-page > *{
+    position:relative;z-index:1;
+  }
+
+  /* ═══════════ Hero ═══════════ */
+  .hero{
+    max-width:var(--page-max);margin:0 auto;
+    padding:96px 40px 72px;
+  }
+  @media (max-width: 768px) {
+    .hero { padding: 56px 22px 48px; }
+  }
+  .hero-hairline{
+    max-width:var(--page-max);margin:0 auto;
+    border-top:1px solid var(--hair);
+  }
+  .h1{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;
+    font-size:clamp(40px,5.6vw,72px);
+    line-height:1.08;
+    letter-spacing:-.025em;
+    margin:0;max-width:22ch;color:var(--ink);
+    text-wrap:balance;
+    text-align:left;
+  }
+  .h1 em{font-style:normal;font-weight:inherit;color:var(--copper)}
+  .h1 .soft{color:var(--ink-3)}
+
+  .hero .sub{
+    margin:28px 0 0;max-width:58ch;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:19px;line-height:1.55;color:var(--ink-2);
+    text-wrap:pretty;
+  }
+
+  .cta-row{margin-top:40px;display:flex;gap:12px;flex-wrap:wrap}
+  .cta-row .btn{padding:14px 24px;font-size:15px}
+
+  .hero-meta{
+    margin-top:24px;
+    font-family:'Geist Mono','SFMono-Regular',Consolas,'Liberation Mono',monospace;
+    font-size:11px;font-weight:400;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+    display:flex;gap:24px;flex-wrap:wrap;align-items:center;
+    line-height:1.4;
+  }
+  .hero-meta-item{
+    display:inline-flex;align-items:center;gap:8px;
+    white-space:nowrap;
+  }
+  .hero-meta-item::before{
+    content:'';
+    display:inline-block;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--copper);
+    flex-shrink:0;
+  }
+  .hero-meta .dot{color:var(--copper);margin-right:6px}
+
+  /* (Removed 2026-04-23: three banners of dead CSS — Product mock,
+     Stats strip, Logo bar — plus associated children: .mock-wrap,
+     .mock-*, .mside, .mmain, .mrail, .pain (generic, ~15 rules),
+     .memory-block (mock variant), .sev, .pains, .tabs, .crumb,
+     .meta-row, .mmain-actions, .icon-btn, .person (mock variant),
+     .stakeholders, .spotlight-card, .stats + children, .logo-bar
+     + children. All 238 lines belonged to the pre-split home page;
+     verified zero JSX consumers before removal. See commit for
+     details. */
+
+  /* ═══════════ Problem section ═══════════ */
+  .prob{
+    max-width:var(--page-max);margin:40px auto 0;padding:20px 40px;
+  }
+  .prob-head{
+    display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;
+    margin-bottom:72px;
+  }
+  .prob-head .eb{margin-bottom:18px;display:flex}
+  .prob-head h2{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:clamp(36px,5.4vw,76px);line-height:1.02;letter-spacing:-.025em;
+    margin:0;color:var(--ink);max-width:18ch;text-wrap:balance;
+  }
+  .prob-head h2 .soft{color:var(--ink-3)}
+  .prob-head .lede{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;line-height:1.6;
+    color:var(--ink-2);max-width:42ch;
+  }
+  .prob-head .lede em{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);
+    font-size:19px;font-weight:400;
+  }
+  /* .prob-head mobile: 2-col headline+lede grid stacks, gap tightens,
+     margin below head reduces. h2 clamp already handles the font
+     scale-down on narrow viewports. */
+  @media (max-width: 768px) {
+    .prob-head {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+      align-items: start;
+    }
+  }
+
+  .prob-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-top:1px solid var(--hair-2);
+  }
+  .prob-card{
+    padding:40px 36px 40px 0;border-right:1px solid var(--hair);
+    position:relative;
+    display:flex;flex-direction:column;
+  }
+  .prob-card:nth-child(n+2){padding-left:36px}
+  .prob-card:last-child{border-right:0}
+  /* Pain-card index "01/02/03" is decorative numbering, not a keyword. */
+  .prob-card .idx{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-weight:400;
+    font-size:15px;color:var(--ink-3);letter-spacing:.02em;margin-bottom:10px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .prob-card .idx::after{
+    content:"";flex:1;height:1px;background:var(--hair);
+  }
+  .prob-card .title{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:30px;line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+    margin:0 0 16px;max-width:14ch;
+  }
+  .prob-card .desc{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
+    line-height:1.6;color:var(--ink-2);margin:0 0 24px;max-width:32ch;
+  }
+  .prob-card .cost{
+    padding-top:16px;border-top:1px dashed var(--hair-2);
+    margin-top:auto;
+  }
+  .prob-card .cost .label{
+    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+    line-height:1.5;
+  }
+
+  .prob-resolve{
+    margin-top:56px;padding:32px 40px;
+    background:linear-gradient(90deg, var(--copper-a08) 0%, rgba(14,12,17,0) 100%);
+    border-left:2px solid var(--copper);border-radius:0 12px 12px 0;
+    display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;
+  }
+  .prob-resolve .label{
+    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+  }
+  .prob-resolve .text{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
+    line-height:1.3;letter-spacing:-.01em;color:var(--ink);max-width:64ch;
+  }
+  .prob-resolve .link{
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:13.5px;color:var(--copper);
+    white-space:nowrap;font-weight:500;
+  }
+  .prob-resolve .link:hover{color:#FE9F5B}
+
+  /* Problem section mobile: 3-col pain grid stacks, vertical dividers
+     become horizontal, asymmetric left/right padding resets, and the
+     .prob-resolve 3-cell row (label + text + link) stacks to 1 col. */
+  @media (max-width: 768px) {
+    .prob-row { grid-template-columns: 1fr; }
+    .prob-card {
+      padding: 32px 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--hair);
+    }
+    .prob-card:nth-child(n+2) { padding-left: 0; }
+    .prob-card:last-child { border-bottom: 0; padding-bottom: 8px; }
+    .prob-card .title { max-width: none; }
+    .prob-card .desc  { max-width: none; }
+    .prob-resolve {
+      padding: 24px 22px;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .prob-resolve .link { white-space: normal; }
+  }
+
+  /* ═══════════ CTA ═══════════ */
+  .cta-section{
+    max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
+  }
+  @media (max-width: 768px) {
+    .cta-section { margin-top: 80px; padding: 0 22px 64px; }
+  }
+  .cta-card{
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg, #1A171E 0%, #121015 100%);
+    border:1px solid var(--hair-2);border-radius:20px;
+    padding:72px 56px;text-align:center;
+  }
+  @media (max-width: 768px) {
+    .cta-card { padding: 40px 24px; border-radius: 14px; }
+  }
+  .cta-card::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(circle at 15% 20%, var(--copper-a18) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(209,60,19,.14) 0%, transparent 40%);
+  }
+  .cta-card::after{
+    content:"";position:absolute;top:-1px;left:20%;right:20%;height:1px;
+    background:linear-gradient(90deg, transparent 0%, var(--copper) 50%, transparent 100%);
+  }
+  .cta-card > *{position:relative;z-index:1}
+  /* CTA card is centered — override global inline-flex back to block
+     so the eyebrow sits on its own centered line. */
+  .cta-card .eb{display:block;margin-bottom:20px}
+  .cta-card h2{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:clamp(44px,5.5vw,72px);line-height:1.02;letter-spacing:-.025em;
+    margin:0 auto;max-width:20ch;color:var(--ink);text-wrap:balance;
+  }
+  .cta-card .sub{
+    margin:24px auto 0;max-width:52ch;font-size:17px;line-height:1.55;color:var(--ink-2);font-weight:300;
+  }
+  .cta-card .btns{margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .cta-card .btn{padding:14px 24px;font-size:15px}
+  .cta-card .fine{
+    margin-top:20px;font-family:'Geist Mono',monospace;font-size:11px;
+    letter-spacing:.08em;color:var(--ink-4);
+  }
+
+  /* ═══════════ How it works (Extract · Map · Remember) ═══════════ */
+  .how{max-width:var(--page-max);margin:140px auto 0;padding:0 40px}
+  @media (max-width: 768px) {
+    .how { margin-top: 80px; padding: 0 22px; }
+  }
+  .how-head{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;margin-bottom:56px}
+  .how-head .eb{margin-bottom:18px;display:flex}
+  .how-head h2{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:clamp(36px,5vw,64px);line-height:1.03;letter-spacing:-.025em;
+    margin:0;color:var(--ink);max-width:16ch;text-wrap:balance;
+  }
+  /* .how-head mobile: 2-col headline+lede stacks, same treatment as
+     .prob-head per PR #71. */
+  @media (max-width: 768px) {
+    .how-head {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+      align-items: start;
+    }
+  }
+  .how-head .lede{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:19px;line-height:1.55;
+    color:var(--ink-2);max-width:42ch;
+  }
+  .how-head .lede em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-size:20px;font-weight:400}
+  .how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hair-2)}
+  .how-step{padding:36px 32px 36px 0;border-right:1px solid var(--hair);position:relative;display:flex;flex-direction:column}
+  .how-step:nth-child(n+2){padding-left:32px}
+  .how-step:last-child{border-right:0}
+  /* Between-step arrow: decoration, not a keyword — ink ramp. */
+  .how-step:not(:last-child)::before{
+    content:"→";position:absolute;right:-10px;top:34px;
+    width:20px;height:20px;display:flex;align-items:center;justify-content:center;
+    background:var(--bg);color:var(--ink-3);font-size:14px;font-weight:400;
+    font-family:'Geist Mono',monospace;z-index:1;
+  }
+  /* Step label — caption, not a keyword. */
+  .how-step .idx{
+    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
+    display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  }
+  .how-step .idx::after{content:"";flex:1;height:1px;background:var(--hair)}
+  .how-step .how-step-action{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:clamp(26px, 5vw, 34px);
+    line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin:0 0 14px;
+  }
+  .how-step .desc{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
+    line-height:1.65;color:var(--ink-2);margin:0 0 22px;max-width:34ch;
+  }
+  /* Example callout — a tinted surface is chrome. Use the ink/hair ramp
+     so the copper em in the verb above stays the only page-accent in
+     each step. */
+  .how-step .ex{
+    margin-top:auto;
+    padding:14px 16px;background:rgba(255,255,255,.02);
+    border:1px solid var(--hair-2);border-radius:8px;
+  }
+  .how-step .ex .example-label{
+    font-family:'Geist Mono',monospace;font-size:9.5px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;
+  }
+  .how-step .ex .example-quote{
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;line-height:1.45;color:var(--ink-2);
+  }
+  .how-step .ex .example-quote strong{color:var(--ink);font-weight:500}
+  /* Mobile: stack the 3 steps vertically. The horizontal arrows don't
+     translate to a vertical flow, so hide them; horizontal dividers
+     between stacked steps replace the vertical borders. */
+  @media (max-width: 768px) {
+    .how-steps { grid-template-columns: 1fr; }
+    .how-step {
+      padding: 32px 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--hair);
+    }
+    .how-step:nth-child(n+2) { padding-left: 0; }
+    .how-step:last-child { border-bottom: 0; padding-bottom: 8px; }
+    .how-step:not(:last-child)::before { display: none; }
+    .how-step .desc { max-width: none; }
+  }
+  .how-foot{
+    margin-top:28px;padding:18px 24px;
+    display:flex;justify-content:space-between;align-items:center;gap:24px;
+    border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+    font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--ink-3);letter-spacing:.04em;
+  }
+  .how-foot em{font-style:normal;color:var(--ink);font-weight:500}
+  .how-foot .sep{color:var(--ink-4);margin:0 6px}
+
+  /* ═══════════ NOT strip ═══════════ */
+  .notdo{max-width:var(--page-max);margin:56px auto 0;padding:0 40px}
+  @media (max-width: 768px) {
+    .notdo { margin-top: 40px; padding: 0 22px; }
+  }
+  .notdo-card{
+    background:#121015;border:1px solid var(--hair-2);border-radius:14px;
+    padding:32px 40px;
+    display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;
+  }
+  .notdo-card .header{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:26px;
+    line-height:1.2;letter-spacing:-.015em;color:var(--ink);max-width:10ch;
+  }
+  /* Dim variant: muted ink color, slightly wider tracking, no dash.
+     ::before suppression lives alongside hub/cta in the top-level
+     reset rule. */
+  .notdo-card .header .eb{
+    display:block;font-size:10.5px;letter-spacing:.2em;
+    color:var(--ink-4);margin-bottom:10px;
+  }
+  .notdo-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px}
+  .notdo-item{
+    display:grid;grid-template-columns:24px 1fr;column-gap:12px;row-gap:4px;
+    align-items:start;
+    padding:8px 0;border-bottom:1px dashed var(--hair);
+  }
+  .notdo-item:last-child,.notdo-item:nth-last-child(2){border-bottom:0}
+  .notdo-item .x,
+  .notdo-item .check{
+    font-family:'Geist Mono',monospace;font-size:20px;line-height:1.2;
+    font-weight:500;text-align:center;
+    grid-column:1;
+  }
+  /* .check is a positive list marker. Brightness differentiates it
+     from the rust .x; the copper accent is reserved for keywords. */
+  .notdo-item .x{color:var(--rust)}
+  .notdo-item .check{color:var(--ink)}
+  .notdo-item .title{font-size:14.5px;color:var(--ink);font-weight:400;line-height:1.4;grid-column:2}
+  .notdo-item .subtitle{font-size:13px;color:var(--ink-3);line-height:1.5;grid-column:2}
+
+  /* "NOT strip" mobile: card header stacks above the 2-col item list,
+     and the item list itself collapses to one column. */
+  @media (max-width: 768px) {
+    .notdo-card {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 24px 22px;
+    }
+    .notdo-card .header { max-width: none; }
+    .notdo-list { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  /* ═══════════ Notetaker comparison table ═══════════ */
+  .notetaker{max-width:var(--page-max);margin:140px auto 0;padding:0 40px}
+  @media (max-width: 768px) {
+    .notetaker { margin-top: 80px; padding: 0 22px; }
+  }
+  .notetaker-head{margin-bottom:48px;max-width:56ch}
+  .notetaker-head .eb{margin-bottom:18px;display:flex}
+  .notetaker-head h2{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:clamp(40px,4.5vw,58px);line-height:1.04;letter-spacing:-.025em;
+    margin:0 0 18px;color:var(--ink);text-wrap:balance;
+  }
+  .notetaker-head p{font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:16px;line-height:1.65;color:var(--ink-2);margin:0}
+  .notetaker-table{
+    width:100%;border-collapse:collapse;
+    background:#121015;border:1px solid var(--hair-2);border-radius:14px;overflow:hidden;
+  }
+  .notetaker-table thead th{
+    padding:22px 24px;text-align:left;border-bottom:1px solid var(--hair-2);
+    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);
+  }
+  .notetaker-table thead th.col-s{color:var(--copper);background:var(--copper-a04)}
+  .notetaker-table thead th.col-s .brand{
+    display:block;font-family:var(--font-display), 'Instrument Serif', serif;font-size:22px;font-weight:400;
+    letter-spacing:-.01em;color:var(--ink);text-transform:none;margin-top:4px;
+  }
+  .notetaker-table thead th.col-g .brand{
+    display:block;font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;font-size:18px;
+    color:var(--ink-2);text-transform:none;letter-spacing:-.005em;margin-top:4px;
+  }
+  .notetaker-table tbody td{
+    padding:20px 24px;border-bottom:1px solid var(--hair);vertical-align:top;
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:14.5px;line-height:1.5;color:var(--ink-2);
+  }
+  .notetaker-table tbody tr:last-child td{border-bottom:0}
+  .notetaker-table tbody td.dim{
+    color:var(--ink);font-weight:500;font-size:14px;
+    font-family:'Geist Mono',monospace;letter-spacing:.02em;width:24%;
+  }
+  .notetaker-table tbody td.col-s{background:var(--copper-a03);color:var(--ink)}
+  .notetaker-table tbody td.col-s strong{color:var(--copper);font-weight:500}
+  .notetaker-table tbody td.col-g{color:var(--ink-3)}
+  .notetaker-table .icon{
+    display:inline-block;margin-right:8px;font-family:'Geist Mono',monospace;
+    font-size:11px;width:16px;text-align:center;
+  }
+  /* Icon markers are list markers, not keywords. Salency column uses
+     bright ink so it's visible against the copper-tinted cell; the
+     column's copper-a03 background + bold strong is the signal. */
+  .notetaker-table .col-s .icon{color:var(--ink-2)}
+  .notetaker-table .col-g .icon{color:var(--ink-4)}
+
+  /* Mobile: table → card-per-row. Row-level semantics stay intact,
+     but each row becomes a bordered card with the dimension as a
+     caption and two labeled cells (Notetaker / Salency) underneath.
+     Column headers dissolve; their labels re-materialize as ::before
+     text on each body cell so users can still tell which is which. */
+  @media (max-width: 768px) {
+    .notetaker-table,
+    .notetaker-table thead,
+    .notetaker-table tbody,
+    .notetaker-table tr,
+    .notetaker-table td,
+    .notetaker-table th { display: block; }
+    .notetaker-table { background: transparent; border: 0; border-radius: 0; }
+    .notetaker-table thead { display: none; }
+    .notetaker-table tbody tr {
+      border: 1px solid var(--hair-2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      background: #121015;
+    }
+    .notetaker-table tbody tr:last-child { margin-bottom: 0; }
+    .notetaker-table tbody td {
+      border: 0;
+      padding: 8px 0;
+      width: auto;
+    }
+    .notetaker-table tbody td.dim {
+      width: auto;
+      font-size: 10.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      font-family: 'Geist Mono', monospace;
+      border-bottom: 1px solid var(--hair);
+      padding-bottom: 10px;
+      margin-bottom: 6px;
+    }
+    .notetaker-table tbody td.col-g { background: transparent; }
+    .notetaker-table tbody td.col-g::before {
+      content: "Notetaker";
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 4px;
+    }
+    .notetaker-table tbody td.col-s {
+      background: var(--copper-a04);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-top: 6px;
+    }
+    .notetaker-table tbody td.col-s::before {
+      content: "Salency";
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 4px;
+    }
+  }
+
+  /* ═══════════ Investor register ═══════════ */
+  .reg-inv{
+    background:#0C0A10;padding:100px 0 120px;position:relative;
+
+    &::before{
+      content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;
+      background-image:radial-gradient(rgba(232,230,227,1) 1px,transparent 1px);
+      background-size:3px 3px;
+    }
+    > *{position:relative;z-index:1}
+    h2, h3{
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;letter-spacing:-.015em;
+    }
+    p{line-height:1.75}
+  }
+
+  /* Platform framing */
+  .platform{
+    max-width:var(--page-max);margin:0 auto;padding:0 40px;
+
+    .eb{margin-bottom:28px;display:flex}
+    h2{
+      font-size:clamp(38px,4.2vw,54px);line-height:1.1;color:var(--ink);
+      margin:0 0 28px;max-width:32ch;text-wrap:balance;
+    }
+    p{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;
+      color:var(--ink-2);max-width:62ch;margin:0 0 18px;
+
+      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-size:19px;font-weight:400}
+    }
+    .primitive{
+      margin-top:44px;padding:28px 32px;
+      background:rgba(254,133,49,.05);border:1px solid var(--copper-a18);
+      border-radius:12px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+
+      .label{
+        font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+        letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+      }
+      .title{
+        font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
+        line-height:1.35;color:var(--ink);max-width:62ch;margin:0;
+      }
+    }
+  }
+
+  /* Platform moat bridge — separates the "what we are" block from the
+     "why the shape defends" block inside the folded Platform section.
+     Mirrors .platform p styling but adds breathing room above. */
+  .platform .platform-moat-bridge{
+    margin-top:44px;
+  }
+
+  /* TAM — market size strip */
+  .inv-tam{
+    max-width:var(--page-max);margin:80px auto 0;padding:0 40px;
+
+    .eb{margin-bottom:28px;display:flex}
+    h2{
+      font-size:clamp(38px,4.2vw,54px);line-height:1.1;color:var(--ink);
+      margin:0 0 36px;max-width:32ch;text-wrap:balance;
+    }
+    .tam-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      border-top:1px solid var(--hair-2);border-bottom:1px solid var(--hair-2);
+
+      .cell{padding:32px 28px;border-right:1px solid var(--hair)}
+      .cell:last-child{border-right:none}
+
+      .label{
+        font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+        letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
+        margin-bottom:16px;display:block;
+      }
+      .figure{
+        font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+        font-size:34px;line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px;
+
+        em{font-style:italic;color:var(--copper)}
+      }
+      .desc{
+        font-family:var(--font-body), 'Geist', sans-serif;font-size:14.5px;
+        line-height:1.6;color:var(--ink-2);font-weight:300;
+
+        strong{color:var(--ink);font-weight:500}
+      }
+    }
+    .tam-counter{
+      margin-top:28px;padding-top:20px;max-width:68ch;
+
+      .label{
+        display:block;font-family:'Geist Mono',monospace;font-size:11px;
+        letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px;
+      }
+      p{
+        font-family:var(--font-body), 'Geist', sans-serif;font-size:14.5px;
+        line-height:1.7;color:var(--ink-2);font-weight:300;max-width:68ch;
+
+        em{color:var(--ink);font-style:normal;font-weight:500}
+      }
+    }
+  }
+
+  /* Competitive landscape — threat table */
+  .inv-compete{
+    max-width:var(--page-max);margin:80px auto 0;padding:0 40px;
+
+    .eb{margin-bottom:28px;display:flex}
+    h2{
+      font-size:clamp(38px,4.2vw,54px);line-height:1.1;color:var(--ink);
+      margin:0 0 20px;max-width:32ch;text-wrap:balance;
+    }
+    .compete-lede{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:17px;
+      line-height:1.7;color:var(--ink-2);max-width:62ch;margin:0 0 36px;
+    }
+    .compete-table{
+      border-top:1px solid var(--hair-2);
+    }
+    .compete-row{
+      display:grid;grid-template-columns:180px 100px 1fr;gap:28px;
+      padding:18px 0;border-bottom:1px solid var(--hair);align-items:baseline;
+
+      &--head{
+        padding:14px 0;border-bottom:1px solid var(--hair-2);
+
+        .c-who,.c-threat,.c-why{
+          font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+          letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
+        }
+      }
+    }
+    .c-who{
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+      font-size:19px;color:var(--ink);letter-spacing:-.01em;
+    }
+    .c-threat{
+      font-family:'Geist Mono',monospace;font-size:13px;font-weight:500;color:var(--ink-2);
+
+      em{font-style:italic;color:var(--copper);font-size:14px}
+    }
+    .c-why{
+      font-family:var(--font-body), 'Geist', sans-serif;font-size:14.5px;line-height:1.65;
+      color:var(--ink-2);font-weight:300;
+    }
+  }
+
+  /* Roadmap — V1.5 / V2 / V2.5 horizons */
+  .roadmap{
+    max-width:var(--page-max);margin:80px auto 0;padding:0 40px;
+
+    .eb{margin-bottom:28px;display:flex}
+    h2{
+      font-size:clamp(38px,4.2vw,54px);line-height:1.1;color:var(--ink);
+      margin:0 0 36px;max-width:22ch;text-wrap:balance;
+    }
+    .horizon-list{display:grid;grid-template-columns:1fr;gap:20px}
+    .horizon{
+      padding:26px 28px;border:1px solid var(--hair-2);border-radius:10px;
+      background:rgba(255,255,255,.02);
+
+      .horizon-head{
+        display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap;
+
+        .pill{
+          font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.18em;
+          text-transform:uppercase;color:var(--copper);padding:6px 12px;
+          border:1px solid rgba(254,133,49,.28);border-radius:999px;
+        }
+        .label{
+          font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
+          letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
+        }
+      }
+      .horizon-body{
+        list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;
+
+        li{
+          font-family:var(--font-body), 'Geist', sans-serif;font-size:15px;line-height:1.65;
+          color:var(--ink-2);font-weight:300;padding-left:16px;position:relative;
+
+          &::before{
+            content:"";position:absolute;left:0;top:.8em;width:6px;height:1px;
+            background:var(--copper-a40);
+          }
+          em{
+            font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;
+            color:var(--copper);font-size:16px;font-weight:400;
+          }
+        }
+      }
+    }
+  }
+
+  /* Team */
+  .team{
+    max-width:var(--page-max);margin:100px auto 0;padding:0 40px;
+
+    .sect-head{
+      margin-bottom:64px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:baseline;
+
+      .section-num{
+        font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-size:22px;color:var(--copper);
+      }
+      h2{
+        font-size:clamp(36px,3.8vw,48px);color:var(--ink);margin:0;max-width:18ch;
+      }
+    }
+  }
+
+  /* Compact team row on /investors — three rows, each is photo + name +
+     role + one-line bet. Full bios live on /our-story (linked below). */
+  .team-compact{
+    border-top:1px solid var(--hair-2);margin-bottom:24px;
+  }
+  .team-compact-row{
+    display:grid;grid-template-columns:72px 1fr;gap:24px;
+    padding:20px 0;border-bottom:1px solid var(--hair);align-items:center;
+
+    &:last-child{border-bottom:none}
+
+    .photo{
+      width:72px;height:72px;border-radius:10px;
+      background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
+      color:#FFEDE8;font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:28px;
+      display:flex;align-items:center;justify-content:center;letter-spacing:-.01em;
+      border:1px solid var(--copper-a30);
+
+      &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));border-color:rgba(107,78,255,.3);color:#D8CEFF}
+      &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
+      &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));border-color:rgba(251,191,36,.32);color:#FFE8A8}
+    }
+  }
+  .team-compact-body{
+    display:grid;grid-template-columns:minmax(180px,220px) auto 1fr;gap:20px;align-items:baseline;
+
+    .name{
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:500;font-size:20px;color:var(--ink);
+    }
+    .role{
+      font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+    }
+    .line{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
+      line-height:1.55;color:var(--ink-2);margin:0;
+    }
+  }
+  .team-compact-link{
+    display:inline-block;font-family:'Geist Mono',monospace;font-size:12px;
+    letter-spacing:.12em;color:var(--copper);text-decoration:none;
+    border-bottom:1px solid var(--copper-a35);padding-bottom:2px;
+    transition:border-color .18s,color .18s;
+
+    &:hover{color:var(--ink);border-bottom-color:var(--ink)}
+  }
+
+  /* Future-fit thesis */
+  .thesis{max-width:var(--page-max);margin:100px auto 0;padding:0 40px 20px}
+  .thesis-card{
+    padding:56px 64px;background:rgba(255,255,255,.02);
+    border:1px solid var(--hair-2);border-radius:16px;position:relative;overflow:hidden;
+
+    &::before{
+      content:"";position:absolute;top:0;left:0;width:2px;height:100%;
+      background:linear-gradient(180deg,var(--copper),var(--copper-a0));
+    }
+    .eb{margin-bottom:24px}
+    h2{
+      font-size:clamp(34px,3.6vw,46px);line-height:1.1;color:var(--ink);
+      margin:0 0 28px;max-width:22ch;
+    }
+    p{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:17px;
+      color:var(--ink-2);max-width:64ch;margin:0 0 18px;
+
+      em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--copper);font-size:18px;font-weight:400}
+    }
+    .thesis-close{
+      margin-top:28px;padding-top:24px;border-top:1px solid var(--hair);
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
+      line-height:1.35;color:var(--ink);max-width:52ch;
+    }
+  }
+
+  /* ═══════════ Footer ═══════════ */
+  footer{
+    border-top:1px solid var(--hair);
+    padding:40px;
+    max-width:var(--page-max);margin:0 auto;
+    display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+    font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-4);
+    letter-spacing:.04em;
+
+    .brand{
+      font-family:var(--font-outfit), 'Outfit', sans-serif;font-weight:800;font-size:17px;
+      color:var(--ink);letter-spacing:-.02em;
+    }
+    nav{display:flex;gap:24px;flex-wrap:wrap}
+    nav a{color:var(--ink-3);transition:color .18s}
+    nav a:hover{color:var(--copper)}
+  }
+
+  /* ═══════════ Investor page (standalone) ═══════════ */
+  .investors-register{
+    background:#0C0A10;position:relative;overflow:hidden;
+
+    &::before{
+      content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+      width:1400px;height:900px;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse at center, var(--copper-a14) 0%, var(--copper-a04) 30%, transparent 60%);
+    }
+    &::after{
+      content:"";position:absolute;top:900px;left:-200px;
+      width:700px;height:700px;pointer-events:none;z-index:0;
+      background:radial-gradient(circle, rgba(209,60,19,0.08) 0%, transparent 60%);
+    }
+    > *{position:relative;z-index:1}
+
+    .reg-inv{padding-top:72px;padding-bottom:120px}
+  }
+
+  .inv-intro{
+    max-width:var(--page-max);margin:40px auto 0;padding:20px 40px;
+    border-bottom:1px solid var(--hair);position:relative;
+
+    &::after{
+      content:"";position:absolute;bottom:-1px;left:20%;right:20%;height:1px;
+      background:linear-gradient(90deg,transparent 0%,var(--copper-a35) 50%,transparent 100%);
+    }
+    .inv-intro-inner{max-width:860px}
+    .eb{margin-bottom:28px}
+    h1{
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+      font-size:clamp(44px,5.2vw,72px);line-height:1.04;letter-spacing:-.025em;
+      color:var(--ink);margin:0 0 28px;max-width:22ch;text-wrap:balance;
+    }
+    p{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;line-height:1.7;
+      color:var(--ink-2);max-width:62ch;margin:0 0 28px;
+    }
+    .inv-intro-meta{
+      display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+      font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-4);
+
+      .sep{color:var(--ink-4);opacity:.5}
+    }
+  }
+
+  /* ═══════════ /our-story ═══════════ */
+  .story{
+    max-width:var(--page-max);margin:40px auto 120px;padding:20px 40px;
+  }
+
+  .story-intro{
+    padding-bottom:56px;border-bottom:1px solid var(--hair);margin-bottom:72px;
+
+    .eb{margin-bottom:28px;display:flex}
+    h1{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
+      font-size:clamp(40px,4.8vw,64px);line-height:1.06;letter-spacing:-.025em;
+      color:var(--ink);margin:0 0 28px;max-width:22ch;text-wrap:balance;
+
+      em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;color:var(--copper)}
+    }
+    .lede{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;
+      line-height:1.7;color:var(--ink-2);max-width:62ch;margin:0;
+    }
+  }
+
+  /* Layer 1 hero — buyer-quote treatment (extends .story-intro) */
+  .story-hero-quote{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+    font-size:clamp(40px,5.6vw,72px);line-height:1.08;letter-spacing:-.025em;
+    color:var(--ink);margin:0 0 28px;max-width:18ch;text-wrap:balance;
+
+    .open-quote{color:var(--ink-3)}
+  }
+  .story-hero-attribution{
+    font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);
+    margin:0 0 32px;
+  }
+  .story-hero-body{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;
+    line-height:1.7;color:var(--ink-2);max-width:62ch;margin:0;
+    text-wrap:pretty;
+
+    em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
+      color:var(--copper);font-size:18px;font-weight:400}
+  }
+
+  /* Layer 2 — founder collision (parallel columns + vertical hairline) */
+  .story-collision{
+    padding-bottom:88px;border-bottom:1px solid var(--hair);margin-bottom:88px;
+
+    .eb{margin-bottom:32px;display:flex}
+  }
+
+  .story-collision-grid{
+    display:grid;grid-template-columns:1fr 1px 1fr;gap:56px;align-items:start;
+  }
+
+  .story-collision-divider{
+    width:1px;background:var(--hair-2);align-self:stretch;
+  }
+
+  .story-collision-col{
+    .name{
+      font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+      letter-spacing:.12em;text-transform:uppercase;color:var(--copper);
+      display:block;margin-bottom:18px;
+    }
+
+    p{
+      font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:17px;
+      line-height:1.7;color:var(--ink);margin:0;
+
+      em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
+        color:var(--copper);font-size:17px;font-weight:400}
+
+      &+p{margin-top:18px}
+    }
+  }
+
+  .story-collision-close{
+    margin-top:56px;font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:17px;line-height:1.7;color:var(--ink-2);max-width:64ch;
+
+    em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
+      color:var(--copper);font-size:17px;font-weight:400}
+  }
+
+  /* Layer 3 — 2x2 founder grid with square photos + side-by-side bio */
+  .story-founders{
+    margin-bottom:64px;
+
+    .eb{margin-bottom:40px;display:flex}
+  }
+
+  .story-founders-list{
+    display:grid;grid-template-columns:1fr 1fr;gap:64px 56px;
+  }
+
+  .story-founder{
+    display:flex;gap:24px;align-items:flex-start;
+  }
+
+  .story-founder-meta{
+    flex-shrink:0;
+
+    .photo{
+      width:88px;height:88px;border-radius:0;
+      background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
+      color:#FFEDE8;font-family:'Geist Mono',monospace;font-weight:500;font-size:13px;
+      display:flex;align-items:center;justify-content:center;letter-spacing:.1em;
+      border:1px solid var(--hair-2);
+
+      &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));color:#D8CEFF}
+      &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));color:#B5F0E5}
+      &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));color:#FFE8A8}
+    }
+  }
+
+  .story-founder-body{flex:1;min-width:0}
+
+  .story-founder-name{
+    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:500;font-size:22px;
+    line-height:1.2;letter-spacing:-.015em;color:var(--ink);margin:0 0 4px;
+  }
+
+  .story-founder-role{
+    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+    display:block;margin-bottom:16px;
+  }
+
+  .story-founder-body p{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
+    line-height:1.65;color:var(--ink-2);margin:0;
+
+    em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;
+      color:var(--copper);font-size:14.5px;font-weight:400}
+  }
+
+  /* Close — 2 sentences + dual CTA, left-aligned */
+  .story-close{
+    margin-top:96px;padding-top:56px;border-top:1px solid var(--hair-2);
+    max-width:64ch;
+
+    p{
+      font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
+      font-size:19px;line-height:1.6;color:var(--ink);margin:0 0 32px;
+
+      em{font-family:var(--font-body), 'Geist', sans-serif;font-style:italic;color:var(--copper)}
+    }
+  }
+
+  .story-close-ctas{
+    display:flex;gap:24px;align-items:center;flex-wrap:wrap;
+  }
+
+  .story-close-link{
+    font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+    text-decoration:none;border-bottom:1px solid var(--copper-a35);
+    padding:6px 0;transition:border-color .18s,color .18s;
+
+    &:hover{color:var(--ink);border-bottom-color:var(--ink)}
+    &:focus-visible{outline:2px solid var(--copper);outline-offset:4px;border-radius:1px}
+  }
+
+  .story-close-link--secondary{
+    color:var(--ink-2);border-bottom-color:var(--hair-2);
+
+    &:hover{color:var(--ink);border-bottom-color:var(--ink)}
+    &:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+  }
+
+  .story-close-email{
+    font-family:'Geist Mono',monospace;font-size:12px;font-weight:400;
+    letter-spacing:.06em;color:var(--ink-3);margin:24px 0 0;
+
+    a{
+      color:var(--ink-2);text-decoration:none;
+      border-bottom:1px solid var(--hair-2);
+      transition:color .18s,border-color .18s;
+
+      &:hover{color:var(--copper);border-bottom-color:var(--copper)}
+      &:focus-visible{outline:2px solid var(--copper);outline-offset:4px;border-radius:1px}
+    }
+  }
+
+  /* /our-story mobile (Decision 2: 2x2 stays to 768px, then 1-col) */
+  @media (max-width:768px){
+    .story{padding:20px 22px;margin-bottom:80px}
+    .story-intro{padding-bottom:40px;margin-bottom:48px}
+    .story-hero-quote{font-size:clamp(32px,8vw,48px);max-width:none}
+
+    .story-collision{padding-bottom:56px;margin-bottom:56px}
+    .story-collision-grid{grid-template-columns:1fr;gap:40px}
+    .story-collision-divider{width:auto;height:1px;align-self:auto}
+    .story-collision-close{margin-top:40px}
+
+    .story-founders-list{grid-template-columns:1fr;gap:48px}
+    .story-founder-meta .photo{width:72px;height:72px;font-size:12px}
+
+    .story-close{margin-top:64px;padding-top:40px}
+    .story-close-ctas{gap:16px}
+  }
+
+  /* ═══════════ Investor page — mobile overrides ═══════════ */
+  @media (max-width: 768px) {
+    .investors-register .reg-inv {
+      padding-top: 48px;
+      padding-bottom: 80px;
+    }
+    .inv-intro,
+    .platform,
+    .inv-tam,
+    .inv-compete,
+    .roadmap,
+    .team,
+    .thesis {
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+    .platform .primitive {
+      /* Stack the "Data primitive" label above the title on narrow screens. */
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 22px 22px;
+    }
+    .inv-tam .tam-grid {
+      /* 3-cell horizontal strip collapses to stacked rows. */
+      grid-template-columns: 1fr;
+    }
+    .inv-tam .tam-grid .cell {
+      border-right: none;
+      border-bottom: 1px solid var(--hair);
+      padding: 24px 0;
+    }
+    .inv-tam .tam-grid .cell:last-child {
+      border-bottom: none;
+    }
+    .inv-compete .compete-row {
+      /* Threat table stacks: who on its own line, threat+why below. */
+      grid-template-columns: 1fr;
+      gap: 6px;
+      padding: 16px 0;
+    }
+    .inv-compete .compete-row--head {
+      display: none;
+    }
+    .roadmap .horizon {
+      padding: 22px 22px;
+    }
+    .team .sect-head {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .team-compact-row {
+      /* Narrow screens: shrink the photo cell and stack name/role/line. */
+      grid-template-columns: 56px 1fr;
+      gap: 14px;
+      padding: 16px 0;
+
+      .photo {
+        width: 56px;
+        height: 56px;
+        font-size: 22px;
+      }
+    }
+    .team-compact-body {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .thesis-card {
+      /* 56/64 padding was the desktop editorial feel — at mobile that
+         left only ~200px for text. */
+      padding: 32px 24px;
+    }
+    .thesis-card h2 {
+      font-size: clamp(28px, 7vw, 40px);
+    }
+    .thesis-card .thesis-close {
+      font-size: 18px;
+    }
+  }
+
+/* ═══════════ Marketing font mapping ═══════════ */
+/* Bind --font-body / --font-display to next/font variables. */
+:root{
+  --font-body: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
+  --font-display: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
+}
+
+/* ═══════════ Mobile nav — hamburger + slide-down panel ═══════════ */
+.nav-burger{
+  display:none;
+  width:44px;height:44px;
+  align-items:center;justify-content:center;
+  flex-direction:column;gap:4px;
+  background:transparent;border:1px solid var(--hair-2);border-radius:8px;
+  cursor:pointer;padding:0;
+  transition:background-color .18s, border-color .18s;
+}
+.nav-burger:hover{background:rgba(232,230,227,0.04);border-color:rgba(232,230,227,0.22)}
+.nav-burger .bar{
+  display:block;width:18px;height:1.5px;background:var(--ink);border-radius:2px;
+  transition:transform .22s ease, opacity .18s ease;transform-origin:center;
+}
+.nav-burger .bar-1.is-open{transform:translateY(5.5px) rotate(45deg)}
+.nav-burger .bar-2.is-open{opacity:0}
+.nav-burger .bar-3.is-open{transform:translateY(-5.5px) rotate(-45deg)}
+
+.nav-panel{
+  display:none;
+  position:absolute;left:0;right:0;top:100%;z-index:39;
+  background:var(--bg);
+  border-bottom:1px solid var(--hair);
+  box-shadow:0 20px 40px -20px rgba(0,0,0,.6);
+  padding:16px 24px 24px;
+  flex-direction:column;gap:12px;
+  animation:nav-panel-in .2s ease-out;
+}
+.nav-panel.is-open{display:flex}
+@keyframes nav-panel-in{
+  from{opacity:0;transform:translateY(-8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media (prefers-reduced-motion: reduce){
+  .nav-panel{animation:none}
+  .nav-burger .bar{transition:none}
+}
+.nav-panel-links{display:flex;flex-direction:column;gap:2px}
+.nav-panel-links a{
+  font-family:var(--font-body), 'Geist', sans-serif;font-weight:400;font-size:16px;
+  color:var(--ink-2);
+  padding:14px 12px;border-radius:8px;min-height:48px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:color .16s, background-color .16s;
+}
+.nav-panel-links a:hover,.nav-panel-links a:active{color:var(--ink);background:rgba(232,230,227,0.05)}
+.nav-panel-links a.is-active{color:var(--ink);box-shadow:inset 2px 0 0 var(--copper);background:var(--copper-a04)}
+.nav-panel-links .new{
+  font-family:'Geist Mono',monospace;font-size:9px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--copper);
+  padding:2px 6px;border:1px solid var(--copper-a30);border-radius:3px;
+}
+.nav-panel-cta{
+  display:flex;flex-direction:column;gap:8px;
+  padding-top:12px;margin-top:4px;
+  border-top:1px solid var(--hair);
+}
+.nav-panel-cta .sign{
+  font-size:15px;color:var(--ink-2);
+  padding:14px 12px;border-radius:8px;min-height:48px;
+  display:inline-flex;align-items:center;
+}
+.nav-panel-cta .btn{justify-content:center;padding:14px 18px;font-size:15px}
+
+/* Collapse desktop nav below 900px — sub-rule of Mobile nav above */
+@media (max-width:900px){
+  .nav{grid-template-columns:1fr auto auto;gap:12px;padding:12px 20px}
+  nav.links{display:none}
+  .nav-cta{display:none}
+  .nav-burger{display:inline-flex}
+  .brand .name{font-size:22px}
+}
+
+/* ═══════════ Header focus-visible ═══════════ */
+/* Copper ring for keyboard users, nothing for mouse. */
+header a:focus-visible,
+header button:focus-visible{
+  outline:2px solid var(--copper);
+  outline-offset:3px;
+  border-radius:4px;
+}
+header a:focus:not(:focus-visible),
+header button:focus:not(:focus-visible){
+  outline:none;
+}
+
+/* ═══════════ Coming-soon stub pages ═══════════ */
+.coming-soon{
+  max-width:var(--page-max);margin:80px auto 0;padding:20px 40px;
+}
+.coming-soon-inner{max-width:780px}
+.coming-soon .eb{margin-bottom:24px}
+.coming-soon h1{
+  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+  font-weight:500;
+  font-size:clamp(36px,4.8vw,60px);
+  line-height:1.1;letter-spacing:-.025em;
+  margin:0;color:var(--ink);text-wrap:balance;
+}
+.coming-soon h1 em{font-style:normal;color:var(--copper)}
+.coming-soon p{
+  margin:24px 0 0;max-width:58ch;
+  font-size:18px;line-height:1.55;color:var(--ink-2);
+  text-wrap:pretty;
+}
+.coming-soon-meta{margin-top:32px}
+
+/* ═══════════ A11y utilities ═══════════ */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Memory page — /memory (per DESIGN.md §2–§7 alignment)
+═══════════════════════════════════════════════════════════ */
+.memory-page {
+  /* ── Intro (matches standalone canonical per DESIGN.md §4) ── */
+  .mem-intro {
+    max-width:var(--page-max);
+    margin: 40px auto 0;
+    padding: 20px 40px;
+
+    .eb { margin-bottom: 28px; }
+
+    h1 {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: clamp(44px, 5.2vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -.025em;
+      color: var(--ink);
+      margin: 0 0 28px;
+      max-width: 22ch;
+      text-wrap: balance;
+    }
+
+    .lede {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--ink-2);
+      max-width: 62ch;
+      margin: 0;
+    }
+    .lede em {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-style: italic;
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 400;
+    }
+  }
+
+  /* ── Featured hero surface (Surface 01: tight 2-col, fits viewport) ── */
+  .mem-hero-surface {
+    max-width: 1100px;
+    margin: 20px auto 0;
+    padding: 0 40px;
+  }
+
+  .mem-hero-frame {
+    position: relative;
+    background: rgba(254, 133, 49, 0.03);
+    border: 1px solid var(--hair-2);
+    border-radius: 16px;
+    padding: 22px 28px 20px;
+    overflow: hidden;
+
+    /* Hero-card 2px left gradient per DESIGN.md §5 card chrome */
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 100%;
+      background: linear-gradient(180deg, var(--copper), rgba(254, 133, 49, 0));
+    }
+  }
+
+  /* Card header — brief-title + meta on the left, preview chip on the right */
+  .mem-hero-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--hair-2);
+    gap: 14px;
+    flex-wrap: wrap;
+
+    .mem-hero-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .mem-hero-title {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      line-height: 1.3;
+
+      em { font-weight: 400; }
+    }
+
+    .mem-hero-meta {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-3);
+      letter-spacing: .04em;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+
+      .sep { color: var(--ink-4); opacity: .5; }
+
+      .pulse {
+        display: inline-flex; align-items: center; gap: 6px;
+        color: var(--ink-3);
+
+        &::before {
+          content: "";
+          width: 5px; height: 5px; border-radius: 50%;
+          background: var(--ink-2);
+          box-shadow: 0 0 0 0 rgba(232, 230, 227, 0.35);
+          animation: memPulse 2.4s ease-in-out infinite;
+        }
+      }
+    }
+
+    /* Status chip — semantic label, not a keyword. Demoted from copper
+       to the ink ramp; the uppercase mono-caps treatment already reads
+       as "tag" without needing the accent color. */
+    .mem-hero-chip {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      background: rgba(232, 230, 227, 0.04);
+      border: 1px solid var(--hair-2);
+      border-radius: 4px;
+      padding: 5px 10px;
+      white-space: nowrap;
+    }
+  }
+
+  /* Brief grid — People left, They need right */
+  .mem-brief-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 28px;
+    padding-top: 16px;
+
+    .brief-block {
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  /* Smaller brief-block eyebrow: 10px font + 24px dash (vs 11px / 28px
+     canonical). Everything else inherits from the global .eb. */
+  .mem-hero-surface .eb {
+    font-size: 10px;
+    margin-bottom: 12px;
+
+    &::before { width: 24px; }
+
+    .sub {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      color: var(--ink-3);
+      font-size: 11.5px;
+      letter-spacing: .04em;
+      font-weight: 400;
+      text-transform: none;
+    }
+  }
+
+  /* People — compact stacked rows */
+  .mem-hero-surface .people { display: grid; gap: 8px; }
+  .mem-hero-surface .person {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3px;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--hair);
+
+    &:last-child { border-bottom: 0; }
+
+    .person-main {
+      display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    }
+
+    .person-name {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      line-height: 1.2;
+    }
+
+    .person-role {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-3);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .person-quote {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.35;
+      color: var(--ink-2);
+    }
+
+    .person-cite {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-3);
+      letter-spacing: .04em;
+
+      .person-cite-link { color: var(--ink-3); border-bottom: 1px solid var(--hair); }
+    }
+  }
+
+  .mem-hero-surface .stance {
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 4px;
+
+    /* Champion state — bright ink against the more muted skeptic (ink-2)
+       and the rust blocker. Hierarchy communicated by brightness and
+       hue-family, not the primary accent. */
+    &.champion {
+      color: var(--ink);
+      background: rgba(232, 230, 227, 0.06);
+      border: 1px solid var(--hair-2);
+    }
+    &.skeptic {
+      color: var(--ink-2);
+      background: rgba(232, 230, 227, 0.04);
+      border: 1px solid var(--hair-2);
+    }
+    &.blocker {
+      color: var(--rust);
+      background: rgba(209, 60, 19, 0.10);
+      border: 1px solid rgba(209, 60, 19, 0.26);
+    }
+  }
+
+  /* They need — compact pain rows */
+  .mem-hero-surface .pains { display: grid; gap: 6px; }
+  .mem-hero-surface .pain {
+    padding: 8px 0 8px 14px;
+    border-left: 2px solid var(--hair-2);
+    background: linear-gradient(90deg, rgba(232, 230, 227, 0.03), transparent 60%);
+    border-radius: 0 4px 4px 0;
+
+    .pain-quote {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 14.5px;
+      line-height: 1.3;
+      color: var(--ink);
+      margin: 0 0 4px;
+      letter-spacing: -.005em;
+    }
+
+    .pain-cite {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-3);
+      letter-spacing: .04em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+
+      .pain-cite-link { color: var(--ink-3); border-bottom: 1px solid var(--hair); }
+    }
+  }
+
+  .mem-hero-surface .intensity {
+    display: inline-flex; gap: 3px; align-items: center;
+
+    /* Intensity dots: filled = active, off = muted. Signal is fill
+       state, not hue — so filled uses the ink ramp, not the accent. */
+    .intensity-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--ink-2);
+    }
+    .intensity-dot.off { background: var(--ink-4); opacity: .4; }
+  }
+
+  /* Bridge "also in the brief" strip — outside the card */
+  .mem-hero-bridge {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    .bridge-lead {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-2);
+      line-height: 1.4;
+    }
+
+    .bridge-also {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-3);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      line-height: 1.55;
+
+      .bridge-link {
+        color: var(--copper);
+        text-decoration: none;
+        border-bottom: 1px solid var(--copper-a18);
+        transition: border-color .18s;
+        white-space: nowrap;
+
+        &:hover { border-bottom-color: var(--copper); }
+      }
+    }
+  }
+
+  /* ── Supporting surfaces 02 / 03 / 04 ── */
+  .mem-supporting {
+    max-width:var(--page-max);
+    margin: 120px auto 0;
+    padding: 0 40px;
+  }
+
+  .mem-support-head { margin-bottom: 36px; }
+
+  .mem-support-head .eb {
+    .sub {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      color: var(--ink-3);
+      font-size: 12.5px;
+      letter-spacing: .04em;
+      font-weight: 400;
+      text-transform: none;
+    }
+  }
+
+  .mem-support-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .mem-support-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--hair-2);
+    border-radius: 12px;
+    padding: 26px 26px 22px;
+    display: flex;
+    flex-direction: column;
+
+    .support-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 10px;
+
+      .idx {
+        font-family: 'Geist Mono', monospace;
+        font-size: 10.5px;
+        font-weight: 500;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+      }
+
+      .support-chip {
+        font-family: 'Geist Mono', monospace;
+        font-size: 9.5px;
+        font-weight: 500;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        background: rgba(232, 230, 227, 0.04);
+        border: 1px solid var(--hair-2);
+        border-radius: 4px;
+        padding: 3px 8px;
+      }
+    }
+
+    /* Support-card h3: whole heading uses the accent — h3 and its em
+       share the same color so the title reads as one unit, not a
+       split ink/copper mix. */
+    h3 {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: -.015em;
+      color: var(--copper);
+      margin: 0 0 10px;
+    }
+
+    .support-desc {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-2);
+      margin: 0 0 18px;
+      flex-grow: 1;
+    }
+
+    .support-mock {
+      background: #0A0910;
+      border: 1px solid var(--hair);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    }
+  }
+
+  /* Pain-product mini mock */
+  .mem-support-card .pp-mock {
+    display: grid;
+    gap: 10px;
+
+    .pp-row {
+      display: grid;
+      grid-template-columns: 1fr 70px auto;
+      gap: 10px;
+      align-items: center;
+      font-size: 12.5px;
+
+      .pp-prod { color: var(--ink); font-weight: 500; }
+      .pp-conf {
+        font-family: 'Geist Mono', monospace;
+        font-size: 11px;
+        color: var(--ink-2);
+        min-width: 34px;
+        text-align: right;
+      }
+
+      /* Progress bar communicates by LENGTH. Fill uses the ink ramp
+         so it doesn't compete with keywords for the user's attention. */
+      .mapping-bar {
+        position: relative;
+        height: 5px;
+        border-radius: 3px;
+        background: rgba(232, 230, 227, 0.06);
+        overflow: hidden;
+
+        .mapping-bar-fill {
+          position: absolute; inset: 0;
+          background: linear-gradient(90deg, var(--ink-2), var(--ink-3));
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+
+  /* Contradictions mini mock */
+  .mem-support-card .cx-mock {
+    display: grid;
+    gap: 8px;
+
+    .cx-row {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 12px;
+      align-items: baseline;
+      padding: 6px 0;
+
+      .cx-date {
+        font-family: 'Geist Mono', monospace;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+
+      .cx-quote {
+        font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+        font-style: italic;
+        font-size: 14px;
+        line-height: 1.35;
+        color: var(--ink);
+      }
+    }
+
+    .cx-arrow {
+      text-align: center;
+      font-family: 'Geist Mono', monospace;
+      font-size: 16px;
+      color: var(--ink-3);
+      opacity: .8;
+      line-height: 1;
+      margin: 2px 0;
+    }
+  }
+
+  /* Handoff export mini mock */
+  .mem-support-card .hx-mock {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.7;
+
+    .hx-line { color: var(--ink-2); }
+    .hx-line.muted { color: var(--ink-3); opacity: .85; }
+  }
+
+  /* ── CRM vs Salency compare ── */
+  .mem-compare {
+    max-width:var(--page-max);
+    margin: 120px auto 0;
+    padding: 0 40px;
+  }
+
+  .mem-compare-head { margin-bottom: 36px; max-width: 60ch; }
+
+  .mem-compare-head .eb { margin-bottom: 20px; }
+
+  .mem-compare-head h2 {
+    font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -.025em;
+    color: var(--ink);
+    margin: 0;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .mem-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--hair-2);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+
+    thead th {
+      text-align: left;
+      padding: 16px 22px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      border-bottom: 1px solid var(--hair-2);
+      background: rgba(0, 0, 0, 0.12);
+    }
+    thead th:nth-child(2) { color: var(--ink-3); }
+    /* Salency column header is a keyword — the whole point of the
+       table is to mark THIS column as the answer. Copper earned. */
+    thead th:nth-child(3) { color: var(--copper); }
+
+    td {
+      padding: 18px 22px;
+      vertical-align: top;
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+      border-bottom: 1px solid var(--hair);
+    }
+    tr:last-child td { border-bottom: 0; }
+    td:nth-child(1) { color: var(--ink); font-weight: 500; width: 22%; }
+    td:nth-child(2) { color: var(--ink-3); width: 39%; }
+    td:nth-child(3) { color: var(--ink); width: 39%; }
+  }
+
+  .mem-compare-foot {
+    margin-top: 22px;
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--ink-3);
+
+    a {
+      color: var(--copper);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(254, 133, 49, 0.3);
+      transition: border-color .18s;
+    }
+    a:hover { border-bottom-color: var(--copper); }
+  }
+
+  /* ── Pilot CTA ── */
+  .mem-cta {
+    max-width:var(--page-max);
+    margin: 96px auto 120px;
+    padding: 0 40px;
+    text-align: center;
+
+    /* Slightly wider tracking than the global .eb (.2em vs .18em)
+       + centered block layout because this CTA surface is centered. */
+    .eb {
+      letter-spacing: .2em;
+      margin-bottom: 22px;
+      display: block;
+    }
+
+    h2 {
+      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 4.5vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -.025em;
+      color: var(--ink);
+      margin: 0 auto 18px;
+      max-width: 22ch;
+      text-wrap: balance;
+    }
+
+    .sub {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 16.5px;
+      line-height: 1.6;
+      color: var(--ink-2);
+      max-width: 52ch;
+      margin: 0 auto 30px;
+    }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 960px) {
+    .mem-support-grid { grid-template-columns: 1fr; gap: 18px; }
+  }
+
+  @media (max-width: 860px) {
+    .mem-brief-grid { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  @media (max-width: 720px) {
+    .mem-intro { padding: 20px 22px; margin-top: 48px; }
+    .mem-hero-surface { padding: 0 18px; }
+    .mem-hero-frame { padding: 20px 18px 18px; }
+    .mem-hero-head { flex-direction: column; align-items: flex-start; }
+    .mem-hero-bridge { flex-direction: column; gap: 8px; }
+
+    .mem-compare { margin-top: 72px; padding: 0 22px; }
+
+    /* Table → card-per-row. Signal (col 1) becomes the card caption,
+       CRM and Salency cells label themselves via ::before pseudo-
+       labels so users still know which column is which. Salency cell
+       keeps the brighter ink + subtle copper tint to signal answer. */
+    .mem-table,
+    .mem-table thead,
+    .mem-table tbody,
+    .mem-table tr,
+    .mem-table td,
+    .mem-table th { display: block; }
+    .mem-table { background: transparent; border: 0; border-radius: 0; }
+    .mem-table thead { display: none; }
+    .mem-table tbody tr {
+      border: 1px solid var(--hair-2);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .mem-table tbody tr:last-child { margin-bottom: 0; }
+    .mem-table tbody td {
+      border: 0;
+      padding: 6px 0;
+      width: auto;
+      font-size: 13.5px;
+    }
+    .mem-table tbody td:nth-child(1) {
+      width: auto;
+      font-size: 10.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      font-family: 'Geist Mono', monospace;
+      border-bottom: 1px solid var(--hair);
+      padding-bottom: 10px;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    .mem-table tbody td:nth-child(2)::before {
+      content: "In your CRM";
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 3px;
+    }
+    .mem-table tbody td:nth-child(3) {
+      background: var(--copper-a04);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-top: 6px;
+    }
+    .mem-table tbody td:nth-child(3)::before {
+      content: "In Salency";
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 3px;
+    }
+
+    .mem-cta { margin: 72px auto 72px; padding: 0 22px; }
+  }
+}
+
+@keyframes memPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 230, 227, 0.35); }
+  50% { box-shadow: 0 0 0 5px rgba(232, 230, 227, 0); }
+}
+
+/* ═══════════ Pilot modal (Request-your-pilot form) ═══════════ */
+.pilot-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  animation: pilotModalFadeIn 200ms ease-out;
+}
+@media (min-width: 768px) {
+  .pilot-modal-backdrop { padding: 24px; }
+}
+
+.pilot-modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 42rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: pilotModalFadeZoomIn 200ms ease-out;
+}
+
+/* Close button — pinned top-right of the scrolling panel so it stays
+   visible even when the form content is longer than the viewport.
+   44×44 hit area per WCAG touch-target guidance. */
+.pilot-modal-close {
+  position: sticky;
+  top: 8px;
+  margin-left: auto;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: rgba(20, 17, 25, 0.85);
+  border: 1px solid var(--hair-2);
+  border-radius: 9999px;
+  color: var(--ink-2);
+  cursor: pointer;
+  z-index: 10;
+  transition: color 180ms, background-color 180ms, border-color 180ms;
+}
+.pilot-modal-close:hover,
+.pilot-modal-close:focus-visible {
+  color: var(--ink);
+  background: rgba(32, 29, 36, 0.95);
+  border-color: var(--hair);
+  outline: none;
+}
+.pilot-modal-close-icon {
+  width: 18px;
+  height: 18px;
+}
+
+@keyframes pilotModalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pilotModalFadeZoomIn {
+  from { opacity: 0; transform: scale(.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pilot-modal-backdrop,
+  .pilot-modal-panel { animation: none; }
+}
+
+/* ═══════════ /why-salency D-refactor ═══════════ */
+
+/* 01 · Thesis hero */
+.thesis-hero {
+  max-width: var(--page-max);
+  margin: 40px auto 0;
+  padding: 20px 40px;
+}
+.thesis-hero-inner h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.2vw, 64px);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 16px 0 24px;
+  max-width: 22ch;
+}
+.thesis-hero-inner h1 em { font-style: italic; color: var(--copper); }
+.thesis-hero-inner h1 .soft { color: var(--ink-3); }
+.thesis-hero-inner .lede {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 64ch;
+  margin-bottom: 48px;
+}
+.thesis-hero-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--hair-2);
+  border-bottom: 1px solid var(--hair-2);
+}
+.thesis-hero-cell {
+  padding: 24px 24px 24px 0;
+  border-right: 1px solid var(--hair);
+}
+.thesis-hero-cell:last-child { border-right: none; padding-right: 0; }
+.thesis-hero-cell:not(:first-child) { padding-left: 24px; }
+.thesis-hero-cell .label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 10px;
+  display: block;
+}
+.thesis-hero-cell p { font-size: 14.5px; line-height: 1.55; color: var(--ink-2); }
+
+/* 03 · Memory stack */
+.mem-stack { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
+.mem-stack-head { margin-bottom: 48px; }
+.mem-stack-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 3.8vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  font-weight: 400;
+  color: var(--ink);
+  margin-top: 18px;
+  max-width: 28ch;
+}
+.mem-stack-head h2 em { font-style: italic; color: var(--copper); }
+.mem-stack-rows { border-top: 1px solid var(--hair-2); }
+.mem-stack-row {
+  display: grid;
+  grid-template-columns: 200px 200px 1fr;
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--hair);
+  align-items: baseline;
+}
+.mem-stack-row .layer-label { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--ink); }
+.mem-stack-row .layer-role { font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
+.mem-stack-row .layer-desc { font-size: 15.5px; line-height: 1.6; color: var(--ink-2); }
+.mem-stack-row .layer-desc em { color: var(--copper); font-style: italic; }
+.mem-stack-row--accent .layer-label { color: var(--copper); }
+
+/* Pain-product + contradiction mock rows (shared by /memory supporting cards) */
+.pp-row { display: grid; grid-template-columns: 1fr 100px 40px; align-items: center; gap: 10px; padding: 8px 0; }
+.pp-row .pp-prod { color: var(--ink-2); }
+.pp-row .pp-conf { color: var(--ink-3); text-align: right; }
+.cx-row { display: grid; grid-template-columns: 60px 1fr; gap: 12px; padding: 6px 0; }
+.cx-row .cx-date { color: var(--ink-3); }
+.cx-row .cx-quote { color: var(--ink); }
+.cx-arrow { color: var(--ink-3); text-align: center; margin: 4px 0; }
+
+/* 05 · Compounds (page visual anchor) */
+.compounds { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
+.compounds-head { margin-bottom: 64px; }
+.compounds-head h2 {
+  font-family: var(--font-display); font-size: clamp(36px, 4vw, 54px); line-height: 1.06;
+  letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 18px; max-width: 22ch;
+}
+.compounds-head h2 em { font-style: italic; color: var(--copper); }
+.compounds-timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-top: 48px; }
+.compounds-rail {
+  position: absolute; top: 24px; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--copper), rgba(254,133,49,0));
+}
+.compounds-step { position: relative; padding-top: 24px; }
+.compounds-marker {
+  position: absolute; top: -32px; left: 0;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em;
+  color: var(--copper); background: var(--bg); padding: 0 8px 0 0;
+}
+.compounds-step h4 { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+.compounds-step p { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+.compounds-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hair); font-size: 15px; color: var(--ink-3); max-width: 64ch; }
+
+/* Gong table takeaway */
+.notetaker-takeaway { margin-top: 28px; font-family: var(--font-display); font-size: 18px; line-height: 1.5; color: var(--ink); max-width: 60ch; }
+.notetaker-takeaway em { font-style: italic; color: var(--copper); }
+
+/* 08 · Not for you */
+.notfor { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
+.notfor-head { margin-bottom: 40px; }
+.notfor-head h2 { font-family: var(--font-display); font-size: clamp(30px, 3.2vw, 40px); line-height: 1.1; letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 16px; max-width: 28ch; }
+.notfor-head h2 em { font-style: italic; color: var(--copper); }
+.notfor-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--hair-2); }
+.notfor-list li { display: grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--hair); align-items: baseline; }
+.notfor-list .notfor-idx { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; color: var(--ink-3); }
+.notfor-list .notfor-body { font-size: 15.5px; line-height: 1.65; color: var(--ink-2); }
+.notfor-list .notfor-body strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; }
+.notfor-foot { margin-top: 28px; font-size: 14.5px; line-height: 1.65; color: var(--ink-3); max-width: 72ch; }
+.notfor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 8px; }
+.notfor-col-head { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px; font-weight: 400; }
+.notfor-list--paired li { grid-template-columns: 1fr; gap: 0; }
+@media (max-width: 768px) { .notfor-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+/* Pilot CTA */
+.why-cta { max-width: var(--page-max); margin: 96px auto 120px; padding: 0 40px; text-align: center; }
+.why-cta .eb { letter-spacing: .2em; margin-bottom: 22px; display: block; }
+.why-cta .eb::before { content: none; }
+.why-cta h2 { font-family: var(--font-display); font-size: clamp(34px, 3.8vw, 48px); line-height: 1.1; letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-bottom: 20px; }
+.why-cta h2 em { font-style: italic; color: var(--copper); }
+.why-cta .sub { font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 56ch; margin: 0 auto 28px; }
+
+/* Mobile overrides */
+@media (max-width: 768px) {
+  .thesis-hero { padding: 0 22px; }
+  .thesis-hero-meta { grid-template-columns: 1fr; }
+  .thesis-hero-cell { border-right: none; border-bottom: 1px solid var(--hair); padding: 20px 0; }
+  .thesis-hero-cell:last-child { border-bottom: none; }
+  .thesis-hero-cell:not(:first-child) { padding-left: 0; }
+
+  .mem-stack { margin-top: 72px; padding: 0 22px; }
+  .mem-stack-row { grid-template-columns: 1fr; gap: 8px; }
+
+  .compounds { margin-top: 72px; padding: 0 22px; }
+  .compounds-timeline { grid-template-columns: 1fr; gap: 40px; padding-top: 8px; }
+  .compounds-rail { display: none; }
+  .compounds-step { padding-top: 0; padding-left: 60px; }
+  .compounds-marker { position: static; display: inline-block; margin-bottom: 8px; }
+
+  .notfor { margin-top: 72px; padding: 0 22px; }
+  .notfor-list li { grid-template-columns: 1fr; gap: 4px; }
+
+  .why-cta { margin: 72px auto 72px; padding: 0 22px; }
+}

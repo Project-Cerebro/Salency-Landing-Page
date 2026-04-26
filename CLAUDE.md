@@ -52,6 +52,7 @@ When editing marketing copy: check `components/PageClient.tsx` first. `app/page.
 - Fonts loaded in `app/layout.tsx`: Geist Sans (body), Outfit (display), Instrument Serif (hero accent). No Geist Mono.
 - `components/ScrollReveal.tsx` wraps below-fold sections; uses IntersectionObserver and respects `prefers-reduced-motion`.
 - `components/SpotlightCard.tsx` provides a mouse-tracked radial gradient for cards; `ProblemCard.tsx` is a server-component wrapper around it.
+- `packages/brand-reveal/` — portable animated wordmark ("Sales + Saliency" → "Salency") and loading-screen splash, packaged for drop-in use in other Salency frontend apps. Exports `<BrandReveal />`, `<BrandRevealSplash />`, plus two standalone stylesheets (`styles.css` = wordmark-only, `loading-screen.css` = full splash chrome + wordmark). Not consumed by this repo — kept as a design primitive only.
 - Prefer explicit `transition-property` lists over `transition-all`.
 
 ### Client/server split
@@ -67,3 +68,16 @@ Server by default. Client components (`'use client'`): `PageClient`, `Header`, `
 - `DESIGN.md` — full proposed system with tokens, competitive research, SAFE/RISK classification.
 - `SALENCY_LANDING_PAGE.md`, `TASKS.md` — product/positioning context and outstanding work.
 - `.gstack/design-reports/design-preview.html` — live token preview (open in browser).
+
+## Branching strategy (GitHub Flow)
+
+**Trunk = `main`. Feature branches branch off `main`, PR to `main`, merge to `main`. `main` auto-deploys to production.**
+
+- **Never** branch off `test-revamp`, `test`, or any long-lived non-main branch. They're obsolete for this repo.
+- **Vercel preview URL per PR** is the staging environment — review the preview, then merge. No intermediate staging branch needed.
+- **Branch names:** `content/*` for copy, `design/*` for visual, `feat/*` for features, `fix/*` for bugs, `refactor/*` for restructure.
+- **One PR = one logical change.** Small, reviewable, bisectable.
+
+**Why:** Salency's landing page is small + fast-moving. The earlier `feature → test-revamp → main` flow caused ordering bugs (e.g., PR #36 shipped before PR #37, breaking prod copy) and double-PR overhead with no integration-risk benefit that Vercel previews don't already cover.
+
+**If you see an older PR targeting `test-revamp`:** retarget to `main` with `gh pr edit <N> --base main`.

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Outfit, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono, Outfit, Instrument_Serif, Instrument_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { PilotModal } from "@/components/PilotModal";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,6 +22,18 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
 });
 
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://salency.ai"),
   title: "Salency — AI that remembers every customer pain your sales reps forget",
@@ -30,14 +43,14 @@ export const metadata: Metadata = {
     description: "Sales intelligence that turns call transcripts into structured context. Extract pains, map them to your products, and generate follow-ups.",
     url: "https://salency.ai",
     siteName: "Salency",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Salency — Sales Intelligence" }],
+    images: [{ url: "/salency-mark.svg", alt: "Salency" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Salency — AI that remembers every customer pain your sales reps forget",
     description: "Sales intelligence that turns call transcripts into structured context.",
-    images: ["/og.png"],
+    images: ["/salency-mark.svg"],
   },
 };
 
@@ -49,9 +62,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${outfit.variable} ${instrumentSerif.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${instrumentSerif.variable} ${instrumentSans.variable} antialiased`}
       >
         {children}
+        <PilotModal />
         <Analytics />
       </body>
     </html>
