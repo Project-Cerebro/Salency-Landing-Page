@@ -31,13 +31,13 @@ export default function Privacy() {
           <p>Form submissions are sent via Resend (our email provider) and stored in our internal systems. We do not store credit card information or sensitive financial data.</p>
 
           <h2 className="text-lg font-bold text-white mt-8 mb-3">Your Rights</h2>
-          <p>You may request access to, correction of, or deletion of your personal data at any time by emailing <a href="mailto:founders@salency.ai" className="text-accent-warm hover:underline">founders@salency.ai</a>.</p>
+          <p>You may request access to, correction of, or deletion of your personal data at any time by emailing <a href="mailto:hello@salency.ai" className="text-accent-warm hover:underline">hello@salency.ai</a>.</p>
 
           <h2 className="text-lg font-bold text-white mt-8 mb-3">Changes</h2>
           <p>We may update this policy from time to time. Changes will be posted on this page with an updated effective date.</p>
 
           <h2 className="text-lg font-bold text-white mt-8 mb-3">Contact</h2>
-          <p>Questions? Email us at <a href="mailto:founders@salency.ai" className="text-accent-warm hover:underline">founders@salency.ai</a>.</p>
+          <p>Questions? Email us at <a href="mailto:hello@salency.ai" className="text-accent-warm hover:underline">hello@salency.ai</a>.</p>
         </div>
       </main>
       <SiteFooter />

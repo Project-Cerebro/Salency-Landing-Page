@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FOUNDERS } from '@/lib/founders';
+import { FOUNDERS_EMAIL } from '@/lib/links';
 
 export function InvestorsSection() {
   return (
@@ -23,7 +24,9 @@ export function InvestorsSection() {
               <span className="sep">·</span>
               <span>Early access opening Q2 2026</span>
               <span className="sep">·</span>
-              <span>Private deck available on request</span>
+              <a href={`mailto:${FOUNDERS_EMAIL}`}>
+                Private deck available on request
+              </a>
             </div>
           </div>
         </div>
