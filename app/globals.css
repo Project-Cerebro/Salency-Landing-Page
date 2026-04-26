@@ -1179,11 +1179,11 @@ html {
   }
   .notetaker-table thead th.col-s{color:var(--copper);background:var(--copper-a04)}
   .notetaker-table thead th.col-s .brand{
-    display:block;font-family:var(--font-display), 'Instrument Serif', serif;font-size:22px;font-weight:400;
+    display:block;font-family:var(--font-body), 'Instrument Sans', system-ui, sans-serif;font-size:22px;font-weight:400;
     letter-spacing:-.01em;color:var(--ink);text-transform:none;margin-top:4px;
   }
   .notetaker-table thead th.col-n .brand{
-    display:block;font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;font-size:18px;
+    display:block;font-family:var(--font-body), 'Instrument Sans', system-ui, sans-serif;font-weight:500;font-size:18px;
     color:var(--ink-2);text-transform:none;letter-spacing:-.005em;margin-top:4px;
   }
   .notetaker-table tbody td{
