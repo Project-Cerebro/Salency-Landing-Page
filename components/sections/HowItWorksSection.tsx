@@ -11,9 +11,10 @@ export function HowItWorksSection() {
           </h2>
         </div>
         <p className="lede">
-          Any transcript &mdash; <em>AI notetaker</em> or raw &mdash; runs
-          through the same pipeline, and the output is{' '}
-          <em>structured, cited, queryable</em> before your next stand-up.
+          Drop in a Gong, Fireflies, Otter, Granola, or Fathom transcript. Or
+          paste raw text from Zoom, Meet, or Teams. Same pipeline, same
+          output: <em>structured, cited, queryable</em> before your next
+          stand-up.
         </p>
       </div>
       <div className="how-steps">
