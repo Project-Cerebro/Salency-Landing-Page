@@ -16,7 +16,7 @@ const organizationSchema = {
   logo: `${SITE_URL}/salency-mark.svg`,
   description:
     "Institutional memory for B2B sales teams. Salency turns every call into structured, cited context — so reps stop losing deals to forgotten signals and any successor inherits full account history.",
-  email: "founders@salency.ai",
+  email: "hello@salency.ai",
   sameAs: [
     "https://www.linkedin.com/company/salency",
   ],

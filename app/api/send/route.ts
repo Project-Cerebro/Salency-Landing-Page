@@ -107,7 +107,7 @@ export async function POST(request: Request) {
 
         const adminEmailFn = resend.emails.send({
             from: 'Salency Admin <onboarding@resend.dev>',
-            to: ['founders@salency.ai'],
+            to: ['hello@salency.ai'],
             subject: `New Pilot Request: ${escapeHtml(name)} · ${escapeHtml(website)}`,
             html: `
         <h1>New Pilot Request</h1>
