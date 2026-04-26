@@ -21,6 +21,7 @@ export const FOUNDERS: Founder[] = [
     role: 'Co-founder & CEO',
     initials: 'HT',
     photoVariant: '',
+    linkedin: 'https://www.linkedin.com/in/howardhwt/',
     shortBio: (
       <>
         Founding AE at Viggle. 2+ years at Sequence as BD &amp; Partnerships
@@ -46,6 +47,7 @@ export const FOUNDERS: Founder[] = [
     role: 'Co-founder & Product',
     initials: 'NI',
     photoVariant: 'photo--violet',
+    linkedin: 'https://www.linkedin.com/in/nikkilkip/',
     shortBio: (
       <>
         Three years as a data analyst in B2B SaaS. Operations roles across
@@ -66,6 +68,7 @@ export const FOUNDERS: Founder[] = [
     role: 'Founding Engineer',
     initials: 'BO',
     photoVariant: 'photo--teal',
+    linkedin: 'https://www.linkedin.com/in/jideokusanya/',
     shortBio: (
       <>
         Scaled MakersValley from 0 to $2M ARR (6.5y, NYC). Ships
