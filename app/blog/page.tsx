@@ -8,7 +8,7 @@ import { FOUNDERS } from '@/lib/founders';
 export const metadata: Metadata = {
   title: 'Build log · Salency',
   description:
-    'Long-form thinking on institutional memory, sales call intelligence, and the layer between Gong and the rep who inherits the account.',
+    'Long-form thinking on institutional memory, sales call intelligence, and the layer between the call recording and the rep who inherits the account.',
   alternates: { canonical: '/blog' },
   robots: { index: true, follow: true },
 };
@@ -35,7 +35,7 @@ export default function BlogIndexPage() {
           <h1>Long-form thinking from the team building it.</h1>
           <p className="blog-index-lede">
             Institutional memory, sales call intelligence, and the layer between
-            Gong and the rep who inherits the account.
+            the call recording and the rep who inherits the account.
           </p>
         </header>
         <ul className="blog-index-list">

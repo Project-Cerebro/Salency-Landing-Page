@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 export const runtime = 'nodejs';
-export const alt = 'Salency vs Gong — what to do with call recordings';
+export const alt = 'Why Salency — what to do after the call recording';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -58,7 +58,7 @@ export default async function Image() {
               color: '#E8925A',
             }}
           >
-            Salency vs Gong
+            Why Salency
           </div>
           <div
             style={{
@@ -74,7 +74,7 @@ export default async function Image() {
             }}
           >
             <div style={{ color: '#9B9A97' }}>
-              Gong records your calls.
+              Notetakers record your calls.
             </div>
             <div>Salency solves what happens after.</div>
           </div>

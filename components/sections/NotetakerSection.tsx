@@ -1,4 +1,4 @@
-export function GongSection() {
+export function NotetakerSection() {
   return (
     <section className="notetaker">
       <div className="notetaker-head">
