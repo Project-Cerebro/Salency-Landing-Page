@@ -10,8 +10,10 @@ export function PilotCtaSection() {
         Start the memory. <em>Inherit it forever.</em>
       </h2>
       <p className="sub">
-        First account memory stands up in a week. By month two, the rep
-        inheriting it reads the story, not a notes field.
+        Week one, your existing calls become searchable memory. Every handoff
+        after that &mdash; internal or customer-side &mdash; reads the story
+        instead of restarting the relationship. No notetaker integration
+        required to start.
       </p>
       <button
         type="button"
