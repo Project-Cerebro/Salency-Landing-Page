@@ -74,14 +74,12 @@ export const metadata: Metadata = {
     description: "Sales intelligence that turns call transcripts into structured context. Extract pains, map them to your products, and generate follow-ups.",
     url: "https://www.salency.ai",
     siteName: "Salency",
-    images: [{ url: "/salency-mark.svg", alt: "Salency" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Salency — AI that remembers every customer pain your sales reps forget",
     description: "Sales intelligence that turns call transcripts into structured context.",
-    images: ["/salency-mark.svg"],
   },
 };
 
