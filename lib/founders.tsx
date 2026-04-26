@@ -11,6 +11,7 @@ export interface Founder {
   photoSrc?: string;
   shortBio: ReactNode;
   longBio: ReactNode;
+  linkedin?: string;
 }
 
 export const FOUNDERS: Founder[] = [
