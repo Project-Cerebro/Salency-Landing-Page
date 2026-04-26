@@ -89,6 +89,7 @@ export const FOUNDERS: Founder[] = [
     role: 'Founding Designer',
     initials: 'SG',
     photoVariant: 'photo--amber',
+    linkedin: 'https://www.linkedin.com/in/shristi1/',
     shortBio: (
       <>
         Shipped Salency&rsquo;s V1. Five years enterprise B2B design — Index
