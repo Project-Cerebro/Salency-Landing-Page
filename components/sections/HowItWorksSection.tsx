@@ -82,7 +82,7 @@ export function HowItWorksSection() {
         <span>
           Works with any transcript.<span className="sep">·</span>
           Citations and confidence scores on every extraction.<span className="sep">·</span>
-          <Link href="/why-salency">See our take on Gong &rarr;</Link>
+          <Link href="/why-salency">Why Salency &rarr;</Link>
         </span>
       </div>
     </section>

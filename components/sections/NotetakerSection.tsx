@@ -1,4 +1,4 @@
-export function GongSection() {
+export function NotetakerSection() {
   return (
     <section className="notetaker">
       <div className="notetaker-head">
@@ -102,7 +102,7 @@ export function GongSection() {
         </tbody>
       </table>
       <p className="notetaker-takeaway">
-        Gong tells you <em>what happened.</em> Salency tells you{' '}
+        Notetakers tell you <em>what happened.</em> Salency tells you{' '}
         <em>what to do next.</em>
       </p>
     </section>

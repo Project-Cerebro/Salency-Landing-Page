@@ -197,7 +197,7 @@ export function MemorySection() {
               </Link>
               {' · '}
               <Link href="/why-salency" className="bridge-link">
-                See our take on Gong &rarr;
+                Why Salency &rarr;
               </Link>
             </span>
           </div>
