@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     title: 'Salency vs Gong — what to do with call recordings',
     description:
       'Gong records your calls. Salency solves what happens after — institutional memory for revenue teams.',
-    url: 'https://salency.ai/why-salency',
+    url: 'https://www.salency.ai/why-salency',
     type: 'website',
   },
 };

@@ -4,6 +4,7 @@ import { FOUNDERS_EMAIL, PILOT_FORM_ANCHOR } from '@/lib/links';
 export function OurStorySection() {
   return (
     <section className="story">
+      <h1 className="sr-only">Our story</h1>
       {/* Layer 1 — Hero: the founding observation */}
       <div className="story-intro">
         <span className="eb">Our story</span>
