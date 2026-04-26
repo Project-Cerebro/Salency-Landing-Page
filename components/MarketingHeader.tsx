@@ -16,6 +16,7 @@ const links: NavLink[] = [
   { label: 'Why Salency', href: '/why-salency' },
   { label: 'Memory', href: '/memory' },
   { label: 'Our story', href: '/our-story' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Investors', href: '/investors' },
   { label: 'Pricing', href: '/pricing' },
 ];
