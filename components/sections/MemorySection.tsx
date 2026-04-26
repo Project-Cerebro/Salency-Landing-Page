@@ -195,6 +195,10 @@ export function MemorySection() {
               <Link href="/investors#platform" className="bridge-link">
                 Why not Salesforce &rarr;
               </Link>
+              {' · '}
+              <Link href="/why-salency" className="bridge-link">
+                See our take on Gong &rarr;
+              </Link>
             </span>
           </div>
         </section>
