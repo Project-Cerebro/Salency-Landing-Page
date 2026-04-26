@@ -14,15 +14,14 @@ export function InvestorsSection() {
               We own the layer.
             </h1>
             <p>
-              Salency is a system of record for what your accounts actually
-              told you — a structured, cited, queryable memory layer that every
-              future revenue tool will inherit from. Below: what we&apos;re
-              building, who&apos;s building it, and why this moat compounds.
+              Salency is the structured, cited, queryable memory layer for
+              what your accounts actually told you — the input every future
+              revenue tool will inherit from. Every call compounds the graph.
             </p>
             <div className="inv-intro-meta">
-              <span>Pre-seed · Q2 2026</span>
+              <span>Pre-seed</span>
               <span className="sep">·</span>
-              <span>Early access opening Q2 2026</span>
+              <span>Pilot cohort · Spring 2026</span>
               <span className="sep">·</span>
               <a href={`mailto:${FOUNDERS_EMAIL}`}>
                 Private deck available on request
