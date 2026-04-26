@@ -37,7 +37,7 @@ export default function Terms() {
           <p>We may update these terms from time to time. Continued use of the site constitutes acceptance of the revised terms.</p>
 
           <h2 className="text-lg font-bold text-white mt-8 mb-3">Contact</h2>
-          <p>Questions? Email us at <a href="mailto:founders@salency.ai" className="text-accent-warm hover:underline">founders@salency.ai</a>.</p>
+          <p>Questions? Email us at <a href="mailto:hello@salency.ai" className="text-accent-warm hover:underline">hello@salency.ai</a>.</p>
         </div>
       </main>
       <SiteFooter />
