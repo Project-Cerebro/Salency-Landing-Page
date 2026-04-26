@@ -1,5 +1,14 @@
+import type { Metadata } from 'next';
 import { MarketingHeader } from '@/components/MarketingHeader';
 import { SiteFooter } from '@/components/sections/SiteFooter';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service · Salency',
+  description:
+    'The terms that govern use of salency.ai and any pilot services provided by Salency.',
+  alternates: { canonical: '/terms' },
+  robots: { index: true, follow: true },
+};
 
 export default function Terms() {
   return (

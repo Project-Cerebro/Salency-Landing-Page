@@ -1,5 +1,14 @@
+import type { Metadata } from 'next';
 import { MarketingHeader } from '@/components/MarketingHeader';
 import { SiteFooter } from '@/components/sections/SiteFooter';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy · Salency',
+  description:
+    'How Salency collects, uses, and protects information from visitors and pilot applicants.',
+  alternates: { canonical: '/privacy' },
+  robots: { index: true, follow: true },
+};
 
 export default function Privacy() {
   return (
