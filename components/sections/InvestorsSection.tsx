@@ -248,7 +248,7 @@ export function InvestorsSection() {
             </div>
 
             <Link href="/our-story" className="team-compact-link">
-              Full bios + founding story on /our-story →
+              Read our founding story →
             </Link>
           </section>
 
