@@ -47,7 +47,7 @@ export function CompoundsSection() {
       </div>
 
       <p className="compounds-foot">
-        Flatten the graph into flat fields and you kill the thing. The memory
+        Flatten the graph into a CRM row and you kill the thing. The memory
         layer has to live on Salency, or it isn&rsquo;t memory.
       </p>
     </section>

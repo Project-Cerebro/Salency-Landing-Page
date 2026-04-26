@@ -23,17 +23,20 @@ export const FOUNDERS: Founder[] = [
     photoVariant: '',
     shortBio: (
       <>
-        Four founding-AE / BD seats in five years. Ran the HubSpot→Monday CRM
-        migration at Sequence.
+        Founding AE at Viggle. 2+ years at Sequence as BD &amp; Partnerships
+        Manager &mdash; ran the HubSpot&rarr;Monday CRM migration there.
       </>
     ),
     longBio: (
       <>
-        Four founding-AE/BD seats in five years —{' '}
-        <em>Sequence, Treasure, Nijta, Viggle</em> (a16z). Same handoff
-        failure on every team. Ran the HubSpot→Monday CRM migration at
-        Sequence. MBET, Waterloo. Earlier: MUFG HK, led their first Panda
-        Bond issuance.
+        Founding AE at <em>Viggle</em> (a16z-backed) &mdash; pilot-to-paid
+        motions with the exact B2B buyers Salency sells to today. Four
+        early-stage GTM seats in five years across{' '}
+        <em>Sequence, Treasure, Nijta, Viggle</em>, including 2+ years at
+        Sequence as BD &amp; Partnerships Manager. Ran the HubSpot&rarr;Monday
+        CRM migration there &mdash; came out knowing the rep&rsquo;s actual
+        context lives in the call, not the CRM row. Earlier: MUFG HK, led
+        their first Panda Bond issuance. MBET, Waterloo.
       </>
     ),
   },
