@@ -4,6 +4,7 @@ import { FOUNDERS_EMAIL, PILOT_FORM_ANCHOR } from '@/lib/links';
 export function OurStorySection() {
   return (
     <section className="story">
+      <h1 className="sr-only">Our story</h1>
       {/* Layer 1 — Hero: the founding observation */}
       <div className="story-intro">
         <span className="eb">Our story</span>
@@ -35,11 +36,12 @@ export function OurStorySection() {
             </span>
             <p>
               She heard the line first. Three years running operational
-              reporting at Adaptavist Group across HubSpot/Snowflake/DBT,
-              she&rsquo;d been watching a version of the same failure from
-              the analyst side &mdash; documentation out of date the week it
-              ships, real context living in Slack threads no one reads. When
-              her coworker said it out loud, she recognized the seam.{' '}
+              reporting at Adaptavist Group across sales, services, and
+              finance, she&rsquo;d been watching a version of the same
+              failure from the analyst side &mdash; documentation out of date
+              the week it ships, real context living in Slack threads no one
+              reads. When her coworker said it out loud, she recognized the
+              seam.{' '}
               <em>
                 If the evidence lives in conversations, why is a human still
                 writing the doc?

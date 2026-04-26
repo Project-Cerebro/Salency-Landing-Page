@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Investors · Salency',
     description:
       'The thesis: institutional memory is the next bottleneck for B2B revenue teams.',
-    url: 'https://salency.ai/investors',
+    url: 'https://www.salency.ai/investors',
     type: 'website',
   },
 };
