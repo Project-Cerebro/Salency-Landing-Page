@@ -2,7 +2,38 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Outfit, Instrument_Serif, Instrument_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { PilotModal } from "@/components/PilotModal";
+import { JsonLd } from "@/components/JsonLd";
 import "./globals.css";
+
+const SITE_URL = "https://salency.ai";
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Salency",
+  alternateName: "Cerebro",
+  url: SITE_URL,
+  logo: `${SITE_URL}/salency-mark.svg`,
+  description:
+    "Institutional memory for B2B sales teams. Salency turns every call into structured, cited context — so reps stop losing deals to forgotten signals and any successor inherits full account history.",
+  email: "founders@salency.ai",
+  sameAs: [
+    "https://www.linkedin.com/company/salency",
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Salency",
+  url: SITE_URL,
+  description:
+    "AI that remembers every customer pain your sales reps forget.",
+  publisher: {
+    "@type": "Organization",
+    name: "Salency",
+  },
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,6 +95,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${instrumentSerif.variable} ${instrumentSans.variable} antialiased`}
       >
+        <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
         {children}
         <PilotModal />
         <Analytics />
