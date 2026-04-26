@@ -1193,7 +1193,7 @@ html {
   .notetaker-table tbody tr:last-child td{border-bottom:0}
   .notetaker-table tbody td.dim{
     color:var(--ink);font-weight:500;font-size:14px;
-    font-family:'Geist Mono',monospace;letter-spacing:.02em;width:24%;
+    font-family:var(--font-body), 'Instrument Sans', system-ui, sans-serif;width:24%;
   }
   .notetaker-table tbody td.col-s{background:var(--copper-a03);color:var(--ink)}
   .notetaker-table tbody td.col-s strong{color:var(--copper);font-weight:500}
