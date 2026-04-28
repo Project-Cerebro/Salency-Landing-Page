@@ -1593,7 +1593,11 @@ html {
       color:var(--ink);letter-spacing:-.02em;
     }
     nav{display:flex;gap:24px;flex-wrap:wrap}
-    nav a{color:var(--ink-3);transition:color .18s}
+    nav a{
+      color:var(--ink-3);transition:color .18s;
+      display:inline-flex;align-items:center;
+      min-height:44px;padding:8px 0;
+    }
     nav a:hover{color:var(--copper)}
   }
 
