@@ -246,7 +246,7 @@ export function InvestorsSection() {
               ))}
             </div>
 
-            <Link href="/our-story" className="team-compact-link">
+            <Link href="/our-story#team" className="team-compact-link">
               Read our founding story →
             </Link>
           </section>
