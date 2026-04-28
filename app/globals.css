@@ -1387,6 +1387,50 @@ html {
     margin-top:44px;
   }
 
+  /* Changelog entry — date + kind pill + title.
+     Date is mono caps in --copper. Kind is a small inline pill that
+     uses a fixed muted palette for readability against the dark surface. */
+  .changelog-page .changelog-meta{
+    display:inline-flex;align-items:center;gap:14px;
+    margin-bottom:10px;
+  }
+  .changelog-page .changelog-meta time{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;font-weight:500;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--copper);
+  }
+  .changelog-kind{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;
+    padding:3px 8px;border-radius:4px;
+    border:1px solid var(--hair-2);
+    background:rgba(255,255,255,0.02);
+    color:var(--ink-2);
+    line-height:1.4;
+  }
+  .changelog-kind--shipped{
+    color:#A5DEB6;border-color:rgba(52,211,153,.32);background:rgba(52,211,153,.06);
+  }
+  .changelog-kind--building{
+    color:#FECDA8;border-color:var(--copper-a30);background:var(--copper-a08);
+  }
+  .changelog-kind--research{
+    color:#C5C0F0;border-color:rgba(140,127,255,.32);background:rgba(140,127,255,.06);
+  }
+  .changelog-kind--operations{
+    color:var(--ink-2);border-color:var(--hair-2);background:rgba(255,255,255,.02);
+  }
+  .changelog-page .changelog-title{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;
+    font-size:clamp(24px, 2.6vw, 30px);
+    line-height:1.2;letter-spacing:-.015em;
+    color:var(--ink);
+    margin:0 0 12px;
+    text-wrap:balance;
+  }
+
   /* Tabular figures on financial stats — keeps numeric strings
      aligned and prevents jitter when values change. Applies to all
      .figure stat displays under /investors sections. */
@@ -3157,3 +3201,4 @@ header button:focus:not(:focus-visible){
 
   .why-cta { margin: 72px auto 72px; padding: 0 22px; }
 }
+
