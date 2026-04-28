@@ -10,17 +10,38 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+type EntryKind = 'shipped' | 'building' | 'research' | 'operations';
+
 type Entry = {
   id: string;
-  date: string;
+  /** ISO date for <time datetime>; render uses formatDate. */
+  iso: string;
+  kind: EntryKind;
   title: string;
   body: React.ReactNode;
 };
 
+const KIND_LABEL: Record<EntryKind, string> = {
+  shipped: 'Shipped',
+  building: 'Building',
+  research: 'Research',
+  operations: 'Operations',
+};
+
+function formatDate(iso: string): string {
+  const d = new Date(iso + 'T00:00:00Z');
+  return d.toLocaleDateString('en-US', {
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
 const ENTRIES: Entry[] = [
   {
     id: '2026-04-seo-foundation',
-    date: 'April 2026',
+    iso: '2026-04-15',
+    kind: 'shipped',
     title: 'SEO foundation shipped',
     body: (
       <>
@@ -33,7 +54,8 @@ const ENTRIES: Entry[] = [
   },
   {
     id: '2026-04-v1-build',
-    date: 'April 2026',
+    iso: '2026-04-01',
+    kind: 'building',
     title: 'V1 build underway',
     body: (
       <>
@@ -45,8 +67,9 @@ const ENTRIES: Entry[] = [
     ),
   },
   {
-    id: '2026-spring-user-interviews',
-    date: 'Spring 2026',
+    id: '2026-03-user-interviews',
+    iso: '2026-03-15',
+    kind: 'research',
     title: 'User interview cycle running',
     body: (
       <>
@@ -58,8 +81,9 @@ const ENTRIES: Entry[] = [
     ),
   },
   {
-    id: '2026-spring-accelerators',
-    date: 'Spring 2026',
+    id: '2026-03-accelerators',
+    iso: '2026-03-01',
+    kind: 'operations',
     title: 'Accelerator applications submitted',
     body: (
       <>
@@ -75,7 +99,7 @@ export default function ChangelogPage() {
   return (
     <div className="page">
       <MarketingHeader />
-      <main className="pt-32 pb-24 px-6 max-w-3xl mx-auto">
+      <main className="changelog-page pt-32 pb-24 px-6 max-w-3xl mx-auto">
         <span className="eb mb-6 inline-flex">Build log</span>
         <h1 className="text-4xl md:text-5xl font-semibold text-white mb-6 tracking-tight">
           What we&rsquo;re shipping.
@@ -87,13 +111,21 @@ export default function ChangelogPage() {
 
         <div className="space-y-14">
           {ENTRIES.map((entry) => (
-            <article key={entry.id}>
-              <div className="text-xs font-mono uppercase tracking-[0.16em] text-copper mb-2">
-                {entry.date}
+            <article key={entry.id} className="changelog-entry">
+              <div className="changelog-meta">
+                <time
+                  className="num"
+                  dateTime={entry.iso}
+                >
+                  {formatDate(entry.iso)}
+                </time>
+                <span className={`changelog-kind changelog-kind--${entry.kind}`}>
+                  {KIND_LABEL[entry.kind]}
+                </span>
               </div>
               <h2
                 id={entry.id}
-                className="text-2xl font-semibold text-white mb-3 tracking-tight"
+                className="changelog-title"
               >
                 {entry.title}
               </h2>
