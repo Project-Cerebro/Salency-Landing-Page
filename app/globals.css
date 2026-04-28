@@ -992,7 +992,7 @@ html {
   .cta-card .eb{display:block;margin-bottom:20px}
   .cta-card h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(44px,5.5vw,72px);line-height:1.02;letter-spacing:-.025em;
+    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
     margin:0 auto;max-width:20ch;color:var(--ink);text-wrap:balance;
   }
   .cta-card .sub{
@@ -1014,7 +1014,7 @@ html {
   .how-head .eb{margin-bottom:18px;display:flex}
   .how-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(36px,5vw,64px);line-height:1.03;letter-spacing:-.025em;
+    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
     margin:0;color:var(--ink);max-width:16ch;text-wrap:balance;
   }
   /* .how-head mobile: 2-col headline+lede stacks, same treatment as
@@ -1052,8 +1052,8 @@ html {
   .how-step .idx::after{content:"";flex:1;height:1px;background:var(--hair)}
   .how-step .how-step-action{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(26px, 5vw, 34px);
-    line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin:0 0 14px;
+    font-size:clamp(22px, 2.4vw, 28px);
+    line-height:1.15;letter-spacing:-.015em;color:var(--ink);margin:0 0 14px;
   }
   .how-step .desc{
     font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
