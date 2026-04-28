@@ -101,7 +101,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
 
     if (isSuccess) {
         return (
-            <div className="bg-accent-warm/10 border border-accent-warm/30 p-8 rounded-xl text-center max-w-lg mx-auto">
+            <div className="bg-copper/10 border border-copper/30 p-8 rounded-xl text-center max-w-lg mx-auto">
                 <h3 className="text-2xl font-bold text-white mb-2">You&apos;re in.</h3>
                 <p className="text-gray-300 mb-1">Someone from our team will reach out to you shortly to schedule your pilot kickoff.</p>
                 <p className="text-sm text-gray-500">Check your inbox for a confirmation from the Salency team.</p>
@@ -109,8 +109,8 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
         );
     }
 
-    const inputClass = 'w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors';
-    const selectChevron = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23E8925A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`;
+    const inputClass = 'w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-copper transition-colors';
+    const selectChevron = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23FE8531' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`;
     const selectClass = `${inputClass} appearance-none pr-10 bg-no-repeat bg-[right_1rem_center]`;
 
     return (
@@ -140,51 +140,63 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-300 mb-1">Name *</label>
+                <label htmlFor="pilot-name" className="block text-sm font-medium text-gray-300 mb-1">Name *</label>
                 <input
+                    id="pilot-name"
                     {...register('name', { required: true, pattern: NAME_REGEX })}
                     className={inputClass}
                     placeholder="Jane Doe"
                     autoComplete="name"
                     onFocus={() => track('form_start')}
+                    aria-invalid={errors.name ? 'true' : undefined}
+                    aria-describedby={errors.name ? 'pilot-name-error' : undefined}
                     suppressHydrationWarning
                 />
-                {errors.name && <span className="text-red-400 text-xs mt-1 block">Enter your full name (letters only, 2–80 chars)</span>}
+                {errors.name && <span id="pilot-name-error" className="text-red-400 text-xs mt-1 block">Enter your full name (letters only, 2–80 chars)</span>}
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-300 mb-1">Work Email *</label>
+                <label htmlFor="pilot-email" className="block text-sm font-medium text-gray-300 mb-1">Work Email *</label>
                 <input
+                    id="pilot-email"
                     type="email"
                     {...register('email', { required: true, pattern: EMAIL_REGEX })}
                     className={inputClass}
                     placeholder="jane@acme.com"
                     autoComplete="email"
+                    aria-invalid={errors.email ? 'true' : undefined}
+                    aria-describedby={errors.email ? 'pilot-email-error' : undefined}
                     suppressHydrationWarning
                 />
-                {errors.email && <span className="text-red-400 text-xs mt-1 block">Valid email required</span>}
+                {errors.email && <span id="pilot-email-error" className="text-red-400 text-xs mt-1 block">Valid email required</span>}
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-300 mb-1">Company Website *</label>
+                <label htmlFor="pilot-website" className="block text-sm font-medium text-gray-300 mb-1">Company Website *</label>
                 <input
+                    id="pilot-website"
                     {...register('website', { required: true, pattern: WEBSITE_REGEX })}
                     className={inputClass}
                     placeholder="acme.com"
                     autoComplete="url"
                     inputMode="url"
+                    aria-invalid={errors.website ? 'true' : undefined}
+                    aria-describedby={errors.website ? 'pilot-website-error' : undefined}
                     suppressHydrationWarning
                 />
-                {errors.website && <span className="text-red-400 text-xs mt-1 block">Enter a valid URL (e.g. acme.com or https://acme.com)</span>}
+                {errors.website && <span id="pilot-website-error" className="text-red-400 text-xs mt-1 block">Enter a valid URL (e.g. acme.com or https://acme.com)</span>}
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-300 mb-1">Industry *</label>
+                <label htmlFor="pilot-industry" className="block text-sm font-medium text-gray-300 mb-1">Industry *</label>
                 <select
+                    id="pilot-industry"
                     {...register('industry', { required: true })}
                     className={selectClass}
                     style={{ backgroundImage: selectChevron }}
                     defaultValue=""
+                    aria-invalid={errors.industry ? 'true' : undefined}
+                    aria-describedby={errors.industry ? 'pilot-industry-error' : undefined}
                     suppressHydrationWarning
                 >
                     <option value="" disabled>Select an industry</option>
@@ -192,16 +204,19 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                         <option key={i} value={i}>{i}</option>
                     ))}
                 </select>
-                {errors.industry && <span className="text-red-400 text-xs mt-1 block">Please select an industry</span>}
+                {errors.industry && <span id="pilot-industry-error" className="text-red-400 text-xs mt-1 block">Please select an industry</span>}
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-300 mb-1">Your Role *</label>
+                <label htmlFor="pilot-role" className="block text-sm font-medium text-gray-300 mb-1">Your Role *</label>
                 <select
+                    id="pilot-role"
                     {...register('role', { required: true })}
                     className={selectClass}
                     style={{ backgroundImage: selectChevron }}
                     defaultValue=""
+                    aria-invalid={errors.role ? 'true' : undefined}
+                    aria-describedby={errors.role ? 'pilot-role-error' : undefined}
                     suppressHydrationWarning
                 >
                     <option value="" disabled>Select your role</option>
@@ -209,29 +224,41 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                         <option key={r} value={r}>{r}</option>
                     ))}
                 </select>
-                {errors.role && <span className="text-red-400 text-xs mt-1 block">Please select your role</span>}
+                {errors.role && <span id="pilot-role-error" className="text-red-400 text-xs mt-1 block">Please select your role</span>}
             </div>
 
             <div className="mb-8">
-                <label className="block text-sm font-medium text-gray-300 mb-2">Team Size *</label>
-                <div className="grid grid-cols-4 gap-2" role="radiogroup" aria-label="Team size">
-                    {TEAM_SIZES.map((s) => (
-                        <label
-                            key={s}
-                            className="relative flex items-center justify-center cursor-pointer rounded-lg border border-white/10 bg-black/20 px-3 py-3 text-sm font-medium text-gray-300 hover:border-white/20 has-[:checked]:border-accent-warm has-[:checked]:bg-accent-warm/10 has-[:checked]:text-accent-warm transition-colors"
-                        >
-                            <input
-                                type="radio"
-                                value={s}
-                                {...register('teamSize', { required: true })}
-                                className="sr-only"
-                                suppressHydrationWarning
-                            />
-                            {s}
-                        </label>
-                    ))}
+                <span id="pilot-team-size-label" className="block text-sm font-medium text-gray-300 mb-2">Team Size *</span>
+                <div
+                    className="grid grid-cols-4 gap-2"
+                    role="radiogroup"
+                    aria-labelledby="pilot-team-size-label"
+                    aria-required="true"
+                    aria-invalid={errors.teamSize ? 'true' : undefined}
+                    aria-describedby={errors.teamSize ? 'pilot-team-size-error' : undefined}
+                >
+                    {TEAM_SIZES.map((s) => {
+                        const inputId = `pilot-team-size-${s}`;
+                        return (
+                            <label
+                                key={s}
+                                htmlFor={inputId}
+                                className="relative flex items-center justify-center cursor-pointer rounded-lg border border-white/10 bg-black/20 px-3 py-3 text-sm font-medium text-gray-300 hover:border-white/20 has-[:checked]:border-copper has-[:checked]:bg-copper/10 has-[:checked]:text-copper transition-colors"
+                            >
+                                <input
+                                    id={inputId}
+                                    type="radio"
+                                    value={s}
+                                    {...register('teamSize', { required: true })}
+                                    className="sr-only"
+                                    suppressHydrationWarning
+                                />
+                                {s}
+                            </label>
+                        );
+                    })}
                 </div>
-                {errors.teamSize && <span className="text-red-400 text-xs mt-1 block">Please select a team size</span>}
+                {errors.teamSize && <span id="pilot-team-size-error" className="text-red-400 text-xs mt-1 block">Please select a team size</span>}
             </div>
 
             <button
