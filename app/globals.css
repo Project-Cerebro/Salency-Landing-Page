@@ -770,6 +770,20 @@ html {
     position:relative;
   }
 
+  /* Founder avatar with photo — applies to .photo wherever it
+     appears (story-founder-meta, team-strip strip-cell). The
+     parent .photo rule still owns size + border-radius + border.
+     This modifier just clips the image and removes the initials
+     gradient background. */
+  .photo.photo--has-image{
+    background:none;
+    overflow:hidden;
+    padding:0;
+  }
+  .photo.photo--has-image img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+
   /* Pricing-status meta line on /pricing + /pilot — small mono caps
      under the lede. Same visual register as the home hero-meta. */
   .apply-page .apply-price{

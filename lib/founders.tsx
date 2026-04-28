@@ -21,6 +21,7 @@ export const FOUNDERS: Founder[] = [
     role: 'Co-founder & CEO',
     initials: 'HT',
     photoVariant: '',
+    photoSrc: '/founders/howard.png',
     linkedin: 'https://www.linkedin.com/in/howardhwt/',
     shortBio: (
       <>
@@ -45,6 +46,7 @@ export const FOUNDERS: Founder[] = [
     role: 'Co-founder & Product',
     initials: 'NI',
     photoVariant: 'photo--violet',
+    photoSrc: '/founders/nikki.png',
     linkedin: 'https://www.linkedin.com/in/nikkilkip/',
     shortBio: (
       <>
@@ -66,6 +68,7 @@ export const FOUNDERS: Founder[] = [
     role: 'Founding Engineer',
     initials: 'BO',
     photoVariant: 'photo--teal',
+    photoSrc: '/founders/babajide.png',
     linkedin: 'https://www.linkedin.com/in/jideokusanya/',
     shortBio: (
       <>
@@ -87,6 +90,7 @@ export const FOUNDERS: Founder[] = [
     role: 'Founding Designer',
     initials: 'SG',
     photoVariant: 'photo--amber',
+    photoSrc: '/founders/shristi.png',
     linkedin: 'https://www.linkedin.com/in/shristi1/',
     shortBio: (
       <>

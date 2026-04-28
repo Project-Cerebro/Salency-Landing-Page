@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FOUNDERS } from '@/lib/founders';
 import { FOUNDERS_EMAIL } from '@/lib/links';
+import { FounderAvatar } from '@/components/FounderAvatar';
 
 export function InvestorsSection() {
   return (
@@ -238,9 +239,7 @@ export function InvestorsSection() {
             <div className="team-strip">
               {FOUNDERS.map((founder) => (
                 <div key={founder.id} className="strip-cell">
-                  <div className={`photo ${founder.photoVariant}`.trim()}>
-                    {founder.initials}
-                  </div>
+                  <FounderAvatar founder={founder} size={56} />
                   <span className="name">{founder.name}</span>
                   <span className="role">{founder.role}</span>
                 </div>

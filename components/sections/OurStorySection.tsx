@@ -1,5 +1,6 @@
 import { FOUNDERS } from '@/lib/founders';
 import { FOUNDERS_EMAIL, PILOT_FORM_ANCHOR } from '@/lib/links';
+import { FounderAvatar } from '@/components/FounderAvatar';
 
 export function OurStorySection() {
   return (
@@ -85,9 +86,7 @@ export function OurStorySection() {
           {FOUNDERS.map((founder) => (
             <article key={founder.id} className="story-founder">
               <aside className="story-founder-meta">
-                <div className={`photo ${founder.photoVariant}`.trim()}>
-                  {founder.initials}
-                </div>
+                <FounderAvatar founder={founder} size={120} />
               </aside>
               <div className="story-founder-body">
                 <h2 className="story-founder-name">{founder.name}</h2>
