@@ -48,6 +48,9 @@ export function PilotApplication() {
           small group of revenue teams this cohort. Tell us about your team and
           we&apos;ll scope the fit together.
         </p>
+        <p className="apply-price">
+          Free during the Spring 2026 pilot. Pricing per engagement after.
+        </p>
       </section>
 
       <section className="apply-layout">
