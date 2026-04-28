@@ -1002,7 +1002,7 @@ html {
   .cta-card .btn{padding:14px 24px;font-size:15px}
   .cta-card .fine{
     margin-top:20px;font-family:'Geist Mono',monospace;font-size:11px;
-    letter-spacing:.08em;color:var(--ink-4);
+    letter-spacing:.08em;color:var(--ink-3);
   }
 
   /* ═══════════ How it works (Extract · Map · Remember) ═══════════ */
@@ -1118,7 +1118,7 @@ html {
      reset rule. */
   .notdo-card .header .eb{
     display:block;font-size:10.5px;letter-spacing:.2em;
-    color:var(--ink-4);margin-bottom:10px;
+    color:var(--ink-3);margin-bottom:10px;
   }
   .notdo-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px}
   .notdo-item{
@@ -1242,7 +1242,7 @@ html {
       font-size: 10.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       font-family: 'Geist Mono', monospace;
       border-bottom: 1px solid var(--hair);
       padding-bottom: 10px;
@@ -1256,7 +1256,7 @@ html {
       font-size: 9.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       margin-bottom: 4px;
     }
     .notetaker-table tbody td.col-s {
@@ -1585,7 +1585,7 @@ html {
     padding:40px;
     max-width:var(--page-max);margin:0 auto;
     display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
-    font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-4);
+    font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-3);
     letter-spacing:.04em;
 
     .brand{
@@ -1642,7 +1642,7 @@ html {
     .inv-intro-meta{
       display:flex;flex-wrap:wrap;gap:12px;align-items:center;
       font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;
-      text-transform:uppercase;color:var(--ink-4);
+      text-transform:uppercase;color:var(--ink-3);
 
       .sep{color:var(--ink-4);opacity:.5}
     }
@@ -2535,7 +2535,7 @@ header button:focus:not(:focus-visible){
         font-weight: 500;
         letter-spacing: .2em;
         text-transform: uppercase;
-        color: var(--ink-4);
+        color: var(--ink-3);
       }
 
       .support-chip {
@@ -2712,7 +2712,7 @@ header button:focus:not(:focus-visible){
       font-weight: 500;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       border-bottom: 1px solid var(--hair-2);
       background: rgba(0, 0, 0, 0.12);
     }
@@ -2837,7 +2837,7 @@ header button:focus:not(:focus-visible){
       font-size: 10.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       font-family: 'Geist Mono', monospace;
       border-bottom: 1px solid var(--hair);
       padding-bottom: 10px;
@@ -2851,7 +2851,7 @@ header button:focus:not(:focus-visible){
       font-size: 9.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       margin-bottom: 3px;
     }
     .mem-table tbody td:nth-child(3) {
