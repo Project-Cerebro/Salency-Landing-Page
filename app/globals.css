@@ -4,7 +4,6 @@
   --background: #121015;
   --foreground: #E8E6E3;
   --accent: #06b6d4;
-  --accent-warm: #E8925A;
   --muted: #201D24;
   --card: #201D24;
 
@@ -29,7 +28,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
-  --color-accent-warm: var(--accent-warm);
   --color-muted: var(--muted);
   --color-card: var(--card);
   --color-bg-secondary: var(--bg-secondary);
