@@ -1178,14 +1178,14 @@ html {
     letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);
   }
   .notetaker-table thead th.col-s{color:var(--copper);background:var(--copper-a04)}
-  .notetaker-table thead th.col-s .brand{
-    display:block;font-family:var(--font-body), 'Instrument Sans', system-ui, sans-serif;font-size:22px;font-weight:400;
-    letter-spacing:-.01em;color:var(--ink);text-transform:none;margin-top:4px;
-  }
+  .notetaker-table thead th.col-s .brand,
   .notetaker-table thead th.col-n .brand{
-    display:block;font-family:var(--font-body), 'Instrument Sans', system-ui, sans-serif;font-weight:500;font-size:18px;
-    color:var(--ink-2);text-transform:none;letter-spacing:-.005em;margin-top:4px;
+    display:block;font-family:var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:400;letter-spacing:-.02em;line-height:1.1;
+    text-transform:none;margin-top:6px;
   }
+  .notetaker-table thead th.col-s .brand{font-size:26px;color:var(--ink)}
+  .notetaker-table thead th.col-n .brand{font-size:22px;color:var(--ink-2)}
   .notetaker-table tbody td{
     padding:20px 24px;border-bottom:1px solid var(--hair);vertical-align:top;
     font-family:var(--font-body), 'Geist', sans-serif;font-size:14.5px;line-height:1.5;color:var(--ink-2);
