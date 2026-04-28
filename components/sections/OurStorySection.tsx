@@ -80,7 +80,7 @@ export function OurStorySection() {
       </div>
 
       {/* Layer 3 — 4 founders, 2x2 grid, square photos */}
-      <div className="story-founders">
+      <div id="team" className="story-founders">
         <span className="eb">Who&rsquo;s building it</span>
         <div className="story-founders-list">
           {FOUNDERS.map((founder) => (

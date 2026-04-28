@@ -1734,6 +1734,7 @@ html {
   /* Layer 3 — 2x2 founder grid with square photos + side-by-side bio */
   .story-founders{
     margin-bottom:64px;
+    scroll-margin-top:96px;
 
     .eb{margin-bottom:40px;display:flex}
   }
