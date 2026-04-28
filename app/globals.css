@@ -769,6 +769,16 @@ html {
   .apply-page{
     position:relative;
   }
+
+  /* Pricing-status meta line on /pricing + /pilot — small mono caps
+     under the lede. Same visual register as the home hero-meta. */
+  .apply-page .apply-price{
+    margin:20px 0 0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;font-weight:500;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-3);
+    max-width:none;
+  }
   .hero::before,
   .mem-intro::before,
   .thesis-hero::before,
