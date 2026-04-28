@@ -5,7 +5,7 @@ import { SiteFooter } from '@/components/sections/SiteFooter';
 export const metadata: Metadata = {
   title: 'Build log · Salency',
   description:
-    'A running log of what’s moving on Salency — V1 build, user interviews with B2B sales leaders, accelerator applications, and the SEO foundation.',
+    'A running log of what’s moving on Salency: V1 build, user interviews with B2B sales leaders, accelerator applications, and the SEO foundation.',
   alternates: { canonical: '/changelog' },
   robots: { index: true, follow: true },
 };

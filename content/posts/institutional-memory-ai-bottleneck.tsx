@@ -6,7 +6,7 @@ export const post: Post = {
     'Stop arguing about AI replacing salespeople. Start asking which layer it should own.',
   dek: 'Or: why your call recordings are a graveyard.',
   description:
-    'The augment-vs-replace debate is brain-rot. The right question for revenue leaders is which knowledge layer AI is uniquely suited to own — and the answer is institutional memory.',
+    'The augment-vs-replace debate is brain-rot. The right question for revenue leaders is which knowledge layer AI is uniquely suited to own. The answer is institutional memory.',
   authorId: 'howard',
   publishedAt: '2026-04-26',
   body: (

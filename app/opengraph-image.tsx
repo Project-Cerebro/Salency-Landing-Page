@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 export const runtime = 'nodejs';
-export const alt = 'Salency — AI that remembers every customer pain your sales reps forget';
+export const alt = 'Salency: AI that remembers every customer pain your sales reps forget';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

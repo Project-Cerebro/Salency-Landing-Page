@@ -22,7 +22,7 @@ const softwareApplicationSchema = {
   operatingSystem: 'Web',
   url: 'https://www.salency.ai',
   description:
-    'Institutional memory for B2B sales teams. Salency turns every sales call transcript into structured, cited context — extracting customer pains, mapping them to products, and retaining the account history any rep or successor needs.',
+    'Institutional memory for B2B sales teams. Salency turns every sales call transcript into structured, cited context, extracting customer pains, mapping them to products, and retaining the account history any rep or successor needs.',
   brand: {
     '@type': 'Organization',
     name: 'Salency',

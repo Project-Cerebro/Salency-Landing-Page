@@ -11,11 +11,11 @@ export function InvestorsSection() {
             <span className="eb">For investors</span>
             <h1>
               Institutional memory is the <em>new bottleneck</em> in B2B sales.
-              We own the layer.
+              We&rsquo;re building the layer.
             </h1>
             <p>
               Salency is the structured, cited, queryable memory layer for
-              what your accounts actually told you — the input every future
+              what your accounts actually told you. The input every future
               revenue tool will inherit from. Every call compounds the graph.
             </p>
             <div className="inv-intro-meta">
@@ -40,21 +40,21 @@ export function InvestorsSection() {
               Salency is a system of record for what your accounts actually
               told you. Every call becomes <em>durable, queryable context</em>{' '}
               mapped to your product catalog, so the next rep, the next
-              quarter, and the next pipeline review all inherit what was said —
+              quarter, and the next pipeline review all inherit what was said,
               not what someone remembered to type.
             </p>
             <p>
               The primitive is structured account memory. The loop compounds:
               every call makes every future call smarter, for every future rep
-              on that account. Every surface we ship — starting with handoff
-              docs today — inherits from the same core graph. One primitive.
+              on that account. Every surface we ship, starting with handoff
+              docs today, inherits from the same core graph. One primitive.
               Everything else is surface.
             </p>
             <div className="primitive">
               <span className="label">Data primitive</span>
               <p className="title">
-                Structured account memory —{' '}
-                <em>cited, scoped, and compounding</em> — is the input every
+                Structured account memory,{' '}
+                <em>cited, scoped, and compounding</em>, is the input every
                 future revenue tool will be measured against.
               </p>
             </div>
@@ -66,17 +66,18 @@ export function InvestorsSection() {
               that makes Salency uncopyable. That&rsquo;s why we sit{' '}
               <em>on top</em> of your stack, not inside it. Reps live in CRM
               for pipeline stages. Reps live in Salency for the qualitative
-              layer — what the customer actually said, what contradicts what,
+              layer, what the customer actually said, what contradicts what,
               which pains map to which products.
             </p>
             <div className="primitive">
-              <span className="label">The uncopyable pair</span>
+              <span className="label">The uncopyable trio</span>
               <p className="title">
-                Pain-product mapping plus contradiction detection.{' '}
+                Pain-product mapping, cross-call contradiction detection, and
+                customer-stated timeline tracking.{' '}
                 <em>
-                  Either alone is defensible for 6 to 9 months. Together — and
-                  once wired into product-management workflows — switching cost
-                  is measured in quarters.
+                  No direct competitor ships all three as an integrated stack.
+                  Together, wired into product-management workflows, the graph
+                  compounds per call.
                 </em>
               </p>
             </div>
@@ -139,17 +140,17 @@ export function InvestorsSection() {
           </section>
 
           <section className="inv-compete" id="competitive">
-            <div className="eb">Competitive landscape</div>
+            <div className="eb">The field</div>
             <h2>
               Closest threats, and <em>where the shape doesn&rsquo;t fit.</em>
             </h2>
             <p className="compete-lede">
               Pain extraction, pre-call briefing, and handoff briefs are
-              now table-stakes &mdash; Gong, HubSpot Frame AI, and AskElephant
-              ship versions of all three. No single competitor ships
-              pain-product mapping plus contradiction detection as an
-              integrated stack. The gap is the shape of the join, not the
-              individual capabilities.
+              now table-stakes. Gong, HubSpot Frame AI, and AskElephant ship
+              versions of all three. No single competitor ships pain-product
+              mapping, cross-call contradiction detection, and customer-stated
+              timeline tracking as an integrated stack. The gap is the shape
+              of the join, not the individual capabilities.
             </p>
             <div className="compete-table">
               <div className="compete-row compete-row--head">
@@ -264,7 +265,7 @@ export function InvestorsSection() {
                 </div>
                 <ul className="horizon-body">
                   <li>
-                    <em>Recall.ai meeting bot</em> — joins Zoom, Meet, Teams
+                    <em>Recall.ai meeting bot</em>, joining Zoom, Meet, Teams
                     directly. Extraction runs without a transcript upload step.
                   </li>
                 </ul>
@@ -277,14 +278,14 @@ export function InvestorsSection() {
                 <ul className="horizon-body">
                   <li>
                     Embedding pain-product mapping into product-management
-                    tools (Productboard, Aha, Jira) — where switching cost
-                    compounds into quarters. Pulled forward from 2027 after
-                    competitive-window analysis tightened the high-threat
-                    tier from 18 months to 12.
+                    tools (Productboard, Aha, Jira), where the customer pain
+                    graph and the product roadmap converge. Pulled forward
+                    from 2027 after competitive-window analysis tightened the
+                    high-threat tier from 18 months to 12.
                   </li>
                   <li>
                     Native integrations with the CRMs revenue teams already
-                    live in — scoped once each one ships a stable contract,
+                    live in, scoped once each one ships a stable contract,
                     not before.
                   </li>
                 </ul>
@@ -322,24 +323,24 @@ export function InvestorsSection() {
                 eighteen months.
               </p>
               <p>
-                Both of those depend on structured account memory as the input
-                — not a raw transcript pile, not another CRM field. The agent
-                doesn&apos;t know what the buyer has already told you. The rep
-                inheriting the account doesn&apos;t either. The asset that
-                makes either one useful is the same asset.
+                Both of those depend on structured account memory as the
+                input. Not a raw transcript pile, not another CRM field. The
+                agent doesn&apos;t know what the buyer has already told you.
+                The rep inheriting the account doesn&apos;t either. The asset
+                that makes either one useful is the same asset.
               </p>
               <p>
                 Every LLM commoditizes extraction. What doesn&rsquo;t
                 commoditize is the <em>customer-built graph</em> of pains,
-                products, and contradictions — and that graph compounds per
+                products, and contradictions, and that graph compounds per
                 account, with every call. The moat is the{' '}
-                <em>specific join</em> — pain → product → contradiction across
-                time — wired into the PM tools where roadmaps already live.
+                <em>specific join</em>, pain → product → contradiction across
+                time, wired into the PM tools where roadmaps already live.
               </p>
               <div className="thesis-close">
-                Salency owns that layer. The longer a team runs it,{' '}
-                <em>the more context compounds</em> — and the deeper the
-                graph gets.
+                Salency is building that layer. The longer a team runs it,{' '}
+                <em>the more context compounds</em>. The graph keeps getting
+                richer with every call.
               </div>
             </div>
           </section>
