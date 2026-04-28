@@ -88,7 +88,7 @@ export default function ChangelogPage() {
         <div className="space-y-14">
           {ENTRIES.map((entry) => (
             <article key={entry.id}>
-              <div className="text-xs font-mono uppercase tracking-[0.16em] text-accent-warm mb-2">
+              <div className="text-xs font-mono uppercase tracking-[0.16em] text-copper mb-2">
                 {entry.date}
               </div>
               <h2
