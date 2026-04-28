@@ -60,6 +60,14 @@ h6 {
 }
 
 /* Utilities */
+
+/* Tabular figures — apply to dates, years, quarters, stats, prices.
+   Keeps numeric strings from jittering when values change at runtime. */
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
 .glass-panel {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);

@@ -14,7 +14,7 @@ export function SiteFooter() {
         <Link href="/privacy" className="footer-link">Privacy</Link>
         <Link href="/terms" className="footer-link">Terms</Link>
       </nav>
-      <span>© 2026 Salency · Toronto</span>
+      <span><span className="num">© 2026</span> Salency · Toronto</span>
     </footer>
   );
 }
