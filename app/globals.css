@@ -1921,10 +1921,19 @@ html {
   }
 
 /* ═══════════ Marketing font mapping ═══════════ */
-/* Bind --font-body / --font-display to next/font variables. */
+/* Bind --font-body / --font-display directly to the loaded next/font
+   font-family name. Previously we used var(--font-instrument-sans) here,
+   but that next/font CSS variable is set on <body> via the className,
+   not on :root. Per CSS spec, an unresolved var() without an explicit
+   fallback makes the entire custom property "guaranteed-invalid" — so
+   --font-body and --font-display silently computed to empty sitewide,
+   breaking every font-family declaration that referenced them and
+   causing inherited fonts (e.g. Geist Mono on table headers) to leak
+   into descendants. Using literal font-family strings removes the
+   var() indirection entirely. */
 :root{
-  --font-body: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
-  --font-display: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', 'Instrument Sans Fallback', system-ui, sans-serif;
+  --font-display: 'Instrument Sans', 'Instrument Sans Fallback', system-ui, sans-serif;
 }
 
 /* ═══════════ Mobile nav — hamburger + slide-down panel ═══════════ */
