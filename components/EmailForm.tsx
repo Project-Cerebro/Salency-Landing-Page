@@ -101,7 +101,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
 
     if (isSuccess) {
         return (
-            <div className="bg-accent-warm/10 border border-accent-warm/30 p-8 rounded-xl text-center max-w-lg mx-auto">
+            <div className="bg-copper/10 border border-copper/30 p-8 rounded-xl text-center max-w-lg mx-auto">
                 <h3 className="text-2xl font-bold text-white mb-2">You&apos;re in.</h3>
                 <p className="text-gray-300 mb-1">Someone from our team will reach out to you shortly to schedule your pilot kickoff.</p>
                 <p className="text-sm text-gray-500">Check your inbox for a confirmation from the Salency team.</p>
@@ -109,8 +109,8 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
         );
     }
 
-    const inputClass = 'w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-warm transition-colors';
-    const selectChevron = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23E8925A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`;
+    const inputClass = 'w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-copper transition-colors';
+    const selectChevron = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23FE8531' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`;
     const selectClass = `${inputClass} appearance-none pr-10 bg-no-repeat bg-[right_1rem_center]`;
 
     return (
@@ -218,7 +218,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                     {TEAM_SIZES.map((s) => (
                         <label
                             key={s}
-                            className="relative flex items-center justify-center cursor-pointer rounded-lg border border-white/10 bg-black/20 px-3 py-3 text-sm font-medium text-gray-300 hover:border-white/20 has-[:checked]:border-accent-warm has-[:checked]:bg-accent-warm/10 has-[:checked]:text-accent-warm transition-colors"
+                            className="relative flex items-center justify-center cursor-pointer rounded-lg border border-white/10 bg-black/20 px-3 py-3 text-sm font-medium text-gray-300 hover:border-white/20 has-[:checked]:border-copper has-[:checked]:bg-copper/10 has-[:checked]:text-copper transition-colors"
                         >
                             <input
                                 type="radio"
