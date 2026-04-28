@@ -22,7 +22,7 @@ export default function Privacy() {
           <p>Salency (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) is committed to protecting your privacy. This policy explains how we collect, use, and safeguard information when you visit salency.ai or use our services.</p>
 
           <h2 className="text-lg font-bold text-white mt-8 mb-3">Information We Collect</h2>
-          <p>When you submit the pilot request form, we collect: your name, work email, company name, role, and team size. We also collect standard web analytics data (page views, referrer, device type) via Vercel Analytics — no cookies, no personal identifiers.</p>
+          <p>When you submit the pilot request form, we collect: your name, work email, company name, role, and team size. We also collect standard web analytics data (page views, referrer, device type) via Vercel Analytics. No cookies, no personal identifiers.</p>
 
           <h2 className="text-lg font-bold text-white mt-8 mb-3">How We Use Your Information</h2>
           <p>We use the information you provide solely to evaluate pilot fit and contact you about Salency. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>

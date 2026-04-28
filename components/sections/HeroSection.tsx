@@ -15,10 +15,10 @@ export function HeroSection() {
           AI notetakers record what was said. Salency{' '}
           <em style={{ fontStyle: 'normal', color: 'var(--copper)' }}>
             remembers what it meant
-          </em>{' '}
-          — structuring every conversation into pains, objections, competitors and
-          commitments, then keeping that context alive as reps rotate and accounts
-          hand off.
+          </em>
+          , structuring every conversation into pains, objections, competitors
+          and commitments, then keeping that context alive as reps rotate and
+          accounts hand off.
         </p>
 
         <div className="cta-row">
@@ -33,7 +33,7 @@ export function HeroSection() {
         </div>
 
         <div className="hero-meta">
-          <span className="hero-meta-item">Gong, Fireflies, Otter, Granola, Fathom &mdash; or any raw transcript</span>
+          <span className="hero-meta-item">Gong, Fireflies, Otter, Granola, Fathom, or any raw transcript</span>
           <span className="hero-meta-item">Early access · Q2 2026</span>
         </div>
       </section>

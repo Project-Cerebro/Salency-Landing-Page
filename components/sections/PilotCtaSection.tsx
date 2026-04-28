@@ -11,9 +11,9 @@ export function PilotCtaSection() {
       </h2>
       <p className="sub">
         Week one, your existing calls become searchable memory. Every handoff
-        after that &mdash; internal or customer-side &mdash; reads the story
-        instead of restarting the relationship. No notetaker integration
-        required to start.
+        after that, internal or customer-side, reads the story instead of
+        restarting the relationship. No notetaker integration required to
+        start.
       </p>
       <button
         type="button"

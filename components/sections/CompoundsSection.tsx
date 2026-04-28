@@ -23,8 +23,8 @@ export function CompoundsSection() {
           <span className="compounds-marker">M3</span>
           <h4>Pain graphs fill</h4>
           <p>
-            Each account&rsquo;s pain landscape stabilizes. Contradictions
-            start surfacing across calls on the same account.
+            Each account&rsquo;s pain map stabilizes. Contradictions start
+            surfacing across calls on the same account.
           </p>
         </div>
         <div className="compounds-step">
@@ -39,9 +39,9 @@ export function CompoundsSection() {
           <span className="compounds-marker">M12</span>
           <h4>A year of tribal knowledge, structured</h4>
           <p>
-            By year one, ripping Salency out means losing what nobody wrote
-            down. That&rsquo;s the design &mdash; not a promise, a structural
-            consequence of how memory compounds.
+            By year one, you have a year of structured customer knowledge that
+            wouldn&rsquo;t otherwise exist. That&rsquo;s the design. Not a
+            promise, a structural consequence of how memory compounds.
           </p>
         </div>
       </div>

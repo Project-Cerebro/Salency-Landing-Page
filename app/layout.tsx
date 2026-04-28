@@ -15,7 +15,7 @@ const organizationSchema = {
   url: SITE_URL,
   logo: `${SITE_URL}/salency-mark.svg`,
   description:
-    "Institutional memory for B2B sales teams. Salency turns every call into structured, cited context — so reps stop losing deals to forgotten signals and any successor inherits full account history.",
+    "Institutional memory for B2B sales teams. Salency turns every call into structured, cited context, so reps stop losing deals to forgotten signals and any successor inherits full account history.",
   email: "hello@salency.ai",
   sameAs: [
     "https://www.linkedin.com/company/salency",
@@ -66,10 +66,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.salency.ai"),
-  title: "Salency — AI that remembers every customer pain your sales reps forget",
-  description: "Sales intelligence that turns call transcripts into structured context. Extract pains, map them to your products, and generate follow-ups — so reps stop losing deals to forgotten context.",
+  title: "Salency: AI that remembers every customer pain your sales reps forget",
+  description: "Sales intelligence that turns call transcripts into structured context. Extract pains, map them to your products, and generate follow-ups, so reps stop losing deals to forgotten context.",
   openGraph: {
-    title: "Salency — AI that remembers every customer pain your sales reps forget",
+    title: "Salency: AI that remembers every customer pain your sales reps forget",
     description: "Sales intelligence that turns call transcripts into structured context. Extract pains, map them to your products, and generate follow-ups.",
     url: "https://www.salency.ai",
     siteName: "Salency",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Salency — AI that remembers every customer pain your sales reps forget",
+    title: "Salency: AI that remembers every customer pain your sales reps forget",
     description: "Sales intelligence that turns call transcripts into structured context.",
   },
 };

@@ -28,7 +28,7 @@ export default function Terms() {
           <p>Pilot access is offered at our discretion. During the pilot period, Salency is provided free of charge. We reserve the right to modify or discontinue the pilot at any time. Continued use after the pilot requires a paid subscription.</p>
 
           <h2 className="text-lg font-bold text-white mt-8 mb-3">Intellectual Property</h2>
-          <p>All content on this site — including text, design, logos, and code — is owned by Salency. You may not reproduce or distribute it without our written permission. Your data remains yours; we do not claim ownership of any transcripts or business information you provide.</p>
+          <p>All content on this site (text, design, logos, and code) is owned by Salency. You may not reproduce or distribute it without our written permission. Your data remains yours; we do not claim ownership of any transcripts or business information you provide.</p>
 
           <h2 className="text-lg font-bold text-white mt-8 mb-3">Limitation of Liability</h2>
           <p>Salency is provided &ldquo;as is&rdquo; during the pilot period. We are not liable for any indirect, incidental, or consequential damages arising from your use of the service.</p>

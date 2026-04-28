@@ -14,7 +14,7 @@ export function ProblemSection() {
         <p className="lede">
           Your reps run discovery calls every week. Your AI notetaker captures
           the audio. Your CRM captures the stage change.{' '}
-          <em>Nothing captures what was actually learned</em> — the pains, the
+          <em>Nothing captures what was actually learned</em>. The pains, the
           politics, the promises. So when a rep rotates, the account restarts
           from zero.
         </p>
@@ -29,7 +29,7 @@ export function ProblemSection() {
           <p className="desc">
             Conversation intelligence gives you 90 minutes of searchable
             transcript. Nobody reads 90 minutes of transcript. The unprompted
-            pain, the offhand competitor mention, the stakeholder aside — they
+            pain, the offhand competitor mention, the stakeholder aside, they
             stay locked in the audio.
           </p>
           <div className="cost">
@@ -53,8 +53,8 @@ export function ProblemSection() {
           </p>
           <div className="cost">
             <span className="label">
-              The customer pays the cost &mdash; they&rsquo;re the ones asked
-              to repeat themselves.
+              The customer pays the cost. They&rsquo;re the ones asked to
+              repeat themselves.
             </span>
           </div>
         </div>
@@ -81,9 +81,9 @@ export function ProblemSection() {
         <span className="label">— The fix</span>
         <p className="text">
           Salency sits above your AI notetaker and CRM as an{' '}
-          <em>institutional memory layer</em> — extracting structured context
-          from every call, keeping it current as the account evolves, and
-          surfacing it the moment someone new picks up the relationship.
+          <em>institutional memory layer</em>. It extracts structured context
+          from every call, keeps it current as the account evolves, and
+          surfaces it the moment someone new picks up the relationship.
         </p>
         <Link href="/memory" className="link">
           See our memory layer →

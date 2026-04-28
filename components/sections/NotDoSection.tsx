@@ -22,8 +22,8 @@ export function NotDoSection() {
             <div className="title">Not a CRM write-back tool today</div>
             <span className="check" aria-label="What it does">✓</span>
             <div className="subtitle">
-              Reps export structured fields by hand &mdash; CSV or markdown
-              into HubSpot, Salesforce, Attio. Native sync is on the roadmap,
+              Reps export structured fields by hand: CSV or markdown into
+              HubSpot, Salesforce, Attio. Native sync is on the roadmap,
               not yet shipped. We don&apos;t commit to a version until the
               integration ships.
             </div>

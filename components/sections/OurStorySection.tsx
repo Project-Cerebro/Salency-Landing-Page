@@ -38,9 +38,8 @@ export function OurStorySection() {
               She heard the line first. Three years running operational
               reporting at Adaptavist Group across sales, services, and
               finance, she&rsquo;d been watching a version of the same
-              failure from the analyst side &mdash; documentation out of date
-              the week it ships, real context living in Slack threads no one
-              reads. When her coworker said it out loud, she recognized the
+              failure from the analyst side. Documentation out of date the
+              week it ships. Real context living in Slack threads no one reads. When her coworker said it out loud, she recognized the
               seam.{' '}
               <em>
                 If the evidence lives in conversations, why is a human still

@@ -54,7 +54,7 @@ export function NotetakerSection() {
             </td>
             <td className="col-s">
               <span className="icon">✓</span>Live{' '}
-              <strong>account graph</strong> — the brief regenerates from it
+              <strong>account graph</strong>. The brief regenerates from it
               and persists between handoffs
             </td>
           </tr>
@@ -64,7 +64,7 @@ export function NotetakerSection() {
               <span className="icon">—</span>Timestamps in transcript
             </td>
             <td className="col-s">
-              <span className="icon">✓</span>Every extraction cited —{' '}
+              <span className="icon">✓</span>Every extraction cited:{' '}
               <strong>transcript + timestamp + confidence</strong>
             </td>
           </tr>
@@ -85,7 +85,7 @@ export function NotetakerSection() {
             </td>
             <td className="col-s">
               <span className="icon">✓</span>
-              <strong>Cross-call adversarial comparison</strong> &mdash; both
+              <strong>Cross-call adversarial comparison</strong>, both
               citations attached
             </td>
           </tr>
@@ -95,7 +95,7 @@ export function NotetakerSection() {
               <span className="icon">—</span>Your CRM
             </td>
             <td className="col-s">
-              <span className="icon">✓</span>Your notetaker + your CRM —{' '}
+              <span className="icon">✓</span>Your notetaker + your CRM:{' '}
               <strong>zero rip-and-replace</strong>
             </td>
           </tr>
