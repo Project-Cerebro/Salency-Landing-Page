@@ -888,7 +888,7 @@ html {
   .prob-head .eb{margin-bottom:18px;display:flex}
   .prob-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(36px,5.4vw,76px);line-height:1.02;letter-spacing:-.025em;
+    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
     margin:0;color:var(--ink);max-width:18ch;text-wrap:balance;
   }
   .prob-head h2 .soft{color:var(--ink-3)}
@@ -934,7 +934,7 @@ html {
   }
   .prob-card .title{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:30px;line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+    font-size:clamp(22px,2.4vw,28px);line-height:1.15;letter-spacing:-.015em;color:var(--ink);
     margin:0 0 16px;max-width:14ch;
   }
   .prob-card .desc{
@@ -1195,7 +1195,7 @@ html {
   .notetaker-head .eb{margin-bottom:18px;display:flex}
   .notetaker-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(40px,4.5vw,58px);line-height:1.04;letter-spacing:-.025em;
+    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
     margin:0 0 18px;color:var(--ink);text-wrap:balance;
   }
   .notetaker-head p{font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:16px;line-height:1.65;color:var(--ink-2);margin:0}
@@ -3078,7 +3078,7 @@ header button:focus:not(:focus-visible){
 .compounds { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
 .compounds-head { margin-bottom: 64px; }
 .compounds-head h2 {
-  font-family: var(--font-display); font-size: clamp(36px, 4vw, 54px); line-height: 1.06;
+  font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.06;
   letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 18px; max-width: 22ch;
 }
 .compounds-head h2 em { font-style: italic; color: var(--copper); }
@@ -3104,7 +3104,7 @@ header button:focus:not(:focus-visible){
 /* 08 · Not for you */
 .notfor { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
 .notfor-head { margin-bottom: 40px; }
-.notfor-head h2 { font-family: var(--font-display); font-size: clamp(30px, 3.2vw, 40px); line-height: 1.1; letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 16px; max-width: 28ch; }
+.notfor-head h2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 16px; max-width: 28ch; }
 .notfor-head h2 em { font-style: italic; color: var(--copper); }
 .notfor-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--hair-2); }
 .notfor-list li { display: grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--hair); align-items: baseline; }
@@ -3113,7 +3113,7 @@ header button:focus:not(:focus-visible){
 .notfor-list .notfor-body strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; }
 .notfor-foot { margin-top: 28px; font-size: 14.5px; line-height: 1.65; color: var(--ink-3); max-width: 72ch; }
 .notfor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 8px; }
-.notfor-col-head { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px; font-weight: 400; }
+.notfor-col-head { display: block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px; font-weight: 500; }
 .notfor-list--paired li { grid-template-columns: 1fr; gap: 0; }
 @media (max-width: 768px) { .notfor-grid { grid-template-columns: 1fr; gap: 40px; } }
 
