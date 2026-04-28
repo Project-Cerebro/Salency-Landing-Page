@@ -34,7 +34,7 @@ export function HeroSection() {
 
         <div className="hero-meta">
           <span className="hero-meta-item">Gong, Fireflies, Otter, Granola, Fathom, or any raw transcript</span>
-          <span className="hero-meta-item">Early access · Q2 2026</span>
+          <span className="hero-meta-item">Early access · <span className="num">Q2 2026</span></span>
         </div>
       </section>
 

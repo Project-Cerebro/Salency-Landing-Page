@@ -4,7 +4,6 @@
   --background: #121015;
   --foreground: #E8E6E3;
   --accent: #06b6d4;
-  --accent-warm: #E8925A;
   --muted: #201D24;
   --card: #201D24;
 
@@ -29,7 +28,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
-  --color-accent-warm: var(--accent-warm);
   --color-muted: var(--muted);
   --color-card: var(--card);
   --color-bg-secondary: var(--bg-secondary);
@@ -62,6 +60,14 @@ h6 {
 }
 
 /* Utilities */
+
+/* Tabular figures — apply to dates, years, quarters, stats, prices.
+   Keeps numeric strings from jittering when values change at runtime. */
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
 .glass-panel {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
@@ -994,7 +1000,7 @@ html {
   .cta-card .eb{display:block;margin-bottom:20px}
   .cta-card h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(44px,5.5vw,72px);line-height:1.02;letter-spacing:-.025em;
+    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
     margin:0 auto;max-width:20ch;color:var(--ink);text-wrap:balance;
   }
   .cta-card .sub{
@@ -1004,7 +1010,7 @@ html {
   .cta-card .btn{padding:14px 24px;font-size:15px}
   .cta-card .fine{
     margin-top:20px;font-family:'Geist Mono',monospace;font-size:11px;
-    letter-spacing:.08em;color:var(--ink-4);
+    letter-spacing:.08em;color:var(--ink-3);
   }
 
   /* ═══════════ How it works (Extract · Map · Remember) ═══════════ */
@@ -1016,7 +1022,7 @@ html {
   .how-head .eb{margin-bottom:18px;display:flex}
   .how-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(36px,5vw,64px);line-height:1.03;letter-spacing:-.025em;
+    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
     margin:0;color:var(--ink);max-width:16ch;text-wrap:balance;
   }
   /* .how-head mobile: 2-col headline+lede stacks, same treatment as
@@ -1054,8 +1060,8 @@ html {
   .how-step .idx::after{content:"";flex:1;height:1px;background:var(--hair)}
   .how-step .how-step-action{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(26px, 5vw, 34px);
-    line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin:0 0 14px;
+    font-size:clamp(22px, 2.4vw, 28px);
+    line-height:1.15;letter-spacing:-.015em;color:var(--ink);margin:0 0 14px;
   }
   .how-step .desc{
     font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
@@ -1120,7 +1126,7 @@ html {
      reset rule. */
   .notdo-card .header .eb{
     display:block;font-size:10.5px;letter-spacing:.2em;
-    color:var(--ink-4);margin-bottom:10px;
+    color:var(--ink-3);margin-bottom:10px;
   }
   .notdo-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px}
   .notdo-item{
@@ -1244,7 +1250,7 @@ html {
       font-size: 10.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       font-family: 'Geist Mono', monospace;
       border-bottom: 1px solid var(--hair);
       padding-bottom: 10px;
@@ -1258,7 +1264,7 @@ html {
       font-size: 9.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       margin-bottom: 4px;
     }
     .notetaker-table tbody td.col-s {
@@ -1587,7 +1593,7 @@ html {
     padding:40px;
     max-width:var(--page-max);margin:0 auto;
     display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
-    font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-4);
+    font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-3);
     letter-spacing:.04em;
 
     .brand{
@@ -1595,7 +1601,11 @@ html {
       color:var(--ink);letter-spacing:-.02em;
     }
     nav{display:flex;gap:24px;flex-wrap:wrap}
-    nav a{color:var(--ink-3);transition:color .18s}
+    nav a{
+      color:var(--ink-3);transition:color .18s;
+      display:inline-flex;align-items:center;
+      min-height:44px;padding:8px 0;
+    }
     nav a:hover{color:var(--copper)}
   }
 
@@ -1640,7 +1650,7 @@ html {
     .inv-intro-meta{
       display:flex;flex-wrap:wrap;gap:12px;align-items:center;
       font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;
-      text-transform:uppercase;color:var(--ink-4);
+      text-transform:uppercase;color:var(--ink-3);
 
       .sep{color:var(--ink-4);opacity:.5}
     }
@@ -2533,7 +2543,7 @@ header button:focus:not(:focus-visible){
         font-weight: 500;
         letter-spacing: .2em;
         text-transform: uppercase;
-        color: var(--ink-4);
+        color: var(--ink-3);
       }
 
       .support-chip {
@@ -2710,7 +2720,7 @@ header button:focus:not(:focus-visible){
       font-weight: 500;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       border-bottom: 1px solid var(--hair-2);
       background: rgba(0, 0, 0, 0.12);
     }
@@ -2835,7 +2845,7 @@ header button:focus:not(:focus-visible){
       font-size: 10.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       font-family: 'Geist Mono', monospace;
       border-bottom: 1px solid var(--hair);
       padding-bottom: 10px;
@@ -2849,7 +2859,7 @@ header button:focus:not(:focus-visible){
       font-size: 9.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       margin-bottom: 3px;
     }
     .mem-table tbody td:nth-child(3) {
