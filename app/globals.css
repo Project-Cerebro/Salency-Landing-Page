@@ -2188,45 +2188,144 @@ header button:focus:not(:focus-visible){
 }
 .coming-soon-meta{margin-top:32px}
 
-/* ═══════════ Blog index ═══════════ */
-.blog-index{
-  max-width:var(--page-max);margin:80px auto 0;padding:20px 40px 96px;
+/* ═══════════ Blog index — magazine layout ═══════════
+   Single featured-post split with a subscribe block beneath.
+   Designed to read editorially on a single post (current state) and
+   gracefully welcome a grid of more posts when we have them. */
+.blog-page{
+  max-width:var(--page-max);margin:0 auto;
+  padding:80px 40px 120px;
 }
-.blog-index-head{max-width:780px;margin-bottom:64px}
-.blog-index-head .eb{margin-bottom:24px}
-.blog-index-head h1{
-  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-  font-weight:500;font-size:clamp(36px,4.8vw,60px);
-  line-height:1.1;letter-spacing:-.025em;
-  margin:0;color:var(--ink);text-wrap:balance;
+.blog-page > .eb{margin-bottom:16px}
+.blog-h1{
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-weight:500;font-size:clamp(40px,5vw,60px);
+  line-height:1.05;letter-spacing:-.02em;
+  margin:0 0 16px;color:var(--ink);
+  max-width:22ch;text-wrap:balance;
 }
-.blog-index-lede{
-  margin:24px 0 0;max-width:58ch;
-  font-size:18px;line-height:1.55;color:var(--ink-2);
+.blog-sub{
+  font-size:17px;line-height:1.55;color:var(--ink-2);
+  margin:0 0 64px;font-weight:300;max-width:56ch;
 }
-.blog-index-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;background:var(--hair);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
-.blog-index-item{background:var(--background)}
-.blog-index-link{
-  display:block;padding:32px 0;text-decoration:none;color:inherit;
-  transition:padding 0.2s ease;
+
+.blog-featured{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:56px;
+  align-items:center;
+  border-top:1px solid var(--hair-2);
+  padding-top:56px;
+  text-decoration:none;color:inherit;
+  transition:opacity .2s;
 }
-.blog-index-link:hover{padding-left:8px}
-.blog-index-date{
-  font-family:'Geist Mono','SFMono-Regular',Consolas,monospace;
-  font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--copper);display:block;margin-bottom:12px;
+.blog-featured:hover{opacity:.85}
+.blog-featured-cover{
+  aspect-ratio:4 / 3;
+  background:
+    radial-gradient(ellipse at 30% 30%, var(--copper-a22) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(107,78,255,.10) 0%, transparent 50%),
+    linear-gradient(135deg, var(--copper-a18), var(--copper-a08));
+  border:1px solid var(--hair-2);
+  border-radius:12px;
 }
-.blog-index-title{
-  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-  font-weight:500;font-size:clamp(22px,2.4vw,30px);line-height:1.2;
-  letter-spacing:-.02em;color:var(--ink);margin:0 0 12px;text-wrap:balance;
+.blog-featured-meta{
+  display:flex;gap:16px;align-items:baseline;
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:11px;color:var(--ink-3);
+  letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:14px;
 }
-.blog-index-dek{
-  font-size:17px;line-height:1.55;color:var(--ink-2);margin:0 0 14px;max-width:62ch;
+.blog-featured-meta .cat{color:var(--copper)}
+.blog-featured-title{
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-size:clamp(28px,3vw,38px);
+  font-weight:500;line-height:1.1;
+  letter-spacing:-.015em;color:var(--ink);
+  margin:0 0 14px;text-wrap:balance;
 }
-.blog-index-cta{
-  font-size:14px;font-weight:500;color:var(--copper);
-  display:inline-block;
+.blog-featured-dek{
+  font-size:17px;line-height:1.55;color:var(--ink-2);
+  margin:0 0 24px;font-weight:300;
+}
+.blog-featured-author{
+  display:flex;align-items:center;gap:12px;
+}
+.blog-featured-author .avatar{
+  width:32px;height:32px;border-radius:999px;
+  background:linear-gradient(135deg, var(--copper-a30), rgba(209,60,19,.6));
+  border:1px solid var(--hair-2);
+}
+.blog-featured-author .author-name{
+  font-size:14px;color:var(--ink-2);font-weight:500;
+}
+
+.blog-subscribe{
+  margin-top:96px;
+  padding:40px 48px;
+  background:var(--bg-2);
+  border:1px solid var(--hair);
+  border-radius:14px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:32px;align-items:center;
+}
+.blog-subscribe-copy .sub-eb{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:8px;display:block;
+}
+.blog-subscribe-copy h3{
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-size:24px;font-weight:500;line-height:1.25;
+  color:var(--ink);margin:0 0 6px;
+}
+.blog-subscribe-copy h3 em{font-style:italic;color:var(--copper)}
+.blog-subscribe-copy p{
+  font-size:14px;color:var(--ink-2);margin:0;
+  max-width:50ch;line-height:1.55;
+}
+
+.subscribe-form{
+  display:flex;gap:8px;align-items:center;
+  background:rgba(0,0,0,.2);
+  border:1px solid var(--hair-2);
+  border-radius:8px;
+  padding:4px 4px 4px 16px;
+  min-width:360px;
+  position:relative;
+}
+.subscribe-form input{
+  background:transparent;border:none;color:var(--ink);
+  font-size:14px;font-family:inherit;outline:none;
+  flex:1;padding:10px 0;
+}
+.subscribe-form input::placeholder{color:var(--ink-3)}
+.subscribe-form button{
+  background:var(--copper);color:#1A0A02;
+  border:none;border-radius:6px;
+  padding:10px 18px;font-weight:500;font-size:13px;
+  font-family:inherit;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:filter .18s ease;
+}
+.subscribe-form button:hover{filter:brightness(1.1)}
+.subscribe-form button:disabled{opacity:.6;cursor:not-allowed}
+.subscribe-error{
+  position:absolute;top:calc(100% + 8px);left:0;
+  font-size:12px;color:#F87171;
+}
+.subscribe-success{
+  font-size:14px;color:var(--copper);margin:0;
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  letter-spacing:.04em;
+}
+
+@media (max-width: 800px){
+  .blog-featured{grid-template-columns:1fr;gap:32px}
+  .blog-featured-title{font-size:clamp(24px,5vw,32px)}
+  .blog-subscribe{grid-template-columns:1fr;padding:28px 24px}
+  .subscribe-form{min-width:0;width:100%}
 }
 
 /* ═══════════ Blog post (article body) ═══════════ */

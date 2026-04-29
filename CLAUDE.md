@@ -18,12 +18,13 @@ No test suite is configured.
 `.env.local` vars:
 
 ```
-RESEND_API_KEY=...                 # required — pilot form emails
+RESEND_API_KEY=...                 # required — pilot form emails + blog subscribe
+RESEND_AUDIENCE_ID=...             # required for /api/subscribe — Resend Audiences ID
 UPSTASH_REDIS_REST_URL=...         # optional — enables per-IP rate limit (5/hour)
 UPSTASH_REDIS_REST_TOKEN=...       # required if UPSTASH_REDIS_REST_URL is set
 ```
 
-Rate limiting in `app/api/send/route.ts` is gated on `UPSTASH_REDIS_REST_URL` — if unset, the limiter is skipped entirely (fine for local dev).
+Rate limiting in `app/api/send/route.ts` and `app/api/subscribe/route.ts` is gated on `UPSTASH_REDIS_REST_URL` — if unset, the limiter is skipped entirely (fine for local dev). `/api/subscribe` returns 503 if `RESEND_AUDIENCE_ID` is unset.
 
 ## Architecture
 
