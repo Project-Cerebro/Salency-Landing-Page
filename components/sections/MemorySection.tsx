@@ -103,10 +103,10 @@ export function MemorySection() {
             Institutional memory, <em>built.</em>
           </h1>
           <p className="lede">
-            Every call your team runs becomes{' '}
-            <em>structured, cited, queryable</em> context, mapped to your product
-            catalog and tied to the rep who heard it. The new AE inherits a Day-1
-            brief. The CS director picks up mid-story. Nothing is re-asked.
+            Every call your team runs becomes structured, cited, queryable
+            context, mapped to your product catalog and tied to the rep who
+            heard it. The new AE inherits a Day-1 brief. The CS director picks
+            up mid-story. Nothing is re-asked.
           </p>
         </section>
       </ScrollReveal>

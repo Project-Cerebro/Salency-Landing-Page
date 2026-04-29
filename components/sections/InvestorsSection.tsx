@@ -39,7 +39,7 @@ export function InvestorsSection() {
             </h2>
             <p>
               Salency is a system of record for what your accounts actually
-              told you. Every call becomes <em>durable, queryable context</em>{' '}
+              told you. Every call becomes durable, queryable context{' '}
               mapped to your product catalog, so the next rep, the next
               quarter, and the next pipeline review all inherit what was said,
               not what someone remembered to type.
@@ -60,12 +60,12 @@ export function InvestorsSection() {
               </p>
             </div>
             <p className="platform-moat-bridge">
-              Vs CRM, the wedge is the <em>shape of the data.</em> Contradiction pairs,
+              Vs CRM, the wedge is the shape of the data. Contradiction pairs,
               pain evolution over time, confidence-ranked pain → product
               matches, cross-account pattern graphs. None of these fit a CRM
               row. Flatten any of them into a field and you kill the thing
-              that makes Salency uncopyable. That&rsquo;s why we sit{' '}
-              <em>on top</em> of your stack, not inside it. Reps live in CRM
+              that makes Salency uncopyable. That&rsquo;s why we sit on top
+              of your stack, not inside it. Reps live in CRM
               for pipeline stages. Reps live in Salency for the qualitative
               layer, what the customer actually said, what contradicts what,
               which pains map to which products.
@@ -84,8 +84,8 @@ export function InvestorsSection() {
             </div>
             <figure className="platform-evidence">
               <p className="stat">
-                <em>40–50%</em> of customers get visibly annoyed when asked to
-                repeat themselves; <em>20–30%</em> explicitly express
+                40–50% of customers get visibly annoyed when asked to
+                repeat themselves; 20–30% explicitly express
                 frustration.
               </p>
               <figcaption className="src">
@@ -111,7 +111,7 @@ export function InvestorsSection() {
               <div className="cell">
                 <span className="label">Capture target</span>
                 <div className="figure">
-                  <em>0.5–1%</em> in 3 years
+                  0.5–1% in 3 years
                 </div>
                 <p className="desc">
                   250–1,000 teams. Revenue scales with category-standard
@@ -121,7 +121,7 @@ export function InvestorsSection() {
               <div className="cell">
                 <span className="label">Validation</span>
                 <div className="figure">
-                  Clay: <em>$1M → $100M</em>
+                  Clay: $1M → $100M
                 </div>
                 <p className="desc">
                   AI sales tooling category proves the scale. Clay hit $100M
@@ -132,7 +132,7 @@ export function InvestorsSection() {
             <div className="tam-counter">
               <span className="label">Counterexample</span>
               <p>
-                11x.ai raised <em>$74M</em> on autonomous AI SDRs and lost
+                11x.ai raised $74M on autonomous AI SDRs and lost
                 70–80% of customers. Autonomous bots without structured
                 customer memory don&rsquo;t hold the relationship. That&rsquo;s
                 the gap we fill.
@@ -264,7 +264,7 @@ export function InvestorsSection() {
                 </div>
                 <ul className="horizon-body">
                   <li>
-                    <em>Recall.ai meeting bot</em>, joining Zoom, Meet, Teams
+                    Recall.ai meeting bot, joining Zoom, Meet, Teams
                     directly. Extraction runs without a transcript upload step.
                   </li>
                 </ul>
@@ -316,10 +316,9 @@ export function InvestorsSection() {
               </h2>
               <p>
                 Sales teams are consolidating tools and cutting rep headcount
-                while deal complexity keeps rising. The surviving reps own{' '}
-                <em>more accounts with less tribal knowledge</em>, and AI
-                agents will start drafting their outreach inside the next
-                eighteen months.
+                while deal complexity keeps rising. The surviving reps own
+                more accounts with less tribal knowledge, and AI agents will
+                start drafting their outreach inside the next eighteen months.
               </p>
               <p>
                 Both of those depend on structured account memory as the
@@ -330,16 +329,16 @@ export function InvestorsSection() {
               </p>
               <p>
                 Every LLM commoditizes extraction. What doesn&rsquo;t
-                commoditize is the <em>customer-built graph</em> of pains,
-                products, and contradictions, and that graph compounds per
-                account, with every call. The moat is the{' '}
-                <em>specific join</em>, pain → product → contradiction across
-                time, wired into the PM tools where roadmaps already live.
+                commoditize is the customer-built graph of pains, products,
+                and contradictions, and that graph compounds per account,
+                with every call. The moat is the specific join, pain →
+                product → contradiction across time, wired into the PM tools
+                where roadmaps already live.
               </p>
               <div className="thesis-close">
-                Salency is building that layer. The longer a team runs it,{' '}
-                <em>the more context compounds</em>. The graph keeps getting
-                richer with every call.
+                Salency is building that layer. The longer a team runs it,
+                the more context compounds. The graph keeps getting richer
+                with every call.
               </div>
             </div>
           </section>

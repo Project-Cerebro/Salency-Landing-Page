@@ -13,10 +13,9 @@ export function ProblemSection() {
         </div>
         <p className="lede">
           Your reps run discovery calls every week. Your AI notetaker captures
-          the audio. Your CRM captures the stage change.{' '}
-          <em>Nothing captures what was actually learned</em>. The pains, the
-          politics, the promises. So when a rep rotates, the account restarts
-          from zero.
+          the audio. Your CRM captures the stage change. Nothing captures what
+          was actually learned. The pains, the politics, the promises. So when
+          a rep rotates, the account restarts from zero.
         </p>
       </div>
 
@@ -24,7 +23,7 @@ export function ProblemSection() {
         <div className="prob-card">
           <div className="idx">i.</div>
           <h3 className="title">
-            Calls are <em>recorded.</em> Context isn&apos;t <em>captured.</em>
+            Calls are recorded. Context isn&apos;t <em>captured.</em>
           </h3>
           <p className="desc">
             Conversation intelligence gives you 90 minutes of searchable
@@ -80,10 +79,10 @@ export function ProblemSection() {
       <div className="prob-resolve">
         <span className="label">— The fix</span>
         <p className="text">
-          Salency sits above your AI notetaker and CRM as an{' '}
-          <em>institutional memory layer</em>. It extracts structured context
-          from every call, keeps it current as the account evolves, and
-          surfaces it the moment someone new picks up the relationship.
+          Salency sits above your AI notetaker and CRM as an institutional
+          memory layer. It extracts structured context from every call, keeps
+          it current as the account evolves, and surfaces it the moment
+          someone new picks up the relationship.
         </p>
         <Link href="/memory" className="link">
           See our memory layer →
