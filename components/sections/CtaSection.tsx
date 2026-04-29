@@ -22,7 +22,7 @@ export function CtaSection() {
             className="btn btn-primary"
             onClick={() => openPilotModal()}
           >
-            Request pilot access →
+            Apply to the Spring 2026 cohort →
           </button>
           <Link href="/investors#thesis" className="btn btn-ghost">
             Read our memory thesis
