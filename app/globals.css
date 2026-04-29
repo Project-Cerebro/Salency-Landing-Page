@@ -687,6 +687,25 @@ html {
     &:disabled:hover{filter:none}
   }
 
+  /* Custom select chevron rendered as a mask-image so the color is
+     tokenized via background-color, not baked into a data URL. The
+     <select> can't host a pseudo-element (replaced element), so wrap
+     it in <div class="select-wrap"> and paint the chevron on ::after. */
+  .select-wrap{position:relative;display:block}
+  .select-wrap::after{
+    content:"";
+    position:absolute;
+    right:16px;top:50%;
+    width:12px;height:8px;
+    transform:translateY(-50%);
+    background-color:var(--copper);
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-size:contain;mask-size:contain;
+    pointer-events:none;
+  }
+
   /* Application/intake page — shared by /pilot and /pricing.
      Generic "apply-*" naming so the classes aren't misleading when
      viewed through the pricing-page lens. All layout/typography lives
