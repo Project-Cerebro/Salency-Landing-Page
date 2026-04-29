@@ -4,6 +4,9 @@ import { notFound } from 'next/navigation';
 import { MarketingHeader } from '@/components/MarketingHeader';
 import { SiteFooter } from '@/components/sections/SiteFooter';
 import { JsonLd } from '@/components/JsonLd';
+import { FounderAvatar } from '@/components/FounderAvatar';
+import { PostToc } from '@/components/PostToc';
+import { ShareButtons } from '@/components/ShareButtons';
 import { FOUNDERS } from '@/lib/founders';
 import { getAllPostSlugs, getPostBySlug } from '@/content/posts';
 
@@ -61,6 +64,7 @@ export default async function BlogPostPage({
 
   const author = FOUNDERS.find((f) => f.id === post.authorId);
   const authorName = author?.name ?? 'Salency';
+  const postUrl = `https://www.salency.ai/blog/${post.slug}`;
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -81,35 +85,78 @@ export default async function BlogPostPage({
         url: 'https://www.salency.ai/salency-mark.svg',
       },
     },
-    mainEntityOfPage: `https://www.salency.ai/blog/${post.slug}`,
+    mainEntityOfPage: postUrl,
   };
 
   return (
     <div className="page">
       <JsonLd data={articleSchema} />
       <MarketingHeader />
-      <main className="post-page">
-        <article className="post-article">
-          <div className="post-meta-top">
-            <Link href="/blog" className="post-back">
-              ← Build log
-            </Link>
-            <span className="post-date">
-              {formatDate(post.publishedAt)} · By {authorName}
-            </span>
+
+      <header className="post-hero">
+        <div className="post-hero-inner">
+          <div className="post-breadcrumb">
+            <Link href="/blog">← Salency build log</Link>
           </div>
-          <h1>{post.title}</h1>
+          <div className="post-meta-row">
+            {post.category && <span className="cat">{post.category}</span>}
+            {post.category && <span className="sep">·</span>}
+            <span>{formatDate(post.publishedAt)}</span>
+            <span className="sep">·</span>
+            <span>{post.readMinutes ?? 5} min read</span>
+          </div>
+          <h1 className="post-title">{post.title}</h1>
           <p className="post-dek">{post.dek}</p>
+        </div>
+      </header>
+
+      <main className="post-layout">
+        <article className="post-article">
           <div className="post-body">{post.body}</div>
-          <div className="post-footer">
-            <p>
-              Salency is institutional memory for B2B sales teams.{' '}
-              <Link href="/why-salency">Read why Salency</Link>, or{' '}
-              <Link href="/pilot">join the Spring 2026 pilot cohort</Link>.
-            </p>
-          </div>
+          <ShareButtons url={postUrl} title={post.title} />
         </article>
+
+        {post.headings && post.headings.length > 0 && (
+          <aside className="post-toc-rail">
+            <PostToc sections={post.headings} />
+          </aside>
+        )}
       </main>
+
+      {author && (
+        <aside className="post-author-card">
+          <div className="post-author-inner">
+            <FounderAvatar founder={author} size={96} />
+            <div className="post-author-meta">
+              <span className="eb">— Author</span>
+              <h3>{author.name}</h3>
+              <span className="role">{author.role}, Salency</span>
+              <p>{author.longBio}</p>
+              <div className="post-author-links">
+                {author.linkedin && (
+                  <a
+                    href={author.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    LinkedIn ↗
+                  </a>
+                )}
+                <a href="mailto:hello@salency.ai">Reach out →</a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      )}
+
+      <div className="post-page-footer">
+        <p>
+          Salency is institutional memory for B2B sales teams.{' '}
+          <Link href="/why-salency">Read why Salency</Link>, or{' '}
+          <Link href="/pilot">join the Spring 2026 pilot cohort</Link>.
+        </p>
+      </div>
+
       <SiteFooter />
     </div>
   );

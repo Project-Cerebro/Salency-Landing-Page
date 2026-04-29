@@ -2328,67 +2328,249 @@ header button:focus:not(:focus-visible){
   .subscribe-form{min-width:0;width:100%}
 }
 
-/* ═══════════ Blog post (article body) ═══════════ */
-.post-page{max-width:780px;margin:0 auto;padding:80px 32px 96px}
-.post-meta-top{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:48px;gap:24px;flex-wrap:wrap;
-  font-family:'Geist Mono','SFMono-Regular',Consolas,monospace;
-  font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+/* ═══════════ Blog post — magazine-grade shell ═══════════
+   Hero (full-bleed pull-quote treatment) → 2-col body with sticky
+   right-rail TOC at >=1024 → share buttons → author card → footer. */
+.post-hero{
+  position:relative;
+  padding:96px 40px 72px;
+  border-bottom:1px solid var(--hair-2);
+  background:
+    radial-gradient(ellipse at 30% 30%, var(--copper-a08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(107,78,255,.06) 0%, transparent 60%),
+    var(--bg);
+  overflow:hidden;
 }
-.post-back{color:var(--copper);text-decoration:none}
-.post-back:hover{text-decoration:underline}
-.post-date{color:var(--ink-3)}
-
-.post-article h1{
-  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-  font-weight:500;font-size:clamp(34px,4.4vw,52px);line-height:1.08;
-  letter-spacing:-.025em;color:var(--ink);margin:0 0 20px;text-wrap:balance;
+.post-hero::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;
+  width:1px;
+  background:linear-gradient(180deg, transparent, var(--copper-a30) 30%, var(--copper-a18) 70%, transparent);
+  transform:translateX(-50%);opacity:.5;
+}
+.post-hero-inner{
+  max-width:880px;margin:0 auto;position:relative;
+}
+.post-breadcrumb{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);
+  margin-bottom:36px;
+}
+.post-breadcrumb a{color:var(--copper);text-decoration:none}
+.post-breadcrumb a:hover{color:var(--ink)}
+.post-meta-row{
+  display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:11px;color:var(--ink-3);
+  letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:22px;
+}
+.post-meta-row .cat{color:var(--copper)}
+.post-meta-row .sep{color:var(--ink-3);opacity:.5}
+.post-title{
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-size:clamp(38px, 4.6vw, 60px);
+  font-weight:500;line-height:1.1;
+  letter-spacing:-.02em;
+  margin:0 0 24px;color:var(--ink);
+  max-width:22ch;text-wrap:balance;
 }
 .post-dek{
-  font-size:20px;line-height:1.5;color:var(--ink-3);
-  margin:0 0 56px;font-weight:400;text-wrap:pretty;
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-style:italic;font-size:22px;line-height:1.5;
+  color:var(--ink-2);margin:0;max-width:56ch;
 }
-.post-body{font-size:18px;line-height:1.65;color:var(--ink-2)}
-.post-body h2{
-  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-  font-weight:500;font-size:clamp(24px,2.6vw,32px);line-height:1.2;
-  letter-spacing:-.015em;color:var(--ink);margin:56px 0 20px;
+.post-dek em{color:var(--copper)}
+
+.post-layout{
+  max-width:1080px;margin:0 auto;
+  padding:56px 40px 72px;
+  display:block;
+}
+.post-article{max-width:720px;margin:0 auto}
+.post-body{
+  font-size:18px;line-height:1.7;color:var(--ink);font-weight:300;
 }
 .post-body p{margin:0 0 22px}
-.post-body p strong{color:var(--ink);font-weight:600}
+.post-body p strong{font-weight:500;color:var(--ink)}
 .post-body p em{color:var(--copper);font-style:italic}
-.post-body a{color:var(--copper);text-decoration:none;border-bottom:1px solid rgba(232,146,90,0.4)}
+.post-body a{
+  color:var(--copper);text-decoration:none;
+  border-bottom:1px solid var(--copper-a30);
+  transition:border-color .18s ease;
+}
 .post-body a:hover{border-bottom-color:var(--copper)}
+.post-body h2{
+  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+  font-size:28px;font-weight:500;line-height:1.25;
+  letter-spacing:-.015em;color:var(--ink);
+  margin:56px 0 18px;text-wrap:balance;
+  scroll-margin-top:96px;
+}
 .post-body ul{margin:0 0 22px;padding-left:20px}
 .post-body ul li{margin-bottom:8px}
 .post-body blockquote{
   margin:28px 0;padding:6px 0 6px 22px;
   border-left:2px solid var(--copper);
+  font-family:var(--font-display), 'Instrument Serif', serif;
   font-size:21px;color:var(--ink);font-style:italic;line-height:1.45;
 }
 .post-body table{
   width:100%;border-collapse:collapse;margin:28px 0;font-size:16px;
 }
-.post-body table th,.post-body table td{
+.post-body table th, .post-body table td{
   text-align:left;padding:14px 16px;border-bottom:1px solid var(--hair);
 }
 .post-body table th{
   color:var(--copper);
-  font-family:'Geist Mono','SFMono-Regular',Consolas,monospace;
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
   font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
 }
 .post-body table td{color:var(--ink-2)}
 .post-pullquote{
   margin:32px 0;padding:24px 0;
   border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  font-family:var(--font-display), 'Instrument Serif', serif;
   font-size:22px;line-height:1.4;color:var(--ink);font-weight:500;
 }
-.post-footer{
-  margin-top:64px;padding-top:32px;border-top:1px solid var(--hair);
-  font-size:16px;color:var(--ink-3);
+
+/* Share buttons — sit beneath the body, before the author card. */
+.post-share{
+  margin:48px 0 0;
+  padding:24px 0 0;
+  border-top:1px solid var(--hair-2);
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
 }
-.post-footer a{color:var(--copper);text-decoration:none;border-bottom:1px solid rgba(232,146,90,0.4)}
+.post-share-label{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);margin-right:4px;
+}
+.post-share-btn{
+  background:transparent;border:0;cursor:pointer;
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:12px;letter-spacing:.08em;
+  color:var(--copper);text-decoration:none;
+  border-bottom:1px solid var(--copper-a30);
+  padding:0 0 2px;
+  transition:color .18s, border-color .18s;
+}
+.post-share-btn:hover{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* Sticky right-rail TOC at >=1024. Below that, hidden — keeps the
+   reading column un-distracted on mobile/tablet. */
+.post-toc-rail{display:none}
+@media (min-width: 1024px){
+  .post-layout{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 220px;
+    gap:64px;
+    align-items:start;
+    max-width:1080px;
+  }
+  .post-article{max-width:none;margin:0}
+  .post-toc-rail{display:block}
+  .post-toc{
+    position:sticky;top:96px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:12px;line-height:1.5;
+  }
+  .post-toc-eb{
+    display:block;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
+    margin-bottom:14px;
+  }
+  .post-toc ol{
+    list-style:none;margin:0;padding:0;
+    border-left:1px solid var(--hair-2);
+  }
+  .post-toc li{margin:0;padding:0}
+  .post-toc a{
+    display:block;padding:6px 14px;
+    color:var(--ink-3);text-decoration:none;
+    border-left:1px solid transparent;margin-left:-1px;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  .post-toc a:hover{color:var(--ink-2)}
+  .post-toc li.is-active a{
+    color:var(--copper);border-left-color:var(--copper);
+  }
+}
+
+/* Author footer card — photo + bio + LinkedIn/email. */
+.post-author-card{
+  max-width:720px;margin:0 auto 72px;padding:0 40px;
+}
+.post-author-inner{
+  display:grid;grid-template-columns:96px 1fr;gap:28px;align-items:start;
+  padding:32px;background:var(--bg-2);
+  border:1px solid var(--hair-2);border-radius:14px;
+  position:relative;
+}
+.post-author-inner::before{
+  content:"";position:absolute;
+  top:0;left:32px;right:32px;height:1px;
+  background:linear-gradient(90deg, var(--copper) 0%, var(--copper-a08) 30%, transparent 100%);
+}
+.post-author-card .photo{
+  width:96px;height:96px;border-radius:12px;
+  border:1px solid var(--hair-2);overflow:hidden;
+}
+.post-author-card .photo img{width:100%;height:100%;object-fit:cover;display:block}
+.post-author-meta .eb{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--copper);display:block;margin-bottom:8px;
+}
+.post-author-meta h3{
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-size:22px;font-weight:500;color:var(--ink);
+  margin:0 0 4px;line-height:1.2;
+}
+.post-author-meta .role{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:14px;display:block;
+}
+.post-author-meta p{
+  font-size:14.5px;line-height:1.6;color:var(--ink-2);
+  margin:0 0 16px;font-weight:300;
+}
+.post-author-meta p em{color:var(--copper);font-style:italic}
+.post-author-links{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.post-author-links a{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:12px;letter-spacing:.08em;
+  color:var(--copper);text-decoration:none;
+  border-bottom:1px solid var(--copper-a30);
+  padding-bottom:2px;
+  transition:border-color .18s, color .18s;
+}
+.post-author-links a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+
+.post-page-footer{
+  max-width:720px;margin:0 auto 96px;padding:32px 40px 0;
+  border-top:1px solid var(--hair);
+  font-size:15px;color:var(--ink-3);
+}
+.post-page-footer a{
+  color:var(--copper);text-decoration:none;
+  border-bottom:1px solid var(--copper-a30);
+}
+.post-page-footer a:hover{border-bottom-color:var(--copper)}
+
+@media (max-width: 700px){
+  .post-hero{padding:64px 24px 48px}
+  .post-layout{padding:40px 24px 56px}
+  .post-body{font-size:17px}
+  .post-author-card{padding:0 24px}
+  .post-author-inner{grid-template-columns:72px 1fr;gap:20px;padding:24px}
+  .post-author-card .photo{width:72px;height:72px}
+  .post-title{font-size:clamp(30px,7vw,44px)}
+  .post-dek{font-size:18px}
+  .post-page-footer{padding:32px 24px 0}
+}
 
 /* ═══════════ A11y utilities ═══════════ */
 .sr-only{
