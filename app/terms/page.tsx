@@ -16,7 +16,7 @@ export default function Terms() {
       <MarketingHeader />
       <main className="pt-32 pb-24 px-6 max-w-3xl mx-auto">
         <h1 className="text-5xl font-bold text-white mb-8">Terms of Service</h1>
-        <div className="prose prose-invert prose-gray max-w-none space-y-6 text-gray-300 text-base leading-relaxed">
+        <div className="max-w-none space-y-6 text-gray-300 text-base leading-relaxed">
           <p><strong>Effective date:</strong> March 25, 2026</p>
 
           <p>These terms govern your use of salency.ai and any pilot services provided by Salency (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;).</p>
