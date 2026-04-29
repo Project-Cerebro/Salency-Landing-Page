@@ -1,14 +1,10 @@
 import { ReactNode } from 'react';
 
-export type PhotoVariant = '' | 'photo--violet' | 'photo--teal' | 'photo--amber';
-
 export interface Founder {
   id: string;
   name: string;
   role: string;
-  initials: string;
-  photoVariant: PhotoVariant;
-  photoSrc?: string;
+  photoSrc: string;
   shortBio: ReactNode;
   longBio: ReactNode;
   linkedin?: string;
@@ -19,8 +15,6 @@ export const FOUNDERS: Founder[] = [
     id: 'howard',
     name: 'Howard Tam',
     role: 'Co-founder & CEO',
-    initials: 'HT',
-    photoVariant: '',
     photoSrc: '/founders/howard.png',
     linkedin: 'https://www.linkedin.com/in/howardhwt/',
     shortBio: (
@@ -44,8 +38,6 @@ export const FOUNDERS: Founder[] = [
     id: 'nikki',
     name: 'Nikki Ip',
     role: 'Co-founder & Product',
-    initials: 'NI',
-    photoVariant: 'photo--violet',
     photoSrc: '/founders/nikki.png',
     linkedin: 'https://www.linkedin.com/in/nikkilkip/',
     shortBio: (
@@ -66,8 +58,6 @@ export const FOUNDERS: Founder[] = [
     id: 'babajide',
     name: 'Babajide Okusanya',
     role: 'Founding Engineer',
-    initials: 'BO',
-    photoVariant: 'photo--teal',
     photoSrc: '/founders/babajide.png',
     linkedin: 'https://www.linkedin.com/in/jideokusanya/',
     shortBio: (
@@ -88,8 +78,6 @@ export const FOUNDERS: Founder[] = [
     id: 'shristi',
     name: 'Shristi Gartaula',
     role: 'Founding Designer',
-    initials: 'SG',
-    photoVariant: 'photo--amber',
     photoSrc: '/founders/shristi.png',
     linkedin: 'https://www.linkedin.com/in/shristi1/',
     shortBio: (
