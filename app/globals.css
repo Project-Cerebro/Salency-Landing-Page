@@ -1440,6 +1440,59 @@ html {
     text-wrap:balance;
   }
 
+  /* Legal pages — /privacy + /terms.
+     Two-column layout at >=1024 with sticky right-rail TOC.
+     Below 1024, falls back to single column and the TOC is hidden
+     (the page is short enough at mobile that a top-of-page anchor
+     list adds noise rather than helping). */
+  .legal-layout{
+    display:block;
+  }
+  .legal-toc{display:none}
+
+  @media (min-width: 1024px){
+    .legal-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 220px;
+      gap:64px;
+      align-items:start;
+    }
+    .legal-toc{
+      display:block;
+      position:sticky;top:96px;
+      font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+      font-size:12px;
+      line-height:1.5;
+    }
+    .legal-toc-eb{
+      display:block;
+      font-size:10.5px;font-weight:500;letter-spacing:.18em;
+      text-transform:uppercase;color:var(--copper);
+      margin-bottom:14px;
+    }
+    .legal-toc ol{
+      list-style:none;margin:0;padding:0;
+      border-left:1px solid var(--hair-2);
+    }
+    .legal-toc li{
+      margin:0;padding:0;
+    }
+    .legal-toc a{
+      display:block;
+      padding:6px 14px;
+      color:var(--ink-3);
+      text-decoration:none;
+      border-left:1px solid transparent;
+      margin-left:-1px;
+      transition:color .18s ease, border-color .18s ease;
+    }
+    .legal-toc a:hover{color:var(--ink-2)}
+    .legal-toc li.is-active a{
+      color:var(--copper);
+      border-left-color:var(--copper);
+    }
+  }
+
   /* Tabular figures on financial stats — keeps numeric strings
      aligned and prevents jitter when values change. Applies to all
      .figure stat displays under /investors sections. */
