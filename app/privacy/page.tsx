@@ -16,7 +16,7 @@ export default function Privacy() {
       <MarketingHeader />
       <main className="pt-32 pb-24 px-6 max-w-3xl mx-auto">
         <h1 className="text-5xl font-bold text-white mb-8">Privacy Policy</h1>
-        <div className="prose prose-invert prose-gray max-w-none space-y-6 text-gray-300 text-base leading-relaxed">
+        <div className="max-w-none space-y-6 text-gray-300 text-base leading-relaxed">
           <p><strong>Effective date:</strong> March 25, 2026</p>
 
           <p>Salency (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) is committed to protecting your privacy. This policy explains how we collect, use, and safeguard information when you visit salency.ai or use our services.</p>

@@ -687,6 +687,25 @@ html {
     &:disabled:hover{filter:none}
   }
 
+  /* Custom select chevron rendered as a mask-image so the color is
+     tokenized via background-color, not baked into a data URL. The
+     <select> can't host a pseudo-element (replaced element), so wrap
+     it in <div class="select-wrap"> and paint the chevron on ::after. */
+  .select-wrap{position:relative;display:block}
+  .select-wrap::after{
+    content:"";
+    position:absolute;
+    right:16px;top:50%;
+    width:12px;height:8px;
+    transform:translateY(-50%);
+    background-color:var(--copper);
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-size:contain;mask-size:contain;
+    pointer-events:none;
+  }
+
   /* Application/intake page — shared by /pilot and /pricing.
      Generic "apply-*" naming so the classes aren't misleading when
      viewed through the pricing-page lens. All layout/typography lives
@@ -769,20 +788,6 @@ html {
   .thesis-hero,
   .apply-page{
     position:relative;
-  }
-
-  /* Founder avatar with photo — applies to .photo wherever it
-     appears (story-founder-meta, team-strip strip-cell). The
-     parent .photo rule still owns size + border-radius + border.
-     This modifier just clips the image and removes the initials
-     gradient background. */
-  .photo.photo--has-image{
-    background:none;
-    overflow:hidden;
-    padding:0;
-  }
-  .photo.photo--has-image img{
-    width:100%;height:100%;object-fit:cover;display:block;
   }
 
   /* Pricing-status meta line on /pricing + /pilot — small mono caps
@@ -1612,14 +1617,10 @@ html {
     }
     .photo{
       width:56px;height:56px;border-radius:8px;
-      background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
-      color:#FFEDE8;font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
-      display:flex;align-items:center;justify-content:center;letter-spacing:-.01em;
       border:1px solid var(--copper-a30);
+      overflow:hidden;
 
-      &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));border-color:rgba(107,78,255,.3);color:#D8CEFF}
-      &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
-      &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));border-color:rgba(251,191,36,.32);color:#FFE8A8}
+      img{width:100%;height:100%;object-fit:cover;display:block}
     }
     .name{
       font-family:var(--font-display), 'Instrument Serif', serif;font-weight:500;font-size:18px;color:var(--ink);
@@ -1841,14 +1842,10 @@ html {
 
     .photo{
       width:88px;height:88px;border-radius:0;
-      background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
-      color:#FFEDE8;font-family:'Geist Mono',monospace;font-weight:500;font-size:13px;
-      display:flex;align-items:center;justify-content:center;letter-spacing:.1em;
       border:1px solid var(--hair-2);
+      overflow:hidden;
 
-      &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));color:#D8CEFF}
-      &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));color:#B5F0E5}
-      &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));color:#FFE8A8}
+      img{width:100%;height:100%;object-fit:cover;display:block}
     }
   }
 
@@ -1933,7 +1930,7 @@ html {
     .story-collision-close{margin-top:40px}
 
     .story-founders-list{grid-template-columns:1fr;gap:48px}
-    .story-founder-meta .photo{width:72px;height:72px;font-size:12px}
+    .story-founder-meta .photo{width:72px;height:72px}
 
     .story-close{margin-top:64px;padding-top:40px}
     .story-close-ctas{gap:16px}

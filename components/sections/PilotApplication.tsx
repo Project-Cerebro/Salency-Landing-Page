@@ -7,7 +7,6 @@ const APPLY_CARDS: Array<{ title: string; marker: MarkerKind; items: string[] }>
     title: 'Pilot includes',
     marker: 'check',
     items: [
-      '60 days of free access',
       'Weekly extraction reports on your calls',
       '30-minute weekly debrief with our team',
       '1–2 week setup, no obligation to continue',

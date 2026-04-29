@@ -110,8 +110,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
     }
 
     const inputClass = 'w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-copper transition-colors';
-    const selectChevron = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23FE8531' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`;
-    const selectClass = `${inputClass} appearance-none pr-10 bg-no-repeat bg-[right_1rem_center]`;
+    const selectClass = `${inputClass} appearance-none pr-10`;
 
     return (
         <form
@@ -189,41 +188,43 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
 
             <div className="mb-4">
                 <label htmlFor="pilot-industry" className="block text-sm font-medium text-gray-300 mb-1">Industry *</label>
-                <select
-                    id="pilot-industry"
-                    {...register('industry', { required: true })}
-                    className={selectClass}
-                    style={{ backgroundImage: selectChevron }}
-                    defaultValue=""
-                    aria-invalid={errors.industry ? 'true' : undefined}
-                    aria-describedby={errors.industry ? 'pilot-industry-error' : undefined}
-                    suppressHydrationWarning
-                >
-                    <option value="" disabled>Select an industry</option>
-                    {INDUSTRIES.map((i) => (
-                        <option key={i} value={i}>{i}</option>
-                    ))}
-                </select>
+                <div className="select-wrap">
+                    <select
+                        id="pilot-industry"
+                        {...register('industry', { required: true })}
+                        className={selectClass}
+                        defaultValue=""
+                        aria-invalid={errors.industry ? 'true' : undefined}
+                        aria-describedby={errors.industry ? 'pilot-industry-error' : undefined}
+                        suppressHydrationWarning
+                    >
+                        <option value="" disabled>Select an industry</option>
+                        {INDUSTRIES.map((i) => (
+                            <option key={i} value={i}>{i}</option>
+                        ))}
+                    </select>
+                </div>
                 {errors.industry && <span id="pilot-industry-error" className="text-red-400 text-xs mt-1 block">Please select an industry</span>}
             </div>
 
             <div className="mb-4">
                 <label htmlFor="pilot-role" className="block text-sm font-medium text-gray-300 mb-1">Your Role *</label>
-                <select
-                    id="pilot-role"
-                    {...register('role', { required: true })}
-                    className={selectClass}
-                    style={{ backgroundImage: selectChevron }}
-                    defaultValue=""
-                    aria-invalid={errors.role ? 'true' : undefined}
-                    aria-describedby={errors.role ? 'pilot-role-error' : undefined}
-                    suppressHydrationWarning
-                >
-                    <option value="" disabled>Select your role</option>
-                    {ROLES.map((r) => (
-                        <option key={r} value={r}>{r}</option>
-                    ))}
-                </select>
+                <div className="select-wrap">
+                    <select
+                        id="pilot-role"
+                        {...register('role', { required: true })}
+                        className={selectClass}
+                        defaultValue=""
+                        aria-invalid={errors.role ? 'true' : undefined}
+                        aria-describedby={errors.role ? 'pilot-role-error' : undefined}
+                        suppressHydrationWarning
+                    >
+                        <option value="" disabled>Select your role</option>
+                        {ROLES.map((r) => (
+                            <option key={r} value={r}>{r}</option>
+                        ))}
+                    </select>
+                </div>
                 {errors.role && <span id="pilot-role-error" className="text-red-400 text-xs mt-1 block">Please select your role</span>}
             </div>
 
