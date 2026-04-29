@@ -170,8 +170,7 @@ export function InvestorsSection() {
                   2025), Account Console (Feb 2026). Doesn&rsquo;t ship pain
                   &rarr; product matching against a customer-maintained
                   catalog (no Vault primitive) or cross-call contradiction
-                  detection. Historical base rate ~38% per 12-month window
-                  for competitor-parity ships.
+                  detection.
                 </span>
               </div>
               <div className="compete-row">
@@ -182,9 +181,8 @@ export function InvestorsSection() {
                 <span className="c-why">
                   <strong>12 month window.</strong> Frame AI acquisition (Dec
                   2024) and Smart Deal Progression (Apr 2026) put them ~12
-                  months from packaging the matching engine. The architecture-
-                  flat moat argument is retracted post-Frame AI. 200K
-                  customers, freemium.
+                  months from packaging the matching engine. 200K customers,
+                  freemium.
                 </span>
               </div>
               <div className="compete-row">
@@ -196,8 +194,7 @@ export function InvestorsSection() {
                   <strong>18&ndash;24 month window.</strong> Account Research
                   Agent (Dreamforce 2025), Data 360 customer graph, Agentforce
                   360. Recipe published in Architect docs but not packaged as
-                  a SKU. 150K customers. One Spring 2027 release-note bullet
-                  erases the wedge for that base.
+                  a SKU. 150K customers.
                 </span>
               </div>
               <div className="compete-row">
