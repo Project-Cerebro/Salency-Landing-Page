@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { openPilotModal } from '@/components/PilotModal';
 import { HeroArtifact } from '@/components/HeroArtifact';
 
@@ -31,7 +32,9 @@ export function HeroSection() {
             >
               Request a pilot →
             </button>
-            <button className="btn btn-ghost">Watch 90-second tour</button>
+            <Link href="/memory" className="btn btn-ghost">
+              See the memory layer →
+            </Link>
           </div>
 
           <div className="hero-meta">
