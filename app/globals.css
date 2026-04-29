@@ -822,6 +822,10 @@ html {
   }
   @media (max-width: 768px) {
     .hero { padding: 56px 22px 48px; }
+    /* Force the muted second sentence onto its own visual block so
+       text-wrap: balance can split "Institutional memory for revenue
+       teams." cleanly without orphaning the orange <em>. */
+    .h1 .soft { display: block; margin-top: .25em; }
   }
   .hero-hairline{
     max-width:var(--page-max);margin:0 auto;
