@@ -52,7 +52,7 @@ export function HowItWorksSection() {
           <div className="ex">
             <div className="example-label">Example mapping</div>
             <div className="example-quote">
-              Pain <em>&ldquo;handoff loses context&rdquo;</em>{' '}
+              Pain &ldquo;handoff loses context&rdquo;{' '}
               <strong>→ 3 products ranked</strong>, contradictions flagged
             </div>
           </div>

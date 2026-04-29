@@ -185,7 +185,7 @@ export function HubSection() {
             <span className="hub-core-name">Salency</span>
           </div>
           <div className="hub-core-ttl">
-            Extract · <em>Map</em> · Remember
+            Extract · Map · Remember
           </div>
         </div>
 
@@ -272,7 +272,7 @@ export function HubSection() {
         <div className="hub-foot">
           <span>One pipeline · every role · zero handoff loss</span>
           <span>
-            <em>Early access</em> · Q2 2026
+            Early access · Q2 2026
           </span>
         </div>
       </div>
