@@ -7,5 +7,6 @@ export interface Post {
   description: string;
   authorId: string;
   publishedAt: string;
+  readMinutes?: number;
   body: ReactNode;
 }
