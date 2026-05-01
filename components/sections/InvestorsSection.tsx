@@ -62,11 +62,11 @@ export function InvestorsSection() {
             <p className="platform-moat-bridge">
               Vs CRM, the wedge is the shape of the data. Contradiction pairs,
               pain evolution over time, confidence-ranked pain → product
-              matches, cross-account pattern graphs. None of these fit a CRM
-              row. Flatten any of them into a field and you kill the thing
-              that makes Salency uncopyable. That&rsquo;s why we sit on top
-              of your stack, not inside it. Reps live in CRM
-              for pipeline stages. Reps live in Salency for the qualitative
+              matches, cross-account pattern graphs. CRM rows hold one value
+              per field; the graph holds rankings, timestamped citations, and
+              cross-call comparisons. Two layers, distinct shapes of data. We
+              sit on top of your stack, not inside it. Reps live in CRM for
+              pipeline stages. Reps live in Salency for the qualitative
               layer, what the customer actually said, what contradicts what,
               which pains map to which products.
             </p>
@@ -328,9 +328,9 @@ export function InvestorsSection() {
                 Every LLM commoditizes extraction. What doesn&rsquo;t
                 commoditize is the customer-built graph of pains, products,
                 and contradictions, and that graph compounds per account,
-                with every call. The moat is the specific join, pain →
-                product → contradiction across time, wired into the PM tools
-                where roadmaps already live.
+                with every call. The defensibility is the specific join, pain
+                → product → contradiction across time, wired into the PM
+                tools where roadmaps already live.
               </p>
               <div className="thesis-close">
                 Salency is building that layer. The longer a team runs it,
