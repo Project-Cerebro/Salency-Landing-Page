@@ -7,7 +7,6 @@ const APPLY_CARDS: Array<{ title: string; marker: MarkerKind; items: string[] }>
     title: 'Pilot includes',
     marker: 'check',
     items: [
-      '60 days of free access',
       'Weekly extraction reports on your calls',
       '30-minute weekly debrief with our team',
       '1–2 week setup, no obligation to continue',
@@ -47,6 +46,9 @@ export function PilotApplication() {
           A memory layer that outlasts any rep. We&apos;re opening early access to a
           small group of revenue teams this cohort. Tell us about your team and
           we&apos;ll scope the fit together.
+        </p>
+        <p className="apply-price">
+          Free during the Spring 2026 pilot. Pricing per engagement after.
         </p>
       </section>
 

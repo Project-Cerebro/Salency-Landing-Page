@@ -4,7 +4,6 @@
   --background: #121015;
   --foreground: #E8E6E3;
   --accent: #06b6d4;
-  --accent-warm: #E8925A;
   --muted: #201D24;
   --card: #201D24;
 
@@ -29,7 +28,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
-  --color-accent-warm: var(--accent-warm);
+  --color-copper: var(--copper);
   --color-muted: var(--muted);
   --color-card: var(--card);
   --color-bg-secondary: var(--bg-secondary);
@@ -62,6 +61,14 @@ h6 {
 }
 
 /* Utilities */
+
+/* Tabular figures — apply to dates, years, quarters, stats, prices.
+   Keeps numeric strings from jittering when values change at runtime. */
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
 .glass-panel {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
@@ -680,6 +687,25 @@ html {
     &:disabled:hover{filter:none}
   }
 
+  /* Custom select chevron rendered as a mask-image so the color is
+     tokenized via background-color, not baked into a data URL. The
+     <select> can't host a pseudo-element (replaced element), so wrap
+     it in <div class="select-wrap"> and paint the chevron on ::after. */
+  .select-wrap{position:relative;display:block}
+  .select-wrap::after{
+    content:"";
+    position:absolute;
+    right:16px;top:50%;
+    width:12px;height:8px;
+    transform:translateY(-50%);
+    background-color:var(--copper);
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-size:contain;mask-size:contain;
+    pointer-events:none;
+  }
+
   /* Application/intake page — shared by /pilot and /pricing.
      Generic "apply-*" naming so the classes aren't misleading when
      viewed through the pricing-page lens. All layout/typography lives
@@ -763,6 +789,16 @@ html {
   .apply-page{
     position:relative;
   }
+
+  /* Pricing-status meta line on /pricing + /pilot — small mono caps
+     under the lede. Same visual register as the home hero-meta. */
+  .apply-page .apply-price{
+    margin:20px 0 0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;font-weight:500;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-3);
+    max-width:none;
+  }
   .hero::before,
   .mem-intro::before,
   .thesis-hero::before,
@@ -779,13 +815,131 @@ html {
     position:relative;z-index:1;
   }
 
-  /* ═══════════ Hero ═══════════ */
+  /* ═══════════ Hero ═══════════
+     Single column on mobile/tablet; split copy + product artifact at
+     >=1024 so the page reads as a product, not a thesis essay. */
   .hero{
     max-width:var(--page-max);margin:0 auto;
     padding:96px 40px 72px;
+    display:block;
+  }
+  .hero-copy{display:block}
+  @media (min-width: 1024px){
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0, 1.05fr) minmax(0, 1fr);
+      gap:64px;
+      align-items:center;
+    }
   }
   @media (max-width: 768px) {
     .hero { padding: 56px 22px 48px; }
+    /* Force the muted second sentence onto its own visual block so
+       text-wrap: balance can split "Institutional memory for revenue
+       teams." cleanly without orphaning the orange <em>. */
+    .h1 .soft { display: block; margin-top: .25em; }
+  }
+
+  /* Hero artifact — illustrative "memory accumulating" stack of
+     extracted call notes. No real backend. Cards stagger-fade in on
+     load; prefers-reduced-motion collapses the animation to instant. */
+  .hero-artifact{
+    margin-top:48px;
+    padding:0;
+    perspective:1200px;
+  }
+  @media (min-width: 1024px){
+    .hero-artifact{margin-top:0}
+  }
+  .hero-artifact-frame{
+    position:relative;
+    background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--hair-2);
+    border-radius:14px;
+    padding:24px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.04) inset,
+      0 24px 60px -28px rgba(0,0,0,.5);
+    overflow:hidden;
+  }
+  .hero-artifact-frame::before{
+    content:"";position:absolute;
+    top:0;left:24px;right:24px;height:1px;
+    background:linear-gradient(90deg, var(--copper) 0%, var(--copper-a08) 30%, transparent 100%);
+  }
+  .hero-artifact-head{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:18px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;
+  }
+  .hero-artifact-eb{color:var(--copper)}
+  .hero-artifact-pulse{
+    color:var(--ink-3);
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .hero-artifact-pulse::before{
+    content:"";width:6px;height:6px;border-radius:999px;
+    background:var(--copper);
+    box-shadow:0 0 0 4px var(--copper-a18);
+  }
+
+  .hero-artifact-stack{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .hero-artifact-card{
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:10px;
+    padding:14px 16px;
+    transform-origin:top left;
+    opacity:0;
+    transform:translateY(8px);
+    animation:hero-artifact-in .55s ease-out forwards;
+    animation-delay:calc(.18s + var(--i, 0) * .14s);
+  }
+  .hero-artifact.is-reduced .hero-artifact-card{
+    animation:none;opacity:1;transform:none;
+  }
+  @keyframes hero-artifact-in{
+    to{opacity:1;transform:translateY(0)}
+  }
+  .hero-artifact-meta{
+    display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-3);
+    margin-bottom:8px;
+  }
+  .hero-artifact-meta .date{color:var(--copper)}
+  .hero-artifact-meta .sep{opacity:.5}
+  .hero-artifact-meta .conf{color:var(--ink-2)}
+  .hero-artifact-pain{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-size:15px;line-height:1.45;
+    color:var(--ink);font-style:italic;
+    margin:0 0 6px;
+  }
+  .hero-artifact-cite{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;
+    color:var(--ink-3);margin:0;
+  }
+
+  .hero-artifact-foot{
+    margin-top:18px;padding-top:14px;
+    border-top:1px solid var(--hair);
+    display:flex;align-items:center;gap:10px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .hero-artifact-foot .dot{
+    width:5px;height:5px;border-radius:999px;
+    background:var(--copper);
+    box-shadow:0 0 0 3px var(--copper-a18);
   }
   .hero-hairline{
     max-width:var(--page-max);margin:0 auto;
@@ -857,7 +1011,7 @@ html {
   .prob-head .eb{margin-bottom:18px;display:flex}
   .prob-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(36px,5.4vw,76px);line-height:1.02;letter-spacing:-.025em;
+    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
     margin:0;color:var(--ink);max-width:18ch;text-wrap:balance;
   }
   .prob-head h2 .soft{color:var(--ink-3)}
@@ -903,7 +1057,7 @@ html {
   }
   .prob-card .title{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:30px;line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+    font-size:clamp(22px,2.4vw,28px);line-height:1.15;letter-spacing:-.015em;color:var(--ink);
     margin:0 0 16px;max-width:14ch;
   }
   .prob-card .desc{
@@ -994,7 +1148,7 @@ html {
   .cta-card .eb{display:block;margin-bottom:20px}
   .cta-card h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(44px,5.5vw,72px);line-height:1.02;letter-spacing:-.025em;
+    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
     margin:0 auto;max-width:20ch;color:var(--ink);text-wrap:balance;
   }
   .cta-card .sub{
@@ -1004,7 +1158,7 @@ html {
   .cta-card .btn{padding:14px 24px;font-size:15px}
   .cta-card .fine{
     margin-top:20px;font-family:'Geist Mono',monospace;font-size:11px;
-    letter-spacing:.08em;color:var(--ink-4);
+    letter-spacing:.08em;color:var(--ink-3);
   }
 
   /* ═══════════ How it works (Extract · Map · Remember) ═══════════ */
@@ -1016,7 +1170,7 @@ html {
   .how-head .eb{margin-bottom:18px;display:flex}
   .how-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(36px,5vw,64px);line-height:1.03;letter-spacing:-.025em;
+    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
     margin:0;color:var(--ink);max-width:16ch;text-wrap:balance;
   }
   /* .how-head mobile: 2-col headline+lede stacks, same treatment as
@@ -1054,8 +1208,8 @@ html {
   .how-step .idx::after{content:"";flex:1;height:1px;background:var(--hair)}
   .how-step .how-step-action{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(26px, 5vw, 34px);
-    line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin:0 0 14px;
+    font-size:clamp(22px, 2.4vw, 28px);
+    line-height:1.15;letter-spacing:-.015em;color:var(--ink);margin:0 0 14px;
   }
   .how-step .desc{
     font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
@@ -1120,7 +1274,7 @@ html {
      reset rule. */
   .notdo-card .header .eb{
     display:block;font-size:10.5px;letter-spacing:.2em;
-    color:var(--ink-4);margin-bottom:10px;
+    color:var(--ink-3);margin-bottom:10px;
   }
   .notdo-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px}
   .notdo-item{
@@ -1164,28 +1318,32 @@ html {
   .notetaker-head .eb{margin-bottom:18px;display:flex}
   .notetaker-head h2{
     font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(40px,4.5vw,58px);line-height:1.04;letter-spacing:-.025em;
+    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
     margin:0 0 18px;color:var(--ink);text-wrap:balance;
   }
   .notetaker-head p{font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:16px;line-height:1.65;color:var(--ink-2);margin:0}
   .notetaker-table{
-    width:100%;border-collapse:collapse;
+    width:100%;border-collapse:collapse;table-layout:fixed;
     background:#121015;border:1px solid var(--hair-2);border-radius:14px;overflow:hidden;
   }
+  .notetaker-table thead th.col-n,
+  .notetaker-table thead th.col-s,
+  .notetaker-table tbody td.col-n,
+  .notetaker-table tbody td.col-s{width:38%}
   .notetaker-table thead th{
     padding:22px 24px;text-align:left;border-bottom:1px solid var(--hair-2);
     font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
     letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);
   }
   .notetaker-table thead th.col-s{color:var(--copper);background:var(--copper-a04)}
-  .notetaker-table thead th.col-s .brand{
-    display:block;font-family:var(--font-display), 'Instrument Serif', serif;font-size:22px;font-weight:400;
-    letter-spacing:-.01em;color:var(--ink);text-transform:none;margin-top:4px;
+  .notetaker-table thead th.col-s .brand,
+  .notetaker-table thead th.col-n .brand{
+    display:block;font-family:var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:400;letter-spacing:-.02em;line-height:1.1;
+    text-transform:none;margin-top:6px;
   }
-  .notetaker-table thead th.col-g .brand{
-    display:block;font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;font-size:18px;
-    color:var(--ink-2);text-transform:none;letter-spacing:-.005em;margin-top:4px;
-  }
+  .notetaker-table thead th.col-s .brand{font-size:26px;color:var(--ink)}
+  .notetaker-table thead th.col-n .brand{font-size:22px;color:var(--ink-2)}
   .notetaker-table tbody td{
     padding:20px 24px;border-bottom:1px solid var(--hair);vertical-align:top;
     font-family:var(--font-body), 'Geist', sans-serif;font-size:14.5px;line-height:1.5;color:var(--ink-2);
@@ -1193,11 +1351,11 @@ html {
   .notetaker-table tbody tr:last-child td{border-bottom:0}
   .notetaker-table tbody td.dim{
     color:var(--ink);font-weight:500;font-size:14px;
-    font-family:'Geist Mono',monospace;letter-spacing:.02em;width:24%;
+    font-family:var(--font-body), 'Instrument Sans', system-ui, sans-serif;width:24%;
   }
   .notetaker-table tbody td.col-s{background:var(--copper-a03);color:var(--ink)}
   .notetaker-table tbody td.col-s strong{color:var(--copper);font-weight:500}
-  .notetaker-table tbody td.col-g{color:var(--ink-3)}
+  .notetaker-table tbody td.col-n{color:var(--ink-3)}
   .notetaker-table .icon{
     display:inline-block;margin-right:8px;font-family:'Geist Mono',monospace;
     font-size:11px;width:16px;text-align:center;
@@ -1206,7 +1364,7 @@ html {
      bright ink so it's visible against the copper-tinted cell; the
      column's copper-a03 background + bold strong is the signal. */
   .notetaker-table .col-s .icon{color:var(--ink-2)}
-  .notetaker-table .col-g .icon{color:var(--ink-4)}
+  .notetaker-table .col-n .icon{color:var(--ink-4)}
 
   /* Mobile: table → card-per-row. Row-level semantics stay intact,
      but each row becomes a bordered card with the dimension as a
@@ -1240,21 +1398,21 @@ html {
       font-size: 10.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       font-family: 'Geist Mono', monospace;
       border-bottom: 1px solid var(--hair);
       padding-bottom: 10px;
       margin-bottom: 6px;
     }
-    .notetaker-table tbody td.col-g { background: transparent; }
-    .notetaker-table tbody td.col-g::before {
+    .notetaker-table tbody td.col-n { background: transparent; }
+    .notetaker-table tbody td.col-n::before {
       content: "Notetaker";
       display: block;
       font-family: 'Geist Mono', monospace;
       font-size: 9.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       margin-bottom: 4px;
     }
     .notetaker-table tbody td.col-s {
@@ -1297,7 +1455,7 @@ html {
 
     .eb{margin-bottom:28px;display:flex}
     h2{
-      font-size:clamp(38px,4.2vw,54px);line-height:1.1;color:var(--ink);
+      font-size:clamp(32px,4vw,48px);line-height:1.05;color:var(--ink);
       margin:0 0 28px;max-width:32ch;text-wrap:balance;
     }
     p{
@@ -1352,13 +1510,120 @@ html {
     margin-top:44px;
   }
 
+  /* Changelog entry — date + kind pill + title.
+     Date is mono caps in --copper. Kind is a small inline pill that
+     uses a fixed muted palette for readability against the dark surface. */
+  .changelog-page .changelog-meta{
+    display:inline-flex;align-items:center;gap:14px;
+    margin-bottom:10px;
+  }
+  .changelog-page .changelog-meta time{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;font-weight:500;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--copper);
+  }
+  .changelog-kind{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;
+    padding:3px 8px;border-radius:4px;
+    border:1px solid var(--hair-2);
+    background:rgba(255,255,255,0.02);
+    color:var(--ink-2);
+    line-height:1.4;
+  }
+  .changelog-kind--shipped{
+    color:#A5DEB6;border-color:rgba(52,211,153,.32);background:rgba(52,211,153,.06);
+  }
+  .changelog-kind--building{
+    color:#FECDA8;border-color:var(--copper-a30);background:var(--copper-a08);
+  }
+  .changelog-kind--research{
+    color:#C5C0F0;border-color:rgba(140,127,255,.32);background:rgba(140,127,255,.06);
+  }
+  .changelog-kind--operations{
+    color:var(--ink-2);border-color:var(--hair-2);background:rgba(255,255,255,.02);
+  }
+  .changelog-page .changelog-title{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;
+    font-size:clamp(24px, 2.6vw, 30px);
+    line-height:1.2;letter-spacing:-.015em;
+    color:var(--ink);
+    margin:0 0 12px;
+    text-wrap:balance;
+  }
+
+  /* Legal pages — /privacy + /terms.
+     Two-column layout at >=1024 with sticky right-rail TOC.
+     Below 1024, falls back to single column and the TOC is hidden
+     (the page is short enough at mobile that a top-of-page anchor
+     list adds noise rather than helping). */
+  .legal-layout{
+    display:block;
+  }
+  .legal-toc{display:none}
+
+  @media (min-width: 1024px){
+    .legal-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 220px;
+      gap:64px;
+      align-items:start;
+    }
+    .legal-toc{
+      display:block;
+      position:sticky;top:96px;
+      font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+      font-size:12px;
+      line-height:1.5;
+    }
+    .legal-toc-eb{
+      display:block;
+      font-size:10.5px;font-weight:500;letter-spacing:.18em;
+      text-transform:uppercase;color:var(--copper);
+      margin-bottom:14px;
+    }
+    .legal-toc ol{
+      list-style:none;margin:0;padding:0;
+      border-left:1px solid var(--hair-2);
+    }
+    .legal-toc li{
+      margin:0;padding:0;
+    }
+    .legal-toc a{
+      display:block;
+      padding:6px 14px;
+      color:var(--ink-3);
+      text-decoration:none;
+      border-left:1px solid transparent;
+      margin-left:-1px;
+      transition:color .18s ease, border-color .18s ease;
+    }
+    .legal-toc a:hover{color:var(--ink-2)}
+    .legal-toc li.is-active a{
+      color:var(--copper);
+      border-left-color:var(--copper);
+    }
+  }
+
+  /* Tabular figures on financial stats — keeps numeric strings
+     aligned and prevents jitter when values change. Applies to all
+     .figure stat displays under /investors sections. */
+  .inv-tam .figure,
+  .platform-evidence .stat,
+  .inv-intro-meta{
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
   /* TAM — market size strip */
   .inv-tam{
     max-width:var(--page-max);margin:80px auto 0;padding:0 40px;
 
     .eb{margin-bottom:28px;display:flex}
     h2{
-      font-size:clamp(38px,4.2vw,54px);line-height:1.1;color:var(--ink);
+      font-size:clamp(32px,4vw,48px);line-height:1.05;color:var(--ink);
       margin:0 0 36px;max-width:32ch;text-wrap:balance;
     }
     .tam-grid{
@@ -1408,7 +1673,7 @@ html {
 
     .eb{margin-bottom:28px;display:flex}
     h2{
-      font-size:clamp(38px,4.2vw,54px);line-height:1.1;color:var(--ink);
+      font-size:clamp(32px,4vw,48px);line-height:1.05;color:var(--ink);
       margin:0 0 20px;max-width:32ch;text-wrap:balance;
     }
     .compete-lede{
@@ -1452,7 +1717,7 @@ html {
 
     .eb{margin-bottom:28px;display:flex}
     h2{
-      font-size:clamp(38px,4.2vw,54px);line-height:1.1;color:var(--ink);
+      font-size:clamp(32px,4vw,48px);line-height:1.05;color:var(--ink);
       margin:0 0 36px;max-width:22ch;text-wrap:balance;
     }
     .horizon-list{display:grid;grid-template-columns:1fr;gap:20px}
@@ -1504,7 +1769,7 @@ html {
         font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-size:22px;color:var(--copper);
       }
       h2{
-        font-size:clamp(36px,3.8vw,48px);color:var(--ink);margin:0;max-width:18ch;
+        font-size:clamp(32px,4vw,48px);line-height:1.05;color:var(--ink);margin:0;max-width:18ch;
       }
     }
   }
@@ -1523,14 +1788,10 @@ html {
     }
     .photo{
       width:56px;height:56px;border-radius:8px;
-      background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
-      color:#FFEDE8;font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
-      display:flex;align-items:center;justify-content:center;letter-spacing:-.01em;
       border:1px solid var(--copper-a30);
+      overflow:hidden;
 
-      &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));border-color:rgba(107,78,255,.3);color:#D8CEFF}
-      &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));border-color:rgba(0,181,160,.3);color:#B5F0E5}
-      &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));border-color:rgba(251,191,36,.32);color:#FFE8A8}
+      img{width:100%;height:100%;object-fit:cover;display:block}
     }
     .name{
       font-family:var(--font-display), 'Instrument Serif', serif;font-weight:500;font-size:18px;color:var(--ink);
@@ -1561,7 +1822,7 @@ html {
     }
     .eb{margin-bottom:24px}
     h2{
-      font-size:clamp(34px,3.6vw,46px);line-height:1.1;color:var(--ink);
+      font-size:clamp(32px,4vw,48px);line-height:1.05;color:var(--ink);
       margin:0 0 28px;max-width:22ch;
     }
     p{
@@ -1583,7 +1844,7 @@ html {
     padding:40px;
     max-width:var(--page-max);margin:0 auto;
     display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
-    font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-4);
+    font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink-3);
     letter-spacing:.04em;
 
     .brand{
@@ -1591,7 +1852,11 @@ html {
       color:var(--ink);letter-spacing:-.02em;
     }
     nav{display:flex;gap:24px;flex-wrap:wrap}
-    nav a{color:var(--ink-3);transition:color .18s}
+    nav a{
+      color:var(--ink-3);transition:color .18s;
+      display:inline-flex;align-items:center;
+      min-height:44px;padding:8px 0;
+    }
     nav a:hover{color:var(--copper)}
   }
 
@@ -1636,7 +1901,7 @@ html {
     .inv-intro-meta{
       display:flex;flex-wrap:wrap;gap:12px;align-items:center;
       font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;
-      text-transform:uppercase;color:var(--ink-4);
+      text-transform:uppercase;color:var(--ink-3);
 
       .sep{color:var(--ink-4);opacity:.5}
     }
@@ -1730,6 +1995,7 @@ html {
   /* Layer 3 — 2x2 founder grid with square photos + side-by-side bio */
   .story-founders{
     margin-bottom:64px;
+    scroll-margin-top:96px;
 
     .eb{margin-bottom:40px;display:flex}
   }
@@ -1747,14 +2013,10 @@ html {
 
     .photo{
       width:88px;height:88px;border-radius:0;
-      background:linear-gradient(135deg,var(--copper-a22),rgba(209,60,19,.35));
-      color:#FFEDE8;font-family:'Geist Mono',monospace;font-weight:500;font-size:13px;
-      display:flex;align-items:center;justify-content:center;letter-spacing:.1em;
       border:1px solid var(--hair-2);
+      overflow:hidden;
 
-      &.photo--violet{background:linear-gradient(135deg,rgba(107,78,255,.22),rgba(42,30,128,.5));color:#D8CEFF}
-      &.photo--teal{background:linear-gradient(135deg,rgba(0,181,160,.22),rgba(0,107,94,.45));color:#B5F0E5}
-      &.photo--amber{background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(146,64,14,.5));color:#FFE8A8}
+      img{width:100%;height:100%;object-fit:cover;display:block}
     }
   }
 
@@ -1839,7 +2101,7 @@ html {
     .story-collision-close{margin-top:40px}
 
     .story-founders-list{grid-template-columns:1fr;gap:48px}
-    .story-founder-meta .photo{width:72px;height:72px;font-size:12px}
+    .story-founder-meta .photo{width:72px;height:72px}
 
     .story-close{margin-top:64px;padding-top:40px}
     .story-close-ctas{gap:16px}
@@ -1917,10 +2179,19 @@ html {
   }
 
 /* ═══════════ Marketing font mapping ═══════════ */
-/* Bind --font-body / --font-display to next/font variables. */
+/* Bind --font-body / --font-display directly to the loaded next/font
+   font-family name. Previously we used var(--font-instrument-sans) here,
+   but that next/font CSS variable is set on <body> via the className,
+   not on :root. Per CSS spec, an unresolved var() without an explicit
+   fallback makes the entire custom property "guaranteed-invalid" — so
+   --font-body and --font-display silently computed to empty sitewide,
+   breaking every font-family declaration that referenced them and
+   causing inherited fonts (e.g. Geist Mono on table headers) to leak
+   into descendants. Using literal font-family strings removes the
+   var() indirection entirely. */
 :root{
-  --font-body: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
-  --font-display: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', 'Instrument Sans Fallback', system-ui, sans-serif;
+  --font-display: 'Instrument Sans', 'Instrument Sans Fallback', system-ui, sans-serif;
 }
 
 /* ═══════════ Mobile nav — hamburger + slide-down panel ═══════════ */
@@ -2031,108 +2302,389 @@ header button:focus:not(:focus-visible){
 }
 .coming-soon-meta{margin-top:32px}
 
-/* ═══════════ Blog index ═══════════ */
-.blog-index{
-  max-width:var(--page-max);margin:80px auto 0;padding:20px 40px 96px;
+/* ═══════════ Blog index — magazine layout ═══════════
+   Single featured-post split with a subscribe block beneath.
+   Designed to read editorially on a single post (current state) and
+   gracefully welcome a grid of more posts when we have them. */
+.blog-page{
+  max-width:var(--page-max);margin:0 auto;
+  padding:80px 40px 120px;
 }
-.blog-index-head{max-width:780px;margin-bottom:64px}
-.blog-index-head .eb{margin-bottom:24px}
-.blog-index-head h1{
-  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-  font-weight:500;font-size:clamp(36px,4.8vw,60px);
-  line-height:1.1;letter-spacing:-.025em;
-  margin:0;color:var(--ink);text-wrap:balance;
+.blog-page > .eb{margin-bottom:16px}
+.blog-h1{
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-weight:500;font-size:clamp(40px,5vw,60px);
+  line-height:1.05;letter-spacing:-.02em;
+  margin:0 0 16px;color:var(--ink);
+  max-width:22ch;text-wrap:balance;
 }
-.blog-index-lede{
-  margin:24px 0 0;max-width:58ch;
-  font-size:18px;line-height:1.55;color:var(--ink-2);
-}
-.blog-index-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;background:var(--hair);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
-.blog-index-item{background:var(--background)}
-.blog-index-link{
-  display:block;padding:32px 0;text-decoration:none;color:inherit;
-  transition:padding 0.2s ease;
-}
-.blog-index-link:hover{padding-left:8px}
-.blog-index-date{
-  font-family:'Geist Mono','SFMono-Regular',Consolas,monospace;
-  font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--copper);display:block;margin-bottom:12px;
-}
-.blog-index-title{
-  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-  font-weight:500;font-size:clamp(22px,2.4vw,30px);line-height:1.2;
-  letter-spacing:-.02em;color:var(--ink);margin:0 0 12px;text-wrap:balance;
-}
-.blog-index-dek{
-  font-size:17px;line-height:1.55;color:var(--ink-2);margin:0 0 14px;max-width:62ch;
-}
-.blog-index-cta{
-  font-size:14px;font-weight:500;color:var(--copper);
-  display:inline-block;
+.blog-sub{
+  font-size:17px;line-height:1.55;color:var(--ink-2);
+  margin:0 0 64px;font-weight:300;max-width:56ch;
 }
 
-/* ═══════════ Blog post (article body) ═══════════ */
-.post-page{max-width:780px;margin:0 auto;padding:80px 32px 96px}
-.post-meta-top{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:48px;gap:24px;flex-wrap:wrap;
-  font-family:'Geist Mono','SFMono-Regular',Consolas,monospace;
-  font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+.blog-featured{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:56px;
+  align-items:center;
+  border-top:1px solid var(--hair-2);
+  padding-top:56px;
+  text-decoration:none;color:inherit;
+  transition:opacity .2s;
 }
-.post-back{color:var(--copper);text-decoration:none}
-.post-back:hover{text-decoration:underline}
-.post-date{color:var(--ink-3)}
+.blog-featured:hover{opacity:.85}
+.blog-featured-cover{
+  aspect-ratio:4 / 3;
+  background:
+    radial-gradient(ellipse at 30% 30%, var(--copper-a22) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(107,78,255,.10) 0%, transparent 50%),
+    linear-gradient(135deg, var(--copper-a18), var(--copper-a08));
+  border:1px solid var(--hair-2);
+  border-radius:12px;
+}
+.blog-featured-meta{
+  display:flex;gap:16px;align-items:baseline;
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:11px;color:var(--ink-3);
+  letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.blog-featured-meta .cat{color:var(--copper)}
+.blog-featured-title{
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-size:clamp(28px,3vw,38px);
+  font-weight:500;line-height:1.1;
+  letter-spacing:-.015em;color:var(--ink);
+  margin:0 0 14px;text-wrap:balance;
+}
+.blog-featured-dek{
+  font-size:17px;line-height:1.55;color:var(--ink-2);
+  margin:0 0 24px;font-weight:300;
+}
+.blog-featured-author{
+  display:flex;align-items:center;gap:12px;
+}
+.blog-featured-author .avatar{
+  width:32px;height:32px;border-radius:999px;
+  background:linear-gradient(135deg, var(--copper-a30), rgba(209,60,19,.6));
+  border:1px solid var(--hair-2);
+}
+.blog-featured-author .author-name{
+  font-size:14px;color:var(--ink-2);font-weight:500;
+}
 
-.post-article h1{
-  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-  font-weight:500;font-size:clamp(34px,4.4vw,52px);line-height:1.08;
-  letter-spacing:-.025em;color:var(--ink);margin:0 0 20px;text-wrap:balance;
+.blog-subscribe{
+  margin-top:96px;
+  padding:40px 48px;
+  background:var(--bg-2);
+  border:1px solid var(--hair);
+  border-radius:14px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:32px;align-items:center;
+}
+.blog-subscribe-copy .sub-eb{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:8px;display:block;
+}
+.blog-subscribe-copy h3{
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-size:24px;font-weight:500;line-height:1.25;
+  color:var(--ink);margin:0 0 6px;
+}
+.blog-subscribe-copy h3 em{font-style:italic;color:var(--copper)}
+.blog-subscribe-copy p{
+  font-size:14px;color:var(--ink-2);margin:0;
+  max-width:50ch;line-height:1.55;
+}
+
+.subscribe-form{
+  display:flex;gap:8px;align-items:center;
+  background:rgba(0,0,0,.2);
+  border:1px solid var(--hair-2);
+  border-radius:8px;
+  padding:4px 4px 4px 16px;
+  min-width:360px;
+  position:relative;
+}
+.subscribe-form input{
+  background:transparent;border:none;color:var(--ink);
+  font-size:14px;font-family:inherit;outline:none;
+  flex:1;padding:10px 0;
+}
+.subscribe-form input::placeholder{color:var(--ink-3)}
+.subscribe-form button{
+  background:var(--copper);color:#1A0A02;
+  border:none;border-radius:6px;
+  padding:10px 18px;font-weight:500;font-size:13px;
+  font-family:inherit;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:filter .18s ease;
+}
+.subscribe-form button:hover{filter:brightness(1.1)}
+.subscribe-form button:disabled{opacity:.6;cursor:not-allowed}
+.subscribe-error{
+  position:absolute;top:calc(100% + 8px);left:0;
+  font-size:12px;color:#F87171;
+}
+.subscribe-success{
+  font-size:14px;color:var(--copper);margin:0;
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  letter-spacing:.04em;
+}
+
+@media (max-width: 800px){
+  .blog-featured{grid-template-columns:1fr;gap:32px}
+  .blog-featured-title{font-size:clamp(24px,5vw,32px)}
+  .blog-subscribe{grid-template-columns:1fr;padding:28px 24px}
+  .subscribe-form{min-width:0;width:100%}
+}
+
+/* ═══════════ Blog post — magazine-grade shell ═══════════
+   Hero (full-bleed pull-quote treatment) → 2-col body with sticky
+   right-rail TOC at >=1024 → share buttons → author card → footer. */
+.post-hero{
+  position:relative;
+  padding:96px 40px 72px;
+  border-bottom:1px solid var(--hair-2);
+  background:
+    radial-gradient(ellipse at 30% 30%, var(--copper-a08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(107,78,255,.06) 0%, transparent 60%),
+    var(--bg);
+  overflow:hidden;
+}
+.post-hero::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;
+  width:1px;
+  background:linear-gradient(180deg, transparent, var(--copper-a30) 30%, var(--copper-a18) 70%, transparent);
+  transform:translateX(-50%);opacity:.5;
+}
+.post-hero-inner{
+  max-width:880px;margin:0 auto;position:relative;
+}
+.post-breadcrumb{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);
+  margin-bottom:36px;
+}
+.post-breadcrumb a{color:var(--copper);text-decoration:none}
+.post-breadcrumb a:hover{color:var(--ink)}
+.post-meta-row{
+  display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:11px;color:var(--ink-3);
+  letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:22px;
+}
+.post-meta-row .cat{color:var(--copper)}
+.post-meta-row .sep{color:var(--ink-3);opacity:.5}
+.post-title{
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-size:clamp(38px, 4.6vw, 60px);
+  font-weight:500;line-height:1.1;
+  letter-spacing:-.02em;
+  margin:0 0 24px;color:var(--ink);
+  max-width:22ch;text-wrap:balance;
 }
 .post-dek{
-  font-size:20px;line-height:1.5;color:var(--ink-3);
-  margin:0 0 56px;font-weight:400;text-wrap:pretty;
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-style:italic;font-size:22px;line-height:1.5;
+  color:var(--ink-2);margin:0;max-width:56ch;
 }
-.post-body{font-size:18px;line-height:1.65;color:var(--ink-2)}
-.post-body h2{
-  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-  font-weight:500;font-size:clamp(24px,2.6vw,32px);line-height:1.2;
-  letter-spacing:-.015em;color:var(--ink);margin:56px 0 20px;
+.post-dek em{color:var(--copper)}
+
+.post-layout{
+  max-width:1080px;margin:0 auto;
+  padding:56px 40px 72px;
+  display:block;
+}
+.post-article{max-width:720px;margin:0 auto}
+.post-body{
+  font-size:18px;line-height:1.7;color:var(--ink);font-weight:300;
 }
 .post-body p{margin:0 0 22px}
-.post-body p strong{color:var(--ink);font-weight:600}
+.post-body p strong{font-weight:500;color:var(--ink)}
 .post-body p em{color:var(--copper);font-style:italic}
-.post-body a{color:var(--copper);text-decoration:none;border-bottom:1px solid rgba(232,146,90,0.4)}
+.post-body a{
+  color:var(--copper);text-decoration:none;
+  border-bottom:1px solid var(--copper-a30);
+  transition:border-color .18s ease;
+}
 .post-body a:hover{border-bottom-color:var(--copper)}
+.post-body h2{
+  font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+  font-size:28px;font-weight:500;line-height:1.25;
+  letter-spacing:-.015em;color:var(--ink);
+  margin:56px 0 18px;text-wrap:balance;
+  scroll-margin-top:96px;
+}
 .post-body ul{margin:0 0 22px;padding-left:20px}
 .post-body ul li{margin-bottom:8px}
 .post-body blockquote{
   margin:28px 0;padding:6px 0 6px 22px;
   border-left:2px solid var(--copper);
+  font-family:var(--font-display), 'Instrument Serif', serif;
   font-size:21px;color:var(--ink);font-style:italic;line-height:1.45;
 }
 .post-body table{
   width:100%;border-collapse:collapse;margin:28px 0;font-size:16px;
 }
-.post-body table th,.post-body table td{
+.post-body table th, .post-body table td{
   text-align:left;padding:14px 16px;border-bottom:1px solid var(--hair);
 }
 .post-body table th{
   color:var(--copper);
-  font-family:'Geist Mono','SFMono-Regular',Consolas,monospace;
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
   font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
 }
 .post-body table td{color:var(--ink-2)}
 .post-pullquote{
   margin:32px 0;padding:24px 0;
   border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  font-family:var(--font-display), 'Instrument Serif', serif;
   font-size:22px;line-height:1.4;color:var(--ink);font-weight:500;
 }
-.post-footer{
-  margin-top:64px;padding-top:32px;border-top:1px solid var(--hair);
-  font-size:16px;color:var(--ink-3);
+
+/* Share buttons — sit beneath the body, before the author card. */
+.post-share{
+  margin:48px 0 0;
+  padding:24px 0 0;
+  border-top:1px solid var(--hair-2);
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
 }
-.post-footer a{color:var(--copper);text-decoration:none;border-bottom:1px solid rgba(232,146,90,0.4)}
+.post-share-label{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);margin-right:4px;
+}
+.post-share-btn{
+  background:transparent;border:0;cursor:pointer;
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:12px;letter-spacing:.08em;
+  color:var(--copper);text-decoration:none;
+  border-bottom:1px solid var(--copper-a30);
+  padding:0 0 2px;
+  transition:color .18s, border-color .18s;
+}
+.post-share-btn:hover{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* Sticky right-rail TOC at >=1024. Below that, hidden — keeps the
+   reading column un-distracted on mobile/tablet. */
+.post-toc-rail{display:none}
+@media (min-width: 1024px){
+  .post-layout{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 220px;
+    gap:64px;
+    align-items:start;
+    max-width:1080px;
+  }
+  .post-article{max-width:none;margin:0}
+  .post-toc-rail{display:block}
+  .post-toc{
+    position:sticky;top:96px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:12px;line-height:1.5;
+  }
+  .post-toc-eb{
+    display:block;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
+    margin-bottom:14px;
+  }
+  .post-toc ol{
+    list-style:none;margin:0;padding:0;
+    border-left:1px solid var(--hair-2);
+  }
+  .post-toc li{margin:0;padding:0}
+  .post-toc a{
+    display:block;padding:6px 14px;
+    color:var(--ink-3);text-decoration:none;
+    border-left:1px solid transparent;margin-left:-1px;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  .post-toc a:hover{color:var(--ink-2)}
+  .post-toc li.is-active a{
+    color:var(--copper);border-left-color:var(--copper);
+  }
+}
+
+/* Author footer card — photo + bio + LinkedIn/email. */
+.post-author-card{
+  max-width:720px;margin:0 auto 72px;padding:0 40px;
+}
+.post-author-inner{
+  display:grid;grid-template-columns:96px 1fr;gap:28px;align-items:start;
+  padding:32px;background:var(--bg-2);
+  border:1px solid var(--hair-2);border-radius:14px;
+  position:relative;
+}
+.post-author-inner::before{
+  content:"";position:absolute;
+  top:0;left:32px;right:32px;height:1px;
+  background:linear-gradient(90deg, var(--copper) 0%, var(--copper-a08) 30%, transparent 100%);
+}
+.post-author-card .photo{
+  width:96px;height:96px;border-radius:12px;
+  border:1px solid var(--hair-2);overflow:hidden;
+}
+.post-author-card .photo img{width:100%;height:100%;object-fit:cover;display:block}
+.post-author-meta .eb{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--copper);display:block;margin-bottom:8px;
+}
+.post-author-meta h3{
+  font-family:var(--font-display), 'Instrument Serif', serif;
+  font-size:22px;font-weight:500;color:var(--ink);
+  margin:0 0 4px;line-height:1.2;
+}
+.post-author-meta .role{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:14px;display:block;
+}
+.post-author-meta p{
+  font-size:14.5px;line-height:1.6;color:var(--ink-2);
+  margin:0 0 16px;font-weight:300;
+}
+.post-author-meta p em{color:var(--copper);font-style:italic}
+.post-author-links{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.post-author-links a{
+  font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size:12px;letter-spacing:.08em;
+  color:var(--copper);text-decoration:none;
+  border-bottom:1px solid var(--copper-a30);
+  padding-bottom:2px;
+  transition:border-color .18s, color .18s;
+}
+.post-author-links a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+
+.post-page-footer{
+  max-width:720px;margin:0 auto 96px;padding:32px 40px 0;
+  border-top:1px solid var(--hair);
+  font-size:15px;color:var(--ink-3);
+}
+.post-page-footer a{
+  color:var(--copper);text-decoration:none;
+  border-bottom:1px solid var(--copper-a30);
+}
+.post-page-footer a:hover{border-bottom-color:var(--copper)}
+
+@media (max-width: 700px){
+  .post-hero{padding:64px 24px 48px}
+  .post-layout{padding:40px 24px 56px}
+  .post-body{font-size:17px}
+  .post-author-card{padding:0 24px}
+  .post-author-inner{grid-template-columns:72px 1fr;gap:20px;padding:24px}
+  .post-author-card .photo{width:72px;height:72px}
+  .post-title{font-size:clamp(30px,7vw,44px)}
+  .post-dek{font-size:18px}
+  .post-page-footer{padding:32px 24px 0}
+}
 
 /* ═══════════ A11y utilities ═══════════ */
 .sr-only{
@@ -2519,7 +3071,7 @@ header button:focus:not(:focus-visible){
         font-weight: 500;
         letter-spacing: .2em;
         text-transform: uppercase;
-        color: var(--ink-4);
+        color: var(--ink-3);
       }
 
       .support-chip {
@@ -2672,9 +3224,9 @@ header button:focus:not(:focus-visible){
   .mem-compare-head h2 {
     font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
     font-weight: 400;
-    font-size: clamp(34px, 4vw, 52px);
+    font-size: clamp(32px, 4vw, 48px);
     line-height: 1.05;
-    letter-spacing: -.025em;
+    letter-spacing: -.02em;
     color: var(--ink);
     margin: 0;
     max-width: 22ch;
@@ -2696,7 +3248,7 @@ header button:focus:not(:focus-visible){
       font-weight: 500;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       border-bottom: 1px solid var(--hair-2);
       background: rgba(0, 0, 0, 0.12);
     }
@@ -2752,9 +3304,9 @@ header button:focus:not(:focus-visible){
     h2 {
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
       font-weight: 400;
-      font-size: clamp(36px, 4.5vw, 56px);
+      font-size: clamp(32px, 4vw, 48px);
       line-height: 1.05;
-      letter-spacing: -.025em;
+      letter-spacing: -.02em;
       color: var(--ink);
       margin: 0 auto 18px;
       max-width: 22ch;
@@ -2821,7 +3373,7 @@ header button:focus:not(:focus-visible){
       font-size: 10.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       font-family: 'Geist Mono', monospace;
       border-bottom: 1px solid var(--hair);
       padding-bottom: 10px;
@@ -2835,7 +3387,7 @@ header button:focus:not(:focus-visible){
       font-size: 9.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       margin-bottom: 3px;
     }
     .mem-table tbody td:nth-child(3) {
@@ -2992,8 +3544,8 @@ header button:focus:not(:focus-visible){
 .mem-stack-head { margin-bottom: 48px; }
 .mem-stack-head h2 {
   font-family: var(--font-display);
-  font-size: clamp(34px, 3.8vw, 48px);
-  line-height: 1.08;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.05;
   letter-spacing: -.02em;
   font-weight: 400;
   color: var(--ink);
@@ -3029,7 +3581,7 @@ header button:focus:not(:focus-visible){
 .compounds { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
 .compounds-head { margin-bottom: 64px; }
 .compounds-head h2 {
-  font-family: var(--font-display); font-size: clamp(36px, 4vw, 54px); line-height: 1.06;
+  font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.06;
   letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 18px; max-width: 22ch;
 }
 .compounds-head h2 em { font-style: italic; color: var(--copper); }
@@ -3048,14 +3600,14 @@ header button:focus:not(:focus-visible){
 .compounds-step p { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
 .compounds-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hair); font-size: 15px; color: var(--ink-3); max-width: 64ch; }
 
-/* Gong table takeaway */
+/* Notetaker comparison table takeaway */
 .notetaker-takeaway { margin-top: 28px; font-family: var(--font-display); font-size: 18px; line-height: 1.5; color: var(--ink); max-width: 60ch; }
 .notetaker-takeaway em { font-style: italic; color: var(--copper); }
 
 /* 08 · Not for you */
 .notfor { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
 .notfor-head { margin-bottom: 40px; }
-.notfor-head h2 { font-family: var(--font-display); font-size: clamp(30px, 3.2vw, 40px); line-height: 1.1; letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 16px; max-width: 28ch; }
+.notfor-head h2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 16px; max-width: 28ch; }
 .notfor-head h2 em { font-style: italic; color: var(--copper); }
 .notfor-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--hair-2); }
 .notfor-list li { display: grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--hair); align-items: baseline; }
@@ -3064,7 +3616,7 @@ header button:focus:not(:focus-visible){
 .notfor-list .notfor-body strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; }
 .notfor-foot { margin-top: 28px; font-size: 14.5px; line-height: 1.65; color: var(--ink-3); max-width: 72ch; }
 .notfor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 8px; }
-.notfor-col-head { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px; font-weight: 400; }
+.notfor-col-head { display: block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px; font-weight: 500; }
 .notfor-list--paired li { grid-template-columns: 1fr; gap: 0; }
 @media (max-width: 768px) { .notfor-grid { grid-template-columns: 1fr; gap: 40px; } }
 
@@ -3098,3 +3650,4 @@ header button:focus:not(:focus-visible){
 
   .why-cta { margin: 72px auto 72px; padding: 0 22px; }
 }
+

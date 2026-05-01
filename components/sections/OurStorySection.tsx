@@ -1,5 +1,6 @@
 import { FOUNDERS } from '@/lib/founders';
 import { FOUNDERS_EMAIL, PILOT_FORM_ANCHOR } from '@/lib/links';
+import { FounderAvatar } from '@/components/FounderAvatar';
 
 export function OurStorySection() {
   return (
@@ -38,9 +39,8 @@ export function OurStorySection() {
               She heard the line first. Three years running operational
               reporting at Adaptavist Group across sales, services, and
               finance, she&rsquo;d been watching a version of the same
-              failure from the analyst side &mdash; documentation out of date
-              the week it ships, real context living in Slack threads no one
-              reads. When her coworker said it out loud, she recognized the
+              failure from the analyst side. Documentation out of date the
+              week it ships. Real context living in Slack threads no one reads. When her coworker said it out loud, she recognized the
               seam.{' '}
               <em>
                 If the evidence lives in conversations, why is a human still
@@ -80,15 +80,13 @@ export function OurStorySection() {
       </div>
 
       {/* Layer 3 — 4 founders, 2x2 grid, square photos */}
-      <div className="story-founders">
+      <div id="team" className="story-founders">
         <span className="eb">Who&rsquo;s building it</span>
         <div className="story-founders-list">
           {FOUNDERS.map((founder) => (
             <article key={founder.id} className="story-founder">
               <aside className="story-founder-meta">
-                <div className={`photo ${founder.photoVariant}`.trim()}>
-                  {founder.initials}
-                </div>
+                <FounderAvatar founder={founder} size={120} />
               </aside>
               <div className="story-founder-body">
                 <h2 className="story-founder-name">{founder.name}</h2>

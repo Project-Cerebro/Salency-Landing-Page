@@ -9,7 +9,7 @@ export function NotForYouSection() {
       </div>
       <div className="notfor-grid">
         <div className="notfor-col">
-          <h3 className="notfor-col-head">For you if</h3>
+          <span className="notfor-col-head">For you if</span>
           <ul className="notfor-list notfor-list--paired">
             <li>
               <div className="notfor-body">
@@ -38,7 +38,7 @@ export function NotForYouSection() {
           </ul>
         </div>
         <div className="notfor-col">
-          <h3 className="notfor-col-head">Not for you if</h3>
+          <span className="notfor-col-head">Not for you if</span>
           <ul className="notfor-list notfor-list--paired">
             <li>
               <div className="notfor-body">

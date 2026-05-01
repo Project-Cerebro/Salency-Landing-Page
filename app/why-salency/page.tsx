@@ -19,7 +19,7 @@ const faqSchema = {
       name: 'How is Salency different from AI notetakers?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'AI notetakers record what was said. Salency solves what happens after — extracting customer pains, mapping them to your products, and retaining the structured context any rep or successor needs to keep the deal moving.',
+        text: 'AI notetakers record what was said. Salency solves what happens after, extracting customer pains, mapping them to your products, and retaining the structured context any rep or successor needs to keep the deal moving.',
       },
     },
     {
@@ -27,7 +27,7 @@ const faqSchema = {
       name: 'Is Salency a good fit for my sales team?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Salency fits teams that record calls (Zoom, Meet, Teams), run deals across multiple calls, and pass accounts between people — AE to CSM, new reps inheriting books, expansion teams taking over.',
+        text: 'Salency fits teams that record calls (Zoom, Meet, Teams), run deals across multiple calls, and pass accounts between people: AE to CSM, new reps inheriting books, expansion teams taking over.',
       },
     },
     {
@@ -35,7 +35,7 @@ const faqSchema = {
       name: 'When is Salency not a good fit?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Salency is not a fit if you do not record your calls (transcripts are the input), if your sales motion is one call to signature with no handoff, or if you are the only one selling — institutional memory does not apply when one head holds it all.',
+        text: 'Salency is not a fit if you do not record your calls (transcripts are the input), if your sales motion is one call to signature with no handoff, or if you are the only one selling. Institutional memory does not apply when one head holds it all.',
       },
     },
     {
@@ -52,12 +52,12 @@ const faqSchema = {
 export const metadata: Metadata = {
   title: 'Why Salency · Salency',
   description:
-    'AI notetakers record what was said. Salency solves what happens after — extracting pains, mapping them to products, and retaining the context reps and successors actually need.',
+    'AI notetakers record what was said. Salency solves what happens after, extracting pains, mapping them to products, and retaining the context reps and successors actually need.',
   alternates: { canonical: '/why-salency' },
   openGraph: {
     title: 'Why Salency',
     description:
-      'AI notetakers record what was said. Salency solves what happens after — institutional memory for revenue teams.',
+      'AI notetakers record what was said. Salency solves what happens after. Institutional memory for revenue teams.',
     url: 'https://www.salency.ai/why-salency',
     type: 'website',
   },

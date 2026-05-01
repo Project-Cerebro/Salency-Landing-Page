@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FOUNDERS } from '@/lib/founders';
 import { FOUNDERS_EMAIL } from '@/lib/links';
+import { FounderAvatar } from '@/components/FounderAvatar';
 
 export function InvestorsSection() {
   return (
@@ -11,11 +12,11 @@ export function InvestorsSection() {
             <span className="eb">For investors</span>
             <h1>
               Institutional memory is the <em>new bottleneck</em> in B2B sales.
-              We own the layer.
+              We&rsquo;re building the layer.
             </h1>
             <p>
               Salency is the structured, cited, queryable memory layer for
-              what your accounts actually told you — the input every future
+              what your accounts actually told you. The input every future
               revenue tool will inherit from. Every call compounds the graph.
             </p>
             <div className="inv-intro-meta">
@@ -38,52 +39,53 @@ export function InvestorsSection() {
             </h2>
             <p>
               Salency is a system of record for what your accounts actually
-              told you. Every call becomes <em>durable, queryable context</em>{' '}
+              told you. Every call becomes durable, queryable context{' '}
               mapped to your product catalog, so the next rep, the next
-              quarter, and the next pipeline review all inherit what was said —
+              quarter, and the next pipeline review all inherit what was said,
               not what someone remembered to type.
             </p>
             <p>
               The primitive is structured account memory. The loop compounds:
               every call makes every future call smarter, for every future rep
-              on that account. Every surface we ship — starting with handoff
-              docs today — inherits from the same core graph. One primitive.
+              on that account. Every surface we ship, starting with handoff
+              docs today, inherits from the same core graph. One primitive.
               Everything else is surface.
             </p>
             <div className="primitive">
               <span className="label">Data primitive</span>
               <p className="title">
-                Structured account memory —{' '}
-                <em>cited, scoped, and compounding</em> — is the input every
+                Structured account memory,{' '}
+                <em>cited, scoped, and compounding</em>, is the input every
                 future revenue tool will be measured against.
               </p>
             </div>
             <p className="platform-moat-bridge">
-              Vs CRM, the wedge is the <em>shape of the data.</em> Contradiction pairs,
+              Vs CRM, the wedge is the shape of the data. Contradiction pairs,
               pain evolution over time, confidence-ranked pain → product
               matches, cross-account pattern graphs. None of these fit a CRM
               row. Flatten any of them into a field and you kill the thing
-              that makes Salency uncopyable. That&rsquo;s why we sit{' '}
-              <em>on top</em> of your stack, not inside it. Reps live in CRM
+              that makes Salency uncopyable. That&rsquo;s why we sit on top
+              of your stack, not inside it. Reps live in CRM
               for pipeline stages. Reps live in Salency for the qualitative
-              layer — what the customer actually said, what contradicts what,
+              layer, what the customer actually said, what contradicts what,
               which pains map to which products.
             </p>
             <div className="primitive">
-              <span className="label">The uncopyable pair</span>
+              <span className="label">The uncopyable trio</span>
               <p className="title">
-                Pain-product mapping plus contradiction detection.{' '}
+                Pain-product mapping, cross-call contradiction detection, and
+                customer-stated timeline tracking.{' '}
                 <em>
-                  Either alone is defensible for 6 to 9 months. Together — and
-                  once wired into product-management workflows — switching cost
-                  is measured in quarters.
+                  No direct competitor ships all three as an integrated stack.
+                  Together, wired into product-management workflows, the graph
+                  compounds per call.
                 </em>
               </p>
             </div>
             <figure className="platform-evidence">
               <p className="stat">
-                <em>40–50%</em> of customers get visibly annoyed when asked to
-                repeat themselves; <em>20–30%</em> explicitly express
+                40–50% of customers get visibly annoyed when asked to
+                repeat themselves; 20–30% explicitly express
                 frustration.
               </p>
               <figcaption className="src">
@@ -109,7 +111,7 @@ export function InvestorsSection() {
               <div className="cell">
                 <span className="label">Capture target</span>
                 <div className="figure">
-                  <em>0.5–1%</em> in 3 years
+                  0.5–1% in 3 years
                 </div>
                 <p className="desc">
                   250–1,000 teams. Revenue scales with category-standard
@@ -119,7 +121,7 @@ export function InvestorsSection() {
               <div className="cell">
                 <span className="label">Validation</span>
                 <div className="figure">
-                  Clay: <em>$1M → $100M</em>
+                  Clay: $1M → $100M
                 </div>
                 <p className="desc">
                   AI sales tooling category proves the scale. Clay hit $100M
@@ -130,7 +132,7 @@ export function InvestorsSection() {
             <div className="tam-counter">
               <span className="label">Counterexample</span>
               <p>
-                11x.ai raised <em>$74M</em> on autonomous AI SDRs and lost
+                11x.ai raised $74M on autonomous AI SDRs and lost
                 70–80% of customers. Autonomous bots without structured
                 customer memory don&rsquo;t hold the relationship. That&rsquo;s
                 the gap we fill.
@@ -139,17 +141,17 @@ export function InvestorsSection() {
           </section>
 
           <section className="inv-compete" id="competitive">
-            <div className="eb">Competitive landscape</div>
+            <div className="eb">The field</div>
             <h2>
               Closest threats, and <em>where the shape doesn&rsquo;t fit.</em>
             </h2>
             <p className="compete-lede">
               Pain extraction, pre-call briefing, and handoff briefs are
-              now table-stakes &mdash; Gong, HubSpot Frame AI, and AskElephant
-              ship versions of all three. No single competitor ships
-              pain-product mapping plus contradiction detection as an
-              integrated stack. The gap is the shape of the join, not the
-              individual capabilities.
+              now table-stakes. Gong, HubSpot Frame AI, and AskElephant ship
+              versions of all three. No single competitor ships pain-product
+              mapping, cross-call contradiction detection, and customer-stated
+              timeline tracking as an integrated stack. The gap is the shape
+              of the join, not the individual capabilities.
             </p>
             <div className="compete-table">
               <div className="compete-row compete-row--head">
@@ -168,8 +170,7 @@ export function InvestorsSection() {
                   2025), Account Console (Feb 2026). Doesn&rsquo;t ship pain
                   &rarr; product matching against a customer-maintained
                   catalog (no Vault primitive) or cross-call contradiction
-                  detection. Historical base rate ~38% per 12-month window
-                  for competitor-parity ships.
+                  detection.
                 </span>
               </div>
               <div className="compete-row">
@@ -180,9 +181,8 @@ export function InvestorsSection() {
                 <span className="c-why">
                   <strong>12 month window.</strong> Frame AI acquisition (Dec
                   2024) and Smart Deal Progression (Apr 2026) put them ~12
-                  months from packaging the matching engine. The architecture-
-                  flat moat argument is retracted post-Frame AI. 200K
-                  customers, freemium.
+                  months from packaging the matching engine. 200K customers,
+                  freemium.
                 </span>
               </div>
               <div className="compete-row">
@@ -194,8 +194,7 @@ export function InvestorsSection() {
                   <strong>18&ndash;24 month window.</strong> Account Research
                   Agent (Dreamforce 2025), Data 360 customer graph, Agentforce
                   360. Recipe published in Architect docs but not packaged as
-                  a SKU. 150K customers. One Spring 2027 release-note bullet
-                  erases the wedge for that base.
+                  a SKU. 150K customers.
                 </span>
               </div>
               <div className="compete-row">
@@ -237,16 +236,14 @@ export function InvestorsSection() {
             <div className="team-strip">
               {FOUNDERS.map((founder) => (
                 <div key={founder.id} className="strip-cell">
-                  <div className={`photo ${founder.photoVariant}`.trim()}>
-                    {founder.initials}
-                  </div>
+                  <FounderAvatar founder={founder} size={56} />
                   <span className="name">{founder.name}</span>
                   <span className="role">{founder.role}</span>
                 </div>
               ))}
             </div>
 
-            <Link href="/our-story" className="team-compact-link">
+            <Link href="/our-story#team" className="team-compact-link">
               Read our founding story →
             </Link>
           </section>
@@ -264,7 +261,7 @@ export function InvestorsSection() {
                 </div>
                 <ul className="horizon-body">
                   <li>
-                    <em>Recall.ai meeting bot</em> — joins Zoom, Meet, Teams
+                    Recall.ai meeting bot, joining Zoom, Meet, Teams
                     directly. Extraction runs without a transcript upload step.
                   </li>
                 </ul>
@@ -277,14 +274,14 @@ export function InvestorsSection() {
                 <ul className="horizon-body">
                   <li>
                     Embedding pain-product mapping into product-management
-                    tools (Productboard, Aha, Jira) — where switching cost
-                    compounds into quarters. Pulled forward from 2027 after
-                    competitive-window analysis tightened the high-threat
-                    tier from 18 months to 12.
+                    tools (Productboard, Aha, Jira), where the customer pain
+                    graph and the product roadmap converge. Pulled forward
+                    from 2027 after competitive-window analysis tightened the
+                    high-threat tier from 18 months to 12.
                   </li>
                   <li>
                     Native integrations with the CRMs revenue teams already
-                    live in — scoped once each one ships a stable contract,
+                    live in, scoped once each one ships a stable contract,
                     not before.
                   </li>
                 </ul>
@@ -316,30 +313,29 @@ export function InvestorsSection() {
               </h2>
               <p>
                 Sales teams are consolidating tools and cutting rep headcount
-                while deal complexity keeps rising. The surviving reps own{' '}
-                <em>more accounts with less tribal knowledge</em>, and AI
-                agents will start drafting their outreach inside the next
-                eighteen months.
+                while deal complexity keeps rising. The surviving reps own
+                more accounts with less tribal knowledge, and AI agents will
+                start drafting their outreach inside the next eighteen months.
               </p>
               <p>
-                Both of those depend on structured account memory as the input
-                — not a raw transcript pile, not another CRM field. The agent
-                doesn&apos;t know what the buyer has already told you. The rep
-                inheriting the account doesn&apos;t either. The asset that
-                makes either one useful is the same asset.
+                Both of those depend on structured account memory as the
+                input. Not a raw transcript pile, not another CRM field. The
+                agent doesn&apos;t know what the buyer has already told you.
+                The rep inheriting the account doesn&apos;t either. The asset
+                that makes either one useful is the same asset.
               </p>
               <p>
                 Every LLM commoditizes extraction. What doesn&rsquo;t
-                commoditize is the <em>customer-built graph</em> of pains,
-                products, and contradictions — and that graph compounds per
-                account, with every call. The moat is the{' '}
-                <em>specific join</em> — pain → product → contradiction across
-                time — wired into the PM tools where roadmaps already live.
+                commoditize is the customer-built graph of pains, products,
+                and contradictions, and that graph compounds per account,
+                with every call. The moat is the specific join, pain →
+                product → contradiction across time, wired into the PM tools
+                where roadmaps already live.
               </p>
               <div className="thesis-close">
-                Salency owns that layer. The longer a team runs it,{' '}
-                <em>the more context compounds</em> — and the deeper the
-                graph gets.
+                Salency is building that layer. The longer a team runs it,
+                the more context compounds. The graph keeps getting richer
+                with every call.
               </div>
             </div>
           </section>

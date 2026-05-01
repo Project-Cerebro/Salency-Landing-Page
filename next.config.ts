@@ -4,6 +4,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'salency.ai' }],
+        destination: 'https://www.salency.ai/:path*',
+        permanent: true,
+      },
+      {
         source: '/investor',
         destination: '/#investors',
         permanent: true,

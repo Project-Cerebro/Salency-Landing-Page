@@ -17,7 +17,6 @@ const links: NavLink[] = [
   { label: 'Memory', href: '/memory' },
   { label: 'Our story', href: '/our-story' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Investors', href: '/investors' },
   { label: 'Pricing', href: '/pricing' },
 ];
 

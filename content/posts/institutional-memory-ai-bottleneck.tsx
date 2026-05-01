@@ -6,9 +6,20 @@ export const post: Post = {
     'Stop arguing about AI replacing salespeople. Start asking which layer it should own.',
   dek: 'Or: why your call recordings are a graveyard.',
   description:
-    'The augment-vs-replace debate is brain-rot. The right question for revenue leaders is which knowledge layer AI is uniquely suited to own — and the answer is institutional memory.',
+    'The augment-vs-replace debate is brain-rot. The right question for revenue leaders is which knowledge layer AI is uniquely suited to own. The answer is institutional memory.',
   authorId: 'howard',
   publishedAt: '2026-04-26',
+  readMinutes: 5,
+  category: 'Strategy',
+  headings: [
+    { id: 'the-wrong-question', title: 'The wrong question' },
+    { id: 'what-humans-do', title: "What humans do that AI can't" },
+    { id: 'what-ai-does', title: "What AI does that humans can't" },
+    { id: 'the-right-model', title: 'The right model' },
+    { id: 'what-changes', title: 'What changes when AI owns the memory layer' },
+    { id: 'what-were-building', title: "This is what we're building" },
+    { id: 'the-actual-reframe', title: 'The actual reframe' },
+  ],
   body: (
     <>
       <p>Your top AE quit Friday.</p>
@@ -35,7 +46,7 @@ export const post: Post = {
 
       <p>This is also what every &ldquo;AI in sales&rdquo; think piece is missing.</p>
 
-      <h2>The wrong question</h2>
+      <h2 id="the-wrong-question">The wrong question</h2>
 
       <p>The augment-vs-replace debate is brain-rot.</p>
 
@@ -59,7 +70,7 @@ export const post: Post = {
         &ldquo;AI sales tools&rdquo; are doing.
       </p>
 
-      <h2>What humans do that AI can&rsquo;t</h2>
+      <h2 id="what-humans-do">What humans do that AI can&rsquo;t</h2>
 
       <ul>
         <li>Read the room.</li>
@@ -79,7 +90,7 @@ export const post: Post = {
 
       <p>Stop trying to replace this layer.</p>
 
-      <h2>What AI does that humans can&rsquo;t</h2>
+      <h2 id="what-ai-does">What AI does that humans can&rsquo;t</h2>
 
       <p>Remember.</p>
 
@@ -112,7 +123,7 @@ export const post: Post = {
 
       <p>That&rsquo;s not memory. That&rsquo;s a graveyard with full-text search.</p>
 
-      <h2>The right model</h2>
+      <h2 id="the-right-model">The right model</h2>
 
       <table>
         <thead>
@@ -151,7 +162,7 @@ export const post: Post = {
         4:55pm on a Friday.
       </p>
 
-      <h2>What changes when AI owns the memory layer</h2>
+      <h2 id="what-changes">What changes when AI owns the memory layer</h2>
 
       <p>
         The new AE doesn&rsquo;t read recordings. They inherit a Day-1 brief:
@@ -185,7 +196,7 @@ export const post: Post = {
         &ldquo;the new person reads notes and hopes.&rdquo;
       </p>
 
-      <h2>This is what we&rsquo;re building</h2>
+      <h2 id="what-were-building">This is what we&rsquo;re building</h2>
 
       <p>
         Salency is institutional memory for B2B sales. We turn every call into
@@ -201,7 +212,7 @@ export const post: Post = {
         <a href="/pilot">we&rsquo;d love to talk</a>.
       </p>
 
-      <h2>The actual reframe</h2>
+      <h2 id="the-actual-reframe">The actual reframe</h2>
 
       <p>AI doesn&rsquo;t replace humans in sales.</p>
 
