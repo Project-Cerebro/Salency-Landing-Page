@@ -248,63 +248,6 @@ export function InvestorsSection() {
             </Link>
           </section>
 
-          <section className="roadmap" id="roadmap">
-            <div className="eb">Roadmap</div>
-            <h2>
-              What ships <em>next.</em>
-            </h2>
-            <div className="horizon-list">
-              <div className="horizon">
-                <div className="horizon-head">
-                  <span className="pill">V1.5 · Q2–Q3 2026</span>
-                  <span className="label">Capture, without the upload step</span>
-                </div>
-                <ul className="horizon-body">
-                  <li>
-                    Recall.ai meeting bot, joining Zoom, Meet, Teams
-                    directly. Extraction runs without a transcript upload step.
-                  </li>
-                </ul>
-              </div>
-              <div className="horizon">
-                <div className="horizon-head">
-                  <span className="pill">Following · 2026 H2</span>
-                  <span className="label">Workflow depth</span>
-                </div>
-                <ul className="horizon-body">
-                  <li>
-                    Embedding pain-product mapping into product-management
-                    tools (Productboard, Aha, Jira), where the customer pain
-                    graph and the product roadmap converge. Pulled forward
-                    from 2027 after competitive-window analysis tightened the
-                    high-threat tier from 18 months to 12.
-                  </li>
-                  <li>
-                    Native integrations with the CRMs revenue teams already
-                    live in, scoped once each one ships a stable contract,
-                    not before.
-                  </li>
-                </ul>
-              </div>
-              <div className="horizon">
-                <div className="horizon-head">
-                  <span className="pill">Further out</span>
-                  <span className="label">Enterprise readiness + vertical expansion</span>
-                </div>
-                <ul className="horizon-body">
-                  <li>
-                    Security posture for regulated-vertical buyers (SOC 2 Type
-                    II audit kickoff post-bridge).
-                  </li>
-                  <li>
-                    Vertical expansion. First vertical: B2B SaaS. Next:
-                    FinTech.
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
           <section className="thesis" id="thesis">
             <div className="thesis-card">
               <div className="eb">Why now</div>
