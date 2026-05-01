@@ -34,8 +34,12 @@ export function NotDoSection() {
             <span className="check" aria-label="What it does">✓</span>
             <div className="subtitle">
               The pain-product graph, contradictions, and account memory live
-              on Salency by design. Flatten them into CRM rows and the moat
-              dissolves the same day.
+              on Salency. Each pain carries N ranked product matches with
+              confidences, two timestamped citations comparing what the
+              customer said in March vs June, and the verbatim quote behind
+              every signal. Pipeline stages, forecasts, and account assignments
+              stay where they belong — in your CRM. Two layers, distinct
+              shapes of data.
             </div>
           </div>
           <div className="notdo-item">
