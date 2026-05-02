@@ -2,6 +2,8 @@ export type SignalType = 'pain' | 'objection' | 'contradiction';
 
 export type CallType = 'discovery' | 'technical' | 'pricing';
 
+export type MatchConfidence = 'high' | 'medium' | 'low';
+
 export interface SyntheticCallSpeaker {
   name: string;
   title: string;
@@ -10,6 +12,13 @@ export interface SyntheticCallSpeaker {
 export interface SyntheticCallSnippet {
   lines: string[];
   highlightLineIndex: number;
+}
+
+export interface ProductMatch {
+  product: string;
+  role: 'primary' | 'secondary';
+  confidence: MatchConfidence;
+  note?: string;
 }
 
 export interface SyntheticCall {
@@ -24,11 +33,15 @@ export interface SyntheticCall {
   signal: SignalType;
   contradicts?: string;
   snippet: SyntheticCallSnippet;
+  matches?: ProductMatch[];
 }
 
 export const ACCOUNT_NAME = 'Hudson Terrace Capital';
 
-export const SYNTHETIC_LABEL = 'SYNTHETIC TRANSCRIPT · Stellar Rails × Hudson Terrace Capital demo arc';
+// SYNTHETIC TRANSCRIPT label — kept blunt to avoid any misread that
+// Salency is the seller in the demo arc. Visible chip in the modal head.
+export const SYNTHETIC_LABEL =
+  'SYNTHETIC TRANSCRIPT · DEMO ARC · NOT REAL CUSTOMER DATA';
 
 const DANIEL: SyntheticCallSpeaker = { name: 'Daniel Voss', title: 'COO' };
 
@@ -44,6 +57,9 @@ export const HUDSON_TERRACE_ARC: readonly SyntheticCall[] = [
     citationTimestamp: '00:01:28',
     confidence: 0.96,
     signal: 'pain',
+    matches: [
+      { product: 'Core', role: 'primary', confidence: 'high' },
+    ],
     snippet: {
       lines: [
         '[00:01:24] Maya Chen: When you say ceiling, what specifically?',
@@ -67,6 +83,14 @@ export const HUDSON_TERRACE_ARC: readonly SyntheticCall[] = [
     citationTimestamp: '00:07:07',
     confidence: 0.94,
     signal: 'objection',
+    matches: [
+      {
+        product: 'Singapore',
+        role: 'primary',
+        confidence: 'medium',
+        note: 'roadmap gap · Q3 2026',
+      },
+    ],
     snippet: {
       lines: [
         '[00:06:49] Daniel Voss: The Singapore MAS piece?',

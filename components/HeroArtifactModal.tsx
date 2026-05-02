@@ -27,6 +27,12 @@ const CALL_TYPE_LABEL: Record<SyntheticCall['callType'], string> = {
   pricing: 'Pricing',
 };
 
+const SIGNAL_HEADER: Record<SyntheticCall['signal'], string> = {
+  pain: 'Pain → product',
+  objection: 'Objection → product',
+  contradiction: 'Pain → product',
+};
+
 function formatCitation(call: SyntheticCall): string {
   return `${ACCOUNT_NAME} · ${CALL_TYPE_LABEL[call.callType]} call · ${call.date} · ${call.citationTimestamp}`;
 }
@@ -154,6 +160,44 @@ export default function HeroArtifactModal() {
             );
           })}
         </ol>
+
+        {call.matches && call.matches.length > 0 && (
+          <section
+            className="hero-artifact-modal-matches"
+            aria-label="Matched products"
+          >
+            <p className="hero-artifact-modal-matches-eb">
+              {SIGNAL_HEADER[call.signal]}
+            </p>
+            <ul className="hero-artifact-modal-matches-list">
+              {call.matches.map((m) => (
+                <li
+                  key={m.product}
+                  className="hero-artifact-modal-match"
+                  data-role={m.role}
+                  data-confidence={m.confidence}
+                >
+                  <span className="hero-artifact-modal-match-name">
+                    {m.product}
+                  </span>
+                  <span className="hero-artifact-modal-match-meta">
+                    {m.role}
+                    <span className="sep">·</span>
+                    {m.confidence}
+                    {m.note && (
+                      <>
+                        <span className="sep">·</span>
+                        <span className="hero-artifact-modal-match-note">
+                          {m.note}
+                        </span>
+                      </>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     </div>
   );

@@ -3859,6 +3859,66 @@ header button:focus:not(:focus-visible){
   background: transparent;
   color: inherit;
 }
+.hero-artifact-modal-matches {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--hair);
+}
+.hero-artifact-modal-matches-eb {
+  margin: 0 0 10px;
+  font-family: 'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.hero-artifact-modal-matches-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hero-artifact-modal-match {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.hero-artifact-modal-match[data-role="primary"] {
+  border-color: var(--copper-a30);
+  background: var(--copper-a04);
+}
+.hero-artifact-modal-match-name {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 500;
+}
+.hero-artifact-modal-match[data-role="primary"] .hero-artifact-modal-match-name {
+  color: var(--copper);
+}
+.hero-artifact-modal-match-meta {
+  font-family: 'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.hero-artifact-modal-match-meta .sep { opacity: 0.5; }
+.hero-artifact-modal-match-note {
+  text-transform: none;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
 @keyframes heroArtifactModalFadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
