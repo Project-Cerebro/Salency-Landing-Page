@@ -58,7 +58,11 @@ export const HUDSON_TERRACE_ARC: readonly SyntheticCall[] = [
     confidence: 0.96,
     signal: 'pain',
     matches: [
-      { product: 'Core', role: 'primary', confidence: 'high' },
+      {
+        product: 'Sub-second settlement layer',
+        role: 'primary',
+        confidence: 'high',
+      },
     ],
     snippet: {
       lines: [
@@ -85,7 +89,7 @@ export const HUDSON_TERRACE_ARC: readonly SyntheticCall[] = [
     signal: 'objection',
     matches: [
       {
-        product: 'Singapore',
+        product: 'MAS-recognized Singapore deployment',
         role: 'primary',
         confidence: 'medium',
         note: 'roadmap gap · Q3 2026',
