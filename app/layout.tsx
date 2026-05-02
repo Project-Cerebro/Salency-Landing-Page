@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Outfit, Instrument_Serif, Instrument_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { PilotModal } from "@/components/PilotModal";
+import { HeroArtifactModalLazy } from "@/components/HeroArtifactModalLazy";
 import { JsonLd } from "@/components/JsonLd";
 import "./globals.css";
 
@@ -96,6 +97,7 @@ export default function RootLayout({
         <JsonLd data={websiteSchema} />
         {children}
         <PilotModal />
+        <HeroArtifactModalLazy />
         <Analytics />
       </body>
     </html>

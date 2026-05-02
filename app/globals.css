@@ -889,23 +889,65 @@ html {
     list-style:none;margin:0;padding:0;
     display:flex;flex-direction:column;gap:10px;
   }
+  .hero-artifact-card-wrap{
+    list-style:none;margin:0;padding:0;
+    position:relative;
+  }
   .hero-artifact-card{
+    display:block;width:100%;text-align:left;
     background:rgba(255,255,255,.02);
     border:1px solid var(--hair);
     border-radius:10px;
     padding:14px 16px;
-    transform-origin:top left;
+    transform-origin:center top;
     opacity:0;
     transform:translateY(8px);
-    animation:hero-artifact-in .55s ease-out forwards;
-    animation-delay:calc(.18s + var(--i, 0) * .14s);
+    color:inherit;font:inherit;
+    cursor:pointer;
+    position:relative;z-index:1;
+    transition-property:opacity, border-color, background-color, box-shadow;
+    transition-duration:200ms;
+    transition-timing-function:cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .hero-artifact.is-reduced .hero-artifact-card{
-    animation:none;opacity:1;transform:none;
+  .hero-artifact[data-revealed="true"] .hero-artifact-card{
+    animation-name:heroArtifactCardEnter;
+    animation-duration:480ms;
+    animation-timing-function:cubic-bezier(0.16, 1, 0.3, 1);
+    animation-fill-mode:forwards;
   }
-  @keyframes hero-artifact-in{
+  .hero-artifact[data-revealed="true"] .hero-artifact-card[data-chrono-index="0"]{animation-delay:0ms}
+  .hero-artifact[data-revealed="true"] .hero-artifact-card[data-chrono-index="1"]{animation-delay:120ms}
+  .hero-artifact[data-revealed="true"] .hero-artifact-card[data-chrono-index="2"]{animation-delay:240ms}
+  @keyframes heroArtifactCardEnter{
+    from{opacity:0;transform:translateY(8px)}
     to{opacity:1;transform:translateY(0)}
   }
+  .hero-artifact[data-reduced="true"] .hero-artifact-card{
+    animation:none;opacity:1;transform:none;
+    transition-duration:0ms;
+  }
+
+  .hero-artifact-card:focus-visible{
+    outline:2px solid var(--copper-a40);
+    outline-offset:2px;
+  }
+
+  /* Hover-expand: pointer devices only.
+     `:has()` lets one card's hover dim its siblings without JS. */
+  @media (hover: hover){
+    .hero-artifact-card:hover{
+      border-color:var(--copper-a30);
+      background:rgba(255,255,255,.04);
+    }
+    .hero-artifact-stack:has(.hero-artifact-card:hover) .hero-artifact-card:not(:hover),
+    .hero-artifact-stack:has(.hero-artifact-card:focus-visible) .hero-artifact-card:not(:focus-visible){
+      opacity:.55;
+    }
+  }
+  .hero-artifact-stack:has(.hero-artifact-card:focus-visible) .hero-artifact-card:not(:focus-visible){
+    opacity:.55;
+  }
+
   .hero-artifact-meta{
     display:flex;gap:8px;align-items:center;flex-wrap:wrap;
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
@@ -916,16 +958,106 @@ html {
   .hero-artifact-meta .date{color:var(--copper)}
   .hero-artifact-meta .sep{opacity:.5}
   .hero-artifact-meta .conf{color:var(--ink-2)}
+
+  .hero-artifact-contra{
+    margin-left:auto;
+    padding:2px 6px;
+    border:1px solid var(--copper-a30);
+    border-radius:3px;
+    color:var(--copper);
+    font-size:9.5px;
+    letter-spacing:.18em;
+    transition-property:box-shadow;
+    transition-duration:200ms;
+  }
+  .hero-artifact-contra.is-pinged{
+    animation:heroArtifactContraPing 400ms cubic-bezier(0.16, 1, 0.3, 1) 1;
+  }
+  @keyframes heroArtifactContraPing{
+    0%   {box-shadow:0 0 0 0 var(--copper-a0)}
+    35%  {box-shadow:0 0 0 6px var(--copper-a35)}
+    100% {box-shadow:0 0 0 0 var(--copper-a0)}
+  }
+  .hero-artifact[data-reduced="true"] .hero-artifact-contra.is-pinged{
+    animation:none;
+  }
+
   .hero-artifact-pain{
     font-family:var(--font-display), 'Instrument Serif', serif;
     font-size:15px;line-height:1.45;
     color:var(--ink);font-style:italic;
     margin:0 0 6px;
+    overflow:hidden;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    line-clamp:2;
   }
   .hero-artifact-cite{
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:11px;letter-spacing:.06em;
     color:var(--ink-3);margin:0;
+    display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+    text-transform:uppercase;
+  }
+  .hero-artifact-cite .sep{opacity:.5}
+
+  .hero-artifact-card-expanded{
+    overflow:hidden;
+    max-height:0;
+    opacity:0;
+    margin-top:0;
+    transition-property:max-height, opacity, margin-top;
+    transition-duration:200ms;
+    transition-timing-function:cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @media (hover: hover){
+    .hero-artifact-card:hover .hero-artifact-card-expanded{
+      max-height:240px;
+      opacity:1;
+      margin-top:10px;
+    }
+    .hero-artifact-card:hover .hero-artifact-pain{
+      -webkit-line-clamp:6;
+      line-clamp:6;
+    }
+  }
+  .hero-artifact-card:focus-visible .hero-artifact-card-expanded{
+    max-height:240px;
+    opacity:1;
+    margin-top:10px;
+  }
+  .hero-artifact-card:focus-visible .hero-artifact-pain{
+    -webkit-line-clamp:6;
+    line-clamp:6;
+  }
+  .hero-artifact[data-reduced="true"] .hero-artifact-card-expanded{
+    transition-duration:0ms;
+  }
+
+  .hero-artifact-card-cite-full{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;
+    letter-spacing:.08em;
+    color:var(--ink-2);
+    line-height:1.55;
+  }
+  .hero-artifact-card-conf{
+    margin:6px 0 0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--copper);
+  }
+  .hero-artifact-card-hint{
+    margin:8px 0 0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--ink-3);
   }
 
   .hero-artifact-foot{
@@ -1711,53 +1843,6 @@ html {
     }
   }
 
-  /* Roadmap — V1.5 / V2 / V2.5 horizons */
-  .roadmap{
-    max-width:var(--page-max);margin:80px auto 0;padding:0 40px;
-
-    .eb{margin-bottom:28px;display:flex}
-    h2{
-      font-size:clamp(32px,4vw,48px);line-height:1.05;color:var(--ink);
-      margin:0 0 36px;max-width:22ch;text-wrap:balance;
-    }
-    .horizon-list{display:grid;grid-template-columns:1fr;gap:20px}
-    .horizon{
-      padding:26px 28px;border:1px solid var(--hair-2);border-radius:10px;
-      background:rgba(255,255,255,.02);
-
-      .horizon-head{
-        display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap;
-
-        .pill{
-          font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.18em;
-          text-transform:uppercase;color:var(--copper);padding:6px 12px;
-          border:1px solid rgba(254,133,49,.28);border-radius:999px;
-        }
-        .label{
-          font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
-          letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
-        }
-      }
-      .horizon-body{
-        list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;
-
-        li{
-          font-family:var(--font-body), 'Geist', sans-serif;font-size:15px;line-height:1.65;
-          color:var(--ink-2);font-weight:300;padding-left:16px;position:relative;
-
-          &::before{
-            content:"";position:absolute;left:0;top:.8em;width:6px;height:1px;
-            background:var(--copper-a40);
-          }
-          em{
-            font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;
-            color:var(--copper);font-size:16px;font-weight:400;
-          }
-        }
-      }
-    }
-  }
-
   /* Team */
   .team{
     max-width:var(--page-max);margin:100px auto 0;padding:0 40px;
@@ -2117,7 +2202,6 @@ html {
     .platform,
     .inv-tam,
     .inv-compete,
-    .roadmap,
     .team,
     .thesis {
       padding-left: 22px;
@@ -2149,9 +2233,6 @@ html {
     }
     .inv-compete .compete-row--head {
       display: none;
-    }
-    .roadmap .horizon {
-      padding: 22px 22px;
     }
     .team .sect-head {
       grid-template-columns: 1fr;
@@ -3649,5 +3730,205 @@ header button:focus:not(:focus-visible){
   .notfor-list li { grid-template-columns: 1fr; gap: 4px; }
 
   .why-cta { margin: 72px auto 72px; padding: 0 22px; }
+}
+
+/* ═══════════ Hero artifact modal — transcript snippet viewer ═══════════ */
+.hero-artifact-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  animation: heroArtifactModalFadeIn 200ms ease-out;
+}
+@media (min-width: 768px) {
+  .hero-artifact-modal-backdrop { padding: 24px; }
+}
+.hero-artifact-modal-panel {
+  position: relative;
+  width: min(640px, 92vw);
+  max-height: 86vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+  border: 1px solid var(--hair-2);
+  border-radius: 12px;
+  padding: 28px 28px 24px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 60px -28px rgba(0, 0, 0, 0.6);
+  animation: heroArtifactModalZoomIn 200ms ease-out;
+}
+.hero-artifact-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: rgba(20, 17, 25, 0.85);
+  border: 1px solid var(--hair-2);
+  border-radius: 9999px;
+  color: var(--ink-2);
+  cursor: pointer;
+  z-index: 2;
+  transition-property: color, background-color, border-color;
+  transition-duration: 180ms;
+}
+.hero-artifact-modal-close:hover,
+.hero-artifact-modal-close:focus-visible {
+  color: var(--ink);
+  background: rgba(32, 29, 36, 0.95);
+  border-color: var(--hair);
+  outline: none;
+}
+.hero-artifact-modal-close-icon {
+  width: 16px;
+  height: 16px;
+}
+.hero-artifact-modal-head {
+  margin-right: 40px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hero-artifact-modal-chip {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border: 1px solid var(--copper-a30);
+  border-radius: 999px;
+  font-family: 'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+  background: var(--copper-a08);
+}
+.hero-artifact-modal-cite {
+  margin: 0;
+  font-family: 'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.hero-artifact-modal-speaker {
+  margin: 0;
+  font-family: 'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.hero-artifact-modal-speaker .sep { opacity: 0.5; }
+.hero-artifact-modal-speaker .conf { color: var(--copper); }
+.hero-artifact-modal-snippet {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hero-artifact-modal-line {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  padding: 4px 0;
+}
+.hero-artifact-modal-line.is-cited {
+  border-left: 2px solid var(--copper-a40);
+  background: var(--copper-a04);
+  padding: 6px 10px;
+  color: var(--ink);
+  font-weight: 400;
+}
+.hero-artifact-modal-line mark {
+  background: transparent;
+  color: inherit;
+}
+.hero-artifact-modal-matches {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--hair);
+}
+.hero-artifact-modal-matches-eb {
+  margin: 0 0 10px;
+  font-family: 'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.hero-artifact-modal-matches-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hero-artifact-modal-match {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.hero-artifact-modal-match[data-role="primary"] {
+  border-color: var(--copper-a30);
+  background: var(--copper-a04);
+}
+.hero-artifact-modal-match-name {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 500;
+}
+.hero-artifact-modal-match[data-role="primary"] .hero-artifact-modal-match-name {
+  color: var(--copper);
+}
+.hero-artifact-modal-match-meta {
+  font-family: 'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.hero-artifact-modal-match-meta .sep { opacity: 0.5; }
+.hero-artifact-modal-match-note {
+  text-transform: none;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+@keyframes heroArtifactModalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes heroArtifactModalZoomIn {
+  from { opacity: 0; transform: scale(.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-artifact-modal-backdrop,
+  .hero-artifact-modal-panel { animation: none; }
 }
 
