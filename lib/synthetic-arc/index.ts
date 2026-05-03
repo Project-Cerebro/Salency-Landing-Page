@@ -42,5 +42,15 @@ export {
 export { getCallsBySignal, getContradictionPairs } from './signals';
 export { getMatchesForCall, getAllMatches } from './matches';
 
+export {
+  HUDSON_TERRACE_BRIEF,
+  HUDSON_TERRACE_PEOPLE,
+  HUDSON_TERRACE_NEEDS,
+  HUDSON_TERRACE_COMMITMENTS,
+  HUDSON_TERRACE_CHANGES,
+  HUDSON_TERRACE_MAP,
+  HUDSON_TERRACE_NEXT,
+} from './hudson-terrace-brief';
+
 // Side-effect import: runs the build-time invariant assertions on load.
 import './invariants';

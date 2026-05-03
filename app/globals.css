@@ -1077,6 +1077,262 @@ html {
     max-width:var(--page-max);margin:0 auto;
     border-top:1px solid var(--hair);
   }
+
+  /* ═══════════ HeroBrief — dominant Day-1 Brief artifact ═══════════
+     Replaces the 3-card HeroArtifact in the / hero (Path D-Hybrid).
+     6 blocks (4 above-fold, 2 below-fold). Inline citation expansion
+     pulls 2-3 surrounding sentences from arc.ts. "See full transcript"
+     opens TranscriptSnippetModal. Below-fold blocks (.hb-block--below)
+     hide on mobile; secondary lists hide on mobile per spec section
+     "Mobile (<768px)". Reduced motion: no entrance animations, instant
+     inline expansion (handled by absence of any transition rules). */
+  .hero-brief{
+    margin-top:48px;
+    perspective:1200px;
+  }
+  @media (min-width: 1024px){
+    .hero-brief{margin-top:0}
+  }
+  .hero-brief-frame{
+    position:relative;
+    background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--hair-2);
+    border-radius:14px;
+    padding:24px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.04) inset,
+      0 24px 60px -28px rgba(0,0,0,.5);
+    overflow:hidden;
+  }
+  .hero-brief-frame::before{
+    content:"";position:absolute;
+    top:0;left:24px;right:24px;height:1px;
+    background:linear-gradient(90deg, var(--copper) 0%, var(--copper-a08) 30%, transparent 100%);
+  }
+  .hero-brief-head{
+    display:flex;flex-direction:column;gap:4px;
+    margin-bottom:18px;padding-bottom:14px;
+    border-bottom:1px solid var(--hair);
+  }
+  .hero-brief-eb{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:15px;letter-spacing:-.005em;
+    color:var(--ink);
+  }
+  .hero-brief-meta{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;font-size:13px;
+    color:var(--ink-3);
+  }
+  .hero-brief-body{
+    display:flex;flex-direction:column;gap:18px;
+  }
+  .hb-block{
+    padding:14px 0;border-top:1px solid var(--hair);
+  }
+  .hb-block:first-child{border-top:0;padding-top:4px}
+  .hb-block-eb{
+    margin:0 0 10px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
+  }
+  /* Hero item — the dominant verbatim quote / lead row in each block. */
+  .hb-hero{
+    display:flex;flex-direction:column;gap:6px;
+    margin-bottom:10px;
+  }
+  .hb-hero-row{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .hb-hero-name{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
+    font-size:14px;color:var(--ink);
+  }
+  .hb-hero-title{color:var(--ink-2);font-weight:400}
+  .hb-hero-sep{color:var(--ink-3);font-weight:400}
+  .hb-hero-quote{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;
+    font-size:15px;line-height:1.5;color:var(--ink);
+  }
+  .hb-hero-item{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
+    font-size:14.5px;color:var(--ink);line-height:1.45;
+  }
+  .hb-pill{
+    padding:2px 8px;border-radius:999px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;
+    border:1px solid var(--copper-a30);color:var(--copper);
+    background:var(--copper-a08);
+    white-space:nowrap;
+  }
+  .hb-pill[data-status="open"]{
+    border-color:var(--copper-a40);
+  }
+  .hb-meta-row{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:12.5px;color:var(--ink-3);
+  }
+
+  /* Citation pill — clickable, opens inline expansion. */
+  .hb-cite{
+    display:inline-flex;align-items:center;gap:0;
+    padding:3px 8px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:4px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;
+    color:var(--ink-3);
+    cursor:pointer;
+    transition-property:border-color, color, background-color;
+    transition-duration:160ms;
+  }
+  .hb-cite:hover{
+    border-color:var(--copper-a30);color:var(--ink);
+    background:var(--copper-a04);
+  }
+  .hb-cite[aria-expanded="true"]{
+    border-color:var(--copper-a40);color:var(--ink);
+    background:var(--copper-a08);
+  }
+  .hb-cite:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;
+  }
+  .hb-cite-speaker{color:var(--ink-2)}
+  .hb-cite-stamp{color:var(--copper)}
+  .hb-cite-sep{opacity:.55}
+
+  /* Inline expansion — surrounding 2-3 sentences pulled from arc.ts. */
+  .hb-expand{
+    margin-top:8px;
+    padding:12px 14px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-left:2px solid var(--copper);
+    border-radius:0 8px 8px 0;
+  }
+  .hb-expand-lines{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .hb-expand-line{
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:13px;line-height:1.55;color:var(--ink-2);
+    font-feature-settings:'tnum';
+  }
+  .hb-expand-trigger{
+    margin-top:10px;
+    padding:0;
+    background:transparent;border:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;color:var(--copper);
+    cursor:pointer;
+  }
+  .hb-expand-trigger:hover{color:#FE9F5B}
+  .hb-expand-trigger:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;border-radius:2px;
+  }
+
+  /* Secondary list — compact rows under the hero item. */
+  .hb-secondary{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .hb-secondary-row{
+    display:flex;flex-wrap:wrap;align-items:center;gap:0;
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:12.5px;color:var(--ink-2);
+    line-height:1.5;
+  }
+  .hb-secondary-name{color:var(--ink);font-weight:500}
+  .hb-secondary-title{color:var(--ink-2)}
+  .hb-secondary-stance{color:var(--ink-3);font-style:italic}
+  .hb-secondary-text{color:var(--ink-2)}
+  .hb-secondary-sep{color:var(--ink-4)}
+  .hb-secondary-meta{color:var(--ink-3)}
+
+  /* Change-pair (Block 04) — dual-quote diff with copper divider. */
+  .hb-change-pair{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    padding:6px 0;
+  }
+  .hb-change-quote{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-size:13.5px;color:var(--ink-2);
+  }
+  .hb-change-divider{
+    display:flex;align-items:center;gap:8px;
+    margin:2px 0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--copper);
+  }
+  .hb-change-divider::before,
+  .hb-change-divider::after{
+    content:"";flex:0 0 12px;height:1px;background:var(--copper);
+  }
+  .hb-change-divider::after{flex:1}
+
+  /* Map block (Block 05) — pain → product matches. */
+  .hb-map-list{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .hb-map-row{
+    display:flex;flex-direction:column;gap:2px;
+    padding:8px 12px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:6px;
+  }
+  .hb-map-row-main{
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;
+    color:var(--ink);
+  }
+  .hb-map-product{font-weight:500;color:var(--copper)}
+  .hb-map-capability{color:var(--ink-2);font-style:italic}
+  .hb-map-row-meta{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+  }
+
+  /* Next block (Block 06) — milestone calendar. */
+  .hb-next-list{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .hb-next-row{
+    display:grid;grid-template-columns:80px 1fr;gap:12px;
+    align-items:baseline;
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;
+    color:var(--ink-2);
+  }
+  .hb-next-date{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;color:var(--copper);
+  }
+  .hb-next-text{color:var(--ink)}
+
+  /* Mobile <768px — hide secondary lists + below-fold blocks per spec.
+     Hero items still render; tap on citation still expands inline. */
+  @media (max-width: 768px){
+    .hero-brief .hb-secondary{display:none}
+    .hero-brief .hb-block--below{display:none}
+  }
+  /* Reduced motion: kill the hb-cite hover transition. Inline expansion
+     is already instant (no transition rules on .hb-expand). */
+  @media (prefers-reduced-motion: reduce){
+    .hero-brief .hb-cite{transition-duration:0ms}
+  }
+
   .h1{
     font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
     font-weight:500;
