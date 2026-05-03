@@ -2015,6 +2015,42 @@ html {
   }
   .comparative-card--salency .comparative-card-copy{color:var(--ink)}
 
+  /* ═══════════ BottomClaim ═══════════
+     Final CTA. Replaces CtaSection. Centered, max-width ~58ch. Italic
+     Instrument Serif quote (verbatim §3 wound metaphor), plain follow-up,
+     mono signoff, primary CTA. */
+  .bottom-claim{
+    max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
+  }
+  @media (max-width: 768px){
+    .bottom-claim{margin-top:80px;padding:0 22px 64px}
+  }
+  .bottom-claim-card{
+    max-width:58ch;margin:0 auto;
+    text-align:center;
+    display:flex;flex-direction:column;gap:20px;align-items:center;
+  }
+  .bottom-claim-quote{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;
+    font-size:clamp(24px,3vw,34px);line-height:1.3;
+    color:var(--ink);text-wrap:balance;
+  }
+  .bottom-claim-followup{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:400;
+    font-size:18px;line-height:1.5;color:var(--ink-2);
+  }
+  .bottom-claim-signoff{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
+  }
+  .bottom-claim-cta{margin-top:8px}
+  .bottom-claim-cta .btn{padding:14px 28px;font-size:15px}
+
   /* ═══════════ CTA ═══════════ */
   .cta-section{
     max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
