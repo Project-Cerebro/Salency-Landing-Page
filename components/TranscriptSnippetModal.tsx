@@ -15,11 +15,11 @@ import {
 } from '@/lib/synthetic-arc';
 import { useBodyScrollLock } from '@/lib/use-body-scroll-lock';
 import {
-  HERO_ARTIFACT_MODAL_EVENT,
-  type HeroArtifactModalDetail,
-} from '@/lib/hero-artifact-modal-event';
+  TRANSCRIPT_SNIPPET_MODAL_EVENT,
+  type TranscriptSnippetModalDetail,
+} from '@/lib/transcript-snippet-modal-event';
 
-export { HERO_ARTIFACT_MODAL_EVENT } from '@/lib/hero-artifact-modal-event';
+export { TRANSCRIPT_SNIPPET_MODAL_EVENT } from '@/lib/transcript-snippet-modal-event';
 
 const CALL_TYPE_LABEL: Record<SyntheticCall['callType'], string> = {
   discovery: 'Discovery',
@@ -37,14 +37,16 @@ function formatCitation(call: SyntheticCall): string {
   return `${ACCOUNT_NAME} · ${CALL_TYPE_LABEL[call.callType]} call · ${call.date} · ${call.citationTimestamp}`;
 }
 
-export default function HeroArtifactModal() {
-  const [callId, setCallId] = useState<string | null>(null);
+export default function TranscriptSnippetModal() {
+  const [detail, setDetail] = useState<TranscriptSnippetModalDetail | null>(
+    null,
+  );
   const triggerRef = useRef<HTMLElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   const close = useCallback(() => {
-    setCallId(null);
+    setDetail(null);
     const t = triggerRef.current;
     triggerRef.current = null;
     if (t && typeof t.focus === 'function') {
@@ -54,17 +56,18 @@ export default function HeroArtifactModal() {
 
   useEffect(() => {
     const onOpen = (e: Event) => {
-      const detail = (e as CustomEvent<HeroArtifactModalDetail>).detail;
-      if (!detail?.callId) return;
+      const next = (e as CustomEvent<TranscriptSnippetModalDetail>).detail;
+      if (!next?.callId) return;
       const active = document.activeElement;
       triggerRef.current = active instanceof HTMLElement ? active : null;
-      setCallId(detail.callId);
+      setDetail(next);
     };
-    window.addEventListener(HERO_ARTIFACT_MODAL_EVENT, onOpen);
-    return () => window.removeEventListener(HERO_ARTIFACT_MODAL_EVENT, onOpen);
+    window.addEventListener(TRANSCRIPT_SNIPPET_MODAL_EVENT, onOpen);
+    return () =>
+      window.removeEventListener(TRANSCRIPT_SNIPPET_MODAL_EVENT, onOpen);
   }, []);
 
-  const open = callId !== null;
+  const open = detail !== null;
 
   useBodyScrollLock(open);
 
@@ -105,10 +108,13 @@ export default function HeroArtifactModal() {
     return () => document.removeEventListener('keydown', onKey);
   }, [open, close]);
 
-  if (!open || !callId) return null;
+  if (!open || !detail) return null;
 
-  const call = HUDSON_TERRACE_ARC.find((c) => c.id === callId);
+  const call = HUDSON_TERRACE_ARC.find((c) => c.id === detail.callId);
   if (!call) return null;
+
+  const highlightLineIndex =
+    detail.lineIdx ?? call.snippet.highlightLineIndex;
 
   return (
     <div
@@ -145,7 +151,7 @@ export default function HeroArtifactModal() {
 
         <ol className="hero-artifact-modal-snippet">
           {call.snippet.lines.map((line, idx) => {
-            const isCited = idx === call.snippet.highlightLineIndex;
+            const isCited = idx === highlightLineIndex;
             return (
               <li
                 key={idx}
@@ -161,7 +167,7 @@ export default function HeroArtifactModal() {
           })}
         </ol>
 
-        {call.matches && call.matches.length > 0 && (
+        {(detail.matches ?? call.matches) && (detail.matches ?? call.matches)!.length > 0 && (
           <section
             className="hero-artifact-modal-matches"
             aria-label="Matched products"
@@ -170,7 +176,7 @@ export default function HeroArtifactModal() {
               {SIGNAL_HEADER[call.signal]}
             </p>
             <ul className="hero-artifact-modal-matches-list">
-              {call.matches.map((m) => (
+              {(detail.matches ?? call.matches)!.map((m) => (
                 <li
                   key={m.product}
                   className="hero-artifact-modal-match"
