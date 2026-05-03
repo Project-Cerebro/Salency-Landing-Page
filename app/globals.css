@@ -1336,15 +1336,25 @@ html {
   .h1{
     font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
     font-weight:500;
-    font-size:clamp(40px,5.6vw,72px);
+    font-size:clamp(36px,4.6vw,60px);
     line-height:1.08;
     letter-spacing:-.025em;
-    margin:0;max-width:22ch;color:var(--ink);
+    margin:0;max-width:24ch;color:var(--ink);
     text-wrap:balance;
     text-align:left;
   }
   .h1 em{font-style:normal;font-weight:inherit;color:var(--copper)}
   .h1 .soft{color:var(--ink-3)}
+  /* Path D-Hybrid hero — italic em accent on the second sentence
+     ("So every rep walks in briefed"), Instrument Serif copper.
+     Renders on its own visual block so the locked H1 reads as two
+     beats without orphaning the italic. */
+  .h1 .h1-italic{
+    display:block;margin-top:.15em;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;color:var(--copper);
+    letter-spacing:-.02em;
+  }
 
   .hero .sub{
     margin:28px 0 0;max-width:58ch;
