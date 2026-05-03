@@ -1557,6 +1557,182 @@ html {
     font-style:italic;color:var(--copper);font-weight:400;
   }
 
+  /* ═══════════ Stage primitives (Map / HandoffExport / Recall) ═══════════
+     Shared head + foot for the 3 abbreviated stage walks below the
+     ProvenanceCard. Each stage uses these chrome tokens so the rhythm
+     stays consistent. .map-stage / .handoff-stage / .recall-stage carry
+     stage-specific layout variations. */
+  .map-stage,
+  .handoff-stage,
+  .recall-stage{
+    max-width:var(--page-max);margin:96px auto 0;padding:0 40px;
+  }
+  @media (max-width: 768px){
+    .map-stage,
+    .handoff-stage,
+    .recall-stage{margin-top:64px;padding:0 22px}
+  }
+  .stage-head{
+    display:flex;flex-direction:column;gap:14px;
+    margin-bottom:36px;max-width:64ch;
+  }
+  .stage-h2{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:clamp(28px,3.6vw,40px);
+    line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+  }
+  .stage-h2 em{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;color:var(--copper);
+  }
+  .stage-lede{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:17px;line-height:1.55;color:var(--ink-2);
+  }
+  .stage-foot{
+    margin-top:28px;
+    display:flex;justify-content:flex-start;
+  }
+  .stage-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:0;background:transparent;border:0;cursor:pointer;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:12px;letter-spacing:.06em;color:var(--copper);
+  }
+  .stage-cta:hover{color:#FE9F5B}
+  .stage-cta:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:4px;border-radius:2px;
+  }
+
+  /* ═══════════ MapStage ═══════════
+     Pain → product mapping demo. 2-col grid: pains left (~45%), matched
+     products right (~55%). Hover/focus pain → swap. Mobile: pain pills
+     become horizontal scroll-snap. ARIA tablist + arrow-key nav. */
+  .map-grid{
+    display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);
+    gap:32px;align-items:start;
+  }
+  @media (max-width: 900px){
+    .map-grid{grid-template-columns:1fr;gap:20px}
+  }
+  .map-pains{
+    display:flex;flex-direction:column;gap:8px;
+  }
+  @media (max-width: 900px){
+    .map-pains{
+      flex-direction:row;flex-wrap:nowrap;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      gap:10px;padding-bottom:10px;
+      margin-right:-22px;padding-right:22px;
+    }
+    .map-pain{flex:0 0 78%;scroll-snap-align:start}
+  }
+  .map-pain{
+    display:flex;flex-direction:column;gap:6px;
+    text-align:left;
+    padding:14px 16px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-left:2px solid transparent;
+    border-radius:8px;
+    color:inherit;font:inherit;cursor:pointer;
+    transition-property:border-color, background-color;
+    transition-duration:160ms;
+  }
+  .map-pain:hover{
+    border-color:var(--copper-a30);
+    background:rgba(255,255,255,.03);
+  }
+  .map-pain:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;
+  }
+  .map-pain.is-active{
+    border-color:var(--copper-a40);
+    border-left-color:var(--copper);
+    background:var(--copper-a04);
+  }
+  .map-pain-text{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;
+    font-size:14px;line-height:1.45;color:var(--ink);
+  }
+  .map-pain-cite{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+
+  .map-matches{
+    position:relative;min-height:280px;
+  }
+  .map-panel{
+    opacity:0;
+    transition-property:opacity;
+    transition-duration:150ms;
+  }
+  .map-panel.is-active{opacity:1}
+  @media (prefers-reduced-motion: reduce){
+    .map-panel{transition-duration:0ms}
+  }
+  .map-match-list{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .map-match{
+    padding:16px 18px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:10px;
+  }
+  .map-match[data-role="primary"]{
+    border-color:var(--copper);
+    background:var(--copper-a04);
+  }
+  .map-match-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;margin-bottom:4px;
+  }
+  .map-match-name{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:18px;color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  .map-match[data-role="primary"] .map-match-name{color:var(--copper)}
+  .map-match-role{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .map-match[data-role="primary"] .map-match-role{color:var(--copper)}
+  .map-match-cap{
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-style:italic;font-size:13px;color:var(--ink-2);
+    margin-bottom:10px;
+  }
+  .map-match-bar{
+    width:100%;height:4px;border-radius:999px;
+    background:var(--hair);overflow:hidden;
+  }
+  .map-match-bar-fill{
+    height:100%;background:var(--copper);
+    transition-property:width;transition-duration:200ms;
+  }
+  .map-match[data-role="secondary"] .map-match-bar-fill{
+    background:var(--copper-a60);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .map-match-bar-fill{transition-duration:0ms}
+  }
+  .map-match-score{
+    margin-top:6px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+
   /* ═══════════ CTA ═══════════ */
   .cta-section{
     max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
