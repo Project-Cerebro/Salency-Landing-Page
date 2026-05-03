@@ -8,6 +8,7 @@ import { NotDoSection } from '@/components/sections/NotDoSection';
 import { CtaSection } from '@/components/sections/CtaSection';
 import { SiteFooter } from '@/components/sections/SiteFooter';
 import { JsonLd } from '@/components/JsonLd';
+import { TranscriptSnippetModalLazy } from '@/components/TranscriptSnippetModalLazy';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -48,6 +49,7 @@ export default function Home() {
       <ScrollReveal><NotDoSection /></ScrollReveal>
       <ScrollReveal><CtaSection /></ScrollReveal>
       <SiteFooter />
+      <TranscriptSnippetModalLazy />
     </div>
   );
 }
