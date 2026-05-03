@@ -6,6 +6,7 @@
 // crossing the lib boundary.
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import {
   HUDSON_TERRACE_ARC,
@@ -116,7 +117,12 @@ export default function TranscriptSnippetModal() {
   const highlightLineIndex =
     detail.lineIdx ?? call.snippet.highlightLineIndex;
 
-  return (
+  // Portal to <body> so the fixed-position backdrop escapes any layout
+  // containers ancestors. The page wrapper has a `.page > *:not(header)
+  // { position:relative; z-index:1 }` rule (used to layer sections over
+  // the bg-noise/bg-mesh) that would otherwise pin this dialog into
+  // normal document flow once it became a direct child of .page in PR 1.
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -205,6 +211,7 @@ export default function TranscriptSnippetModal() {
           </section>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
