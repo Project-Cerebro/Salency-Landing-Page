@@ -1947,6 +1947,74 @@ html {
     text-transform:uppercase;
   }
 
+  /* ═══════════ ComparativeStrip ═══════════
+     3-card row at position 7. Salency card highlighted with copper border
+     and tint. Replaces NotDoSection. No Attio card (Q13=d). Currency for
+     Gong/Salesforce/HubSpot framings checked against company-context §9. */
+  .comparative{
+    max-width:var(--page-max);margin:96px auto 0;padding:0 40px;
+  }
+  @media (max-width: 768px){
+    .comparative{margin-top:64px;padding:0 22px}
+  }
+  .comparative-head{
+    display:flex;flex-direction:column;gap:10px;
+    margin-bottom:36px;max-width:64ch;
+  }
+  .comparative-h2{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:clamp(28px,3.6vw,40px);
+    line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+  }
+  .comparative-h2 em{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;color:var(--copper);
+  }
+  .comparative-sub{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;font-size:18px;color:var(--ink-2);
+  }
+  .comparative-row{
+    display:grid;grid-template-columns:repeat(3, 1fr);gap:18px;
+  }
+  @media (max-width: 900px){
+    .comparative-row{grid-template-columns:1fr;gap:14px}
+  }
+  .comparative-card{
+    padding:24px 22px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:12px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .comparative-card--salency{
+    border:1px solid var(--copper);
+    background:linear-gradient(180deg, var(--copper-a08) 0%, var(--copper-a04) 100%);
+    box-shadow:0 24px 60px -28px rgba(254,133,49,.18);
+  }
+  .comparative-card-head{
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .comparative-card-eb{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-3);
+  }
+  .comparative-card--salency .comparative-card-eb{color:var(--copper)}
+  .comparative-card-name{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:20px;color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  .comparative-card-copy{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:14.5px;line-height:1.6;color:var(--ink-2);
+  }
+  .comparative-card--salency .comparative-card-copy{color:var(--ink)}
+
   /* ═══════════ CTA ═══════════ */
   .cta-section{
     max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
