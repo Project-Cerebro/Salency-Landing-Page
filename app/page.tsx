@@ -3,9 +3,12 @@ import { MarketingHeader } from '@/components/MarketingHeader';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { HubSection } from '@/components/sections/HubSection';
-import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
-import { NotDoSection } from '@/components/sections/NotDoSection';
-import { CtaSection } from '@/components/sections/CtaSection';
+import { ProvenanceCard } from '@/components/sections/ProvenanceCard';
+import { MapStage } from '@/components/sections/MapStage';
+import { HandoffExportStage } from '@/components/sections/HandoffExportStage';
+import { RecallStage } from '@/components/sections/RecallStage';
+import { ComparativeStrip } from '@/components/sections/ComparativeStrip';
+import { BottomClaim } from '@/components/sections/BottomClaim';
 import { SiteFooter } from '@/components/sections/SiteFooter';
 import { JsonLd } from '@/components/JsonLd';
 import { TranscriptSnippetModalLazy } from '@/components/TranscriptSnippetModalLazy';
@@ -45,9 +48,12 @@ export default function Home() {
       <MarketingHeader />
       <ScrollReveal><HeroSection /></ScrollReveal>
       <ScrollReveal><HubSection /></ScrollReveal>
-      <ScrollReveal><HowItWorksSection /></ScrollReveal>
-      <ScrollReveal><NotDoSection /></ScrollReveal>
-      <ScrollReveal><CtaSection /></ScrollReveal>
+      <ScrollReveal><ProvenanceCard /></ScrollReveal>
+      <ScrollReveal><MapStage /></ScrollReveal>
+      <ScrollReveal><HandoffExportStage /></ScrollReveal>
+      <ScrollReveal><RecallStage /></ScrollReveal>
+      <ScrollReveal><ComparativeStrip /></ScrollReveal>
+      <ScrollReveal><BottomClaim /></ScrollReveal>
       <SiteFooter />
       <TranscriptSnippetModalLazy />
     </div>

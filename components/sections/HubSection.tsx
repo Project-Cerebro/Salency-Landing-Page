@@ -7,7 +7,7 @@ export function HubSection() {
   const trigger = () => setPlayed(true);
 
   return (
-    <section className={`hub-wrap${played ? ' played' : ''}`}>
+    <section id="hub" className={`hub-wrap${played ? ' played' : ''}`}>
       <div className="hub">
         <div className="hub-main">
         <div className="hub-head">
