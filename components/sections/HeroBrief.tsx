@@ -127,7 +127,7 @@ export function HeroBrief() {
     >
       <div className="hero-brief-frame">
         <header className="hero-brief-head">
-          <span className="hero-brief-eb">{ACCOUNT_NAME} {'\u00b7'} Day-1 Brief</span>
+          <h2 className="hero-brief-eb">{ACCOUNT_NAME} {'\u00b7'} Day-1 Brief</h2>
           <p className="hero-brief-meta">
             15 min prep {'\u00b7'} 3 calls indexed {'\u00b7'} auto-generated 2026-04-06
           </p>
@@ -145,7 +145,9 @@ export function HeroBrief() {
                   <span className="hb-hero-title">{people.hero.speakerTitle}</span>
                 </span>
                 {people.hero.stance && (
-                  <span className="hb-pill" data-stance="champion">{people.hero.stance}</span>
+                  <span className="hb-pill" data-stance="champion">
+                    <span className="sr-only">role: </span>{people.hero.stance}
+                  </span>
                 )}
               </div>
               <p className="hb-hero-quote">
@@ -174,7 +176,9 @@ export function HeroBrief() {
                   {p.stance && (
                     <>
                       <span className="hb-secondary-sep" aria-hidden="true">{' \u00b7 '}</span>
-                      <span className="hb-secondary-stance">{p.stance}</span>
+                      <span className="hb-secondary-stance">
+                        <span className="sr-only">role: </span>{p.stance}
+                      </span>
                     </>
                   )}
                 </li>
@@ -255,7 +259,11 @@ export function HeroBrief() {
                 <li key={idx} className="hb-secondary-row">
                   <span className="hb-secondary-text">{c.item}</span>
                   <span className="hb-secondary-meta hb-commit-meta">
-                    {c.owner && <span>{c.owner}</span>}
+                    {c.owner && (
+                      <span>
+                        <span className="sr-only">owner: </span>{c.owner}
+                      </span>
+                    )}
                     {c.owner && c.due && (
                       <span className="hb-secondary-sep" aria-hidden="true">{' \u00b7 '}</span>
                     )}

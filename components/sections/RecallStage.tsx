@@ -32,6 +32,9 @@ const CURRENT_QUOTE = {
 
 export function RecallStage() {
   const headingId = useId();
+  const contradictionLabelId = useId();
+  const completeLabelId = useId();
+  const diffRegionId = useId();
   const [expanded, setExpanded] = useState(false);
 
   const onSeeTranscript = () => {
@@ -68,9 +71,10 @@ export function RecallStage() {
 
           <article
             className={`recall-card recall-card--contradiction${expanded ? ' is-expanded' : ''}`}
+            aria-labelledby={contradictionLabelId}
           >
             <header className="recall-card-head">
-              <span className="recall-card-eb">
+              <span id={contradictionLabelId} className="recall-card-eb">
                 Contradiction {'\u00b7'} {ACCOUNT_NAME}
               </span>
               <span className="recall-card-pill">flagged</span>
@@ -101,7 +105,7 @@ export function RecallStage() {
             </div>
 
             {expanded && (
-              <div className="recall-diff" role="region">
+              <div className="recall-diff" id={diffRegionId} role="region" aria-label="Latency contradiction delta">
                 <p className="recall-diff-eb">Delta</p>
                 <p className="recall-diff-text">
                   Latency: <span className="recall-diff-from">blocker</span>{' '}
@@ -120,6 +124,7 @@ export function RecallStage() {
                 className="recall-card-toggle"
                 onClick={() => setExpanded((v) => !v)}
                 aria-expanded={expanded}
+                aria-controls={diffRegionId}
               >
                 {expanded ? 'Hide diff' : 'Show diff'}
               </button>
@@ -133,10 +138,10 @@ export function RecallStage() {
             </div>
           </article>
 
-          <article className="recall-card recall-card--complete">
+          <article className="recall-card recall-card--complete" aria-labelledby={completeLabelId}>
             <span className="recall-card-status" aria-hidden="true" />
             <div className="recall-card-body">
-              <p className="recall-card-title recall-card-title--small">
+              <p id={completeLabelId} className="recall-card-title recall-card-title--small">
                 Pipeline complete {'\u00b7'} {ACCOUNT_NAME}
               </p>
               <p className="recall-card-meta">
