@@ -214,14 +214,12 @@ export function HeroBrief() {
                 return (
                   <li key={idx} className="hb-secondary-row">
                     <span className="hb-secondary-text">{row.text}</span>
-                    <span className="hb-secondary-sep" aria-hidden="true">{' '}</span>
                     <CitationButton
                       callId={row.callId}
                       citationLabel={`${row.displayDate} \u00b7 ${row.citationTimestamp}`}
-                      speaker={row.speakerName}
                       expanded={openKey === key}
                       onToggle={() => toggle(key)}
-                      ariaLabel={`Show surrounding transcript for ${row.text}`}
+                      ariaLabel={`Show surrounding transcript for ${row.text} (${row.speakerName}, ${row.displayDate})`}
                     />
                     {openKey === key && call && (
                       <InlineExpansion callId={row.callId} lineIdx={lineIdx} />
