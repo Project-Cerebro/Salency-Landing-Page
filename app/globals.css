@@ -1099,6 +1099,10 @@ html {
       0 1px 0 rgba(255,255,255,.04) inset,
       0 24px 60px -28px rgba(0,0,0,.5);
     overflow:hidden;
+    /* Cap the brief so it stops dwarfing the hero copy. All 6 blocks
+       remain reachable via internal scroll inside .hero-brief-body. */
+    max-height:640px;
+    display:flex;flex-direction:column;
   }
   .hero-brief-frame::before{
     content:"";position:absolute;
@@ -1106,6 +1110,7 @@ html {
     background:linear-gradient(90deg, var(--copper) 0%, var(--copper-a08) 30%, transparent 100%);
   }
   .hero-brief-head{
+    flex:0 0 auto;
     display:flex;flex-direction:column;gap:4px;
     margin-bottom:18px;padding-bottom:14px;
     border-bottom:1px solid var(--hair);
@@ -1122,8 +1127,24 @@ html {
     color:var(--ink-3);
   }
   .hero-brief-body{
+    flex:1 1 auto;
     display:flex;flex-direction:column;gap:18px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    /* gutter for the scrollbar without crowding content */
+    padding-right:6px;
+    margin-right:-6px;
+    /* fade out the bottom edge to hint there's more below */
+    -webkit-mask-image:linear-gradient(180deg, #000 0, #000 calc(100% - 36px), transparent 100%);
+            mask-image:linear-gradient(180deg, #000 0, #000 calc(100% - 36px), transparent 100%);
+    scrollbar-width:thin;
+    scrollbar-color:var(--copper-a30) transparent;
   }
+  .hero-brief-body::-webkit-scrollbar{width:6px;height:6px}
+  .hero-brief-body::-webkit-scrollbar-thumb{
+    background:var(--copper-a30);border-radius:3px;
+  }
+  .hero-brief-body::-webkit-scrollbar-track{background:transparent}
   .hb-block{
     padding:14px 0;border-top:1px solid var(--hair);
   }
