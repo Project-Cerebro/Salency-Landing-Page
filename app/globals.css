@@ -1290,6 +1290,15 @@ html {
   .hb-secondary-text{color:var(--ink-2)}
   .hb-secondary-sep{color:var(--ink-4);opacity:.6}
   .hb-secondary-meta{color:var(--ink-3)}
+  /* Commitment rows: meta (owner, due) gets mono treatment + right-aligned
+     so item title and meta read as two clean columns. */
+  .hb-secondary--commit .hb-secondary-row{justify-content:space-between}
+  .hb-commit-meta{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.04em;
+    color:var(--ink-3);
+    white-space:nowrap;
+  }
 
   /* Change-pair (Block 04) — dual-quote diff with copper divider. */
   .hb-change-pair{

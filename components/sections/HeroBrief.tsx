@@ -250,15 +250,16 @@ export function HeroBrief() {
                 )}
               </p>
             </div>
-            <ul className="hb-secondary">
+            <ul className="hb-secondary hb-secondary--commit">
               {commitments.secondary.map((c, idx) => (
                 <li key={idx} className="hb-secondary-row">
                   <span className="hb-secondary-text">{c.item}</span>
-                  <span className="hb-secondary-sep" aria-hidden="true">{' \u00b7 '}</span>
-                  <span className="hb-secondary-meta">
-                    {c.owner && `owner: ${c.owner}`}
-                    {c.owner && c.due && ', '}
-                    {c.due}
+                  <span className="hb-secondary-meta hb-commit-meta">
+                    {c.owner && <span>{c.owner}</span>}
+                    {c.owner && c.due && (
+                      <span className="hb-secondary-sep" aria-hidden="true">{' \u00b7 '}</span>
+                    )}
+                    {c.due && <span>{c.due}</span>}
                   </span>
                 </li>
               ))}
