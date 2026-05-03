@@ -1733,6 +1733,61 @@ html {
     text-transform:uppercase;
   }
 
+  /* ═══════════ HandoffExportStage ═══════════
+     2-col: copy left (~45%), code-fenced markdown viewer right (~55%).
+     No CTA on this stage (Q6=iv lock). Filename header + copy button.
+     Honesty boundary: visible copy uses human destinations only. */
+  .handoff-grid{
+    display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);
+    gap:32px;align-items:start;
+  }
+  @media (max-width: 900px){
+    .handoff-grid{grid-template-columns:1fr;gap:24px}
+  }
+  .handoff-head{margin-bottom:0}
+  .handoff-viewer{
+    background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--hair-2);
+    border-radius:12px;overflow:hidden;
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.5);
+  }
+  .handoff-viewer-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;padding:12px 16px;
+    background:rgba(255,255,255,.02);
+    border-bottom:1px solid var(--hair);
+  }
+  .handoff-viewer-name{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11.5px;letter-spacing:.04em;color:var(--ink-2);
+  }
+  .handoff-viewer-copy{
+    padding:6px 12px;
+    background:transparent;
+    border:1px solid var(--hair-2);border-radius:6px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--copper);cursor:pointer;
+    transition-property:border-color, background-color;
+    transition-duration:160ms;
+  }
+  .handoff-viewer-copy:hover{
+    border-color:var(--copper-a40);background:var(--copper-a08);
+  }
+  .handoff-viewer-copy:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;
+  }
+  .handoff-viewer-pre{
+    margin:0;padding:18px 20px;
+    overflow-x:auto;max-height:520px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:12.5px;line-height:1.65;color:var(--ink-2);
+  }
+  .handoff-viewer-code{
+    font:inherit;color:inherit;background:transparent;
+    white-space:pre;
+  }
+
   /* ═══════════ CTA ═══════════ */
   .cta-section{
     max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
