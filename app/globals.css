@@ -1300,14 +1300,30 @@ html {
     white-space:nowrap;
   }
 
-  /* Change-pair (Block 04) — dual-quote diff with copper divider. */
+  /* Change-pair (Block 04) — dual-quote diff with copper divider. The
+     "earlier" pair reads dimmer + smaller; the "now" pair reads at
+     hero-quote weight so chronology is visible without parsing dates. */
   .hb-change-pair{
-    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
     padding:6px 0;
   }
+  .hb-change-tag{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-3);
+    flex:0 0 auto;
+  }
+  .hb-change-pair--now .hb-change-tag{color:var(--copper)}
   .hb-change-quote{
     font-family:var(--font-display), 'Instrument Serif', serif;
     font-style:italic;font-size:13.5px;color:var(--ink-2);
+    flex:1 1 auto;min-width:0;
+  }
+  .hb-change-pair--earlier .hb-change-quote{
+    color:var(--ink-3);font-size:13px;
+  }
+  .hb-change-pair--now .hb-change-quote{
+    color:var(--ink);
   }
   .hb-change-divider{
     display:flex;align-items:center;gap:8px;

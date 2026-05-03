@@ -271,7 +271,8 @@ export function HeroBrief() {
             <h3 id="hb-block-changed" className="hb-block-eb">What{'\u2019'}s changed</h3>
             <div className="hb-hero">
               <p className="hb-hero-item">{changes.hero.topic}</p>
-              <div className="hb-change-pair">
+              <div className="hb-change-pair hb-change-pair--earlier">
+                <span className="hb-change-tag">Earlier</span>
                 <span className="hb-change-quote">{'\u201c'}{changes.hero.fromQuote}{'\u201d'}</span>
                 {changes.hero.fromCall && (
                   <CitationButton
@@ -292,7 +293,8 @@ export function HeroBrief() {
               <div className="hb-change-divider" aria-hidden="true">
                 <span>{'\u2195'} contradicts</span>
               </div>
-              <div className="hb-change-pair">
+              <div className="hb-change-pair hb-change-pair--now">
+                <span className="hb-change-tag">Now</span>
                 <span className="hb-change-quote">{'\u201c'}{changes.hero.toQuote}{'\u201d'}</span>
                 {changes.hero.toCall && (
                   <CitationButton
