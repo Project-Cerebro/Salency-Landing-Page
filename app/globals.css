@@ -1116,6 +1116,7 @@ html {
     border-bottom:1px solid var(--hair);
   }
   .hero-brief-eb{
+    margin:0;
     font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
     font-weight:500;font-size:15px;letter-spacing:-.005em;
     color:var(--ink);
@@ -2056,6 +2057,7 @@ html {
     display:flex;flex-direction:column;gap:4px;
   }
   .comparative-card-eb{
+    margin:0;
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:10.5px;font-weight:500;letter-spacing:.18em;
     text-transform:uppercase;color:var(--ink-3);

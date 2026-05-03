@@ -24,7 +24,7 @@ export function ComparativeStrip() {
       <div className="comparative-row">
         <article className="comparative-card">
           <header className="comparative-card-head">
-            <span className="comparative-card-eb">Notetaker</span>
+            <h3 className="comparative-card-eb">Notetaker</h3>
             <span className="comparative-card-name">Gong, Fireflies, Otter</span>
           </header>
           <p className="comparative-card-copy">
@@ -35,7 +35,7 @@ export function ComparativeStrip() {
 
         <article className="comparative-card">
           <header className="comparative-card-head">
-            <span className="comparative-card-eb">CRM</span>
+            <h3 className="comparative-card-eb">CRM</h3>
             <span className="comparative-card-name">Salesforce, HubSpot</span>
           </header>
           <p className="comparative-card-copy">
@@ -47,7 +47,7 @@ export function ComparativeStrip() {
 
         <article className="comparative-card comparative-card--salency">
           <header className="comparative-card-head">
-            <span className="comparative-card-eb">Salency</span>
+            <h3 className="comparative-card-eb">Salency</h3>
             <span className="comparative-card-name">Memory layer</span>
           </header>
           <p className="comparative-card-copy">
