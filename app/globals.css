@@ -1514,6 +1514,49 @@ html {
     .prob-resolve .link { white-space: normal; }
   }
 
+  /* ═══════════ ProvenanceCard ═══════════
+     Position 4 in the Path D-Hybrid composition. Single-row card with
+     Howard headshot left + first-person founder copy right. Subtle
+     copper-tint surface to differentiate from stages above and below. */
+  .provenance{
+    max-width:var(--page-max);margin:80px auto 0;padding:0 40px;
+  }
+  @media (max-width: 768px){
+    .provenance{margin-top:48px;padding:0 22px}
+  }
+  .provenance-card{
+    display:grid;grid-template-columns:auto 1fr;gap:28px;
+    align-items:center;
+    padding:28px 32px;
+    background:linear-gradient(135deg, var(--copper-a08) 0%, rgba(14,12,17,0) 60%);
+    border:1px solid var(--copper-a22);
+    border-radius:14px;
+  }
+  @media (max-width: 768px){
+    .provenance-card{
+      grid-template-columns:auto 1fr;gap:20px;padding:22px 20px;
+    }
+  }
+  .provenance-photo{
+    width:80px;height:80px;border-radius:999px;overflow:hidden;
+    border:1px solid var(--copper-a30);
+    flex-shrink:0;
+  }
+  .provenance-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .provenance-body{display:flex;flex-direction:column}
+  .provenance-copy{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:16px;line-height:1.6;color:var(--ink);
+    max-width:64ch;
+  }
+  .provenance-copy em{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;color:var(--copper);font-weight:400;
+  }
+
   /* ═══════════ CTA ═══════════ */
   .cta-section{
     max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
