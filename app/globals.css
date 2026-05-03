@@ -217,12 +217,8 @@ html {
   }
   /* Edge cases that don't use the canonical dash: the hub-head
      breadcrumb (inherits smaller font + no decoration from parent);
-     the CTA card (centered layout, decoration would offset text);
-     the NOT-strip dim header label (uses its own muted treatment);
      the mem-cta (centered block eyebrow above the final CTA). */
   .hub-head .eb::before,
-  .cta-card .eb::before,
-  .notdo-card .header .eb::before,
   .mem-cta .eb::before{content:none}
 
   /* Canonical em accent — display headings and body copy inside any
@@ -1077,18 +1073,346 @@ html {
     max-width:var(--page-max);margin:0 auto;
     border-top:1px solid var(--hair);
   }
+
+  /* ═══════════ HeroBrief — dominant Day-1 Brief artifact ═══════════
+     Replaces the 3-card HeroArtifact in the / hero (Path D-Hybrid).
+     6 blocks (4 above-fold, 2 below-fold). Inline citation expansion
+     pulls 2-3 surrounding sentences from arc.ts. "See full transcript"
+     opens TranscriptSnippetModal. Below-fold blocks (.hb-block--below)
+     hide on mobile; secondary lists hide on mobile per spec section
+     "Mobile (<768px)". Reduced motion: no entrance animations, instant
+     inline expansion (handled by absence of any transition rules). */
+  .hero-brief{
+    margin-top:48px;
+    perspective:1200px;
+  }
+  @media (min-width: 1024px){
+    .hero-brief{margin-top:0}
+  }
+  .hero-brief-frame{
+    position:relative;
+    background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--hair-2);
+    border-radius:14px;
+    padding:24px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.04) inset,
+      0 24px 60px -28px rgba(0,0,0,.5);
+    overflow:hidden;
+    /* Cap the brief so it stops dwarfing the hero copy. All 6 blocks
+       remain reachable via internal scroll inside .hero-brief-body. */
+    max-height:640px;
+    display:flex;flex-direction:column;
+  }
+  .hero-brief-frame::before{
+    content:"";position:absolute;
+    top:0;left:24px;right:24px;height:1px;
+    background:linear-gradient(90deg, var(--copper) 0%, var(--copper-a08) 30%, transparent 100%);
+  }
+  .hero-brief-head{
+    flex:0 0 auto;
+    display:flex;flex-direction:column;gap:4px;
+    margin-bottom:18px;padding-bottom:14px;
+    border-bottom:1px solid var(--hair);
+  }
+  .hero-brief-eb{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:15px;letter-spacing:-.005em;
+    color:var(--ink);
+  }
+  .hero-brief-meta{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;font-size:13px;
+    color:var(--ink-3);
+  }
+  .hero-brief-body{
+    flex:1 1 auto;
+    display:flex;flex-direction:column;gap:18px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    /* gutter for the scrollbar without crowding content */
+    padding-right:6px;
+    margin-right:-6px;
+    /* fade out the bottom edge to hint there's more below */
+    -webkit-mask-image:linear-gradient(180deg, #000 0, #000 calc(100% - 36px), transparent 100%);
+            mask-image:linear-gradient(180deg, #000 0, #000 calc(100% - 36px), transparent 100%);
+    scrollbar-width:thin;
+    scrollbar-color:var(--copper-a30) transparent;
+  }
+  .hero-brief-body::-webkit-scrollbar{width:6px;height:6px}
+  .hero-brief-body::-webkit-scrollbar-thumb{
+    background:var(--copper-a30);border-radius:3px;
+  }
+  .hero-brief-body::-webkit-scrollbar-track{background:transparent}
+  .hb-block{
+    padding:14px 0;border-top:1px solid var(--hair);
+  }
+  .hb-block:first-child{border-top:0;padding-top:4px}
+  .hb-block-eb{
+    margin:0 0 10px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
+  }
+  /* Hero item — the dominant verbatim quote / lead row in each block. */
+  .hb-hero{
+    display:flex;flex-direction:column;gap:6px;
+    margin-bottom:10px;
+  }
+  .hb-hero-row{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .hb-hero-name{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
+    font-size:14px;color:var(--ink);
+  }
+  .hb-hero-title{color:var(--ink-2);font-weight:400}
+  .hb-hero-sep{color:var(--ink-3);font-weight:400}
+  .hb-hero-quote{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;
+    font-size:15px;line-height:1.5;color:var(--ink);
+  }
+  .hb-hero-item{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
+    font-size:14.5px;color:var(--ink);line-height:1.45;
+  }
+  .hb-pill{
+    padding:2px 8px;border-radius:999px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;
+    border:1px solid var(--copper-a30);color:var(--copper);
+    background:var(--copper-a08);
+    white-space:nowrap;
+  }
+  .hb-pill[data-status="open"]{
+    border-color:var(--copper-a40);
+  }
+  .hb-meta-row{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:12.5px;color:var(--ink-3);
+  }
+
+  /* Citation pill — clickable, opens inline expansion. Tighter padding +
+     letter-spacing so secondary rows don't get pushed around. */
+  .hb-cite{
+    display:inline-flex;align-items:center;gap:0;
+    padding:2px 6px;
+    background:transparent;
+    border:1px solid var(--hair);
+    border-radius:3px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;letter-spacing:.04em;
+    color:var(--ink-3);
+    cursor:pointer;
+    transition-property:border-color, color, background-color;
+    transition-duration:160ms;
+    white-space:nowrap;
+  }
+  .hb-cite:hover{
+    border-color:var(--copper-a30);color:var(--ink);
+    background:var(--copper-a04);
+  }
+  .hb-cite[aria-expanded="true"]{
+    border-color:var(--copper-a40);color:var(--ink);
+    background:var(--copper-a08);
+  }
+  .hb-cite:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;
+  }
+  .hb-cite-speaker{color:var(--ink-2)}
+  .hb-cite-stamp{color:var(--copper)}
+  .hb-cite-sep{opacity:.55}
+
+  /* Inline expansion — surrounding 2-3 sentences pulled from arc.ts. */
+  .hb-expand{
+    margin-top:8px;
+    padding:12px 14px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-left:2px solid var(--copper);
+    border-radius:0 8px 8px 0;
+  }
+  .hb-expand-lines{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .hb-expand-line{
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:13px;line-height:1.55;color:var(--ink-2);
+    font-feature-settings:'tnum';
+  }
+  .hb-expand-trigger{
+    margin-top:10px;
+    padding:0;
+    background:transparent;border:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;color:var(--copper);
+    cursor:pointer;
+  }
+  .hb-expand-trigger:hover{color:#FE9F5B}
+  .hb-expand-trigger:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;border-radius:2px;
+  }
+
+  /* Secondary list — compact rows under the hero item. */
+  .hb-secondary{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .hb-secondary-row{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:12.5px;color:var(--ink-2);
+    line-height:1.5;
+  }
+  .hb-secondary-row .hb-secondary-text{flex:1 1 auto;min-width:0}
+  .hb-secondary-row .hb-cite{flex:0 0 auto;align-self:center}
+  /* When an inline expansion is rendered inside a secondary row, force
+     the expansion to a new full-width line so the surrounding-context
+     box doesn't crowd the citation pill. */
+  .hb-secondary-row .hb-expand{
+    flex-basis:100%;margin-top:6px;
+  }
+  .hb-secondary-name{color:var(--ink);font-weight:500}
+  .hb-secondary-title{color:var(--ink-2);font-weight:400}
+  .hb-secondary-stance{
+    color:var(--ink-3);font-style:italic;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-size:12px;
+    margin-left:2px;
+  }
+  .hb-secondary-text{color:var(--ink-2)}
+  .hb-secondary-sep{color:var(--ink-4);opacity:.6}
+  .hb-secondary-meta{color:var(--ink-3)}
+  /* Commitment rows: meta (owner, due) gets mono treatment + right-aligned
+     so item title and meta read as two clean columns. */
+  .hb-secondary--commit .hb-secondary-row{justify-content:space-between}
+  .hb-commit-meta{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.04em;
+    color:var(--ink-3);
+    white-space:nowrap;
+  }
+
+  /* Change-pair (Block 04) — dual-quote diff with copper divider. The
+     "earlier" pair reads dimmer + smaller; the "now" pair reads at
+     hero-quote weight so chronology is visible without parsing dates. */
+  .hb-change-pair{
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+    padding:6px 0;
+  }
+  .hb-change-tag{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-3);
+    flex:0 0 auto;
+  }
+  .hb-change-pair--now .hb-change-tag{color:var(--copper)}
+  .hb-change-quote{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-size:13.5px;color:var(--ink-2);
+    flex:1 1 auto;min-width:0;
+  }
+  .hb-change-pair--earlier .hb-change-quote{
+    color:var(--ink-3);font-size:13px;
+  }
+  .hb-change-pair--now .hb-change-quote{
+    color:var(--ink);
+  }
+  .hb-change-divider{
+    display:flex;align-items:center;gap:8px;
+    margin:2px 0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--copper);
+  }
+  .hb-change-divider::before,
+  .hb-change-divider::after{
+    content:"";flex:0 0 12px;height:1px;background:var(--copper);
+  }
+  .hb-change-divider::after{flex:1}
+
+  /* Map block (Block 05) — pain → product matches. Hairline rows match
+     the rest of the brief's density rhythm rather than card chrome. */
+  .hb-map-list{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;
+  }
+  .hb-map-row{
+    display:flex;flex-direction:column;gap:3px;
+    padding:8px 0;
+    border-top:1px solid var(--hair);
+  }
+  .hb-map-row:first-child{border-top:0;padding-top:2px}
+  .hb-map-row-main{
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;
+    color:var(--ink);
+    display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+  }
+  .hb-map-product{font-weight:500;color:var(--copper)}
+  .hb-map-capability{color:var(--ink-2);font-style:italic;font-size:12.5px}
+  .hb-map-row-meta{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.04em;color:var(--ink-3);
+  }
+
+  /* Next block (Block 06) — milestone calendar. */
+  .hb-next-list{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .hb-next-row{
+    display:grid;grid-template-columns:80px 1fr;gap:12px;
+    align-items:baseline;
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;
+    color:var(--ink-2);
+  }
+  .hb-next-date{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;color:var(--copper);
+  }
+  .hb-next-text{color:var(--ink)}
+
+  /* Mobile <768px — hide secondary lists + below-fold blocks per spec.
+     Hero items still render; tap on citation still expands inline. */
+  @media (max-width: 768px){
+    .hero-brief .hb-secondary{display:none}
+    .hero-brief .hb-block--below{display:none}
+  }
+  /* Reduced motion: kill the hb-cite hover transition. Inline expansion
+     is already instant (no transition rules on .hb-expand). */
+  @media (prefers-reduced-motion: reduce){
+    .hero-brief .hb-cite{transition-duration:0ms}
+  }
+
   .h1{
     font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
     font-weight:500;
-    font-size:clamp(40px,5.6vw,72px);
+    font-size:clamp(36px,4.6vw,60px);
     line-height:1.08;
     letter-spacing:-.025em;
-    margin:0;max-width:22ch;color:var(--ink);
+    margin:0;max-width:24ch;color:var(--ink);
     text-wrap:balance;
     text-align:left;
   }
   .h1 em{font-style:normal;font-weight:inherit;color:var(--copper)}
   .h1 .soft{color:var(--ink-3)}
+  /* Path D-Hybrid hero — italic em accent on the second sentence
+     ("So every rep walks in briefed"), Instrument Serif copper.
+     Renders on its own visual block so the locked H1 reads as two
+     beats without orphaning the italic. */
+  .h1 .h1-italic{
+    display:block;margin-top:.15em;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;color:var(--copper);
+    letter-spacing:-.02em;
+  }
 
   .hero .sub{
     margin:28px 0 0;max-width:58ch;
@@ -1248,198 +1572,551 @@ html {
     .prob-resolve .link { white-space: normal; }
   }
 
-  /* ═══════════ CTA ═══════════ */
-  .cta-section{
+  /* ═══════════ ProvenanceCard ═══════════
+     Position 4 in the Path D-Hybrid composition. Single-row card with
+     Howard headshot left + first-person founder copy right. Subtle
+     copper-tint surface to differentiate from stages above and below. */
+  .provenance{
+    max-width:var(--page-max);margin:80px auto 0;padding:0 40px;
+  }
+  @media (max-width: 768px){
+    .provenance{margin-top:48px;padding:0 22px}
+  }
+  .provenance-card{
+    display:grid;grid-template-columns:auto 1fr;gap:28px;
+    align-items:center;
+    padding:28px 32px;
+    background:linear-gradient(135deg, var(--copper-a08) 0%, rgba(14,12,17,0) 60%);
+    border:1px solid var(--copper-a22);
+    border-radius:14px;
+  }
+  @media (max-width: 768px){
+    .provenance-card{
+      grid-template-columns:auto 1fr;gap:20px;padding:22px 20px;
+    }
+  }
+  .provenance-photo{
+    width:80px;height:80px;border-radius:999px;overflow:hidden;
+    border:1px solid var(--copper-a30);
+    flex-shrink:0;
+  }
+  .provenance-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .provenance-body{display:flex;flex-direction:column}
+  .provenance-copy{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:16px;line-height:1.6;color:var(--ink);
+    max-width:64ch;
+  }
+  .provenance-copy em{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;color:var(--copper);font-weight:400;
+  }
+
+  /* ═══════════ Stage primitives (Map / HandoffExport / Recall) ═══════════
+     Shared head + foot for the 3 abbreviated stage walks below the
+     ProvenanceCard. Each stage uses these chrome tokens so the rhythm
+     stays consistent. .map-stage / .handoff-stage / .recall-stage carry
+     stage-specific layout variations. */
+  .map-stage,
+  .handoff-stage,
+  .recall-stage{
+    max-width:var(--page-max);margin:96px auto 0;padding:0 40px;
+  }
+  @media (max-width: 768px){
+    .map-stage,
+    .handoff-stage,
+    .recall-stage{margin-top:64px;padding:0 22px}
+  }
+  .stage-head{
+    display:flex;flex-direction:column;gap:14px;
+    margin-bottom:36px;max-width:64ch;
+  }
+  .stage-h2{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:clamp(28px,3.6vw,40px);
+    line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+  }
+  .stage-h2 em{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;color:var(--copper);
+  }
+  .stage-lede{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:17px;line-height:1.55;color:var(--ink-2);
+  }
+  .stage-foot{
+    margin-top:28px;
+    display:flex;justify-content:flex-start;
+  }
+  .stage-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:0;background:transparent;border:0;cursor:pointer;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:12px;letter-spacing:.06em;color:var(--copper);
+  }
+  .stage-cta:hover{color:#FE9F5B}
+  .stage-cta:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:4px;border-radius:2px;
+  }
+
+  /* ═══════════ MapStage ═══════════
+     Pain → product mapping demo. 2-col grid: pains left (~45%), matched
+     products right (~55%). Hover/focus pain → swap. Mobile: pain pills
+     become horizontal scroll-snap. ARIA tablist + arrow-key nav. */
+  .map-grid{
+    display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);
+    gap:32px;align-items:start;
+  }
+  @media (max-width: 900px){
+    .map-grid{grid-template-columns:1fr;gap:20px}
+  }
+  .map-pains{
+    display:flex;flex-direction:column;gap:8px;
+  }
+  @media (max-width: 900px){
+    .map-pains{
+      flex-direction:row;flex-wrap:nowrap;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      gap:10px;padding-bottom:10px;
+      margin-right:-22px;padding-right:22px;
+    }
+    .map-pain{flex:0 0 78%;scroll-snap-align:start}
+  }
+  .map-pain{
+    display:flex;flex-direction:column;gap:6px;
+    text-align:left;
+    padding:14px 16px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-left:2px solid transparent;
+    border-radius:8px;
+    color:inherit;font:inherit;cursor:pointer;
+    transition-property:border-color, background-color;
+    transition-duration:160ms;
+  }
+  .map-pain:hover{
+    border-color:var(--copper-a30);
+    background:rgba(255,255,255,.03);
+  }
+  .map-pain:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;
+  }
+  .map-pain.is-active{
+    border-color:var(--copper-a40);
+    border-left-color:var(--copper);
+    background:var(--copper-a04);
+  }
+  .map-pain-text{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;
+    font-size:14px;line-height:1.45;color:var(--ink);
+  }
+  .map-pain-cite{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+
+  .map-matches{
+    position:relative;min-height:280px;
+  }
+  .map-panel{
+    opacity:0;
+    transition-property:opacity;
+    transition-duration:150ms;
+  }
+  .map-panel.is-active{opacity:1}
+  @media (prefers-reduced-motion: reduce){
+    .map-panel{transition-duration:0ms}
+  }
+  .map-match-list{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .map-match{
+    padding:16px 18px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:10px;
+  }
+  .map-match[data-role="primary"]{
+    border-color:var(--copper);
+    background:var(--copper-a04);
+  }
+  .map-match-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;margin-bottom:4px;
+  }
+  .map-match-name{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:18px;color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  .map-match[data-role="primary"] .map-match-name{color:var(--copper)}
+  .map-match-role{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .map-match[data-role="primary"] .map-match-role{color:var(--copper)}
+  .map-match-cap{
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-style:italic;font-size:13px;color:var(--ink-2);
+    margin-bottom:10px;
+  }
+  .map-match-bar{
+    width:100%;height:4px;border-radius:999px;
+    background:var(--hair);overflow:hidden;
+  }
+  .map-match-bar-fill{
+    height:100%;background:var(--copper);
+    transition-property:width;transition-duration:200ms;
+  }
+  .map-match[data-role="secondary"] .map-match-bar-fill{
+    background:var(--copper-a60);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .map-match-bar-fill{transition-duration:0ms}
+  }
+  .map-match-score{
+    margin-top:6px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+
+  /* ═══════════ HandoffExportStage ═══════════
+     2-col: copy left (~45%), code-fenced markdown viewer right (~55%).
+     No CTA on this stage (Q6=iv lock). Filename header + copy button.
+     Honesty boundary: visible copy uses human destinations only. */
+  .handoff-grid{
+    display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);
+    gap:32px;align-items:start;
+  }
+  @media (max-width: 900px){
+    .handoff-grid{grid-template-columns:1fr;gap:24px}
+  }
+  .handoff-head{margin-bottom:0}
+  .handoff-viewer{
+    background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--hair-2);
+    border-radius:12px;overflow:hidden;
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.5);
+  }
+  .handoff-viewer-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;padding:12px 16px;
+    background:rgba(255,255,255,.02);
+    border-bottom:1px solid var(--hair);
+  }
+  .handoff-viewer-name{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11.5px;letter-spacing:.04em;color:var(--ink-2);
+  }
+  .handoff-viewer-copy{
+    padding:6px 12px;
+    background:transparent;
+    border:1px solid var(--hair-2);border-radius:6px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--copper);cursor:pointer;
+    transition-property:border-color, background-color;
+    transition-duration:160ms;
+  }
+  .handoff-viewer-copy:hover{
+    border-color:var(--copper-a40);background:var(--copper-a08);
+  }
+  .handoff-viewer-copy:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;
+  }
+  .handoff-viewer-pre{
+    margin:0;padding:18px 20px;
+    overflow-x:auto;max-height:520px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:12.5px;line-height:1.65;color:var(--ink-2);
+  }
+  .handoff-viewer-code{
+    font:inherit;color:inherit;background:transparent;
+    white-space:pre;
+  }
+
+  /* ═══════════ RecallStage ═══════════
+     Contradiction notification + pipeline-complete ping. Click to expand
+     diff inline; "See full transcript" opens the modal with contradicts
+     payload. Both quotes are verbatim from arc.ts. */
+  .recall-grid{
+    display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);
+    gap:32px;align-items:start;
+  }
+  @media (max-width: 900px){
+    .recall-grid{grid-template-columns:1fr;gap:24px}
+  }
+  .recall-head{margin-bottom:0}
+  .recall-stream{
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .recall-stream-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 4px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .recall-stream-dot{
+    width:8px;height:8px;border-radius:999px;
+    background:var(--copper);
+    box-shadow:0 0 0 4px var(--copper-a18);
+  }
+  .recall-card{
+    background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--hair-2);
+    border-radius:12px;
+    padding:18px 20px;
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.5);
+  }
+  .recall-card--contradiction{
+    border-color:var(--copper-a40);
+    border-left:3px solid var(--copper);
+  }
+  .recall-card-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;margin-bottom:10px;
+  }
+  .recall-card-eb{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
+  }
+  .recall-card-pill{
+    padding:2px 8px;border-radius:999px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--copper);
+    border:1px solid var(--copper-a40);
+    background:var(--copper-a08);
+  }
+  .recall-card-title{
+    margin:0 0 14px;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
+    font-size:15.5px;color:var(--ink);
+  }
+  .recall-card-title--small{
+    font-size:14px;margin-bottom:2px;
+  }
+  .recall-pair{
+    display:flex;flex-direction:column;gap:0;
+    padding:12px 14px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:8px;
+  }
+  .recall-pair-quote{padding:10px 0}
+  .recall-pair-text{
+    margin:0 0 6px;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-size:14.5px;line-height:1.5;
+    color:var(--ink);
+  }
+  .recall-pair-cite{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+  .recall-pair-divider{
+    display:flex;align-items:center;gap:8px;
+    padding:6px 0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--copper);
+  }
+  .recall-pair-divider::before,
+  .recall-pair-divider::after{
+    content:"";flex:0 0 16px;height:1px;background:var(--copper);
+  }
+  .recall-pair-divider::after{flex:1}
+
+  .recall-diff{
+    margin-top:12px;padding:12px 14px;
+    background:var(--copper-a04);
+    border:1px solid var(--copper-a30);border-left:2px solid var(--copper);
+    border-radius:0 8px 8px 0;
+  }
+  .recall-diff-eb{
+    margin:0 0 6px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--copper);
+  }
+  .recall-diff-text{
+    margin:0 0 4px;
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:14px;
+    color:var(--ink);
+  }
+  .recall-diff-from{
+    text-decoration:line-through;color:var(--ink-3);
+  }
+  .recall-diff-to{color:var(--copper);font-weight:500}
+  .recall-diff-meta{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+  }
+
+  .recall-card-actions{
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    margin-top:14px;
+  }
+  .recall-card-toggle,
+  .recall-card-link{
+    background:transparent;border:0;padding:0;cursor:pointer;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;
+  }
+  .recall-card-toggle{color:var(--ink-2)}
+  .recall-card-toggle:hover{color:var(--ink)}
+  .recall-card-link{color:var(--copper)}
+  .recall-card-link:hover{color:#FE9F5B}
+  .recall-card-toggle:focus-visible,
+  .recall-card-link:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;border-radius:2px;
+  }
+
+  .recall-card--complete{
+    display:flex;align-items:center;gap:14px;
+    padding:14px 18px;
+  }
+  .recall-card-status{
+    width:8px;height:8px;border-radius:999px;
+    background:var(--copper);flex-shrink:0;
+    box-shadow:0 0 0 4px var(--copper-a18);
+  }
+  .recall-card-body{display:flex;flex-direction:column;gap:2px}
+  .recall-card-meta{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+
+  /* ═══════════ ComparativeStrip ═══════════
+     3-card row at position 7. Salency card highlighted with copper border
+     and tint. Replaces NotDoSection. No Attio card (Q13=d). Currency for
+     Gong/Salesforce/HubSpot framings checked against company-context §9. */
+  .comparative{
+    max-width:var(--page-max);margin:96px auto 0;padding:0 40px;
+  }
+  @media (max-width: 768px){
+    .comparative{margin-top:64px;padding:0 22px}
+  }
+  .comparative-head{
+    display:flex;flex-direction:column;gap:10px;
+    margin-bottom:36px;max-width:64ch;
+  }
+  .comparative-h2{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:clamp(28px,3.6vw,40px);
+    line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+  }
+  .comparative-h2 em{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;color:var(--copper);
+  }
+  .comparative-sub{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;font-size:18px;color:var(--ink-2);
+  }
+  .comparative-row{
+    display:grid;grid-template-columns:repeat(3, 1fr);gap:18px;
+  }
+  @media (max-width: 900px){
+    .comparative-row{grid-template-columns:1fr;gap:14px}
+  }
+  .comparative-card{
+    padding:24px 22px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:12px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .comparative-card--salency{
+    border:1px solid var(--copper);
+    background:linear-gradient(180deg, var(--copper-a08) 0%, var(--copper-a04) 100%);
+    box-shadow:0 24px 60px -28px rgba(254,133,49,.18);
+  }
+  .comparative-card-head{
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .comparative-card-eb{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-3);
+  }
+  .comparative-card--salency .comparative-card-eb{color:var(--copper)}
+  .comparative-card-name{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:20px;color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  .comparative-card-copy{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:14.5px;line-height:1.6;color:var(--ink-2);
+  }
+  .comparative-card--salency .comparative-card-copy{color:var(--ink)}
+
+  /* ═══════════ BottomClaim ═══════════
+     Final CTA. Replaces CtaSection. Centered, max-width ~58ch. Italic
+     Instrument Serif quote (verbatim §3 wound metaphor), plain follow-up,
+     mono signoff, primary CTA. */
+  .bottom-claim{
     max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
   }
-  @media (max-width: 768px) {
-    .cta-section { margin-top: 80px; padding: 0 22px 64px; }
+  @media (max-width: 768px){
+    .bottom-claim{margin-top:80px;padding:0 22px 64px}
   }
-  .cta-card{
-    position:relative;overflow:hidden;
-    background:linear-gradient(135deg, #1A171E 0%, #121015 100%);
-    border:1px solid var(--hair-2);border-radius:20px;
-    padding:72px 56px;text-align:center;
+  .bottom-claim-card{
+    max-width:58ch;margin:0 auto;
+    text-align:center;
+    display:flex;flex-direction:column;gap:20px;align-items:center;
   }
-  @media (max-width: 768px) {
-    .cta-card { padding: 40px 24px; border-radius: 14px; }
+  .bottom-claim-quote{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;
+    font-size:clamp(24px,3vw,34px);line-height:1.3;
+    color:var(--ink);text-wrap:balance;
   }
-  .cta-card::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:
-      radial-gradient(circle at 15% 20%, var(--copper-a18) 0%, transparent 40%),
-      radial-gradient(circle at 85% 80%, rgba(209,60,19,.14) 0%, transparent 40%);
+  .bottom-claim-followup{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:400;
+    font-size:18px;line-height:1.5;color:var(--ink-2);
   }
-  .cta-card::after{
-    content:"";position:absolute;top:-1px;left:20%;right:20%;height:1px;
-    background:linear-gradient(90deg, transparent 0%, var(--copper) 50%, transparent 100%);
+  .bottom-claim-signoff{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
   }
-  .cta-card > *{position:relative;z-index:1}
-  /* CTA card is centered — override global inline-flex back to block
-     so the eyebrow sits on its own centered line. */
-  .cta-card .eb{display:block;margin-bottom:20px}
-  .cta-card h2{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
-    margin:0 auto;max-width:20ch;color:var(--ink);text-wrap:balance;
-  }
-  .cta-card .sub{
-    margin:24px auto 0;max-width:52ch;font-size:17px;line-height:1.55;color:var(--ink-2);font-weight:300;
-  }
-  .cta-card .btns{margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .cta-card .btn{padding:14px 24px;font-size:15px}
-  .cta-card .fine{
-    margin-top:20px;font-family:'Geist Mono',monospace;font-size:11px;
-    letter-spacing:.08em;color:var(--ink-3);
-  }
+  .bottom-claim-cta{margin-top:8px}
+  .bottom-claim-cta .btn{padding:14px 28px;font-size:15px}
 
-  /* ═══════════ How it works (Extract · Map · Remember) ═══════════ */
-  .how{max-width:var(--page-max);margin:140px auto 0;padding:0 40px}
-  @media (max-width: 768px) {
-    .how { margin-top: 80px; padding: 0 22px; }
-  }
-  .how-head{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;margin-bottom:56px}
-  .how-head .eb{margin-bottom:18px;display:flex}
-  .how-head h2{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
-    margin:0;color:var(--ink);max-width:16ch;text-wrap:balance;
-  }
-  /* .how-head mobile: 2-col headline+lede stacks, same treatment as
-     .prob-head per PR #71. */
-  @media (max-width: 768px) {
-    .how-head {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-bottom: 40px;
-      align-items: start;
-    }
-  }
-  .how-head .lede{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:19px;line-height:1.55;
-    color:var(--ink-2);max-width:42ch;
-  }
-  .how-head .lede em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-size:20px;font-weight:400}
-  .how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hair-2)}
-  .how-step{padding:36px 32px 36px 0;border-right:1px solid var(--hair);position:relative;display:flex;flex-direction:column}
-  .how-step:nth-child(n+2){padding-left:32px}
-  .how-step:last-child{border-right:0}
-  /* Between-step arrow: decoration, not a keyword — ink ramp. */
-  .how-step:not(:last-child)::before{
-    content:"→";position:absolute;right:-10px;top:34px;
-    width:20px;height:20px;display:flex;align-items:center;justify-content:center;
-    background:var(--bg);color:var(--ink-3);font-size:14px;font-weight:400;
-    font-family:'Geist Mono',monospace;z-index:1;
-  }
-  /* Step label — caption, not a keyword. */
-  .how-step .idx{
-    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
-    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
-    display:flex;align-items:center;gap:10px;margin-bottom:18px;
-  }
-  .how-step .idx::after{content:"";flex:1;height:1px;background:var(--hair)}
-  .how-step .how-step-action{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(22px, 2.4vw, 28px);
-    line-height:1.15;letter-spacing:-.015em;color:var(--ink);margin:0 0 14px;
-  }
-  .how-step .desc{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
-    line-height:1.65;color:var(--ink-2);margin:0 0 22px;max-width:34ch;
-  }
-  /* Example callout — a tinted surface is chrome. Use the ink/hair ramp
-     so the copper em in the verb above stays the only page-accent in
-     each step. */
-  .how-step .ex{
-    margin-top:auto;
-    padding:14px 16px;background:rgba(255,255,255,.02);
-    border:1px solid var(--hair-2);border-radius:8px;
-  }
-  .how-step .ex .example-label{
-    font-family:'Geist Mono',monospace;font-size:9.5px;font-weight:500;
-    letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;
-  }
-  .how-step .ex .example-quote{
-    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;line-height:1.45;color:var(--ink-2);
-  }
-  .how-step .ex .example-quote strong{color:var(--ink);font-weight:500}
-  /* Mobile: stack the 3 steps vertically. The horizontal arrows don't
-     translate to a vertical flow, so hide them; horizontal dividers
-     between stacked steps replace the vertical borders. */
-  @media (max-width: 768px) {
-    .how-steps { grid-template-columns: 1fr; }
-    .how-step {
-      padding: 32px 0;
-      border-right: 0;
-      border-bottom: 1px solid var(--hair);
-    }
-    .how-step:nth-child(n+2) { padding-left: 0; }
-    .how-step:last-child { border-bottom: 0; padding-bottom: 8px; }
-    .how-step:not(:last-child)::before { display: none; }
-    .how-step .desc { max-width: none; }
-  }
-  .how-foot{
-    margin-top:28px;padding:18px 24px;
-    display:flex;justify-content:space-between;align-items:center;gap:24px;
-    border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
-    font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--ink-3);letter-spacing:.04em;
-  }
-  .how-foot em{font-style:normal;color:var(--ink);font-weight:500}
-  .how-foot .sep{color:var(--ink-4);margin:0 6px}
-
-  /* ═══════════ NOT strip ═══════════ */
-  .notdo{max-width:var(--page-max);margin:56px auto 0;padding:0 40px}
-  @media (max-width: 768px) {
-    .notdo { margin-top: 40px; padding: 0 22px; }
-  }
-  .notdo-card{
-    background:#121015;border:1px solid var(--hair-2);border-radius:14px;
-    padding:32px 40px;
-    display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;
-  }
-  .notdo-card .header{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:26px;
-    line-height:1.2;letter-spacing:-.015em;color:var(--ink);max-width:10ch;
-  }
-  /* Dim variant: muted ink color, slightly wider tracking, no dash.
-     ::before suppression lives alongside hub/cta in the top-level
-     reset rule. */
-  .notdo-card .header .eb{
-    display:block;font-size:10.5px;letter-spacing:.2em;
-    color:var(--ink-3);margin-bottom:10px;
-  }
-  .notdo-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px}
-  .notdo-item{
-    display:grid;grid-template-columns:24px 1fr;column-gap:12px;row-gap:4px;
-    align-items:start;
-    padding:8px 0;border-bottom:1px dashed var(--hair);
-  }
-  .notdo-item:last-child{border-bottom:0}
-  .notdo-item--span{grid-column:1 / -1}
-  .notdo-item .x,
-  .notdo-item .check{
-    font-family:'Geist Mono',monospace;font-size:20px;line-height:1.2;
-    font-weight:500;text-align:center;
-    grid-column:1;
-  }
-  /* .check is a positive list marker. Brightness differentiates it
-     from the rust .x; the copper accent is reserved for keywords. */
-  .notdo-item .x{color:var(--rust)}
-  .notdo-item .check{color:var(--ink)}
-  .notdo-item .title{font-size:14.5px;color:var(--ink);font-weight:400;line-height:1.4;grid-column:2}
-  .notdo-item .subtitle{font-size:13px;color:var(--ink-3);line-height:1.5;grid-column:2}
-
-  /* "NOT strip" mobile: card header stacks above the 2-col item list,
-     and the item list itself collapses to one column. */
-  @media (max-width: 768px) {
-    .notdo-card {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      padding: 24px 22px;
-    }
-    .notdo-card .header { max-width: none; }
-    .notdo-list { grid-template-columns: 1fr; gap: 14px; }
-  }
+  /* (Removed 2026-05-02 in PR 2 of Path D-Hybrid: orphaned styles for
+     CtaSection (.cta-section, .cta-card and children), HowItWorksSection
+     (.how, .how-head, .how-steps, .how-step, .how-foot and children), and
+     NotDoSection (.notdo, .notdo-card, .notdo-list, .notdo-item and
+     children). All three sections were deleted from the homepage when
+     ProvenanceCard / MapStage / HandoffExportStage / RecallStage /
+     ComparativeStrip / BottomClaim replaced them. Verified zero JSX
+     consumers before removal. */
 
   /* ═══════════ Notetaker comparison table ═══════════ */
   .notetaker{max-width:var(--page-max);margin:140px auto 0;padding:0 40px}
