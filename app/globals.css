@@ -1788,6 +1788,165 @@ html {
     white-space:pre;
   }
 
+  /* ═══════════ RecallStage ═══════════
+     Contradiction notification + pipeline-complete ping. Click to expand
+     diff inline; "See full transcript" opens the modal with contradicts
+     payload. Both quotes are verbatim from arc.ts. */
+  .recall-grid{
+    display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);
+    gap:32px;align-items:start;
+  }
+  @media (max-width: 900px){
+    .recall-grid{grid-template-columns:1fr;gap:24px}
+  }
+  .recall-head{margin-bottom:0}
+  .recall-stream{
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .recall-stream-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 4px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .recall-stream-dot{
+    width:8px;height:8px;border-radius:999px;
+    background:var(--copper);
+    box-shadow:0 0 0 4px var(--copper-a18);
+  }
+  .recall-card{
+    background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--hair-2);
+    border-radius:12px;
+    padding:18px 20px;
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.5);
+  }
+  .recall-card--contradiction{
+    border-color:var(--copper-a40);
+    border-left:3px solid var(--copper);
+  }
+  .recall-card-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;margin-bottom:10px;
+  }
+  .recall-card-eb{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
+  }
+  .recall-card-pill{
+    padding:2px 8px;border-radius:999px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--copper);
+    border:1px solid var(--copper-a40);
+    background:var(--copper-a08);
+  }
+  .recall-card-title{
+    margin:0 0 14px;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
+    font-size:15.5px;color:var(--ink);
+  }
+  .recall-card-title--small{
+    font-size:14px;margin-bottom:2px;
+  }
+  .recall-pair{
+    display:flex;flex-direction:column;gap:0;
+    padding:12px 14px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:8px;
+  }
+  .recall-pair-quote{padding:10px 0}
+  .recall-pair-text{
+    margin:0 0 6px;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-size:14.5px;line-height:1.5;
+    color:var(--ink);
+  }
+  .recall-pair-cite{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+  .recall-pair-divider{
+    display:flex;align-items:center;gap:8px;
+    padding:6px 0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--copper);
+  }
+  .recall-pair-divider::before,
+  .recall-pair-divider::after{
+    content:"";flex:0 0 16px;height:1px;background:var(--copper);
+  }
+  .recall-pair-divider::after{flex:1}
+
+  .recall-diff{
+    margin-top:12px;padding:12px 14px;
+    background:var(--copper-a04);
+    border:1px solid var(--copper-a30);border-left:2px solid var(--copper);
+    border-radius:0 8px 8px 0;
+  }
+  .recall-diff-eb{
+    margin:0 0 6px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--copper);
+  }
+  .recall-diff-text{
+    margin:0 0 4px;
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:14px;
+    color:var(--ink);
+  }
+  .recall-diff-from{
+    text-decoration:line-through;color:var(--ink-3);
+  }
+  .recall-diff-to{color:var(--copper);font-weight:500}
+  .recall-diff-meta{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+  }
+
+  .recall-card-actions{
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    margin-top:14px;
+  }
+  .recall-card-toggle,
+  .recall-card-link{
+    background:transparent;border:0;padding:0;cursor:pointer;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;
+  }
+  .recall-card-toggle{color:var(--ink-2)}
+  .recall-card-toggle:hover{color:var(--ink)}
+  .recall-card-link{color:var(--copper)}
+  .recall-card-link:hover{color:#FE9F5B}
+  .recall-card-toggle:focus-visible,
+  .recall-card-link:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;border-radius:2px;
+  }
+
+  .recall-card--complete{
+    display:flex;align-items:center;gap:14px;
+    padding:14px 18px;
+  }
+  .recall-card-status{
+    width:8px;height:8px;border-radius:999px;
+    background:var(--copper);flex-shrink:0;
+    box-shadow:0 0 0 4px var(--copper-a18);
+  }
+  .recall-card-body{display:flex;flex-direction:column;gap:2px}
+  .recall-card-meta{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+
   /* ═══════════ CTA ═══════════ */
   .cta-section{
     max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
