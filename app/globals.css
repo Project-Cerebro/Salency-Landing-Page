@@ -1280,10 +1280,15 @@ html {
     flex-basis:100%;margin-top:6px;
   }
   .hb-secondary-name{color:var(--ink);font-weight:500}
-  .hb-secondary-title{color:var(--ink-2)}
-  .hb-secondary-stance{color:var(--ink-3);font-style:italic}
+  .hb-secondary-title{color:var(--ink-2);font-weight:400}
+  .hb-secondary-stance{
+    color:var(--ink-3);font-style:italic;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-size:12px;
+    margin-left:2px;
+  }
   .hb-secondary-text{color:var(--ink-2)}
-  .hb-secondary-sep{color:var(--ink-4)}
+  .hb-secondary-sep{color:var(--ink-4);opacity:.6}
   .hb-secondary-meta{color:var(--ink-3)}
 
   /* Change-pair (Block 04) — dual-quote diff with copper divider. */
