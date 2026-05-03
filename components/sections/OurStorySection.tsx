@@ -55,9 +55,9 @@ export function OurStorySection() {
               First onboarding call for a new web3 game-studio customer at
               Sequence. By minute 15 the customer had said some version of{' '}
               <em>&ldquo;I already told your colleague this&rdquo;</em> three
-              times. The rep who closed the deal was two desks away. Nobody
-              had asked him to do a handover. The CRM had a stage field and a
-              one-line note.
+              times. The rep who closed the deal was one Slack message away.
+              Nobody had asked him to do a handover. The CRM had a stage field
+              and a one-line note.
             </p>
             <p>
               Howard had stopped thinking of that as a behavior problem months
