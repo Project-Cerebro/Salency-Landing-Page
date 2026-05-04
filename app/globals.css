@@ -4011,11 +4011,13 @@ header button:focus:not(:focus-visible){
   }
   .mem-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     border: 1px solid var(--hair-2);
     border-radius: 12px;
-    overflow: hidden;
+    overflow: visible;
     background: rgba(255, 255, 255, 0.02);
+    position: relative;
 
     thead th {
       text-align: left;
@@ -4047,6 +4049,51 @@ header button:focus:not(:focus-visible){
     td:nth-child(2) { color: var(--ink-3); width: 39%; }
     td:nth-child(3) { color: var(--ink); width: 39%; }
   }
+
+  /* Copper-glow column treatment for the "In Salency" column on the CRM
+     compare table. Mirrors ComparativeStrip's highlighted-card visual
+     language: copper left/right border rails, copper-tint fill, copper
+     header text + slightly stronger top border, top/bottom rounded
+     corners on the column ends. The faint copper drop-shadow lives on
+     the wrapping .mem-compare-col-glow pseudo-anchor for layered fall-off. */
+  .mem-table th.salency-col,
+  .mem-table td.salency-col {
+    border-left: 1px solid var(--copper-a30);
+    border-right: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.04);
+    color: var(--ink);
+  }
+  .mem-table thead th.salency-col {
+    color: var(--copper);
+    border-top: 1px solid var(--copper-a30);
+    border-bottom: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.06);
+    border-radius: 8px 8px 0 0;
+  }
+  .mem-table tbody tr:last-child td.salency-col {
+    border-bottom: 1px solid var(--copper-a30);
+    border-radius: 0 0 8px 8px;
+  }
+
+  .mem-compare-wrap {
+    position: relative;
+  }
+  /* Faint copper drop-shadow under the Salency column. Sits behind the
+     table; a layout-anchor pseudo on the wrapper. Hidden on the mobile
+     stacked-card layout via the 720px breakpoint below. */
+  .mem-compare-wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 39%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 30px 80px -40px rgba(254, 133, 49, 0.35);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .mem-compare-wrap > .mem-table { position: relative; z-index: 1; }
 
   .mem-compare-foot {
     margin-top: 22px;
@@ -4118,6 +4165,10 @@ header button:focus:not(:focus-visible){
     .mem-hero-bridge { flex-direction: column; gap: 8px; }
 
     .mem-compare { margin-top: 72px; padding: 0 22px; }
+
+    /* Glow shadow is hidden in the stacked-card mobile layout — the
+       column geometry no longer applies. */
+    .mem-compare-wrap::before { display: none; }
 
     /* Table → card-per-row. Signal (col 1) becomes the card caption,
        CRM and Salency cells label themselves via ::before pseudo-
