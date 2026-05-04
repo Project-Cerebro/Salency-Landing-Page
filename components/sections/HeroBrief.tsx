@@ -94,7 +94,17 @@ function InlineExpansion({ callId, lineIdx }: InlineExpansionProps) {
   );
 }
 
-export function HeroBrief() {
+interface HeroBriefProps {
+  /**
+   * When true, drops the 640px max-height + internal scroll. Used on /memory
+   * where the brief is the page-opening artifact and benefits from showing
+   * all 6 blocks at once without a scrollbar. Defaults to false (the
+   * capped variant shipping on /).
+   */
+  uncapped?: boolean;
+}
+
+export function HeroBrief({ uncapped = false }: HeroBriefProps = {}) {
   const { people, needs, commitments, changes, map, next } = HUDSON_TERRACE_BRIEF;
   // Expansion state keyed by `${blockId}:${rowId}` so each click toggles
   // independently. Only one citation per row, so the row id is enough.
@@ -122,7 +132,7 @@ export function HeroBrief() {
 
   return (
     <div
-      className="hero-brief"
+      className={`hero-brief${uncapped ? ' hero-brief--uncapped' : ''}`}
       aria-label={`Day-1 Brief for ${ACCOUNT_NAME}`}
     >
       <div className="hero-brief-frame">

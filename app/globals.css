@@ -1146,6 +1146,23 @@ html {
     background:var(--copper-a30);border-radius:3px;
   }
   .hero-brief-body::-webkit-scrollbar-track{background:transparent}
+
+  /* Uncapped variant — used on /memory. Drops the 640px max-height,
+     internal scroll, fade mask, and scrollbar. All 6 blocks visible
+     at once, full interactivity preserved. */
+  .hero-brief--uncapped .hero-brief-frame{
+    max-height:none;
+    display:block;
+  }
+  .hero-brief--uncapped .hero-brief-body{
+    overflow-y:visible;
+    overflow-x:visible;
+    padding-right:0;
+    margin-right:0;
+    -webkit-mask-image:none;
+            mask-image:none;
+  }
+  .hero-brief--uncapped .hero-brief-body::-webkit-scrollbar{display:none}
   .hb-block{
     padding:14px 0;border-top:1px solid var(--hair);
   }
