@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { MarketingHeader } from '@/components/MarketingHeader';
-import { HeroArtifact } from '@/components/HeroArtifact';
 import { MemorySection } from '@/components/sections/MemorySection';
 import { SiteFooter } from '@/components/sections/SiteFooter';
 import { TranscriptSnippetModalLazy } from '@/components/TranscriptSnippetModalLazy';
@@ -16,7 +15,6 @@ export default function MemoryPage() {
   return (
     <div className="page memory-page">
       <MarketingHeader />
-      <HeroArtifact />
       <MemorySection />
       <SiteFooter />
       <TranscriptSnippetModalLazy />

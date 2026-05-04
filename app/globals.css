@@ -3456,519 +3456,99 @@ header button:focus:not(:focus-visible){
    Memory page — /memory (per DESIGN.md §2–§7 alignment)
 ═══════════════════════════════════════════════════════════ */
 .memory-page {
-  /* ── Intro (matches standalone canonical per DESIGN.md §4) ── */
+  /* ── Intro (Linear treatment: tight page-label H1, no lede) ── */
   .mem-intro {
     max-width:var(--page-max);
     margin: 40px auto 0;
-    padding: 20px 40px;
+    padding: 20px 40px 8px;
 
-    .eb { margin-bottom: 28px; }
+    .eb { margin-bottom: 14px; }
 
     h1 {
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 400;
-      font-size: clamp(44px, 5.2vw, 72px);
-      line-height: 1.04;
-      letter-spacing: -.025em;
+      font-weight: 500;
+      font-size: clamp(28px, 3.2vw, 38px);
+      line-height: 1.05;
+      letter-spacing: -.02em;
       color: var(--ink);
-      margin: 0 0 28px;
+      margin: 0 0 14px;
       max-width: 22ch;
       text-wrap: balance;
     }
+    h1 em {
+      font-family: var(--font-display), 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--copper);
+    }
 
-    .lede {
+    .mem-intro-sub {
       font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
       font-weight: 300;
-      font-size: 18px;
-      line-height: 1.7;
+      font-size: 16px;
+      line-height: 1.55;
       color: var(--ink-2);
-      max-width: 62ch;
+      max-width: 56ch;
       margin: 0;
     }
-    .lede em {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-style: italic;
-      color: var(--ink);
-      font-size: 19px;
-      font-weight: 400;
-    }
+    .mem-intro-cue { color: var(--copper); }
   }
 
-  /* ── Featured hero surface (Surface 01: tight 2-col, fits viewport) ── */
-  .mem-hero-surface {
-    max-width: 1100px;
-    margin: 20px auto 0;
+  /* ── HeroArtifact stage (sits directly under mem-intro H1) ── */
+  .mem-artifact-stage {
+    max-width: var(--page-max);
+    margin: 24px auto 0;
     padding: 0 40px;
   }
 
-  .mem-hero-frame {
-    position: relative;
-    background: rgba(254, 133, 49, 0.03);
-    border: 1px solid var(--hair-2);
-    border-radius: 16px;
-    padding: 22px 28px 20px;
-    overflow: hidden;
-
-    /* Hero-card 2px left gradient per DESIGN.md §5 card chrome */
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 2px; height: 100%;
-      background: linear-gradient(180deg, var(--copper), rgba(254, 133, 49, 0));
-    }
-  }
-
-  /* Card header — brief-title + meta on the left, preview chip on the right */
-  .mem-hero-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--hair-2);
-    gap: 14px;
-    flex-wrap: wrap;
-
-    .mem-hero-title-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      min-width: 0;
-    }
-
-    .mem-hero-title {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 500;
-      font-size: 17px;
-      color: var(--ink);
-      letter-spacing: -.01em;
-      line-height: 1.3;
-
-      em { font-weight: 400; }
-    }
-
-    .mem-hero-meta {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      color: var(--ink-3);
-      letter-spacing: .04em;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-
-      .sep { color: var(--ink-4); opacity: .5; }
-
-      .pulse {
-        display: inline-flex; align-items: center; gap: 6px;
-        color: var(--ink-3);
-
-        &::before {
-          content: "";
-          width: 5px; height: 5px; border-radius: 50%;
-          background: var(--ink-2);
-          box-shadow: 0 0 0 0 rgba(232, 230, 227, 0.35);
-          animation: memPulse 2.4s ease-in-out infinite;
-        }
-      }
-    }
-
-    /* Status chip — semantic label, not a keyword. Demoted from copper
-       to the ink ramp; the uppercase mono-caps treatment already reads
-       as "tag" without needing the accent color. */
-    .mem-hero-chip {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--ink-3);
-      background: rgba(232, 230, 227, 0.04);
-      border: 1px solid var(--hair-2);
-      border-radius: 4px;
-      padding: 5px 10px;
-      white-space: nowrap;
-    }
-  }
-
-  /* Brief grid — People left, They need right */
-  .mem-brief-grid {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 28px;
-    padding-top: 16px;
-
-    .brief-block {
-      padding: 0;
-      border: 0;
-    }
-  }
-
-  /* Smaller brief-block eyebrow: 10px font + 24px dash (vs 11px / 28px
-     canonical). Everything else inherits from the global .eb. */
-  .mem-hero-surface .eb {
-    font-size: 10px;
-    margin-bottom: 12px;
-
-    &::before { width: 24px; }
-
-    .sub {
-      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-      color: var(--ink-3);
-      font-size: 11.5px;
-      letter-spacing: .04em;
-      font-weight: 400;
-      text-transform: none;
-    }
-  }
-
-  /* People — compact stacked rows */
-  .mem-hero-surface .people { display: grid; gap: 8px; }
-  .mem-hero-surface .person {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3px;
-    padding: 8px 0;
-    border-bottom: 1px dashed var(--hair);
-
-    &:last-child { border-bottom: 0; }
-
-    .person-main {
-      display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
-    }
-
-    .person-name {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 500;
-      font-size: 17px;
-      color: var(--ink);
-      letter-spacing: -.01em;
-      line-height: 1.2;
-    }
-
-    .person-role {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      color: var(--ink-3);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .person-quote {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1.35;
-      color: var(--ink-2);
-    }
-
-    .person-cite {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      color: var(--ink-3);
-      letter-spacing: .04em;
-
-      .person-cite-link { color: var(--ink-3); border-bottom: 1px solid var(--hair); }
-    }
-  }
-
-  .mem-hero-surface .stance {
-    font-family: 'Geist Mono', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    border-radius: 4px;
-
-    /* Champion state — bright ink against the more muted skeptic (ink-2)
-       and the rust blocker. Hierarchy communicated by brightness and
-       hue-family, not the primary accent. */
-    &.champion {
-      color: var(--ink);
-      background: rgba(232, 230, 227, 0.06);
-      border: 1px solid var(--hair-2);
-    }
-    &.skeptic {
-      color: var(--ink-2);
-      background: rgba(232, 230, 227, 0.04);
-      border: 1px solid var(--hair-2);
-    }
-    &.blocker {
-      color: var(--rust);
-      background: rgba(209, 60, 19, 0.10);
-      border: 1px solid rgba(209, 60, 19, 0.26);
-    }
-  }
-
-  /* They need — compact pain rows */
-  .mem-hero-surface .pains { display: grid; gap: 6px; }
-  .mem-hero-surface .pain {
-    padding: 8px 0 8px 14px;
-    border-left: 2px solid var(--hair-2);
-    background: linear-gradient(90deg, rgba(232, 230, 227, 0.03), transparent 60%);
-    border-radius: 0 4px 4px 0;
-
-    .pain-quote {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: 14.5px;
-      line-height: 1.3;
-      color: var(--ink);
-      margin: 0 0 4px;
-      letter-spacing: -.005em;
-    }
-
-    .pain-cite {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      color: var(--ink-3);
-      letter-spacing: .04em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-
-      .pain-cite-link { color: var(--ink-3); border-bottom: 1px solid var(--hair); }
-    }
-  }
-
-  .mem-hero-surface .intensity {
-    display: inline-flex; gap: 3px; align-items: center;
-
-    /* Intensity dots: filled = active, off = muted. Signal is fill
-       state, not hue — so filled uses the ink ramp, not the accent. */
-    .intensity-dot {
-      width: 4px; height: 4px; border-radius: 50%;
-      background: var(--ink-2);
-    }
-    .intensity-dot.off { background: var(--ink-4); opacity: .4; }
-  }
-
-  /* Bridge "also in the brief" strip — outside the card */
-  .mem-hero-bridge {
-    margin-top: 18px;
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-
-    .bridge-lead {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-style: italic;
-      font-size: 14px;
-      color: var(--ink-2);
-      line-height: 1.4;
-    }
-
-    .bridge-also {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      color: var(--ink-3);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      line-height: 1.55;
-
-      .bridge-link {
-        color: var(--copper);
-        text-decoration: none;
-        border-bottom: 1px solid var(--copper-a18);
-        transition: border-color .18s;
-        white-space: nowrap;
-
-        &:hover { border-bottom-color: var(--copper); }
-      }
-    }
-  }
-
-  /* ── Supporting surfaces 02 / 03 / 04 ── */
-  .mem-supporting {
-    max-width:var(--page-max);
-    margin: 120px auto 0;
+  /* ── γ / β stages: shared rhythm matches .map-stage / .recall-stage
+     pattern from / for visual continuity. */
+  .gamma-stage,
+  .beta-stage {
+    max-width: var(--page-max);
+    margin: 96px auto 0;
     padding: 0 40px;
   }
-
-  .mem-support-head { margin-bottom: 36px; }
-
-  .mem-support-head .eb {
-    .sub {
-      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-      color: var(--ink-3);
-      font-size: 12.5px;
-      letter-spacing: .04em;
-      font-weight: 400;
-      text-transform: none;
-    }
-  }
-
-  .mem-support-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .mem-support-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--hair-2);
-    border-radius: 12px;
-    padding: 26px 26px 22px;
+  .gamma-stage .stage-head,
+  .beta-stage .stage-head {
     display: flex;
     flex-direction: column;
-
-    .support-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      gap: 10px;
-
-      .idx {
-        font-family: 'Geist Mono', monospace;
-        font-size: 10.5px;
-        font-weight: 500;
-        letter-spacing: .2em;
-        text-transform: uppercase;
-        color: var(--ink-3);
-      }
-
-      .support-chip {
-        font-family: 'Geist Mono', monospace;
-        font-size: 9.5px;
-        font-weight: 500;
-        letter-spacing: .16em;
-        text-transform: uppercase;
-        color: var(--ink-3);
-        background: rgba(232, 230, 227, 0.04);
-        border: 1px solid var(--hair-2);
-        border-radius: 4px;
-        padding: 3px 8px;
-      }
-    }
-
-    /* Support-card h3: whole heading uses the accent — h3 and its em
-       share the same color so the title reads as one unit, not a
-       split ink/copper mix. */
-    h3 {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 400;
-      font-size: 22px;
-      line-height: 1.15;
-      letter-spacing: -.015em;
-      color: var(--copper);
-      margin: 0 0 10px;
-    }
-
-    .support-desc {
-      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 400;
-      font-size: 13.5px;
-      line-height: 1.55;
-      color: var(--ink-2);
-      margin: 0 0 18px;
-      flex-grow: 1;
-    }
-
-    .support-mock {
-      background: #0A0910;
-      border: 1px solid var(--hair);
-      border-radius: 8px;
-      padding: 14px 16px;
-      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-    }
+    gap: 14px;
+    margin-bottom: 32px;
+    max-width: 64ch;
+  }
+  .gamma-stage .stage-head .eb,
+  .beta-stage .stage-head .eb { margin-bottom: 0; }
+  .gamma-stage .stage-h2,
+  .beta-stage .stage-h2 {
+    margin: 0;
+    font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 36px);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .gamma-stage .stage-h2 em,
+  .beta-stage .stage-h2 em {
+    font-family: var(--font-display), 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--copper);
+  }
+  .gamma-stage .stage-lede,
+  .beta-stage .stage-lede {
+    margin: 0;
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 56ch;
   }
 
-  /* Pain-product mini mock */
-  .mem-support-card .pp-mock {
-    display: grid;
-    gap: 10px;
-
-    .pp-row {
-      display: grid;
-      grid-template-columns: 1fr 70px auto;
-      gap: 10px;
-      align-items: center;
-      font-size: 12.5px;
-
-      .pp-prod { color: var(--ink); font-weight: 500; }
-      .pp-conf {
-        font-family: 'Geist Mono', monospace;
-        font-size: 11px;
-        color: var(--ink-2);
-        min-width: 34px;
-        text-align: right;
-      }
-
-      /* Progress bar communicates by LENGTH. Fill uses the ink ramp
-         so it doesn't compete with keywords for the user's attention. */
-      .mapping-bar {
-        position: relative;
-        height: 5px;
-        border-radius: 3px;
-        background: rgba(232, 230, 227, 0.06);
-        overflow: hidden;
-
-        .mapping-bar-fill {
-          position: absolute; inset: 0;
-          background: linear-gradient(90deg, var(--ink-2), var(--ink-3));
-          border-radius: 3px;
-        }
-      }
-    }
-  }
-
-  /* Contradictions mini mock */
-  .mem-support-card .cx-mock {
-    display: grid;
-    gap: 8px;
-
-    .cx-row {
-      display: grid;
-      grid-template-columns: 54px 1fr;
-      gap: 12px;
-      align-items: baseline;
-      padding: 6px 0;
-
-      .cx-date {
-        font-family: 'Geist Mono', monospace;
-        font-size: 10px;
-        font-weight: 500;
-        letter-spacing: .18em;
-        text-transform: uppercase;
-        color: var(--ink-3);
-      }
-
-      .cx-quote {
-        font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-        font-style: italic;
-        font-size: 14px;
-        line-height: 1.35;
-        color: var(--ink);
-      }
-    }
-
-    .cx-arrow {
-      text-align: center;
-      font-family: 'Geist Mono', monospace;
-      font-size: 16px;
-      color: var(--ink-3);
-      opacity: .8;
-      line-height: 1;
-      margin: 2px 0;
-    }
-  }
-
-  /* Handoff export mini mock */
-  .mem-support-card .hx-mock {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11.5px;
-    line-height: 1.7;
-
-    .hx-line { color: var(--ink-2); }
-    .hx-line.muted { color: var(--ink-3); opacity: .85; }
-  }
 
   /* ── CRM vs Salency compare ── */
   .mem-compare {
@@ -3994,11 +3574,13 @@ header button:focus:not(:focus-visible){
   }
   .mem-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     border: 1px solid var(--hair-2);
     border-radius: 12px;
-    overflow: hidden;
+    overflow: visible;
     background: rgba(255, 255, 255, 0.02);
+    position: relative;
 
     thead th {
       text-align: left;
@@ -4030,6 +3612,51 @@ header button:focus:not(:focus-visible){
     td:nth-child(2) { color: var(--ink-3); width: 39%; }
     td:nth-child(3) { color: var(--ink); width: 39%; }
   }
+
+  /* Copper-glow column treatment for the "In Salency" column on the CRM
+     compare table. Mirrors ComparativeStrip's highlighted-card visual
+     language: copper left/right border rails, copper-tint fill, copper
+     header text + slightly stronger top border, top/bottom rounded
+     corners on the column ends. The faint copper drop-shadow lives on
+     the wrapping .mem-compare-col-glow pseudo-anchor for layered fall-off. */
+  .mem-table th.salency-col,
+  .mem-table td.salency-col {
+    border-left: 1px solid var(--copper-a30);
+    border-right: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.04);
+    color: var(--ink);
+  }
+  .mem-table thead th.salency-col {
+    color: var(--copper);
+    border-top: 1px solid var(--copper-a30);
+    border-bottom: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.06);
+    border-radius: 8px 8px 0 0;
+  }
+  .mem-table tbody tr:last-child td.salency-col {
+    border-bottom: 1px solid var(--copper-a30);
+    border-radius: 0 0 8px 8px;
+  }
+
+  .mem-compare-wrap {
+    position: relative;
+  }
+  /* Faint copper drop-shadow under the Salency column. Sits behind the
+     table; a layout-anchor pseudo on the wrapper. Hidden on the mobile
+     stacked-card layout via the 720px breakpoint below. */
+  .mem-compare-wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 39%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 30px 80px -40px rgba(254, 133, 49, 0.35);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .mem-compare-wrap > .mem-table { position: relative; z-index: 1; }
 
   .mem-compare-foot {
     margin-top: 22px;
@@ -4085,22 +3712,17 @@ header button:focus:not(:focus-visible){
   }
 
   /* ── Responsive ── */
-  @media (max-width: 960px) {
-    .mem-support-grid { grid-template-columns: 1fr; gap: 18px; }
-  }
-
-  @media (max-width: 860px) {
-    .mem-brief-grid { grid-template-columns: 1fr; gap: 20px; }
-  }
-
   @media (max-width: 720px) {
     .mem-intro { padding: 20px 22px; margin-top: 48px; }
-    .mem-hero-surface { padding: 0 18px; }
-    .mem-hero-frame { padding: 20px 18px 18px; }
-    .mem-hero-head { flex-direction: column; align-items: flex-start; }
-    .mem-hero-bridge { flex-direction: column; gap: 8px; }
+    .mem-artifact-stage { padding: 0 22px; margin-top: 16px; }
+    .gamma-stage,
+    .beta-stage { margin-top: 64px; padding: 0 22px; }
 
     .mem-compare { margin-top: 72px; padding: 0 22px; }
+
+    /* Glow shadow is hidden in the stacked-card mobile layout — the
+       column geometry no longer applies. */
+    .mem-compare-wrap::before { display: none; }
 
     /* Table → card-per-row. Signal (col 1) becomes the card caption,
        CRM and Salency cells label themselves via ::before pseudo-
@@ -4169,11 +3791,243 @@ header button:focus:not(:focus-visible){
 
     .mem-cta { margin: 72px auto 72px; padding: 0 22px; }
   }
-}
 
-@keyframes memPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 230, 227, 0.35); }
-  50% { box-shadow: 0 0 0 5px rgba(232, 230, 227, 0); }
+  /* ── γ surface: AnchorSplitPane (how it stays anchored) ──
+     Static split-pane: raw transcript on the left, extracted signal cards
+     on the right. Cited lines get a copper left-rule + tinted background;
+     extract cards on the right have a copper rule + arrow ::before/::after
+     pointing back at the source. Frame matches .hero-brief-frame chrome
+     (bg-2, hair-2 border, copper top-rule, 14px radius). */
+  .anchor-frame {
+    position: relative;
+    background: var(--bg-2);
+    border: 1px solid var(--hair-2);
+    border-radius: 14px;
+    padding: 0;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .anchor-frame::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 18px; right: 18px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--copper) 0%, transparent 100%);
+    border-radius: 2px;
+  }
+  .anchor-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 14px;
+    padding: 20px 24px 14px;
+    border-bottom: 1px solid var(--hair);
+    flex-wrap: wrap;
+  }
+  .anchor-head-left {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .anchor-head-left strong { color: var(--ink); font-weight: 500; }
+  .anchor-head-right {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+  .anchor-synthetic-chip {
+    margin: 0;
+    padding: 8px 24px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    background: rgba(232, 230, 227, 0.03);
+    border-bottom: 1px solid var(--hair);
+  }
+  .anchor-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    position: relative;
+  }
+  .anchor-split::before {
+    content: "";
+    position: absolute;
+    top: 18px; bottom: 18px;
+    left: 50%;
+    width: 1px;
+    background: var(--hair);
+  }
+  .anchor-col { padding: 22px 24px; }
+  .anchor-col-eb {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+  }
+  .anchor-line {
+    margin: 0 0 10px;
+    padding: 4px 8px;
+    margin-left: -8px;
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    border-radius: 4px;
+  }
+  .anchor-line.is-extracted {
+    background: var(--copper-a04);
+    border-left: 2px solid var(--copper);
+    padding-left: 10px;
+    margin-left: -12px;
+    color: var(--ink);
+  }
+  .anchor-card {
+    position: relative;
+    background: var(--bg-3);
+    border: 1px solid var(--copper-a30);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 0 0 14px;
+  }
+  .anchor-card:last-child { margin-bottom: 0; }
+  /* Copper rule + arrow pointing back at the source line on the left.
+     Hidden on narrow viewports where the columns stack. */
+  .anchor-card::before {
+    content: "";
+    position: absolute;
+    left: -25px;
+    top: 18px;
+    width: 25px;
+    height: 1px;
+    background: var(--copper-a60);
+  }
+  .anchor-card::after {
+    content: "\25BA";
+    position: absolute;
+    left: -10px;
+    top: 12px;
+    color: var(--copper);
+    font-size: 10px;
+  }
+  .anchor-card-name {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 6px;
+  }
+  .anchor-card-body {
+    margin: 0 0 6px;
+    font-family: var(--font-display), 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--ink);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .anchor-card-cap {
+    font-style: normal;
+    color: var(--ink-3);
+    font-size: 11px;
+  }
+  .anchor-card-meta {
+    margin: 0;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    letter-spacing: .04em;
+  }
+  .anchor-meta-copper { color: var(--copper); }
+
+  @media (max-width: 860px) {
+    .anchor-split { grid-template-columns: 1fr; }
+    .anchor-split::before { display: none; }
+    .anchor-card::before,
+    .anchor-card::after { display: none; }
+    .anchor-col--r { border-top: 1px solid var(--hair); }
+  }
+
+  /* ── β surface: SchemaList (what's stored) ──
+     Vertical stack of hairline-separated rows. Each row is a 3-col grid
+     (signal name + count | one-sentence definition | example payload card).
+     Static — no hover or click state. */
+  .schema-list { margin-top: 8px; }
+  .schema-row {
+    padding: 18px 0;
+    border-top: 1px solid var(--hair);
+    display: grid;
+    grid-template-columns: 200px 1fr 340px;
+    gap: 24px;
+    align-items: start;
+  }
+  .schema-row:first-child { border-top: 1px solid var(--hair-2); }
+  .schema-name {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--copper);
+    line-height: 1.3;
+  }
+  .schema-count {
+    margin-top: 6px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    letter-spacing: .04em;
+    font-weight: 400;
+  }
+  .schema-def {
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 42ch;
+  }
+  .schema-card {
+    background: var(--bg-2);
+    border: 1px solid var(--hair);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .schema-field {
+    display: grid;
+    grid-template-columns: 86px 1fr;
+    gap: 10px;
+    padding: 1px 0;
+  }
+  .schema-field-key { color: var(--ink-3); }
+  .schema-field-val { color: var(--ink); }
+  .schema-field-val--quote {
+    font-family: var(--font-display), 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+  .schema-field-val--copper { color: var(--copper); }
+
+  @media (max-width: 860px) {
+    .schema-row {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 22px 0;
+    }
+    .schema-def { max-width: none; }
+  }
 }
 
 /* ═══════════ Pilot modal (Request-your-pilot form) ═══════════ */
@@ -4299,44 +4153,6 @@ header button:focus:not(:focus-visible){
 }
 .thesis-hero-cell p { font-size: 14.5px; line-height: 1.55; color: var(--ink-2); }
 
-/* 03 · Memory stack */
-.mem-stack { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
-.mem-stack-head { margin-bottom: 48px; }
-.mem-stack-head h2 {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 48px);
-  line-height: 1.05;
-  letter-spacing: -.02em;
-  font-weight: 400;
-  color: var(--ink);
-  margin-top: 18px;
-  max-width: 28ch;
-}
-.mem-stack-head h2 em { font-style: italic; color: var(--copper); }
-.mem-stack-rows { border-top: 1px solid var(--hair-2); }
-.mem-stack-row {
-  display: grid;
-  grid-template-columns: 200px 200px 1fr;
-  gap: 32px;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--hair);
-  align-items: baseline;
-}
-.mem-stack-row .layer-label { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--ink); }
-.mem-stack-row .layer-role { font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
-.mem-stack-row .layer-desc { font-size: 15.5px; line-height: 1.6; color: var(--ink-2); }
-.mem-stack-row .layer-desc em { color: var(--copper); font-style: italic; }
-.mem-stack-row--accent .layer-label { color: var(--copper); }
-
-/* Pain-product + contradiction mock rows (shared by /memory supporting cards) */
-.pp-row { display: grid; grid-template-columns: 1fr 100px 40px; align-items: center; gap: 10px; padding: 8px 0; }
-.pp-row .pp-prod { color: var(--ink-2); }
-.pp-row .pp-conf { color: var(--ink-3); text-align: right; }
-.cx-row { display: grid; grid-template-columns: 60px 1fr; gap: 12px; padding: 6px 0; }
-.cx-row .cx-date { color: var(--ink-3); }
-.cx-row .cx-quote { color: var(--ink); }
-.cx-arrow { color: var(--ink-3); text-align: center; margin: 4px 0; }
-
 /* 05 · Compounds (page visual anchor) */
 .compounds { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
 .compounds-head { margin-bottom: 64px; }
@@ -4395,9 +4211,6 @@ header button:focus:not(:focus-visible){
   .thesis-hero-cell { border-right: none; border-bottom: 1px solid var(--hair); padding: 20px 0; }
   .thesis-hero-cell:last-child { border-bottom: none; }
   .thesis-hero-cell:not(:first-child) { padding-left: 0; }
-
-  .mem-stack { margin-top: 72px; padding: 0 22px; }
-  .mem-stack-row { grid-template-columns: 1fr; gap: 8px; }
 
   .compounds { margin-top: 72px; padding: 0 22px; }
   .compounds-timeline { grid-template-columns: 1fr; gap: 40px; padding-top: 8px; }
