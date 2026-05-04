@@ -1,59 +1,46 @@
 'use client';
 
+// MemorySection — /memory body, sits below <HeroArtifact /> at top of the page.
+// Editorial pass (2026-05-03): all demo fixtures realigned to the canonical
+// Hudson Terrace synthetic arc + Atlas/Helix/Vector/Anchor catalog. Reader
+// flow: HeroArtifact (3-card stack at page top) → this section's intro
+// pivots straight to "below is what those calls compose into" without
+// re-introducing the concept.
+//
+// Honesty boundary: every quote and citation here resolves against
+// HUDSON_TERRACE_BRIEF / HUDSON_TERRACE_ARC, the same data the modal serves
+// on /. The SYNTHETIC TRANSCRIPT chip on Surface 01 mirrors the modal label.
+
 import Link from 'next/link';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { openPilotModal } from '@/components/PilotModal';
 import { MemoryStackSection } from '@/components/sections/MemoryStackSection';
+import {
+  ACCOUNT_NAME,
+  HUDSON_TERRACE_BRIEF,
+  SYNTHETIC_LABEL,
+} from '@/lib/synthetic-arc';
 
-const PEOPLE = [
-  {
-    name: 'Priya Shah',
-    role: 'VP Sales',
-    stance: 'champion' as const,
-    stanceLabel: 'Champion',
-    quote: 'We lose deals to forgotten context every quarter.',
-    cite: 'call 03, Apr 14 · 18:02',
-  },
-  {
-    name: 'Marcus Chen',
-    role: 'Sales Ops',
-    stance: 'skeptic' as const,
-    stanceLabel: 'Skeptic',
-    quote: 'How does this not become another tab we forget about?',
-    cite: 'call 03, Apr 14 · 42:18',
-  },
-];
+const { people, needs, commitments, changes } = HUDSON_TERRACE_BRIEF;
 
-const PAINS = [
-  {
-    quote: 'Handoff loses context every time an AE rotates off.',
-    who: 'Priya Shah',
-    cite: 'call 03, Apr 14 · 18:02',
-    urgency: 3,
-  },
-  {
-    quote: 'Pains repeat across accounts \u2014 all in reps\u2019 heads.',
-    who: 'Priya Shah',
-    cite: 'call 02, Apr 07 · 27:44',
-    urgency: 2,
-  },
-  {
-    quote: 'CRM has notes, not anything we can query.',
-    who: 'Marcus Chen',
-    cite: 'call 03, Apr 14 · 41:02',
-    urgency: 1,
-  },
+// Pain → product rows for Surface 02 mirror the Map block on /, drawn from
+// HUDSON_TERRACE_BRIEF.map. Confidence numbers match arc.ts SCORE_LOOKUP
+// in MapStage so the same artifact reads consistent across both pages.
+const PP_ROWS = [
+  { product: 'Atlas Settlement', capability: 'sub-second settlement', conf: 0.94 },
+  { product: 'Helix Recon', capability: 'multi-venue reconciliation', conf: 0.92 },
+  { product: 'Atlas Singapore', capability: 'MAS-recognized regional deployment', conf: 0.85 },
 ];
 
 const COMPARE_ROWS = [
   {
     signal: 'Customer pain',
     crm: 'Free-text field, last writer wins',
-    salency: 'Cited quote, speaker, timestamp \u2014 ranked by urgency',
+    salency: 'Cited quote, speaker, timestamp, ranked by confidence',
   },
   {
     signal: 'Contradiction between calls',
-    crm: 'Invisible \u2014 fields overwrite silently',
+    crm: 'Invisible. Fields overwrite silently',
     salency: 'Flagged with both source citations',
   },
   {
@@ -65,22 +52,9 @@ const COMPARE_ROWS = [
     signal: 'Pattern across accounts',
     crm: 'CSV export to a spreadsheet',
     salency:
-      'Search \u201chandoff loses context\u201d \u2014 7 accounts match',
+      'Search \u201csettlement delay\u201d, every account that flagged it surfaces',
   },
 ];
-
-function UrgencyDots({ level }: { level: number }) {
-  return (
-    <span className="intensity" aria-label={`Urgency ${level} of 3`}>
-      {[1, 2, 3].map((i) => (
-        <span
-          key={i}
-          className={i <= level ? 'intensity-dot' : 'intensity-dot off'}
-        />
-      ))}
-    </span>
-  );
-}
 
 function ConfBar({ pct }: { pct: number }) {
   return (
@@ -94,43 +68,46 @@ function ConfBar({ pct }: { pct: number }) {
 }
 
 export function MemorySection() {
+  const heroPerson = people.hero;
+  const heroNeed = needs.hero;
+  const fromCall = changes.hero.fromCall;
+  const toCall = changes.hero.toCall;
+
   return (
     <>
       <ScrollReveal>
         <section className="mem-intro">
-          <span className="eb">Memory · Built for revenue teams</span>
+          <span className="eb">Memory {'\u00b7'} Built for revenue teams</span>
           <h1>
             Institutional memory, <em>built.</em>
           </h1>
           <p className="lede">
-            Every call your team runs becomes structured, cited, queryable
-            context, mapped to your product catalog and tied to the rep who
-            heard it. The new AE inherits a Day-1 brief. The CS director picks
-            up mid-story. Nothing is re-asked.
+            Above: 3 calls indexed. Below: what they compose into. A Day-1
+            brief, pain {'\u2192'} product mapping, contradiction alerts,
+            handoff export. Every artifact cited to a transcript line, anchored
+            to the rep who heard it.
           </p>
         </section>
       </ScrollReveal>
 
-      {/* ─── Surface 01: featured brief (tight 2-col, fits viewport) ─── */}
+      {/* ─── Surface 01: Day-1 brief, anchored to Hudson Terrace ─── */}
       <ScrollReveal>
         <section className="mem-hero-surface">
           <div className="mem-hero-frame">
             <div className="mem-hero-head">
               <div className="mem-hero-title-group">
                 <span className="mem-hero-title">
-                  Acme Corp &middot; <em>Day-1 brief</em>
+                  {ACCOUNT_NAME} {'\u00b7'} <em>Day-1 brief</em>
                 </span>
                 <span className="mem-hero-meta">
-                  <span>Updated 2026-04-22</span>
-                  <span className="sep">&middot;</span>
-                  <span className="pulse">3 new pains flagged</span>
-                  <span className="sep">&middot;</span>
-                  <span>12 calls indexed</span>
+                  <span>Auto-generated 2026-04-06</span>
+                  <span className="sep">{'\u00b7'}</span>
+                  <span className="pulse">3 calls indexed</span>
+                  <span className="sep">{'\u00b7'}</span>
+                  <span>21 signals extracted</span>
                 </span>
               </div>
-              <span className="mem-hero-chip">
-                Surface 01 &middot; Design preview
-              </span>
+              <span className="mem-hero-chip">{SYNTHETIC_LABEL}</span>
             </div>
 
             <div className="mem-brief-grid">
@@ -140,21 +117,30 @@ export function MemorySection() {
                   People <span className="sub">who&rsquo;s in the room</span>
                 </div>
                 <div className="people">
-                  {PEOPLE.map((p) => (
+                  <div className="person">
+                    <div className="person-main">
+                      <span className="person-name">{heroPerson.speakerName}</span>
+                      <span className="person-role">{heroPerson.speakerTitle}</span>
+                      <span className="stance champion">Champion</span>
+                    </div>
+                    <div className="person-quote">
+                      &ldquo;{heroPerson.text}&rdquo;
+                    </div>
+                    <div className="person-cite">
+                      <span>{heroPerson.speakerName} {'\u00b7'} </span>
+                      <span className="person-cite-link">
+                        {heroPerson.displayDate} {'\u00b7'} {heroPerson.citationTimestamp}
+                      </span>
+                    </div>
+                  </div>
+                  {people.secondary.map((p) => (
                     <div key={p.name} className="person">
                       <div className="person-main">
                         <span className="person-name">{p.name}</span>
-                        <span className="person-role">{p.role}</span>
-                        <span className={`stance ${p.stance}`}>
-                          {p.stanceLabel}
-                        </span>
-                      </div>
-                      <div className="person-quote">
-                        &ldquo;{p.quote}&rdquo;
-                      </div>
-                      <div className="person-cite">
-                        <span>{p.name} &middot; </span>
-                        <span className="person-cite-link">{p.cite}</span>
+                        <span className="person-role">{p.title}</span>
+                        {p.stance && (
+                          <span className="stance">{p.stance}</span>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -167,15 +153,27 @@ export function MemorySection() {
                   They need <span className="sub">top pains, cited</span>
                 </div>
                 <div className="pains">
-                  {PAINS.map((p) => (
-                    <div key={p.cite} className="pain">
-                      <p className="pain-quote">&ldquo;{p.quote}&rdquo;</p>
+                  <div className="pain">
+                    <p className="pain-quote">&ldquo;{heroNeed.text}&rdquo;</p>
+                    <div className="pain-cite">
+                      <span>
+                        {heroNeed.speakerName} {'\u00b7'}{' '}
+                        <span className="pain-cite-link">
+                          {heroNeed.displayDate} {'\u00b7'} {heroNeed.citationTimestamp}
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                  {needs.secondary.map((p, i) => (
+                    <div key={i} className="pain">
+                      <p className="pain-quote">{p.text}</p>
                       <div className="pain-cite">
                         <span>
-                          {p.who} &middot;{' '}
-                          <span className="pain-cite-link">{p.cite}</span>
+                          {p.speakerName} {'\u00b7'}{' '}
+                          <span className="pain-cite-link">
+                            {p.displayDate} {'\u00b7'} {p.citationTimestamp}
+                          </span>
                         </span>
-                        <UrgencyDots level={p.urgency} />
                       </div>
                     </div>
                   ))}
@@ -184,91 +182,82 @@ export function MemorySection() {
             </div>
           </div>
 
-          {/* "Also in the brief" bridge — moved outside the card */}
+          {/* Bridge below the card */}
           <div className="mem-hero-bridge">
             <span className="bridge-lead">
-              This is what the rep opens Monday at 1:45pm.
+              This is what the rep opens 15 minutes before the next call.
             </span>
             <span className="bridge-also">
-              Also in the brief: commitments &middot; contradictions &middot;
-              pain &rarr; product &middot; cliffhanger.{' '}
+              Also in the brief: commitments {'\u00b7'} contradictions {'\u00b7'}{' '}
+              pain {'\u2192'} product {'\u00b7'} next-step calendar.{' '}
               <Link href="/investors#platform" className="bridge-link">
-                Why not Salesforce &rarr;
+                Why not Salesforce {'\u2192'}
               </Link>
-              {' · '}
+              {' \u00b7 '}
               <Link href="/why-salency" className="bridge-link">
-                Why Salency &rarr;
+                Why Salency {'\u2192'}
               </Link>
             </span>
           </div>
         </section>
       </ScrollReveal>
 
-      {/* ─── Supporting surfaces 02 / 03 / 04 ─── */}
+      {/* ─── Surfaces 02 / 03 / 04 ─── */}
       <ScrollReveal>
         <section className="mem-supporting">
           <div className="mem-support-head">
             <span className="eb">
-              What else lives here <span className="sub">supporting surfaces</span>
+              What else lives here{' '}
+              <span className="sub">supporting surfaces</span>
             </span>
           </div>
           <div className="mem-support-grid">
             <article className="mem-support-card">
               <div className="support-head">
                 <span className="idx">02</span>
-                <span className="support-chip">Design preview</span>
               </div>
               <h3>
-                <em>Pain &rarr; product</em> mapping
+                <em>Pain {'\u2192'} product</em> mapping
               </h3>
               <p className="support-desc">
-                Every extracted pain ranked against your catalog, confidence-scored.
-                Three upsells queued before the AE has ended the call.
+                Every extracted pain ranked against your catalog,
+                confidence-scored. The recommendation a rep needed before the
+                next call.
               </p>
               <div className="support-mock pp-mock">
-                <div className="pp-row">
-                  <span className="pp-prod">Memory Layer</span>
-                  <ConfBar pct={0.92} />
-                  <span className="pp-conf">0.92</span>
-                </div>
-                <div className="pp-row">
-                  <span className="pp-prod">Contradiction Detection</span>
-                  <ConfBar pct={0.74} />
-                  <span className="pp-conf">0.74</span>
-                </div>
-                <div className="pp-row">
-                  <span className="pp-prod">Account Pattern Search</span>
-                  <ConfBar pct={0.61} />
-                  <span className="pp-conf">0.61</span>
-                </div>
+                {PP_ROWS.map((r) => (
+                  <div key={r.product} className="pp-row">
+                    <span className="pp-prod">{r.product}</span>
+                    <ConfBar pct={r.conf} />
+                    <span className="pp-conf">{r.conf.toFixed(2)}</span>
+                  </div>
+                ))}
               </div>
             </article>
 
             <article className="mem-support-card">
               <div className="support-head">
                 <span className="idx">03</span>
-                <span className="support-chip">Design preview</span>
               </div>
               <h3>
                 <em>Contradictions</em> flagged
               </h3>
               <p className="support-desc">
-                Call A: &ldquo;budget is fifty.&rdquo; Call B: &ldquo;budget&rsquo;s
-                tight.&rdquo; Salency flags it with both citations before the rep
-                re-pitches the wrong number.
+                Call A: a stated blocker. Call B: walked back. Salency surfaces
+                both citations before the rep re-pitches the wrong position.
               </p>
               <div className="support-mock cx-mock">
                 <div className="cx-row">
-                  <span className="cx-date">Apr 07</span>
+                  <span className="cx-date">{fromCall?.displayDate}</span>
                   <span className="cx-quote">
-                    &ldquo;budget is fifty.&rdquo;
+                    &ldquo;{changes.hero.fromQuote}&rdquo;
                   </span>
                 </div>
-                <div className="cx-arrow">&darr;</div>
+                <div className="cx-arrow">{'\u2195'}</div>
                 <div className="cx-row">
-                  <span className="cx-date">Apr 14</span>
+                  <span className="cx-date">{toCall?.displayDate}</span>
                   <span className="cx-quote">
-                    &ldquo;budget&rsquo;s tight, maybe twenty.&rdquo;
+                    &ldquo;{changes.hero.toQuote}&rdquo;
                   </span>
                 </div>
               </div>
@@ -277,33 +266,33 @@ export function MemorySection() {
             <article className="mem-support-card">
               <div className="support-head">
                 <span className="idx">04</span>
-                <span className="support-chip">Design preview</span>
               </div>
               <h3>
                 <em>Handoff export</em>
               </h3>
               <p className="support-desc">
-                One-click markdown. The new AE gets a brief. The CS director gets
-                a handoff. Nobody gets &ldquo;I wasn&rsquo;t in that call.&rdquo;
+                One-click markdown. Paste it into Notion, Slack, your CRM. The
+                successor inherits the account, not just the pipeline stage.
               </p>
               <div className="support-mock hx-mock">
-                <div className="hx-line"># Acme Corp — handoff</div>
+                <div className="hx-line"># {ACCOUNT_NAME} {'\u2014'} handoff</div>
                 <div className="hx-line muted">## Stakeholders</div>
-                <div className="hx-line">- Priya Shah, VP Sales (champion)</div>
-                <div className="hx-line">- Marcus Chen, Sales Ops (skeptic)</div>
+                <div className="hx-line">- Daniel Voss, COO (champion)</div>
+                <div className="hx-line">- Priya Mehta, Head of Ops</div>
+                <div className="hx-line">- Jordan Kim, CTO</div>
                 <div className="hx-line muted">## Open commitments</div>
-                <div className="hx-line">- Pricing memo &middot; due Apr 26</div>
+                <div className="hx-line">
+                  - {commitments.hero.item} {'\u00b7'} owner: {commitments.hero.owner}
+                </div>
                 <div className="hx-line muted">## Watch-outs</div>
-                <div className="hx-line">- Budget reset flagged Apr 14</div>
+                <div className="hx-line">- Latency stance shift Mar 09 {'\u2194'} Apr 06</div>
               </div>
             </article>
           </div>
         </section>
       </ScrollReveal>
 
-      {/* ─── Framing: where Salency lives (migrated from /why-salency).
-           Sits right before mem-compare so the 3-layer frame and the
-           signal-by-signal table cluster as one "not a CRM field" argument. ─── */}
+      {/* ─── Where Salency lives (3-layer frame) ─── */}
       <ScrollReveal>
         <MemoryStackSection />
       </ScrollReveal>
@@ -337,14 +326,14 @@ export function MemorySection() {
           </table>
           <p className="mem-compare-foot">
             Flatten the graph and you kill the thing.{' '}
-            <Link href="/investors#thesis">Read our memory thesis &rarr;</Link>
+            <Link href="/investors#thesis">Read our memory thesis {'\u2192'}</Link>
           </p>
         </section>
       </ScrollReveal>
 
       {/* ─── Pilot CTA ─── */}
       <section className="mem-cta">
-        <span className="eb">Pilot cohort &middot; Spring 2026</span>
+        <span className="eb">Pilot cohort {'\u00b7'} Spring 2026</span>
         <h2>
           Inherit every account&rsquo;s <em>memory</em> from Day 1.
         </h2>
@@ -357,7 +346,7 @@ export function MemorySection() {
           className="btn btn-primary"
           onClick={() => openPilotModal()}
         >
-          Request a pilot &rarr;
+          Request a pilot {'\u2192'}
         </button>
       </section>
     </>
