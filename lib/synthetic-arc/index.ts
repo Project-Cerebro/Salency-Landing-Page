@@ -52,5 +52,14 @@ export {
   HUDSON_TERRACE_NEXT,
 } from './hudson-terrace-brief';
 
+export type {
+  MemorySignalType,
+  SchemaExampleField,
+} from './memory-signal-schema';
+export {
+  MEMORY_SIGNAL_TYPES,
+  MEMORY_SIGNAL_ACCOUNT,
+} from './memory-signal-schema';
+
 // Side-effect import: runs the build-time invariant assertions on load.
 import './invariants';

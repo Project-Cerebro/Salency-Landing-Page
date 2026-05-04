@@ -4186,6 +4186,79 @@ header button:focus:not(:focus-visible){
 
     .mem-cta { margin: 72px auto 72px; padding: 0 22px; }
   }
+
+  /* ── β surface: SchemaList (what's stored) ──
+     Vertical stack of hairline-separated rows. Each row is a 3-col grid
+     (signal name + count | one-sentence definition | example payload card).
+     Static — no hover or click state. */
+  .schema-list { margin-top: 8px; }
+  .schema-row {
+    padding: 28px 0;
+    border-top: 1px solid var(--hair);
+    display: grid;
+    grid-template-columns: 220px 1fr 360px;
+    gap: 32px;
+    align-items: start;
+  }
+  .schema-row:first-child { border-top: 1px solid var(--hair-2); }
+  .schema-name {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--copper);
+    line-height: 1.3;
+  }
+  .schema-count {
+    margin-top: 6px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    letter-spacing: .04em;
+    font-weight: 400;
+  }
+  .schema-def {
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 42ch;
+  }
+  .schema-card {
+    background: var(--bg-2);
+    border: 1px solid var(--hair);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .schema-field {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 10px;
+    padding: 2px 0;
+  }
+  .schema-field-key { color: var(--ink-3); }
+  .schema-field-val { color: var(--ink); }
+  .schema-field-val--quote {
+    font-family: var(--font-display), 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+  .schema-field-val--copper { color: var(--copper); }
+
+  @media (max-width: 860px) {
+    .schema-row {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 22px 0;
+    }
+    .schema-def { max-width: none; }
+  }
 }
 
 @keyframes memPulse {
