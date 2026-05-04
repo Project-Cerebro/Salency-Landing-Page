@@ -14,7 +14,6 @@ import Link from 'next/link';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { openPilotModal } from '@/components/PilotModal';
 import { HeroArtifact } from '@/components/HeroArtifact';
-import { HeroBrief } from '@/components/sections/HeroBrief';
 import { AnchorSplitPane } from '@/components/sections/AnchorSplitPane';
 import { SchemaList } from '@/components/sections/SchemaList';
 
@@ -51,27 +50,16 @@ export function MemorySection() {
           <h1>
             The memory layer, <em>in detail.</em>
           </h1>
+          <p className="mem-intro-sub">
+            Three calls indexed for Hudson Terrace Capital.{' '}
+            <span className="mem-intro-cue">Click any card</span> for the
+            transcript snippet.
+          </p>
         </section>
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="mem-brief-stage">
-          <HeroBrief uncapped />
-        </section>
-      </ScrollReveal>
-
-      <ScrollReveal>
-        <section className="alpha-stage">
-          <div className="stage-head">
-            <span className="eb">How it composes</span>
-            <h2 className="stage-h2">
-              The brief is the output. These are the <em>inputs.</em>
-            </h2>
-            <p className="stage-lede">
-              Three indexed calls, 28 days apart. Each card opens the
-              transcript snippet behind one of the brief&rsquo;s blocks above.
-            </p>
-          </div>
+        <section className="mem-artifact-stage">
           <HeroArtifact />
         </section>
       </ScrollReveal>

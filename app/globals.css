@@ -1146,23 +1146,6 @@ html {
     background:var(--copper-a30);border-radius:3px;
   }
   .hero-brief-body::-webkit-scrollbar-track{background:transparent}
-
-  /* Uncapped variant — used on /memory. Drops the 640px max-height,
-     internal scroll, fade mask, and scrollbar. All 6 blocks visible
-     at once, full interactivity preserved. */
-  .hero-brief--uncapped .hero-brief-frame{
-    max-height:none;
-    display:block;
-  }
-  .hero-brief--uncapped .hero-brief-body{
-    overflow-y:visible;
-    overflow-x:visible;
-    padding-right:0;
-    margin-right:0;
-    -webkit-mask-image:none;
-            mask-image:none;
-  }
-  .hero-brief--uncapped .hero-brief-body::-webkit-scrollbar{display:none}
   .hb-block{
     padding:14px 0;border-top:1px solid var(--hair);
   }
@@ -3484,12 +3467,12 @@ header button:focus:not(:focus-visible){
     h1 {
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
       font-weight: 500;
-      font-size: clamp(24px, 2.6vw, 30px);
-      line-height: 1.1;
+      font-size: clamp(28px, 3.2vw, 38px);
+      line-height: 1.05;
       letter-spacing: -.02em;
       color: var(--ink);
-      margin: 0;
-      max-width: 28ch;
+      margin: 0 0 14px;
+      max-width: 22ch;
       text-wrap: balance;
     }
     h1 em {
@@ -3498,25 +3481,34 @@ header button:focus:not(:focus-visible){
       font-weight: 400;
       color: var(--copper);
     }
+
+    .mem-intro-sub {
+      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink-2);
+      max-width: 56ch;
+      margin: 0;
+    }
+    .mem-intro-cue { color: var(--copper); }
   }
 
-  /* ── Brief stage (HeroBrief uncapped) ── */
-  .mem-brief-stage {
+  /* ── HeroArtifact stage (sits directly under mem-intro H1) ── */
+  .mem-artifact-stage {
     max-width: var(--page-max);
     margin: 24px auto 0;
     padding: 0 40px;
   }
 
-  /* ── α / γ / β stages: shared rhythm matches .map-stage / .recall-stage
+  /* ── γ / β stages: shared rhythm matches .map-stage / .recall-stage
      pattern from / for visual continuity. */
-  .alpha-stage,
   .gamma-stage,
   .beta-stage {
     max-width: var(--page-max);
     margin: 96px auto 0;
     padding: 0 40px;
   }
-  .alpha-stage .stage-head,
   .gamma-stage .stage-head,
   .beta-stage .stage-head {
     display: flex;
@@ -3525,10 +3517,8 @@ header button:focus:not(:focus-visible){
     margin-bottom: 32px;
     max-width: 64ch;
   }
-  .alpha-stage .stage-head .eb,
   .gamma-stage .stage-head .eb,
   .beta-stage .stage-head .eb { margin-bottom: 0; }
-  .alpha-stage .stage-h2,
   .gamma-stage .stage-h2,
   .beta-stage .stage-h2 {
     margin: 0;
@@ -3541,7 +3531,6 @@ header button:focus:not(:focus-visible){
     max-width: 22ch;
     text-wrap: balance;
   }
-  .alpha-stage .stage-h2 em,
   .gamma-stage .stage-h2 em,
   .beta-stage .stage-h2 em {
     font-family: var(--font-display), 'Instrument Serif', serif;
@@ -3549,7 +3538,6 @@ header button:focus:not(:focus-visible){
     font-weight: 400;
     color: var(--copper);
   }
-  .alpha-stage .stage-lede,
   .gamma-stage .stage-lede,
   .beta-stage .stage-lede {
     margin: 0;
@@ -3726,8 +3714,7 @@ header button:focus:not(:focus-visible){
   /* ── Responsive ── */
   @media (max-width: 720px) {
     .mem-intro { padding: 20px 22px; margin-top: 48px; }
-    .mem-brief-stage { padding: 0 22px; margin-top: 16px; }
-    .alpha-stage,
+    .mem-artifact-stage { padding: 0 22px; margin-top: 16px; }
     .gamma-stage,
     .beta-stage { margin-top: 64px; padding: 0 22px; }
 
