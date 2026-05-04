@@ -48,7 +48,6 @@ export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
           '\u201c3 to 5 second settlement delays, killing us during volatility windows.\u201d',
         quote: true,
       },
-      { key: 'call', value: 'Mar 09 \u00b7 Discovery \u00b7 00:01:28' },
       { key: 'confidence', value: '0.96', copper: true },
     ],
   },
@@ -58,11 +57,9 @@ export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
     definition:
       'A stated blocker or buying friction. Tracked separately from pain so closing logic can route them.',
     example: [
-      { key: 'speaker', value: 'Daniel Voss \u00b7 COO' },
       {
         key: 'text',
-        value:
-          '\u201cMAS-recognized infra vendors by Q4.\u201d',
+        value: '\u201cMAS-recognized infra vendors by Q4.\u201d',
         quote: true,
       },
       { key: 'call', value: 'Mar 23 \u00b7 Technical \u00b7 00:07:07' },
@@ -78,15 +75,14 @@ export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
       { key: 'topic', value: 'Latency: blocker \u2192 resolved workaround' },
       {
         key: 'from',
-        value: '\u201ckilling us during volatility\u201d \u00b7 Mar 09 \u00b7 00:01:28',
+        value: '\u201ckilling us during volatility\u201d \u00b7 Mar 09',
         quote: true,
       },
       {
         key: 'to',
-        value: '\u201cgotten used to it\u201d \u00b7 Apr 06 \u00b7 00:01:00',
+        value: '\u201cgotten used to it\u201d \u00b7 Apr 06',
         quote: true,
       },
-      { key: 'span', value: '28 days', copper: true },
     ],
   },
   {
@@ -97,7 +93,6 @@ export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
     example: [
       { key: 'item', value: 'SOC 2 Type II report' },
       { key: 'owner', value: 'Maya' },
-      { key: 'due', value: 'owed since Mar 23' },
       { key: 'status', value: 'open', copper: true },
     ],
   },
@@ -110,7 +105,6 @@ export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
       { key: 'name', value: 'Daniel Voss' },
       { key: 'title', value: 'COO' },
       { key: 'stance', value: 'champion', copper: true },
-      { key: 'quotes', value: '8 across 3 calls' },
     ],
   },
   {
@@ -121,8 +115,6 @@ export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
     example: [
       { key: 'pain', value: '3-5s settlement delays' },
       { key: 'product', value: 'Atlas Settlement', copper: true },
-      { key: 'capability', value: 'sub-second settlement' },
-      { key: 'role', value: 'primary' },
       { key: 'confidence', value: '0.94', copper: true },
     ],
   },
@@ -135,7 +127,6 @@ export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
       { key: 'topic', value: 'SOC 2 cadence: annual \u2192 quarterly' },
       { key: 'from', value: 'Mar 09 \u00b7 Discovery' },
       { key: 'to', value: 'Apr 06 \u00b7 Pricing' },
-      { key: 'span', value: '28 days', copper: true },
     ],
   },
 ] as const;
