@@ -3473,42 +3473,92 @@ header button:focus:not(:focus-visible){
    Memory page — /memory (per DESIGN.md §2–§7 alignment)
 ═══════════════════════════════════════════════════════════ */
 .memory-page {
-  /* ── Intro (matches standalone canonical per DESIGN.md §4) ── */
+  /* ── Intro (Linear treatment: tight page-label H1, no lede) ── */
   .mem-intro {
     max-width:var(--page-max);
     margin: 40px auto 0;
-    padding: 20px 40px;
+    padding: 20px 40px 8px;
 
-    .eb { margin-bottom: 28px; }
+    .eb { margin-bottom: 14px; }
 
     h1 {
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 400;
-      font-size: clamp(44px, 5.2vw, 72px);
-      line-height: 1.04;
-      letter-spacing: -.025em;
+      font-weight: 500;
+      font-size: clamp(24px, 2.6vw, 30px);
+      line-height: 1.1;
+      letter-spacing: -.02em;
       color: var(--ink);
-      margin: 0 0 28px;
-      max-width: 22ch;
+      margin: 0;
+      max-width: 28ch;
       text-wrap: balance;
     }
-
-    .lede {
-      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 300;
-      font-size: 18px;
-      line-height: 1.7;
-      color: var(--ink-2);
-      max-width: 62ch;
-      margin: 0;
-    }
-    .lede em {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    h1 em {
+      font-family: var(--font-display), 'Instrument Serif', serif;
       font-style: italic;
-      color: var(--ink);
-      font-size: 19px;
       font-weight: 400;
+      color: var(--copper);
     }
+  }
+
+  /* ── Brief stage (HeroBrief uncapped) ── */
+  .mem-brief-stage {
+    max-width: var(--page-max);
+    margin: 24px auto 0;
+    padding: 0 40px;
+  }
+
+  /* ── α / γ / β stages: shared rhythm matches .map-stage / .recall-stage
+     pattern from / for visual continuity. */
+  .alpha-stage,
+  .gamma-stage,
+  .beta-stage {
+    max-width: var(--page-max);
+    margin: 96px auto 0;
+    padding: 0 40px;
+  }
+  .alpha-stage .stage-head,
+  .gamma-stage .stage-head,
+  .beta-stage .stage-head {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 32px;
+    max-width: 64ch;
+  }
+  .alpha-stage .stage-head .eb,
+  .gamma-stage .stage-head .eb,
+  .beta-stage .stage-head .eb { margin-bottom: 0; }
+  .alpha-stage .stage-h2,
+  .gamma-stage .stage-h2,
+  .beta-stage .stage-h2 {
+    margin: 0;
+    font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 36px);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .alpha-stage .stage-h2 em,
+  .gamma-stage .stage-h2 em,
+  .beta-stage .stage-h2 em {
+    font-family: var(--font-display), 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--copper);
+  }
+  .alpha-stage .stage-lede,
+  .gamma-stage .stage-lede,
+  .beta-stage .stage-lede {
+    margin: 0;
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 56ch;
   }
 
   /* ── Featured hero surface (Surface 01: tight 2-col, fits viewport) ── */
@@ -4159,6 +4209,10 @@ header button:focus:not(:focus-visible){
 
   @media (max-width: 720px) {
     .mem-intro { padding: 20px 22px; margin-top: 48px; }
+    .mem-brief-stage { padding: 0 22px; margin-top: 16px; }
+    .alpha-stage,
+    .gamma-stage,
+    .beta-stage { margin-top: 64px; padding: 0 22px; }
     .mem-hero-surface { padding: 0 18px; }
     .mem-hero-frame { padding: 20px 18px 18px; }
     .mem-hero-head { flex-direction: column; align-items: flex-start; }
