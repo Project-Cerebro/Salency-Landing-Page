@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 import { MarketingHeader } from '@/components/MarketingHeader';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { ThesisSection } from '@/components/sections/ThesisSection';
-import { ProblemSection } from '@/components/sections/ProblemSection';
-import { CompoundsSection } from '@/components/sections/CompoundsSection';
+import { DiffPairViewer } from '@/components/sections/DiffPairViewer';
 import { NotetakerCompareTable } from '@/components/sections/NotetakerCompareTable';
-import { NotForYouSection } from '@/components/sections/NotForYouSection';
 import { PilotCtaSection } from '@/components/sections/PilotCtaSection';
 import { SiteFooter } from '@/components/sections/SiteFooter';
+import { TranscriptSnippetModalLazy } from '@/components/TranscriptSnippetModalLazy';
 import { JsonLd } from '@/components/JsonLd';
 
 const faqSchema = {
@@ -65,16 +63,26 @@ export const metadata: Metadata = {
 
 export default function WhySalencyPage() {
   return (
-    <div className="page">
+    <div className="page why-salency-page">
       <JsonLd data={faqSchema} />
       <MarketingHeader />
-      <ThesisSection />
-      <ScrollReveal><ProblemSection /></ScrollReveal>
-      <ScrollReveal><NotetakerCompareTable /></ScrollReveal>
-      <ScrollReveal><CompoundsSection /></ScrollReveal>
-      <ScrollReveal><NotForYouSection /></ScrollReveal>
+      <section className="why-intro">
+        <span className="eb">Why Salency</span>
+        <h1>
+          Your notetaker. Your CRM. <em>Salency.</em>
+        </h1>
+        <p className="why-sub">
+          Notetakers transcribe. CRMs overwrite.{' '}
+          <span className="copper">Salency remembers.</span>
+        </p>
+      </section>
+      <DiffPairViewer />
+      <ScrollReveal>
+        <NotetakerCompareTable />
+      </ScrollReveal>
       <PilotCtaSection />
       <SiteFooter />
+      <TranscriptSnippetModalLazy />
     </div>
   );
 }
