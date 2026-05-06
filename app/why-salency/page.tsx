@@ -69,7 +69,8 @@ export default function WhySalencyPage() {
       <section className="why-intro">
         <span className="eb">Why Salency</span>
         <h1>
-          Your notetaker. Your CRM. <em>Salency.</em>
+          Your notetaker. Your CRM.<br />
+          <em>Salency.</em>
         </h1>
         <p className="why-sub">
           Notetakers transcribe. CRMs overwrite.{' '}
