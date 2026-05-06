@@ -4261,7 +4261,6 @@ header button:focus:not(:focus-visible){
   margin: 56px auto 22px;
   padding: 0 40px;
 }
-.why-intro .eb { margin-bottom: 12px; }
 .why-intro .why-sub {
   color: var(--ink-2);
   font-size: 15px;

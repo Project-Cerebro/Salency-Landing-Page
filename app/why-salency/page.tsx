@@ -67,7 +67,6 @@ export default function WhySalencyPage() {
       <JsonLd data={faqSchema} />
       <MarketingHeader />
       <section className="why-intro">
-        <span className="eb">Why Salency</span>
         <h1 className="h1">
           Notetakers transcribe. CRMs overwrite.{' '}
           <span className="h1-italic">Salency remembers.</span>
