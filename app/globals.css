@@ -201,7 +201,7 @@ html {
 
   /* ═══════════ Canonical eyebrow ═══════════
      One base rule for every .eb across the site. Scoped overrides
-     below this (.prob-head .eb, .how-head .eb, .inv-intro .eb, etc.)
+     below this (.how-head .eb, .inv-intro .eb, .why-intro .eb, etc.)
      only set per-context margin-bottom (and occasionally font-size /
      display). The 28×1 copper dash ::before applies by default;
      edge cases that don't want it explicitly reset with
@@ -781,7 +781,6 @@ html {
      (which clips the pseudo below the element's own paint layer). */
   .hero,
   .mem-intro,
-  .thesis-hero,
   .apply-page{
     position:relative;
   }
@@ -797,7 +796,6 @@ html {
   }
   .hero::before,
   .mem-intro::before,
-  .thesis-hero::before,
   .apply-page::before{
     content:"";
     position:absolute;top:-200px;left:50%;transform:translateX(-50%);
@@ -806,7 +804,6 @@ html {
   }
   .hero > *,
   .mem-intro > *,
-  .thesis-hero > *,
   .apply-page > *{
     position:relative;z-index:1;
   }
@@ -1456,122 +1453,6 @@ html {
      + children. All 238 lines belonged to the pre-split home page;
      verified zero JSX consumers before removal. See commit for
      details. */
-
-  /* ═══════════ Problem section ═══════════ */
-  .prob{
-    max-width:var(--page-max);margin:40px auto 0;padding:20px 40px;
-  }
-  .prob-head{
-    display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;
-    margin-bottom:72px;
-  }
-  .prob-head .eb{margin-bottom:18px;display:flex}
-  .prob-head h2{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
-    margin:0;color:var(--ink);max-width:18ch;text-wrap:balance;
-  }
-  .prob-head h2 .soft{color:var(--ink-3)}
-  .prob-head .lede{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;line-height:1.6;
-    color:var(--ink-2);max-width:42ch;
-  }
-  .prob-head .lede em{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);
-    font-size:19px;font-weight:400;
-  }
-  /* .prob-head mobile: 2-col headline+lede grid stacks, gap tightens,
-     margin below head reduces. h2 clamp already handles the font
-     scale-down on narrow viewports. */
-  @media (max-width: 768px) {
-    .prob-head {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-bottom: 40px;
-      align-items: start;
-    }
-  }
-
-  .prob-row{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
-    border-top:1px solid var(--hair-2);
-  }
-  .prob-card{
-    padding:40px 36px 40px 0;border-right:1px solid var(--hair);
-    position:relative;
-    display:flex;flex-direction:column;
-  }
-  .prob-card:nth-child(n+2){padding-left:36px}
-  .prob-card:last-child{border-right:0}
-  /* Pain-card index "01/02/03" is decorative numbering, not a keyword. */
-  .prob-card .idx{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-weight:400;
-    font-size:15px;color:var(--ink-3);letter-spacing:.02em;margin-bottom:10px;
-    display:flex;align-items:center;gap:10px;
-  }
-  .prob-card .idx::after{
-    content:"";flex:1;height:1px;background:var(--hair);
-  }
-  .prob-card .title{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(22px,2.4vw,28px);line-height:1.15;letter-spacing:-.015em;color:var(--ink);
-    margin:0 0 16px;max-width:14ch;
-  }
-  .prob-card .desc{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
-    line-height:1.6;color:var(--ink-2);margin:0 0 24px;max-width:32ch;
-  }
-  .prob-card .cost{
-    padding-top:16px;border-top:1px dashed var(--hair-2);
-    margin-top:auto;
-  }
-  .prob-card .cost .label{
-    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
-    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
-    line-height:1.5;
-  }
-
-  .prob-resolve{
-    margin-top:56px;padding:32px 40px;
-    background:linear-gradient(90deg, var(--copper-a08) 0%, rgba(14,12,17,0) 100%);
-    border-left:2px solid var(--copper);border-radius:0 12px 12px 0;
-    display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;
-  }
-  .prob-resolve .label{
-    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
-    letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
-  }
-  .prob-resolve .text{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
-    line-height:1.3;letter-spacing:-.01em;color:var(--ink);max-width:64ch;
-  }
-  .prob-resolve .link{
-    font-family:var(--font-body), 'Geist', sans-serif;font-size:13.5px;color:var(--copper);
-    white-space:nowrap;font-weight:500;
-  }
-  .prob-resolve .link:hover{color:#FE9F5B}
-
-  /* Problem section mobile: 3-col pain grid stacks, vertical dividers
-     become horizontal, asymmetric left/right padding resets, and the
-     .prob-resolve 3-cell row (label + text + link) stacks to 1 col. */
-  @media (max-width: 768px) {
-    .prob-row { grid-template-columns: 1fr; }
-    .prob-card {
-      padding: 32px 0;
-      border-right: 0;
-      border-bottom: 1px solid var(--hair);
-    }
-    .prob-card:nth-child(n+2) { padding-left: 0; }
-    .prob-card:last-child { border-bottom: 0; padding-bottom: 8px; }
-    .prob-card .title { max-width: none; }
-    .prob-card .desc  { max-width: none; }
-    .prob-resolve {
-      padding: 24px 22px;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-    .prob-resolve .link { white-space: normal; }
-  }
 
   /* ═══════════ ProvenanceCard ═══════════
      Position 4 in the Path D-Hybrid composition. Single-row card with
@@ -4135,98 +4016,11 @@ header button:focus:not(:focus-visible){
   .pilot-modal-panel { animation: none; }
 }
 
-/* ═══════════ /why-salency D-refactor ═══════════ */
-
-/* 01 · Thesis hero */
-.thesis-hero {
-  max-width: var(--page-max);
-  margin: 40px auto 0;
-  padding: 20px 40px;
-}
-.thesis-hero-inner h1 {
-  font-family: var(--font-display);
-  font-size: clamp(40px, 5.2vw, 64px);
-  line-height: 1.08;
-  letter-spacing: -.025em;
-  font-weight: 400;
-  color: var(--ink);
-  margin: 16px 0 24px;
-  max-width: 22ch;
-}
-.thesis-hero-inner h1 em { font-style: italic; color: var(--copper); }
-.thesis-hero-inner h1 .soft { color: var(--ink-3); }
-.thesis-hero-inner .lede {
-  font-size: 19px;
-  line-height: 1.6;
-  color: var(--ink-2);
-  max-width: 64ch;
-  margin-bottom: 48px;
-}
-.thesis-hero-meta {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--hair-2);
-  border-bottom: 1px solid var(--hair-2);
-}
-.thesis-hero-cell {
-  padding: 24px 24px 24px 0;
-  border-right: 1px solid var(--hair);
-}
-.thesis-hero-cell:last-child { border-right: none; padding-right: 0; }
-.thesis-hero-cell:not(:first-child) { padding-left: 24px; }
-.thesis-hero-cell .label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-bottom: 10px;
-  display: block;
-}
-.thesis-hero-cell p { font-size: 14.5px; line-height: 1.55; color: var(--ink-2); }
-
-/* 05 · Compounds (page visual anchor) */
-.compounds { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
-.compounds-head { margin-bottom: 64px; }
-.compounds-head h2 {
-  font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.06;
-  letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 18px; max-width: 22ch;
-}
-.compounds-head h2 em { font-style: italic; color: var(--copper); }
-.compounds-timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-top: 48px; }
-.compounds-rail {
-  position: absolute; top: 24px; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--copper), rgba(254,133,49,0));
-}
-.compounds-step { position: relative; padding-top: 24px; }
-.compounds-marker {
-  position: absolute; top: -32px; left: 0;
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em;
-  color: var(--copper); background: var(--bg); padding: 0 8px 0 0;
-}
-.compounds-step h4 { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
-.compounds-step p { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
-.compounds-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hair); font-size: 15px; color: var(--ink-3); max-width: 64ch; }
+/* ═══════════ /why-salency Linear-treatment surface ═══════════ */
 
 /* Notetaker comparison table takeaway */
 .notetaker-takeaway { margin-top: 28px; font-family: var(--font-display); font-size: 18px; line-height: 1.5; color: var(--ink); max-width: 60ch; }
 .notetaker-takeaway em { font-style: italic; color: var(--copper); }
-
-/* 08 · Not for you */
-.notfor { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
-.notfor-head { margin-bottom: 40px; }
-.notfor-head h2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 16px; max-width: 28ch; }
-.notfor-head h2 em { font-style: italic; color: var(--copper); }
-.notfor-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--hair-2); }
-.notfor-list li { display: grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--hair); align-items: baseline; }
-.notfor-list .notfor-idx { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; color: var(--ink-3); }
-.notfor-list .notfor-body { font-size: 15.5px; line-height: 1.65; color: var(--ink-2); }
-.notfor-list .notfor-body strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; }
-.notfor-foot { margin-top: 28px; font-size: 14.5px; line-height: 1.65; color: var(--ink-3); max-width: 72ch; }
-.notfor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 8px; }
-.notfor-col-head { display: block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px; font-weight: 500; }
-.notfor-list--paired li { grid-template-columns: 1fr; gap: 0; }
-@media (max-width: 768px) { .notfor-grid { grid-template-columns: 1fr; gap: 40px; } }
 
 /* Pilot CTA */
 .why-cta { max-width: var(--page-max); margin: 96px auto 120px; padding: 0 40px; text-align: center; }
@@ -4236,23 +4030,7 @@ header button:focus:not(:focus-visible){
 .why-cta h2 em { font-style: italic; color: var(--copper); }
 .why-cta .sub { font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 56ch; margin: 0 auto 28px; }
 
-/* Mobile overrides */
 @media (max-width: 768px) {
-  .thesis-hero { padding: 0 22px; }
-  .thesis-hero-meta { grid-template-columns: 1fr; }
-  .thesis-hero-cell { border-right: none; border-bottom: 1px solid var(--hair); padding: 20px 0; }
-  .thesis-hero-cell:last-child { border-bottom: none; }
-  .thesis-hero-cell:not(:first-child) { padding-left: 0; }
-
-  .compounds { margin-top: 72px; padding: 0 22px; }
-  .compounds-timeline { grid-template-columns: 1fr; gap: 40px; padding-top: 8px; }
-  .compounds-rail { display: none; }
-  .compounds-step { padding-top: 0; padding-left: 60px; }
-  .compounds-marker { position: static; display: inline-block; margin-bottom: 8px; }
-
-  .notfor { margin-top: 72px; padding: 0 22px; }
-  .notfor-list li { grid-template-columns: 1fr; gap: 4px; }
-
   .why-cta { margin: 72px auto 72px; padding: 0 22px; }
 }
 
