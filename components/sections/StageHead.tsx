@@ -1,8 +1,8 @@
-// StageHead — shared eyebrow + h2 + lede block used by every Linear-treatment
+// StageHead, shared eyebrow + h2 + lede block used by every Linear-treatment
 // stage on / and /memory (and now /why-salency). Pure extraction of the
 // repeated `<span className="eb"> + h2.stage-h2 + p.stage-lede>` pattern.
 //
-// Same DOM, same classes, same CSS — see app/globals.css `.stage-head` rules.
+// Same DOM, same classes, same CSS. See app/globals.css `.stage-head` rules.
 // Supports an optional `headingId` for aria-labelledby wiring on the parent
 // section, and an optional `className` for compound classes like
 // `handoff-head` / `recall-head` that some stages add for stage-specific

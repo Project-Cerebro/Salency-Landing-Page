@@ -1,4 +1,4 @@
-// NotetakerCompareTable — /why-salency depth payoff under the diff-pair
+// NotetakerCompareTable, /why-salency depth payoff under the diff-pair
 // viewer. 7-row contrast between AI notetakers (conversation intelligence)
 // and Salency (institutional memory). Refresh of the previous
 // NotetakerSection: dropped the - / + icon column treatment in favor of

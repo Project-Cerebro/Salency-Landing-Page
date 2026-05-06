@@ -1,6 +1,6 @@
 'use client';
 
-// DiffPairViewer — /why-salency centerpiece artifact (Linear treatment).
+// DiffPairViewer, /why-salency centerpiece artifact (Linear treatment).
 //
 // 3-pane interactive diff: transcript (left) | CRM record (middle) | Salency
 // memory (right). Click any of 5 transcript lines from call-003 (Apr 06
@@ -10,8 +10,8 @@
 // signal cards (Contradiction / Pain to product / Stakeholder / Change delta /
 // Pain ranking depending on which line is active).
 //
-// Visual reference: locked mockup at /tmp/salency-mockup/why-salency-v-1and2.html
-// — the STATES object and CSS rules in this component are ported from there.
+// Visual reference: locked mockup at /tmp/salency-mockup/why-salency-v-1and2.html.
+// The STATES object and CSS rules in this component are ported from there.
 //
 // Honesty boundary:
 //   - All 5 transcript lines are paraphrased headlines pointing at verbatim
@@ -35,7 +35,7 @@ import {
 } from '@/lib/synthetic-arc';
 import { openTranscriptSnippetModal } from '@/lib/transcript-snippet-modal-event';
 
-// Unicode glyph constants — kept here so JSX text children can pull from
+// Unicode glyph constants. Kept here so JSX text children can pull from
 // these constants instead of trying to inline `\u00b7` (which JSX text
 // does not interpret as an escape sequence).
 const MIDDOT = '\u00b7';
@@ -46,7 +46,7 @@ const CROSS = '\u2715';
 const DOT_FILLED = '\u25CF';
 
 // ─────────────────────────────────────────────────────────────────────────
-// Transcript lines — stripped to one line each for layout. These map to
+// Transcript lines, stripped to one line each for layout. These map to
 // arc.ts call-003.snippet.lines indices.
 
 const CALL_003 = getCallById('call-003');
@@ -133,7 +133,7 @@ interface DiffState {
 }
 
 const STATES: Record<number, DiffState> = {
-  // 0 — Maya framing question (no extraction)
+  // 0: Maya framing question (no extraction)
   0: {
     crmNotes: '"Where are we on the commercial side?"',
     crmFoot: { hidden: true },
@@ -149,7 +149,7 @@ const STATES: Record<number, DiffState> = {
       },
     ],
   },
-  // 1 — DEFAULT — the contradiction line
+  // 1: DEFAULT, the contradiction line
   1: {
     crmNotes: '"gotten used to it. not main thing anymore."',
     crmFoot: { hidden: false, text: `${CROSS} Mar 09 pain overwritten Apr 06.` },
@@ -246,7 +246,7 @@ const STATES: Record<number, DiffState> = {
       },
     ],
   },
-  // 2 — Maya followup probe
+  // 2: Maya followup probe
   2: {
     crmNotes: '"Interesting. What changed?"',
     crmFoot: { hidden: true },
@@ -262,7 +262,7 @@ const STATES: Record<number, DiffState> = {
       },
     ],
   },
-  // 3 — Trader workflow adjustment
+  // 3: Trader workflow adjustment
   3: {
     crmNotes: '"trader workflow adjusted, pre-positions margin"',
     crmFoot: {
@@ -322,7 +322,7 @@ const STATES: Record<number, DiffState> = {
       },
     ],
   },
-  // 4 — Pain ranking
+  // 4: Pain ranking
   4: {
     crmNotes: '"latency on the list but not the top"',
     crmFoot: {
