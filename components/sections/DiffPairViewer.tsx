@@ -586,17 +586,26 @@ export function DiffPairViewer() {
                       {`1024 chars ${MIDDOT} last writer wins`}
                     </span>
                   </span>
-                  <span
-                    key={swapKey}
-                    className={`crm-val crm-val-fade${outgoing ? ' is-outgoing' : ''}`}
-                  >
-                    {renderState.crmNotes}
-                  </span>
-                  <span
-                    className={`crm-overwrite-badge${renderState.overwrite ? '' : ' is-hidden'}${pulseBadge ? ' is-pulse' : ''}`}
-                    aria-hidden={renderState.overwrite ? 'false' : 'true'}
-                  >
-                    {`${CROSS} overwrites`}
+                  <span className="crm-val-col">
+                    <span
+                      className={`crm-overwrite-badge${renderState.overwrite ? '' : ' is-hidden'}${pulseBadge ? ' is-pulse' : ''}`}
+                      aria-hidden={renderState.overwrite ? 'false' : 'true'}
+                    >
+                      {`${CROSS} overwrites`}
+                    </span>
+                    <span
+                      key={swapKey}
+                      className={`crm-val crm-val-fade${outgoing ? ' is-outgoing' : ''}`}
+                    >
+                      {renderState.crmNotes}
+                    </span>
+                    {renderState.overwrite ? (
+                      <span className="crm-expand-cue" aria-hidden="true">
+                        {overwriteOpen
+                          ? '\u2191 Click to collapse'
+                          : '\u2193 Click to see what was overwritten'}
+                      </span>
+                    ) : null}
                   </span>
                 </button>
               </div>

@@ -4594,9 +4594,9 @@ header button:focus:not(:focus-visible){
 .crm-record .crm-row .crm-val { color: var(--ink); }
 .crm-record .crm-row .crm-val.dim { color: var(--ink-3); }
 
-/* notes row is interactive — laid out as 3 cols (key / val / badge) */
+/* notes row is interactive — laid out as 2 cols (key / value-stack) */
 .crm-record button.crm-row.notes {
-  grid-template-columns: 86px 1fr auto;
+  grid-template-columns: 86px 1fr;
   align-items: start;
   padding: 8px 0;
   cursor: pointer;
@@ -4613,6 +4613,12 @@ header button:focus:not(:focus-visible){
   outline: 2px solid var(--copper-a30);
   outline-offset: 1px;
 }
+.crm-record .crm-val-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
 .crm-record button.crm-row.notes .crm-val {
   font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
   font-style: italic;
@@ -4625,25 +4631,22 @@ header button:focus:not(:focus-visible){
   opacity: 0;
   transform: translateY(-2px);
 }
-.crm-record button.crm-row.notes::after {
-  content: '\2193 show overwrite history';
-  grid-column: 2;
+.crm-record .crm-expand-cue {
   font-family: 'Geist Mono', ui-monospace, monospace;
   font-size: 9.5px;
-  color: var(--ink-3);
   letter-spacing: 0.06em;
-  margin-top: 4px;
-  opacity: 0.6;
+  color: var(--ink-3);
+  opacity: 0.7;
+  transition: opacity 160ms, color 160ms;
 }
-.crm-record button.crm-row.notes.is-expanded::after {
-  content: '\2191 collapse';
+.crm-record button.crm-row.notes:hover .crm-expand-cue { opacity: 1; color: var(--ink-2); }
+.crm-record button.crm-row.notes.is-expanded .crm-expand-cue {
   color: #E89A8E;
   opacity: 1;
 }
-.crm-record button.crm-row.notes.is-quiet::after { content: ''; }
 
 .crm-overwrite-badge {
-  align-self: start;
+  align-self: flex-start;
   font-family: 'Geist Mono', ui-monospace, monospace;
   font-size: 8.5px;
   letter-spacing: 0.16em;
