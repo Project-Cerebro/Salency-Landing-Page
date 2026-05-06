@@ -13,6 +13,7 @@
 import { useId, useState } from 'react';
 import { ACCOUNT_NAME } from '@/lib/synthetic-arc';
 import { openTranscriptSnippetModal } from '@/lib/transcript-snippet-modal-event';
+import { StageHead } from '@/components/sections/StageHead';
 
 const PRIOR_QUOTE = {
   text: 'Killing us during volatility windows. Six figures of P&L on one trade.',
@@ -51,17 +52,23 @@ export function RecallStage() {
   return (
     <section className="recall-stage" aria-labelledby={headingId}>
       <div className="recall-grid">
-        <div className="stage-head recall-head">
-          <span className="eb">Recall</span>
-          <h2 id={headingId} className="stage-h2">
-            Salency tells you when something <em>changed.</em>
-          </h2>
-          <p className="stage-lede">
-            Contradiction alerts when a buyer{'\u2019'}s position shifts between
-            calls. Pipeline-complete pings when a meeting is fully indexed.
-            The memory layer that surfaces signal, not noise.
-          </p>
-        </div>
+        <StageHead
+          className="recall-head"
+          headingId={headingId}
+          eyebrow="Recall"
+          h2={
+            <>
+              Salency tells you when something <em>changed.</em>
+            </>
+          }
+          lede={
+            <>
+              Contradiction alerts when a buyer{'\u2019'}s position shifts
+              between calls. Pipeline-complete pings when a meeting is fully
+              indexed. The memory layer that surfaces signal, not noise.
+            </>
+          }
+        />
 
         <div className="recall-stream">
           <div className="recall-stream-head">

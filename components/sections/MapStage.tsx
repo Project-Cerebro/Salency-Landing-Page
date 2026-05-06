@@ -17,6 +17,7 @@ import {
   type ProductMatch,
 } from '@/lib/synthetic-arc';
 import { openTranscriptSnippetModal } from '@/lib/transcript-snippet-modal-event';
+import { StageHead } from '@/components/sections/StageHead';
 
 interface MapPain {
   /** Stable id used for tab key + aria controls. */
@@ -152,17 +153,22 @@ export function MapStage() {
 
   return (
     <section className="map-stage" aria-labelledby={headingId}>
-      <div className="stage-head">
-        <span className="eb">Map</span>
-        <h2 id={headingId} className="stage-h2">
-          Every pain meets your <em>catalog.</em>
-        </h2>
-        <p className="stage-lede">
-          Salency reads your product catalog and ranks which products match
-          each extracted pain by confidence. The recommendation a rep needed
-          before the next call.
-        </p>
-      </div>
+      <StageHead
+        headingId={headingId}
+        eyebrow="Map"
+        h2={
+          <>
+            Every pain meets your <em>catalog.</em>
+          </>
+        }
+        lede={
+          <>
+            Salency reads your product catalog and ranks which products match
+            each extracted pain by confidence. The recommendation a rep needed
+            before the next call.
+          </>
+        }
+      />
 
       <div className="map-grid">
         <div

@@ -16,6 +16,7 @@ import { openPilotModal } from '@/components/PilotModal';
 import { HeroArtifact } from '@/components/HeroArtifact';
 import { AnchorSplitPane } from '@/components/sections/AnchorSplitPane';
 import { SchemaList } from '@/components/sections/SchemaList';
+import { StageHead } from '@/components/sections/StageHead';
 
 const COMPARE_ROWS = [
   {
@@ -66,34 +67,42 @@ export function MemorySection() {
 
       <ScrollReveal>
         <section className="gamma-stage">
-          <div className="stage-head">
-            <span className="eb">How it stays anchored</span>
-            <h2 className="stage-h2">
-              Every signal points <em>back at a line.</em>
-            </h2>
-            <p className="stage-lede">
-              The brief above isn&rsquo;t conjured. Every claim resolves to a
-              transcript line, with the cite-link visible. Below, one Hudson
-              Terrace call with extracted signals shown beside the source.
-            </p>
-          </div>
+          <StageHead
+            eyebrow="How it stays anchored"
+            h2={
+              <>
+                Every signal points <em>back at a line.</em>
+              </>
+            }
+            lede={
+              <>
+                The brief above isn&rsquo;t conjured. Every claim resolves to a
+                transcript line, with the cite-link visible. Below, one Hudson
+                Terrace call with extracted signals shown beside the source.
+              </>
+            }
+          />
           <AnchorSplitPane />
         </section>
       </ScrollReveal>
 
       <ScrollReveal>
         <section className="beta-stage">
-          <div className="stage-head">
-            <span className="eb">What&rsquo;s stored</span>
-            <h2 className="stage-h2">
-              Seven signal types, <em>cited.</em>
-            </h2>
-            <p className="stage-lede">
-              Every call extracts a typed payload. Same 7 shapes, every
-              account, every successor. Below, each type with one Hudson
-              Terrace example.
-            </p>
-          </div>
+          <StageHead
+            eyebrow={<>What&rsquo;s stored</>}
+            h2={
+              <>
+                Seven signal types, <em>cited.</em>
+              </>
+            }
+            lede={
+              <>
+                Every call extracts a typed payload. Same 7 shapes, every
+                account, every successor. Below, each type with one Hudson
+                Terrace example.
+              </>
+            }
+          />
           <SchemaList />
         </section>
       </ScrollReveal>

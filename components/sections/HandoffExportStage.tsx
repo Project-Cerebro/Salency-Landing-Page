@@ -9,6 +9,7 @@
 //   - NO CTA on this stage (Q6=iv lock — Surface stages are static read-only).
 
 import { useId, useState } from 'react';
+import { StageHead } from '@/components/sections/StageHead';
 
 const FILENAME = 'hudson-terrace-handoff.md';
 
@@ -69,17 +70,23 @@ export function HandoffExportStage() {
   return (
     <section className="handoff-stage" aria-labelledby={headingId}>
       <div className="handoff-grid">
-        <div className="stage-head handoff-head">
-          <span className="eb">Export</span>
-          <h2 id={headingId} className="stage-h2">
-            Hand off the account, not just the <em>seat.</em>
-          </h2>
-          <p className="stage-lede">
-            One-click markdown export. Paste it into Notion, Slack, your CRM,
-            or wherever the next rep lives. The successor inherits everything,
-            not just the pipeline stage.
-          </p>
-        </div>
+        <StageHead
+          className="handoff-head"
+          headingId={headingId}
+          eyebrow="Export"
+          h2={
+            <>
+              Hand off the account, not just the <em>seat.</em>
+            </>
+          }
+          lede={
+            <>
+              One-click markdown export. Paste it into Notion, Slack, your CRM,
+              or wherever the next rep lives. The successor inherits everything,
+              not just the pipeline stage.
+            </>
+          }
+        />
 
         <div className="handoff-viewer" role="figure" aria-label={`${FILENAME} preview`}>
           <div className="handoff-viewer-head">
