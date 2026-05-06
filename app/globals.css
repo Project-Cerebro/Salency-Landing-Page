@@ -4322,12 +4322,14 @@ header button:focus:not(:focus-visible){
 }
 @media (max-width: 880px) {
   .window-chrome { height: auto; max-height: none; }
+  .chrome-title { display: none; }
 }
 
 /* 4. Chrome bar ────────────────────────────────────────────────────── */
 .chrome-bar {
   display: grid;
-  grid-template-columns: 88px 1fr 88px;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
   align-items: center;
   padding: 10px 14px;
   background: linear-gradient(180deg, #1d1a22 0%, #15131a 100%);
@@ -4378,6 +4380,7 @@ header button:focus:not(:focus-visible){
   text-transform: uppercase;
   color: var(--ink-3);
   grid-column: 3;
+  white-space: nowrap;
 }
 
 /* 5. Diff frame ────────────────────────────────────────────────────── */
