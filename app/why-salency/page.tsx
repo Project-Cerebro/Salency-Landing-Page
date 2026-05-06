@@ -4,7 +4,7 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 import { ThesisSection } from '@/components/sections/ThesisSection';
 import { ProblemSection } from '@/components/sections/ProblemSection';
 import { CompoundsSection } from '@/components/sections/CompoundsSection';
-import { NotetakerSection } from '@/components/sections/NotetakerSection';
+import { NotetakerCompareTable } from '@/components/sections/NotetakerCompareTable';
 import { NotForYouSection } from '@/components/sections/NotForYouSection';
 import { PilotCtaSection } from '@/components/sections/PilotCtaSection';
 import { SiteFooter } from '@/components/sections/SiteFooter';
@@ -70,7 +70,7 @@ export default function WhySalencyPage() {
       <MarketingHeader />
       <ThesisSection />
       <ScrollReveal><ProblemSection /></ScrollReveal>
-      <ScrollReveal><NotetakerSection /></ScrollReveal>
+      <ScrollReveal><NotetakerCompareTable /></ScrollReveal>
       <ScrollReveal><CompoundsSection /></ScrollReveal>
       <ScrollReveal><NotForYouSection /></ScrollReveal>
       <PilotCtaSection />

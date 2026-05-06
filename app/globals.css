@@ -2167,15 +2167,47 @@ html {
   .notetaker-table tbody td.col-s{background:var(--copper-a03);color:var(--ink)}
   .notetaker-table tbody td.col-s strong{color:var(--copper);font-weight:500}
   .notetaker-table tbody td.col-n{color:var(--ink-3)}
-  .notetaker-table .icon{
-    display:inline-block;margin-right:8px;font-family:'Geist Mono',monospace;
-    font-size:11px;width:16px;text-align:center;
+
+  /* Copper-glow column treatment for the Salency side. Mirrors /memory's
+     .mem-table .salency-col rules (PR #225 + #227): copper left/right rails,
+     copper-tint fill, copper header text + slightly stronger top border,
+     top/bottom rounded corners on the column ends. The drop-shadow lives
+     on .notetaker-wrap as a layout-anchor pseudo. */
+  .notetaker-table th.salency-col,
+  .notetaker-table td.salency-col {
+    border-left: 1px solid var(--copper-a30);
+    border-right: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.04);
+    color: var(--ink);
   }
-  /* Icon markers are list markers, not keywords. Salency column uses
-     bright ink so it's visible against the copper-tinted cell; the
-     column's copper-a03 background + bold strong is the signal. */
-  .notetaker-table .col-s .icon{color:var(--ink-2)}
-  .notetaker-table .col-n .icon{color:var(--ink-4)}
+  .notetaker-table thead th.salency-col {
+    color: var(--copper);
+    border-top: 1px solid var(--copper-a30);
+    border-bottom: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.06);
+    border-radius: 8px 8px 0 0;
+  }
+  .notetaker-table tbody tr:last-child td.salency-col {
+    border-bottom: 1px solid var(--copper-a30);
+    border-radius: 0 0 8px 8px;
+  }
+  .notetaker-wrap { position: relative; }
+  .notetaker-wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 38%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 30px 80px -40px rgba(254, 133, 49, 0.35);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .notetaker-wrap > .notetaker-table { position: relative; z-index: 1; }
+  @media (max-width: 768px) {
+    .notetaker-wrap::before { display: none; }
+  }
 
   /* Mobile: table → card-per-row. Row-level semantics stay intact,
      but each row becomes a bordered card with the dimension as a
