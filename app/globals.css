@@ -201,7 +201,7 @@ html {
 
   /* ═══════════ Canonical eyebrow ═══════════
      One base rule for every .eb across the site. Scoped overrides
-     below this (.prob-head .eb, .how-head .eb, .inv-intro .eb, etc.)
+     below this (.how-head .eb, .inv-intro .eb, .why-intro .eb, etc.)
      only set per-context margin-bottom (and occasionally font-size /
      display). The 28×1 copper dash ::before applies by default;
      edge cases that don't want it explicitly reset with
@@ -781,7 +781,6 @@ html {
      (which clips the pseudo below the element's own paint layer). */
   .hero,
   .mem-intro,
-  .thesis-hero,
   .apply-page{
     position:relative;
   }
@@ -797,7 +796,6 @@ html {
   }
   .hero::before,
   .mem-intro::before,
-  .thesis-hero::before,
   .apply-page::before{
     content:"";
     position:absolute;top:-200px;left:50%;transform:translateX(-50%);
@@ -806,7 +804,6 @@ html {
   }
   .hero > *,
   .mem-intro > *,
-  .thesis-hero > *,
   .apply-page > *{
     position:relative;z-index:1;
   }
@@ -1457,122 +1454,6 @@ html {
      verified zero JSX consumers before removal. See commit for
      details. */
 
-  /* ═══════════ Problem section ═══════════ */
-  .prob{
-    max-width:var(--page-max);margin:40px auto 0;padding:20px 40px;
-  }
-  .prob-head{
-    display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;
-    margin-bottom:72px;
-  }
-  .prob-head .eb{margin-bottom:18px;display:flex}
-  .prob-head h2{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
-    margin:0;color:var(--ink);max-width:18ch;text-wrap:balance;
-  }
-  .prob-head h2 .soft{color:var(--ink-3)}
-  .prob-head .lede{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;line-height:1.6;
-    color:var(--ink-2);max-width:42ch;
-  }
-  .prob-head .lede em{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);
-    font-size:19px;font-weight:400;
-  }
-  /* .prob-head mobile: 2-col headline+lede grid stacks, gap tightens,
-     margin below head reduces. h2 clamp already handles the font
-     scale-down on narrow viewports. */
-  @media (max-width: 768px) {
-    .prob-head {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-bottom: 40px;
-      align-items: start;
-    }
-  }
-
-  .prob-row{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
-    border-top:1px solid var(--hair-2);
-  }
-  .prob-card{
-    padding:40px 36px 40px 0;border-right:1px solid var(--hair);
-    position:relative;
-    display:flex;flex-direction:column;
-  }
-  .prob-card:nth-child(n+2){padding-left:36px}
-  .prob-card:last-child{border-right:0}
-  /* Pain-card index "01/02/03" is decorative numbering, not a keyword. */
-  .prob-card .idx{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-weight:400;
-    font-size:15px;color:var(--ink-3);letter-spacing:.02em;margin-bottom:10px;
-    display:flex;align-items:center;gap:10px;
-  }
-  .prob-card .idx::after{
-    content:"";flex:1;height:1px;background:var(--hair);
-  }
-  .prob-card .title{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(22px,2.4vw,28px);line-height:1.15;letter-spacing:-.015em;color:var(--ink);
-    margin:0 0 16px;max-width:14ch;
-  }
-  .prob-card .desc{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
-    line-height:1.6;color:var(--ink-2);margin:0 0 24px;max-width:32ch;
-  }
-  .prob-card .cost{
-    padding-top:16px;border-top:1px dashed var(--hair-2);
-    margin-top:auto;
-  }
-  .prob-card .cost .label{
-    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
-    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
-    line-height:1.5;
-  }
-
-  .prob-resolve{
-    margin-top:56px;padding:32px 40px;
-    background:linear-gradient(90deg, var(--copper-a08) 0%, rgba(14,12,17,0) 100%);
-    border-left:2px solid var(--copper);border-radius:0 12px 12px 0;
-    display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;
-  }
-  .prob-resolve .label{
-    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
-    letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
-  }
-  .prob-resolve .text{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
-    line-height:1.3;letter-spacing:-.01em;color:var(--ink);max-width:64ch;
-  }
-  .prob-resolve .link{
-    font-family:var(--font-body), 'Geist', sans-serif;font-size:13.5px;color:var(--copper);
-    white-space:nowrap;font-weight:500;
-  }
-  .prob-resolve .link:hover{color:#FE9F5B}
-
-  /* Problem section mobile: 3-col pain grid stacks, vertical dividers
-     become horizontal, asymmetric left/right padding resets, and the
-     .prob-resolve 3-cell row (label + text + link) stacks to 1 col. */
-  @media (max-width: 768px) {
-    .prob-row { grid-template-columns: 1fr; }
-    .prob-card {
-      padding: 32px 0;
-      border-right: 0;
-      border-bottom: 1px solid var(--hair);
-    }
-    .prob-card:nth-child(n+2) { padding-left: 0; }
-    .prob-card:last-child { border-bottom: 0; padding-bottom: 8px; }
-    .prob-card .title { max-width: none; }
-    .prob-card .desc  { max-width: none; }
-    .prob-resolve {
-      padding: 24px 22px;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-    .prob-resolve .link { white-space: normal; }
-  }
-
   /* ═══════════ ProvenanceCard ═══════════
      Position 4 in the Path D-Hybrid composition. Single-row card with
      Howard headshot left + first-person founder copy right. Subtle
@@ -2167,15 +2048,47 @@ html {
   .notetaker-table tbody td.col-s{background:var(--copper-a03);color:var(--ink)}
   .notetaker-table tbody td.col-s strong{color:var(--copper);font-weight:500}
   .notetaker-table tbody td.col-n{color:var(--ink-3)}
-  .notetaker-table .icon{
-    display:inline-block;margin-right:8px;font-family:'Geist Mono',monospace;
-    font-size:11px;width:16px;text-align:center;
+
+  /* Copper-glow column treatment for the Salency side. Mirrors /memory's
+     .mem-table .salency-col rules (PR #225 + #227): copper left/right rails,
+     copper-tint fill, copper header text + slightly stronger top border,
+     top/bottom rounded corners on the column ends. The drop-shadow lives
+     on .notetaker-wrap as a layout-anchor pseudo. */
+  .notetaker-table th.salency-col,
+  .notetaker-table td.salency-col {
+    border-left: 1px solid var(--copper-a30);
+    border-right: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.04);
+    color: var(--ink);
   }
-  /* Icon markers are list markers, not keywords. Salency column uses
-     bright ink so it's visible against the copper-tinted cell; the
-     column's copper-a03 background + bold strong is the signal. */
-  .notetaker-table .col-s .icon{color:var(--ink-2)}
-  .notetaker-table .col-n .icon{color:var(--ink-4)}
+  .notetaker-table thead th.salency-col {
+    color: var(--copper);
+    border-top: 1px solid var(--copper-a30);
+    border-bottom: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.06);
+    border-radius: 8px 8px 0 0;
+  }
+  .notetaker-table tbody tr:last-child td.salency-col {
+    border-bottom: 1px solid var(--copper-a30);
+    border-radius: 0 0 8px 8px;
+  }
+  .notetaker-wrap { position: relative; }
+  .notetaker-wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 38%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 30px 80px -40px rgba(254, 133, 49, 0.35);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .notetaker-wrap > .notetaker-table { position: relative; z-index: 1; }
+  @media (max-width: 768px) {
+    .notetaker-wrap::before { display: none; }
+  }
 
   /* Mobile: table → card-per-row. Row-level semantics stay intact,
      but each row becomes a bordered card with the dimension as a
@@ -4103,98 +4016,11 @@ header button:focus:not(:focus-visible){
   .pilot-modal-panel { animation: none; }
 }
 
-/* ═══════════ /why-salency D-refactor ═══════════ */
-
-/* 01 · Thesis hero */
-.thesis-hero {
-  max-width: var(--page-max);
-  margin: 40px auto 0;
-  padding: 20px 40px;
-}
-.thesis-hero-inner h1 {
-  font-family: var(--font-display);
-  font-size: clamp(40px, 5.2vw, 64px);
-  line-height: 1.08;
-  letter-spacing: -.025em;
-  font-weight: 400;
-  color: var(--ink);
-  margin: 16px 0 24px;
-  max-width: 22ch;
-}
-.thesis-hero-inner h1 em { font-style: italic; color: var(--copper); }
-.thesis-hero-inner h1 .soft { color: var(--ink-3); }
-.thesis-hero-inner .lede {
-  font-size: 19px;
-  line-height: 1.6;
-  color: var(--ink-2);
-  max-width: 64ch;
-  margin-bottom: 48px;
-}
-.thesis-hero-meta {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--hair-2);
-  border-bottom: 1px solid var(--hair-2);
-}
-.thesis-hero-cell {
-  padding: 24px 24px 24px 0;
-  border-right: 1px solid var(--hair);
-}
-.thesis-hero-cell:last-child { border-right: none; padding-right: 0; }
-.thesis-hero-cell:not(:first-child) { padding-left: 24px; }
-.thesis-hero-cell .label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-bottom: 10px;
-  display: block;
-}
-.thesis-hero-cell p { font-size: 14.5px; line-height: 1.55; color: var(--ink-2); }
-
-/* 05 · Compounds (page visual anchor) */
-.compounds { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
-.compounds-head { margin-bottom: 64px; }
-.compounds-head h2 {
-  font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.06;
-  letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 18px; max-width: 22ch;
-}
-.compounds-head h2 em { font-style: italic; color: var(--copper); }
-.compounds-timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-top: 48px; }
-.compounds-rail {
-  position: absolute; top: 24px; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--copper), rgba(254,133,49,0));
-}
-.compounds-step { position: relative; padding-top: 24px; }
-.compounds-marker {
-  position: absolute; top: -32px; left: 0;
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em;
-  color: var(--copper); background: var(--bg); padding: 0 8px 0 0;
-}
-.compounds-step h4 { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
-.compounds-step p { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
-.compounds-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hair); font-size: 15px; color: var(--ink-3); max-width: 64ch; }
+/* ═══════════ /why-salency Linear-treatment surface ═══════════ */
 
 /* Notetaker comparison table takeaway */
 .notetaker-takeaway { margin-top: 28px; font-family: var(--font-display); font-size: 18px; line-height: 1.5; color: var(--ink); max-width: 60ch; }
 .notetaker-takeaway em { font-style: italic; color: var(--copper); }
-
-/* 08 · Not for you */
-.notfor { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
-.notfor-head { margin-bottom: 40px; }
-.notfor-head h2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 16px; max-width: 28ch; }
-.notfor-head h2 em { font-style: italic; color: var(--copper); }
-.notfor-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--hair-2); }
-.notfor-list li { display: grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--hair); align-items: baseline; }
-.notfor-list .notfor-idx { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; color: var(--ink-3); }
-.notfor-list .notfor-body { font-size: 15.5px; line-height: 1.65; color: var(--ink-2); }
-.notfor-list .notfor-body strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; }
-.notfor-foot { margin-top: 28px; font-size: 14.5px; line-height: 1.65; color: var(--ink-3); max-width: 72ch; }
-.notfor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 8px; }
-.notfor-col-head { display: block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px; font-weight: 500; }
-.notfor-list--paired li { grid-template-columns: 1fr; gap: 0; }
-@media (max-width: 768px) { .notfor-grid { grid-template-columns: 1fr; gap: 40px; } }
 
 /* Pilot CTA */
 .why-cta { max-width: var(--page-max); margin: 96px auto 120px; padding: 0 40px; text-align: center; }
@@ -4204,23 +4030,7 @@ header button:focus:not(:focus-visible){
 .why-cta h2 em { font-style: italic; color: var(--copper); }
 .why-cta .sub { font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 56ch; margin: 0 auto 28px; }
 
-/* Mobile overrides */
 @media (max-width: 768px) {
-  .thesis-hero { padding: 0 22px; }
-  .thesis-hero-meta { grid-template-columns: 1fr; }
-  .thesis-hero-cell { border-right: none; border-bottom: 1px solid var(--hair); padding: 20px 0; }
-  .thesis-hero-cell:last-child { border-bottom: none; }
-  .thesis-hero-cell:not(:first-child) { padding-left: 0; }
-
-  .compounds { margin-top: 72px; padding: 0 22px; }
-  .compounds-timeline { grid-template-columns: 1fr; gap: 40px; padding-top: 8px; }
-  .compounds-rail { display: none; }
-  .compounds-step { padding-top: 0; padding-left: 60px; }
-  .compounds-marker { position: static; display: inline-block; margin-bottom: 8px; }
-
-  .notfor { margin-top: 72px; padding: 0 22px; }
-  .notfor-list li { grid-template-columns: 1fr; gap: 4px; }
-
   .why-cta { margin: 72px auto 72px; padding: 0 22px; }
 }
 
@@ -4422,5 +4232,748 @@ header button:focus:not(:focus-visible){
 @media (prefers-reduced-motion: reduce) {
   .hero-artifact-modal-backdrop,
   .hero-artifact-modal-panel { animation: none; }
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   /why-salency Linear-treatment rebuild — diff-pair viewer + intro + CTA.
+   Ported from /tmp/salency-mockup/why-salency-v-1and2.html. The mockup
+   is the visual source of truth for this surface. CSS organized as:
+     1. .why-intro            (the H1 + subhead block above the viewer)
+     2. .diff-stage           (outer section spacer)
+     3. .window-chrome        (browser-window wrapper)
+     4. .chrome-bar           (traffic lights + URL pill + title)
+     5. .diff-frame           (inner artifact frame)
+     6. .diff-head            (call meta + synthetic chip)
+     7. .column-headers       (3-up Notetaker / Your CRM / Salency labels)
+     8. .diff-grid + .pane    (3-pane layout)
+     9. .tline                (transcript line buttons)
+    10. .crm-record           (CRM field rows + overwrite badge)
+    11. .crm-overwrite        (Lost-in-overwrite reveal panel)
+    12. .signal-card          (Salency memory cards)
+    13. .cross-call-foot      (account-level memory link)
+    14. .notetaker-table .salency-col  (copper-glow column refresh)
+   Mobile: 880px breakpoint merges CRM + Salency into a single response
+   panel per Q2=D from the spec. ═════════════════════════════════════ */
+
+/* 1. Intro ─────────────────────────────────────────────────────────── */
+.why-intro {
+  max-width: var(--page-max);
+  margin: 56px auto 22px;
+  padding: 0 40px;
+}
+.why-intro .why-sub {
+  color: var(--ink-2);
+  font-size: 15px;
+  max-width: 56ch;
+  margin: 18px 0 0;
+}
+.why-intro .why-sub .copper { color: var(--copper); }
+@media (max-width: 768px) {
+  .why-intro { margin-top: 32px; padding: 0 22px; }
+}
+
+/* 2. Diff stage spacer ─────────────────────────────────────────────── */
+.diff-stage {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 18px 40px 56px;
+}
+@media (max-width: 768px) {
+  .diff-stage { padding: 12px 22px 40px; }
+}
+
+/* 3. Window chrome ─────────────────────────────────────────────────── */
+.window-chrome {
+  background: var(--bg-2);
+  border: 1px solid var(--hair-2);
+  border-radius: 12px;
+  box-shadow:
+    0 30px 80px -40px rgba(254, 133, 49, 0.18),
+    0 24px 60px -28px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 640px;
+  max-height: calc(100vh - 180px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 1140px) {
+  .window-chrome { max-width: 100%; }
+}
+@media (max-width: 880px) {
+  .window-chrome { height: auto; max-height: none; }
+  .chrome-title { display: none; }
+}
+
+/* 4. Chrome bar ────────────────────────────────────────────────────── */
+.chrome-bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 14px;
+  background: linear-gradient(180deg, #1d1a22 0%, #15131a 100%);
+  border-bottom: 1px solid var(--hair-2);
+  flex: 0 0 auto;
+}
+.chrome-traffic {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.chrome-traffic .dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+.chrome-traffic .dot.red    { background: #FF5F56; }
+.chrome-traffic .dot.yellow { background: #FFBD2E; }
+.chrome-traffic .dot.green  { background: #27C93F; }
+.chrome-url {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: var(--bg-3);
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  max-width: 360px;
+  margin: 0 auto;
+}
+.chrome-url .lock {
+  color: var(--ink-3);
+  font-size: 9px;
+  margin-right: 2px;
+}
+.chrome-url .domain { color: var(--ink-2); }
+.chrome-url .path   { color: var(--ink); }
+.chrome-title {
+  text-align: right;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  grid-column: 3;
+  white-space: nowrap;
+}
+
+/* 5. Diff frame ────────────────────────────────────────────────────── */
+.diff-frame {
+  background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.diff-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--copper) 0%, transparent 100%);
+  border-radius: 2px;
+}
+
+/* 6. Diff head ─────────────────────────────────────────────────────── */
+.diff-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 16px 24px 12px;
+  border-bottom: 1px solid var(--hair);
+}
+.diff-head .left {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.diff-head .left strong { color: var(--ink); font-weight: 500; }
+.diff-head .right {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--copper);
+  border: 1px solid var(--copper-a30);
+  padding: 3px 7px;
+  border-radius: 3px;
+  background: var(--copper-a04);
+  white-space: nowrap;
+}
+
+/* 7. Column headers ───────────────────────────────────────────────── */
+.column-headers {
+  display: grid;
+  grid-template-columns: 1.1fr 0.85fr 1.05fr;
+  border-bottom: 1px solid var(--hair-2);
+  background: var(--bg-3);
+  flex: 0 0 auto;
+}
+.col-header {
+  padding: 14px 22px 12px;
+  border-right: 1px solid var(--hair);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.col-header:last-child { border-right: 0; }
+.col-header.salency-header {
+  background: rgba(254, 133, 49, 0.06);
+  border-right-color: var(--copper-a30);
+}
+.col-header .col-name {
+  font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.col-header.salency-header .col-name { color: var(--copper); }
+.col-header .col-sub {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.col-header.salency-header .col-sub { color: var(--copper); opacity: 0.85; }
+@media (max-width: 880px) {
+  .column-headers { display: none; }
+}
+
+/* 8. Diff grid + panes ─────────────────────────────────────────────── */
+.diff-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.85fr 1.05fr;
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.pane {
+  padding: 16px 22px 18px;
+  min-width: 0;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--copper-a30) transparent;
+  border-right: 1px solid var(--hair);
+}
+.pane:last-child { border-right: 0; }
+.pane::-webkit-scrollbar { width: 5px; }
+.pane::-webkit-scrollbar-thumb { background: var(--copper-a30); border-radius: 3px; }
+.pane::-webkit-scrollbar-track { background: transparent; }
+
+.pane .pane-eb {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 10px;
+  /* Hide redundant pane labels — column-headers above already names them. */
+  display: none;
+}
+.pane .pane-eb .meta { color: var(--ink-3); margin-left: 6px; opacity: 0.7; font-weight: 400; }
+
+.pane.salency-pane {
+  background: linear-gradient(180deg, rgba(254, 133, 49, 0.04) 0%, rgba(254, 133, 49, 0.06) 100%);
+}
+.pane.salency-pane::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  right: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent 0%, var(--copper-a30) 30%, var(--copper-a30) 70%, transparent 100%);
+}
+.pane.crm-pane { background: rgba(255, 255, 255, 0.01); }
+
+/* 9. Transcript lines ─────────────────────────────────────────────── */
+.tline-list { display: flex; flex-direction: column; gap: 2px; }
+.tline {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin: 0;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  background: transparent;
+  text-align: left;
+  width: 100%;
+  transition-property: background, border-color, color;
+  transition-duration: 140ms;
+}
+.tline:hover {
+  background: rgba(255, 255, 255, 0.02);
+  border-left-color: var(--hair-2);
+}
+.tline:focus-visible {
+  outline: 2px solid var(--copper-a30);
+  outline-offset: 1px;
+}
+.tline .ts {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  color: var(--ink-3);
+  font-size: 11px;
+  margin-right: 5px;
+}
+.tline .speaker { color: var(--ink); font-weight: 500; }
+.tline.is-active {
+  background: var(--copper-a04);
+  border-left-color: var(--copper);
+}
+.tline.is-active .ts { color: var(--copper); }
+.transcript-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--hair);
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+}
+
+/* 10. CRM record ──────────────────────────────────────────────────── */
+.crm-record {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+.crm-record .crm-row {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--hair);
+  background: transparent;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  text-align: left;
+  width: 100%;
+}
+.crm-record .crm-row:last-of-type { border-bottom: 0; }
+.crm-record .crm-row .crm-key {
+  color: var(--ink-3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.crm-record .crm-row .crm-key .crm-constraint {
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+  color: rgba(138, 136, 132, 0.55);
+  text-transform: lowercase;
+  line-height: 1.2;
+}
+.crm-record .crm-row .crm-key .crm-constraint.warn {
+  color: rgba(255, 90, 90, 0.55);
+}
+.crm-record .crm-row .crm-val { color: var(--ink); }
+.crm-record .crm-row .crm-val.dim { color: var(--ink-3); }
+
+/* notes row is interactive — laid out as 2 cols (key / value-stack) */
+.crm-record button.crm-row.notes {
+  grid-template-columns: 86px 1fr;
+  align-items: start;
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 160ms;
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+}
+.crm-record button.crm-row.notes:hover { background: rgba(255, 90, 90, 0.04); }
+.crm-record button.crm-row.notes.is-quiet { cursor: default; }
+.crm-record button.crm-row.notes.is-quiet:hover { background: transparent; }
+.crm-record button.crm-row.notes:focus-visible {
+  outline: 2px solid var(--copper-a30);
+  outline-offset: 1px;
+}
+.crm-record .crm-val-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.crm-record button.crm-row.notes .crm-val {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-style: italic;
+  color: var(--ink-2);
+  font-size: 12px;
+  line-height: 1.45;
+  transition: opacity 130ms ease-out, transform 130ms ease-out;
+}
+.crm-record button.crm-row.notes .crm-val.is-outgoing {
+  opacity: 0;
+  transform: translateY(-2px);
+}
+.crm-record .crm-expand-cue {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  opacity: 0.7;
+  transition: opacity 160ms, color 160ms;
+}
+.crm-record button.crm-row.notes:hover .crm-expand-cue { opacity: 1; color: var(--ink-2); }
+.crm-record button.crm-row.notes.is-expanded .crm-expand-cue {
+  color: #E89A8E;
+  opacity: 1;
+}
+
+.crm-overwrite-badge {
+  align-self: flex-start;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #E89A8E;
+  background: rgba(255, 90, 90, 0.08);
+  border: 1px solid rgba(255, 90, 90, 0.24);
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: opacity 200ms;
+}
+.crm-overwrite-badge.is-hidden { display: none; }
+.crm-overwrite-badge.is-pulse { animation: crm-badge-pulse 1.2s ease-out; }
+@keyframes crm-badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 90, 0); }
+  50%      { box-shadow: 0 0 0 4px rgba(255, 90, 90, 0.12); }
+}
+
+/* 11. Lost-in-overwrite reveal panel ───────────────────────────────── */
+.crm-overwrite {
+  margin-top: 8px;
+  padding: 9px 11px;
+  background: rgba(255, 90, 90, 0.05);
+  border: 1px solid rgba(255, 90, 90, 0.20);
+  border-radius: 4px;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  display: none;
+}
+.crm-overwrite.is-shown {
+  display: block;
+  animation: signal-in 240ms ease-out;
+}
+.crm-overwrite .lost-eb {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #E89A8E;
+  margin-bottom: 6px;
+}
+.crm-overwrite .lost-line {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-style: italic;
+  color: #E89A8E;
+  font-size: 12px;
+  margin: 0 0 3px;
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 90, 90, 0.5);
+}
+.crm-overwrite .lost-meta {
+  font-size: 9.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  margin: 0;
+}
+.crm-overwrite .lost-comment {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 90, 90, 0.18);
+  color: var(--ink-3);
+  font-style: normal;
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.crm-foot {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: rgba(255, 90, 90, 0.04);
+  border: 1px solid rgba(255, 90, 90, 0.16);
+  border-radius: 4px;
+  color: #E89A8E;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+/* 12. Salency signal cards ────────────────────────────────────────── */
+.signals { display: flex; flex-direction: column; gap: 8px; }
+.signals.is-outgoing > .signal-card {
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity 130ms ease-out, transform 130ms ease-out;
+}
+.signal-card {
+  background: var(--bg-3);
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  padding: 9px 12px;
+  transition: border-color 140ms, background 140ms;
+}
+.signal-card.is-flagged {
+  border-color: var(--copper-a30);
+  background: var(--copper-a04);
+}
+.signal-card .signal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+.signal-card .signal-name {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.signal-card .signal-status {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 1px 6px;
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+}
+.signal-card.is-flagged .signal-status {
+  color: var(--copper);
+  border-color: var(--copper-a30);
+  background: var(--copper-a08);
+}
+.signal-card .signal-title {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.signal-card .signal-title-meta {
+  color: var(--ink-3);
+  font-weight: 400;
+  font-size: 11.5px;
+  font-style: italic;
+}
+.signal-card .signal-quote-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 8px;
+  padding: 2px 0;
+  font-size: 11.5px;
+}
+.signal-card .signal-quote-row .label {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+}
+.signal-card .signal-quote-row .body { color: var(--ink-2); }
+.signal-card .signal-quote-row .body .quote {
+  font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  font-style: italic;
+  color: var(--ink);
+}
+.signal-card .signal-quote-row .body .cite {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--ink-3);
+  margin-left: 4px;
+}
+.signal-card .signal-foot {
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid var(--hair);
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--ink-3);
+}
+.signal-card .signal-foot .copper { color: var(--copper); }
+.signal-card.is-flagged .signal-foot { border-top-color: var(--copper-a30); }
+
+.signal-card .expand-toggle {
+  margin-top: 4px;
+  display: inline-block;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.signal-card .expand-toggle:hover { opacity: 1; color: var(--ink-2); }
+.signal-card .expand-toggle:focus-visible {
+  outline: 2px solid var(--copper-a30);
+  outline-offset: 2px;
+}
+.signal-card .expand-toggle--collapse { color: var(--copper); opacity: 0.85; }
+
+.signal-card-detail {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--hair);
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  animation: signal-in 200ms ease-out;
+}
+.signal-card.is-flagged .signal-card-detail { border-top-color: var(--copper-a30); }
+.signal-card-detail .ctx-line {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 4px 0;
+  padding-left: 10px;
+  border-left: 2px solid var(--copper-a30);
+}
+.signal-card-detail .ctx-line .ts {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  color: var(--ink-3);
+  font-size: 10.5px;
+  margin-right: 5px;
+}
+.signal-card-detail .open-modal {
+  margin-top: 8px;
+  display: inline-block;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--copper);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.signal-card-detail .open-modal:hover { color: #FE9F5B; }
+.signal-card-detail .open-modal:focus-visible {
+  outline: 2px solid var(--copper-a30);
+  outline-offset: 2px;
+}
+
+.signal-card.is-new { animation: signal-in 220ms ease-out backwards; }
+@keyframes signal-in {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 13. Cross-call footer ───────────────────────────────────────────── */
+.cross-call-foot {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--copper-a30);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.cross-call-foot > .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--copper);
+  flex-shrink: 0;
+}
+.cross-call-foot .link {
+  color: var(--copper);
+  text-decoration: none;
+  border-bottom: 1px solid var(--copper-a30);
+}
+.cross-call-foot .link:hover { border-bottom-color: var(--copper); }
+
+/* Mobile (<880px) — Q2=D merge: CRM + Salency stack into a single
+   "response" panel with a copper divider chip. Touch targets bump to
+   44px. ────────────────────────────────────────────────────────────── */
+@media (max-width: 880px) {
+  .diff-grid { grid-template-columns: 1fr; }
+  .diff-grid::before,
+  .diff-grid::after { display: none; }
+  .pane {
+    padding: 14px 18px;
+    border-top: 1px solid var(--hair);
+  }
+  .pane:first-child { border-top: 0; }
+  .tline { padding: 12px 12px; min-height: 44px; }
+  .pane.crm-pane {
+    border-top: 1px solid var(--copper-a30);
+    padding-bottom: 8px;
+  }
+  .pane.salency-pane {
+    border-top: 0;
+    padding-top: 12px;
+    position: relative;
+  }
+  .pane.salency-pane::before {
+    content: '\2195 Salency preserves both';
+    display: block;
+    text-align: center;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    padding: 8px 12px;
+    margin: 0 -18px 14px;
+    background: rgba(254, 133, 49, 0.08);
+    border-top: 1px solid var(--copper-a30);
+    border-bottom: 1px solid var(--copper-a30);
+  }
+  .signal-card { padding: 10px 12px; }
+  .cross-call-foot { font-size: 9.5px; }
+}
+
+/* Reduced-motion: disable entrance + pulse animations. */
+@media (prefers-reduced-motion: reduce) {
+  .signal-card.is-new,
+  .signal-card-detail,
+  .crm-overwrite.is-shown { animation: none; }
+  .crm-overwrite-badge.is-pulse { animation: none; }
+  .signals.is-outgoing > .signal-card,
+  .crm-record button.crm-row.notes .crm-val.is-outgoing {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 

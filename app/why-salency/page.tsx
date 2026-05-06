@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 import { MarketingHeader } from '@/components/MarketingHeader';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { ThesisSection } from '@/components/sections/ThesisSection';
-import { ProblemSection } from '@/components/sections/ProblemSection';
-import { CompoundsSection } from '@/components/sections/CompoundsSection';
-import { NotetakerSection } from '@/components/sections/NotetakerSection';
-import { NotForYouSection } from '@/components/sections/NotForYouSection';
+import { DiffPairViewer } from '@/components/sections/DiffPairViewer';
+import { NotetakerCompareTable } from '@/components/sections/NotetakerCompareTable';
 import { PilotCtaSection } from '@/components/sections/PilotCtaSection';
 import { SiteFooter } from '@/components/sections/SiteFooter';
+import { TranscriptSnippetModalLazy } from '@/components/TranscriptSnippetModalLazy';
 import { JsonLd } from '@/components/JsonLd';
 
 const faqSchema = {
@@ -65,16 +63,25 @@ export const metadata: Metadata = {
 
 export default function WhySalencyPage() {
   return (
-    <div className="page">
+    <div className="page why-salency-page">
       <JsonLd data={faqSchema} />
       <MarketingHeader />
-      <ThesisSection />
-      <ScrollReveal><ProblemSection /></ScrollReveal>
-      <ScrollReveal><NotetakerSection /></ScrollReveal>
-      <ScrollReveal><CompoundsSection /></ScrollReveal>
-      <ScrollReveal><NotForYouSection /></ScrollReveal>
+      <section className="why-intro">
+        <h1 className="h1">
+          Notetakers transcribe. CRMs overwrite.{' '}
+          <span className="h1-italic">Salency remembers.</span>
+        </h1>
+        <p className="why-sub">
+          The memory layer between your notetaker and your CRM.
+        </p>
+      </section>
+      <DiffPairViewer />
+      <ScrollReveal>
+        <NotetakerCompareTable />
+      </ScrollReveal>
       <PilotCtaSection />
       <SiteFooter />
+      <TranscriptSnippetModalLazy />
     </div>
   );
 }

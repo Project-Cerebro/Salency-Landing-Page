@@ -7,13 +7,11 @@ export function PilotCtaSection() {
     <section className="why-cta">
       <span className="eb">Pilot cohort &middot; Spring 2026</span>
       <h2>
-        Start the memory. <em>Inherit it forever.</em>
+        Add the <em>memory layer</em> to your stack.
       </h2>
       <p className="sub">
-        Week one, your existing calls become searchable memory. Every handoff
-        after that, internal or customer-side, reads the story instead of
-        restarting the relationship. No notetaker integration required to
-        start.
+        Pilot cohort opens Spring 2026. Your existing calls become memory in
+        week one. Notetaker integration not required.
       </p>
       <button
         type="button"
