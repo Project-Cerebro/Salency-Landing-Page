@@ -69,12 +69,11 @@ export default function WhySalencyPage() {
       <section className="why-intro">
         <span className="eb">Why Salency</span>
         <h1 className="h1">
-          Your notetaker. Your CRM.{' '}
-          <span className="h1-italic">Salency.</span>
+          Notetakers transcribe. CRMs overwrite.{' '}
+          <span className="h1-italic">Salency remembers.</span>
         </h1>
         <p className="why-sub">
-          Notetakers transcribe. CRMs overwrite.{' '}
-          <span className="copper">Salency remembers.</span>
+          The memory layer between your notetaker and your CRM.
         </p>
       </section>
       <DiffPairViewer />
