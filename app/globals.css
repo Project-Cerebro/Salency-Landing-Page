@@ -4276,7 +4276,11 @@ header button:focus:not(:focus-visible){
 .diff-stage {
   max-width: var(--page-max);
   margin: 0 auto;
-  padding: 18px 40px 56px;
+  /* 20px horizontal so the artifact (max-width 1240) can fill 1280 - 40
+     and preserve the locked 1.72:1 aspect ratio at 720 height. The rest
+     of the page stays on the 40px rail; the artifact intentionally
+     breaks out by 20px each side as the hero. */
+  padding: 18px 20px 56px;
 }
 @media (max-width: 768px) {
   .diff-stage { padding: 12px 22px 40px; }
@@ -4293,14 +4297,14 @@ header button:focus:not(:focus-visible){
   overflow: hidden;
   position: relative;
   width: 100%;
-  max-width: 1100px;
-  height: 640px;
-  max-height: calc(100vh - 180px);
+  max-width: 1240px;
+  height: 720px;
+  max-height: calc(100vh - 140px);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
-@media (max-width: 1140px) {
+@media (max-width: 1280px) {
   .window-chrome { max-width: 100%; }
 }
 @media (max-width: 880px) {
@@ -4665,7 +4669,9 @@ header button:focus:not(:focus-visible){
   50%      { box-shadow: 0 0 0 4px rgba(255, 90, 90, 0.12); }
 }
 
-/* 11. Lost-in-overwrite reveal panel ───────────────────────────────── */
+/* 11. CRM-gap reveal panel — three failure modes (overwrite/no-link/no-field).
+   All share base layout. Strikethrough fires only for overwrite, since
+   no-link/no-field aren't destructive — they're CRM limitations.        */
 .crm-overwrite {
   margin-top: 8px;
   padding: 9px 11px;
@@ -4688,16 +4694,82 @@ header button:focus:not(:focus-visible){
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #E89A8E;
+  margin: 0 -4px 6px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  display: inline-block;
+}
+/* Punchy flash on the eyebrow + reveal-panel border on expand so the new
+   content is noticed even when auto-scroll only nudges a few pixels. The
+   key prop on .crm-overwrite (in DiffPairViewer.tsx) forces React to remount
+   on state transitions, guaranteeing the keyframe restarts cleanly. */
+.crm-overwrite.is-shown .lost-eb {
+  animation: lost-eb-flash 800ms ease-out;
+}
+@keyframes lost-eb-flash {
+  0% {
+    background: rgba(255, 90, 90, 0.40);
+    color: #FFE4DC;
+    box-shadow: 0 0 0 0 rgba(255, 90, 90, 0.5);
+  }
+  30% {
+    background: rgba(255, 90, 90, 0.32);
+    color: #FFD2C5;
+    box-shadow: 0 0 0 4px rgba(255, 90, 90, 0.18);
+  }
+  100% {
+    background: transparent;
+    color: #E89A8E;
+    box-shadow: 0 0 0 0 rgba(255, 90, 90, 0);
+  }
+}
+.crm-overwrite.is-shown {
+  animation: signal-in 240ms ease-out, gap-reveal-glow 800ms ease-out;
+}
+@keyframes gap-reveal-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 90, 0); }
+  35%      { box-shadow: 0 0 18px -2px rgba(255, 90, 90, 0.32); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crm-overwrite.is-shown .lost-eb,
+  .crm-overwrite.is-shown { animation: none; }
+}
+.crm-overwrite .lost-row {
   margin-bottom: 6px;
+}
+.crm-overwrite .lost-row:last-of-type {
+  margin-bottom: 0;
+}
+.crm-overwrite .lost-row + .lost-row {
+  padding-top: 6px;
+  border-top: 1px dashed rgba(255, 90, 90, 0.14);
 }
 .crm-overwrite .lost-line {
   font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-  font-style: italic;
-  color: #E89A8E;
   font-size: 12px;
   margin: 0 0 3px;
+}
+/* Overwrite + no-link kinds are showing actual customer speech that
+   either got erased or stored without relationships. Italic-red reads
+   as "verbatim quote with a problem." */
+.crm-overwrite.is-overwrite .lost-line,
+.crm-overwrite.is-no-link .lost-line {
+  font-style: italic;
+  color: #E89A8E;
+}
+/* Overwrite kind also gets strikethrough — the line is genuinely erased. */
+.crm-overwrite.is-overwrite .lost-line {
   text-decoration: line-through;
   text-decoration-color: rgba(255, 90, 90, 0.5);
+}
+/* No-field kind is showing structured pain records (categories, not
+   speech). Style as labels, not quotes — non-italic, ink-2 color, with
+   a subtle copper tint on the data category to call out the structure. */
+.crm-overwrite.is-no-field .lost-line {
+  font-style: normal;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.005em;
 }
 .crm-overwrite .lost-meta {
   font-size: 9.5px;
