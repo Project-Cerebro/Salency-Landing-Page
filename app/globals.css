@@ -4276,7 +4276,11 @@ header button:focus:not(:focus-visible){
 .diff-stage {
   max-width: var(--page-max);
   margin: 0 auto;
-  padding: 18px 40px 56px;
+  /* 20px horizontal so the artifact (max-width 1240) can fill 1280 - 40
+     and preserve the locked 1.72:1 aspect ratio at 720 height. The rest
+     of the page stays on the 40px rail; the artifact intentionally
+     breaks out by 20px each side as the hero. */
+  padding: 18px 20px 56px;
 }
 @media (max-width: 768px) {
   .diff-stage { padding: 12px 22px 40px; }
@@ -4293,14 +4297,14 @@ header button:focus:not(:focus-visible){
   overflow: hidden;
   position: relative;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1240px;
   height: 720px;
   max-height: calc(100vh - 140px);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
-@media (max-width: 1140px) {
+@media (max-width: 1280px) {
   .window-chrome { max-width: 100%; }
 }
 @media (max-width: 880px) {
