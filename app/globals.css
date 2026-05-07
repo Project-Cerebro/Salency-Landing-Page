@@ -4665,7 +4665,9 @@ header button:focus:not(:focus-visible){
   50%      { box-shadow: 0 0 0 4px rgba(255, 90, 90, 0.12); }
 }
 
-/* 11. Lost-in-overwrite reveal panel ───────────────────────────────── */
+/* 11. CRM-gap reveal panel — three failure modes (overwrite/no-link/no-field).
+   All share base layout. Strikethrough fires only for overwrite, since
+   no-link/no-field aren't destructive — they're CRM limitations.        */
 .crm-overwrite {
   margin-top: 8px;
   padding: 9px 11px;
@@ -4690,12 +4692,25 @@ header button:focus:not(:focus-visible){
   color: #E89A8E;
   margin-bottom: 6px;
 }
+.crm-overwrite .lost-row {
+  margin-bottom: 6px;
+}
+.crm-overwrite .lost-row:last-of-type {
+  margin-bottom: 0;
+}
+.crm-overwrite .lost-row + .lost-row {
+  padding-top: 6px;
+  border-top: 1px dashed rgba(255, 90, 90, 0.14);
+}
 .crm-overwrite .lost-line {
   font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
   font-style: italic;
   color: #E89A8E;
   font-size: 12px;
   margin: 0 0 3px;
+}
+/* Strikethrough only on the overwrite kind — the line is genuinely erased. */
+.crm-overwrite.is-overwrite .lost-line {
   text-decoration: line-through;
   text-decoration-color: rgba(255, 90, 90, 0.5);
 }

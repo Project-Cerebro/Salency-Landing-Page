@@ -119,25 +119,66 @@ interface CrmFoot {
   text?: string;
 }
 
-interface OverwritePayload {
-  lostLine: string;
-  lostMeta: string;
+// CRM fails in three distinct ways across the arc. Each state declares which
+// failure mode it demonstrates; the badge, the reveal label, and the visual
+// treatment (strikethrough vs not) all key off this.
+type GapKind = 'overwrite' | 'no-link' | 'no-field';
+
+interface GapRow {
+  line: string;
+  meta: string;
+}
+
+interface CrmGapPayload {
+  kind: GapKind;
+  rows: GapRow[];
   comment: string;
 }
 
 interface DiffState {
   crmNotes: string;
   crmFoot: CrmFoot;
-  overwrite: OverwritePayload | null;
+  gap: CrmGapPayload | null;
   signals: SignalCardSpec[];
 }
 
+const GAP_BADGE: Record<GapKind, string> = {
+  'overwrite': `${CROSS} overwrites`,
+  'no-link': '\u26A0 no link',
+  'no-field': '\u26A0 no field',
+};
+
+const GAP_LABEL: Record<GapKind, string> = {
+  'overwrite': 'Lost in this overwrite',
+  'no-link': 'What CRM can\u2019t connect',
+  'no-field': 'What CRM has no field for',
+};
+
+const GAP_CUE: Record<GapKind, { closed: string; open: string }> = {
+  'overwrite': {
+    closed: `${ARROW_DOWN} Click to see what was overwritten`,
+    open: `${ARROW_UP} Click to collapse`,
+  },
+  'no-link': {
+    closed: `${ARROW_DOWN} Click to see what isn\u2019t linked`,
+    open: `${ARROW_UP} Click to collapse`,
+  },
+  'no-field': {
+    closed: `${ARROW_DOWN} Click to see what has no schema home`,
+    open: `${ARROW_UP} Click to collapse`,
+  },
+};
+
 const STATES: Record<number, DiffState> = {
-  // 0: Maya framing question (no extraction)
+  // 0: Maya framing question. CRM still carries the stale March note from
+  // before the pricing call started. Salency stays quiet.
   0: {
-    crmNotes: '"Where are we on the commercial side?"',
-    crmFoot: { hidden: true },
-    overwrite: null,
+    crmNotes: '"3-5s settlement delays during vol windows. follow up commercial."',
+    crmFoot: {
+      hidden: false,
+      text: `Mar 09 entry ${MIDDOT} not yet updated this call.`,
+    },
+    gap: null,
     signals: [
       {
         name: 'Context only',
@@ -149,14 +190,21 @@ const STATES: Record<number, DiffState> = {
       },
     ],
   },
-  // 1: DEFAULT, the contradiction line
+  // 1: DEFAULT, the contradiction line. CRM gets overwritten in place,
+  // erasing the original March pain. Salency keeps both citations and
+  // flags the delta.
   1: {
     crmNotes: '"gotten used to it. not main thing anymore."',
     crmFoot: { hidden: false, text: `${CROSS} Mar 09 pain overwritten Apr 06.` },
-    overwrite: {
-      lostLine:
-        '"3 to 5 second settlement delays, killing us during volatility windows."',
-      lostMeta: `Daniel Voss ${MIDDOT} Mar 09 ${MIDDOT} 00:01:28 ${MIDDOT} stored in this same notes field`,
+    gap: {
+      kind: 'overwrite',
+      rows: [
+        {
+          line:
+            '"three to five seconds of settlement delay on our internal transfers, and that\u2019s killing us during volatility windows."',
+          meta: `Daniel Voss ${MIDDOT} Mar 09 ${MIDDOT} 00:01:28 ${MIDDOT} this same notes field`,
+        },
+      ],
       comment:
         'The pain that drove the deal in March is gone from this CRM record. Salency keeps it cited and contradicted, not erased.',
     },
@@ -212,7 +260,7 @@ const STATES: Record<number, DiffState> = {
       },
       {
         name: `Pain ${ARROW} product`,
-        status: 'still queued',
+        status: 'still ranked',
         flagged: false,
         title: (
           <>
@@ -227,13 +275,13 @@ const STATES: Record<number, DiffState> = {
             label: 'match',
             body: (
               <>
-                {`3-5s settlement delays ${MIDDOT} primary ${MIDDOT} confidence `}
-                <span className="copper">high</span>
+                {`3-5s settlement delays ${MIDDOT} primary ${MIDDOT} `}
+                <span className="copper">0.96 confidence</span>
               </>
             ),
           },
         ],
-        foot: 'Pain doesn\u2019t disappear when the rep adapts. The match stays queued.',
+        foot: 'Pain doesn\u2019t disappear when the rep adapts. The match stays ranked.',
         detail: {
           ctx: [
             {
@@ -246,11 +294,15 @@ const STATES: Record<number, DiffState> = {
       },
     ],
   },
-  // 2: Maya followup probe
+  // 2: Maya followup probe. CRM unchanged from state 1 (questions don't
+  // trigger CRM updates). Salency stays quiet on follow-up prompts.
   2: {
-    crmNotes: '"Interesting. What changed?"',
-    crmFoot: { hidden: true },
-    overwrite: null,
+    crmNotes: '"gotten used to it. not main thing anymore."',
+    crmFoot: {
+      hidden: false,
+      text: `Apr 06 entry ${MIDDOT} unchanged from previous line.`,
+    },
+    gap: null,
     signals: [
       {
         name: 'Context only',
@@ -262,18 +314,30 @@ const STATES: Record<number, DiffState> = {
       },
     ],
   },
-  // 3: Trader workflow adjustment
+  // 3: Trader workflow adjustment. CRM stores the new line but cannot
+  // connect it to the underlying pain (call-001) or to the trader as a
+  // stakeholder. The failure mode is "no link", not "overwrite".
   3: {
     crmNotes: '"trader workflow adjusted, pre-positions margin"',
     crmFoot: {
       hidden: false,
-      text: `${CROSS} Note doesn\u2019t link to the original pain or to the trader stakeholder.`,
+      text: `${CROSS} New line stored. No link to the related pain or stakeholder.`,
     },
-    overwrite: {
-      lostLine: '"trader workflow adjusted, pre-positions margin"',
-      lostMeta: `Apr 06 entry ${MIDDOT} 88 chars`,
+    gap: {
+      kind: 'no-link',
+      rows: [
+        {
+          line:
+            '"three to five seconds of settlement delay on our internal transfers..."',
+          meta: `related pain ${MIDDOT} call-001 ${MIDDOT} 00:01:28 ${MIDDOT} stored as separate note, no relation`,
+        },
+        {
+          line: '"They yell at me. Not joking."',
+          meta: `head trader ${MIDDOT} call-001 ${MIDDOT} 00:01:56 ${MIDDOT} no stakeholder field, no relation`,
+        },
+      ],
       comment:
-        'CRM stores the line. It can\u2019t link this to the underlying pain or to the trader stakeholder. Two related signals, no relationship.',
+        'Three related facts across two calls. CRM stores them as flat strings with no relationship. Salency links the workaround to the pain it compensates for and to the person who drove it.',
     },
     signals: [
       {
@@ -315,25 +379,39 @@ const STATES: Record<number, DiffState> = {
         rows: [
           {
             label: 'role',
-            body: `Daniel Voss\u2019s direct report ${MIDDOT} referenced 4 times across calls`,
+            body: `Daniel Voss\u2019s direct report ${MIDDOT} mentioned across both calls`,
           },
         ],
         foot: 'Salency tracks people Daniel mentions, not just attendees of the call.',
       },
     ],
   },
-  // 4: Pain ranking
+  // 4: Pain ranking. Daniel's "list" statement implies an ordered priority
+  // across the account's pains. CRM has no priority/ranking field type, so
+  // even if the rep typed it, there's no schema home for the order. The
+  // failure mode is "no field", not "overwrite". The rebalance only cites
+  // pains that actually appear in the arc (latency from call-001 and MAS
+  // Singapore from call-002).
   4: {
     crmNotes: '"latency on the list but not the top"',
     crmFoot: {
       hidden: false,
-      text: `${CROSS} "List" is referenced. CRM has no list field.`,
+      text: `${CROSS} "List" is referenced. CRM has no priority field.`,
     },
-    overwrite: {
-      lostLine: '"latency on the list but not the top"',
-      lostMeta: `Apr 06 ${MIDDOT} references a "list" CRM has no field for`,
+    gap: {
+      kind: 'no-field',
+      rows: [
+        {
+          line: 'Latency · 3-5s settlement delays',
+          meta: `call-001 ${MIDDOT} Mar 09 ${MIDDOT} stored as a pain with no rank`,
+        },
+        {
+          line: 'MAS Singapore · Q4 deadline',
+          meta: `call-002 ${MIDDOT} Mar 23 ${MIDDOT} stored as an objection with no rank`,
+        },
+      ],
       comment:
-        'Daniel\u2019s ranking statement implies a 3-pain priority list. CRM has no representation; Salency rebalances the account\u2019s pain weights.',
+        'Two pains tracked across the arc. Daniel\u2019s "list" statement reorders them: MAS now urgent, latency demoted. CRM has no priority field, so the order has no place to live. Salency stores ranked weights as first-class data.',
     },
     signals: [
       {
@@ -344,14 +422,14 @@ const STATES: Record<number, DiffState> = {
         rows: [
           {
             label: 'before',
-            body: `Latency #1 (Mar 09) ${MIDDOT} Reconciliation #2 ${MIDDOT} MAS #3`,
+            body: `Latency #1 (Mar 09) ${MIDDOT} MAS Singapore #2 (Mar 23)`,
           },
           {
             label: 'after',
-            body: `Reconciliation #1 ${MIDDOT} MAS #2 ${MIDDOT} Latency #3`,
+            body: `MAS Singapore #1 ${MIDDOT} Latency #2`,
           },
         ],
-        foot: `Same pains, new weights ${MIDDOT} auto-rebalanced from explicit ranking statement.`,
+        foot: `Same two pains, new weights ${MIDDOT} rebalanced from Daniel\u2019s ranking statement.`,
       },
     ],
   },
@@ -431,7 +509,7 @@ export function DiffPairViewer() {
       setRenderState(STATES[idx]);
       setSwapKey((k) => k + 1);
       const next = STATES[idx];
-      if (next.overwrite) {
+      if (next.gap) {
         setPulseBadge(true);
         window.setTimeout(() => setPulseBadge(false), 1200);
       }
@@ -572,13 +650,13 @@ export function DiffPairViewer() {
                 </div>
                 <button
                   type="button"
-                  className={`crm-row notes${overwriteOpen ? ' is-expanded' : ''}${renderState.overwrite ? '' : ' is-quiet'}`}
+                  className={`crm-row notes${overwriteOpen ? ' is-expanded' : ''}${renderState.gap ? '' : ' is-quiet'}`}
                   onClick={() => {
-                    if (!renderState.overwrite) return;
+                    if (!renderState.gap) return;
                     setOverwriteOpen((v) => !v);
                   }}
                   aria-expanded={overwriteOpen}
-                  aria-disabled={renderState.overwrite ? 'false' : 'true'}
+                  aria-disabled={renderState.gap ? 'false' : 'true'}
                 >
                   <span className="crm-key">
                     notes
@@ -588,10 +666,12 @@ export function DiffPairViewer() {
                   </span>
                   <span className="crm-val-col">
                     <span
-                      className={`crm-overwrite-badge${renderState.overwrite ? '' : ' is-hidden'}${pulseBadge ? ' is-pulse' : ''}`}
-                      aria-hidden={renderState.overwrite ? 'false' : 'true'}
+                      className={`crm-overwrite-badge${renderState.gap ? ` is-${renderState.gap.kind}` : ' is-hidden'}${pulseBadge ? ' is-pulse' : ''}`}
+                      aria-hidden={renderState.gap ? 'false' : 'true'}
                     >
-                      {`${CROSS} overwrites`}
+                      {renderState.gap
+                        ? GAP_BADGE[renderState.gap.kind]
+                        : ''}
                     </span>
                     <span
                       key={swapKey}
@@ -599,28 +679,30 @@ export function DiffPairViewer() {
                     >
                       {renderState.crmNotes}
                     </span>
-                    {renderState.overwrite ? (
+                    {renderState.gap ? (
                       <span className="crm-expand-cue" aria-hidden="true">
                         {overwriteOpen
-                          ? '\u2191 Click to collapse'
-                          : '\u2193 Click to see what was overwritten'}
+                          ? GAP_CUE[renderState.gap.kind].open
+                          : GAP_CUE[renderState.gap.kind].closed}
                       </span>
                     ) : null}
                   </span>
                 </button>
               </div>
-              {renderState.overwrite ? (
+              {renderState.gap ? (
                 <div
-                  className={`crm-overwrite${overwriteOpen ? ' is-shown' : ''}`}
+                  className={`crm-overwrite is-${renderState.gap.kind}${overwriteOpen ? ' is-shown' : ''}`}
                   role="region"
-                  aria-label="Lost in this overwrite"
+                  aria-label={GAP_LABEL[renderState.gap.kind]}
                 >
-                  <div className="lost-eb">Lost in this overwrite</div>
-                  <p className="lost-line">{renderState.overwrite.lostLine}</p>
-                  <p className="lost-meta">{renderState.overwrite.lostMeta}</p>
-                  <div className="lost-comment">
-                    {renderState.overwrite.comment}
-                  </div>
+                  <div className="lost-eb">{GAP_LABEL[renderState.gap.kind]}</div>
+                  {renderState.gap.rows.map((r, ri) => (
+                    <div className="lost-row" key={ri}>
+                      <p className="lost-line">{r.line}</p>
+                      <p className="lost-meta">{r.meta}</p>
+                    </div>
+                  ))}
+                  <div className="lost-comment">{renderState.gap.comment}</div>
                 </div>
               ) : null}
               {!renderState.crmFoot.hidden ? (
