@@ -4694,7 +4694,31 @@ header button:focus:not(:focus-visible){
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #E89A8E;
-  margin-bottom: 6px;
+  margin: 0 -4px 6px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  display: inline-block;
+}
+/* Brief flash on the eyebrow when the reveal expands so the new content is
+   noticed even when the auto-scroll only nudges the pane a few pixels. */
+.crm-overwrite.is-shown .lost-eb {
+  animation: lost-eb-flash 600ms ease-out;
+}
+@keyframes lost-eb-flash {
+  0% {
+    background: rgba(255, 90, 90, 0.22);
+    color: #FFC7BD;
+  }
+  60% {
+    background: rgba(255, 90, 90, 0.10);
+  }
+  100% {
+    background: transparent;
+    color: #E89A8E;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crm-overwrite.is-shown .lost-eb { animation: none; }
 }
 .crm-overwrite .lost-row {
   margin-bottom: 6px;
