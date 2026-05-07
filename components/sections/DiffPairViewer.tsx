@@ -510,25 +510,22 @@ export function DiffPairViewer() {
     if (salencyPaneRef.current) salencyPaneRef.current.scrollTop = 0;
   }, [activeIdx]);
 
-  // Scroll the parent pane (not the page) so an expanded element is visible.
-  // Uses scrollTop math instead of scrollIntoView to avoid the document also
-  // scrolling when the artifact itself is partially below the fold.
+  // On expand: scroll the parent pane to its very bottom so the reveal
+  // (and the crm-foot beneath it) are guaranteed visible. Simpler than
+  // computing minimum-required scroll, and produces the same generous
+  // downward motion across every state — no math edge cases. Only scrolls
+  // the pane (not the page) by walking up to the nearest .pane ancestor.
   useEffect(() => {
     if (!overwriteOpen || !overwriteRef.current) return;
-    const el = overwriteRef.current;
-    const pane = el.closest('.pane') as HTMLElement | null;
+    const pane = overwriteRef.current.closest('.pane') as HTMLElement | null;
     if (!pane) return;
     const reduceMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches;
-    const elBottom = el.offsetTop + el.offsetHeight;
-    const paneBottom = pane.scrollTop + pane.clientHeight;
-    if (elBottom > paneBottom) {
-      pane.scrollTo({
-        top: elBottom - pane.clientHeight + 16,
-        behavior: reduceMotion ? 'auto' : 'smooth',
-      });
-    }
+    pane.scrollTo({
+      top: pane.scrollHeight,
+      behavior: reduceMotion ? 'auto' : 'smooth',
+    });
   }, [overwriteOpen]);
 
   useEffect(() => {
@@ -541,14 +538,10 @@ export function DiffPairViewer() {
       if (!el) return;
       const pane = el.closest('.pane') as HTMLElement | null;
       if (!pane) return;
-      const elBottom = el.offsetTop + el.offsetHeight;
-      const paneBottom = pane.scrollTop + pane.clientHeight;
-      if (elBottom > paneBottom) {
-        pane.scrollTo({
-          top: elBottom - pane.clientHeight + 16,
-          behavior: reduceMotion ? 'auto' : 'smooth',
-        });
-      }
+      pane.scrollTo({
+        top: pane.scrollHeight,
+        behavior: reduceMotion ? 'auto' : 'smooth',
+      });
     });
   }, [expanded]);
 
