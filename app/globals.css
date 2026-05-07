@@ -4746,15 +4746,30 @@ header button:focus:not(:focus-visible){
 }
 .crm-overwrite .lost-line {
   font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-  font-style: italic;
-  color: #E89A8E;
   font-size: 12px;
   margin: 0 0 3px;
 }
-/* Strikethrough only on the overwrite kind — the line is genuinely erased. */
+/* Overwrite + no-link kinds are showing actual customer speech that
+   either got erased or stored without relationships. Italic-red reads
+   as "verbatim quote with a problem." */
+.crm-overwrite.is-overwrite .lost-line,
+.crm-overwrite.is-no-link .lost-line {
+  font-style: italic;
+  color: #E89A8E;
+}
+/* Overwrite kind also gets strikethrough — the line is genuinely erased. */
 .crm-overwrite.is-overwrite .lost-line {
   text-decoration: line-through;
   text-decoration-color: rgba(255, 90, 90, 0.5);
+}
+/* No-field kind is showing structured pain records (categories, not
+   speech). Style as labels, not quotes — non-italic, ink-2 color, with
+   a subtle copper tint on the data category to call out the structure. */
+.crm-overwrite.is-no-field .lost-line {
+  font-style: normal;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.005em;
 }
 .crm-overwrite .lost-meta {
   font-size: 9.5px;
