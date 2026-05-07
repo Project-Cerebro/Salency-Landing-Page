@@ -28,7 +28,7 @@
 //     anchored to call-001 (the Mar 09 Discovery where the pain was raised)
 //     and passes call-001's matches array as-is.
 
-import { useMemo, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   HUDSON_TERRACE_ARC,
   getCallById,
@@ -482,11 +482,59 @@ export function DiffPairViewer() {
   // pre-swap window. CSS transitions on .is-outgoing handle the fade.
   const [outgoing, setOutgoing] = useState(false);
   const tlineRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  // Refs for the CRM gap reveal panel and the Salency signal cards. When the
+  // user expands either, we scroll the parent pane so the new content is in
+  // view without forcing a manual scroll. Only scrolls the pane (not the
+  // page) by walking up to the nearest .pane ancestor.
+  const overwriteRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<Array<HTMLElement | null>>([]);
 
   const totalCallsLine = useMemo(
     () => `Tracked across ${HUDSON_TERRACE_ARC.length} calls`,
     [],
   );
+
+  // Scroll the parent pane (not the page) so an expanded element is visible.
+  // Uses scrollTop math instead of scrollIntoView to avoid the document also
+  // scrolling when the artifact itself is partially below the fold.
+  useEffect(() => {
+    if (!overwriteOpen || !overwriteRef.current) return;
+    const el = overwriteRef.current;
+    const pane = el.closest('.pane') as HTMLElement | null;
+    if (!pane) return;
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    const elBottom = el.offsetTop + el.offsetHeight;
+    const paneBottom = pane.scrollTop + pane.clientHeight;
+    if (elBottom > paneBottom) {
+      pane.scrollTo({
+        top: elBottom - pane.clientHeight + 16,
+        behavior: reduceMotion ? 'auto' : 'smooth',
+      });
+    }
+  }, [overwriteOpen]);
+
+  useEffect(() => {
+    if (expanded.size === 0) return;
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    expanded.forEach((idx) => {
+      const el = cardRefs.current[idx];
+      if (!el) return;
+      const pane = el.closest('.pane') as HTMLElement | null;
+      if (!pane) return;
+      const elBottom = el.offsetTop + el.offsetHeight;
+      const paneBottom = pane.scrollTop + pane.clientHeight;
+      if (elBottom > paneBottom) {
+        pane.scrollTo({
+          top: elBottom - pane.clientHeight + 16,
+          behavior: reduceMotion ? 'auto' : 'smooth',
+        });
+      }
+    });
+  }, [expanded]);
 
   const onSelectLine = (idx: number) => {
     if (idx === activeIdx) return;
@@ -691,6 +739,7 @@ export function DiffPairViewer() {
               </div>
               {renderState.gap ? (
                 <div
+                  ref={overwriteRef}
                   className={`crm-overwrite is-${renderState.gap.kind}${overwriteOpen ? ' is-shown' : ''}`}
                   role="region"
                   aria-label={GAP_LABEL[renderState.gap.kind]}
@@ -727,6 +776,9 @@ export function DiffPairViewer() {
                   return (
                     <article
                       key={`${swapKey}-${i}`}
+                      ref={(el) => {
+                        cardRefs.current[i] = el;
+                      }}
                       className={`signal-card is-new${sig.flagged ? ' is-flagged' : ''}${isExpanded ? ' is-expanded' : ''}`}
                       style={{ animationDelay: `${i * 60}ms` }}
                     >
