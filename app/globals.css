@@ -4699,26 +4699,40 @@ header button:focus:not(:focus-visible){
   border-radius: 2px;
   display: inline-block;
 }
-/* Brief flash on the eyebrow when the reveal expands so the new content is
-   noticed even when the auto-scroll only nudges the pane a few pixels. */
+/* Punchy flash on the eyebrow + reveal-panel border on expand so the new
+   content is noticed even when auto-scroll only nudges a few pixels. The
+   key prop on .crm-overwrite (in DiffPairViewer.tsx) forces React to remount
+   on state transitions, guaranteeing the keyframe restarts cleanly. */
 .crm-overwrite.is-shown .lost-eb {
-  animation: lost-eb-flash 600ms ease-out;
+  animation: lost-eb-flash 800ms ease-out;
 }
 @keyframes lost-eb-flash {
   0% {
-    background: rgba(255, 90, 90, 0.22);
-    color: #FFC7BD;
+    background: rgba(255, 90, 90, 0.40);
+    color: #FFE4DC;
+    box-shadow: 0 0 0 0 rgba(255, 90, 90, 0.5);
   }
-  60% {
-    background: rgba(255, 90, 90, 0.10);
+  30% {
+    background: rgba(255, 90, 90, 0.32);
+    color: #FFD2C5;
+    box-shadow: 0 0 0 4px rgba(255, 90, 90, 0.18);
   }
   100% {
     background: transparent;
     color: #E89A8E;
+    box-shadow: 0 0 0 0 rgba(255, 90, 90, 0);
   }
 }
+.crm-overwrite.is-shown {
+  animation: signal-in 240ms ease-out, gap-reveal-glow 800ms ease-out;
+}
+@keyframes gap-reveal-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 90, 0); }
+  35%      { box-shadow: 0 0 18px -2px rgba(255, 90, 90, 0.32); }
+}
 @media (prefers-reduced-motion: reduce) {
-  .crm-overwrite.is-shown .lost-eb { animation: none; }
+  .crm-overwrite.is-shown .lost-eb,
+  .crm-overwrite.is-shown { animation: none; }
 }
 .crm-overwrite .lost-row {
   margin-bottom: 6px;

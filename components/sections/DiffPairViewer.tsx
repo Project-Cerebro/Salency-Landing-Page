@@ -739,6 +739,11 @@ export function DiffPairViewer() {
               </div>
               {renderState.gap ? (
                 <div
+                  // Key includes activeIdx + overwriteOpen so React remounts
+                  // when the user re-expands on a new state. Forces the flash
+                  // animation to restart cleanly instead of being preserved
+                  // mid-progress across state-to-state transitions.
+                  key={`gap-${activeIdx}-${overwriteOpen}`}
                   ref={overwriteRef}
                   className={`crm-overwrite is-${renderState.gap.kind}${overwriteOpen ? ' is-shown' : ''}`}
                   role="region"
