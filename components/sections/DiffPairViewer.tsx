@@ -488,11 +488,27 @@ export function DiffPairViewer() {
   // page) by walking up to the nearest .pane ancestor.
   const overwriteRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<Array<HTMLElement | null>>([]);
+  // Refs for both the CRM pane and the Salency pane. When the user changes
+  // transcript state, we reset both panes' scrollTop so each new expand
+  // starts from a known (top) position. Without this, the pane retains the
+  // prior state's scroll, which makes the auto-scroll math conclude "already
+  // in view" on the next expand and skip the visual cue.
+  const crmPaneRef = useRef<HTMLDivElement | null>(null);
+  const salencyPaneRef = useRef<HTMLDivElement | null>(null);
 
   const totalCallsLine = useMemo(
     () => `Tracked across ${HUDSON_TERRACE_ARC.length} calls`,
     [],
   );
+
+  // Reset both panes' scrollTop on every transcript state change so each new
+  // expand on the new state starts from a known top position. Without this,
+  // a prior-state auto-scroll leaves scrollTop > 0, and the next expand's
+  // math concludes "already in view" and skips the visual cue.
+  useEffect(() => {
+    if (crmPaneRef.current) crmPaneRef.current.scrollTop = 0;
+    if (salencyPaneRef.current) salencyPaneRef.current.scrollTop = 0;
+  }, [activeIdx]);
 
   // Scroll the parent pane (not the page) so an expanded element is visible.
   // Uses scrollTop math instead of scrollIntoView to avoid the document also
@@ -666,7 +682,7 @@ export function DiffPairViewer() {
             </div>
 
             {/* CRM pane */}
-            <div className="pane crm-pane">
+            <div ref={crmPaneRef} className="pane crm-pane">
               <div className="pane-eb">
                 {`CRM record `}
                 <span className="meta">{` ${MIDDOT} #4128`}</span>
@@ -765,7 +781,7 @@ export function DiffPairViewer() {
             </div>
 
             {/* Salency pane */}
-            <div className="pane salency-pane">
+            <div ref={salencyPaneRef} className="pane salency-pane">
               <div className="pane-eb">
                 {`Memory layer`}
                 <span className="meta">
