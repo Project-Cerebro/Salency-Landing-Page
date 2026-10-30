@@ -20,15 +20,15 @@ export const FOUNDERS: Founder[] = [
     shortBio: (
       <>
         Founding AE at Viggle. 2+ years at Sequence as BD &amp; Partnerships
-        Manager, ran the HubSpot&rarr;Monday CRM migration there.
+        Manager, moved the team from Trello to HubSpot there.
       </>
     ),
     longBio: (
       <>
         Early-stage GTM operator at multiple startups since leaving banking,
         currently founding AE at <em>Viggle</em> (a16z-backed). Deep run at
-        Sequence as BD &amp; Partnerships Manager (2+ years), where he ran
-        the HubSpot&rarr;Monday CRM migration and came out knowing the
+        Sequence as BD &amp; Partnerships Manager (2+ years), where he moved
+        the team from Trello to HubSpot and came out knowing the
         rep&rsquo;s actual context lives in the call, not the CRM row.
         Earlier: credit analysis at MUFG Hong Kong. MBET, Waterloo.
       </>
