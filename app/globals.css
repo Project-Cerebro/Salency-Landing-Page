@@ -1833,9 +1833,9 @@ html {
   }
 
   /* ═══════════ ComparativeStrip ═══════════
-     3-card row at position 7. Salency card highlighted with copper border
-     and tint. Replaces NotDoSection. No Attio card (Q13=d). Currency for
-     Gong/Salesforce/HubSpot framings checked against company-context §9. */
+     Two-column comparison table at position 7: what each tool keeps vs.
+     what Salency adds. Salency column marked by a copper hairline rail and
+     copper header only. Stacks to labelled blocks under 720px. */
   .comparative{
     max-width:var(--page-max);margin:96px auto 0;padding:0 40px;
   }
@@ -1861,44 +1861,69 @@ html {
     font-family:var(--font-display), 'Instrument Serif', serif;
     font-style:italic;font-weight:400;font-size:18px;color:var(--ink-2);
   }
-  .comparative-row{
-    display:grid;grid-template-columns:repeat(3, 1fr);gap:18px;
+  .comparative-table{
+    width:100%;border-collapse:collapse;
+    font-family:var(--font-body), 'Instrument Sans', system-ui, sans-serif;
   }
-  @media (max-width: 900px){
-    .comparative-row{grid-template-columns:1fr;gap:14px}
-  }
-  .comparative-card{
-    padding:24px 22px;
-    background:rgba(255,255,255,.02);
-    border:1px solid var(--hair);
-    border-radius:12px;
-    display:flex;flex-direction:column;gap:14px;
-  }
-  .comparative-card--salency{
-    border:1px solid rgba(232,230,227,.22);
-    background:rgba(232,230,227,.035);
-  }
-  .comparative-card-head{
-    display:flex;flex-direction:column;gap:4px;
-  }
-  .comparative-card-eb{
-    margin:0;
+  .comparative-table thead th{
+    text-align:left;padding:0 24px 14px 0;
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
-    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    font-size:11px;font-weight:500;letter-spacing:.16em;
     text-transform:uppercase;color:var(--ink-3);
+    border-bottom:1px solid var(--hair-2);
   }
-  .comparative-card--salency .comparative-card-eb{color:var(--ink)}
-  .comparative-card-name{
+  .comparative-table thead th.comparative-salency{color:var(--copper)}
+  .comparative-table tbody th,
+  .comparative-table td{
+    padding:26px 24px 26px 0;vertical-align:top;text-align:left;
+    border-bottom:1px solid var(--hair);
+  }
+  .comparative-table tbody th{width:24%;font-weight:400}
+  .comparative-table td{
+    width:38%;font-size:15px;line-height:1.6;font-weight:300;
+    color:var(--ink-3);max-width:44ch;
+  }
+  .comparative-table td.comparative-salency{color:var(--ink)}
+  .comparative-table th.comparative-salency,
+  .comparative-table td.comparative-salency{
+    padding-left:24px;padding-right:0;
+    border-left:1px solid var(--copper-a30);
+  }
+  .comparative-cat{
+    display:block;
     font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-    font-weight:500;font-size:20px;color:var(--ink);
-    letter-spacing:-.01em;
+    font-weight:500;font-size:20px;letter-spacing:-.01em;color:var(--ink);
   }
-  .comparative-card-copy{
-    margin:0;
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
-    font-size:14.5px;line-height:1.6;color:var(--ink-2);
+  .comparative-tools{
+    display:block;margin-top:4px;
+    font-size:13.5px;color:var(--ink-3);
   }
-  .comparative-card--salency .comparative-card-copy{color:var(--ink)}
+  @media (max-width: 720px){
+    .comparative-table thead{
+      position:absolute;width:1px;height:1px;overflow:hidden;
+      clip:rect(0 0 0 0);white-space:nowrap;
+    }
+    .comparative-table,
+    .comparative-table tbody,
+    .comparative-table tr,
+    .comparative-table tbody th,
+    .comparative-table td{display:block;width:auto}
+    .comparative-table tr{padding:22px 0;border-bottom:1px solid var(--hair)}
+    .comparative-table tr:first-child{border-top:1px solid var(--hair-2)}
+    .comparative-table tbody th,
+    .comparative-table td{padding:0;border-bottom:0}
+    .comparative-table td{margin-top:16px}
+    .comparative-table td::before{
+      content:attr(data-label);display:block;margin-bottom:6px;
+      font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+      font-size:11px;font-weight:500;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--ink-3);
+    }
+    .comparative-table td.comparative-salency{
+      padding-left:14px;
+    }
+    .comparative-table td.comparative-salency::before{color:var(--copper)}
+  }
 
   /* ═══════════ BottomClaim ═══════════
      Final CTA. Replaces CtaSection. Centered, max-width ~58ch. Italic
