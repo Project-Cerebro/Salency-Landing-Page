@@ -82,3 +82,17 @@ Flow: branch off `main` → PR feature branch to `test` → merge to `test` for 
 - **One PR = one logical change.** Small, reviewable, bisectable.
 
 **If you see an older PR targeting `test-revamp`:** retarget to `test` with `gh pr edit <N> --base test`.
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues on Project-Cerebro/Salency-Landing-Page, via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: root `GLOSSARY.md` + `docs/adr/`. See `docs/agents/domain.md`.
