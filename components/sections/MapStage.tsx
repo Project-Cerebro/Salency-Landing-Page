@@ -201,7 +201,7 @@ export function MapStage() {
                 </span>
                 <span className="map-pain-cite">
                   {pain.speakerName} {'\u00b7'} {pain.speakerTitle} {'\u00b7'}{' '}
-                  {pain.displayDate} {'\u00b7'} {pain.citationTimestamp}
+                  {pain.displayDate}
                 </span>
               </button>
             );
@@ -261,6 +261,7 @@ export function MapStage() {
         >
           See the mapping engine {'\u2192'}
         </button>
+        <span className="synthetic-tag">Synthetic demo account</span>
       </div>
     </section>
   );
