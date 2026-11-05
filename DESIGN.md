@@ -27,7 +27,6 @@ Salency is a B2B sales-intelligence platform for revenue leaders, not developers
 | CSS variable | Family | Weights | Style |
 |---|---|---|---|
 | `--font-instrument-sans` | Instrument Sans | 400, 500, 600, 700 | normal + italic |
-| `--font-instrument-serif` | Instrument Serif | 400 | normal + italic |
 | `--font-geist-sans` | Geist | all | normal |
 | `--font-geist-mono` | Geist Mono | all | normal |
 | `--font-outfit` | Outfit | all | normal |
@@ -39,7 +38,7 @@ Salency is a B2B sales-intelligence platform for revenue leaders, not developers
 --font-display: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
 ```
 
-Both `--font-body` and `--font-display` currently resolve to **Instrument Sans**. Many CSS rules still list `'Instrument Serif', serif` as a fallback — those are legacy declarations that never activate because Instrument Sans loads successfully. When in doubt, use `var(--font-display)` for headings and `var(--font-body)` for prose and trust the token.
+Both `--font-body` and `--font-display` currently resolve to **Instrument Sans**. Instrument Serif is no longer loaded; italic accents render in Instrument Sans italic. When in doubt, use `var(--font-display)` for headings and `var(--font-body)` for prose and trust the token.
 
 ### Usage map
 
