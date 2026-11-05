@@ -64,9 +64,9 @@ export const HUDSON_TERRACE_ARC: readonly SyntheticCall[] = [
     snippet: {
       lines: [
         '[00:06:49] Daniel Voss: The Singapore MAS piece?',
-        '[00:06:52] Maya Chen: No change from last call. Q3 roadmap for MAS recognition. I want to be straight with you — if MAS is a current blocker for Hudson Terrace Singapore, we won\u2019t solve it this quarter.',
+        '[00:06:52] Maya Chen: No change from last call. Q3 roadmap for MAS recognition. I want to be straight with you: if MAS is a current blocker for Hudson Terrace Singapore, we won\u2019t solve it this quarter.',
         "[00:07:07] Daniel Voss: It's becoming more of a blocker. Our Singapore entity just took on a second strategic investor and they want us to only use MAS-recognized infra vendors by Q4.",
-        '[00:07:21] Maya Chen: Okay. So realistic framing — you sign with us for NYC in Q2, and for Singapore you keep Fireblocks until we\u2019re MAS-ready in Q3, and then we migrate Singapore in Q4.',
+        '[00:07:21] Maya Chen: Okay. So realistic framing: you sign with us for NYC in Q2, and for Singapore you keep Fireblocks until we\u2019re MAS-ready in Q3, and then we migrate Singapore in Q4.',
         "[00:07:42] Daniel Voss: That's workable if your Q3 commitment is real.",
         "[00:07:46] Maya Chen: I'll put it in writing as a contractual milestone. If we miss it, you get out of the Singapore obligation at no cost. Fair?",
       ],
@@ -89,9 +89,9 @@ export const HUDSON_TERRACE_ARC: readonly SyntheticCall[] = [
       lines: [
         '[00:00:48] Maya Chen: Good. So where are we on the commercial side?',
         "[00:00:52] Daniel Voss: That's what we need to work through today. Priya and I have been talking. Let me give you the honest picture.",
-        "[00:01:00] Daniel Voss: On the latency piece — I was hot about that on the first call. I've been watching the Fireblocks numbers the last three weeks. Honestly, we've gotten used to it. It's not the main thing anymore.",
+        "[00:01:00] Daniel Voss: On the latency piece, I was hot about that on the first call. I've been watching the Fireblocks numbers the last three weeks. Honestly, we've gotten used to it. It's not the main thing anymore.",
         '[00:01:18] Maya Chen: Interesting. What changed?',
-        "[00:01:22] Daniel Voss: The trader who was yelling at me — we adjusted his workflow. He pre-positions margin earlier, which compensates for the settlement lag. It's a hack but it's working.",
+        "[00:01:22] Daniel Voss: The trader who was yelling at me, we adjusted his workflow. He pre-positions margin earlier, which compensates for the settlement lag. It's a hack but it's working.",
         "So latency is on the list but it's not the top of the list.",
       ],
       highlightLineIndex: 2,

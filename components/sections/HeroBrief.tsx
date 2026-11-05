@@ -123,11 +123,11 @@ export function HeroBrief() {
   return (
     <div
       className="hero-brief"
-      aria-label={`Day-1 Brief for ${ACCOUNT_NAME}`}
+      aria-label={`Company brief for ${ACCOUNT_NAME}`}
     >
       <div className="hero-brief-frame">
         <header className="hero-brief-head">
-          <h2 className="hero-brief-eb">{ACCOUNT_NAME} {'\u00b7'} Day-1 Brief</h2>
+          <h2 className="hero-brief-eb">{ACCOUNT_NAME} {'\u00b7'} Company brief</h2>
           <p className="hero-brief-meta">
             Synthetic demo account {'\u00b7'} 3 calls indexed
           </p>
