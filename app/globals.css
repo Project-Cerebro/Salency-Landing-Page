@@ -3942,6 +3942,38 @@ header button:focus:not(:focus-visible){
   }
 }
 
+/* ═══════════ Homepage demo polish ═══════════
+   Legibility and touch reach for the small controls inside the synthetic
+   demo artifacts (hero brief, MapStage, RecallStage, export preview). */
+.hb-cite,
+.map-pain-cite { font-size: 11px; }
+
+/* Invisible hit-area expansion on touch: the controls keep their compact
+   look, but each gets a ~44px-tall target without moving the layout. */
+@media (pointer: coarse) {
+  .hb-cite,
+  .stage-cta,
+  .recall-card-toggle,
+  .recall-card-link { position: relative; }
+  .hb-cite::after,
+  .stage-cta::after,
+  .recall-card-toggle::after,
+  .recall-card-link::after {
+    content: "";
+    position: absolute;
+    inset: -11px -6px;
+  }
+}
+
+/* The export preview is a fixed-width text mock; on phones let long lines
+   wrap instead of clipping off the right edge of the card. */
+@media (max-width: 600px) {
+  .handoff-viewer-code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}
+
 /* ═══════════ Pilot modal (Request-your-pilot form) ═══════════ */
 .pilot-modal-backdrop {
   position: fixed;
