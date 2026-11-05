@@ -35,7 +35,7 @@ export const HUDSON_TERRACE_PEOPLE: BriefPeopleBlock = {
     speakerTitle: 'COO',
     displayDate: CALL_001.displayDate,
     citationTimestamp: '00:01:56',
-    text: 'They yell at me. Not joking. Our head trader has literally said, in a Monday morning standup, "if I miss one more fill because of settlement, I\u2019m going to lose my mind."',
+    text: 'They yell at me. Not joking. Our head trader has literally said, in a Monday morning standup, \u2018if I miss one more fill because of settlement, I\u2019m going to lose my mind.\u2019',
     stance: 'champion',
   },
   secondary: [
@@ -56,7 +56,7 @@ export const HUDSON_TERRACE_NEEDS: BriefNeedsBlock = {
     displayDate: CALL_001.displayDate,
     citationTimestamp: '00:01:28',
     // Verbatim quote per spec — straight quotes preserved.
-    text: '3 to 5 second settlement delays, killing us during volatility windows.',
+    text: "Three to five seconds of settlement delay on our internal transfers, and that's killing us during volatility windows.",
   },
   secondary: [
     {

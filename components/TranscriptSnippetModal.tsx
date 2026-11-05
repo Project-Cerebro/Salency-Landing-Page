@@ -35,7 +35,7 @@ const SIGNAL_HEADER: Record<SyntheticCall['signal'], string> = {
 };
 
 function formatCitation(call: SyntheticCall): string {
-  return `${ACCOUNT_NAME} · ${CALL_TYPE_LABEL[call.callType]} call · ${call.date} · ${call.citationTimestamp}`;
+  return `${ACCOUNT_NAME} · ${CALL_TYPE_LABEL[call.callType]} call · ${call.date}`;
 }
 
 export default function TranscriptSnippetModal() {
@@ -150,8 +150,6 @@ export default function TranscriptSnippetModal() {
           <p className="hero-artifact-modal-cite">{formatCitation(call)}</p>
           <p className="hero-artifact-modal-speaker">
             {call.speaker.name}, {call.speaker.title}
-            <span className="sep">·</span>
-            <span className="conf">conf {call.confidence.toFixed(2)}</span>
           </p>
         </div>
 
