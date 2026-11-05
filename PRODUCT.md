@@ -49,7 +49,7 @@ The site may claim only what is on the shipped list. Anything else is described 
 - Transcript upload (text formats above) with pre-scan that detects company and attendees.
 - Product catalog ingestion from URL, PDF, CSV, with regeneration.
 - Extraction of pains, objections, competitors, requirements, next steps, key events, and urgency, each with a verbatim quote and speaker.
-- Pain → product and requirement → product mapping down to feature level, with confidence tiers (Strong / Probable / Speculative); unmatched pains go to an operational bucket.
+- Pain → product and requirement → product mapping down to feature level, with confidence shown as tiers in the app (Strong / Probable / Speculative) and as a numeric score in the exported PDF; unmatched pains go to an operational bucket.
 - Call recaps and follow-up email drafts (subject + body).
 - Per-prospect account memory: merged pains with sources, objections, requirements, competitors, key events, contacts with inferred stance, and todos. Prospect and contact merging.
 - Cross-call contradiction detection: new claims labeled as contradicting or shifting earlier ones, shown side by side with both source quotes; pain-shift deltas.
