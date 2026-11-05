@@ -323,7 +323,7 @@ html {
       --out-delay:0s;
       position:absolute;left:0;right:0;overflow:hidden;
       display:flex;align-items:flex-start;gap:12px;
-      background:rgba(26,23,30,.92);border:1px solid var(--copper-a22);
+      background:rgba(26,23,30,.92);border:1px solid var(--hair-2);
       border-radius:8px;padding:12px 14px;
       backdrop-filter:blur(6px);box-shadow:0 4px 16px rgba(0,0,0,.3);
       opacity:1;transform:translate(0,-50%);
@@ -346,7 +346,7 @@ html {
 
     .hub-output-ic{
       width:22px;height:22px;flex-shrink:0;border-radius:50%;
-      background:var(--copper-a18);color:var(--copper);
+      background:rgba(232,230,227,.06);color:var(--ink-2);
       display:flex;align-items:center;justify-content:center;margin-top:1px;
       opacity:1;transform:scale(1);
     }
@@ -379,13 +379,13 @@ html {
 
     .hub-outcome-row{
       display:flex;flex-direction:column;gap:3px;
-      padding-left:12px;border-left:2px solid var(--copper-a35);
+      padding-left:12px;border-left:1px solid var(--hair-2);
       transition:transform .2s ease;
     }
 
     .hub-outcome-role{
       font-family:'Geist Mono',monospace;font-size:10px;font-weight:500;
-      letter-spacing:.2em;text-transform:uppercase;color:var(--copper);
+      letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);
     }
 
     .hub-outcome-role-title{
@@ -858,7 +858,7 @@ html {
   .hero-artifact-frame::before{
     content:"";position:absolute;
     top:0;left:24px;right:24px;height:1px;
-    background:linear-gradient(90deg, var(--copper) 0%, var(--copper-a08) 30%, transparent 100%);
+    background:linear-gradient(90deg, rgba(232,230,227,.22) 0%, var(--hair) 30%, transparent 100%);
   }
   .hero-artifact-head{
     display:flex;align-items:center;justify-content:space-between;
@@ -1073,10 +1073,10 @@ html {
 
   /* ═══════════ HeroBrief — dominant Day-1 Brief artifact ═══════════
      Replaces the 3-card HeroArtifact in the / hero (Path D-Hybrid).
-     6 blocks (4 above-fold, 2 below-fold). Inline citation expansion
+     Blocks 01–04 at natural height (no inner scroll); 05–06 live in the
+     full company brief preview (#company-brief). Inline citation expansion
      pulls 2-3 surrounding sentences from arc.ts. "See full transcript"
-     opens TranscriptSnippetModal. Below-fold blocks (.hb-block--below)
-     hide on mobile; secondary lists hide on mobile per spec section
+     opens TranscriptSnippetModal. Secondary lists hide on mobile per spec section
      "Mobile (<768px)". Reduced motion: no entrance animations, instant
      inline expansion (handled by absence of any transition rules). */
   .hero-brief{
@@ -1096,9 +1096,6 @@ html {
       0 1px 0 rgba(255,255,255,.04) inset,
       0 24px 60px -28px rgba(0,0,0,.5);
     overflow:hidden;
-    /* Cap the brief so it stops dwarfing the hero copy. All 6 blocks
-       remain reachable via internal scroll inside .hero-brief-body. */
-    max-height:640px;
     display:flex;flex-direction:column;
   }
   .hero-brief-frame::before{
@@ -1125,24 +1122,22 @@ html {
     color:var(--ink-3);
   }
   .hero-brief-body{
-    flex:1 1 auto;
     display:flex;flex-direction:column;gap:18px;
-    overflow-y:auto;
-    overflow-x:hidden;
-    /* gutter for the scrollbar without crowding content */
-    padding-right:6px;
-    margin-right:-6px;
-    /* fade out the bottom edge to hint there's more below */
-    -webkit-mask-image:linear-gradient(180deg, #000 0, #000 calc(100% - 36px), transparent 100%);
-            mask-image:linear-gradient(180deg, #000 0, #000 calc(100% - 36px), transparent 100%);
-    scrollbar-width:thin;
-    scrollbar-color:var(--copper-a30) transparent;
   }
-  .hero-brief-body::-webkit-scrollbar{width:6px;height:6px}
-  .hero-brief-body::-webkit-scrollbar-thumb{
-    background:var(--copper-a30);border-radius:3px;
+  .hero-brief-more{
+    align-self:flex-start;
+    margin-top:14px;padding-top:14px;
+    border-top:1px solid var(--hair);
+    width:100%;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:12px;letter-spacing:.06em;
+    color:var(--copper);text-decoration:none;
   }
-  .hero-brief-body::-webkit-scrollbar-track{background:transparent}
+  .hero-brief-more:hover{color:#FE9F5B}
+  .hero-brief-more:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:4px;border-radius:2px;
+  }
+  #company-brief{scroll-margin-top:96px}
   .hb-block{
     padding:14px 0;border-top:1px solid var(--hair);
   }
@@ -1151,7 +1146,7 @@ html {
     margin:0 0 10px;
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:10.5px;font-weight:500;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--copper);
+    text-transform:uppercase;color:var(--ink-3);
   }
   /* Hero item — the dominant verbatim quote / lead row in each block. */
   .hb-hero{
@@ -1183,12 +1178,9 @@ html {
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:9.5px;font-weight:500;letter-spacing:.14em;
     text-transform:uppercase;
-    border:1px solid var(--copper-a30);color:var(--copper);
-    background:var(--copper-a08);
+    border:1px solid var(--hair-2);color:var(--ink-2);
+    background:rgba(232,230,227,.04);
     white-space:nowrap;
-  }
-  .hb-pill[data-status="open"]{
-    border-color:var(--copper-a40);
   }
   .hb-meta-row{
     margin:0;
@@ -1227,7 +1219,7 @@ html {
     outline:2px solid var(--copper-a40);outline-offset:2px;
   }
   .hb-cite-speaker{color:var(--ink-2)}
-  .hb-cite-stamp{color:var(--copper)}
+  .hb-cite-stamp{color:var(--ink-2)}
   .hb-cite-sep{opacity:.55}
 
   /* Inline expansion — surrounding 2-3 sentences pulled from arc.ts. */
@@ -1236,8 +1228,7 @@ html {
     padding:12px 14px;
     background:rgba(255,255,255,.02);
     border:1px solid var(--hair);
-    border-left:2px solid var(--copper);
-    border-radius:0 8px 8px 0;
+    border-radius:8px;
   }
   .hb-expand-lines{
     list-style:none;margin:0;padding:0;
@@ -1314,7 +1305,7 @@ html {
     color:var(--ink-3);
     flex:0 0 auto;
   }
-  .hb-change-pair--now .hb-change-tag{color:var(--copper)}
+  .hb-change-pair--now .hb-change-tag{color:var(--ink-2)}
   .hb-change-quote{
     font-family:var(--font-display), 'Instrument Serif', serif;
     font-style:italic;font-size:13.5px;color:var(--ink-2);
@@ -1331,60 +1322,19 @@ html {
     margin:2px 0;
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--copper);
+    color:var(--ink-3);
   }
   .hb-change-divider::before,
   .hb-change-divider::after{
-    content:"";flex:0 0 12px;height:1px;background:var(--copper);
+    content:"";flex:0 0 12px;height:1px;background:var(--hair-2);
   }
   .hb-change-divider::after{flex:1}
 
-  /* Map block (Block 05) — pain → product matches. Hairline rows match
-     the rest of the brief's density rhythm rather than card chrome. */
-  .hb-map-list{
-    list-style:none;margin:0;padding:0;
-    display:flex;flex-direction:column;
-  }
-  .hb-map-row{
-    display:flex;flex-direction:column;gap:3px;
-    padding:8px 0;
-    border-top:1px solid var(--hair);
-  }
-  .hb-map-row:first-child{border-top:0;padding-top:2px}
-  .hb-map-row-main{
-    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;
-    color:var(--ink);
-    display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
-  }
-  .hb-map-product{font-weight:500;color:var(--copper)}
-  .hb-map-capability{color:var(--ink-2);font-style:italic;font-size:12.5px}
-  .hb-map-row-meta{
-    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
-    font-size:10.5px;letter-spacing:.04em;color:var(--ink-3);
-  }
-
-  /* Next block (Block 06) — milestone calendar. */
-  .hb-next-list{
-    list-style:none;margin:0;padding:0;
-    display:flex;flex-direction:column;gap:6px;
-  }
-  .hb-next-row{
-    display:grid;grid-template-columns:80px 1fr;gap:12px;
-    align-items:baseline;
-    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;
-    color:var(--ink-2);
-  }
-  .hb-next-date{
-    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
-    font-size:11px;letter-spacing:.06em;color:var(--copper);
-  }
-  .hb-next-text{color:var(--ink)}
 
   /* Mobile <768px — hide secondary lists + below-fold blocks per spec.
      Hero items still render; tap on citation still expands inline. */
   @media (max-width: 768px){
     .hero-brief .hb-secondary{display:none}
-    .hero-brief .hb-block--below{display:none}
   }
   /* Reduced motion: kill the hb-cite hover transition. Inline expansion
      is already instant (no transition rules on .hb-expand). */
@@ -1443,7 +1393,7 @@ html {
     width:6px;height:6px;
     transform:translateY(-1px);
     border-radius:50%;
-    background:var(--copper);
+    background:var(--ink-3);
     flex-shrink:0;
   }
   .hero-meta .dot{color:var(--copper);margin-right:6px}
@@ -1472,8 +1422,8 @@ html {
     display:grid;grid-template-columns:auto 1fr;gap:28px;
     align-items:center;
     padding:28px 32px;
-    background:linear-gradient(135deg, var(--copper-a08) 0%, rgba(14,12,17,0) 60%);
-    border:1px solid var(--copper-a22);
+    background:linear-gradient(135deg, rgba(232,230,227,.035) 0%, rgba(14,12,17,0) 60%);
+    border:1px solid var(--hair-2);
     border-radius:14px;
   }
   @media (max-width: 768px){
@@ -1483,7 +1433,7 @@ html {
   }
   .provenance-photo{
     width:80px;height:80px;border-radius:999px;overflow:hidden;
-    border:1px solid var(--copper-a30);
+    border:1px solid var(--hair-2);
     flex-shrink:0;
   }
   .provenance-photo img{
@@ -1632,8 +1582,8 @@ html {
     border-radius:10px;
   }
   .map-match[data-role="primary"]{
-    border-color:var(--copper);
-    background:var(--copper-a04);
+    border-color:rgba(232,230,227,.22);
+    background:rgba(232,230,227,.035);
   }
   .map-match-head{
     display:flex;align-items:center;justify-content:space-between;
@@ -1644,13 +1594,12 @@ html {
     font-weight:500;font-size:18px;color:var(--ink);
     letter-spacing:-.01em;
   }
-  .map-match[data-role="primary"] .map-match-name{color:var(--copper)}
   .map-match-role{
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
     color:var(--ink-3);
   }
-  .map-match[data-role="primary"] .map-match-role{color:var(--copper)}
+  .map-match[data-role="primary"] .map-match-role{color:var(--ink-2)}
   .map-match-cap{
     font-family:var(--font-body), 'Geist', sans-serif;
     font-style:italic;font-size:13px;color:var(--ink-2);
@@ -1661,11 +1610,11 @@ html {
     background:var(--hair);overflow:hidden;
   }
   .map-match-bar-fill{
-    height:100%;background:var(--copper);
+    height:100%;background:var(--ink-2);
     transition-property:width;transition-duration:200ms;
   }
   .map-match[data-role="secondary"] .map-match-bar-fill{
-    background:var(--copper-a60);
+    background:var(--ink-4);
   }
   @media (prefers-reduced-motion: reduce){
     .map-match-bar-fill{transition-duration:0ms}
@@ -1751,8 +1700,7 @@ html {
   }
   .recall-stream-dot{
     width:8px;height:8px;border-radius:999px;
-    background:var(--copper);
-    box-shadow:0 0 0 4px var(--copper-a18);
+    background:var(--ink-3);
   }
   .recall-card{
     background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
@@ -1762,8 +1710,7 @@ html {
     box-shadow:0 24px 60px -28px rgba(0,0,0,.5);
   }
   .recall-card--contradiction{
-    border-color:var(--copper-a40);
-    border-left:3px solid var(--copper);
+    border-color:rgba(232,230,227,.22);
   }
   .recall-card-head{
     display:flex;align-items:center;justify-content:space-between;
@@ -1772,15 +1719,15 @@ html {
   .recall-card-eb{
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:10.5px;font-weight:500;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--copper);
+    text-transform:uppercase;color:var(--ink-2);
   }
   .recall-card-pill{
     padding:2px 8px;border-radius:999px;
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--copper);
-    border:1px solid var(--copper-a40);
-    background:var(--copper-a08);
+    color:var(--ink-2);
+    border:1px solid var(--hair-2);
+    background:rgba(232,230,227,.04);
   }
   .recall-card-title{
     margin:0 0 14px;
@@ -1815,25 +1762,25 @@ html {
     padding:6px 0;
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--copper);
+    color:var(--ink-3);
   }
   .recall-pair-divider::before,
   .recall-pair-divider::after{
-    content:"";flex:0 0 16px;height:1px;background:var(--copper);
+    content:"";flex:0 0 16px;height:1px;background:var(--hair-2);
   }
   .recall-pair-divider::after{flex:1}
 
   .recall-diff{
     margin-top:12px;padding:12px 14px;
-    background:var(--copper-a04);
-    border:1px solid var(--copper-a30);border-left:2px solid var(--copper);
-    border-radius:0 8px 8px 0;
+    background:rgba(232,230,227,.03);
+    border:1px solid var(--hair-2);
+    border-radius:8px;
   }
   .recall-diff-eb{
     margin:0 0 6px;
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:10px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--copper);
+    color:var(--ink-3);
   }
   .recall-diff-text{
     margin:0 0 4px;
@@ -1843,7 +1790,7 @@ html {
   .recall-diff-from{
     text-decoration:line-through;color:var(--ink-3);
   }
-  .recall-diff-to{color:var(--copper);font-weight:500}
+  .recall-diff-to{color:var(--ink);font-weight:500}
   .recall-diff-meta{
     margin:0;
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
@@ -1875,8 +1822,7 @@ html {
   }
   .recall-card-status{
     width:8px;height:8px;border-radius:999px;
-    background:var(--copper);flex-shrink:0;
-    box-shadow:0 0 0 4px var(--copper-a18);
+    background:var(--ink-3);flex-shrink:0;
   }
   .recall-card-body{display:flex;flex-direction:column;gap:2px}
   .recall-card-meta{
@@ -3966,6 +3912,38 @@ header button:focus:not(:focus-visible){
   }
 }
 
+/* ═══════════ Homepage demo polish ═══════════
+   Legibility and touch reach for the small controls inside the synthetic
+   demo artifacts (hero brief, MapStage, RecallStage, export preview). */
+.hb-cite,
+.map-pain-cite { font-size: 11px; }
+
+/* Invisible hit-area expansion on touch: the controls keep their compact
+   look, but each gets a ~44px-tall target without moving the layout. */
+@media (pointer: coarse) {
+  .hb-cite,
+  .stage-cta,
+  .recall-card-toggle,
+  .recall-card-link { position: relative; }
+  .hb-cite::after,
+  .stage-cta::after,
+  .recall-card-toggle::after,
+  .recall-card-link::after {
+    content: "";
+    position: absolute;
+    inset: -11px -6px;
+  }
+}
+
+/* The export preview is a fixed-width text mock; on phones let long lines
+   wrap instead of clipping off the right edge of the card. */
+@media (max-width: 600px) {
+  .handoff-viewer-code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}
+
 /* ═══════════ Pilot modal (Request-your-pilot form) ═══════════ */
 .pilot-modal-backdrop {
   position: fixed;
@@ -4115,7 +4093,7 @@ header button:focus:not(:focus-visible){
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: var(--copper);
+  background: var(--ink-3);
 }
 .pilot-form-fit {
   margin: 12px 0 0;

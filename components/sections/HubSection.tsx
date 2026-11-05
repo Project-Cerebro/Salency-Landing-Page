@@ -252,7 +252,7 @@ export function HubSection() {
         </div>
 
         <div className="hub-foot">
-          <span>One pipeline · every role · zero handoff loss</span>
+          <span>One account memory · every role</span>
           <span>
             Pilot applications open
           </span>

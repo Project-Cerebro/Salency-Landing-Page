@@ -95,7 +95,7 @@ function InlineExpansion({ callId, lineIdx }: InlineExpansionProps) {
 }
 
 export function HeroBrief() {
-  const { people, needs, commitments, changes, map, next } = HUDSON_TERRACE_BRIEF;
+  const { people, needs, commitments, changes } = HUDSON_TERRACE_BRIEF;
   // Expansion state keyed by `${blockId}:${rowId}` so each click toggles
   // independently. Only one citation per row, so the row id is enough.
   const [openKey, setOpenKey] = useState<string | null>(null);
@@ -123,11 +123,11 @@ export function HeroBrief() {
   return (
     <div
       className="hero-brief"
-      aria-label={`Day-1 Brief for ${ACCOUNT_NAME}`}
+      aria-label={`Company brief for ${ACCOUNT_NAME}`}
     >
       <div className="hero-brief-frame">
         <header className="hero-brief-head">
-          <h2 className="hero-brief-eb">{ACCOUNT_NAME} {'\u00b7'} Day-1 Brief</h2>
+          <h2 className="hero-brief-eb">{ACCOUNT_NAME} {'\u00b7'} Company brief</h2>
           <p className="hero-brief-meta">
             Synthetic demo account {'\u00b7'} 3 calls indexed
           </p>
@@ -338,38 +338,14 @@ export function HeroBrief() {
             </ul>
           </section>
 
-          {/* Block 05 — How we map (below fold) */}
-          <section className="hb-block hb-block--below" aria-labelledby="hb-block-map">
-            <h3 id="hb-block-map" className="hb-block-eb">How we map</h3>
-            <ul className="hb-map-list">
-              {map.rows.map((row, idx) => (
-                <li key={idx} className="hb-map-row">
-                  <div className="hb-map-row-main">
-                    <span className="hb-map-product">{row.match.product}</span>
-                    <span className="hb-secondary-sep" aria-hidden="true">{' \u00b7 '}</span>
-                    <span className="hb-map-capability">{row.match.capability}</span>
-                  </div>
-                  <div className="hb-map-row-meta">
-                    matches: {row.againstPainText}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {/* Block 06 — Next (below fold) */}
-          <section className="hb-block hb-block--below" aria-labelledby="hb-block-next">
-            <h3 id="hb-block-next" className="hb-block-eb">Next</h3>
-            <ul className="hb-next-list">
-              {next.items.map((item, idx) => (
-                <li key={idx} className="hb-next-row">
-                  <span className="hb-next-date">{item.date}</span>
-                  <span className="hb-next-text">{item.text}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
         </div>
+
+        {/* Blocks 05 (How we map) and 06 (Next) live in the full company
+            brief preview in HandoffExportStage; the hero shows 01–04 at
+            natural height instead of scrolling inside the page. */}
+        <a href="#company-brief" className="hero-brief-more">
+          See the full company brief {'\u2193'}
+        </a>
       </div>
     </div>
   );
