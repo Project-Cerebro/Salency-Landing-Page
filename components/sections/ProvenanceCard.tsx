@@ -31,8 +31,8 @@ export function ProvenanceCard() {
             <em>{'\u201c'}I already told your colleague this{'\u201d'}</em>{' '}
             three times in 15 minutes. The rep who closed the deal was one
             Slack message away. The CRM had a stage field and a one-line
-            note. That{'\u2019'}s why we built Salency. Spring 2026 pilot
-            cohort is open.
+            note. That{'\u2019'}s why we built Salency. Pilot applications
+            are open.
           </p>
         </div>
       </div>
