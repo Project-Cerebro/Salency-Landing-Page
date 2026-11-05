@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Outfit, Instrument_Serif, Instrument_Sans } from "next/font/google";
+import { Geist, Geist_Mono, Outfit, Instrument_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { PilotModal } from "@/components/PilotModal";
 import { JsonLd } from "@/components/JsonLd";
@@ -46,13 +46,6 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  weight: "400",
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-});
-
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
   style: ["normal", "italic"],
@@ -90,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${instrumentSerif.variable} ${instrumentSans.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${instrumentSans.variable} antialiased`}
       >
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />
