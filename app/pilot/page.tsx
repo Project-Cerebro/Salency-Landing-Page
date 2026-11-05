@@ -7,7 +7,7 @@ import { SiteFooter } from '@/components/sections/SiteFooter';
 export const metadata: Metadata = {
   title: 'Request a pilot · Salency',
   description:
-    'Apply for the Salency pilot. A memory layer that outlasts any rep, so the next hire inherits a Day-1 brief.',
+    'Apply for the Salency pilot. A memory layer that outlasts any rep, so the next hire inherits the full account brief.',
   alternates: { canonical: '/pilot' },
 };
 
