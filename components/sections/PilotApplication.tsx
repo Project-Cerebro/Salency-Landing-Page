@@ -38,7 +38,7 @@ export function PilotApplication() {
   return (
     <main className="apply-page">
       <section className="apply-intro">
-        <p className="eb">Pilot cohort · Spring 2026</p>
+        <p className="eb">Pilot applications open</p>
         <h1>
           Join the <em>pilot.</em>
         </h1>
@@ -48,7 +48,7 @@ export function PilotApplication() {
           we&apos;ll scope the fit together.
         </p>
         <p className="apply-price">
-          Free during the Spring 2026 pilot. Pricing per engagement after.
+          Free during the pilot. Pricing per engagement after.
         </p>
       </section>
 
