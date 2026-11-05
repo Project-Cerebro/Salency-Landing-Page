@@ -153,7 +153,7 @@ export default async function BlogPostPage({
         <p>
           Salency is institutional memory for B2B sales teams.{' '}
           <Link href="/why-salency">Read why Salency</Link>, or{' '}
-          <Link href="/pilot">join the Spring 2026 pilot cohort</Link>.
+          <Link href="/pilot">apply for the pilot</Link>.
         </p>
       </div>
 

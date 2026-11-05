@@ -19,7 +19,7 @@ export function BottomClaim() {
           Salency is the layer that fills it.
         </p>
         <p className="bottom-claim-signoff">
-          Spring 2026 pilot cohort {'\u00b7'} open
+          Pilot applications open
         </p>
         <div className="bottom-claim-cta">
           <button

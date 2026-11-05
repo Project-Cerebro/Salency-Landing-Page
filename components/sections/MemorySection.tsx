@@ -137,7 +137,7 @@ export function MemorySection() {
       </ScrollReveal>
 
       <section className="mem-cta">
-        <span className="eb">Pilot cohort {'\u00b7'} Spring 2026</span>
+        <span className="eb">Pilot applications open</span>
         <h2>
           Inherit every account&rsquo;s <em>memory</em> from Day 1.
         </h2>
