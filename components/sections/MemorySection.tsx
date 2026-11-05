@@ -22,7 +22,7 @@ const COMPARE_ROWS = [
   {
     signal: 'Customer pain',
     crm: 'Free-text field, last writer wins',
-    salency: 'Cited quote, speaker, timestamp, ranked by confidence',
+    salency: 'Cited quote, with the speaker and the call it came from',
   },
   {
     signal: 'Contradiction between calls',

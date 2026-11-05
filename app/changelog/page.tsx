@@ -59,10 +59,8 @@ const ENTRIES: Entry[] = [
     title: 'V1 build underway',
     body: (
       <>
-        Shipping the V1 sales surface: notetaker bot, transcript ingest, pain
-        extraction with citations, account brief, and pain-to-product mapping.
-        Aiming to land the Spring 2026 pilot cohort with the first real account
-        memories.
+        Shipping the V1 sales surface: transcript upload, pain extraction
+        with citations, account brief, and pain-to-product mapping.
       </>
     ),
   },
