@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 export const runtime = 'nodejs';
-export const alt = 'Join the Spring 2026 Salency pilot cohort';
+export const alt = 'Apply for the Salency pilot';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -58,7 +58,7 @@ export default async function Image() {
               color: '#E8925A',
             }}
           >
-            Pilot cohort · Spring 2026
+            Pilot applications open
           </div>
           <div
             style={{

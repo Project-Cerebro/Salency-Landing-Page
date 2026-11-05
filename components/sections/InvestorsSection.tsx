@@ -22,7 +22,7 @@ export function InvestorsSection() {
             <div className="inv-intro-meta">
               <span>Pre-seed</span>
               <span className="sep">·</span>
-              <span>Pilot cohort · Spring 2026</span>
+              <span>Pilot applications open</span>
               <span className="sep">·</span>
               <a href={`mailto:${FOUNDERS_EMAIL}`}>
                 Private deck available on request

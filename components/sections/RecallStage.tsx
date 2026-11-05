@@ -19,7 +19,6 @@ const PRIOR_QUOTE = {
   text: 'Killing us during volatility windows. Six figures of P&L on one trade.',
   date: 'Mar 09',
   callType: 'Discovery',
-  citationTimestamp: '00:01:28',
   callId: 'call-001',
 };
 
@@ -27,7 +26,6 @@ const CURRENT_QUOTE = {
   text: 'Honestly, we\u2019ve gotten used to it. It\u2019s not the main thing anymore.',
   date: 'Apr 06',
   callType: 'Pricing',
-  citationTimestamp: '00:01:00',
   callId: 'call-003',
 };
 
@@ -72,7 +70,7 @@ export function RecallStage() {
 
         <div className="recall-stream">
           <div className="recall-stream-head">
-            <span>Recall {'\u00b7'} 2 alerts</span>
+            <span>Recall {'\u00b7'} 2 alerts {'\u00b7'} synthetic demo account</span>
             <span className="recall-stream-dot" aria-hidden="true" />
           </div>
 
@@ -95,8 +93,7 @@ export function RecallStage() {
               <div className="recall-pair-quote">
                 <p className="recall-pair-text">{'\u201c'}{PRIOR_QUOTE.text}{'\u201d'}</p>
                 <p className="recall-pair-cite">
-                  {PRIOR_QUOTE.date} {'\u00b7'} {PRIOR_QUOTE.callType} {'\u00b7'}{' '}
-                  {PRIOR_QUOTE.citationTimestamp}
+                  {PRIOR_QUOTE.date} {'\u00b7'} {PRIOR_QUOTE.callType} call
                 </p>
               </div>
               <div className="recall-pair-divider" aria-hidden="true">
@@ -105,8 +102,7 @@ export function RecallStage() {
               <div className="recall-pair-quote">
                 <p className="recall-pair-text">{'\u201c'}{CURRENT_QUOTE.text}{'\u201d'}</p>
                 <p className="recall-pair-cite">
-                  {CURRENT_QUOTE.date} {'\u00b7'} {CURRENT_QUOTE.callType} {'\u00b7'}{' '}
-                  {CURRENT_QUOTE.citationTimestamp}
+                  {CURRENT_QUOTE.date} {'\u00b7'} {CURRENT_QUOTE.callType} call
                 </p>
               </div>
             </div>
