@@ -42,7 +42,7 @@ export function HandoffExportStage() {
   const headingId = useId();
 
   return (
-    <section className="handoff-stage" aria-labelledby={headingId}>
+    <section id="company-brief" className="handoff-stage" aria-labelledby={headingId}>
       <div className="handoff-grid">
         <StageHead
           className="handoff-head"

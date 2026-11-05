@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Outfit, Instrument_Serif, Instrument_Sans } from "next/font/google";
+import { Geist, Geist_Mono, Outfit, Instrument_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { PilotModal } from "@/components/PilotModal";
 import { JsonLd } from "@/components/JsonLd";
@@ -15,7 +15,7 @@ const organizationSchema = {
   url: SITE_URL,
   logo: `${SITE_URL}/salency-mark.svg`,
   description:
-    "Institutional memory for B2B sales teams. Salency turns every call into structured, cited context, so reps stop losing deals to forgotten signals and any successor inherits full account history.",
+    "Institutional memory for B2B sales teams. Salency turns every call into structured, cited context, so nothing your buyer said gets lost between calls and any successor inherits full account history.",
   email: "hello@salency.ai",
   sameAs: [
     "https://www.linkedin.com/company/salency",
@@ -43,13 +43,6 @@ const geistSans = Geist({
 
 const outfit = Outfit({
   variable: "--font-outfit",
-  subsets: ["latin"],
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  weight: "400",
-  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
@@ -90,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${instrumentSerif.variable} ${instrumentSans.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${instrumentSans.variable} antialiased`}
       >
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />

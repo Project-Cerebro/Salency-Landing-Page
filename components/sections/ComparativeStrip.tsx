@@ -1,12 +1,36 @@
-// ComparativeStrip — Path D-Hybrid section 7. 3-card row with the
-// Salency card highlighted. Currency-checked against company-context
-// §9 (2026-04-29): Gong ships AI Briefer + Account Console + Smart
-// Trackers; Salesforce ships Account Research & Meeting Prep Agent;
-// HubSpot ships Breeze + Smart Deal Progression. No Attio card per
-// Q13=d strategic decision.
+// ComparativeStrip: homepage "vs. the stack you already have" section.
+//
+// Two-column table, one row per tool category: what that tool keeps, and
+// what Salency adds on top. Rebuilt from a 3-card row (2026-11-05) so the
+// section reads as a comparison instead of a feature grid.
+//
+// Honesty boundary: Salency has no notetaker or CRM integration today.
+// Reps upload transcripts by hand, so the copy says "works alongside",
+// never "reads from" or "syncs with". The right column says what Salency
+// adds, not what the other tool lacks: Gong and HubSpot ship cross-call
+// features of their own, so we don't claim they lose anything.
 //
 // Voice rules: no em dashes, no banned phrases, no captivity / lock-in
 // framings, no "harder to rip out" language.
+
+const ROWS = [
+  {
+    category: 'Notetaker',
+    tools: 'Gong, Fireflies, Otter',
+    keeps:
+      'A record of each call: who said what, a summary, and the warnings raised on that call.',
+    adds:
+      'What carries across calls: each pain in the buyer’s words, what you promised, and where call 03 contradicts call 01.',
+  },
+  {
+    category: 'CRM',
+    tools: 'Salesforce, HubSpot',
+    keeps:
+      'Stage, amount, close date and owner. The system of record for the deal.',
+    adds:
+      'The story behind those fields: who needs what and why, and which of your products fits, each with a quote to back it.',
+  },
+];
 
 export function ComparativeStrip() {
   return (
@@ -17,45 +41,38 @@ export function ComparativeStrip() {
           Salency is <em>not a replacement.</em>
         </h2>
         <p className="comparative-sub">
-          It{'\u2019'}s the layer that makes the rest of your stack remember.
+          It works alongside the tools you have. Upload the transcripts your
+          notetaker already makes.
         </p>
       </div>
 
-      <div className="comparative-row">
-        <article className="comparative-card">
-          <header className="comparative-card-head">
-            <h3 className="comparative-card-eb">Notetaker</h3>
-            <span className="comparative-card-name">Gong, Fireflies, Otter</span>
-          </header>
-          <p className="comparative-card-copy">
-            Records what was said. Surfaces deal warnings inside calls. The
-            raw input layer Salency reads from.
-          </p>
-        </article>
-
-        <article className="comparative-card">
-          <header className="comparative-card-head">
-            <h3 className="comparative-card-eb">CRM</h3>
-            <span className="comparative-card-name">Salesforce, HubSpot</span>
-          </header>
-          <p className="comparative-card-copy">
-            Tracks pipeline stages and deal amounts. The system of record for
-            the deal motion. Salency holds the qualitative layer those rows
-            can{'\u2019'}t.
-          </p>
-        </article>
-
-        <article className="comparative-card comparative-card--salency">
-          <header className="comparative-card-head">
-            <h3 className="comparative-card-eb">Salency</h3>
-            <span className="comparative-card-name">Memory layer</span>
-          </header>
-          <p className="comparative-card-copy">
-            Pains, contradictions, pain {'\u2192'} product matches, account
-            briefs. The graph CRM rows can{'\u2019'}t hold.
-          </p>
-        </article>
-      </div>
+      <table className="comparative-table">
+        <thead>
+          <tr>
+            <th scope="col">
+              <span className="sr-only">Tool</span>
+            </th>
+            <th scope="col">What it keeps</th>
+            <th scope="col" className="comparative-salency">
+              What Salency adds
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {ROWS.map((row) => (
+            <tr key={row.category}>
+              <th scope="row">
+                <span className="comparative-cat">{row.category}</span>
+                <span className="comparative-tools">{row.tools}</span>
+              </th>
+              <td data-label="What it keeps">{row.keeps}</td>
+              <td data-label="What Salency adds" className="comparative-salency">
+                {row.adds}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </section>
   );
 }
