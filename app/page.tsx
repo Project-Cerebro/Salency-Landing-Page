@@ -37,7 +37,7 @@ const softwareApplicationSchema = {
     priceCurrency: 'USD',
     availability: 'https://schema.org/PreOrder',
     description:
-      'Free during the Spring 2026 pilot cohort. Pricing set per engagement post-pilot.',
+      'Free during the pilot. Pricing set per engagement post-pilot.',
   },
 };
 

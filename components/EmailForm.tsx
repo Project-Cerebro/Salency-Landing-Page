@@ -1,7 +1,7 @@
-
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { Loader2 } from 'lucide-react';
 import { track } from '@vercel/analytics';
@@ -51,10 +51,28 @@ const NAME_REGEX = /^[\p{L}\p{M}\p{Zs}'\-.]{2,80}$/u;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const WEBSITE_REGEX = /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/[^\s]*)?$/i;
 
-export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
+// Pilot terms shown inside the modal so the visitor knows what they are
+// applying for before the first field. Copy mirrors APPLY_CARDS on /pilot
+// (PRODUCT.md pilot terms); /pilot renders those cards beside the form, so
+// the page variant omits this block.
+const PILOT_TERMS = [
+    'Free for 4–6 weeks',
+    '1–2 week setup, using transcripts you already have',
+    'Weekly extraction report and 30-minute debrief',
+    'No obligation to continue',
+] as const;
+
+export function EmailForm({
+    prefillEmail,
+    showTerms = false,
+}: {
+    prefillEmail?: string;
+    showTerms?: boolean;
+}) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
+    const successHeadingRef = useRef<HTMLHeadingElement>(null);
     const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
         mode: 'onTouched',
         defaultValues: { email: prefillEmail ?? '', industry: '', role: '', teamSize: '' },
@@ -63,6 +81,12 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
     useEffect(() => {
         if (prefillEmail) setValue('email', prefillEmail);
     }, [prefillEmail, setValue]);
+
+    // Move focus to the confirmation so keyboard and screen-reader users
+    // land on the outcome instead of a removed submit button.
+    useEffect(() => {
+        if (isSuccess) successHeadingRef.current?.focus();
+    }, [isSuccess]);
 
     const onSubmit = async (data: FormData) => {
         if (data.address) {
@@ -80,20 +104,20 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
             });
 
             if (response.status === 429) {
-                setServerError('Too many requests. Please try again in a few minutes.');
+                setServerError('Too many requests from this connection. Try again in a few minutes, or email founders@salency.ai.');
                 return;
             }
 
             if (!response.ok) {
                 const body = await response.json().catch(() => null);
-                setServerError(body?.error ?? 'Something went wrong. Please try again.');
+                setServerError(body?.error ?? 'We couldn’t send your application. Try again, or email founders@salency.ai.');
                 return;
             }
 
             setIsSuccess(true);
             track('form_complete');
         } catch {
-            setServerError('Network error. Please check your connection and try again.');
+            setServerError('Your application didn’t send. Check your connection and try again. Nothing you typed was lost.');
         } finally {
             setIsSubmitting(false);
         }
@@ -101,137 +125,160 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
 
     if (isSuccess) {
         return (
-            <div className="bg-copper/10 border border-copper/30 p-8 rounded-xl text-center max-w-lg mx-auto">
-                <h3 className="text-2xl font-bold text-white mb-2">You&apos;re in.</h3>
-                <p className="text-gray-300 mb-1">Someone from our team will reach out to you shortly to schedule your pilot kickoff.</p>
-                <p className="text-sm text-gray-500">Check your inbox for a confirmation from the Salency team.</p>
+            <div className="pilot-form pilot-form--done" role="status">
+                <h3 ref={successHeadingRef} tabIndex={-1} className="pilot-form-title">
+                    Application received.
+                </h3>
+                <p className="pilot-form-sub">
+                    We&apos;ll reply by email to scope the fit for your team. A confirmation
+                    from the Salency team is on its way to your inbox.
+                </p>
             </div>
         );
     }
 
-    const inputClass = 'w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-copper transition-colors';
-    const selectClass = `${inputClass} appearance-none pr-10`;
-
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="bg-card p-8 rounded-2xl border border-white/10 max-w-2xl mx-auto shadow-2xl"
+            className="pilot-form"
+            noValidate
             suppressHydrationWarning
         >
-            <h3 className="text-xl font-bold text-white mb-1">Request Your Pilot</h3>
-            <p className="text-sm text-gray-400 mb-6">Someone from our team will reach out to you shortly.</p>
+            <h3 className="pilot-form-title">Apply for the pilot</h3>
+            <p className="pilot-form-sub">
+                Tell us about your team. We&apos;ll reply by email to scope the fit.
+            </p>
+
+            {showTerms && (
+                <div className="pilot-form-terms">
+                    <ul>
+                        {PILOT_TERMS.map((t) => (
+                            <li key={t}>{t}</li>
+                        ))}
+                    </ul>
+                    <p className="pilot-form-fit">
+                        Best fit: 5–50 reps, with reps inheriting accounts.
+                    </p>
+                </div>
+            )}
 
             {serverError && (
-                <div className="mb-6 bg-red-500/10 border border-red-500/30 text-red-300 text-sm rounded-lg px-4 py-3">
+                <div className="pilot-form-alert" role="alert">
                     {serverError}
                 </div>
             )}
 
             <div className="hidden" aria-hidden="true">
-                <label className="block text-sm font-medium text-gray-300 mb-1">Address</label>
+                <label>Address</label>
                 <input
                     {...register('address')}
                     tabIndex={-1}
                     autoComplete="off"
-                    className={inputClass}
                     suppressHydrationWarning
                 />
             </div>
 
-            <div className="mb-4">
-                <label htmlFor="pilot-name" className="block text-sm font-medium text-gray-300 mb-1">Name *</label>
+            <div className="pilot-field">
+                <label htmlFor="pilot-name" className="pilot-label">Name</label>
                 <input
                     id="pilot-name"
                     {...register('name', { required: true, pattern: NAME_REGEX })}
-                    className={inputClass}
+                    className="pilot-input"
                     placeholder="Jane Doe"
                     autoComplete="name"
                     onFocus={() => track('form_start')}
+                    aria-required="true"
                     aria-invalid={errors.name ? 'true' : undefined}
                     aria-describedby={errors.name ? 'pilot-name-error' : undefined}
                     suppressHydrationWarning
                 />
-                {errors.name && <span id="pilot-name-error" className="text-red-400 text-xs mt-1 block">Enter your full name (letters only, 2–80 chars)</span>}
+                {errors.name && <span id="pilot-name-error" className="pilot-error">Enter your full name, using letters only (2–80 characters).</span>}
             </div>
 
-            <div className="mb-4">
-                <label htmlFor="pilot-email" className="block text-sm font-medium text-gray-300 mb-1">Work Email *</label>
+            <div className="pilot-field">
+                <label htmlFor="pilot-email" className="pilot-label">Work email</label>
                 <input
                     id="pilot-email"
                     type="email"
                     {...register('email', { required: true, pattern: EMAIL_REGEX })}
-                    className={inputClass}
+                    className="pilot-input"
                     placeholder="jane@acme.com"
                     autoComplete="email"
+                    aria-required="true"
                     aria-invalid={errors.email ? 'true' : undefined}
                     aria-describedby={errors.email ? 'pilot-email-error' : undefined}
                     suppressHydrationWarning
                 />
-                {errors.email && <span id="pilot-email-error" className="text-red-400 text-xs mt-1 block">Valid email required</span>}
+                {errors.email && <span id="pilot-email-error" className="pilot-error">Enter an email address like jane@acme.com.</span>}
             </div>
 
-            <div className="mb-4">
-                <label htmlFor="pilot-website" className="block text-sm font-medium text-gray-300 mb-1">Company Website *</label>
+            <div className="pilot-field">
+                <label htmlFor="pilot-website" className="pilot-label">Company website</label>
                 <input
                     id="pilot-website"
                     {...register('website', { required: true, pattern: WEBSITE_REGEX })}
-                    className={inputClass}
+                    className="pilot-input"
                     placeholder="acme.com"
                     autoComplete="url"
                     inputMode="url"
+                    aria-required="true"
                     aria-invalid={errors.website ? 'true' : undefined}
                     aria-describedby={errors.website ? 'pilot-website-error' : undefined}
                     suppressHydrationWarning
                 />
-                {errors.website && <span id="pilot-website-error" className="text-red-400 text-xs mt-1 block">Enter a valid URL (e.g. acme.com or https://acme.com)</span>}
+                {errors.website && <span id="pilot-website-error" className="pilot-error">Enter a website like acme.com or https://acme.com.</span>}
             </div>
 
-            <div className="mb-4">
-                <label htmlFor="pilot-industry" className="block text-sm font-medium text-gray-300 mb-1">Industry *</label>
-                <div className="select-wrap">
-                    <select
-                        id="pilot-industry"
-                        {...register('industry', { required: true })}
-                        className={selectClass}
-                        defaultValue=""
-                        aria-invalid={errors.industry ? 'true' : undefined}
-                        aria-describedby={errors.industry ? 'pilot-industry-error' : undefined}
-                        suppressHydrationWarning
-                    >
-                        <option value="" disabled>Select an industry</option>
-                        {INDUSTRIES.map((i) => (
-                            <option key={i} value={i}>{i}</option>
-                        ))}
-                    </select>
+            <div className="pilot-field-row">
+                <div className="pilot-field">
+                    <label htmlFor="pilot-industry" className="pilot-label">Industry</label>
+                    <div className="select-wrap">
+                        <select
+                            id="pilot-industry"
+                            {...register('industry', { required: true })}
+                            className="pilot-input pilot-select"
+                            defaultValue=""
+                            aria-required="true"
+                            aria-invalid={errors.industry ? 'true' : undefined}
+                            aria-describedby={errors.industry ? 'pilot-industry-error' : undefined}
+                            suppressHydrationWarning
+                        >
+                            <option value="" disabled>Select an industry</option>
+                            {INDUSTRIES.map((i) => (
+                                <option key={i} value={i}>{i}</option>
+                            ))}
+                        </select>
+                    </div>
+                    {errors.industry && <span id="pilot-industry-error" className="pilot-error">Choose your industry.</span>}
                 </div>
-                {errors.industry && <span id="pilot-industry-error" className="text-red-400 text-xs mt-1 block">Please select an industry</span>}
-            </div>
 
-            <div className="mb-4">
-                <label htmlFor="pilot-role" className="block text-sm font-medium text-gray-300 mb-1">Your Role *</label>
-                <div className="select-wrap">
-                    <select
-                        id="pilot-role"
-                        {...register('role', { required: true })}
-                        className={selectClass}
-                        defaultValue=""
-                        aria-invalid={errors.role ? 'true' : undefined}
-                        aria-describedby={errors.role ? 'pilot-role-error' : undefined}
-                        suppressHydrationWarning
-                    >
-                        <option value="" disabled>Select your role</option>
-                        {ROLES.map((r) => (
-                            <option key={r} value={r}>{r}</option>
-                        ))}
-                    </select>
+                <div className="pilot-field">
+                    <label htmlFor="pilot-role" className="pilot-label">Your role</label>
+                    <div className="select-wrap">
+                        <select
+                            id="pilot-role"
+                            {...register('role', { required: true })}
+                            className="pilot-input pilot-select"
+                            defaultValue=""
+                            aria-required="true"
+                            aria-invalid={errors.role ? 'true' : undefined}
+                            aria-describedby={errors.role ? 'pilot-role-error' : undefined}
+                            suppressHydrationWarning
+                        >
+                            <option value="" disabled>Select your role</option>
+                            {ROLES.map((r) => (
+                                <option key={r} value={r}>{r}</option>
+                            ))}
+                        </select>
+                    </div>
+                    {errors.role && <span id="pilot-role-error" className="pilot-error">Choose your role.</span>}
                 </div>
-                {errors.role && <span id="pilot-role-error" className="text-red-400 text-xs mt-1 block">Please select your role</span>}
             </div>
 
-            <div className="mb-8">
-                <span id="pilot-team-size-label" className="block text-sm font-medium text-gray-300 mb-2">Team Size *</span>
+            <div className="pilot-field pilot-field--last">
+                <span id="pilot-team-size-label" className="pilot-label">Reps on your revenue team</span>
                 <div
-                    className="grid grid-cols-4 gap-2"
+                    className="pilot-sizes"
                     role="radiogroup"
                     aria-labelledby="pilot-team-size-label"
                     aria-required="true"
@@ -241,11 +288,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                     {TEAM_SIZES.map((s) => {
                         const inputId = `pilot-team-size-${s}`;
                         return (
-                            <label
-                                key={s}
-                                htmlFor={inputId}
-                                className="relative flex items-center justify-center cursor-pointer rounded-lg border border-white/10 bg-black/20 px-3 py-3 text-sm font-medium text-gray-300 hover:border-white/20 has-[:checked]:border-copper has-[:checked]:bg-copper/10 has-[:checked]:text-copper transition-colors"
-                            >
+                            <label key={s} htmlFor={inputId} className="pilot-size">
                                 <input
                                     id={inputId}
                                     type="radio"
@@ -259,7 +302,7 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                         );
                     })}
                 </div>
-                {errors.teamSize && <span id="pilot-team-size-error" className="text-red-400 text-xs mt-1 block">Please select a team size</span>}
+                {errors.teamSize && <span id="pilot-team-size-error" className="pilot-error">Choose a team size.</span>}
             </div>
 
             <button
@@ -267,12 +310,13 @@ export function EmailForm({ prefillEmail }: { prefillEmail?: string }) {
                 disabled={isSubmitting}
                 className="btn-submit"
             >
-                {isSubmitting && <Loader2 className="animate-spin w-5 h-5" />}
-                <span>{isSubmitting ? 'Submitting' : 'Request Pilot'}</span>
+                {isSubmitting && <Loader2 className="animate-spin w-5 h-5" aria-hidden />}
+                <span>{isSubmitting ? 'Sending application' : 'Apply for the pilot'}</span>
             </button>
 
-            <p className="text-center text-xs text-gray-500 mt-4">
-                Your data is secure. No spam, ever.
+            <p className="pilot-form-note">
+                All fields required. We use your details only to reply about the pilot.{' '}
+                <Link href="/privacy">Privacy policy</Link>
             </p>
         </form>
     );
