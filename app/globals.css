@@ -1211,6 +1211,9 @@ html {
     transition-property:border-color, color, background-color;
     transition-duration:160ms;
     white-space:nowrap;
+    /* Size to the label, not the column: the hero blocks are flex
+       columns that would otherwise stretch the pill full width. */
+    align-self:flex-start;
   }
   .hb-cite:hover{
     border-color:var(--copper-a30);color:var(--ink);
@@ -1431,13 +1434,14 @@ html {
     line-height:1.4;
   }
   .hero-meta-item{
-    display:inline-flex;align-items:center;gap:8px;
-    white-space:nowrap;
+    display:inline-flex;align-items:baseline;gap:8px;
+    min-width:0;
   }
   .hero-meta-item::before{
     content:'';
     display:inline-block;
     width:6px;height:6px;
+    transform:translateY(-1px);
     border-radius:50%;
     background:var(--copper);
     flex-shrink:0;
@@ -1701,22 +1705,17 @@ html {
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
     font-size:11.5px;letter-spacing:.04em;color:var(--ink-2);
   }
-  .handoff-viewer-copy{
-    padding:6px 12px;
-    background:transparent;
-    border:1px solid var(--hair-2);border-radius:6px;
+  /* Honesty label on every demo artifact (PRODUCT.md: synthetic data is
+     always labeled). Mono caption, ≥11px, muted but AA on --bg-2/--bg-3. */
+  .synthetic-tag{
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
-    font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--copper);cursor:pointer;
-    transition-property:border-color, background-color;
-    transition-duration:160ms;
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);
+    white-space:nowrap;
   }
-  .handoff-viewer-copy:hover{
-    border-color:var(--copper-a40);background:var(--copper-a08);
-  }
-  .handoff-viewer-copy:focus-visible{
-    outline:2px solid var(--copper-a40);outline-offset:2px;
-  }
+  .stage-foot:has(.synthetic-tag){flex-wrap:wrap;align-items:center;gap:8px 16px}
+  .stage-foot .synthetic-tag{margin-left:auto}
+  .handoff-viewer-head:has(.synthetic-tag){flex-wrap:wrap;row-gap:4px}
   .handoff-viewer-pre{
     margin:0;padding:18px 20px;
     overflow-x:auto;max-height:520px;
@@ -3963,10 +3962,33 @@ header button:focus:not(:focus-visible){
 .pilot-modal-panel {
   position: relative;
   width: 100%;
-  max-width: 42rem;
+  max-width: 40rem;
   max-height: 90vh;
+  max-height: 90dvh;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+  border: 1px solid var(--hair-2);
+  border-radius: 16px;
+  box-shadow: 0 32px 80px -24px rgba(0, 0, 0, 0.7);
   animation: pilotModalFadeZoomIn 200ms ease-out;
+}
+/* Inside the modal the panel is the card; the form drops its own. */
+.pilot-modal-panel .pilot-form {
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+/* Clear the sticky close button in the top-right corner. */
+.pilot-modal-panel .pilot-form-title { margin-right: 56px; }
+/* On phones the form is taller than the panel: keep the submit button in
+   thumb reach while the visitor scrolls the fields. */
+@media (max-width: 520px) {
+  .pilot-modal-panel .btn-submit {
+    position: sticky;
+    bottom: 12px;
+    z-index: 5;
+  }
 }
 
 /* Close button — pinned top-right of the scrolling panel so it stays
@@ -3974,9 +3996,10 @@ header button:focus:not(:focus-visible){
    44×44 hit area per WCAG touch-target guidance. */
 .pilot-modal-close {
   position: sticky;
-  top: 8px;
-  margin-left: auto;
-  margin-right: 8px;
+  top: 12px;
+  /* Negative bottom margin lets the sticky button sit inside the card's
+     top-right corner without pushing the form down. */
+  margin: 12px 12px -56px auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4002,6 +4025,191 @@ header button:focus:not(:focus-visible){
   width: 18px;
   height: 18px;
 }
+
+/* ═══════════ Pilot application form (modal + /pilot page) ═══════════ */
+.pilot-form {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 32px;
+  background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+  border: 1px solid var(--hair-2);
+  border-radius: 16px;
+  color: var(--ink);
+}
+@media (max-width: 520px) {
+  .pilot-form { padding: 24px 20px; }
+}
+.pilot-form-title {
+  margin: 0 0 6px;
+  font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.pilot-form-title:focus { outline: none; }
+.pilot-form-sub {
+  margin: 0 0 20px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.pilot-form--done { text-align: left; }
+.pilot-form--done .pilot-form-sub { margin-bottom: 0; }
+
+.pilot-form-terms {
+  margin: 0 0 24px;
+  padding: 16px 0;
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+}
+.pilot-form-terms ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+}
+@media (max-width: 520px) {
+  .pilot-form-terms ul { grid-template-columns: 1fr; gap: 8px; }
+}
+.pilot-form-terms li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+.pilot-form-terms li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--copper);
+}
+.pilot-form-fit {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.pilot-form-alert {
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  border-radius: 8px;
+  background: rgba(248, 113, 113, 0.08);
+  font-size: 14px;
+  line-height: 1.45;
+  color: #FCA5A5;
+}
+
+.pilot-field { margin-bottom: 16px; min-width: 0; }
+.pilot-field--last { margin-bottom: 28px; }
+.pilot-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+@media (max-width: 520px) {
+  .pilot-field-row { grid-template-columns: 1fr; }
+}
+.pilot-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.pilot-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 14px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--hair-2);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  caret-color: var(--copper);
+  transition-property: border-color, box-shadow;
+  transition-duration: 160ms;
+}
+.pilot-input::placeholder { color: var(--ink-3); }
+.pilot-input:hover { border-color: rgba(232, 230, 227, 0.22); }
+.pilot-input:focus {
+  outline: none;
+  border-color: var(--copper);
+  box-shadow: 0 0 0 3px var(--copper-a18);
+}
+.pilot-input[aria-invalid="true"] { border-color: var(--error); }
+.pilot-select {
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+.pilot-select:has(option[value=""]:checked) { color: var(--ink-3); }
+.pilot-select option { color: var(--ink); background: var(--bg-3); }
+.pilot-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--error);
+}
+
+.pilot-sizes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.pilot-size {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  border: 1px solid var(--hair-2);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.22);
+  font-family: 'Geist Mono', SFMono-Regular, Consolas, monospace;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition-property: border-color, background-color, color;
+  transition-duration: 160ms;
+}
+.pilot-size:hover { border-color: rgba(232, 230, 227, 0.22); }
+.pilot-size:has(:checked) {
+  border-color: var(--copper);
+  background: var(--copper-a08);
+  color: var(--copper);
+}
+.pilot-size:has(:focus-visible) {
+  outline: 2px solid var(--copper-a40);
+  outline-offset: 2px;
+}
+.pilot-sizes[aria-invalid="true"] .pilot-size { border-color: rgba(248, 113, 113, 0.5); }
+
+.pilot-form-note {
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--ink-3);
+}
+.pilot-form-note a {
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.pilot-form-note a:hover { color: var(--ink); }
 
 @keyframes pilotModalFadeIn {
   from { opacity: 0; }
