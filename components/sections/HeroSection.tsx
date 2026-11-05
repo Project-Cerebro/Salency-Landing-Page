@@ -55,7 +55,7 @@ export function HeroSection() {
 
           <div className="hero-meta">
             <span className="hero-meta-item">
-              Upload transcripts from Gong, Fireflies, Otter, Granola, Fathom, or paste your own
+              Upload transcripts from Gong, Fathom, Otter, or any notetaker
             </span>
             <span className="hero-meta-item">
               Now accepting pilot applications

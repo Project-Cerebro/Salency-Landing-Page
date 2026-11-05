@@ -1211,6 +1211,9 @@ html {
     transition-property:border-color, color, background-color;
     transition-duration:160ms;
     white-space:nowrap;
+    /* Size to the label, not the column: the hero blocks are flex
+       columns that would otherwise stretch the pill full width. */
+    align-self:flex-start;
   }
   .hb-cite:hover{
     border-color:var(--copper-a30);color:var(--ink);
@@ -1431,13 +1434,14 @@ html {
     line-height:1.4;
   }
   .hero-meta-item{
-    display:inline-flex;align-items:center;gap:8px;
-    white-space:nowrap;
+    display:inline-flex;align-items:baseline;gap:8px;
+    min-width:0;
   }
   .hero-meta-item::before{
     content:'';
     display:inline-block;
     width:6px;height:6px;
+    transform:translateY(-1px);
     border-radius:50%;
     background:var(--copper);
     flex-shrink:0;
