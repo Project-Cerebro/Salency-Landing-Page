@@ -15,7 +15,7 @@ export function InvestorsSection() {
               We&rsquo;re building the layer.
             </h1>
             <p>
-              Salency is the structured, cited, queryable memory layer for
+              Salency is the structured, cited memory layer for
               what your accounts actually told you. The input every future
               revenue tool will inherit from. Every call compounds the graph.
             </p>
@@ -39,7 +39,7 @@ export function InvestorsSection() {
             </h2>
             <p>
               Salency is a system of record for what your accounts actually
-              told you. Every call becomes durable, queryable context{' '}
+              told you. Every call becomes durable, cited context{' '}
               mapped to your product catalog, so the next rep, the next
               quarter, and the next pipeline review all inherit what was said,
               not what someone remembered to type.
@@ -62,8 +62,8 @@ export function InvestorsSection() {
             <p className="platform-moat-bridge">
               Vs CRM, the wedge is the shape of the data. Contradiction pairs,
               pain evolution over time, confidence-ranked pain → product
-              matches, cross-account pattern graphs. CRM rows hold one value
-              per field; the graph holds rankings, timestamped citations, and
+              matches. CRM rows hold one value
+              per field; the graph holds rankings, cited quotes, and
               cross-call comparisons. Two layers, distinct shapes of data. We
               sit on top of your stack, not inside it. Reps live in CRM for
               pipeline stages. Reps live in Salency for the qualitative

@@ -56,8 +56,8 @@ export function NotetakerCompareTable() {
                 Templated handoff doc per inheritance event
               </td>
               <td className="col-s salency-col">
-                Live <strong>account graph</strong>. The brief regenerates
-                from it and persists between handoffs
+                Account memory that <strong>persists between handoffs</strong>.
+                Export the company brief as a PDF at any point
               </td>
             </tr>
             <tr>
@@ -65,7 +65,7 @@ export function NotetakerCompareTable() {
               <td className="col-n">Timestamps in transcript</td>
               <td className="col-s salency-col">
                 Every extraction cited:{' '}
-                <strong>transcript + timestamp + confidence</strong>
+                <strong>the quote, who said it, and which call</strong>
               </td>
             </tr>
             <tr>
