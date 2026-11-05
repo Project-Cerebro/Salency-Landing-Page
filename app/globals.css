@@ -822,8 +822,12 @@ html {
       display:grid;
       grid-template-columns:minmax(0, 1.05fr) minmax(0, 1fr);
       gap:64px;
-      align-items:center;
+      /* Top-aligned, not centred: the brief runs taller than a laptop
+         viewport, and centring pushed the CTA row below the fold at
+         1440x900. The copy stays pinned while the brief scrolls past. */
+      align-items:start;
     }
+    .hero-copy{position:sticky;top:112px}
   }
   @media (max-width: 768px) {
     .hero { padding: 56px 22px 48px; }
