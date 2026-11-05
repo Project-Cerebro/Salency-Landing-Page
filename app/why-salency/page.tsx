@@ -25,7 +25,7 @@ const faqSchema = {
       name: 'Is Salency a good fit for my sales team?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Salency fits teams that record calls (Zoom, Meet, Teams), run deals across multiple calls, and pass accounts between people: AE to CSM, new reps inheriting books, expansion teams taking over.',
+        text: 'Salency fits teams that already get call transcripts from a notetaker (Gong, Fireflies, Otter), run deals across multiple calls, and pass accounts between people: AE to CSM, new reps inheriting books, expansion teams taking over.',
       },
     },
     {

@@ -104,13 +104,13 @@ export const post: Post = {
       <ul>
         <li>
           Every pain extracted from every call across years, with the verbatim
-          quote and timestamp.
+          quote and who said it.
         </li>
         <li>Every contradiction across calls flagged.</li>
         <li>Every commitment tracked, deadline included.</li>
         <li>Every pain mapped to your product catalog.</li>
         <li>
-          Every signal still queryable two years later when the third rep on the
+          Every signal still there two years later when the third rep on the
           account starts asking questions.
         </li>
       </ul>
@@ -200,7 +200,7 @@ export const post: Post = {
 
       <p>
         Salency is institutional memory for B2B sales. We turn every call into
-        structured, cited, queryable context. Pains, products, stakeholders,
+        structured, cited context. Pains, products, stakeholders,
         contradictions, commitments. We don&rsquo;t replace your CRM. We sit on
         top of it. The piece between the call recording and the rep who
         inherits the account.
