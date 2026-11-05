@@ -254,7 +254,7 @@ export function HubSection() {
         <div className="hub-foot">
           <span>One pipeline · every role · zero handoff loss</span>
           <span>
-            Early access · Q2 2026
+            Pilot applications open
           </span>
         </div>
       </div>
