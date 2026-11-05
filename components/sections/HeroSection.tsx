@@ -58,7 +58,7 @@ export function HeroSection() {
               Upload transcripts from Gong, Fathom, Otter, or any notetaker
             </span>
             <span className="hero-meta-item">
-              Now accepting pilot applications
+              Free pilot {'\u00b7'} 4{'\u2013'}6 weeks {'\u00b7'} no obligation
             </span>
           </div>
         </div>
