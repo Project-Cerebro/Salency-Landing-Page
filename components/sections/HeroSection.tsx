@@ -32,8 +32,8 @@ export function HeroSection() {
 
           <p className="sub">
             AI that turns every call into structured, cited context. Pains,
-            objections, contradictions, mapped to your products. Reps stop
-            losing deals to forgotten signals.
+            objections, contradictions, mapped to your products. Nothing your
+            buyer said gets lost between calls.
           </p>
 
           <div className="cta-row">
@@ -55,10 +55,10 @@ export function HeroSection() {
 
           <div className="hero-meta">
             <span className="hero-meta-item">
-              Gong, Fireflies, Otter, Granola, Fathom, or any raw transcript
+              Upload transcripts from Gong, Fathom, Otter, or any notetaker
             </span>
             <span className="hero-meta-item">
-              Now accepting pilot applications
+              Free pilot {'\u00b7'} 4{'\u2013'}6 weeks {'\u00b7'} no obligation
             </span>
           </div>
         </div>

@@ -12,14 +12,14 @@ export function BottomClaim() {
     <section className="bottom-claim">
       <div className="bottom-claim-card">
         <p className="bottom-claim-quote">
-          {'\u201c'}The empty CRM is the wound. Everything else is your team
-          trying to bandage it.{'\u201d'}
+          The empty CRM is the wound. Everything else is your team trying to
+          bandage it.
         </p>
         <p className="bottom-claim-followup">
-          Salency is the layer that fills it.
+          Salency keeps what the CRM never captured.
         </p>
         <p className="bottom-claim-signoff">
-          Spring 2026 pilot cohort {'\u00b7'} open
+          Free pilot {'\u00b7'} 4{'\u2013'}6 weeks {'\u00b7'} no obligation
         </p>
         <div className="bottom-claim-cta">
           <button

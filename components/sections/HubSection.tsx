@@ -2,6 +2,32 @@
 
 import { useState } from 'react';
 
+function FileGlyph({ ext }: { ext: string }) {
+  return (
+    <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">
+      <path
+        d="M11 4 H29 L39 14 V42 C39 43.1 38.1 44 37 44 H11 C9.9 44 9 43.1 9 42 V6 C9 4.9 9.9 4 11 4 Z"
+        fill="#22202A"
+        stroke="rgba(254,133,49,0.55)"
+        strokeWidth="1"
+      />
+      <path d="M29 4 V14 H39" fill="none" stroke="rgba(254,133,49,0.55)" strokeWidth="1" />
+      <text
+        x="24"
+        y="32"
+        fontSize="8"
+        fontWeight="600"
+        fill="#E8925A"
+        textAnchor="middle"
+        fontFamily="'Geist Mono', monospace"
+        letterSpacing="0.5"
+      >
+        {ext}
+      </text>
+    </svg>
+  );
+}
+
 export function HubSection() {
   const [played, setPlayed] = useState(false);
   const trigger = () => setPlayed(true);
@@ -69,34 +95,9 @@ export function HubSection() {
         <div className="hub-inputs">
           <div className="hub-input" style={{ top: '22%' }}>
             <div className="hub-input-ic">
-              <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">
-                <path
-                  d="M11 4 H29 L39 14 V42 C39 43.1 38.1 44 37 44 H11 C9.9 44 9 43.1 9 42 V6 C9 4.9 9.9 4 11 4 Z"
-                  fill="#22202A"
-                  stroke="rgba(254,133,49,0.55)"
-                  strokeWidth="1"
-                />
-                <path
-                  d="M29 4 V14 H39"
-                  fill="none"
-                  stroke="rgba(254,133,49,0.55)"
-                  strokeWidth="1"
-                />
-                <text
-                  x="24"
-                  y="32"
-                  fontSize="8"
-                  fontWeight="600"
-                  fill="#E8925A"
-                  textAnchor="middle"
-                  fontFamily="'Geist Mono', monospace"
-                  letterSpacing="0.5"
-                >
-                  .TXT
-                </text>
-              </svg>
+              <FileGlyph ext=".TXT" />
             </div>
-            <div className="hub-input-label">Transcript</div>
+            <div className="hub-input-label">Call transcript</div>
           </div>
 
           <div className="hub-input" style={{ top: '39%' }}>
@@ -141,40 +142,21 @@ export function HubSection() {
                 />
               </svg>
             </div>
-            <div className="hub-input-label">Product Catalog</div>
+            <div className="hub-input-label">Product website</div>
           </div>
 
           <div className="hub-input" style={{ top: '59%' }}>
             <div className="hub-input-ic">
-              <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">
-                <rect x="4" y="4" width="40" height="40" rx="7" fill="#0052CC" />
-                <path
-                  d="M8 34 C14 28, 20 28, 26 30 C32 32, 38 32, 42 28"
-                  stroke="#FFFFFF"
-                  strokeWidth="4"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M8 20 C14 14, 20 14, 26 16 C32 18, 38 18, 42 14"
-                  stroke="#FFFFFF"
-                  strokeWidth="4"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <FileGlyph ext=".PDF" />
             </div>
-            <div className="hub-input-label">Product Details</div>
+            <div className="hub-input-label">Product PDFs</div>
           </div>
 
           <div className="hub-input" style={{ top: '76%' }}>
             <div className="hub-input-ic">
-              <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">
-                <rect x="4" y="4" width="40" height="40" rx="8" fill="#2D8CFF" />
-                <path d="M18 17 L32 24 L18 31 Z" fill="#FFFFFF" />
-              </svg>
+              <FileGlyph ext=".CSV" />
             </div>
-            <div className="hub-input-label">Call Recording</div>
+            <div className="hub-input-label">Product CSVs</div>
           </div>
         </div>
 
@@ -240,8 +222,8 @@ export function HubSection() {
               </svg>
             </div>
             <div className="hub-output-body">
-              <div className="hub-output-ttl">Handoff briefs</div>
-              <div className="hub-output-sub">full account state, ready for the next rep</div>
+              <div className="hub-output-ttl">Company brief</div>
+              <div className="hub-output-sub">full account state, exported as a PDF</div>
             </div>
           </div>
         </div>
@@ -262,17 +244,17 @@ export function HubSection() {
               <div className="hub-outcome-role-summary">Cited pain-to-product mappings, no re-asking</div>
             </div>
             <div className="hub-outcome-row">
-              <div className="hub-outcome-role">Director</div>
-              <div className="hub-outcome-role-title">Sees the pattern</div>
-              <div className="hub-outcome-role-summary">Pains and objections across every deal in the pipe</div>
+              <div className="hub-outcome-role">Sales leader</div>
+              <div className="hub-outcome-role-title">Sees what shifted</div>
+              <div className="hub-outcome-role-summary">Contradictions between calls, flagged with both quotes</div>
             </div>
           </div>
         </div>
 
         <div className="hub-foot">
-          <span>One pipeline · every role · zero handoff loss</span>
+          <span>One account memory · every role</span>
           <span>
-            Early access · Q2 2026
+            Pilot applications open
           </span>
         </div>
       </div>
