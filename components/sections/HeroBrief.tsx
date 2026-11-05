@@ -344,7 +344,7 @@ export function HeroBrief() {
             brief preview in HandoffExportStage; the hero shows 01–04 at
             natural height instead of scrolling inside the page. */}
         <a href="#company-brief" className="hero-brief-more">
-          See the full company brief {'\u2193'}
+          See the company brief {'\u2193'}
         </a>
       </div>
     </div>
