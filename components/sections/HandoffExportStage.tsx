@@ -1,71 +1,64 @@
-'use client';
-
-// HandoffExportStage — Path D-Hybrid section 5. Static markdown viewer
-// with a copy button. Demonstrates the rep-rotation use case (§6 thesis).
+// HandoffExportStage — Path D-Hybrid section 5. Read-only preview of the
+// company brief export. Demonstrates the rep-rotation use case (§6 thesis).
 //
-// Honesty guardrails (spec section 5):
-//   - "Paste into Notion, Slack, your CRM, or wherever the next rep lives" OK.
+// Honesty guardrails (PRODUCT.md shipped list):
+//   - The product exports a company brief per prospect as a PDF. Section
+//     names and citation format mirror cerebro-frontend
+//     src/lib/build-company-brief-html.ts. No markdown export, no copy.
+//   - Citations carry speaker, role, date, call number. No timestamps.
 //   - NO "API" / "webhook" / "machine-readable" / "automation" / "agent" / "MCP".
 //   - NO CTA on this stage (Q6=iv lock — Surface stages are static read-only).
 
-import { useId, useState } from 'react';
+import { useId } from 'react';
 import { StageHead } from '@/components/sections/StageHead';
 
-const FILENAME = 'hudson-terrace-handoff.md';
+const FILENAME = 'hudson-terrace-capital.pdf';
 
-// Locked markdown content per spec section 5 "Mock content". Verbatim
-// references use Daniel's Apr 06 quote at 00:06:45 ("I want the cash
-// flow flexibility") which exists in the synthetic transcripts.
-const MARKDOWN = `# Hudson Terrace Capital \u00b7 Account Handoff
-Generated 2026-04-06 \u00b7 3 calls indexed
+// Mock content mirrors the real brief's six sections. Quotes are verbatim
+// from the synthetic transcripts (Daniel's Apr 06 cash-flow line).
+const BRIEF = `Hudson Terrace Capital \u00b7 Company brief
+3 calls indexed
 
-## People
-- **Daniel Voss**, COO \u00b7 primary contact, champion
-  > "I want the cash flow flexibility." (Apr 06 \u00b7 00:06:45)
-- Priya Mehta, Head of Ops \u00b7 operational evaluator
-- Jordan Kim, CTO \u00b7 technical reviewer
+01 \u00b7 People
+  Daniel Voss, COO \u00b7 primary contact, champion
+    "I want the cash flow flexibility."
+    Daniel Voss, COO \u00b7 Apr 06, call 03
+  Priya Mehta, Head of Ops \u00b7 operational evaluator
+  Jordan Kim, CTO \u00b7 technical reviewer
 
-## They need
-1. **Sub-second settlement** \u00b7 Daniel \u00b7 Mar 09 \u00b7 00:01:28
-2. **Multi-venue reconciliation** \u00b7 Daniel \u00b7 Mar 09 \u00b7 00:02:36
-3. **MAS-recognized Singapore deployment** \u00b7 Daniel \u00b7 Mar 23 \u00b7 00:07:07
+02 \u00b7 They need
+  1. Sub-second settlement
+     Daniel Voss, COO \u00b7 Mar 09, call 01
+  2. Multi-venue reconciliation
+     Daniel Voss, COO \u00b7 Mar 09, call 01
+  3. MAS-recognized Singapore deployment
+     Daniel Voss, COO \u00b7 Mar 23, call 02
 
-## We owe them
-- [ ] SOC 2 Type II report (owed Mar 23, owner: Maya)
-- [ ] Anchorage sandbox creds (due Fri, owner: Raj)
-- [ ] Reference calls \u00d7 2 (due Fri, owner: Maya)
+03 \u00b7 We owe them
+  SOC 2 Type II report \u00b7 owed Mar 23 \u00b7 owner: Maya
+  Anchorage sandbox creds \u00b7 due Fri \u00b7 owner: Raj
+  Reference calls \u00d7 2 \u00b7 due Fri \u00b7 owner: Maya
 
-## What's changed
-- Latency: blocker \u2192 resolved workaround (Mar 09 \u2194 Apr 06)
-- SOC 2 cadence: annual \u2192 quarterly (Apr 06)
+04 \u00b7 What's changed
+  Latency: blocker \u2192 resolved workaround
+    Between call 01 and call 03. Verify before next call.
+  SOC 2 cadence: annual \u2192 quarterly
+    Between call 01 and call 03. Verify before next call.
 
-## How we map
-1. Atlas Settlement \u00b7 0.94 \u00b7 sub-second settlement
-2. Helix Recon \u00b7 0.92 \u00b7 multi-venue reconciliation
-3. Atlas Singapore \u00b7 0.85 \u00b7 MAS-recognized regional deployment
+05 \u00b7 How we map
+  Atlas Settlement \u00b7 0.94 \u00b7 sub-second settlement
+  Helix Recon \u00b7 0.92 \u00b7 multi-venue reconciliation
+  Atlas Singapore \u00b7 0.85 \u00b7 MAS-recognized regional deployment
 
-## Next
-- Apr 18 \u00b7 MSA signature target
-- Apr 20 \u00b7 Kickoff
-- May 1 \u00b7 Atlas Settlement Core live
-- May 15 \u00b7 Helix Recon rollout
+06 \u00b7 Next
+  Apr 18 \u00b7 MSA signature target
+  Apr 20 \u00b7 Kickoff
+  May 1 \u00b7 Atlas Settlement Core live
+  May 15 \u00b7 Helix Recon rollout
 `;
 
 export function HandoffExportStage() {
   const headingId = useId();
-  const [copied, setCopied] = useState(false);
-
-  const onCopy = async () => {
-    if (typeof navigator === 'undefined' || !navigator.clipboard) return;
-    try {
-      await navigator.clipboard.writeText(MARKDOWN);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
-    } catch {
-      // Clipboard unavailable (older Safari, locked-down env). Fail
-      // silently; user can still select+copy by hand from the viewer.
-    }
-  };
 
   return (
     <section className="handoff-stage" aria-labelledby={headingId}>
@@ -81,9 +74,9 @@ export function HandoffExportStage() {
           }
           lede={
             <>
-              One-click markdown export. Paste it into Notion, Slack, your CRM,
-              or wherever the next rep lives. The successor inherits everything,
-              not just the pipeline stage.
+              Export the company brief as a PDF and hand it to whoever picks up
+              the account next. The successor inherits everything, not just the
+              pipeline stage.
             </>
           }
         />
@@ -91,17 +84,10 @@ export function HandoffExportStage() {
         <div className="handoff-viewer" role="figure" aria-label={`${FILENAME} preview`}>
           <div className="handoff-viewer-head">
             <span className="handoff-viewer-name">{FILENAME}</span>
-            <button
-              type="button"
-              className="handoff-viewer-copy"
-              onClick={onCopy}
-              aria-label={`Copy ${FILENAME} to clipboard`}
-            >
-              {copied ? 'Copied' : 'Copy'} {'\u2197'}
-            </button>
+            <span className="synthetic-tag">Synthetic demo account</span>
           </div>
           <pre className="handoff-viewer-pre">
-            <code className="handoff-viewer-code">{MARKDOWN}</code>
+            <code className="handoff-viewer-code">{BRIEF}</code>
           </pre>
         </div>
       </div>
