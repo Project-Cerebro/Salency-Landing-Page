@@ -129,7 +129,7 @@ export function HeroBrief() {
         <header className="hero-brief-head">
           <h2 className="hero-brief-eb">{ACCOUNT_NAME} {'\u00b7'} Day-1 Brief</h2>
           <p className="hero-brief-meta">
-            15 min prep {'\u00b7'} 3 calls indexed {'\u00b7'} auto-generated 2026-04-06
+            Synthetic demo account {'\u00b7'} 3 calls indexed
           </p>
         </header>
 
@@ -155,7 +155,7 @@ export function HeroBrief() {
               </p>
               <CitationButton
                 callId={people.hero.callId}
-                citationLabel={`${people.hero.displayDate} \u00b7 ${people.hero.citationTimestamp}`}
+                citationLabel={people.hero.displayDate}
                 expanded={openKey === 'people:hero'}
                 onToggle={() => toggle('people:hero')}
                 ariaLabel={`Show surrounding transcript for ${people.hero.speakerName} on ${people.hero.displayDate}`}
@@ -195,7 +195,7 @@ export function HeroBrief() {
               </p>
               <CitationButton
                 callId={needs.hero.callId}
-                citationLabel={`${needs.hero.displayDate} \u00b7 ${needs.hero.citationTimestamp}`}
+                citationLabel={needs.hero.displayDate}
                 speaker={needs.hero.speakerName}
                 expanded={openKey === 'needs:hero'}
                 onToggle={() => toggle('needs:hero')}
@@ -220,7 +220,7 @@ export function HeroBrief() {
                     <span className="hb-secondary-text">{row.text}</span>
                     <CitationButton
                       callId={row.callId}
-                      citationLabel={`${row.displayDate} \u00b7 ${row.citationTimestamp}`}
+                      citationLabel={row.displayDate}
                       expanded={openKey === key}
                       onToggle={() => toggle(key)}
                       ariaLabel={`Show surrounding transcript for ${row.text} (${row.speakerName}, ${row.displayDate})`}
