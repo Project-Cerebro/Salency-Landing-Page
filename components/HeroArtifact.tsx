@@ -6,7 +6,7 @@ import {
   ACCOUNT_NAME,
   type SyntheticCall,
 } from '@/lib/synthetic-arc';
-import { openHeroArtifactModal } from '@/lib/hero-artifact-modal-event';
+import { openTranscriptSnippetModal } from '@/lib/transcript-snippet-modal-event';
 
 const CALL_TYPE_LABEL: Record<SyntheticCall['callType'], string> = {
   discovery: 'Discovery',
@@ -143,7 +143,7 @@ export function HeroArtifact() {
                   className="hero-artifact-card"
                   data-chrono-index={chronoIndex}
                   data-signal={call.signal}
-                  onClick={() => openHeroArtifactModal(call.id)}
+                  onClick={() => openTranscriptSnippetModal(call.id)}
                   aria-label={`Open transcript snippet for ${call.displayDate} ${CALL_TYPE_LABEL[call.callType]} call`}
                 >
                   <div className="hero-artifact-meta">

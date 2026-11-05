@@ -2,7 +2,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const file = resolve('components/HeroArtifactModal.tsx');
+const file = resolve('components/TranscriptSnippetModal.tsx');
 const required = 'SYNTHETIC TRANSCRIPT';
 
 if (!existsSync(file)) {

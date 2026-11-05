@@ -158,7 +158,7 @@ html {
     --hair-2: rgba(232,230,227,0.14);
     --ink: #E8E6E3;
     --ink-2: #B6B4B0;
-    --ink-3: #7C7A77;
+    --ink-3: #8A8884;
     --ink-4: #4E4C4A;
     /* Salency warm ramp — from uploaded palette */
     --copper: #FE8531;          /* primary accent */
@@ -201,7 +201,7 @@ html {
 
   /* ═══════════ Canonical eyebrow ═══════════
      One base rule for every .eb across the site. Scoped overrides
-     below this (.prob-head .eb, .how-head .eb, .inv-intro .eb, etc.)
+     below this (.how-head .eb, .inv-intro .eb, .why-intro .eb, etc.)
      only set per-context margin-bottom (and occasionally font-size /
      display). The 28×1 copper dash ::before applies by default;
      edge cases that don't want it explicitly reset with
@@ -217,12 +217,8 @@ html {
   }
   /* Edge cases that don't use the canonical dash: the hub-head
      breadcrumb (inherits smaller font + no decoration from parent);
-     the CTA card (centered layout, decoration would offset text);
-     the NOT-strip dim header label (uses its own muted treatment);
      the mem-cta (centered block eyebrow above the final CTA). */
   .hub-head .eb::before,
-  .cta-card .eb::before,
-  .notdo-card .header .eb::before,
   .mem-cta .eb::before{content:none}
 
   /* Canonical em accent — display headings and body copy inside any
@@ -785,7 +781,6 @@ html {
      (which clips the pseudo below the element's own paint layer). */
   .hero,
   .mem-intro,
-  .thesis-hero,
   .apply-page{
     position:relative;
   }
@@ -801,7 +796,6 @@ html {
   }
   .hero::before,
   .mem-intro::before,
-  .thesis-hero::before,
   .apply-page::before{
     content:"";
     position:absolute;top:-200px;left:50%;transform:translateX(-50%);
@@ -810,7 +804,6 @@ html {
   }
   .hero > *,
   .mem-intro > *,
-  .thesis-hero > *,
   .apply-page > *{
     position:relative;z-index:1;
   }
@@ -1077,18 +1070,350 @@ html {
     max-width:var(--page-max);margin:0 auto;
     border-top:1px solid var(--hair);
   }
+
+  /* ═══════════ HeroBrief — dominant Day-1 Brief artifact ═══════════
+     Replaces the 3-card HeroArtifact in the / hero (Path D-Hybrid).
+     6 blocks (4 above-fold, 2 below-fold). Inline citation expansion
+     pulls 2-3 surrounding sentences from arc.ts. "See full transcript"
+     opens TranscriptSnippetModal. Below-fold blocks (.hb-block--below)
+     hide on mobile; secondary lists hide on mobile per spec section
+     "Mobile (<768px)". Reduced motion: no entrance animations, instant
+     inline expansion (handled by absence of any transition rules). */
+  .hero-brief{
+    margin-top:48px;
+    perspective:1200px;
+  }
+  @media (min-width: 1024px){
+    .hero-brief{margin-top:0}
+  }
+  .hero-brief-frame{
+    position:relative;
+    background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--hair-2);
+    border-radius:14px;
+    padding:24px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.04) inset,
+      0 24px 60px -28px rgba(0,0,0,.5);
+    overflow:hidden;
+    /* Cap the brief so it stops dwarfing the hero copy. All 6 blocks
+       remain reachable via internal scroll inside .hero-brief-body. */
+    max-height:640px;
+    display:flex;flex-direction:column;
+  }
+  .hero-brief-frame::before{
+    content:"";position:absolute;
+    top:0;left:24px;right:24px;height:1px;
+    background:linear-gradient(90deg, var(--copper) 0%, var(--copper-a08) 30%, transparent 100%);
+  }
+  .hero-brief-head{
+    flex:0 0 auto;
+    display:flex;flex-direction:column;gap:4px;
+    margin-bottom:18px;padding-bottom:14px;
+    border-bottom:1px solid var(--hair);
+  }
+  .hero-brief-eb{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:15px;letter-spacing:-.005em;
+    color:var(--ink);
+  }
+  .hero-brief-meta{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;font-size:13px;
+    color:var(--ink-3);
+  }
+  .hero-brief-body{
+    flex:1 1 auto;
+    display:flex;flex-direction:column;gap:18px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    /* gutter for the scrollbar without crowding content */
+    padding-right:6px;
+    margin-right:-6px;
+    /* fade out the bottom edge to hint there's more below */
+    -webkit-mask-image:linear-gradient(180deg, #000 0, #000 calc(100% - 36px), transparent 100%);
+            mask-image:linear-gradient(180deg, #000 0, #000 calc(100% - 36px), transparent 100%);
+    scrollbar-width:thin;
+    scrollbar-color:var(--copper-a30) transparent;
+  }
+  .hero-brief-body::-webkit-scrollbar{width:6px;height:6px}
+  .hero-brief-body::-webkit-scrollbar-thumb{
+    background:var(--copper-a30);border-radius:3px;
+  }
+  .hero-brief-body::-webkit-scrollbar-track{background:transparent}
+  .hb-block{
+    padding:14px 0;border-top:1px solid var(--hair);
+  }
+  .hb-block:first-child{border-top:0;padding-top:4px}
+  .hb-block-eb{
+    margin:0 0 10px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
+  }
+  /* Hero item — the dominant verbatim quote / lead row in each block. */
+  .hb-hero{
+    display:flex;flex-direction:column;gap:6px;
+    margin-bottom:10px;
+  }
+  .hb-hero-row{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .hb-hero-name{
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
+    font-size:14px;color:var(--ink);
+  }
+  .hb-hero-title{color:var(--ink-2);font-weight:400}
+  .hb-hero-sep{color:var(--ink-3);font-weight:400}
+  .hb-hero-quote{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;
+    font-size:15px;line-height:1.5;color:var(--ink);
+  }
+  .hb-hero-item{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
+    font-size:14.5px;color:var(--ink);line-height:1.45;
+  }
+  .hb-pill{
+    padding:2px 8px;border-radius:999px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;
+    border:1px solid var(--copper-a30);color:var(--copper);
+    background:var(--copper-a08);
+    white-space:nowrap;
+  }
+  .hb-pill[data-status="open"]{
+    border-color:var(--copper-a40);
+  }
+  .hb-meta-row{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:12.5px;color:var(--ink-3);
+  }
+
+  /* Citation pill — clickable, opens inline expansion. Tighter padding +
+     letter-spacing so secondary rows don't get pushed around. */
+  .hb-cite{
+    display:inline-flex;align-items:center;gap:0;
+    padding:2px 6px;
+    background:transparent;
+    border:1px solid var(--hair);
+    border-radius:3px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;letter-spacing:.04em;
+    color:var(--ink-3);
+    cursor:pointer;
+    transition-property:border-color, color, background-color;
+    transition-duration:160ms;
+    white-space:nowrap;
+    /* Size to the label, not the column: the hero blocks are flex
+       columns that would otherwise stretch the pill full width. */
+    align-self:flex-start;
+  }
+  .hb-cite:hover{
+    border-color:var(--copper-a30);color:var(--ink);
+    background:var(--copper-a04);
+  }
+  .hb-cite[aria-expanded="true"]{
+    border-color:var(--copper-a40);color:var(--ink);
+    background:var(--copper-a08);
+  }
+  .hb-cite:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;
+  }
+  .hb-cite-speaker{color:var(--ink-2)}
+  .hb-cite-stamp{color:var(--copper)}
+  .hb-cite-sep{opacity:.55}
+
+  /* Inline expansion — surrounding 2-3 sentences pulled from arc.ts. */
+  .hb-expand{
+    margin-top:8px;
+    padding:12px 14px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-left:2px solid var(--copper);
+    border-radius:0 8px 8px 0;
+  }
+  .hb-expand-lines{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .hb-expand-line{
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:13px;line-height:1.55;color:var(--ink-2);
+    font-feature-settings:'tnum';
+  }
+  .hb-expand-trigger{
+    margin-top:10px;
+    padding:0;
+    background:transparent;border:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;color:var(--copper);
+    cursor:pointer;
+  }
+  .hb-expand-trigger:hover{color:#FE9F5B}
+  .hb-expand-trigger:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;border-radius:2px;
+  }
+
+  /* Secondary list — compact rows under the hero item. */
+  .hb-secondary{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .hb-secondary-row{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:12.5px;color:var(--ink-2);
+    line-height:1.5;
+  }
+  .hb-secondary-row .hb-secondary-text{flex:1 1 auto;min-width:0}
+  .hb-secondary-row .hb-cite{flex:0 0 auto;align-self:center}
+  /* When an inline expansion is rendered inside a secondary row, force
+     the expansion to a new full-width line so the surrounding-context
+     box doesn't crowd the citation pill. */
+  .hb-secondary-row .hb-expand{
+    flex-basis:100%;margin-top:6px;
+  }
+  .hb-secondary-name{color:var(--ink);font-weight:500}
+  .hb-secondary-title{color:var(--ink-2);font-weight:400}
+  .hb-secondary-stance{
+    color:var(--ink-3);font-style:italic;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-size:12px;
+    margin-left:2px;
+  }
+  .hb-secondary-text{color:var(--ink-2)}
+  .hb-secondary-sep{color:var(--ink-4);opacity:.6}
+  .hb-secondary-meta{color:var(--ink-3)}
+  /* Commitment rows: meta (owner, due) gets mono treatment + right-aligned
+     so item title and meta read as two clean columns. */
+  .hb-secondary--commit .hb-secondary-row{justify-content:space-between}
+  .hb-commit-meta{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.04em;
+    color:var(--ink-3);
+    white-space:nowrap;
+  }
+
+  /* Change-pair (Block 04) — dual-quote diff with copper divider. The
+     "earlier" pair reads dimmer + smaller; the "now" pair reads at
+     hero-quote weight so chronology is visible without parsing dates. */
+  .hb-change-pair{
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+    padding:6px 0;
+  }
+  .hb-change-tag{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-3);
+    flex:0 0 auto;
+  }
+  .hb-change-pair--now .hb-change-tag{color:var(--copper)}
+  .hb-change-quote{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-size:13.5px;color:var(--ink-2);
+    flex:1 1 auto;min-width:0;
+  }
+  .hb-change-pair--earlier .hb-change-quote{
+    color:var(--ink-3);font-size:13px;
+  }
+  .hb-change-pair--now .hb-change-quote{
+    color:var(--ink);
+  }
+  .hb-change-divider{
+    display:flex;align-items:center;gap:8px;
+    margin:2px 0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--copper);
+  }
+  .hb-change-divider::before,
+  .hb-change-divider::after{
+    content:"";flex:0 0 12px;height:1px;background:var(--copper);
+  }
+  .hb-change-divider::after{flex:1}
+
+  /* Map block (Block 05) — pain → product matches. Hairline rows match
+     the rest of the brief's density rhythm rather than card chrome. */
+  .hb-map-list{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;
+  }
+  .hb-map-row{
+    display:flex;flex-direction:column;gap:3px;
+    padding:8px 0;
+    border-top:1px solid var(--hair);
+  }
+  .hb-map-row:first-child{border-top:0;padding-top:2px}
+  .hb-map-row-main{
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;
+    color:var(--ink);
+    display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+  }
+  .hb-map-product{font-weight:500;color:var(--copper)}
+  .hb-map-capability{color:var(--ink-2);font-style:italic;font-size:12.5px}
+  .hb-map-row-meta{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.04em;color:var(--ink-3);
+  }
+
+  /* Next block (Block 06) — milestone calendar. */
+  .hb-next-list{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .hb-next-row{
+    display:grid;grid-template-columns:80px 1fr;gap:12px;
+    align-items:baseline;
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;
+    color:var(--ink-2);
+  }
+  .hb-next-date{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;color:var(--copper);
+  }
+  .hb-next-text{color:var(--ink)}
+
+  /* Mobile <768px — hide secondary lists + below-fold blocks per spec.
+     Hero items still render; tap on citation still expands inline. */
+  @media (max-width: 768px){
+    .hero-brief .hb-secondary{display:none}
+    .hero-brief .hb-block--below{display:none}
+  }
+  /* Reduced motion: kill the hb-cite hover transition. Inline expansion
+     is already instant (no transition rules on .hb-expand). */
+  @media (prefers-reduced-motion: reduce){
+    .hero-brief .hb-cite{transition-duration:0ms}
+  }
+
   .h1{
     font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
     font-weight:500;
-    font-size:clamp(40px,5.6vw,72px);
+    font-size:clamp(36px,4.6vw,60px);
     line-height:1.08;
     letter-spacing:-.025em;
-    margin:0;max-width:22ch;color:var(--ink);
+    margin:0;max-width:24ch;color:var(--ink);
     text-wrap:balance;
     text-align:left;
   }
   .h1 em{font-style:normal;font-weight:inherit;color:var(--copper)}
   .h1 .soft{color:var(--ink-3)}
+  /* Path D-Hybrid hero — italic em accent on the second sentence
+     ("So every rep walks in briefed"), Instrument Serif copper.
+     Renders on its own visual block so the locked H1 reads as two
+     beats without orphaning the italic. */
+  .h1 .h1-italic{
+    display:block;margin-top:.15em;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;color:var(--copper);
+    letter-spacing:-.02em;
+  }
 
   .hero .sub{
     margin:28px 0 0;max-width:58ch;
@@ -1109,13 +1434,14 @@ html {
     line-height:1.4;
   }
   .hero-meta-item{
-    display:inline-flex;align-items:center;gap:8px;
-    white-space:nowrap;
+    display:inline-flex;align-items:baseline;gap:8px;
+    min-width:0;
   }
   .hero-meta-item::before{
     content:'';
     display:inline-block;
     width:6px;height:6px;
+    transform:translateY(-1px);
     border-radius:50%;
     background:var(--copper);
     flex-shrink:0;
@@ -1132,314 +1458,547 @@ html {
      verified zero JSX consumers before removal. See commit for
      details. */
 
-  /* ═══════════ Problem section ═══════════ */
-  .prob{
-    max-width:var(--page-max);margin:40px auto 0;padding:20px 40px;
+  /* ═══════════ ProvenanceCard ═══════════
+     Position 4 in the Path D-Hybrid composition. Single-row card with
+     Howard headshot left + first-person founder copy right. Subtle
+     copper-tint surface to differentiate from stages above and below. */
+  .provenance{
+    max-width:var(--page-max);margin:80px auto 0;padding:0 40px;
   }
-  .prob-head{
-    display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;
-    margin-bottom:72px;
+  @media (max-width: 768px){
+    .provenance{margin-top:48px;padding:0 22px}
   }
-  .prob-head .eb{margin-bottom:18px;display:flex}
-  .prob-head h2{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
-    margin:0;color:var(--ink);max-width:18ch;text-wrap:balance;
+  .provenance-card{
+    display:grid;grid-template-columns:auto 1fr;gap:28px;
+    align-items:center;
+    padding:28px 32px;
+    background:linear-gradient(135deg, var(--copper-a08) 0%, rgba(14,12,17,0) 60%);
+    border:1px solid var(--copper-a22);
+    border-radius:14px;
   }
-  .prob-head h2 .soft{color:var(--ink-3)}
-  .prob-head .lede{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:18px;line-height:1.6;
-    color:var(--ink-2);max-width:42ch;
-  }
-  .prob-head .lede em{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);
-    font-size:19px;font-weight:400;
-  }
-  /* .prob-head mobile: 2-col headline+lede grid stacks, gap tightens,
-     margin below head reduces. h2 clamp already handles the font
-     scale-down on narrow viewports. */
-  @media (max-width: 768px) {
-    .prob-head {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-bottom: 40px;
-      align-items: start;
+  @media (max-width: 768px){
+    .provenance-card{
+      grid-template-columns:auto 1fr;gap:20px;padding:22px 20px;
     }
   }
-
-  .prob-row{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
-    border-top:1px solid var(--hair-2);
+  .provenance-photo{
+    width:80px;height:80px;border-radius:999px;overflow:hidden;
+    border:1px solid var(--copper-a30);
+    flex-shrink:0;
   }
-  .prob-card{
-    padding:40px 36px 40px 0;border-right:1px solid var(--hair);
-    position:relative;
-    display:flex;flex-direction:column;
+  .provenance-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
   }
-  .prob-card:nth-child(n+2){padding-left:36px}
-  .prob-card:last-child{border-right:0}
-  /* Pain-card index "01/02/03" is decorative numbering, not a keyword. */
-  .prob-card .idx{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;font-weight:400;
-    font-size:15px;color:var(--ink-3);letter-spacing:.02em;margin-bottom:10px;
-    display:flex;align-items:center;gap:10px;
+  .provenance-body{display:flex;flex-direction:column}
+  .provenance-copy{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-size:16px;line-height:1.6;color:var(--ink);
+    max-width:64ch;
   }
-  .prob-card .idx::after{
-    content:"";flex:1;height:1px;background:var(--hair);
-  }
-  .prob-card .title{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(22px,2.4vw,28px);line-height:1.15;letter-spacing:-.015em;color:var(--ink);
-    margin:0 0 16px;max-width:14ch;
-  }
-  .prob-card .desc{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
-    line-height:1.6;color:var(--ink-2);margin:0 0 24px;max-width:32ch;
-  }
-  .prob-card .cost{
-    padding-top:16px;border-top:1px dashed var(--hair-2);
-    margin-top:auto;
-  }
-  .prob-card .cost .label{
-    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
-    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
-    line-height:1.5;
+  .provenance-copy em{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;color:var(--copper);font-weight:400;
   }
 
-  .prob-resolve{
-    margin-top:56px;padding:32px 40px;
-    background:linear-gradient(90deg, var(--copper-a08) 0%, rgba(14,12,17,0) 100%);
-    border-left:2px solid var(--copper);border-radius:0 12px 12px 0;
-    display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;
+  /* ═══════════ Stage primitives (Map / HandoffExport / Recall) ═══════════
+     Shared head + foot for the 3 abbreviated stage walks below the
+     ProvenanceCard. Each stage uses these chrome tokens so the rhythm
+     stays consistent. .map-stage / .handoff-stage / .recall-stage carry
+     stage-specific layout variations. */
+  .map-stage,
+  .handoff-stage,
+  .recall-stage{
+    max-width:var(--page-max);margin:96px auto 0;padding:0 40px;
   }
-  .prob-resolve .label{
-    font-family:'Geist Mono',monospace;font-size:10.5px;font-weight:500;
-    letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+  @media (max-width: 768px){
+    .map-stage,
+    .handoff-stage,
+    .recall-stage{margin-top:64px;padding:0 22px}
   }
-  .prob-resolve .text{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:22px;
-    line-height:1.3;letter-spacing:-.01em;color:var(--ink);max-width:64ch;
+  .stage-head{
+    display:flex;flex-direction:column;gap:14px;
+    margin-bottom:36px;max-width:64ch;
   }
-  .prob-resolve .link{
-    font-family:var(--font-body), 'Geist', sans-serif;font-size:13.5px;color:var(--copper);
-    white-space:nowrap;font-weight:500;
+  .stage-h2{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:clamp(28px,3.6vw,40px);
+    line-height:1.1;letter-spacing:-.02em;color:var(--ink);
   }
-  .prob-resolve .link:hover{color:#FE9F5B}
+  .stage-h2 em{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;color:var(--copper);
+  }
+  .stage-lede{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:17px;line-height:1.55;color:var(--ink-2);
+  }
+  .stage-foot{
+    margin-top:28px;
+    display:flex;justify-content:flex-start;
+  }
+  .stage-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:0;background:transparent;border:0;cursor:pointer;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:12px;letter-spacing:.06em;color:var(--copper);
+  }
+  .stage-cta:hover{color:#FE9F5B}
+  .stage-cta:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:4px;border-radius:2px;
+  }
 
-  /* Problem section mobile: 3-col pain grid stacks, vertical dividers
-     become horizontal, asymmetric left/right padding resets, and the
-     .prob-resolve 3-cell row (label + text + link) stacks to 1 col. */
-  @media (max-width: 768px) {
-    .prob-row { grid-template-columns: 1fr; }
-    .prob-card {
-      padding: 32px 0;
-      border-right: 0;
-      border-bottom: 1px solid var(--hair);
+  /* ═══════════ MapStage ═══════════
+     Pain → product mapping demo. 2-col grid: pains left (~45%), matched
+     products right (~55%). Hover/focus pain → swap. Mobile: pain pills
+     become horizontal scroll-snap. ARIA tablist + arrow-key nav. */
+  .map-grid{
+    display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);
+    gap:32px;align-items:start;
+  }
+  @media (max-width: 900px){
+    .map-grid{grid-template-columns:1fr;gap:20px}
+  }
+  .map-pains{
+    display:flex;flex-direction:column;gap:8px;
+  }
+  @media (max-width: 900px){
+    .map-pains{
+      flex-direction:row;flex-wrap:nowrap;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      gap:10px;padding-bottom:10px;
+      margin-right:-22px;padding-right:22px;
     }
-    .prob-card:nth-child(n+2) { padding-left: 0; }
-    .prob-card:last-child { border-bottom: 0; padding-bottom: 8px; }
-    .prob-card .title { max-width: none; }
-    .prob-card .desc  { max-width: none; }
-    .prob-resolve {
-      padding: 24px 22px;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-    .prob-resolve .link { white-space: normal; }
+    .map-pain{flex:0 0 78%;scroll-snap-align:start}
+  }
+  .map-pain{
+    display:flex;flex-direction:column;gap:6px;
+    text-align:left;
+    padding:14px 16px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-left:2px solid transparent;
+    border-radius:8px;
+    color:inherit;font:inherit;cursor:pointer;
+    transition-property:border-color, background-color;
+    transition-duration:160ms;
+  }
+  .map-pain:hover{
+    border-color:var(--copper-a30);
+    background:rgba(255,255,255,.03);
+  }
+  .map-pain:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;
+  }
+  .map-pain.is-active{
+    border-color:var(--copper-a40);
+    border-left-color:var(--copper);
+    background:var(--copper-a04);
+  }
+  .map-pain-text{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;
+    font-size:14px;line-height:1.45;color:var(--ink);
+  }
+  .map-pain-cite{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
   }
 
-  /* ═══════════ CTA ═══════════ */
-  .cta-section{
+  .map-matches{
+    position:relative;min-height:280px;
+  }
+  .map-panel{
+    opacity:0;
+    transition-property:opacity;
+    transition-duration:150ms;
+  }
+  .map-panel.is-active{opacity:1}
+  @media (prefers-reduced-motion: reduce){
+    .map-panel{transition-duration:0ms}
+  }
+  .map-match-list{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .map-match{
+    padding:16px 18px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:10px;
+  }
+  .map-match[data-role="primary"]{
+    border-color:var(--copper);
+    background:var(--copper-a04);
+  }
+  .map-match-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;margin-bottom:4px;
+  }
+  .map-match-name{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:18px;color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  .map-match[data-role="primary"] .map-match-name{color:var(--copper)}
+  .map-match-role{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .map-match[data-role="primary"] .map-match-role{color:var(--copper)}
+  .map-match-cap{
+    font-family:var(--font-body), 'Geist', sans-serif;
+    font-style:italic;font-size:13px;color:var(--ink-2);
+    margin-bottom:10px;
+  }
+  .map-match-bar{
+    width:100%;height:4px;border-radius:999px;
+    background:var(--hair);overflow:hidden;
+  }
+  .map-match-bar-fill{
+    height:100%;background:var(--copper);
+    transition-property:width;transition-duration:200ms;
+  }
+  .map-match[data-role="secondary"] .map-match-bar-fill{
+    background:var(--copper-a60);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .map-match-bar-fill{transition-duration:0ms}
+  }
+  .map-match-score{
+    margin-top:6px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+
+  /* ═══════════ HandoffExportStage ═══════════
+     2-col: copy left (~45%), code-fenced markdown viewer right (~55%).
+     No CTA on this stage (Q6=iv lock). Filename header + copy button.
+     Honesty boundary: visible copy uses human destinations only. */
+  .handoff-grid{
+    display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);
+    gap:32px;align-items:start;
+  }
+  @media (max-width: 900px){
+    .handoff-grid{grid-template-columns:1fr;gap:24px}
+  }
+  .handoff-head{margin-bottom:0}
+  .handoff-viewer{
+    background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--hair-2);
+    border-radius:12px;overflow:hidden;
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.5);
+  }
+  .handoff-viewer-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;padding:12px 16px;
+    background:rgba(255,255,255,.02);
+    border-bottom:1px solid var(--hair);
+  }
+  .handoff-viewer-name{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11.5px;letter-spacing:.04em;color:var(--ink-2);
+  }
+  /* Honesty label on every demo artifact (PRODUCT.md: synthetic data is
+     always labeled). Mono caption, ≥11px, muted but AA on --bg-2/--bg-3. */
+  .synthetic-tag{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);
+    white-space:nowrap;
+  }
+  .stage-foot:has(.synthetic-tag){flex-wrap:wrap;align-items:center;gap:8px 16px}
+  .stage-foot .synthetic-tag{margin-left:auto}
+  .handoff-viewer-head:has(.synthetic-tag){flex-wrap:wrap;row-gap:4px}
+  .handoff-viewer-pre{
+    margin:0;padding:18px 20px;
+    overflow-x:auto;max-height:520px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:12.5px;line-height:1.65;color:var(--ink-2);
+  }
+  .handoff-viewer-code{
+    font:inherit;color:inherit;background:transparent;
+    white-space:pre;
+  }
+
+  /* ═══════════ RecallStage ═══════════
+     Contradiction notification + pipeline-complete ping. Click to expand
+     diff inline; "See full transcript" opens the modal with contradicts
+     payload. Both quotes are verbatim from arc.ts. */
+  .recall-grid{
+    display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);
+    gap:32px;align-items:start;
+  }
+  @media (max-width: 900px){
+    .recall-grid{grid-template-columns:1fr;gap:24px}
+  }
+  .recall-head{margin-bottom:0}
+  .recall-stream{
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .recall-stream-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 4px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .recall-stream-dot{
+    width:8px;height:8px;border-radius:999px;
+    background:var(--copper);
+    box-shadow:0 0 0 4px var(--copper-a18);
+  }
+  .recall-card{
+    background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--hair-2);
+    border-radius:12px;
+    padding:18px 20px;
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.5);
+  }
+  .recall-card--contradiction{
+    border-color:var(--copper-a40);
+    border-left:3px solid var(--copper);
+  }
+  .recall-card-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;margin-bottom:10px;
+  }
+  .recall-card-eb{
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
+  }
+  .recall-card-pill{
+    padding:2px 8px;border-radius:999px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--copper);
+    border:1px solid var(--copper-a40);
+    background:var(--copper-a08);
+  }
+  .recall-card-title{
+    margin:0 0 14px;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:500;
+    font-size:15.5px;color:var(--ink);
+  }
+  .recall-card-title--small{
+    font-size:14px;margin-bottom:2px;
+  }
+  .recall-pair{
+    display:flex;flex-direction:column;gap:0;
+    padding:12px 14px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:8px;
+  }
+  .recall-pair-quote{padding:10px 0}
+  .recall-pair-text{
+    margin:0 0 6px;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-size:14.5px;line-height:1.5;
+    color:var(--ink);
+  }
+  .recall-pair-cite{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+  .recall-pair-divider{
+    display:flex;align-items:center;gap:8px;
+    padding:6px 0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--copper);
+  }
+  .recall-pair-divider::before,
+  .recall-pair-divider::after{
+    content:"";flex:0 0 16px;height:1px;background:var(--copper);
+  }
+  .recall-pair-divider::after{flex:1}
+
+  .recall-diff{
+    margin-top:12px;padding:12px 14px;
+    background:var(--copper-a04);
+    border:1px solid var(--copper-a30);border-left:2px solid var(--copper);
+    border-radius:0 8px 8px 0;
+  }
+  .recall-diff-eb{
+    margin:0 0 6px;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--copper);
+  }
+  .recall-diff-text{
+    margin:0 0 4px;
+    font-family:var(--font-body), 'Geist', sans-serif;font-size:14px;
+    color:var(--ink);
+  }
+  .recall-diff-from{
+    text-decoration:line-through;color:var(--ink-3);
+  }
+  .recall-diff-to{color:var(--copper);font-weight:500}
+  .recall-diff-meta{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+  }
+
+  .recall-card-actions{
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    margin-top:14px;
+  }
+  .recall-card-toggle,
+  .recall-card-link{
+    background:transparent;border:0;padding:0;cursor:pointer;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;letter-spacing:.06em;
+  }
+  .recall-card-toggle{color:var(--ink-2)}
+  .recall-card-toggle:hover{color:var(--ink)}
+  .recall-card-link{color:var(--copper)}
+  .recall-card-link:hover{color:#FE9F5B}
+  .recall-card-toggle:focus-visible,
+  .recall-card-link:focus-visible{
+    outline:2px solid var(--copper-a40);outline-offset:2px;border-radius:2px;
+  }
+
+  .recall-card--complete{
+    display:flex;align-items:center;gap:14px;
+    padding:14px 18px;
+  }
+  .recall-card-status{
+    width:8px;height:8px;border-radius:999px;
+    background:var(--copper);flex-shrink:0;
+    box-shadow:0 0 0 4px var(--copper-a18);
+  }
+  .recall-card-body{display:flex;flex-direction:column;gap:2px}
+  .recall-card-meta{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+    text-transform:uppercase;
+  }
+
+  /* ═══════════ ComparativeStrip ═══════════
+     3-card row at position 7. Salency card highlighted with copper border
+     and tint. Replaces NotDoSection. No Attio card (Q13=d). Currency for
+     Gong/Salesforce/HubSpot framings checked against company-context §9. */
+  .comparative{
+    max-width:var(--page-max);margin:96px auto 0;padding:0 40px;
+  }
+  @media (max-width: 768px){
+    .comparative{margin-top:64px;padding:0 22px}
+  }
+  .comparative-head{
+    display:flex;flex-direction:column;gap:10px;
+    margin-bottom:36px;max-width:64ch;
+  }
+  .comparative-h2{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:clamp(28px,3.6vw,40px);
+    line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+  }
+  .comparative-h2 em{
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;color:var(--copper);
+  }
+  .comparative-sub{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;font-size:18px;color:var(--ink-2);
+  }
+  .comparative-row{
+    display:grid;grid-template-columns:repeat(3, 1fr);gap:18px;
+  }
+  @media (max-width: 900px){
+    .comparative-row{grid-template-columns:1fr;gap:14px}
+  }
+  .comparative-card{
+    padding:24px 22px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--hair);
+    border-radius:12px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .comparative-card--salency{
+    border:1px solid var(--copper);
+    background:linear-gradient(180deg, var(--copper-a08) 0%, var(--copper-a04) 100%);
+    box-shadow:0 24px 60px -28px rgba(254,133,49,.18);
+  }
+  .comparative-card-head{
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .comparative-card-eb{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:10.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-3);
+  }
+  .comparative-card--salency .comparative-card-eb{color:var(--copper)}
+  .comparative-card-name{
+    font-family:var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight:500;font-size:20px;color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  .comparative-card-copy{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;
+    font-size:14.5px;line-height:1.6;color:var(--ink-2);
+  }
+  .comparative-card--salency .comparative-card-copy{color:var(--ink)}
+
+  /* ═══════════ BottomClaim ═══════════
+     Final CTA. Replaces CtaSection. Centered, max-width ~58ch. Italic
+     Instrument Serif quote (verbatim §3 wound metaphor), plain follow-up,
+     mono signoff, primary CTA. */
+  .bottom-claim{
     max-width:var(--page-max);margin:140px auto 0;padding:0 40px 120px;
   }
-  @media (max-width: 768px) {
-    .cta-section { margin-top: 80px; padding: 0 22px 64px; }
+  @media (max-width: 768px){
+    .bottom-claim{margin-top:80px;padding:0 22px 64px}
   }
-  .cta-card{
-    position:relative;overflow:hidden;
-    background:linear-gradient(135deg, #1A171E 0%, #121015 100%);
-    border:1px solid var(--hair-2);border-radius:20px;
-    padding:72px 56px;text-align:center;
+  .bottom-claim-card{
+    max-width:58ch;margin:0 auto;
+    text-align:center;
+    display:flex;flex-direction:column;gap:20px;align-items:center;
   }
-  @media (max-width: 768px) {
-    .cta-card { padding: 40px 24px; border-radius: 14px; }
+  .bottom-claim-quote{
+    margin:0;
+    font-family:var(--font-display), 'Instrument Serif', serif;
+    font-style:italic;font-weight:400;
+    font-size:clamp(24px,3vw,34px);line-height:1.3;
+    color:var(--ink);text-wrap:balance;
   }
-  .cta-card::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:
-      radial-gradient(circle at 15% 20%, var(--copper-a18) 0%, transparent 40%),
-      radial-gradient(circle at 85% 80%, rgba(209,60,19,.14) 0%, transparent 40%);
+  .bottom-claim-followup{
+    margin:0;
+    font-family:var(--font-body), 'Geist', sans-serif;font-weight:400;
+    font-size:18px;line-height:1.5;color:var(--ink-2);
   }
-  .cta-card::after{
-    content:"";position:absolute;top:-1px;left:20%;right:20%;height:1px;
-    background:linear-gradient(90deg, transparent 0%, var(--copper) 50%, transparent 100%);
+  .bottom-claim-signoff{
+    margin:0;
+    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size:11px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);
   }
-  .cta-card > *{position:relative;z-index:1}
-  /* CTA card is centered — override global inline-flex back to block
-     so the eyebrow sits on its own centered line. */
-  .cta-card .eb{display:block;margin-bottom:20px}
-  .cta-card h2{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
-    margin:0 auto;max-width:20ch;color:var(--ink);text-wrap:balance;
-  }
-  .cta-card .sub{
-    margin:24px auto 0;max-width:52ch;font-size:17px;line-height:1.55;color:var(--ink-2);font-weight:300;
-  }
-  .cta-card .btns{margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .cta-card .btn{padding:14px 24px;font-size:15px}
-  .cta-card .fine{
-    margin-top:20px;font-family:'Geist Mono',monospace;font-size:11px;
-    letter-spacing:.08em;color:var(--ink-3);
-  }
+  .bottom-claim-cta{margin-top:8px}
+  .bottom-claim-cta .btn{padding:14px 28px;font-size:15px}
 
-  /* ═══════════ How it works (Extract · Map · Remember) ═══════════ */
-  .how{max-width:var(--page-max);margin:140px auto 0;padding:0 40px}
-  @media (max-width: 768px) {
-    .how { margin-top: 80px; padding: 0 22px; }
-  }
-  .how-head{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;margin-bottom:56px}
-  .how-head .eb{margin-bottom:18px;display:flex}
-  .how-head h2{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;
-    margin:0;color:var(--ink);max-width:16ch;text-wrap:balance;
-  }
-  /* .how-head mobile: 2-col headline+lede stacks, same treatment as
-     .prob-head per PR #71. */
-  @media (max-width: 768px) {
-    .how-head {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-bottom: 40px;
-      align-items: start;
-    }
-  }
-  .how-head .lede{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:19px;line-height:1.55;
-    color:var(--ink-2);max-width:42ch;
-  }
-  .how-head .lede em{font-family:var(--font-display), 'Instrument Serif', serif;font-style:italic;color:var(--ink);font-size:20px;font-weight:400}
-  .how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hair-2)}
-  .how-step{padding:36px 32px 36px 0;border-right:1px solid var(--hair);position:relative;display:flex;flex-direction:column}
-  .how-step:nth-child(n+2){padding-left:32px}
-  .how-step:last-child{border-right:0}
-  /* Between-step arrow: decoration, not a keyword — ink ramp. */
-  .how-step:not(:last-child)::before{
-    content:"→";position:absolute;right:-10px;top:34px;
-    width:20px;height:20px;display:flex;align-items:center;justify-content:center;
-    background:var(--bg);color:var(--ink-3);font-size:14px;font-weight:400;
-    font-family:'Geist Mono',monospace;z-index:1;
-  }
-  /* Step label — caption, not a keyword. */
-  .how-step .idx{
-    font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;
-    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
-    display:flex;align-items:center;gap:10px;margin-bottom:18px;
-  }
-  .how-step .idx::after{content:"";flex:1;height:1px;background:var(--hair)}
-  .how-step .how-step-action{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;
-    font-size:clamp(22px, 2.4vw, 28px);
-    line-height:1.15;letter-spacing:-.015em;color:var(--ink);margin:0 0 14px;
-  }
-  .how-step .desc{
-    font-family:var(--font-body), 'Geist', sans-serif;font-weight:300;font-size:14.5px;
-    line-height:1.65;color:var(--ink-2);margin:0 0 22px;max-width:34ch;
-  }
-  /* Example callout — a tinted surface is chrome. Use the ink/hair ramp
-     so the copper em in the verb above stays the only page-accent in
-     each step. */
-  .how-step .ex{
-    margin-top:auto;
-    padding:14px 16px;background:rgba(255,255,255,.02);
-    border:1px solid var(--hair-2);border-radius:8px;
-  }
-  .how-step .ex .example-label{
-    font-family:'Geist Mono',monospace;font-size:9.5px;font-weight:500;
-    letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;
-  }
-  .how-step .ex .example-quote{
-    font-family:var(--font-body), 'Geist', sans-serif;font-size:13px;line-height:1.45;color:var(--ink-2);
-  }
-  .how-step .ex .example-quote strong{color:var(--ink);font-weight:500}
-  /* Mobile: stack the 3 steps vertically. The horizontal arrows don't
-     translate to a vertical flow, so hide them; horizontal dividers
-     between stacked steps replace the vertical borders. */
-  @media (max-width: 768px) {
-    .how-steps { grid-template-columns: 1fr; }
-    .how-step {
-      padding: 32px 0;
-      border-right: 0;
-      border-bottom: 1px solid var(--hair);
-    }
-    .how-step:nth-child(n+2) { padding-left: 0; }
-    .how-step:last-child { border-bottom: 0; padding-bottom: 8px; }
-    .how-step:not(:last-child)::before { display: none; }
-    .how-step .desc { max-width: none; }
-  }
-  .how-foot{
-    margin-top:28px;padding:18px 24px;
-    display:flex;justify-content:space-between;align-items:center;gap:24px;
-    border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
-    font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--ink-3);letter-spacing:.04em;
-  }
-  .how-foot em{font-style:normal;color:var(--ink);font-weight:500}
-  .how-foot .sep{color:var(--ink-4);margin:0 6px}
-
-  /* ═══════════ NOT strip ═══════════ */
-  .notdo{max-width:var(--page-max);margin:56px auto 0;padding:0 40px}
-  @media (max-width: 768px) {
-    .notdo { margin-top: 40px; padding: 0 22px; }
-  }
-  .notdo-card{
-    background:#121015;border:1px solid var(--hair-2);border-radius:14px;
-    padding:32px 40px;
-    display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;
-  }
-  .notdo-card .header{
-    font-family:var(--font-display), 'Instrument Serif', serif;font-weight:400;font-size:26px;
-    line-height:1.2;letter-spacing:-.015em;color:var(--ink);max-width:10ch;
-  }
-  /* Dim variant: muted ink color, slightly wider tracking, no dash.
-     ::before suppression lives alongside hub/cta in the top-level
-     reset rule. */
-  .notdo-card .header .eb{
-    display:block;font-size:10.5px;letter-spacing:.2em;
-    color:var(--ink-3);margin-bottom:10px;
-  }
-  .notdo-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px}
-  .notdo-item{
-    display:grid;grid-template-columns:24px 1fr;column-gap:12px;row-gap:4px;
-    align-items:start;
-    padding:8px 0;border-bottom:1px dashed var(--hair);
-  }
-  .notdo-item:last-child{border-bottom:0}
-  .notdo-item--span{grid-column:1 / -1}
-  .notdo-item .x,
-  .notdo-item .check{
-    font-family:'Geist Mono',monospace;font-size:20px;line-height:1.2;
-    font-weight:500;text-align:center;
-    grid-column:1;
-  }
-  /* .check is a positive list marker. Brightness differentiates it
-     from the rust .x; the copper accent is reserved for keywords. */
-  .notdo-item .x{color:var(--rust)}
-  .notdo-item .check{color:var(--ink)}
-  .notdo-item .title{font-size:14.5px;color:var(--ink);font-weight:400;line-height:1.4;grid-column:2}
-  .notdo-item .subtitle{font-size:13px;color:var(--ink-3);line-height:1.5;grid-column:2}
-
-  /* "NOT strip" mobile: card header stacks above the 2-col item list,
-     and the item list itself collapses to one column. */
-  @media (max-width: 768px) {
-    .notdo-card {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      padding: 24px 22px;
-    }
-    .notdo-card .header { max-width: none; }
-    .notdo-list { grid-template-columns: 1fr; gap: 14px; }
-  }
+  /* (Removed 2026-05-02 in PR 2 of Path D-Hybrid: orphaned styles for
+     CtaSection (.cta-section, .cta-card and children), HowItWorksSection
+     (.how, .how-head, .how-steps, .how-step, .how-foot and children), and
+     NotDoSection (.notdo, .notdo-card, .notdo-list, .notdo-item and
+     children). All three sections were deleted from the homepage when
+     ProvenanceCard / MapStage / HandoffExportStage / RecallStage /
+     ComparativeStrip / BottomClaim replaced them. Verified zero JSX
+     consumers before removal. */
 
   /* ═══════════ Notetaker comparison table ═══════════ */
   .notetaker{max-width:var(--page-max);margin:140px auto 0;padding:0 40px}
@@ -1488,15 +2047,47 @@ html {
   .notetaker-table tbody td.col-s{background:var(--copper-a03);color:var(--ink)}
   .notetaker-table tbody td.col-s strong{color:var(--copper);font-weight:500}
   .notetaker-table tbody td.col-n{color:var(--ink-3)}
-  .notetaker-table .icon{
-    display:inline-block;margin-right:8px;font-family:'Geist Mono',monospace;
-    font-size:11px;width:16px;text-align:center;
+
+  /* Copper-glow column treatment for the Salency side. Mirrors /memory's
+     .mem-table .salency-col rules (PR #225 + #227): copper left/right rails,
+     copper-tint fill, copper header text + slightly stronger top border,
+     top/bottom rounded corners on the column ends. The drop-shadow lives
+     on .notetaker-wrap as a layout-anchor pseudo. */
+  .notetaker-table th.salency-col,
+  .notetaker-table td.salency-col {
+    border-left: 1px solid var(--copper-a30);
+    border-right: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.04);
+    color: var(--ink);
   }
-  /* Icon markers are list markers, not keywords. Salency column uses
-     bright ink so it's visible against the copper-tinted cell; the
-     column's copper-a03 background + bold strong is the signal. */
-  .notetaker-table .col-s .icon{color:var(--ink-2)}
-  .notetaker-table .col-n .icon{color:var(--ink-4)}
+  .notetaker-table thead th.salency-col {
+    color: var(--copper);
+    border-top: 1px solid var(--copper-a30);
+    border-bottom: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.06);
+    border-radius: 8px 8px 0 0;
+  }
+  .notetaker-table tbody tr:last-child td.salency-col {
+    border-bottom: 1px solid var(--copper-a30);
+    border-radius: 0 0 8px 8px;
+  }
+  .notetaker-wrap { position: relative; }
+  .notetaker-wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 38%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 30px 80px -40px rgba(254, 133, 49, 0.35);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .notetaker-wrap > .notetaker-table { position: relative; z-index: 1; }
+  @media (max-width: 768px) {
+    .notetaker-wrap::before { display: none; }
+  }
 
   /* Mobile: table → card-per-row. Row-level semantics stay intact,
      but each row becomes a bordered card with the dimension as a
@@ -2777,519 +3368,99 @@ header button:focus:not(:focus-visible){
    Memory page — /memory (per DESIGN.md §2–§7 alignment)
 ═══════════════════════════════════════════════════════════ */
 .memory-page {
-  /* ── Intro (matches standalone canonical per DESIGN.md §4) ── */
+  /* ── Intro (Linear treatment: tight page-label H1, no lede) ── */
   .mem-intro {
     max-width:var(--page-max);
     margin: 40px auto 0;
-    padding: 20px 40px;
+    padding: 20px 40px 8px;
 
-    .eb { margin-bottom: 28px; }
+    .eb { margin-bottom: 14px; }
 
     h1 {
       font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 400;
-      font-size: clamp(44px, 5.2vw, 72px);
-      line-height: 1.04;
-      letter-spacing: -.025em;
+      font-weight: 500;
+      font-size: clamp(28px, 3.2vw, 38px);
+      line-height: 1.05;
+      letter-spacing: -.02em;
       color: var(--ink);
-      margin: 0 0 28px;
+      margin: 0 0 14px;
       max-width: 22ch;
       text-wrap: balance;
     }
+    h1 em {
+      font-family: var(--font-display), 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--copper);
+    }
 
-    .lede {
+    .mem-intro-sub {
       font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
       font-weight: 300;
-      font-size: 18px;
-      line-height: 1.7;
+      font-size: 16px;
+      line-height: 1.55;
       color: var(--ink-2);
-      max-width: 62ch;
+      max-width: 56ch;
       margin: 0;
     }
-    .lede em {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-style: italic;
-      color: var(--ink);
-      font-size: 19px;
-      font-weight: 400;
-    }
+    .mem-intro-cue { color: var(--copper); }
   }
 
-  /* ── Featured hero surface (Surface 01: tight 2-col, fits viewport) ── */
-  .mem-hero-surface {
-    max-width: 1100px;
-    margin: 20px auto 0;
+  /* ── HeroArtifact stage (sits directly under mem-intro H1) ── */
+  .mem-artifact-stage {
+    max-width: var(--page-max);
+    margin: 24px auto 0;
     padding: 0 40px;
   }
 
-  .mem-hero-frame {
-    position: relative;
-    background: rgba(254, 133, 49, 0.03);
-    border: 1px solid var(--hair-2);
-    border-radius: 16px;
-    padding: 22px 28px 20px;
-    overflow: hidden;
-
-    /* Hero-card 2px left gradient per DESIGN.md §5 card chrome */
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 2px; height: 100%;
-      background: linear-gradient(180deg, var(--copper), rgba(254, 133, 49, 0));
-    }
-  }
-
-  /* Card header — brief-title + meta on the left, preview chip on the right */
-  .mem-hero-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--hair-2);
-    gap: 14px;
-    flex-wrap: wrap;
-
-    .mem-hero-title-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      min-width: 0;
-    }
-
-    .mem-hero-title {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 500;
-      font-size: 17px;
-      color: var(--ink);
-      letter-spacing: -.01em;
-      line-height: 1.3;
-
-      em { font-weight: 400; }
-    }
-
-    .mem-hero-meta {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      color: var(--ink-3);
-      letter-spacing: .04em;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-
-      .sep { color: var(--ink-4); opacity: .5; }
-
-      .pulse {
-        display: inline-flex; align-items: center; gap: 6px;
-        color: var(--ink-3);
-
-        &::before {
-          content: "";
-          width: 5px; height: 5px; border-radius: 50%;
-          background: var(--ink-2);
-          box-shadow: 0 0 0 0 rgba(232, 230, 227, 0.35);
-          animation: memPulse 2.4s ease-in-out infinite;
-        }
-      }
-    }
-
-    /* Status chip — semantic label, not a keyword. Demoted from copper
-       to the ink ramp; the uppercase mono-caps treatment already reads
-       as "tag" without needing the accent color. */
-    .mem-hero-chip {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--ink-3);
-      background: rgba(232, 230, 227, 0.04);
-      border: 1px solid var(--hair-2);
-      border-radius: 4px;
-      padding: 5px 10px;
-      white-space: nowrap;
-    }
-  }
-
-  /* Brief grid — People left, They need right */
-  .mem-brief-grid {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 28px;
-    padding-top: 16px;
-
-    .brief-block {
-      padding: 0;
-      border: 0;
-    }
-  }
-
-  /* Smaller brief-block eyebrow: 10px font + 24px dash (vs 11px / 28px
-     canonical). Everything else inherits from the global .eb. */
-  .mem-hero-surface .eb {
-    font-size: 10px;
-    margin-bottom: 12px;
-
-    &::before { width: 24px; }
-
-    .sub {
-      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-      color: var(--ink-3);
-      font-size: 11.5px;
-      letter-spacing: .04em;
-      font-weight: 400;
-      text-transform: none;
-    }
-  }
-
-  /* People — compact stacked rows */
-  .mem-hero-surface .people { display: grid; gap: 8px; }
-  .mem-hero-surface .person {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3px;
-    padding: 8px 0;
-    border-bottom: 1px dashed var(--hair);
-
-    &:last-child { border-bottom: 0; }
-
-    .person-main {
-      display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
-    }
-
-    .person-name {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 500;
-      font-size: 17px;
-      color: var(--ink);
-      letter-spacing: -.01em;
-      line-height: 1.2;
-    }
-
-    .person-role {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      color: var(--ink-3);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .person-quote {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1.35;
-      color: var(--ink-2);
-    }
-
-    .person-cite {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      color: var(--ink-3);
-      letter-spacing: .04em;
-
-      .person-cite-link { color: var(--ink-3); border-bottom: 1px solid var(--hair); }
-    }
-  }
-
-  .mem-hero-surface .stance {
-    font-family: 'Geist Mono', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    border-radius: 4px;
-
-    /* Champion state — bright ink against the more muted skeptic (ink-2)
-       and the rust blocker. Hierarchy communicated by brightness and
-       hue-family, not the primary accent. */
-    &.champion {
-      color: var(--ink);
-      background: rgba(232, 230, 227, 0.06);
-      border: 1px solid var(--hair-2);
-    }
-    &.skeptic {
-      color: var(--ink-2);
-      background: rgba(232, 230, 227, 0.04);
-      border: 1px solid var(--hair-2);
-    }
-    &.blocker {
-      color: var(--rust);
-      background: rgba(209, 60, 19, 0.10);
-      border: 1px solid rgba(209, 60, 19, 0.26);
-    }
-  }
-
-  /* They need — compact pain rows */
-  .mem-hero-surface .pains { display: grid; gap: 6px; }
-  .mem-hero-surface .pain {
-    padding: 8px 0 8px 14px;
-    border-left: 2px solid var(--hair-2);
-    background: linear-gradient(90deg, rgba(232, 230, 227, 0.03), transparent 60%);
-    border-radius: 0 4px 4px 0;
-
-    .pain-quote {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: 14.5px;
-      line-height: 1.3;
-      color: var(--ink);
-      margin: 0 0 4px;
-      letter-spacing: -.005em;
-    }
-
-    .pain-cite {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      color: var(--ink-3);
-      letter-spacing: .04em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-
-      .pain-cite-link { color: var(--ink-3); border-bottom: 1px solid var(--hair); }
-    }
-  }
-
-  .mem-hero-surface .intensity {
-    display: inline-flex; gap: 3px; align-items: center;
-
-    /* Intensity dots: filled = active, off = muted. Signal is fill
-       state, not hue — so filled uses the ink ramp, not the accent. */
-    .intensity-dot {
-      width: 4px; height: 4px; border-radius: 50%;
-      background: var(--ink-2);
-    }
-    .intensity-dot.off { background: var(--ink-4); opacity: .4; }
-  }
-
-  /* Bridge "also in the brief" strip — outside the card */
-  .mem-hero-bridge {
-    margin-top: 18px;
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-
-    .bridge-lead {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-style: italic;
-      font-size: 14px;
-      color: var(--ink-2);
-      line-height: 1.4;
-    }
-
-    .bridge-also {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      color: var(--ink-3);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      line-height: 1.55;
-
-      .bridge-link {
-        color: var(--copper);
-        text-decoration: none;
-        border-bottom: 1px solid var(--copper-a18);
-        transition: border-color .18s;
-        white-space: nowrap;
-
-        &:hover { border-bottom-color: var(--copper); }
-      }
-    }
-  }
-
-  /* ── Supporting surfaces 02 / 03 / 04 ── */
-  .mem-supporting {
-    max-width:var(--page-max);
-    margin: 120px auto 0;
+  /* ── γ / β stages: shared rhythm matches .map-stage / .recall-stage
+     pattern from / for visual continuity. */
+  .gamma-stage,
+  .beta-stage {
+    max-width: var(--page-max);
+    margin: 96px auto 0;
     padding: 0 40px;
   }
-
-  .mem-support-head { margin-bottom: 36px; }
-
-  .mem-support-head .eb {
-    .sub {
-      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-      color: var(--ink-3);
-      font-size: 12.5px;
-      letter-spacing: .04em;
-      font-weight: 400;
-      text-transform: none;
-    }
-  }
-
-  .mem-support-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .mem-support-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--hair-2);
-    border-radius: 12px;
-    padding: 26px 26px 22px;
+  .gamma-stage .stage-head,
+  .beta-stage .stage-head {
     display: flex;
     flex-direction: column;
-
-    .support-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      gap: 10px;
-
-      .idx {
-        font-family: 'Geist Mono', monospace;
-        font-size: 10.5px;
-        font-weight: 500;
-        letter-spacing: .2em;
-        text-transform: uppercase;
-        color: var(--ink-3);
-      }
-
-      .support-chip {
-        font-family: 'Geist Mono', monospace;
-        font-size: 9.5px;
-        font-weight: 500;
-        letter-spacing: .16em;
-        text-transform: uppercase;
-        color: var(--ink-3);
-        background: rgba(232, 230, 227, 0.04);
-        border: 1px solid var(--hair-2);
-        border-radius: 4px;
-        padding: 3px 8px;
-      }
-    }
-
-    /* Support-card h3: whole heading uses the accent — h3 and its em
-       share the same color so the title reads as one unit, not a
-       split ink/copper mix. */
-    h3 {
-      font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 400;
-      font-size: 22px;
-      line-height: 1.15;
-      letter-spacing: -.015em;
-      color: var(--copper);
-      margin: 0 0 10px;
-    }
-
-    .support-desc {
-      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-      font-weight: 400;
-      font-size: 13.5px;
-      line-height: 1.55;
-      color: var(--ink-2);
-      margin: 0 0 18px;
-      flex-grow: 1;
-    }
-
-    .support-mock {
-      background: #0A0910;
-      border: 1px solid var(--hair);
-      border-radius: 8px;
-      padding: 14px 16px;
-      font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
-    }
+    gap: 14px;
+    margin-bottom: 32px;
+    max-width: 64ch;
+  }
+  .gamma-stage .stage-head .eb,
+  .beta-stage .stage-head .eb { margin-bottom: 0; }
+  .gamma-stage .stage-h2,
+  .beta-stage .stage-h2 {
+    margin: 0;
+    font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 36px);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .gamma-stage .stage-h2 em,
+  .beta-stage .stage-h2 em {
+    font-family: var(--font-display), 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--copper);
+  }
+  .gamma-stage .stage-lede,
+  .beta-stage .stage-lede {
+    margin: 0;
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 56ch;
   }
 
-  /* Pain-product mini mock */
-  .mem-support-card .pp-mock {
-    display: grid;
-    gap: 10px;
-
-    .pp-row {
-      display: grid;
-      grid-template-columns: 1fr 70px auto;
-      gap: 10px;
-      align-items: center;
-      font-size: 12.5px;
-
-      .pp-prod { color: var(--ink); font-weight: 500; }
-      .pp-conf {
-        font-family: 'Geist Mono', monospace;
-        font-size: 11px;
-        color: var(--ink-2);
-        min-width: 34px;
-        text-align: right;
-      }
-
-      /* Progress bar communicates by LENGTH. Fill uses the ink ramp
-         so it doesn't compete with keywords for the user's attention. */
-      .mapping-bar {
-        position: relative;
-        height: 5px;
-        border-radius: 3px;
-        background: rgba(232, 230, 227, 0.06);
-        overflow: hidden;
-
-        .mapping-bar-fill {
-          position: absolute; inset: 0;
-          background: linear-gradient(90deg, var(--ink-2), var(--ink-3));
-          border-radius: 3px;
-        }
-      }
-    }
-  }
-
-  /* Contradictions mini mock */
-  .mem-support-card .cx-mock {
-    display: grid;
-    gap: 8px;
-
-    .cx-row {
-      display: grid;
-      grid-template-columns: 54px 1fr;
-      gap: 12px;
-      align-items: baseline;
-      padding: 6px 0;
-
-      .cx-date {
-        font-family: 'Geist Mono', monospace;
-        font-size: 10px;
-        font-weight: 500;
-        letter-spacing: .18em;
-        text-transform: uppercase;
-        color: var(--ink-3);
-      }
-
-      .cx-quote {
-        font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
-        font-style: italic;
-        font-size: 14px;
-        line-height: 1.35;
-        color: var(--ink);
-      }
-    }
-
-    .cx-arrow {
-      text-align: center;
-      font-family: 'Geist Mono', monospace;
-      font-size: 16px;
-      color: var(--ink-3);
-      opacity: .8;
-      line-height: 1;
-      margin: 2px 0;
-    }
-  }
-
-  /* Handoff export mini mock */
-  .mem-support-card .hx-mock {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11.5px;
-    line-height: 1.7;
-
-    .hx-line { color: var(--ink-2); }
-    .hx-line.muted { color: var(--ink-3); opacity: .85; }
-  }
 
   /* ── CRM vs Salency compare ── */
   .mem-compare {
@@ -3315,11 +3486,13 @@ header button:focus:not(:focus-visible){
   }
   .mem-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     border: 1px solid var(--hair-2);
     border-radius: 12px;
-    overflow: hidden;
+    overflow: visible;
     background: rgba(255, 255, 255, 0.02);
+    position: relative;
 
     thead th {
       text-align: left;
@@ -3351,6 +3524,51 @@ header button:focus:not(:focus-visible){
     td:nth-child(2) { color: var(--ink-3); width: 39%; }
     td:nth-child(3) { color: var(--ink); width: 39%; }
   }
+
+  /* Copper-glow column treatment for the "In Salency" column on the CRM
+     compare table. Mirrors ComparativeStrip's highlighted-card visual
+     language: copper left/right border rails, copper-tint fill, copper
+     header text + slightly stronger top border, top/bottom rounded
+     corners on the column ends. The faint copper drop-shadow lives on
+     the wrapping .mem-compare-col-glow pseudo-anchor for layered fall-off. */
+  .mem-table th.salency-col,
+  .mem-table td.salency-col {
+    border-left: 1px solid var(--copper-a30);
+    border-right: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.04);
+    color: var(--ink);
+  }
+  .mem-table thead th.salency-col {
+    color: var(--copper);
+    border-top: 1px solid var(--copper-a30);
+    border-bottom: 1px solid var(--copper-a30);
+    background: rgba(254, 133, 49, 0.06);
+    border-radius: 8px 8px 0 0;
+  }
+  .mem-table tbody tr:last-child td.salency-col {
+    border-bottom: 1px solid var(--copper-a30);
+    border-radius: 0 0 8px 8px;
+  }
+
+  .mem-compare-wrap {
+    position: relative;
+  }
+  /* Faint copper drop-shadow under the Salency column. Sits behind the
+     table; a layout-anchor pseudo on the wrapper. Hidden on the mobile
+     stacked-card layout via the 720px breakpoint below. */
+  .mem-compare-wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 39%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 30px 80px -40px rgba(254, 133, 49, 0.35);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .mem-compare-wrap > .mem-table { position: relative; z-index: 1; }
 
   .mem-compare-foot {
     margin-top: 22px;
@@ -3406,22 +3624,17 @@ header button:focus:not(:focus-visible){
   }
 
   /* ── Responsive ── */
-  @media (max-width: 960px) {
-    .mem-support-grid { grid-template-columns: 1fr; gap: 18px; }
-  }
-
-  @media (max-width: 860px) {
-    .mem-brief-grid { grid-template-columns: 1fr; gap: 20px; }
-  }
-
   @media (max-width: 720px) {
     .mem-intro { padding: 20px 22px; margin-top: 48px; }
-    .mem-hero-surface { padding: 0 18px; }
-    .mem-hero-frame { padding: 20px 18px 18px; }
-    .mem-hero-head { flex-direction: column; align-items: flex-start; }
-    .mem-hero-bridge { flex-direction: column; gap: 8px; }
+    .mem-artifact-stage { padding: 0 22px; margin-top: 16px; }
+    .gamma-stage,
+    .beta-stage { margin-top: 64px; padding: 0 22px; }
 
     .mem-compare { margin-top: 72px; padding: 0 22px; }
+
+    /* Glow shadow is hidden in the stacked-card mobile layout — the
+       column geometry no longer applies. */
+    .mem-compare-wrap::before { display: none; }
 
     /* Table → card-per-row. Signal (col 1) becomes the card caption,
        CRM and Salency cells label themselves via ::before pseudo-
@@ -3490,11 +3703,243 @@ header button:focus:not(:focus-visible){
 
     .mem-cta { margin: 72px auto 72px; padding: 0 22px; }
   }
-}
 
-@keyframes memPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 230, 227, 0.35); }
-  50% { box-shadow: 0 0 0 5px rgba(232, 230, 227, 0); }
+  /* ── γ surface: AnchorSplitPane (how it stays anchored) ──
+     Static split-pane: raw transcript on the left, extracted signal cards
+     on the right. Cited lines get a copper left-rule + tinted background;
+     extract cards on the right have a copper rule + arrow ::before/::after
+     pointing back at the source. Frame matches .hero-brief-frame chrome
+     (bg-2, hair-2 border, copper top-rule, 14px radius). */
+  .anchor-frame {
+    position: relative;
+    background: var(--bg-2);
+    border: 1px solid var(--hair-2);
+    border-radius: 14px;
+    padding: 0;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .anchor-frame::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 18px; right: 18px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--copper) 0%, transparent 100%);
+    border-radius: 2px;
+  }
+  .anchor-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 14px;
+    padding: 20px 24px 14px;
+    border-bottom: 1px solid var(--hair);
+    flex-wrap: wrap;
+  }
+  .anchor-head-left {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .anchor-head-left strong { color: var(--ink); font-weight: 500; }
+  .anchor-head-right {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+  .anchor-synthetic-chip {
+    margin: 0;
+    padding: 8px 24px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    background: rgba(232, 230, 227, 0.03);
+    border-bottom: 1px solid var(--hair);
+  }
+  .anchor-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    position: relative;
+  }
+  .anchor-split::before {
+    content: "";
+    position: absolute;
+    top: 18px; bottom: 18px;
+    left: 50%;
+    width: 1px;
+    background: var(--hair);
+  }
+  .anchor-col { padding: 22px 24px; }
+  .anchor-col-eb {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+  }
+  .anchor-line {
+    margin: 0 0 10px;
+    padding: 4px 8px;
+    margin-left: -8px;
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    border-radius: 4px;
+  }
+  .anchor-line.is-extracted {
+    background: var(--copper-a04);
+    border-left: 2px solid var(--copper);
+    padding-left: 10px;
+    margin-left: -12px;
+    color: var(--ink);
+  }
+  .anchor-card {
+    position: relative;
+    background: var(--bg-3);
+    border: 1px solid var(--copper-a30);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 0 0 14px;
+  }
+  .anchor-card:last-child { margin-bottom: 0; }
+  /* Copper rule + arrow pointing back at the source line on the left.
+     Hidden on narrow viewports where the columns stack. */
+  .anchor-card::before {
+    content: "";
+    position: absolute;
+    left: -25px;
+    top: 18px;
+    width: 25px;
+    height: 1px;
+    background: var(--copper-a60);
+  }
+  .anchor-card::after {
+    content: "\25BA";
+    position: absolute;
+    left: -10px;
+    top: 12px;
+    color: var(--copper);
+    font-size: 10px;
+  }
+  .anchor-card-name {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 6px;
+  }
+  .anchor-card-body {
+    margin: 0 0 6px;
+    font-family: var(--font-display), 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--ink);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .anchor-card-cap {
+    font-style: normal;
+    color: var(--ink-3);
+    font-size: 11px;
+  }
+  .anchor-card-meta {
+    margin: 0;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    letter-spacing: .04em;
+  }
+  .anchor-meta-copper { color: var(--copper); }
+
+  @media (max-width: 860px) {
+    .anchor-split { grid-template-columns: 1fr; }
+    .anchor-split::before { display: none; }
+    .anchor-card::before,
+    .anchor-card::after { display: none; }
+    .anchor-col--r { border-top: 1px solid var(--hair); }
+  }
+
+  /* ── β surface: SchemaList (what's stored) ──
+     Vertical stack of hairline-separated rows. Each row is a 3-col grid
+     (signal name + count | one-sentence definition | example payload card).
+     Static — no hover or click state. */
+  .schema-list { margin-top: 8px; }
+  .schema-row {
+    padding: 18px 0;
+    border-top: 1px solid var(--hair);
+    display: grid;
+    grid-template-columns: 200px 1fr 340px;
+    gap: 24px;
+    align-items: start;
+  }
+  .schema-row:first-child { border-top: 1px solid var(--hair-2); }
+  .schema-name {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--copper);
+    line-height: 1.3;
+  }
+  .schema-count {
+    margin-top: 6px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    letter-spacing: .04em;
+    font-weight: 400;
+  }
+  .schema-def {
+    font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 42ch;
+  }
+  .schema-card {
+    background: var(--bg-2);
+    border: 1px solid var(--hair);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .schema-field {
+    display: grid;
+    grid-template-columns: 86px 1fr;
+    gap: 10px;
+    padding: 1px 0;
+  }
+  .schema-field-key { color: var(--ink-3); }
+  .schema-field-val { color: var(--ink); }
+  .schema-field-val--quote {
+    font-family: var(--font-display), 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+  .schema-field-val--copper { color: var(--copper); }
+
+  @media (max-width: 860px) {
+    .schema-row {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 22px 0;
+    }
+    .schema-def { max-width: none; }
+  }
 }
 
 /* ═══════════ Pilot modal (Request-your-pilot form) ═══════════ */
@@ -3570,136 +4015,11 @@ header button:focus:not(:focus-visible){
   .pilot-modal-panel { animation: none; }
 }
 
-/* ═══════════ /why-salency D-refactor ═══════════ */
-
-/* 01 · Thesis hero */
-.thesis-hero {
-  max-width: var(--page-max);
-  margin: 40px auto 0;
-  padding: 20px 40px;
-}
-.thesis-hero-inner h1 {
-  font-family: var(--font-display);
-  font-size: clamp(40px, 5.2vw, 64px);
-  line-height: 1.08;
-  letter-spacing: -.025em;
-  font-weight: 400;
-  color: var(--ink);
-  margin: 16px 0 24px;
-  max-width: 22ch;
-}
-.thesis-hero-inner h1 em { font-style: italic; color: var(--copper); }
-.thesis-hero-inner h1 .soft { color: var(--ink-3); }
-.thesis-hero-inner .lede {
-  font-size: 19px;
-  line-height: 1.6;
-  color: var(--ink-2);
-  max-width: 64ch;
-  margin-bottom: 48px;
-}
-.thesis-hero-meta {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--hair-2);
-  border-bottom: 1px solid var(--hair-2);
-}
-.thesis-hero-cell {
-  padding: 24px 24px 24px 0;
-  border-right: 1px solid var(--hair);
-}
-.thesis-hero-cell:last-child { border-right: none; padding-right: 0; }
-.thesis-hero-cell:not(:first-child) { padding-left: 24px; }
-.thesis-hero-cell .label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-bottom: 10px;
-  display: block;
-}
-.thesis-hero-cell p { font-size: 14.5px; line-height: 1.55; color: var(--ink-2); }
-
-/* 03 · Memory stack */
-.mem-stack { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
-.mem-stack-head { margin-bottom: 48px; }
-.mem-stack-head h2 {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 48px);
-  line-height: 1.05;
-  letter-spacing: -.02em;
-  font-weight: 400;
-  color: var(--ink);
-  margin-top: 18px;
-  max-width: 28ch;
-}
-.mem-stack-head h2 em { font-style: italic; color: var(--copper); }
-.mem-stack-rows { border-top: 1px solid var(--hair-2); }
-.mem-stack-row {
-  display: grid;
-  grid-template-columns: 200px 200px 1fr;
-  gap: 32px;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--hair);
-  align-items: baseline;
-}
-.mem-stack-row .layer-label { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--ink); }
-.mem-stack-row .layer-role { font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
-.mem-stack-row .layer-desc { font-size: 15.5px; line-height: 1.6; color: var(--ink-2); }
-.mem-stack-row .layer-desc em { color: var(--copper); font-style: italic; }
-.mem-stack-row--accent .layer-label { color: var(--copper); }
-
-/* Pain-product + contradiction mock rows (shared by /memory supporting cards) */
-.pp-row { display: grid; grid-template-columns: 1fr 100px 40px; align-items: center; gap: 10px; padding: 8px 0; }
-.pp-row .pp-prod { color: var(--ink-2); }
-.pp-row .pp-conf { color: var(--ink-3); text-align: right; }
-.cx-row { display: grid; grid-template-columns: 60px 1fr; gap: 12px; padding: 6px 0; }
-.cx-row .cx-date { color: var(--ink-3); }
-.cx-row .cx-quote { color: var(--ink); }
-.cx-arrow { color: var(--ink-3); text-align: center; margin: 4px 0; }
-
-/* 05 · Compounds (page visual anchor) */
-.compounds { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
-.compounds-head { margin-bottom: 64px; }
-.compounds-head h2 {
-  font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.06;
-  letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 18px; max-width: 22ch;
-}
-.compounds-head h2 em { font-style: italic; color: var(--copper); }
-.compounds-timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-top: 48px; }
-.compounds-rail {
-  position: absolute; top: 24px; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--copper), rgba(254,133,49,0));
-}
-.compounds-step { position: relative; padding-top: 24px; }
-.compounds-marker {
-  position: absolute; top: -32px; left: 0;
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em;
-  color: var(--copper); background: var(--bg); padding: 0 8px 0 0;
-}
-.compounds-step h4 { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
-.compounds-step p { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
-.compounds-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hair); font-size: 15px; color: var(--ink-3); max-width: 64ch; }
+/* ═══════════ /why-salency Linear-treatment surface ═══════════ */
 
 /* Notetaker comparison table takeaway */
 .notetaker-takeaway { margin-top: 28px; font-family: var(--font-display); font-size: 18px; line-height: 1.5; color: var(--ink); max-width: 60ch; }
 .notetaker-takeaway em { font-style: italic; color: var(--copper); }
-
-/* 08 · Not for you */
-.notfor { max-width: var(--page-max); margin: 120px auto 0; padding: 0 40px; }
-.notfor-head { margin-bottom: 40px; }
-.notfor-head h2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -.02em; font-weight: 400; color: var(--ink); margin-top: 16px; max-width: 28ch; }
-.notfor-head h2 em { font-style: italic; color: var(--copper); }
-.notfor-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--hair-2); }
-.notfor-list li { display: grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--hair); align-items: baseline; }
-.notfor-list .notfor-idx { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; color: var(--ink-3); }
-.notfor-list .notfor-body { font-size: 15.5px; line-height: 1.65; color: var(--ink-2); }
-.notfor-list .notfor-body strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; }
-.notfor-foot { margin-top: 28px; font-size: 14.5px; line-height: 1.65; color: var(--ink-3); max-width: 72ch; }
-.notfor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 8px; }
-.notfor-col-head { display: block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px; font-weight: 500; }
-.notfor-list--paired li { grid-template-columns: 1fr; gap: 0; }
-@media (max-width: 768px) { .notfor-grid { grid-template-columns: 1fr; gap: 40px; } }
 
 /* Pilot CTA */
 .why-cta { max-width: var(--page-max); margin: 96px auto 120px; padding: 0 40px; text-align: center; }
@@ -3709,26 +4029,7 @@ header button:focus:not(:focus-visible){
 .why-cta h2 em { font-style: italic; color: var(--copper); }
 .why-cta .sub { font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 56ch; margin: 0 auto 28px; }
 
-/* Mobile overrides */
 @media (max-width: 768px) {
-  .thesis-hero { padding: 0 22px; }
-  .thesis-hero-meta { grid-template-columns: 1fr; }
-  .thesis-hero-cell { border-right: none; border-bottom: 1px solid var(--hair); padding: 20px 0; }
-  .thesis-hero-cell:last-child { border-bottom: none; }
-  .thesis-hero-cell:not(:first-child) { padding-left: 0; }
-
-  .mem-stack { margin-top: 72px; padding: 0 22px; }
-  .mem-stack-row { grid-template-columns: 1fr; gap: 8px; }
-
-  .compounds { margin-top: 72px; padding: 0 22px; }
-  .compounds-timeline { grid-template-columns: 1fr; gap: 40px; padding-top: 8px; }
-  .compounds-rail { display: none; }
-  .compounds-step { padding-top: 0; padding-left: 60px; }
-  .compounds-marker { position: static; display: inline-block; margin-bottom: 8px; }
-
-  .notfor { margin-top: 72px; padding: 0 22px; }
-  .notfor-list li { grid-template-columns: 1fr; gap: 4px; }
-
   .why-cta { margin: 72px auto 72px; padding: 0 22px; }
 }
 
@@ -3930,5 +4231,820 @@ header button:focus:not(:focus-visible){
 @media (prefers-reduced-motion: reduce) {
   .hero-artifact-modal-backdrop,
   .hero-artifact-modal-panel { animation: none; }
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   /why-salency Linear-treatment rebuild — diff-pair viewer + intro + CTA.
+   Ported from /tmp/salency-mockup/why-salency-v-1and2.html. The mockup
+   is the visual source of truth for this surface. CSS organized as:
+     1. .why-intro            (the H1 + subhead block above the viewer)
+     2. .diff-stage           (outer section spacer)
+     3. .window-chrome        (browser-window wrapper)
+     4. .chrome-bar           (traffic lights + URL pill + title)
+     5. .diff-frame           (inner artifact frame)
+     6. .diff-head            (call meta + synthetic chip)
+     7. .column-headers       (3-up Notetaker / Your CRM / Salency labels)
+     8. .diff-grid + .pane    (3-pane layout)
+     9. .tline                (transcript line buttons)
+    10. .crm-record           (CRM field rows + overwrite badge)
+    11. .crm-overwrite        (Lost-in-overwrite reveal panel)
+    12. .signal-card          (Salency memory cards)
+    13. .cross-call-foot      (account-level memory link)
+    14. .notetaker-table .salency-col  (copper-glow column refresh)
+   Mobile: 880px breakpoint merges CRM + Salency into a single response
+   panel per Q2=D from the spec. ═════════════════════════════════════ */
+
+/* 1. Intro ─────────────────────────────────────────────────────────── */
+.why-intro {
+  max-width: var(--page-max);
+  margin: 56px auto 22px;
+  padding: 0 40px;
+}
+.why-intro .why-sub {
+  color: var(--ink-2);
+  font-size: 15px;
+  max-width: 56ch;
+  margin: 18px 0 0;
+}
+.why-intro .why-sub .copper { color: var(--copper); }
+@media (max-width: 768px) {
+  .why-intro { margin-top: 32px; padding: 0 22px; }
+}
+
+/* 2. Diff stage spacer ─────────────────────────────────────────────── */
+.diff-stage {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  /* 20px horizontal so the artifact (max-width 1240) can fill 1280 - 40
+     and preserve the locked 1.72:1 aspect ratio at 720 height. The rest
+     of the page stays on the 40px rail; the artifact intentionally
+     breaks out by 20px each side as the hero. */
+  padding: 18px 20px 56px;
+}
+@media (max-width: 768px) {
+  .diff-stage { padding: 12px 22px 40px; }
+}
+
+/* 3. Window chrome ─────────────────────────────────────────────────── */
+.window-chrome {
+  background: var(--bg-2);
+  border: 1px solid var(--hair-2);
+  border-radius: 12px;
+  box-shadow:
+    0 30px 80px -40px rgba(254, 133, 49, 0.18),
+    0 24px 60px -28px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 1240px;
+  height: 720px;
+  max-height: calc(100vh - 140px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 1280px) {
+  .window-chrome { max-width: 100%; }
+}
+@media (max-width: 880px) {
+  .window-chrome { height: auto; max-height: none; }
+  .chrome-title { display: none; }
+}
+
+/* 4. Chrome bar ────────────────────────────────────────────────────── */
+.chrome-bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 14px;
+  background: linear-gradient(180deg, #1d1a22 0%, #15131a 100%);
+  border-bottom: 1px solid var(--hair-2);
+  flex: 0 0 auto;
+}
+.chrome-traffic {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.chrome-traffic .dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+.chrome-traffic .dot.red    { background: #FF5F56; }
+.chrome-traffic .dot.yellow { background: #FFBD2E; }
+.chrome-traffic .dot.green  { background: #27C93F; }
+.chrome-url {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: var(--bg-3);
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  max-width: 360px;
+  margin: 0 auto;
+}
+.chrome-url .lock {
+  color: var(--ink-3);
+  font-size: 9px;
+  margin-right: 2px;
+}
+.chrome-url .domain { color: var(--ink-2); }
+.chrome-url .path   { color: var(--ink); }
+.chrome-title {
+  text-align: right;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  grid-column: 3;
+  white-space: nowrap;
+}
+
+/* 5. Diff frame ────────────────────────────────────────────────────── */
+.diff-frame {
+  background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.diff-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--copper) 0%, transparent 100%);
+  border-radius: 2px;
+}
+
+/* 6. Diff head ─────────────────────────────────────────────────────── */
+.diff-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 16px 24px 12px;
+  border-bottom: 1px solid var(--hair);
+}
+.diff-head .left {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.diff-head .left strong { color: var(--ink); font-weight: 500; }
+.diff-head .right {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--copper);
+  border: 1px solid var(--copper-a30);
+  padding: 3px 7px;
+  border-radius: 3px;
+  background: var(--copper-a04);
+  white-space: nowrap;
+}
+
+/* 7. Column headers ───────────────────────────────────────────────── */
+.column-headers {
+  display: grid;
+  grid-template-columns: 1.1fr 0.85fr 1.05fr;
+  border-bottom: 1px solid var(--hair-2);
+  background: var(--bg-3);
+  flex: 0 0 auto;
+}
+.col-header {
+  padding: 14px 22px 12px;
+  border-right: 1px solid var(--hair);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.col-header:last-child { border-right: 0; }
+.col-header.salency-header {
+  background: rgba(254, 133, 49, 0.06);
+  border-right-color: var(--copper-a30);
+}
+.col-header .col-name {
+  font-family: var(--font-display), 'Instrument Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.col-header.salency-header .col-name { color: var(--copper); }
+.col-header .col-sub {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.col-header.salency-header .col-sub { color: var(--copper); opacity: 0.85; }
+@media (max-width: 880px) {
+  .column-headers { display: none; }
+}
+
+/* 8. Diff grid + panes ─────────────────────────────────────────────── */
+.diff-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.85fr 1.05fr;
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.pane {
+  padding: 16px 22px 18px;
+  min-width: 0;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--copper-a30) transparent;
+  border-right: 1px solid var(--hair);
+}
+.pane:last-child { border-right: 0; }
+.pane::-webkit-scrollbar { width: 5px; }
+.pane::-webkit-scrollbar-thumb { background: var(--copper-a30); border-radius: 3px; }
+.pane::-webkit-scrollbar-track { background: transparent; }
+
+.pane .pane-eb {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 10px;
+  /* Hide redundant pane labels — column-headers above already names them. */
+  display: none;
+}
+.pane .pane-eb .meta { color: var(--ink-3); margin-left: 6px; opacity: 0.7; font-weight: 400; }
+
+.pane.salency-pane {
+  background: linear-gradient(180deg, rgba(254, 133, 49, 0.04) 0%, rgba(254, 133, 49, 0.06) 100%);
+}
+.pane.salency-pane::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  right: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent 0%, var(--copper-a30) 30%, var(--copper-a30) 70%, transparent 100%);
+}
+.pane.crm-pane { background: rgba(255, 255, 255, 0.01); }
+
+/* 9. Transcript lines ─────────────────────────────────────────────── */
+.tline-list { display: flex; flex-direction: column; gap: 2px; }
+.tline {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin: 0;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  background: transparent;
+  text-align: left;
+  width: 100%;
+  transition-property: background, border-color, color;
+  transition-duration: 140ms;
+}
+.tline:hover {
+  background: rgba(255, 255, 255, 0.02);
+  border-left-color: var(--hair-2);
+}
+.tline:focus-visible {
+  outline: 2px solid var(--copper-a30);
+  outline-offset: 1px;
+}
+.tline .ts {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  color: var(--ink-3);
+  font-size: 11px;
+  margin-right: 5px;
+}
+.tline .speaker { color: var(--ink); font-weight: 500; }
+.tline.is-active {
+  background: var(--copper-a04);
+  border-left-color: var(--copper);
+}
+.tline.is-active .ts { color: var(--copper); }
+.transcript-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--hair);
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+}
+
+/* 10. CRM record ──────────────────────────────────────────────────── */
+.crm-record {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+.crm-record .crm-row {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--hair);
+  background: transparent;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  text-align: left;
+  width: 100%;
+}
+.crm-record .crm-row:last-of-type { border-bottom: 0; }
+.crm-record .crm-row .crm-key {
+  color: var(--ink-3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.crm-record .crm-row .crm-key .crm-constraint {
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+  color: rgba(138, 136, 132, 0.55);
+  text-transform: lowercase;
+  line-height: 1.2;
+}
+.crm-record .crm-row .crm-key .crm-constraint.warn {
+  color: rgba(255, 90, 90, 0.55);
+}
+.crm-record .crm-row .crm-val { color: var(--ink); }
+.crm-record .crm-row .crm-val.dim { color: var(--ink-3); }
+
+/* notes row is interactive — laid out as 2 cols (key / value-stack) */
+.crm-record button.crm-row.notes {
+  grid-template-columns: 86px 1fr;
+  align-items: start;
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 160ms;
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+}
+.crm-record button.crm-row.notes:hover { background: rgba(255, 90, 90, 0.04); }
+.crm-record button.crm-row.notes.is-quiet { cursor: default; }
+.crm-record button.crm-row.notes.is-quiet:hover { background: transparent; }
+.crm-record button.crm-row.notes:focus-visible {
+  outline: 2px solid var(--copper-a30);
+  outline-offset: 1px;
+}
+.crm-record .crm-val-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.crm-record button.crm-row.notes .crm-val {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-style: italic;
+  color: var(--ink-2);
+  font-size: 12px;
+  line-height: 1.45;
+  transition: opacity 130ms ease-out, transform 130ms ease-out;
+}
+.crm-record button.crm-row.notes .crm-val.is-outgoing {
+  opacity: 0;
+  transform: translateY(-2px);
+}
+.crm-record .crm-expand-cue {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  opacity: 0.7;
+  transition: opacity 160ms, color 160ms;
+}
+.crm-record button.crm-row.notes:hover .crm-expand-cue { opacity: 1; color: var(--ink-2); }
+.crm-record button.crm-row.notes.is-expanded .crm-expand-cue {
+  color: #E89A8E;
+  opacity: 1;
+}
+
+.crm-overwrite-badge {
+  align-self: flex-start;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #E89A8E;
+  background: rgba(255, 90, 90, 0.08);
+  border: 1px solid rgba(255, 90, 90, 0.24);
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: opacity 200ms;
+}
+.crm-overwrite-badge.is-hidden { display: none; }
+.crm-overwrite-badge.is-pulse { animation: crm-badge-pulse 1.2s ease-out; }
+@keyframes crm-badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 90, 0); }
+  50%      { box-shadow: 0 0 0 4px rgba(255, 90, 90, 0.12); }
+}
+
+/* 11. CRM-gap reveal panel — three failure modes (overwrite/no-link/no-field).
+   All share base layout. Strikethrough fires only for overwrite, since
+   no-link/no-field aren't destructive — they're CRM limitations.        */
+.crm-overwrite {
+  margin-top: 8px;
+  padding: 9px 11px;
+  background: rgba(255, 90, 90, 0.05);
+  border: 1px solid rgba(255, 90, 90, 0.20);
+  border-radius: 4px;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  display: none;
+}
+.crm-overwrite.is-shown {
+  display: block;
+  animation: signal-in 240ms ease-out;
+}
+.crm-overwrite .lost-eb {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #E89A8E;
+  margin: 0 -4px 6px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  display: inline-block;
+}
+/* Punchy flash on the eyebrow + reveal-panel border on expand so the new
+   content is noticed even when auto-scroll only nudges a few pixels. The
+   key prop on .crm-overwrite (in DiffPairViewer.tsx) forces React to remount
+   on state transitions, guaranteeing the keyframe restarts cleanly. */
+.crm-overwrite.is-shown .lost-eb {
+  animation: lost-eb-flash 800ms ease-out;
+}
+@keyframes lost-eb-flash {
+  0% {
+    background: rgba(255, 90, 90, 0.40);
+    color: #FFE4DC;
+    box-shadow: 0 0 0 0 rgba(255, 90, 90, 0.5);
+  }
+  30% {
+    background: rgba(255, 90, 90, 0.32);
+    color: #FFD2C5;
+    box-shadow: 0 0 0 4px rgba(255, 90, 90, 0.18);
+  }
+  100% {
+    background: transparent;
+    color: #E89A8E;
+    box-shadow: 0 0 0 0 rgba(255, 90, 90, 0);
+  }
+}
+.crm-overwrite.is-shown {
+  animation: signal-in 240ms ease-out, gap-reveal-glow 800ms ease-out;
+}
+@keyframes gap-reveal-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 90, 0); }
+  35%      { box-shadow: 0 0 18px -2px rgba(255, 90, 90, 0.32); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crm-overwrite.is-shown .lost-eb,
+  .crm-overwrite.is-shown { animation: none; }
+}
+.crm-overwrite .lost-row {
+  margin-bottom: 6px;
+}
+.crm-overwrite .lost-row:last-of-type {
+  margin-bottom: 0;
+}
+.crm-overwrite .lost-row + .lost-row {
+  padding-top: 6px;
+  border-top: 1px dashed rgba(255, 90, 90, 0.14);
+}
+.crm-overwrite .lost-line {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 12px;
+  margin: 0 0 3px;
+}
+/* Overwrite + no-link kinds are showing actual customer speech that
+   either got erased or stored without relationships. Italic-red reads
+   as "verbatim quote with a problem." */
+.crm-overwrite.is-overwrite .lost-line,
+.crm-overwrite.is-no-link .lost-line {
+  font-style: italic;
+  color: #E89A8E;
+}
+/* Overwrite kind also gets strikethrough — the line is genuinely erased. */
+.crm-overwrite.is-overwrite .lost-line {
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 90, 90, 0.5);
+}
+/* No-field kind is showing structured pain records (categories, not
+   speech). Style as labels, not quotes — non-italic, ink-2 color, with
+   a subtle copper tint on the data category to call out the structure. */
+.crm-overwrite.is-no-field .lost-line {
+  font-style: normal;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.crm-overwrite .lost-meta {
+  font-size: 9.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  margin: 0;
+}
+.crm-overwrite .lost-comment {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 90, 90, 0.18);
+  color: var(--ink-3);
+  font-style: normal;
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.crm-foot {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: rgba(255, 90, 90, 0.04);
+  border: 1px solid rgba(255, 90, 90, 0.16);
+  border-radius: 4px;
+  color: #E89A8E;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+/* 12. Salency signal cards ────────────────────────────────────────── */
+.signals { display: flex; flex-direction: column; gap: 8px; }
+.signals.is-outgoing > .signal-card {
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity 130ms ease-out, transform 130ms ease-out;
+}
+.signal-card {
+  background: var(--bg-3);
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  padding: 9px 12px;
+  transition: border-color 140ms, background 140ms;
+}
+.signal-card.is-flagged {
+  border-color: var(--copper-a30);
+  background: var(--copper-a04);
+}
+.signal-card .signal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+.signal-card .signal-name {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.signal-card .signal-status {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 1px 6px;
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+}
+.signal-card.is-flagged .signal-status {
+  color: var(--copper);
+  border-color: var(--copper-a30);
+  background: var(--copper-a08);
+}
+.signal-card .signal-title {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.signal-card .signal-title-meta {
+  color: var(--ink-3);
+  font-weight: 400;
+  font-size: 11.5px;
+  font-style: italic;
+}
+.signal-card .signal-quote-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 8px;
+  padding: 2px 0;
+  font-size: 11.5px;
+}
+.signal-card .signal-quote-row .label {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+}
+.signal-card .signal-quote-row .body { color: var(--ink-2); }
+.signal-card .signal-quote-row .body .quote {
+  font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  font-style: italic;
+  color: var(--ink);
+}
+.signal-card .signal-quote-row .body .cite {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--ink-3);
+  margin-left: 4px;
+}
+.signal-card .signal-foot {
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid var(--hair);
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--ink-3);
+}
+.signal-card .signal-foot .copper { color: var(--copper); }
+.signal-card.is-flagged .signal-foot { border-top-color: var(--copper-a30); }
+
+.signal-card .expand-toggle {
+  margin-top: 4px;
+  display: inline-block;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.signal-card .expand-toggle:hover { opacity: 1; color: var(--ink-2); }
+.signal-card .expand-toggle:focus-visible {
+  outline: 2px solid var(--copper-a30);
+  outline-offset: 2px;
+}
+.signal-card .expand-toggle--collapse { color: var(--copper); opacity: 0.85; }
+
+.signal-card-detail {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--hair);
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  animation: signal-in 200ms ease-out;
+}
+.signal-card.is-flagged .signal-card-detail { border-top-color: var(--copper-a30); }
+.signal-card-detail .ctx-line {
+  font-family: var(--font-body), 'Instrument Sans', system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 4px 0;
+  padding-left: 10px;
+  border-left: 2px solid var(--copper-a30);
+}
+.signal-card-detail .ctx-line .ts {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  color: var(--ink-3);
+  font-size: 10.5px;
+  margin-right: 5px;
+}
+.signal-card-detail .open-modal {
+  margin-top: 8px;
+  display: inline-block;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--copper);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.signal-card-detail .open-modal:hover { color: #FE9F5B; }
+.signal-card-detail .open-modal:focus-visible {
+  outline: 2px solid var(--copper-a30);
+  outline-offset: 2px;
+}
+
+.signal-card.is-new { animation: signal-in 220ms ease-out backwards; }
+@keyframes signal-in {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 13. Cross-call footer ───────────────────────────────────────────── */
+.cross-call-foot {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--copper-a30);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.cross-call-foot > .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--copper);
+  flex-shrink: 0;
+}
+.cross-call-foot .link {
+  color: var(--copper);
+  text-decoration: none;
+  border-bottom: 1px solid var(--copper-a30);
+}
+.cross-call-foot .link:hover { border-bottom-color: var(--copper); }
+
+/* Mobile (<880px) — Q2=D merge: CRM + Salency stack into a single
+   "response" panel with a copper divider chip. Touch targets bump to
+   44px. ────────────────────────────────────────────────────────────── */
+@media (max-width: 880px) {
+  .diff-grid { grid-template-columns: 1fr; }
+  .diff-grid::before,
+  .diff-grid::after { display: none; }
+  .pane {
+    padding: 14px 18px;
+    border-top: 1px solid var(--hair);
+  }
+  .pane:first-child { border-top: 0; }
+  .tline { padding: 12px 12px; min-height: 44px; }
+  .pane.crm-pane {
+    border-top: 1px solid var(--copper-a30);
+    padding-bottom: 8px;
+  }
+  .pane.salency-pane {
+    border-top: 0;
+    padding-top: 12px;
+    position: relative;
+  }
+  .pane.salency-pane::before {
+    content: '\2195 Salency preserves both';
+    display: block;
+    text-align: center;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    padding: 8px 12px;
+    margin: 0 -18px 14px;
+    background: rgba(254, 133, 49, 0.08);
+    border-top: 1px solid var(--copper-a30);
+    border-bottom: 1px solid var(--copper-a30);
+  }
+  .signal-card { padding: 10px 12px; }
+  .cross-call-foot { font-size: 9.5px; }
+}
+
+/* Reduced-motion: disable entrance + pulse animations. */
+@media (prefers-reduced-motion: reduce) {
+  .signal-card.is-new,
+  .signal-card-detail,
+  .crm-overwrite.is-shown { animation: none; }
+  .crm-overwrite-badge.is-pulse { animation: none; }
+  .signals.is-outgoing > .signal-card,
+  .crm-record button.crm-row.notes .crm-val.is-outgoing {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
