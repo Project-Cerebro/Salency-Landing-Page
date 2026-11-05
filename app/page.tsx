@@ -5,6 +5,7 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { HubSection } from '@/components/sections/HubSection';
 import { ProvenanceCard } from '@/components/sections/ProvenanceCard';
 import { MapStage } from '@/components/sections/MapStage';
+import { FollowUpStage } from '@/components/sections/FollowUpStage';
 import { HandoffExportStage } from '@/components/sections/HandoffExportStage';
 import { RecallStage } from '@/components/sections/RecallStage';
 import { ComparativeStrip } from '@/components/sections/ComparativeStrip';
@@ -50,6 +51,7 @@ export default function Home() {
       <ScrollReveal><HubSection /></ScrollReveal>
       <ScrollReveal><ProvenanceCard /></ScrollReveal>
       <ScrollReveal><MapStage /></ScrollReveal>
+      <ScrollReveal><FollowUpStage /></ScrollReveal>
       <ScrollReveal><HandoffExportStage /></ScrollReveal>
       <ScrollReveal><RecallStage /></ScrollReveal>
       <ScrollReveal><ComparativeStrip /></ScrollReveal>

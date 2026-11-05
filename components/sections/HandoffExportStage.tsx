@@ -14,8 +14,11 @@ import { StageHead } from '@/components/sections/StageHead';
 
 const FILENAME = 'hudson-terrace-capital.pdf';
 
-// Mock content mirrors the real brief's six sections. Quotes are verbatim
-// from the synthetic transcripts (Daniel's Apr 06 cash-flow line).
+// Preview shows the real brief's first two sections verbatim; the other
+// four are named in the footer. Trimmed 2026-11-05 so the homepage doesn't
+// replay the hero brief a third time. Quotes are verbatim from the
+// synthetic transcripts (Daniel's Apr 06 cash-flow line).
+const MORE = ['We owe them', 'What\u2019s changed', 'How we map', 'Next'];
 const BRIEF = `Hudson Terrace Capital \u00b7 Company brief
 3 calls indexed
 
@@ -33,28 +36,6 @@ const BRIEF = `Hudson Terrace Capital \u00b7 Company brief
      Daniel Voss, COO \u00b7 Mar 09, call 01
   3. MAS-recognized Singapore deployment
      Daniel Voss, COO \u00b7 Mar 23, call 02
-
-03 \u00b7 We owe them
-  SOC 2 Type II report \u00b7 owed Mar 23 \u00b7 owner: Maya
-  Anchorage sandbox creds \u00b7 due Fri \u00b7 owner: Raj
-  Reference calls \u00d7 2 \u00b7 due Fri \u00b7 owner: Maya
-
-04 \u00b7 What's changed
-  Latency: blocker \u2192 resolved workaround
-    Between call 01 and call 03. Verify before next call.
-  SOC 2 cadence: annual \u2192 quarterly
-    Between call 01 and call 03. Verify before next call.
-
-05 \u00b7 How we map
-  Atlas Settlement \u00b7 0.94 \u00b7 sub-second settlement
-  Helix Recon \u00b7 0.92 \u00b7 multi-venue reconciliation
-  Atlas Singapore \u00b7 0.85 \u00b7 MAS-recognized regional deployment
-
-06 \u00b7 Next
-  Apr 18 \u00b7 MSA signature target
-  Apr 20 \u00b7 Kickoff
-  May 1 \u00b7 Atlas Settlement Core live
-  May 15 \u00b7 Helix Recon rollout
 `;
 
 export function HandoffExportStage() {
@@ -89,6 +70,9 @@ export function HandoffExportStage() {
           <pre className="handoff-viewer-pre">
             <code className="handoff-viewer-code">{BRIEF}</code>
           </pre>
+          <p className="handoff-viewer-more">
+            4 more sections in the PDF: {MORE.join(' \u00b7 ')}
+          </p>
         </div>
       </div>
     </section>
