@@ -17,7 +17,7 @@ export function InvestorsSection() {
             <p>
               Salency is the structured, cited memory layer for
               what your accounts actually told you. The input every future
-              revenue tool will inherit from. Every call compounds the graph.
+              revenue tool will inherit from. Every call adds to account memory.
             </p>
             <div className="inv-intro-meta">
               <span>Pre-seed</span>
@@ -63,7 +63,7 @@ export function InvestorsSection() {
               Vs CRM, the wedge is the shape of the data. Contradiction pairs,
               pain evolution over time, confidence-ranked pain → product
               matches. CRM rows hold one value
-              per field; the graph holds rankings, cited quotes, and
+              per field; account memory holds rankings, cited quotes, and
               cross-call comparisons. Two layers, distinct shapes of data. We
               sit on top of your stack, not inside it. Reps live in CRM for
               pipeline stages. Reps live in Salency for the qualitative

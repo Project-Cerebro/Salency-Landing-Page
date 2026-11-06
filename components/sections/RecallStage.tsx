@@ -61,9 +61,9 @@ export function RecallStage() {
           }
           lede={
             <>
-              Contradiction alerts when a buyer{'\u2019'}s position shifts
-              between calls. Pipeline-complete pings when a meeting is fully
-              indexed. The memory layer that surfaces signal, not noise.
+              Contradiction alerts when a contact says something that
+              doesn{'\u2019'}t match an earlier call. A ping when a call is
+              fully processed. The memory layer that surfaces signal, not noise.
             </>
           }
         />

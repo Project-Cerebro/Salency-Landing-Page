@@ -56,7 +56,7 @@ export function HandoffExportStage() {
           lede={
             <>
               Export the company brief as a PDF and hand it to whoever picks up
-              the account next. The successor inherits everything, not just the
+              the account next. The next rep inherits everything, not just the
               pipeline stage.
             </>
           }
