@@ -54,7 +54,7 @@ _Avoid_: action item
 
 **Account memory**:
 Everything Salency has gathered on one account across its calls: pains, objections, requirements, commitments, contacts, and what's changed.
-_Avoid_: account graph, the graph, memory layer
+_Avoid_: account graph, the graph, memory layer (for one account)
 
 **Commitment**:
 Something your side has said it will do for an account and hasn't done yet. Part of account memory, not a signal.
@@ -97,6 +97,10 @@ _Avoid_: follow-up (on its own), auto-reply, sequence, automated email
 **Institutional memory**:
 The category Salency belongs to. Used in positioning lines only, never for something a rep opens.
 _Avoid_: using it for one account's memory
+
+**Memory layer**:
+Where Salency sits in your stack, between the notetaker and the CRM. Used in positioning lines only, never for one account's memory.
+_Avoid_: using it for account memory
 
 **Graph**:
 The planned structure linking accounts, so patterns across them can be seen. Not shipped: the site mentions it only as a plan, never as something available today.
