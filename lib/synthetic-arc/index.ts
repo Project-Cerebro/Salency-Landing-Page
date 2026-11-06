@@ -11,6 +11,7 @@ export type {
   ProductMatch,
   SyntheticCall,
 } from './types';
+export { MATCH_TIER_LABEL } from './types';
 
 export type {
   BriefCitation,
