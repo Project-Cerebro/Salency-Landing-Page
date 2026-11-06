@@ -27,13 +27,12 @@ const EXTRACT_CARDS: readonly ExtractCard[] = [
     body: '\u201c3 to 5 second settlement delays, killing us during volatility windows.\u201d',
     meta: (
       <>
-        cited at <span className="anchor-meta-copper">00:01:28</span> {'\u00b7'} conf{' '}
-        <span className="anchor-meta-copper">0.96</span>
+        cited {'\u00b7'} <span className="anchor-meta-copper">Daniel Voss</span> {'\u00b7'} Mar 09
       </>
     ),
   },
   {
-    name: 'Pain \u2192 product',
+    name: 'Product match',
     body: (
       <>
         Atlas Settlement
@@ -42,17 +41,16 @@ const EXTRACT_CARDS: readonly ExtractCard[] = [
     ),
     meta: (
       <>
-        resolves <span className="anchor-meta-copper">00:01:28</span> {'\u00b7'} primary {'\u00b7'} conf{' '}
-        <span className="anchor-meta-copper">0.94</span>
+        primary {'\u00b7'} <span className="anchor-meta-copper">Strong</span>
       </>
     ),
   },
   {
-    name: 'Stakeholder',
+    name: 'Contact',
     body: 'Daniel Voss \u00b7 COO \u00b7 champion',
     meta: (
       <>
-        inferred from <span className="anchor-meta-copper">00:01:56</span> + 7 other lines
+        inferred from <span className="anchor-meta-copper">8</span> lines
       </>
     ),
   },
