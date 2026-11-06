@@ -165,8 +165,8 @@ export const post: Post = {
       <h2 id="what-changes">What changes when AI owns the memory layer</h2>
 
       <p>
-        The new AE doesn&rsquo;t read recordings. They inherit a Day-1 brief:
-        who the stakeholders are, what pains have been raised across the last 14
+        The new AE doesn&rsquo;t read recordings. They inherit a company brief:
+        who the contacts are, what pains have been raised across the last 14
         calls, which products got mapped, what was committed and to whom,
         what&rsquo;s still open, what contradicts what.
       </p>
@@ -200,7 +200,7 @@ export const post: Post = {
 
       <p>
         Salency is institutional memory for B2B sales. We turn every call into
-        structured, cited context. Pains, products, stakeholders,
+        structured, cited context. Pains, products, contacts,
         contradictions, commitments. We don&rsquo;t replace your CRM. We sit on
         top of it. The piece between the call recording and the rep who
         inherits the account.

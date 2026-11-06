@@ -32,8 +32,8 @@ export function HeroSection() {
 
           <p className="sub">
             AI that turns every call into structured, cited context. Pains,
-            objections, contradictions, mapped to your products. Nothing your
-            buyer said gets lost between calls.
+            objections, contradictions, mapped to your products. Nothing the
+            account said gets lost between calls.
           </p>
 
           <div className="cta-row">

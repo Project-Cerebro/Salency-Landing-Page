@@ -53,7 +53,7 @@ export function NotetakerCompareTable() {
             <tr>
               <td className="dim">Survives rep turnover</td>
               <td className="col-n">
-                Templated handoff doc per inheritance event
+                A templated handoff doc, written at each handoff
               </td>
               <td className="col-s salency-col">
                 Account memory that <strong>persists between handoffs</strong>.

@@ -15,7 +15,7 @@ const organizationSchema = {
   url: SITE_URL,
   logo: `${SITE_URL}/salency-mark.svg`,
   description:
-    "Institutional memory for B2B sales teams. Salency turns every call into structured, cited context, so nothing your buyer said gets lost between calls and any successor inherits full account history.",
+    "Institutional memory for B2B sales teams. Salency turns every call into structured, cited context, so nothing an account said gets lost between calls and the next rep inherits the full account history.",
   email: "hello@salency.ai",
   sameAs: [
     "https://www.linkedin.com/company/salency",
@@ -60,7 +60,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.salency.ai"),
   title: "Salency: AI that remembers every customer pain your sales reps forget",
-  description: "Sales intelligence that turns call transcripts into structured context. Extract pains, map them to your products, and generate follow-ups, so reps stop losing deals to forgotten context.",
+  description: "Sales intelligence that turns call transcripts into structured context. Extract pains, map them to your products, and draft follow-up emails, so reps stop losing deals to forgotten context.",
   openGraph: {
     title: "Salency: AI that remembers every customer pain your sales reps forget",
     description: "Sales intelligence that turns call transcripts into structured context. Extract pains, map them to your products, and generate follow-ups.",

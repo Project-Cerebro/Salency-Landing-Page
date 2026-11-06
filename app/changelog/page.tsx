@@ -60,7 +60,7 @@ const ENTRIES: Entry[] = [
     body: (
       <>
         Shipping the V1 sales surface: transcript upload, pain extraction
-        with citations, account brief, and pain-to-product mapping.
+        with citations, company brief, and pain-to-product mapping.
       </>
     ),
   },
