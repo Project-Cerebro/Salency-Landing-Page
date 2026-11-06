@@ -7,7 +7,7 @@
 // Pricing) and the CRM and Salency panes update with a 130ms cross-fade to
 // show what each layer preserves from that line. The CRM pane signals "lossy"
 // (last-writer-wins); the Salency pane signals "preserved" with cited
-// signal cards (Contradiction / Pain to product / Stakeholder / Change delta /
+// signal cards (Contradiction / Pain to product / Contact / Shift /
 // Pain ranking depending on which line is active).
 //
 // Visual reference: locked mockup at /tmp/salency-mockup/why-salency-v-1and2.html.
@@ -341,7 +341,7 @@ const STATES: Record<number, DiffState> = {
     },
     signals: [
       {
-        name: 'Change delta',
+        name: 'Shift',
         status: 'detected',
         flagged: true,
         title: `Trader workflow: reactive ${ARROW} pre-positioned`,
@@ -372,7 +372,7 @@ const STATES: Record<number, DiffState> = {
         },
       },
       {
-        name: 'Stakeholder',
+        name: 'Contact',
         status: 'inferred',
         flagged: false,
         title: `Head trader ${MIDDOT} operational driver`,
