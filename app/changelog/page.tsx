@@ -5,7 +5,7 @@ import { SiteFooter } from '@/components/sections/SiteFooter';
 export const metadata: Metadata = {
   title: 'Build log · Salency',
   description:
-    'A running log of what’s moving on Salency: V1 build, user interviews with B2B sales leaders, accelerator applications, and the SEO foundation.',
+    'A running log of what’s moving on Salency: what shipped each month, plus the research and operations behind it.',
   alternates: { canonical: '/changelog' },
   robots: { index: true, follow: true },
 };
@@ -38,6 +38,56 @@ function formatDate(iso: string): string {
 }
 
 const ENTRIES: Entry[] = [
+  {
+    id: '2026-06-feature-mapping',
+    iso: '2026-06-30',
+    kind: 'shipped',
+    title: 'Mapping down to the feature, and pain shifts',
+    body: (
+      <>
+        Pains and requirements now map to the specific feature in your
+        catalog, not only the product. Requirements get their own product
+        matches. Pains no product covers go to an operational bucket for CS
+        or account management. Salency now flags when a pain shifts between
+        calls, not only when a later call contradicts an earlier one.
+        Duplicate contacts and prospects can be merged, your catalog can be
+        regenerated after you update product material, and the dashboard
+        shows overdue follow-ups.
+      </>
+    ),
+  },
+  {
+    id: '2026-05-ranked-matches',
+    iso: '2026-05-30',
+    kind: 'shipped',
+    title: 'Ranked product matches in the company brief',
+    body: (
+      <>
+        The exported company brief now ranks the products that match each
+        pain. Reps can dismiss a pain that no longer applies, and it stays
+        dismissed as later calls come in. We also built an evaluation
+        harness that scores extraction against reference transcripts:
+        quotes have to appear in the transcript and speakers have to be
+        real. Prompt changes get measured before they ship.
+      </>
+    ),
+  },
+  {
+    id: '2026-04-company-brief',
+    iso: '2026-04-26',
+    kind: 'shipped',
+    title: 'Company brief export and side-by-side contradictions',
+    body: (
+      <>
+        Reps can export a company brief for any prospect as a PDF. When a
+        call contradicts an earlier one, both quotes now sit side by side
+        with the meetings they came from. Salency infers each contact&rsquo;s
+        stance from what they said on calls. Follow-up drafts can be scoped
+        to the tasks you pick, and a new dashboard shows KPIs, recent
+        meetings, and follow-ups.
+      </>
+    ),
+  },
   {
     id: '2026-04-seo-foundation',
     iso: '2026-04-15',
