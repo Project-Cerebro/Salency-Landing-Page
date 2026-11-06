@@ -3815,24 +3815,13 @@ header button:focus:not(:focus-visible){
     margin: 0 0 14px;
   }
   .anchor-card:last-child { margin-bottom: 0; }
-  /* Copper rule + arrow pointing back at the source line on the left.
-     Hidden on narrow viewports where the columns stack. */
-  .anchor-card::before {
-    content: "";
-    position: absolute;
-    left: -25px;
-    top: 18px;
-    width: 25px;
-    height: 1px;
-    background: var(--copper-a60);
-  }
-  .anchor-card::after {
-    content: "\25BA";
-    position: absolute;
-    left: -10px;
-    top: 12px;
+  .anchor-line-tag {
+    display: block;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
     color: var(--copper);
-    font-size: 10px;
   }
   .anchor-card-name {
     font-family: 'Geist Mono', monospace;
@@ -3867,8 +3856,6 @@ header button:focus:not(:focus-visible){
   @media (max-width: 860px) {
     .anchor-split { grid-template-columns: 1fr; }
     .anchor-split::before { display: none; }
-    .anchor-card::before,
-    .anchor-card::after { display: none; }
     .anchor-col--r { border-top: 1px solid var(--hair); }
   }
 
