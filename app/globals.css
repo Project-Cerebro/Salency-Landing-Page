@@ -1040,14 +1040,6 @@ html {
     color:var(--ink-2);
     line-height:1.55;
   }
-  .hero-artifact-card-conf{
-    margin:6px 0 0;
-    font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;
-    font-size:10.5px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--copper);
-  }
   .hero-artifact-card-hint{
     margin:8px 0 0;
     font-family:'Geist Mono', SFMono-Regular, Consolas, monospace;

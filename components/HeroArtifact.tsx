@@ -44,7 +44,7 @@ function getReducedMotion() {
 }
 
 function formatCitation(call: SyntheticCall): string {
-  return `${ACCOUNT_NAME} · ${CALL_TYPE_LABEL[call.callType]} call · ${call.date} · ${call.citationTimestamp}`;
+  return `${ACCOUNT_NAME} · ${CALL_TYPE_LABEL[call.callType]} call · ${call.date}`;
 }
 
 function buildContradictsLabel(call: SyntheticCall): string | null {
@@ -171,9 +171,6 @@ export function HeroArtifact() {
                   <div className="hero-artifact-card-expanded">
                     <p className="hero-artifact-card-cite-full">
                       {formatCitation(call)}
-                    </p>
-                    <p className="hero-artifact-card-conf">
-                      conf {call.confidence.toFixed(2)}
                     </p>
                     <p className="hero-artifact-card-hint">
                       Click for transcript snippet
