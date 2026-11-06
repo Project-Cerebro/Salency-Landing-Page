@@ -31,9 +31,9 @@ const COMPARE_ROWS = [
     salency: 'Flagged with both source citations',
   },
   {
-    signal: 'Pain \u2192 product fit',
+    signal: 'Pain \u2192 product match',
     crm: 'One value per field, no ranking',
-    salency: 'Confidence-ranked, top-N per pain',
+    salency: 'Matched to your catalog, with a confidence tier',
   },
 ];
 
