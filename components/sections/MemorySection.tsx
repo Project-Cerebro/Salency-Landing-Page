@@ -17,6 +17,7 @@ import { HeroArtifact } from '@/components/HeroArtifact';
 import { AnchorSplitPane } from '@/components/sections/AnchorSplitPane';
 import { SchemaList } from '@/components/sections/SchemaList';
 import { StageHead } from '@/components/sections/StageHead';
+import { ACCOUNT_MEMORY_TYPES } from '@/lib/synthetic-arc';
 
 const COMPARE_ROWS = [
   {
@@ -91,13 +92,33 @@ export function MemorySection() {
             }
             lede={
               <>
-                Every call extracts a typed payload. Same 7 shapes, every
-                account, every successor. Below, each type with one Hudson
-                Terrace example.
+                Every signal Salency takes from a call is one of seven kinds,
+                each backed by the quote and who said it. Below, each kind with
+                one Hudson Terrace example.
               </>
             }
           />
           <SchemaList />
+        </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <section className="beta-stage">
+          <StageHead
+            eyebrow="Across calls"
+            h2={
+              <>
+                What only shows up <em>between calls.</em>
+              </>
+            }
+            lede={
+              <>
+                Some things need more than one call, or your catalog, to see.
+                Salency works them out and keeps them in account memory.
+              </>
+            }
+          />
+          <SchemaList items={ACCOUNT_MEMORY_TYPES} />
         </section>
       </ScrollReveal>
 

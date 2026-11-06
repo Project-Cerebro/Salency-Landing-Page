@@ -1,6 +1,7 @@
 // SchemaList — /memory β surface ("what's stored").
 //
-// Renders the seven-signal-type schema as a vertical stack of hairline-
+// Renders a list of signal or account-memory types (default: the seven
+// signal kinds) as a vertical stack of hairline-
 // separated rows. Each row is a 3-column grid: signal name + count, one-
 // sentence definition, example payload card. All examples trace to
 // HUDSON_TERRACE_BRIEF / HUDSON_TERRACE_ARC via the
@@ -9,7 +10,11 @@
 // Static — no click-to-expand, no hover state. The component's job is
 // to make the data model visible at a glance.
 
-import { MEMORY_SIGNAL_TYPES, type SchemaExampleField } from '@/lib/synthetic-arc';
+import {
+  MEMORY_SIGNAL_TYPES,
+  type MemorySignalType,
+  type SchemaExampleField,
+} from '@/lib/synthetic-arc';
 
 function renderFieldValue(field: SchemaExampleField) {
   const tone = field.copper ? 'schema-field-val schema-field-val--copper' : 'schema-field-val';
@@ -19,10 +24,14 @@ function renderFieldValue(field: SchemaExampleField) {
   return <span className={tone}>{field.value}</span>;
 }
 
-export function SchemaList() {
+export function SchemaList({
+  items = MEMORY_SIGNAL_TYPES,
+}: {
+  items?: readonly MemorySignalType[];
+}) {
   return (
     <div className="schema-list">
-      {MEMORY_SIGNAL_TYPES.map((signal) => (
+      {items.map((signal) => (
         <div key={signal.name} className="schema-row">
           <div className="schema-name-col">
             <div className="schema-name">{signal.name}</div>

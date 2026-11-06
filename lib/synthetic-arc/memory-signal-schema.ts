@@ -1,7 +1,7 @@
-// Memory signal schema — the typed payload Salency extracts per indexed call.
-// Used by /memory's β surface (SchemaList) to render seven signal types,
-// each with a one-sentence definition and one canonical Hudson Terrace
-// example payload.
+// Memory signal schema. Used by /memory's β surface (SchemaList) to render
+// the seven signal kinds taken from one call, then what Salency works out
+// across calls. Each has a one-sentence definition and one Hudson Terrace
+// example. Names and definitions follow GLOSSARY.md.
 //
 // Honesty boundary: every example below traces to HUDSON_TERRACE_ARC or
 // HUDSON_TERRACE_BRIEF. No fictional names, no fabricated quotes, no
@@ -34,43 +34,120 @@ export interface MemorySignalType {
   example: SchemaExampleField[];
 }
 
+const DANIEL = 'Daniel Voss \u00b7 COO';
+const MAYA = 'Maya Chen';
+const MAR_09 = 'Mar 09 \u00b7 Discovery';
+const MAR_23 = 'Mar 23 \u00b7 Technical';
+const APR_06 = 'Apr 06 \u00b7 Pricing';
+
+/** The seven signal kinds Salency takes from a single call (GLOSSARY.md:
+ *  Signal). Every quote is verbatim from HUDSON_TERRACE_ARC snippets. */
 export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
   {
     name: 'Pain',
-    count: '7 across 3 calls',
-    definition:
-      'A customer-stated problem the rep should remember. Verbatim quote, speaker, citation, urgency-ranked.',
+    count: '2 across 3 calls',
+    definition: 'A problem the account has now or is worried about.',
     example: [
-      { key: 'speaker', value: 'Daniel Voss \u00b7 COO' },
+      { key: 'speaker', value: DANIEL },
       {
-        key: 'text',
+        key: 'quote',
         value:
-          '\u201c3 to 5 second settlement delays, killing us during volatility windows.\u201d',
+          '\u201cthree to five seconds of settlement delay on our internal transfers\u201d',
         quote: true,
       },
-      { key: 'confidence', value: '0.96', copper: true },
+      { key: 'call', value: MAR_09 },
     ],
   },
   {
     name: 'Objection',
-    count: '2 across 3 calls',
-    definition:
-      'A stated blocker or buying friction. Tracked separately from pain so closing logic can route them.',
+    count: '1 across 3 calls',
+    definition: 'A stated reason not to buy yet, kept apart from pains.',
     example: [
-      {
-        key: 'text',
-        value: '\u201cMAS-recognized infra vendors by Q4.\u201d',
-        quote: true,
-      },
-      { key: 'call', value: 'Mar 23 \u00b7 Technical \u00b7 00:07:07' },
-      { key: 'blocking', value: 'true', copper: true },
+      { key: 'speaker', value: DANIEL },
+      { key: 'quote', value: '\u201cIt\u2019s becoming more of a blocker.\u201d', quote: true },
+      { key: 'call', value: MAR_23 },
     ],
   },
   {
-    name: 'Contradiction',
+    name: 'Requirement',
     count: '1 across 3 calls',
+    definition: 'Something the account explicitly said it needs or asked about.',
+    example: [
+      { key: 'speaker', value: DANIEL },
+      {
+        key: 'quote',
+        value: '\u201conly use MAS-recognized infra vendors by Q4\u201d',
+        quote: true,
+      },
+      { key: 'call', value: MAR_23 },
+    ],
+  },
+  {
+    name: 'Competitor',
+    count: '1 across 3 calls',
+    definition: 'Another vendor the account uses or is weighing.',
+    example: [
+      { key: 'competitor', value: 'Fireblocks', copper: true },
+      {
+        key: 'quote',
+        value: '\u201cI\u2019ve been watching the Fireblocks numbers the last three weeks.\u201d',
+        quote: true,
+      },
+      { key: 'call', value: APR_06 },
+    ],
+  },
+  {
+    name: 'Next step',
+    count: '1 across 3 calls',
+    definition: 'Something either side agreed to do, as said on the call.',
+    example: [
+      { key: 'speaker', value: MAYA },
+      {
+        key: 'quote',
+        value: '\u201cI\u2019ll put it in writing as a contractual milestone.\u201d',
+        quote: true,
+      },
+      { key: 'call', value: MAR_23 },
+    ],
+  },
+  {
+    name: 'Key event',
+    count: '1 across 3 calls',
+    definition: 'Something that happened at the account that changes the deal.',
+    example: [
+      { key: 'speaker', value: DANIEL },
+      {
+        key: 'quote',
+        value: '\u201cOur Singapore entity just took on a second strategic investor\u201d',
+        quote: true,
+      },
+      { key: 'call', value: MAR_23 },
+    ],
+  },
+  {
+    name: 'Urgency',
+    count: '1 across 3 calls',
+    definition: 'What makes the problem pressing, in their words.',
+    example: [
+      { key: 'speaker', value: DANIEL },
+      {
+        key: 'quote',
+        value: '\u201cThat\u2019s six figures of P&L on one trade.\u201d',
+        quote: true,
+      },
+      { key: 'call', value: MAR_09 },
+    ],
+  },
+] as const;
+
+/** What Salency works out across calls or against the catalog: part of
+ *  account memory, not signals (GLOSSARY.md). Traces to HUDSON_TERRACE_BRIEF. */
+export const ACCOUNT_MEMORY_TYPES: readonly MemorySignalType[] = [
+  {
+    name: 'Contradiction',
+    count: '1 detected',
     definition:
-      "When a buyer's stated position shifts between calls. Both citations preserved so the rep sees the delta, not the overwrite.",
+      'A later call saying something that doesn\u2019t agree with an earlier one. Both quotes kept, so the rep sees the change instead of an overwrite.',
     example: [
       { key: 'topic', value: 'Latency: blocker \u2192 resolved workaround' },
       {
@@ -86,10 +163,20 @@ export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
     ],
   },
   {
+    name: 'Shift',
+    count: '1 detected',
+    definition:
+      'A pain that changed between calls without contradicting what came before: scope, urgency, owner, or cadence.',
+    example: [
+      { key: 'topic', value: 'SOC 2 cadence: annual \u2192 quarterly' },
+      { key: 'from', value: MAR_09 },
+      { key: 'to', value: APR_06 },
+    ],
+  },
+  {
     name: 'Commitment',
     count: '3 open',
-    definition:
-      'Something we owe the customer. Owner, due date, status. Closes when delivered.',
+    definition: 'Something your side said it will do and hasn\u2019t done yet.',
     example: [
       { key: 'item', value: 'SOC 2 Type II report' },
       { key: 'owner', value: 'Maya' },
@@ -97,10 +184,10 @@ export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
     ],
   },
   {
-    name: 'Stakeholder',
-    count: '3 mapped',
+    name: 'Contact',
+    count: '3 known',
     definition:
-      "Who's in the room and where they sit. Stance is inferred from quote patterns across calls.",
+      'A person at the account, with the stance Salency inferred from what they said.',
     example: [
       { key: 'name', value: 'Daniel Voss' },
       { key: 'title', value: 'COO' },
@@ -109,24 +196,13 @@ export const MEMORY_SIGNAL_TYPES: readonly MemorySignalType[] = [
   },
   {
     name: 'Product match',
-    count: '5 ranked',
+    count: '3 matched',
     definition:
-      'A pain ranked against your catalog. Confidence-scored, role-tagged primary or secondary.',
+      'A pain or requirement linked to a product in your catalog, with a confidence tier.',
     example: [
       { key: 'pain', value: '3-5s settlement delays' },
       { key: 'product', value: 'Atlas Settlement', copper: true },
-      { key: 'confidence', value: '0.94', copper: true },
-    ],
-  },
-  {
-    name: 'Change delta',
-    count: '2 detected',
-    definition:
-      'A non-contradiction shift. Cadence change, scope change, owner change. Same anchor pair, different topic.',
-    example: [
-      { key: 'topic', value: 'SOC 2 cadence: annual \u2192 quarterly' },
-      { key: 'from', value: 'Mar 09 \u00b7 Discovery' },
-      { key: 'to', value: 'Apr 06 \u00b7 Pricing' },
+      { key: 'tier', value: 'Strong', copper: true },
     ],
   },
 ] as const;
