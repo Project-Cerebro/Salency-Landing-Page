@@ -14,6 +14,7 @@
 import { useId, useRef, useState, type KeyboardEvent } from 'react';
 import {
   HUDSON_TERRACE_ARC,
+  MATCH_TIER_LABEL,
   type ProductMatch,
 } from '@/lib/synthetic-arc';
 import { openTranscriptSnippetModal } from '@/lib/transcript-snippet-modal-event';
@@ -99,21 +100,6 @@ const PAINS: ReadonlyArray<MapPain> = [
   },
 ];
 
-// Confidence -> numeric score for the bar/label. Locked per spec
-// section 4 "Matched products" rows.
-const SCORE_LOOKUP: Record<string, number> = {
-  'pain-1::Atlas Settlement': 0.94,
-  'pain-1::Vector API': 0.61,
-  'pain-2::Helix Recon': 0.92,
-  'pain-3::Vector API': 0.88,
-  'pain-3::Atlas Settlement': 0.55,
-  'pain-4::Anchor Compliance': 0.85,
-};
-
-function scoreFor(painId: string, product: string): number {
-  return SCORE_LOOKUP[`${painId}::${product}`] ?? 0.7;
-}
-
 export function MapStage() {
   const tabsRef = useRef<HTMLDivElement>(null);
   const headingId = useId();
@@ -164,8 +150,8 @@ export function MapStage() {
         lede={
           <>
             Salency reads your product catalog and ranks which products match
-            each extracted pain by confidence. The recommendation a rep needed
-            before the next call.
+            each extracted pain, with a confidence tier. The recommendation a
+            rep needed before the next call.
           </>
         }
       />
@@ -222,7 +208,6 @@ export function MapStage() {
               >
                 <ul className="map-match-list">
                   {pain.matches.map((m) => {
-                    const score = scoreFor(pain.id, m.product);
                     return (
                       <li
                         key={m.product}
@@ -234,14 +219,11 @@ export function MapStage() {
                           <span className="map-match-role">{m.role}</span>
                         </div>
                         <div className="map-match-cap">{m.capability}</div>
-                        <div className="map-match-bar" aria-hidden="true">
-                          <div
-                            className="map-match-bar-fill"
-                            style={{ width: `${Math.round(score * 100)}%` }}
-                          />
-                        </div>
-                        <div className="map-match-score">
-                          confidence {score.toFixed(2)}
+                        <div
+                          className="map-match-score"
+                          data-confidence={m.confidence}
+                        >
+                          {MATCH_TIER_LABEL[m.confidence]}
                         </div>
                       </li>
                     );

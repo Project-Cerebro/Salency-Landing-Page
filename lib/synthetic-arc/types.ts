@@ -9,6 +9,14 @@ export type CallType = 'discovery' | 'technical' | 'pricing';
 
 export type MatchConfidence = 'high' | 'medium' | 'low';
 
+/** Tier labels the app shows for a product match (GLOSSARY.md:
+ *  Confidence tier). The app cuts at 0.8 (Strong) and 0.5 (Probable). */
+export const MATCH_TIER_LABEL: Record<MatchConfidence, string> = {
+  high: 'Strong',
+  medium: 'Probable',
+  low: 'Speculative',
+};
+
 export interface SyntheticCallSpeaker {
   name: string;
   title: string;
