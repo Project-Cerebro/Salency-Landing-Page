@@ -127,7 +127,7 @@ export function MemorySection() {
           <div className="mem-compare-head">
             <span className="eb">Not another CRM field</span>
             <h2>
-              Memory is a <em>graph with time.</em> CRMs store flat rows.
+              Memory has <em>a timeline.</em> CRMs store flat rows.
             </h2>
           </div>
           <div className="mem-compare-wrap">
@@ -151,7 +151,7 @@ export function MemorySection() {
             </table>
           </div>
           <p className="mem-compare-foot">
-            Flatten the graph and you kill the thing.{' '}
+            Flatten memory into CRM fields and you kill the thing.{' '}
             <Link href="/investors#thesis">Read our memory thesis {'\u2192'}</Link>
           </p>
         </section>

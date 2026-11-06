@@ -20,7 +20,7 @@ const ROWS = [
     keeps:
       'A record of each call: who said what, a summary, and the warnings raised on that call.',
     adds:
-      'What carries across calls: each pain in the buyer’s words, what you promised, and where call 03 contradicts call 01.',
+      'What carries across calls: each pain in their words, what you’ve committed to, and where call 03 contradicts call 01.',
   },
   {
     category: 'CRM',
