@@ -17,7 +17,7 @@ const faqSchema = {
       name: 'How is Salency different from AI notetakers?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'AI notetakers record what was said. Salency solves what happens after, extracting customer pains, mapping them to your products, and retaining the structured context any rep or successor needs to keep the deal moving.',
+        text: 'AI notetakers record what was said. Salency solves what happens after, extracting customer pains, mapping them to your products, and retaining the structured context any rep, including the next one, needs to keep the deal moving.',
       },
     },
     {
@@ -50,7 +50,7 @@ const faqSchema = {
 export const metadata: Metadata = {
   title: 'Why Salency · Salency',
   description:
-    'AI notetakers record what was said. Salency solves what happens after, extracting pains, mapping them to products, and retaining the context reps and successors actually need.',
+    'AI notetakers record what was said. Salency solves what happens after, extracting pains, mapping them to products, and retaining the context the next rep actually needs.',
   alternates: { canonical: '/why-salency' },
   openGraph: {
     title: 'Why Salency',

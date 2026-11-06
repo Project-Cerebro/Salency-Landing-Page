@@ -7,7 +7,7 @@ import { TranscriptSnippetModalLazy } from '@/components/TranscriptSnippetModalL
 export const metadata: Metadata = {
   title: 'Memory · Salency',
   description:
-    'Institutional memory for revenue teams. Every call becomes cited context: stakeholders, pains, open commitments, contradictions, pain-to-product mapping. Built for the rep inheriting the account at 2pm Monday.',
+    'Institutional memory for revenue teams. Every call becomes cited context: contacts, pains, open commitments, contradictions, pain-to-product mapping. Built for the rep inheriting the account at 2pm Monday.',
   alternates: { canonical: '/memory' },
 };
 

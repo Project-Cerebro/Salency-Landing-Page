@@ -18,7 +18,7 @@ const APPLY_CARDS: Array<{ title: string; marker: MarkerKind; items: string[] }>
     items: [
       '5–50 reps on your revenue team',
       'Already using a notetaker (Gong, Fathom, Fireflies) or raw transcripts',
-      'Reps inheriting accounts, deals, or customers',
+      'Reps inheriting accounts, before or after the sale',
     ],
   },
 ];
@@ -43,8 +43,8 @@ export function PilotApplication() {
           Join the <em>pilot.</em>
         </h1>
         <p className="apply-lede">
-          A memory layer that outlasts any rep. We&apos;re opening early access to a
-          small group of revenue teams this cohort. Tell us about your team and
+          A memory layer that outlasts any rep. We&apos;re opening the pilot to a
+          small group of revenue teams. Tell us about your team and
           we&apos;ll scope the fit together.
         </p>
         <p className="apply-price">
