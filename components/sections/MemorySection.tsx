@@ -17,6 +17,7 @@ import { HeroArtifact } from '@/components/HeroArtifact';
 import { AnchorSplitPane } from '@/components/sections/AnchorSplitPane';
 import { SchemaList } from '@/components/sections/SchemaList';
 import { StageHead } from '@/components/sections/StageHead';
+import { ACCOUNT_MEMORY_TYPES } from '@/lib/synthetic-arc';
 
 const COMPARE_ROWS = [
   {
@@ -91,9 +92,9 @@ export function MemorySection() {
             }
             lede={
               <>
-                Every call extracts a typed payload. Same 7 shapes, every
-                account, every successor. Below, each type with one Hudson
-                Terrace example.
+                Every signal Salency takes from a call is one of seven kinds,
+                each backed by the quote and who said it. Below, each kind with
+                one Hudson Terrace example.
               </>
             }
           />
@@ -102,11 +103,31 @@ export function MemorySection() {
       </ScrollReveal>
 
       <ScrollReveal>
+        <section className="beta-stage">
+          <StageHead
+            eyebrow="Across calls"
+            h2={
+              <>
+                What only shows up <em>between calls.</em>
+              </>
+            }
+            lede={
+              <>
+                Some things need more than one call, or your catalog, to see.
+                Salency works them out and keeps them in account memory.
+              </>
+            }
+          />
+          <SchemaList items={ACCOUNT_MEMORY_TYPES} />
+        </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
         <section className="mem-compare">
           <div className="mem-compare-head">
             <span className="eb">Not another CRM field</span>
             <h2>
-              Memory is a <em>graph with time.</em> CRMs store flat rows.
+              Memory has <em>a timeline.</em> CRMs store flat rows.
             </h2>
           </div>
           <div className="mem-compare-wrap">
@@ -130,7 +151,7 @@ export function MemorySection() {
             </table>
           </div>
           <p className="mem-compare-foot">
-            Flatten the graph and you kill the thing.{' '}
+            Flatten memory into CRM fields and you kill the thing.{' '}
             <Link href="/investors#thesis">Read our memory thesis {'\u2192'}</Link>
           </p>
         </section>

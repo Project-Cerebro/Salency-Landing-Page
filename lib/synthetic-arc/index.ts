@@ -58,6 +58,7 @@ export type {
 } from './memory-signal-schema';
 export {
   MEMORY_SIGNAL_TYPES,
+  ACCOUNT_MEMORY_TYPES,
   MEMORY_SIGNAL_ACCOUNT,
 } from './memory-signal-schema';
 
