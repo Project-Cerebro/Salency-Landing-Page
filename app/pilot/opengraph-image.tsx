@@ -82,7 +82,7 @@ export default async function Image() {
               marginTop: '8px',
             }}
           >
-            The next hire inherits a Day-1 brief instead of starting from zero.
+            The next hire inherits a company brief instead of starting from zero.
           </div>
           <div
             style={{
