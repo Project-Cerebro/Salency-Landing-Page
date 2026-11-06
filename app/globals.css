@@ -3666,6 +3666,9 @@ header button:focus:not(:focus-visible){
       width: auto;
       font-size: 13.5px;
     }
+    /* Beat the desktop column widths (td:nth-child(n) { width: 39% }),
+       which otherwise squeeze each stacked cell to a third of the card. */
+    .mem-table tbody td:nth-child(n) { width: auto; }
     .mem-table tbody td:nth-child(1) {
       width: auto;
       font-size: 10.5px;
