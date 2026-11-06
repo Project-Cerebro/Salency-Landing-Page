@@ -16,7 +16,7 @@ export function OurStorySection() {
           Said in a Toronto office &middot; 2024
         </div>
         <p className="story-hero-body">
-          Thousands of pain points die in files no one opens.{' '}
+          Thousands of pains die in files no one opens.{' '}
           <em>
             The customer raises five per call. The rep on the call catches
             three. The rep who inherits sees zero.
@@ -108,7 +108,7 @@ export function OurStorySection() {
         </p>
         <div className="story-close-ctas">
           <a href={PILOT_FORM_ANCHOR} className="story-close-link">
-            Request early access &rarr;
+            Request a pilot &rarr;
           </a>
         </div>
         <p className="story-close-email">
