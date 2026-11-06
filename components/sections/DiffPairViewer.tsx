@@ -276,7 +276,7 @@ const STATES: Record<number, DiffState> = {
             body: (
               <>
                 {`3-5s settlement delays ${MIDDOT} primary ${MIDDOT} `}
-                <span className="copper">0.96 confidence</span>
+                <span className="copper">Strong</span>
               </>
             ),
           },

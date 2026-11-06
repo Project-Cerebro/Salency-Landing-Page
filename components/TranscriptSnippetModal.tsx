@@ -12,6 +12,7 @@ import {
   HUDSON_TERRACE_ARC,
   SYNTHETIC_LABEL,
   ACCOUNT_NAME,
+  MATCH_TIER_LABEL,
   type SyntheticCall,
 } from '@/lib/synthetic-arc';
 import { useBodyScrollLock } from '@/lib/use-body-scroll-lock';
@@ -193,7 +194,7 @@ export default function TranscriptSnippetModal() {
                   <span className="hero-artifact-modal-match-meta">
                     {m.role}
                     <span className="sep">·</span>
-                    {m.confidence}
+                    {MATCH_TIER_LABEL[m.confidence]}
                     {m.note && (
                       <>
                         <span className="sep">·</span>
