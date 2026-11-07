@@ -121,7 +121,7 @@ export function HeroArtifact() {
       <div className="hero-artifact-frame">
         <div className="hero-artifact-head">
           <span className="hero-artifact-eb">
-            {ACCOUNT_NAME} · live memory
+            {ACCOUNT_NAME} · synthetic demo account
           </span>
           <span className="hero-artifact-pulse">3 calls indexed</span>
         </div>
