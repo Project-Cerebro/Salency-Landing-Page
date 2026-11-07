@@ -71,9 +71,9 @@ export function MemorySection() {
             }
             lede={
               <>
-                The brief above isn&rsquo;t conjured. Every claim resolves to a
-                transcript line, with the cite-link visible. Below, one Hudson
-                Terrace call with extracted signals shown beside the source.
+                Nothing above is conjured. Every signal keeps the words it came
+                from and who said them. Below, one Hudson Terrace call, with
+                what Salency kept beside the lines it came from.
               </>
             }
           />
