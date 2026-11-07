@@ -1,16 +1,13 @@
 import { EmailForm } from '@/components/EmailForm';
+import { PILOT_TERMS } from '@/lib/pilot-terms';
 
 type MarkerKind = 'check' | 'dot';
 
-const APPLY_CARDS: Array<{ title: string; marker: MarkerKind; items: string[] }> = [
+const APPLY_CARDS: Array<{ title: string; marker: MarkerKind; items: readonly string[] }> = [
   {
     title: 'Pilot includes',
     marker: 'check',
-    items: [
-      'Weekly extraction reports on your calls',
-      '30-minute weekly debrief with our team',
-      '1–2 week setup, no obligation to continue',
-    ],
+    items: PILOT_TERMS,
   },
   {
     title: 'Good fit if',
@@ -48,7 +45,7 @@ export function PilotApplication() {
           we&apos;ll scope the fit together.
         </p>
         <p className="apply-price">
-          Free during the pilot. Pricing per engagement after.
+          Free for 4–6 weeks. Pricing per engagement after.
         </p>
       </section>
 

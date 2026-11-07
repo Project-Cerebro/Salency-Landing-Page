@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { Loader2 } from 'lucide-react';
 import { track } from '@vercel/analytics';
+import { PILOT_TERMS } from '@/lib/pilot-terms';
 
 const INDUSTRIES = [
     'SaaS / Software',
@@ -52,15 +53,8 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const WEBSITE_REGEX = /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/[^\s]*)?$/i;
 
 // Pilot terms shown inside the modal so the visitor knows what they are
-// applying for before the first field. Copy mirrors APPLY_CARDS on /pilot
-// (PRODUCT.md pilot terms); /pilot renders those cards beside the form, so
-// the page variant omits this block.
-const PILOT_TERMS = [
-    'Free for 4–6 weeks',
-    '1–2 week setup, using transcripts you already have',
-    'Weekly extraction report and 30-minute debrief',
-    'No obligation to continue',
-] as const;
+// applying for before the first field. /pilot renders the same list in its
+// "Pilot includes" card beside the form, so the page variant omits it.
 
 export function EmailForm({
     prefillEmail,
