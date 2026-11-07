@@ -3869,12 +3869,12 @@ header button:focus:not(:focus-visible){
      Static — no hover or click state. */
   .schema-list { margin-top: 8px; }
   .schema-row {
-    padding: 18px 0;
+    padding: 14px 0;
     border-top: 1px solid var(--hair);
     display: grid;
-    grid-template-columns: 200px 1fr 340px;
+    grid-template-columns: 200px 1fr;
     gap: 24px;
-    align-items: start;
+    align-items: baseline;
   }
   .schema-row:first-child { border-top: 1px solid var(--hair-2); }
   .schema-name {
@@ -3899,40 +3899,17 @@ header button:focus:not(:focus-visible){
     font-size: 14.5px;
     line-height: 1.55;
     color: var(--ink-2);
-    max-width: 42ch;
+    max-width: 60ch;
   }
-  .schema-card {
-    background: var(--bg-2);
-    border: 1px solid var(--hair);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-family: 'Geist Mono', monospace;
-    font-size: 11.5px;
-    line-height: 1.55;
-    color: var(--ink-2);
-  }
-  .schema-field {
-    display: grid;
-    grid-template-columns: 86px 1fr;
-    gap: 10px;
-    padding: 1px 0;
-  }
-  .schema-field-key { color: var(--ink-3); }
-  .schema-field-val { color: var(--ink); }
-  .schema-field-val--quote {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 12.5px;
-    color: var(--ink);
-  }
-  .schema-field-val--copper { color: var(--ink); }
 
   @media (max-width: 860px) {
     .schema-row {
       grid-template-columns: 1fr;
-      gap: 14px;
-      padding: 22px 0;
+      gap: 6px;
+      padding: 14px 0;
     }
+    .schema-name-col { display: flex; align-items: baseline; gap: 10px; }
+    .schema-count { margin-top: 0; }
     .schema-def { max-width: none; }
   }
 }

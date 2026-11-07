@@ -92,8 +92,8 @@ export function MemorySection() {
             lede={
               <>
                 Every signal Salency takes from a call is one of seven kinds,
-                each backed by the quote and who said it. Below, each kind with
-                one Hudson Terrace example.
+                each backed by the quote and who said it. The Hudson Terrace calls
+                above show them in place.
               </>
             }
           />
