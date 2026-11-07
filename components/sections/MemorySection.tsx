@@ -10,7 +10,6 @@
 // Honesty boundary: every artifact below traces to HUDSON_TERRACE_ARC /
 // HUDSON_TERRACE_BRIEF / MEMORY_SIGNAL_TYPES. No fictional names.
 
-import Link from 'next/link';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { openPilotModal } from '@/components/PilotModal';
 import { HeroArtifact } from '@/components/HeroArtifact';
@@ -127,7 +126,7 @@ export function MemorySection() {
           <div className="mem-compare-head">
             <span className="eb">Not another CRM field</span>
             <h2>
-              Memory has <em>a timeline.</em> CRMs store flat rows.
+              CRMs overwrite. <em>Memory keeps both versions.</em>
             </h2>
           </div>
           <div className="mem-compare-wrap">
@@ -151,8 +150,8 @@ export function MemorySection() {
             </table>
           </div>
           <p className="mem-compare-foot">
-            Flatten memory into CRM fields and you kill the thing.{' '}
-            <Link href="/investors#thesis">Read our memory thesis {'\u2192'}</Link>
+            Flatten memory into CRM fields and the next rep inherits whatever
+            was typed last.
           </p>
         </section>
       </ScrollReveal>
@@ -163,8 +162,8 @@ export function MemorySection() {
           Inherit every account&rsquo;s <em>memory</em> from Day 1.
         </h2>
         <p className="sub">
-          First account memory stands up in a week. By month two, the rep
-          inheriting it reads the story, not a notes field.
+          Setup takes one to two weeks. By month two, the rep inheriting an
+          account reads the story, not a notes field.
         </p>
         <button
           type="button"
@@ -173,6 +172,9 @@ export function MemorySection() {
         >
           Request a pilot {'\u2192'}
         </button>
+        <p className="mem-cta-terms">
+          Free pilot {'\u00b7'} 4{'\u2013'}6 weeks {'\u00b7'} no obligation
+        </p>
       </section>
     </>
   );
