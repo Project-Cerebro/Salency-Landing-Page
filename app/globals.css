@@ -3618,6 +3618,15 @@ header button:focus:not(:focus-visible){
       margin: 0 auto 30px;
     }
   }
+  .mem-cta-terms {
+    margin: 16px 0 0;
+    font-family: 'Geist Mono', SFMono-Regular, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
 
   /* ── Responsive ── */
   @media (max-width: 720px) {
