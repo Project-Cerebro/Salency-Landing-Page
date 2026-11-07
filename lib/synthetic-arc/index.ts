@@ -55,7 +55,6 @@ export {
 
 export type {
   MemorySignalType,
-  SchemaExampleField,
 } from './memory-signal-schema';
 export {
   MEMORY_SIGNAL_TYPES,
