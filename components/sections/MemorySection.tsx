@@ -20,14 +20,14 @@ import { ACCOUNT_MEMORY_TYPES } from '@/lib/synthetic-arc';
 
 const COMPARE_ROWS = [
   {
-    signal: 'Customer pain',
+    signal: 'Pain',
     crm: 'Free-text field, last writer wins',
     salency: 'Cited quote, with the speaker and the call it came from',
   },
   {
     signal: 'Contradiction between calls',
     crm: 'Invisible. Fields overwrite silently',
-    salency: 'Flagged with both source citations',
+    salency: 'Flagged, with a citation from each call',
   },
   {
     signal: 'Pain \u2192 product match',
