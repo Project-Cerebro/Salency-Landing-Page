@@ -5261,3 +5261,6 @@ header button:focus:not(:focus-visible){
   }
 }
 
+
+/* /pilot: header CTA scrolls here instead of opening the modal. */
+#apply { scroll-margin-top: 96px; }
