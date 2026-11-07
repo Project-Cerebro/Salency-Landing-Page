@@ -11,6 +11,19 @@ type OpenDetail = { email?: string };
 
 export function openPilotModal(email?: string) {
   if (typeof window === 'undefined') return;
+  // On /pilot the form is already on the page. Opening the modal would
+  // mount a second copy (duplicate field ids), so take the visitor to the
+  // inline form instead: first field, or the success heading once sent.
+  const inline = document.getElementById('apply');
+  if (inline) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    inline.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    const target =
+      inline.querySelector<HTMLElement>('#pilot-name') ??
+      inline.querySelector<HTMLElement>('.pilot-form-title');
+    target?.focus({ preventScroll: true });
+    return;
+  }
   window.dispatchEvent(new CustomEvent<OpenDetail>(EVENT_NAME, { detail: { email } }));
 }
 

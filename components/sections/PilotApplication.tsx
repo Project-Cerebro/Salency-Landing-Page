@@ -68,7 +68,7 @@ export function PilotApplication() {
             </div>
           ))}
         </div>
-        <div className="apply-form">
+        <div className="apply-form" id="apply">
           <EmailForm />
         </div>
       </section>
