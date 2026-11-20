@@ -68,7 +68,8 @@ export function EmailForm({
     const [serverError, setServerError] = useState<string | null>(null);
     const successHeadingRef = useRef<HTMLHeadingElement>(null);
     const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
-        mode: 'onTouched',
+        mode: 'onSubmit',
+        reValidateMode: 'onChange',
         defaultValues: { email: prefillEmail ?? '', industry: '', role: '', teamSize: '' },
     });
 
