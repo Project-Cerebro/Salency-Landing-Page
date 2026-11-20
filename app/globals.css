@@ -694,7 +694,7 @@ html {
     right:16px;top:50%;
     width:12px;height:8px;
     transform:translateY(-50%);
-    background-color:var(--copper);
+    background-color:var(--ink-3);
     -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
             mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
@@ -753,9 +753,9 @@ html {
       }
     }
     /* Bullet markers for the two list styles. */
-    .apply-check{color:var(--copper);margin-top:2px;flex-shrink:0}
+    .apply-check{color:var(--ink-3);margin-top:2px;flex-shrink:0}
     .apply-dot{
-      width:6px;height:6px;border-radius:9999px;background:var(--copper);
+      width:6px;height:6px;border-radius:9999px;background:var(--ink-3);
       margin-top:9px;flex-shrink:0;
     }
   }
@@ -4141,7 +4141,7 @@ header button:focus:not(:focus-visible){
   font: inherit;
   font-size: 15px;
   color: var(--ink);
-  caret-color: var(--copper);
+  caret-color: var(--ink);
   transition-property: border-color, box-shadow;
   transition-duration: 160ms;
 }
@@ -4149,8 +4149,8 @@ header button:focus:not(:focus-visible){
 .pilot-input:hover { border-color: rgba(232, 230, 227, 0.22); }
 .pilot-input:focus {
   outline: none;
-  border-color: var(--copper);
-  box-shadow: 0 0 0 3px var(--copper-a18);
+  border-color: rgba(232, 230, 227, 0.45);
+  box-shadow: 0 0 0 3px rgba(232, 230, 227, 0.08);
 }
 .pilot-input[aria-invalid="true"] { border-color: var(--error); }
 .pilot-select {
@@ -4191,12 +4191,12 @@ header button:focus:not(:focus-visible){
 }
 .pilot-size:hover { border-color: rgba(232, 230, 227, 0.22); }
 .pilot-size:has(:checked) {
-  border-color: var(--copper);
-  background: var(--copper-a08);
-  color: var(--copper);
+  border-color: var(--ink-2);
+  background: rgba(232, 230, 227, 0.08);
+  color: var(--ink);
 }
 .pilot-size:has(:focus-visible) {
-  outline: 2px solid var(--copper-a40);
+  outline: 2px solid rgba(232, 230, 227, 0.45);
   outline-offset: 2px;
 }
 .pilot-sizes[aria-invalid="true"] .pilot-size { border-color: rgba(248, 113, 113, 0.5); }
