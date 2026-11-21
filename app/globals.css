@@ -723,15 +723,15 @@ html {
       font-size:1.125rem;max-width:52ch;margin:0;
     }
 
-    /* Two-column layout: sidebar cards + email form.
-       Form is visually first on narrow viewports, moves right on ≥1024px. */
+    /* Two-column layout: sidebar cards + email form. Source order
+       (terms, then form) is the visual order at every width, so phones
+       read the pilot terms before applying. */
     .apply-layout{
       display:grid;grid-template-columns:1fr;gap:48px;align-items:start;
     }
     .apply-sidebar{
-      display:flex;flex-direction:column;gap:24px;order:2;
+      display:flex;flex-direction:column;gap:24px;
     }
-    .apply-form{order:1}
 
     /* Sidebar cards ("Pilot includes", "Good fit if") — identical
        styling, shared class so they stay in sync. */
@@ -770,8 +770,6 @@ html {
   @media (min-width: 1024px){
     .apply-page{
       .apply-layout{grid-template-columns:1fr 1.2fr;gap:64px}
-      .apply-sidebar{order:1}
-      .apply-form{order:2}
     }
   }
 
